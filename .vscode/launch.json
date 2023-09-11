@@ -1,0 +1,76 @@
+{
+  // Usare IntelliSense per informazioni sui possibili attributi.
+  // Al passaggio del mouse vengono visualizzate le descrizioni degli attributi esistenti.
+  // Per altre informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "----- STAGING -----",
+      "flutterMode": "debug",
+      "program": "lib/main.dart",
+      "request": "launch",
+      "type": "dart",
+    },
+    {
+      "name": "Lines - Staging - Debug",
+      "flutterMode": "debug",
+      "program": "lib/main_dev.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "lib/main_dev.dart",
+        "--flavor",
+        "dev",
+      ]
+    },
+    {
+      "name": "Lines - Staging - Release",
+      "flutterMode": "release",
+      "program": "lib/main_dev.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "-t",
+        "lib/main_dev.dart",
+        "--flavor",
+        "dev",
+        "--release"
+      ]
+    },
+    
+    {
+      "name": "----- PRODUCTION -----",
+      "flutterMode": "debug",
+      "program": "lib/main.dart",
+      "request": "launch",
+      "type": "dart",
+    },
+    {
+      "name": "Lines - Debug",
+      "flutterMode": "debug",
+      "program": "lib/main_prod.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+         "-t",
+        "lib/main_prod.dart",
+        "--flavor",
+        "prod"
+      ]
+    },
+    {
+      "name": "Lines - Release",
+      "flutterMode": "release",
+      "program": "lib/main_prod.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "-t",
+        "lib/main_prod.dart",
+        "--flavor",
+        "prod",
+        "--release"
+      ]
+    },
+  ]
+}

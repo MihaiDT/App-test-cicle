@@ -1,0 +1,7 @@
+{
+  "dart.flutterSdkPath": "/Users/mfiore/fvm/versions/3.13.3",
+  "workbench.preferredHighContrastColorTheme": "Community Material Theme Ocean High Contrast",
+  "workbench.preferredLightColorTheme": "Community Material Theme Ocean High Contrast",
+  "editor.defaultFormatter": "Dart-Code.dart-code",
+  "editor.formatOnSave": true
+}

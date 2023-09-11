@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812462163580",
+    "project_id": "lines-74cf1",
+    "storage_bucket": "lines-74cf1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812462163580:android:6d1f96ef915ca3d12f2bf9",
+        "android_client_info": {
+          "package_name": "com.example.lines_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANi6nd6QML08HI9sy228iQGIGtOP86orM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

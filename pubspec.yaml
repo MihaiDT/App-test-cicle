@@ -1,0 +1,99 @@
+name: lines
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cached_network_image: ^3.2.3
+  circular_motion: ^0.0.3 # TODO: valutare
+  connectivity_plus: ^4.0.2
+  dio: ^5.3.2
+  firebase_core: ^2.15.1
+  firebase_crashlytics: ^3.3.5
+  flutter_app_badger: ^1.5.0
+  flutter_dotenv: ^5.1.0
+  flutter_flavorizr: ^2.2.1
+  flutter_keyboard_visibility: ^5.4.1
+  flutter_native_splash: ^2.3.2
+  flutter_screenutil: ^5.9.0
+  flutter_svg: ^2.0.7
+  get: ^4.6.6
+  google_fonts: ^5.1.0
+  gradient_borders: ^1.0.0
+  http_interceptor: ^2.0.0-beta.7
+  horizontal_blocked_scroll_physics: ^4.0.1
+  intl: ^0.18.1
+  package_info_plus: ^4.1.0
+  path_provider: ^2.1.1
+  permission_handler: ^10.4.3
+  shared_preferences: ^2.2.1
+  shimmer: ^3.0.0
+  url_launcher: ^6.1.14
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^2.0.3
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
+    - .env.prod
+    - assets/app_icon/
+    - assets/icons/
+    - assets/images/
+
+# App icon
+flutter_icons:
+  ios: false
+  android: false
+  image_path_ios: "assets/app_icon/app_icon_dev.png"
+  image_path_android: "assets/app_icon/app_icon_prod.png"
+  adaptive_icon_background: "assets/app_icon/android_adaptive_background.png"
+  adaptive_icon_foreground: "assets/app_icon/android_adaptive_foreground_prod.png"
+
+# Flavors
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+
+  flavors:
+    dev:
+      app:
+        name: "Lines"
+      android:
+        applicationId: "it.tandu.lines"
+        firebase:
+          config: "firebase/android/dev/google-services.json"
+      ios:
+        bundleId: "it.tandu.lines"
+        firebase:
+          config: "firebase/ios/dev/GoogleService-Info.plist"
+
+    prod:
+      app:
+        name: "Lines"
+      android:
+        applicationId: "it.lines.lines" # FIXME:
+        firebase:
+          config: "firebase/android/prod/google-services.json"
+      ios:
+        bundleId: "it.lines.lines" # FIXME:
+        firebase:
+          config: "firebase/ios/prod/GoogleService-Info.plist"
+
+# Splash
+flutter_native_splash:
+  color: "#F6F6F6"
+  background_image: "assets/images/splash.png"
