@@ -1,5 +1,5 @@
 name: lines
-version: 1.0.0+1
+version: 0.0.1+1
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -10,48 +10,100 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  cached_network_image: ^3.2.3
-  circular_motion: ^0.0.3 # TODO: valutare
-  connectivity_plus: ^4.0.2
-  dio: ^5.3.2
-  firebase_core: ^2.15.1
-  firebase_crashlytics: ^3.3.5
+
+  # A flutter library to show images from the internet and keep them in the cache directory.
+  cached_network_image: ^3.3.0
+
+  # This package provides a way to create widgets in a circular position and able to scroll and make them rotate.
+  circular_motion: ^0.0.3
+
+  # This plugin allows Flutter apps to discover network connectivity and configure themselves accordingly. It can distinguish between cellular vs WiFi connection.
+  connectivity_plus: ^5.0.1
+
+  # A powerful HTTP networking package for Dart/Flutter, supports Global configuration, Interceptors, FormData, Request cancellation, File uploading/downloading, Timeout, Custom adapters, Transformers, etc.
+  dio: ^5.4.0
+
+  # A Flutter plugin to use the Firebase Core API, which enables connecting to multiple Firebase apps.
+  firebase_core: ^2.22.0
+  
+  # A common platform interface for the firebase_core plugin.
+  firebase_core_platform_interface: ^5.0.0
+
+  # A Flutter plugin to use the Firebase Crashlytics API.
+  firebase_crashlytics: ^3.4.4
+
+  # This plugin for Flutter adds the ability to change the badge of the app in the launcher. It supports iOS, macOS, and some Android devices (the official API does not support the feature, even on Oreo).
   flutter_app_badger: ^1.5.0
+  
+  # Load configuration at runtime from a .env file which can be used throughout the application. 
   flutter_dotenv: ^5.1.0
+
+  # A flutter utility to easily create flavors in your flutter application
   flutter_flavorizr: ^2.2.1
-  flutter_keyboard_visibility: ^5.4.1
-  flutter_native_splash: ^2.3.2
+  
+  # This package automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
+  flutter_native_splash: ^2.3.5
+
+  # A flutter plugin for adapting screen and font size.Let your UI display a reasonable layout on different screen sizes!
   flutter_screenutil: ^5.9.0
-  flutter_svg: ^2.0.7
+  
+  # A Flutter plugin to store data in secure storage:
+  # Keychain is used for iOS
+  # AES encryption is used for Android. AES secret key is encrypted with RSA and RSA key is stored in KeyStore
+  # With V5.0.0 we can use EncryptedSharedPreferences on Android by enabling it in the Android Options like so:
+  flutter_secure_storage: ^9.0.0
+
+  # Draw SVG files using Flutter.
+  flutter_svg: ^2.0.9
+  
+  # GetX is an extra-light and powerful solution for Flutter. It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
   get: ^4.6.6
-  google_fonts: ^5.1.0
+  
+  # A Flutter package to use fonts from fonts.google.com.
+  google_fonts: ^6.1.0
+  
+  # Various borders that use gradient instead of boring plain colors.
   gradient_borders: ^1.0.0
   http_interceptor: ^2.0.0-beta.7
   horizontal_blocked_scroll_physics: ^4.0.1
+  flutter_inappwebview: ^5.8.0
+  
+  # Provides internationalization and localization facilities, including message translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
   intl: ^0.18.1
-  package_info_plus: ^4.1.0
+  
+  # This Flutter plugin provides means to perform local, on-device authentication of the user.
+  # On supported devices, this includes authentication with biometrics such as fingerprint or facial recognition.
+  local_auth: ^2.1.7
+  
+  # This Flutter plugin provides an API for querying information about an application package.
+  package_info_plus: ^4.2.0 
+  
+  # A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS, Linux, macOS and Windows. Not all methods are supported on all platforms.
   path_provider: ^2.1.1
-  permission_handler: ^10.4.3
-  shared_preferences: ^2.2.1
+  
+  # This plugin provides a cross-platform (iOS, Android) API to request permissions and check their status. You can also open the device's app settings so users can grant permission.
+  permission_handler: ^11.0.1
+  
+  # A wrapper for ListView.builder widget that allows "snaping" event to an item at the end of user-scroll.
+  # This widget allows unrestricted scrolling (unlike other widget that only able to "snap" to left/right neighbor at a time).
+  scroll_snap_list: ^0.9.1
   shimmer: ^3.0.0
-  url_launcher: ^6.1.14
+  url_launcher: ^6.2.1
+  # webview_flutter: ^4.4.2
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^2.0.3
+  flutter_lints: ^3.0.1
 
 flutter:
   uses-material-design: true
-
   assets:
     - .env
     - .env.prod
     - assets/app_icon/
     - assets/icons/
     - assets/images/
+    - assets/web_views/
 
 # App icon
 flutter_icons:
@@ -71,7 +123,7 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: "Lines"
+        name: "MyLines"
       android:
         applicationId: "it.tandu.lines"
         firebase:
@@ -83,7 +135,7 @@ flavorizr:
 
     prod:
       app:
-        name: "Lines"
+        name: "MyLines"
       android:
         applicationId: "it.lines.lines" # FIXME:
         firebase:

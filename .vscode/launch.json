@@ -20,7 +20,7 @@
       "args": [
         "lib/main_dev.dart",
         "--flavor",
-        "dev",
+        "dev"
       ]
     },
     {

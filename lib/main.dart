@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -19,7 +18,6 @@ import 'data/models/session.dart';
 import 'firebase_options.dart';
 
 FutureOr<void> main() async {
-  // Aspetto che l'app venga interamente inizializzata
   WidgetsFlutterBinding.ensureInitialized();
   await _initApp();
 
@@ -34,7 +32,6 @@ _initApp() async {
   await _initNetwork();
   await _initPackageInfo();
   await _initFirebase();
-  _initKeyboardListener();
 }
 
 _initConnectivity() async {
@@ -44,13 +41,18 @@ _initConnectivity() async {
   isDeviceConnected = connectivityResult != ConnectivityResult.none;
 
   Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+    // TODO: facciamo uscire un qualche alert?
     isDeviceConnected = (result != ConnectivityResult.none);
+
     logDebug(isDeviceConnected ? "Connesso" : "Non connesso", tag: "Network");
   });
 }
 
+/// Private methods
+///
 _initEnv() async {
   await env.load(fileName: '.env');
+
   logDebug('${env.env}', tag: '.env');
 }
 
@@ -60,18 +62,7 @@ _initFirebase() async {
   );
 }
 
-_initKeyboardListener() {
-  final keyboardVisibilityController = KeyboardVisibilityController();
-  // Listener per capire se la tastiera è mostrata o nascosta
-  keyboardVisibilityController.onChange.listen((bool visible) async {
-    await wait(milliseconds: 500);
-    keyboardHeight = MediaQuery.of(Get.context!).viewInsets.bottom;
-  });
-}
-
 _initNetwork() {
-  // Inizializzo gli interceptor
-
   dio.interceptors.add(DioErrorInterceptor());
 
   logDebug('Dio inizializzato', tag: 'Network');

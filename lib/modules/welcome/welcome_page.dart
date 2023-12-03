@@ -1,97 +1,90 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lines/widgets/app_button.dart';
 
 import '../../core/app_theme.dart';
-import 'welcome_controller.dart';
 
-class WelcomePage extends GetView {
-  const WelcomePage({Key? key}) : super(key: key);
+import '../../widgets/layouts/app_scaffold_padding.dart';
+import '../../widgets/layouts/app_scaffold_page.dart';
+
+import '../../widgets/logos/hero_logo.dart';
+import 'welcome_controller.dart';
+import 'widgets/welcome_body.dart';
+
+class WelcomePage extends GetView<WelcomeController> {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: AppTheme.decorations.images.bgDark,
-        ),
-        height: Get.height,
-        width: Get.width,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                AppTheme.sizes.hTopSafeArea,
-                const Spacer(),
-                Hero(
-                  tag: 'hero_logo',
-                  child: SizedBox(
-                    height: Get.width * 0.6,
-                    width: Get.width * 0.6,
-                    child: SvgPicture.asset(
-                      AppTheme.icons.logo,
-                      fit: BoxFit.scaleDown,
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                ..._bottomContents(),
-              ],
+    return AppScaffoldPage(
+      backgroundImage: ThemeDecoration.images.bgDark,
+      scrollController: ScrollController(),
+      body: AppScaffoldPadding(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const Expanded(
+              flex: 3,
+              child: SizedBox.shrink(),
             ),
-          ),
+            HeroLogo(size: min(Get.width * 0.7, Get.height * 0.3)),
+            const Expanded(
+              flex: 4,
+              child: SizedBox.shrink(),
+            ),
+            WelcomeBody(controller: controller),
+          ],
         ),
       ),
     );
   }
-
-  List<Widget> _bottomContents() {
-    Get.put(WelcomeController());
-    final controller = Get.find<WelcomeController>();
-
-    // Tenendo la duration più lunga e impostando il testo solo quando parte l'animazione mantengo centrato
-    // il logo ad inizio animazione e evito di avere scatti nell'animazione
-    return [
-      Obx(
-        () => AnimatedOpacity(
-          curve: Curves.easeInOut,
-          duration: const Duration(milliseconds: 1500),
-          opacity: controller.startAnimation ? 1 : 0,
-          child: Column(
-            children: [
-              Text(
-                "Molto più di un\nperiod tracker.",
-                style: AppTheme.fonts.largeLight,
-              ),
-              AppTheme.sizes.h16,
-              Text(
-                controller.startAnimation
-                    ? "La tua nuova app per vivere e monitorare\nil ciclo mestruale in modo positivo, consapevole e divertente.\n\nSei pronta?"
-                    : '',
-                style: AppTheme.fonts.bodyLight,
-                textAlign: TextAlign.center,
-              ),
-              AppTheme.sizes.h40,
-              const AppButton(
-                gradient: false,
-                filled: true,
-                fullWidth: true,
-                text: "INIZIAMO!",
-              ),
-              AppTheme.sizes.h16,
-              Text(
-                "Hai un account? ACCEDI",
-                style: AppTheme.fonts.bodyLight,
-              ),
-              AppTheme.sizes.h16,
-              AppTheme.sizes.hBottomSafeArea,
-            ],
-          ),
-        ),
-      ),
-    ];
-  }
 }
+
+/// TEST
+/*
+ Widget _testHtml() {
+    return Container(
+      color: Colors.black,
+      height: Get.height * 0.7,
+      width: Get.width,-
+      child: Obx(
+        () => controller.webServerReady
+            ? InAppWebView(
+                initialUrlRequest: URLRequest(url: Uri.parse("http://localhost:8080?aaa=bbb")),
+                onWebViewCreated: (controller) {},
+                onLoadStart: (controller, url) {},
+                onLoadStop: (controller, url) {},
+              )
+            : const SizedBox.shrink(),
+      ),
+    );
+  }
+
+  Widget _testSpotify() {
+    // const html = """
+    //   <html>
+    //     <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+    //     <body>
+
+    //       <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3mPOxUuncth4ZetwZDussl?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    //     </body>
+    //   </html>
+    // """;
+    final webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(Colors.transparent) // Imposto il background trasparente
+      ..loadRequest(Uri.parse('https://lines-gioco.tandu.it'));
+    // ..loadRequest(Uri.dataFromString(html, mimeType: 'text/html'));
+
+    return Container(
+      color: Colors.black,
+      height: Get.height * 0.7,
+      width: Get.width,
+      child: WebViewWidget(
+        controller: webViewController,
+      ),
+    );
+  }
+  */

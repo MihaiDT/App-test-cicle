@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/app_theme.dart';
+import '../../../widgets/texts/text_gradient.dart';
+
+class WalkthroughStep1 extends StatelessWidget {
+  const WalkthroughStep1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: ThemeSize.widthPaddingLarge,
+        right: ThemeSize.widthPaddingLarge,
+        top: ThemeSize.heightAppBarDefault,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          SizedBox(
+            height: 240.sp,
+            width: 240.sp,
+            child: Placeholder(
+              color: Colors.grey[400]!,
+            ),
+          ),
+          ThemeSizedBox.height24,
+          TextGradient(
+            text: Text(
+              "Personalizza il tuo\navatar e gioca",
+              textAlign: TextAlign.center,
+              style: ThemeTextStyle.largeDark,
+            ),
+          ),
+          ThemeSizedBox.height16,
+          Text(
+            "Crea il tuo avatar e personalizzalo come più ti piace per rendere l'app ancora più tua!\nE quando ha i le mestruazioni non dimenticare di giocare e prenderti cura di lui.",
+            textAlign: TextAlign.center,
+            style: ThemeTextStyle.bodyDark,
+          ),
+        ],
+      ),
+    );
+  }
+}

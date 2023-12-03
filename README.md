@@ -10,6 +10,27 @@ apri il file _projectname.xcodeproj/project.pbxproj_ e cerca  _developmentRegion
 developmentRegion = it;
 ```
 
+
+## Impostare il nome dell'app
+### Android
+
+Apri il file `android/app/src/main/AndroidManifest.xml`
+```xml
+<application
+        android:name="io.flutter.app.FlutterApplication"
+        android:label="NOME APP"
+        android:icon="@mipmap/ic_launcher">
+```
+
+### iOS
+
+Apri il file `ios/Runner/Info.plist`
+```xml
+<key>CFBundleName</key>
+<string>NOME APP</string>
+```
+
+
 ## Firebase
 Creare i progetti su [Firebase](https://firebase.google.com/)
 

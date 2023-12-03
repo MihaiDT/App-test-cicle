@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'theme/colors_theme.dart';
-import 'theme/decorations_theme.dart';
-import 'theme/gradients_theme.dart';
-import 'theme/icons_theme.dart';
-import 'theme/images_theme.dart';
-import 'theme/shadows_theme.dart';
-import 'theme/sizes_theme.dart';
-import 'theme/text_styles_theme.dart';
+import 'theme/theme_color.dart';
+
+export 'theme/theme_color.dart';
+export 'theme/theme_decoration.dart';
+export 'theme/theme_gradient.dart';
+export 'theme/theme_icon.dart';
+export 'theme/theme_image.dart';
+export 'theme/theme_shadow.dart';
+export 'theme/theme_size.dart';
+export 'theme/theme_sized_box.dart';
+export 'theme/theme_text_field.dart';
+export 'theme/theme_text_style.dart';
 
 class AppTheme {
-  static ColorsTheme colors = ColorsTheme();
-  static DecorationsTheme decorations = DecorationsTheme();
-  static FontStylesTheme fonts = FontStylesTheme();
-  static GradientsTheme gradients = GradientsTheme();
-  static IconsTheme icons = IconsTheme();
-  static ImagesTheme images = ImagesTheme();
-  static SizesTheme sizes = SizesTheme();
-  static ShadowsTheme shadows = ShadowsTheme();
-
   static ThemeData theme = ThemeData(
-    appBarTheme: AppBarTheme(
-      backgroundColor: colors.primary,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: ThemeColor.primary,
       centerTitle: true,
       elevation: 0,
     ),
@@ -29,19 +24,16 @@ class AppTheme {
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
     fontFamily: 'Barlow',
-    focusColor: colors.primary,
+    focusColor: ThemeColor.primary,
     // primarySwatch: colorPrimaryMaterial,
     splashColor: Colors.transparent,
     tabBarTheme: const TabBarTheme(
         // labelStyle: textStyleBody,
         ),
-    textSelectionTheme: TextSelectionThemeData(
+    textSelectionTheme: const TextSelectionThemeData(
       cursorColor: Colors.white,
-      selectionColor: colors.primary,
-      selectionHandleColor: colors.primary,
-      // cursorColor: colorPrimary,
-      // selectionColor: colorPrimary,
-      // selectionHandleColor: colorPrimary,
+      selectionColor: ThemeColor.primary,
+      selectionHandleColor: ThemeColor.primary,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );

@@ -15,7 +15,7 @@ logDebug(
 logError({
   required Object error,
   StackTrace? stackTrace,
-  String tag = '',
+  String tag = 'ERROR',
   DateTime? time,
 }) {
   _formatLog('', LogLevel.error, error: error, stackTrace: stackTrace);
@@ -24,7 +24,7 @@ logError({
 logTodo(
   String msg, {
   DateTime? time,
-  String tag = '',
+  String tag = 'TODO',
 }) {
   _formatLog(msg, LogLevel.todo, tag: tag, time: time);
 }
@@ -39,7 +39,7 @@ _formatLog(
 }) {
   if (kDebugMode) {
     List<String> txt = [level.asciiColorBegin!];
-    txt.add('[$tag]\n');
+    txt.add('[$tag]');
     if (time != null) {
       txt.add('- ${time.toIso8601String()}');
     }
