@@ -29,7 +29,7 @@ class ThemeTextStyle {
 
   static TextStyle bodyLight = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 15.5.sp,
+    fontSize: 16.sp,
     fontWeight: weightMedium,
     height: 1.4.sp,
   );
@@ -50,7 +50,7 @@ class ThemeTextStyle {
 
   static TextStyle button = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 15.5.sp,
+    fontSize: 16.sp,
     fontWeight: weightSemibold,
     height: 1.4.sp,
   );

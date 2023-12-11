@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 
 import '../../core/utils/helpers.dart';
-import '../../modules/welcome/welcome_page.dart';
 import '../../modules/welcome/welcome_controller.dart';
+import '../../modules/welcome/welcome_page.dart';
 
 class SplashController extends GetxController {
   SplashController() {
@@ -48,7 +48,6 @@ class SplashController extends GetxController {
     // Navigazione manuale verso la WelcomePage per gestire correttamente l'animazione
     Navigator.of(Get.context!).push(
       PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 800),
         pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
           Get.put(WelcomeController());
           return const WelcomePage();
@@ -62,6 +61,7 @@ class SplashController extends GetxController {
             ),
           );
         },
+        transitionDuration: const Duration(milliseconds: 800),
       ),
     );
   }

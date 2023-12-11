@@ -11,8 +11,7 @@ class MainController extends AppScaffoldController {
   late final HomeController homeController;
 
   MainController() {
-    Get.put(HomeController());
-    homeController = Get.find<HomeController>();
+    homeController = Get.put(HomeController());
   }
 
   onTapBottomNavigationBarMenu({required int selectedTab}) async {

@@ -18,11 +18,11 @@ generate_app_icons:
 generate_flavors:
 	fvm flutter pub run flutter_flavorizr
 
-generate_hive_models:
-	@echo "type `fvm flutter packages pub run build_runner build`"
+#generate_hive_models:
+#	@echo "type `fvm flutter packages pub run build_runner build`"
 
-generate_splash:
-	fvm flutter pub run flutter_native_splash:create
+# generate_splash:
+# 	fvm flutter pub run flutter_native_splash:create
 
 ios_clean_up:
 	rm -rf ios/Pods && rm -rf ios/Podfile.lock; fvm flutter pub get; cd ios && pod install --repo-update && cd ..

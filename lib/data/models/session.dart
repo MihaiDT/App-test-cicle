@@ -21,14 +21,6 @@ class Session {
   String get bloodGroup => rxBloodGroup.value;
   set bloodGroup(String newValue) => rxBloodGroup.value = newValue;
 
-  RxMap<String, bool> rxFoodEvaluations = RxMap.from({});
-  Map<String, bool> get foodEvaluations => rxFoodEvaluations.value;
-  set foodEvaluations(Map<String, bool> newValue) {
-    rxFoodEvaluations.value.clear();
-    rxFoodEvaluations.value.addAll(newValue);
-    rxFoodEvaluations.refresh();
-  }
-
   /// Methods
   logout() async {
     // currentUser = User.empty();

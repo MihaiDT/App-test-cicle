@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyANi6nd6QML08HI9sy228iQGIGtOP86orM',
-    appId: '1:812462163580:android:6d1f96ef915ca3d12f2bf9',
-    messagingSenderId: '812462163580',
-    projectId: 'lines-74cf1',
-    storageBucket: 'lines-74cf1.appspot.com',
+    apiKey: 'AIzaSyAqU8ho60aiwom-pRG5xNDsL3oSyweDi-0',
+    appId: '1:329390092342:android:edc3ac1fd7948aec96e897',
+    messagingSenderId: '329390092342',
+    projectId: 'lines-fed32',
+    storageBucket: 'lines-fed32.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB_E-mPpl3C67xFuciqx1d-FHDB-hM6ufQ',
-    appId: '1:812462163580:ios:70d7d874f00a27d52f2bf9',
-    messagingSenderId: '812462163580',
-    projectId: 'lines-74cf1',
-    storageBucket: 'lines-74cf1.appspot.com',
-    iosBundleId: 'com.example.linesFlutter',
+    apiKey: 'AIzaSyAc5Jg6b2nnLM84IOnkMOMBtUmKqUSo6KE',
+    appId: '1:329390092342:ios:5614c63d5bc6573996e897',
+    messagingSenderId: '329390092342',
+    projectId: 'lines-fed32',
+    storageBucket: 'lines-fed32.appspot.com',
+    iosClientId: '329390092342-0qrf134m44ouft9q1p70nubt1t1hdo8u.apps.googleusercontent.com',
+    iosBundleId: 'it.fater.lines',
   );
 }

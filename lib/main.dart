@@ -31,7 +31,7 @@ _initApp() async {
   await _initSingletons();
   await _initNetwork();
   await _initPackageInfo();
-  await _initFirebase();
+  //await _initFirebase();
 }
 
 _initConnectivity() async {

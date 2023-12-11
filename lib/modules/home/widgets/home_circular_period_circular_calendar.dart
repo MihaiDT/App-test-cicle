@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
+import '../../../core/app_theme.dart';
 import '../../../core/utils/helpers.dart';
 import '../../../widgets/calendars/circular_path_painter.dart';
 import '../home_controller.dart';
@@ -37,10 +39,13 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: color,
+          // color: color,
         ),
         height: isBig ? 12 : 4,
         width: isBig ? 12 : 4,
+        child: Center(
+          child: SvgPicture.asset(ThemeIcon.drop, fit: BoxFit.scaleDown),
+        ),
         // child: Center(child: Text("${index}", style: TextStyle(fontSize: 10))),
       ),
     );
@@ -52,70 +57,104 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
     for (int i = 0; i < controller.dates.length; i++) {
       children.add(_calendarDot(
         color: cicloColor,
-        isBig: true,
+        isBig: i % 26 == 0,
         index: controller.dates[i].day,
       ));
     }
 
-    final datesLength = controller.dates.length - 1;
+    final datesLength = controller.dates.length - 1; // + (controller.dates.length * 0.11).round() ;
 
-    final double distanceAngle = _getDistanceAngle(datesLength, datesLength);
+    final double distanceAngle = _getDistanceAngle(datesLength);
 
     return GestureDetector(
       onPanUpdate: _panHandler,
-      child: Stack(
-        children: [
-          Obx(
-            () => AnimatedRotation(
-              duration: const Duration(milliseconds: 400),
-              turns: -(controller.periodSelectedDateIndex /
-                  datesLength), // Negativi perché se vado in avanti col calendario devo ruotare in senso antiorario con la corona circolare
-              child: Center(
+      child: Obx(
+        () => AnimatedRotation(
+          duration: const Duration(milliseconds: 400),
+          turns: -(controller.periodSelectedDateIndex /
+              (datesLength *
+                  1.15)), // Negativi perché se vado in avanti col calendario devo ruotare in senso antiorario con la corona circolare
+          child: Stack(
+            children: [
+              Center(
                 child: SizedBox(
                   height: size - 15,
                   width: size - 15,
                   child: CustomPaint(
                     foregroundPainter: CircularPathPainter(
                       lineColor: Colors.transparent,
-                      completeColor: const Color(0xfff5f5f5).withOpacity(0.2),
-                      completePercent: 90,
+                      completeColor: const Color(0xfff5f5f5).withOpacity(0.1),
+                      completePercent: 88,
                       width: 16.0,
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
 
-          // /// Period
-          // Obx(
-          //   () => AnimatedRotation(
-          //     turns: -controller.periodSelectedDateIndex / 43,
-          //     duration: const Duration(milliseconds: 400),
-          //     child: SizedBox(
-          //       height: size,
-          //       width: size,
-          //       child: CustomPaint(
-          //         foregroundPainter: CircularPathPainter(
-          //           lineColor: Colors.transparent,
-          //           completeColor: const Color(0xfff5f5f5).withOpacity(0.2),
-          //           completePercent: 25, // FIXME: proporzioni
-          //           width: 16.0,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+              Stack(
+                children: [
+                  Center(
+                    child: SizedBox(
+                      height: size - 14,
+                      width: size - 14,
+                      child: CustomPaint(
+                        foregroundPainter: CircularPathPainter(
+                          lineColor: Colors.transparent,
+                          completeColor: ThemeColor.primary.withOpacity(0.1),
+                          completePercent: 86.5,
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
 
-          /// Dots
-          LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              return Obx(
-                () => AnimatedRotation(
-                  duration: const Duration(milliseconds: 400),
-                  turns: -(controller.periodSelectedDateIndex /
-                      datesLength), // Negativi perché se vado in avanti col calendario devo ruotare in senso antiorario con la corona circolare
-                  child: Stack(
+                  /// Arrow
+                  Positioned(
+                    top: (Get.width - size) / 2 - 8,
+                    left: (Get.width - size) / 2 - 8,
+                    child: Transform.rotate(
+                      angle: _arrowAngle(),
+                      child: SvgPicture.asset(
+                        ThemeIcon.circularCalendarArrow,
+                        color: ThemeColor.primary.withOpacity(0.1),
+                        fit: BoxFit.scaleDown,
+                        width: 9,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              // /// Period
+              // Obx(
+              //   () => AnimatedRotation(
+              //     turns: -controller.periodSelectedDateIndex / 43,
+              //     duration: const Duration(milliseconds: 400),
+              //     child: SizedBox(
+              //       height: size,
+              //       width: size,
+              //       child: CustomPaint(
+              //         foregroundPainter: CircularPathPainter(
+              //           lineColor: Colors.transparent,
+              //           completeColor: const Color(0xfff5f5f5).withOpacity(0.2),
+              //           completePercent: 25, // FIXME: proporzioni
+              //           width: 16.0,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
+              /// Dots
+              LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  //     return Obx(
+                  //       () => AnimatedRotation(
+                  //         duration: const Duration(milliseconds: 400),
+                  //         turns: -(controller.periodSelectedDateIndex /
+                  //             datesLength), // Negativi perché se vado in avanti col calendario devo ruotare in senso antiorario con la corona circolare
+                  //         child:
+                  return Stack(
                     children: List.generate(
                       children.length,
                       (index) => Align(
@@ -126,28 +165,35 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
                         child: children[index],
                       ),
                     ),
-                  ),
+                  );
+                },
+              ),
+
+              /// Dot magnifier
+
+              /// Gesture Detector
+              Container(
+                height: size * 2,
+                width: size * 2,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.transparent,
                 ),
-              );
-            },
+              ),
+            ],
           ),
-
-          /// Dot magnifier
-
-          /// Gesture Detector
-          Container(
-            height: size * 2,
-            width: size * 2,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.transparent,
-            ),
-          ),
-        ],
+        ),
       ),
     );
+  }
 
-    ;
+  double _arrowAngle() {
+    double xCoordinate = 0.1; // Coordinata x del punto sulla circonferenza
+    double yCoordinate = 0.12; // Coordinata y del punto sulla circonferenza
+
+    double rotationAngle = atan2(xCoordinate, yCoordinate);
+
+    return -rotationAngle;
   }
 
   double _getAngle(double halfWidth, double halfHeight, Offset position) {
@@ -158,8 +204,8 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
     return degreeangle;
   }
 
-  double _getDistanceAngle(int? count, int? children) {
-    return count == null ? (360 / children!) : (360 / count);
+  double _getDistanceAngle(int count) {
+    return (360 * 0.85 / count);
   }
 
   _panHandler(DragUpdateDetails d) async {
@@ -196,7 +242,7 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
           updating = true;
           HapticFeedback.lightImpact();
 
-          await wait(milliseconds: 150);
+          await wait(milliseconds: 100);
           _resetUpdating();
           controller.scrollSnapListKey.currentState?.focusToItem(controller.periodSelectedDateIndex -= 1);
         }
@@ -205,7 +251,7 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
           updating = true;
           HapticFeedback.lightImpact();
 
-          await wait(milliseconds: 150);
+          await wait(milliseconds: 100);
           _resetUpdating();
           controller.scrollSnapListKey.currentState?.focusToItem(controller.periodSelectedDateIndex += 1);
         }
@@ -219,6 +265,6 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
 
   _resetUpdating() async {
     updating = false;
-    await wait(milliseconds: 150);
+    await wait(milliseconds: 100);
   }
 }

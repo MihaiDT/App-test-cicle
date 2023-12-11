@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/widgets/grid_guides.dart';
 
 import '../../core/app_theme.dart';
 
@@ -17,27 +18,32 @@ class WelcomePage extends GetView<WelcomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldPage(
-      backgroundImage: ThemeDecoration.images.bgDark,
-      scrollController: ScrollController(),
-      body: AppScaffoldPadding(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const Expanded(
-              flex: 3,
-              child: SizedBox.shrink(),
+    return Stack(
+      children: [
+        AppScaffoldPage(
+          backgroundImage: ThemeDecoration.images.bgDark,
+          scrollController: ScrollController(),
+          body: AppScaffoldPadding(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Expanded(
+                  flex: 3,
+                  child: SizedBox.shrink(),
+                ),
+                HeroLogo(size: min(Get.width * 0.7, Get.height * 0.3)),
+                const Expanded(
+                  flex: 4,
+                  child: SizedBox.shrink(),
+                ),
+                WelcomeBody(controller: controller),
+              ],
             ),
-            HeroLogo(size: min(Get.width * 0.7, Get.height * 0.3)),
-            const Expanded(
-              flex: 4,
-              child: SizedBox.shrink(),
-            ),
-            WelcomeBody(controller: controller),
-          ],
+          ),
         ),
-      ),
+        // GridGuides()
+      ],
     );
   }
 }

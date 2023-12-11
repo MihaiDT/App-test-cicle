@@ -39,7 +39,7 @@ Dalla console Firebase aggiungere Firebase alla tua app Flutter.
 Verrà richiesto di eseguire i seguenti comandi nella directory principale del progetto Flutter:
 ```bash
 dart pub global activate flutterfire_cli
-flutterfire configure --project=lines-74cf1
+flutterfire configure --project=lines-fed32
 ```
 
 Una volta completata la procedura aggiungere il seguente codice nel file _main.dart_ per inizializzare Firebase
