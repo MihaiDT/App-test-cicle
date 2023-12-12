@@ -105,7 +105,6 @@ flutter:
   assets:
     - .env
     - .env.prod
-    - assets/app_icon/
     - assets/icons/
     - assets/images/
     - assets/web_views/
