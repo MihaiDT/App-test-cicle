@@ -6,8 +6,6 @@ import 'package:lines/modules/home/widgets/home_circular_period_circular_calenda
 import 'package:lines/widgets/buttons/app_button.dart';
 
 import '../../../core/app_theme.dart';
-import '../../../core/utils/helpers.dart';
-import '../../../widgets/calendars/circular_path_painter.dart';
 import '../../../widgets/layouts/app_scaffold_padding.dart';
 import '../home_controller.dart';
 
@@ -29,13 +27,13 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
               child: HomeCircularPeriodCircularCalendar(),
             ),
           ),
-          _avatarContainer(),
+          _avatarContainer,
         ],
       ),
-    ).padding(context);
+    );
   }
 
-  Widget _avatarContainer() {
+  Widget get _avatarContainer {
     return Center(
       child: SizedBox(
         height: size,
@@ -66,7 +64,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10.0),
-                        child: _avatar(),
+                        child: _avatar,
                       ),
                       if (controller.playButtonVisible)
                         const Positioned(
@@ -98,7 +96,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
     );
   }
 
-  Widget _avatar() {
+  Widget get _avatar {
     return SizedBox(
       width: 100,
       height: 140,

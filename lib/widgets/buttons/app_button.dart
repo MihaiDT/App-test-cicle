@@ -56,16 +56,16 @@ class AppButton extends StatelessWidget {
         width: fullWidth ? double.maxFinite : null,
         child: filled
             ? gradient
-                ? _text()
-                : TextGradient(text: _text())
+                ? _text
+                : TextGradient(text: _text)
             : gradient
-                ? TextGradient(text: _text())
-                : _text(),
+                ? TextGradient(text: _text)
+                : _text,
       ),
     );
   }
 
-  Text _text() {
+  Text get _text {
     return Text(
       text.toUpperCase(),
       style: small ? ThemeTextStyle.buttonSmall : ThemeTextStyle.button,
