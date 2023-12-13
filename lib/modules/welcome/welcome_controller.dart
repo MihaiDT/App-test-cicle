@@ -18,7 +18,7 @@ class WelcomeController extends AppScaffoldController {
   set webServerReady(bool newValue) => rxWebServerReady.value = newValue;
 
   onTapSignin() {
-    Get.toNamed(Routes.walkthrough);
+    Get.toNamed(Routes.cookie);
   }
 
   /// Private methods

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/cookie/cookie_page.dart';
 
 import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
@@ -46,11 +47,18 @@ class Pages {
       page: () => _mediaQueryWrapper(const WalkthroughPage()),
       transition: Transition.fade,
     ),
+
+    // Cookie
+    GetPage(
+      name: Routes.cookie,
+      page: () => _mediaQueryWrapper(const CookiePage()),
+      transition: Transition.fade,
+    ),
   ];
 
   /// Private methods
 
-  static MediaQuery _mediaQueryWrapper(GetView view) {
+  static MediaQuery _mediaQueryWrapper(Widget view) {
     return MediaQuery(
       data: MediaQuery.of(Get.context!).copyWith(
         textScaler: const TextScaler.linear(1),

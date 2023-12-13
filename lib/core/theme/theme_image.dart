@@ -19,4 +19,5 @@ class ThemeImage {
   static String walkthrough3 = '$folderPath/walkthrough_3.webp';
   static String walkthrough4 = '$folderPath/walkthrough_4.webp';
   static String walkthrough5 = '$folderPath/walkthrough_5.webp';
+  static String cookie = '$folderPath/cookie.webp';
 }
