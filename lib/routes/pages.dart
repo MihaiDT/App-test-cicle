@@ -19,7 +19,7 @@ class Pages {
     GetPage(
       binding: MainBinding(),
       name: Routes.main,
-      page: () => const MainPage(),
+      page: () => _mediaQueryWrapper(const MainPage()),
       transition: Transition.fadeIn,
     ),
 
@@ -27,7 +27,7 @@ class Pages {
     GetPage(
       binding: SigninBinding(),
       name: Routes.signin,
-      page: () => const SigninPage(),
+      page: () => _mediaQueryWrapper(const SigninPage()),
       transition: Transition.rightToLeft,
     ),
 
@@ -35,7 +35,7 @@ class Pages {
     GetPage(
       binding: SplashBinding(),
       name: Routes.splash,
-      page: () => const SplashPage(),
+      page: () => _mediaQueryWrapper(const SplashPage()),
       transition: Transition.fade,
     ),
 
@@ -43,8 +43,19 @@ class Pages {
     GetPage(
       binding: WalkthroughBinding(),
       name: Routes.walkthrough,
-      page: () => const WalkthroughPage(),
+      page: () => _mediaQueryWrapper(const WalkthroughPage()),
       transition: Transition.fade,
     ),
   ];
+
+  /// Private methods
+
+  static MediaQuery _mediaQueryWrapper(GetView view) {
+    return MediaQuery(
+      data: MediaQuery.of(Get.context!).copyWith(
+        textScaler: const TextScaler.linear(1),
+      ),
+      child: view,
+    );
+  }
 }
