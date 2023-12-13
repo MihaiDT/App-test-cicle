@@ -16,7 +16,8 @@ class HomeController extends AppScaffoldController {
 
   RxInt rxPeriodSelectedDateIndex = 0.obs;
   int get periodSelectedDateIndex => rxPeriodSelectedDateIndex.value;
-  set periodSelectedDateIndex(int newValue) => rxPeriodSelectedDateIndex.value = newValue;
+  set periodSelectedDateIndex(int newValue) =>
+      rxPeriodSelectedDateIndex.value = newValue;
 
   final List<DateTime> dates = [];
   final int numberOfWeeksBefore = 3; // FIXME: da calcolare rispetto al ciclo
@@ -29,7 +30,8 @@ class HomeController extends AppScaffoldController {
   horizontalCalendarOnItemFocus(int index) {
     periodSelectedDateIndex = index;
 
-    playButtonVisible = dateFormatYMD.format(dates[periodSelectedDateIndex]) == dateFormatYMD.format(DateTime.now());
+    playButtonVisible = dateFormatYMD.format(dates[periodSelectedDateIndex]) ==
+        dateFormatYMD.format(DateTime.now());
     // TODO: cambio immagine avatar e colore
   }
 
@@ -42,11 +44,16 @@ class HomeController extends AppScaffoldController {
   _generateDates() {
     final DateTime today = DateTime.now();
 
-    int dateMilliseconds = today.add(Duration(days: (-(7 * numberOfWeeksBefore) - 3))).millisecondsSinceEpoch;
-    final lastDateMilliseconds = today.add(Duration(days: ((7 * numberOfWeeksAfter) + 4))).millisecondsSinceEpoch;
+    int dateMilliseconds = today
+        .add(Duration(days: (-(7 * numberOfWeeksBefore) - 3)))
+        .millisecondsSinceEpoch;
+    final lastDateMilliseconds = today
+        .add(Duration(days: ((7 * numberOfWeeksAfter) + 4)))
+        .millisecondsSinceEpoch;
 
     while (dateMilliseconds <= lastDateMilliseconds) {
-      dateMilliseconds = dateMilliseconds + const Duration(days: 1).inMilliseconds;
+      dateMilliseconds =
+          dateMilliseconds + const Duration(days: 1).inMilliseconds;
       dates.add(DateTime.fromMillisecondsSinceEpoch(dateMilliseconds));
     }
   }

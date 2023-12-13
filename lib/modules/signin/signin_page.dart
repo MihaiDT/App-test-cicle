@@ -62,7 +62,9 @@ class SigninPage extends GetView<SigninController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: ThemeSize.heightSafeAreaTop + ScrollableAppBar.scrollOffset - 24,
+            height: ThemeSize.heightSafeAreaTop +
+                ScrollableAppBar.scrollOffset -
+                24,
           ),
           _logo(),
           ThemeSizedBox.height16,

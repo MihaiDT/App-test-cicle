@@ -19,7 +19,8 @@ class SplashController extends GetxController {
     final LocalAuthentication auth = LocalAuthentication();
 
     final bool canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
-    final bool canAuthenticate = canAuthenticateWithBiometrics || await auth.isDeviceSupported();
+    final bool canAuthenticate =
+        canAuthenticateWithBiometrics || await auth.isDeviceSupported();
 
     logDebug("Posso autenticare: $canAuthenticate", tag: "Biometric auth");
 
@@ -48,12 +49,13 @@ class SplashController extends GetxController {
     // Navigazione manuale verso la WelcomePage per gestire correttamente l'animazione
     Navigator.of(Get.context!).push(
       PageRouteBuilder(
-        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
           Get.put(WelcomeController());
           return const WelcomePage();
         },
-        transitionsBuilder:
-            (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+        transitionsBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation, Widget child) {
           return Align(
             child: FadeTransition(
               opacity: animation,

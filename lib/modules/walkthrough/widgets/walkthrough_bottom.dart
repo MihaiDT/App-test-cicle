@@ -15,7 +15,8 @@ class WalkthroughBottom extends StatelessWidget {
     final controller = Get.find<WalkthroughController>();
 
     return Positioned(
-      bottom: ThemeSize.heightSafeAreaBottom + (ThemeSize.heightSafeAreaBottom == 0 ? 24 : 0),
+      bottom: ThemeSize.heightSafeAreaBottom +
+          (ThemeSize.heightSafeAreaBottom == 0 ? 24 : 0),
       left: ThemeSize.widthPaddingLarge,
       right: ThemeSize.widthPaddingLarge,
       child: Obx(
@@ -39,7 +40,9 @@ class WalkthroughBottom extends StatelessWidget {
               onTap: () => controller.currentStepIndex < controller.lastStep
                   ? controller.onTapNext()
                   : controller.onTapLetsStart(),
-              text: controller.currentStepIndex < controller.lastStep ? "CONTINUA" : "AVANTI",
+              text: controller.currentStepIndex < controller.lastStep
+                  ? "CONTINUA"
+                  : "AVANTI",
             ),
             if (!controller.isLastStep) ...[
               ThemeSizedBox.height24,

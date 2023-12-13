@@ -73,7 +73,8 @@ _initPackageInfo() async {
   appConfig.appVersion = packageInfo.version;
   appConfig.buildNumber = packageInfo.buildNumber;
 
-  logDebug("${appConfig.appVersion} (${appConfig.buildNumber})", tag: "App Version");
+  logDebug("${appConfig.appVersion} (${appConfig.buildNumber})",
+      tag: "App Version");
 }
 
 _initSingletons() async {

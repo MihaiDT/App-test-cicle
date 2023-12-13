@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '329390092342',
     projectId: 'lines-fed32',
     storageBucket: 'lines-fed32.appspot.com',
-    iosClientId: '329390092342-0qrf134m44ouft9q1p70nubt1t1hdo8u.apps.googleusercontent.com',
+    iosClientId:
+        '329390092342-0qrf134m44ouft9q1p70nubt1t1hdo8u.apps.googleusercontent.com',
     iosBundleId: 'it.fater.lines',
   );
 }

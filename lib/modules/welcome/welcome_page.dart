@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/widgets/grid_guides.dart';
-
 import '../../core/app_theme.dart';
 
 import '../../widgets/layouts/app_scaffold_padding.dart';

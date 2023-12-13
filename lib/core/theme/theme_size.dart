@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 class ThemeSize {
   /// Safe area
   static double heightSafeAreaBottom =
-      MediaQuery.of(Get.context!).viewPadding.bottom + MediaQuery.of(Get.context!).viewInsets.bottom;
+      MediaQuery.of(Get.context!).viewPadding.bottom +
+          MediaQuery.of(Get.context!).viewInsets.bottom;
   static double heightSafeAreaTop = MediaQuery.of(Get.context!).viewPadding.top;
   static double heightAppBarDefault = AppBar().preferredSize.height;
 

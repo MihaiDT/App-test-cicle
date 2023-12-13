@@ -8,7 +8,8 @@ import '../utils/singletons.dart';
 get apiEndpoint => env.env['API_ENDPOINT'];
 get proxyEndpoint => "${env.env['PROXY']}:9090";
 // bool get authTokenPresent => authHeaders.accessToken != null;
-get isProxymanEnabled => kDebugMode ? env.env['ENABLE_PROXYMAN'] == 'true' : false;
+get isProxymanEnabled =>
+    kDebugMode ? env.env['ENABLE_PROXYMAN'] == 'true' : false;
 
 // Dio interceptor: se false non vengono intercettati gli errori ma viene lasciata la gestione all'utente
 bool disableDioInterceptor = false;
@@ -17,9 +18,12 @@ bool disableDioInterceptor = false;
 String apiErrorMessage(DioError err) {
   String errorMessage = '';
 
-  if (err.response != null && err.response!.data != null && err.response!.data is Map) {
+  if (err.response != null &&
+      err.response!.data != null &&
+      err.response!.data is Map) {
     final Map<String, dynamic> responseData = err.response!.data;
-    for (final error in (responseData['errors'] as Map<String, dynamic>).values) {
+    for (final error
+        in (responseData['errors'] as Map<String, dynamic>).values) {
       errorMessage = error;
     }
   } else {

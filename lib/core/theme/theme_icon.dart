@@ -3,7 +3,8 @@ class ThemeIcon {
 
   static String back = '$folderPath/back.svg';
   static String calendar = '$folderPath/calendar.svg';
-  static String circularCalendarArrow = '$folderPath/circular_calendar_arrow.svg';
+  static String circularCalendarArrow =
+      '$folderPath/circular_calendar_arrow.svg';
   static String drop = '$folderPath/drop.svg';
   static String logo = '$folderPath/logo.svg';
   static String menu = '$folderPath/menu.svg';

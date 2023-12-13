@@ -29,7 +29,8 @@ class AppIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        color: showBg ? backgroundColor ?? ThemeColor.primary : Colors.transparent,
+        color:
+            showBg ? backgroundColor ?? ThemeColor.primary : Colors.transparent,
         height: size,
         width: size,
         child: iconPath != null

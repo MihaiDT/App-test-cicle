@@ -7,8 +7,10 @@ class ApiResult {
 
   ApiResult({required this.statusCode, this.response}) : errorMessage = null;
 
-  ApiResult.error({required this.statusCode, this.errorMessage}) : response = null;
+  ApiResult.error({required this.statusCode, this.errorMessage})
+      : response = null;
 
   // Returns true if the response has an error associated with it
-  bool get hasError => (errorMessage != null && errorMessage!.isNotEmpty) || statusCode > 299;
+  bool get hasError =>
+      (errorMessage != null && errorMessage!.isNotEmpty) || statusCode > 299;
 }

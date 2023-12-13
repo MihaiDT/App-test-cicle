@@ -50,10 +50,14 @@ class WalkthroughPage extends GetView<WalkthroughController> {
   _addPostFrameCallback() {
     // Questa callback viene chiamato dopo che il widget è stato renderizzato
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final RenderBox renderBox = controller.bottomAreaKey.currentContext!.findRenderObject() as RenderBox;
+      final RenderBox renderBox = controller.bottomAreaKey.currentContext!
+          .findRenderObject() as RenderBox;
       final widgetSize = renderBox.size;
 
-      controller.hBottomArea = Get.height - widgetSize.height - ThemeSize.heightSafeAreaBottom - 24; // perché -24?
+      controller.hBottomArea = Get.height -
+          widgetSize.height -
+          ThemeSize.heightSafeAreaBottom -
+          24; // perché -24?
     });
   }
 }

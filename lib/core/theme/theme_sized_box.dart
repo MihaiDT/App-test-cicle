@@ -31,7 +31,10 @@ extension ThemeSizedBox on SizedBox {
   static SizedBox get width60 => SizedBox(width: 60.sp);
 
   /// SafeArea
-  static SizedBox get heightAppBarDefault => SizedBox(height: ThemeSize.heightAppBarDefault);
-  static SizedBox get heightBottomSafeArea => SizedBox(height: ThemeSize.heightSafeAreaBottom);
-  static SizedBox get heightTopSafeArea => SizedBox(height: ThemeSize.heightSafeAreaTop);
+  static SizedBox get heightAppBarDefault =>
+      SizedBox(height: ThemeSize.heightAppBarDefault);
+  static SizedBox get heightBottomSafeArea =>
+      SizedBox(height: ThemeSize.heightSafeAreaBottom);
+  static SizedBox get heightTopSafeArea =>
+      SizedBox(height: ThemeSize.heightSafeAreaTop);
 }

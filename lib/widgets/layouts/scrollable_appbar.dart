@@ -53,7 +53,8 @@ class ScrollableAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-      data: MediaQuery.of(Get.context!).copyWith(textScaler: const TextScaler.linear(1)),
+      data: MediaQuery.of(Get.context!)
+          .copyWith(textScaler: const TextScaler.linear(1)),
       child: Obx(
         () => AppBar(
           actions: rightWidget != null
@@ -88,14 +89,18 @@ class ScrollableAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget _backButton(BuildContext context) {
     return AppIconButton(
-      onTap: () => controller != null ? controller!.onTapBack() : _backDefaultBehaviour(context),
+      onTap: () => controller != null
+          ? controller!.onTapBack()
+          : _backDefaultBehaviour(context),
       iconPath: ThemeIcon.back,
     );
   }
 
   Widget _closeButton(BuildContext context) {
     return AppIconButton(
-      onTap: () => controller != null ? controller!.onTapBack() : _backDefaultBehaviour(context),
+      onTap: () => controller != null
+          ? controller!.onTapBack()
+          : _backDefaultBehaviour(context),
       iconPath: ThemeIcon.back,
     );
   }
@@ -146,7 +151,9 @@ class ScrollableAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   bool get isSliverAppBarExpanded =>
-      scrollController != null && scrollController!.hasClients && scrollController!.offset > scrollOffset;
+      scrollController != null &&
+      scrollController!.hasClients &&
+      scrollController!.offset > scrollOffset;
 
   @override
   Size get preferredSize => Size(Get.width, ThemeSize.heightAppBarDefault);

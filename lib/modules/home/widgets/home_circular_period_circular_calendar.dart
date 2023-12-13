@@ -62,7 +62,8 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
       ));
     }
 
-    final datesLength = controller.dates.length - 1; // + (controller.dates.length * 0.11).round() ;
+    final datesLength = controller.dates.length -
+        1; // + (controller.dates.length * 0.11).round() ;
 
     final double distanceAngle = _getDistanceAngle(datesLength);
 
@@ -227,9 +228,13 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
       double xChange = d.delta.dx.abs();
 
       /// Directional change on wheel
-      double verticalRotation = (onRightSide && panDown) || (onLeftSide && panUp) ? yChange : yChange * -1;
+      double verticalRotation =
+          (onRightSide && panDown) || (onLeftSide && panUp)
+              ? yChange
+              : yChange * -1;
 
-      double horizontalRotation = (onTop && panRight) || (onBottom && panLeft) ? xChange : xChange * -1;
+      double horizontalRotation =
+          (onTop && panRight) || (onBottom && panLeft) ? xChange : xChange * -1;
 
       // Total computed change
       double rotationalChange = verticalRotation + horizontalRotation;
@@ -244,7 +249,8 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
 
           await wait(milliseconds: 100);
           _resetUpdating();
-          controller.scrollSnapListKey.currentState?.focusToItem(controller.periodSelectedDateIndex -= 1);
+          controller.scrollSnapListKey.currentState
+              ?.focusToItem(controller.periodSelectedDateIndex -= 1);
         }
       } else if (rotationalChange < -0.3) {
         if (controller.periodSelectedDateIndex < controller.dates.length - 2) {
@@ -253,7 +259,8 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
 
           await wait(milliseconds: 100);
           _resetUpdating();
-          controller.scrollSnapListKey.currentState?.focusToItem(controller.periodSelectedDateIndex += 1);
+          controller.scrollSnapListKey.currentState
+              ?.focusToItem(controller.periodSelectedDateIndex += 1);
         }
       }
     }

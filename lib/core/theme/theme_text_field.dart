@@ -48,11 +48,13 @@ InputDecoration textFieldDefaultDecoration(
     ),
     disabledBorder: disabledOutlineInputBorder,
     enabled: !isDisabled,
-    enabledBorder: hasError ? errorOutlineInputBorder : enabledOutlineInputBorder,
+    enabledBorder:
+        hasError ? errorOutlineInputBorder : enabledOutlineInputBorder,
     errorText: null, //  Gestisco a mano l'errore
     floatingLabelBehavior: FloatingLabelBehavior.never,
     fillColor: Colors.transparent,
-    focusedBorder: hasError ? errorOutlineInputBorder : focusedOutlineInputBorder,
+    focusedBorder:
+        hasError ? errorOutlineInputBorder : focusedOutlineInputBorder,
     focusedErrorBorder: errorOutlineInputBorder,
     focusColor: ThemeColor.whiteDark,
     hintMaxLines: 1,

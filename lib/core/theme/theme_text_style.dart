@@ -43,10 +43,13 @@ class ThemeTextStyle {
     height: 1.4.sp,
   );
 
-  static TextStyle bodySmallDark = bodySmallLight.copyWith(color: ThemeColor.primary);
+  static TextStyle bodySmallDark =
+      bodySmallLight.copyWith(color: ThemeColor.primary);
 
-  static TextStyle boldSmallDark = bodySmallDark.copyWith(fontWeight: weightBold);
-  static TextStyle boldSmallLight = bodySmallLight.copyWith(fontWeight: weightBold);
+  static TextStyle boldSmallDark =
+      bodySmallDark.copyWith(fontWeight: weightBold);
+  static TextStyle boldSmallLight =
+      bodySmallLight.copyWith(fontWeight: weightBold);
 
   static TextStyle button = GoogleFonts.barlow(
     color: Colors.white,
@@ -89,7 +92,8 @@ class ThemeTextStyle {
     letterSpacing: 1.1.sp,
   );
 
-  static TextStyle placeholderDark = placeholderLight.copyWith(color: ThemeColor.primary);
+  static TextStyle placeholderDark =
+      placeholderLight.copyWith(color: ThemeColor.primary);
 
   static TextStyle calendarMonth = GoogleFonts.barlow(
     color: Colors.white,

@@ -13,7 +13,9 @@ class WalktroughSkipLink extends StatelessWidget {
     final controller = Get.find<WalkthroughController>();
 
     return InkWell(
-      onTap: () => controller.currentStepIndex < controller.lastStep ? controller.onTapSkip() : {},
+      onTap: () => controller.currentStepIndex < controller.lastStep
+          ? controller.onTapSkip()
+          : {},
       child: Opacity(
         opacity: controller.currentStepIndex < controller.lastStep ? 1 : 0,
         child: Column(

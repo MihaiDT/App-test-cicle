@@ -15,5 +15,6 @@ extension $formValidatorString on String {
 
   bool get containsLowercaseChars => RegExp(r'[a-z]').hasMatch(this);
 
-  bool get containsSpecialChars => RegExp(r'[!@#$%\-/\\€;£=_^&*(),.?":{}|<>]').hasMatch(this);
+  bool get containsSpecialChars =>
+      RegExp(r'[!@#$%\-/\\€;£=_^&*(),.?":{}|<>]').hasMatch(this);
 }
