@@ -58,6 +58,7 @@ class ThemeTextStyle {
     height: 1.4.sp,
   );
 
+
   static TextStyle buttonSmall = button.copyWith(
     fontSize: 12.sp,
     height: 1.2.sp,
@@ -119,4 +120,12 @@ class ThemeTextStyle {
   );
 
   static TextStyle ctaDark = ctaLight.copyWith(color: ThemeColor.primary);
+
+  static TextStyle welcomeQuizSelectDark = GoogleFonts.barlow(
+    height: 1.4,
+    letterSpacing: 2.0,
+    fontSize: 16,
+    color: ThemeColor.darkBlue,
+    fontWeight: weightBold,
+  );
 }

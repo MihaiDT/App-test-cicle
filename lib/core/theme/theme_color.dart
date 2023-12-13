@@ -6,5 +6,6 @@ class ThemeColor {
   static const Color buttonBackground = Colors.white;
   static const Color buttonText = Colors.white;
   static const Color whiteDark = Color(0xffE4D8E7);
+  static const Color darkBlue = Color(0xff1f2d4f);
   Color get inputSelection => primary.withOpacity(0.9);
 }

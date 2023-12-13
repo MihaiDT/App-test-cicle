@@ -9,4 +9,5 @@ class ThemeIcon {
   static String logo = '$folderPath/logo.svg';
   static String menu = '$folderPath/menu.svg';
   static String passwordHidden = '$folderPath/password_hidden.svg';
+  static String checkMark = '$folderPath/white_checkmark.svg';
 }
