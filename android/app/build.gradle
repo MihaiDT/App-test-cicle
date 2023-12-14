@@ -66,31 +66,31 @@ android {
         multiDexEnabled true
     }
 
-    signingConfigs {
-        debug {
-            storeFile file("LinesKeyDev.keystore")
-            storePassword "LinesPassword!"
-            keyAlias "LinesKeyDev"
-            keyPassword "LinesPassword!"
-        }
+    /*  signingConfigs {
+          debug {
+              storeFile file("LinesKeyDev.keystore")
+              storePassword "LinesPassword!"
+              keyAlias "LinesKeyDev"
+              keyPassword "LinesPassword!"
+          }
 
-        release {
-            storeFile file("LinesKey.keystore")
-            storePassword "LinesPassword!"
-            keyAlias "LinesKey"
-            keyPassword "LinesPassword!"
-        }
-    }
+          release {
+              storeFile file("LinesKey.keystore")
+              storePassword "LinesPassword!"
+              keyAlias "LinesKey"
+              keyPassword "LinesPassword!"
+          }
+      }
 
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
-            
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
+      buildTypes {
+          debug {
+              signingConfig signingConfigs.debug
+          }
+
+          release {
+              signingConfig signingConfigs.release
+          }
+      }*/
 }
 
 flutter {

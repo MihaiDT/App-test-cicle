@@ -27,5 +27,8 @@ generate_flavors:
 ios_clean_up:
 	rm -rf ios/Pods && rm -rf ios/Podfile.lock; fvm flutter pub get; cd ios && pod install --repo-update && cd ..
 
+fpg:
+	fvm flutter pub get
+
 #clean_up_gradle_cache:
  	# ./gradlew --stop; rm -rf ~/.gradle/caches/

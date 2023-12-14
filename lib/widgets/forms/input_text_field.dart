@@ -49,7 +49,6 @@ class InputTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         _label(),
@@ -60,7 +59,7 @@ class InputTextField extends StatelessWidget {
                   label,
                   hasError: hasError,
                   isDisabled: isDisabled,
-                  obscureText: true,
+                  obscureText: obscureText,
                   placeholder: placeholder,
                   onTapTogglePassword: onTapTogglePassword,
                 )

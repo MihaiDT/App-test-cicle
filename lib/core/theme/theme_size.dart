@@ -10,13 +10,18 @@ class ThemeSize {
   static double heightAppBarDefault = AppBar().preferredSize.height;
 
   /// EdgeInsets (Padding)
-  static double widthPaddingSmall = 24;
-  static double widthPaddingLarge = 32;
-  static EdgeInsets paddingS = const EdgeInsets.symmetric(horizontal: 16);
-  static EdgeInsets paddingL = const EdgeInsets.symmetric(horizontal: 24);
+  static const double paddingSmall = 16;
+  static const double paddingMedium = 24;
+  static const double paddingLarge = 32;
+  static const EdgeInsets paddingS = EdgeInsets.symmetric(
+    horizontal: paddingSmall,
+  );
+  static const EdgeInsets paddingL = EdgeInsets.symmetric(
+    horizontal: paddingMedium,
+  );
 
-  // /// Keyboard
-  // static RxDouble rxHKeyboard = 0.0.obs;
-  // static double get hKeyboard => rxHKeyboard.value;
-  // static set hKeyboard(double newValue) => rxHKeyboard.value = newValue;
+// /// Keyboard
+// static RxDouble rxHKeyboard = 0.0.obs;
+// static double get hKeyboard => rxHKeyboard.value;
+// static set hKeyboard(double newValue) => rxHKeyboard.value = newValue;
 }

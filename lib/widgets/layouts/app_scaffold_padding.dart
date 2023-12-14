@@ -56,15 +56,15 @@ class AppScaffoldPadding extends StatelessWidget {
       _mediaQueryData(context).viewInsets.left +
       // _mediaQueryData(context).viewPadding.left +
       (sidePaddingLarge
-          ? ThemeSize.widthPaddingLarge
-          : ThemeSize.widthPaddingSmall);
+          ? ThemeSize.paddingLarge
+          : ThemeSize.paddingMedium);
 
   double paddingRight(BuildContext context) =>
       _mediaQueryData(context).viewInsets.right +
       // _mediaQueryData(context).viewPadding.right +
       (sidePaddingLarge
-          ? ThemeSize.widthPaddingLarge
-          : ThemeSize.widthPaddingSmall);
+          ? ThemeSize.paddingLarge
+          : ThemeSize.paddingMedium);
 
   double paddingTop(BuildContext context) => _mediaQueryData(context)
       .viewInsets

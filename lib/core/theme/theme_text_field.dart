@@ -85,8 +85,8 @@ InputDecoration textFieldPasswordDecoration(
             height: 40,
             width: 40,
             child: SvgPicture.asset(
-              obscureText ? ThemeIcon.passwordHidden : ThemeIcon.passwordHidden,
-              fit: BoxFit.contain,
+              obscureText ? ThemeIcon.eyeClosed : ThemeIcon.eyeOpened,
+              color: Colors.white,
             ),
           ),
         ),

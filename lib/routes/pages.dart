@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/register/register_binding.dart';
+import 'package:lines/modules/register/register_and_login_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
 
 import '../modules/main/main_binding.dart';
@@ -45,6 +47,14 @@ class Pages {
       binding: WalkthroughBinding(),
       name: Routes.walkthrough,
       page: () => _mediaQueryWrapper(const WalkthroughPage()),
+      transition: Transition.fade,
+    ),
+
+    // Register
+    GetPage(
+      binding: RegisterBinding(),
+      name: Routes.registerAndLogin,
+      page: () => _mediaQueryWrapper(RegisterAndLoginPage()),
       transition: Transition.fade,
     ),
 

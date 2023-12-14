@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/register/register_and_login_page.dart';
+import 'package:lines/routes/routes.dart';
 
 import '../../../core/app_theme.dart';
 import '../welcome_controller.dart';
@@ -23,6 +25,7 @@ class WelcomeBody extends StatelessWidget {
         duration: const Duration(milliseconds: 1500),
         opacity: controller.startAnimation ? 1 : 0,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "Molto più di un\ncalendario mestruale",
@@ -37,6 +40,7 @@ class WelcomeBody extends StatelessWidget {
               style: ThemeTextStyle.bodyLight,
               textAlign: TextAlign.center,
             ),
+            const Spacer(),
             ThemeSizedBox.height40,
             WelcomeSigninButton(controller),
             ThemeSizedBox.height16,
@@ -50,9 +54,22 @@ class WelcomeBody extends StatelessWidget {
                   style: ThemeTextStyle.bodySmallLight,
                 ),
                 ThemeSizedBox.width4,
-                Text(
-                  "ACCEDI",
-                  style: ThemeTextStyle.ctaLight,
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(
+                      Routes.registerAndLogin,
+                      arguments: RegisterAndLoginPageArguments(
+                        isLoginPage: true,
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "ACCEDI",
+                    style: ThemeTextStyle.ctaLight.copyWith(
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -17,8 +17,8 @@ class WalkthroughBottom extends StatelessWidget {
     return Positioned(
       bottom: ThemeSize.heightSafeAreaBottom +
           (ThemeSize.heightSafeAreaBottom == 0 ? 24 : 0),
-      left: ThemeSize.widthPaddingLarge,
-      right: ThemeSize.widthPaddingLarge,
+      left: ThemeSize.paddingLarge,
+      right: ThemeSize.paddingLarge,
       child: Obx(
         () => Column(
           crossAxisAlignment: CrossAxisAlignment.center,

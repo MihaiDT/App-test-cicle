@@ -10,8 +10,8 @@ class WalkthroughStep4 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: ThemeSize.widthPaddingLarge,
-        right: ThemeSize.widthPaddingLarge,
+        left: ThemeSize.paddingLarge,
+        right: ThemeSize.paddingLarge,
         top: ThemeSize.heightAppBarDefault,
       ),
       child: Column(

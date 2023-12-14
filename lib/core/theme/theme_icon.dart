@@ -8,6 +8,7 @@ class ThemeIcon {
   static String drop = '$folderPath/drop.svg';
   static String logo = '$folderPath/logo.svg';
   static String menu = '$folderPath/menu.svg';
-  static String passwordHidden = '$folderPath/password_hidden.svg';
   static String checkMark = '$folderPath/white_checkmark.svg';
+  static String eyeClosed = '$folderPath/eye_closed.svg';
+  static String eyeOpened = '$folderPath/eye_opened.svg';
 }
