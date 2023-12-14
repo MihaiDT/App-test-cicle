@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
@@ -66,7 +65,7 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
                 : _weekDayFromDate(date),
             style: ThemeTextStyle.bodyDark.copyWith(
               color: const Color(0xffB438B2),
-              fontSize: 15.sp,
+              fontSize: 15,
               fontWeight: ThemeTextStyle.weightExtraBold,
             ),
           ),
@@ -80,11 +79,11 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
             width: 32,
             child: Center(
               child: Padding(
-                padding: EdgeInsets.only(bottom: 2.0.sp),
+                padding: EdgeInsets.only(bottom: 2.0),
                 child: Text(
                   "${date.day}",
                   style: ThemeTextStyle.bodyLight.copyWith(
-                    fontSize: 16.sp,
+                    fontSize: 16,
                     fontWeight: ThemeTextStyle.weightExtraBold,
                   ),
                   textAlign: TextAlign.center,

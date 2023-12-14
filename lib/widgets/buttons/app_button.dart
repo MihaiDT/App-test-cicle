@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
 import '../../core/app_theme.dart';
@@ -50,8 +49,8 @@ class AppButton extends StatelessWidget {
           gradient: gradient ? ThemeGradient.primary : null,
         ),
         padding: EdgeInsets.symmetric(
-          horizontal: small ? 10.sp : 20.sp,
-          vertical: small ? 4.sp : 16.sp,
+          horizontal: small ? 10 : 20,
+          vertical: small ? 4 : 16,
         ),
         width: fullWidth ? double.maxFinite : null,
         child: filled
