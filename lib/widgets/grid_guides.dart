@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'layouts/app_scaffold_padding.dart';
@@ -50,7 +49,7 @@ class GridGuides extends StatelessWidget {
   Widget _gutter() {
     return SizedBox(
       height: Get.height,
-      width: 20.sp,
+      width: 20,
     );
   }
 }

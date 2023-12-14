@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/app_theme.dart';
 import '../../../widgets/texts/text_gradient.dart';
@@ -20,8 +19,8 @@ class WalkthroughStep2 extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           SizedBox(
-            height: 240.sp,
-            width: 240.sp,
+            height: 240,
+            width: 240,
             child: Image.asset(
               ThemeImage.walkthrough1,
               fit: BoxFit.contain,

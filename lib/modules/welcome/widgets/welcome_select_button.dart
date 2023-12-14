@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_gradient.dart';
-import '../../../core/theme/theme_icon.dart';
 import 'welcome_highlighted_box.dart';
 import 'welcome_select_button_checkbox.dart';
 import 'welcome_select_title.dart';

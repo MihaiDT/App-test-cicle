@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lines/core/app_theme.dart';
 
@@ -12,35 +11,35 @@ class ThemeTextStyle {
 
   static TextStyle largeLight = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 24.sp,
+    fontSize: 24,
     fontWeight: weightMedium,
-    height: 1.1.sp,
+    height: 1.1,
   );
 
   static TextStyle largeDark = largeLight.copyWith(color: ThemeColor.primary);
 
   static TextStyle mediumLight = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 16.5.sp,
+    fontSize: 16.5,
     fontWeight: weightMedium,
-    height: 1.4.sp,
+    height: 1.4,
   );
   static TextStyle mediumDark = mediumLight.copyWith(color: ThemeColor.primary);
 
   static TextStyle bodyLight = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 16.sp,
+    fontSize: 16,
     fontWeight: weightMedium,
-    height: 1.4.sp,
+    height: 1.4,
   );
 
   static TextStyle bodyDark = bodyLight.copyWith(color: ThemeColor.primary);
 
   static TextStyle bodySmallLight = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 13.sp,
+    fontSize: 13,
     fontWeight: weightMedium,
-    height: 1.4.sp,
+    height: 1.4,
   );
 
   static TextStyle bodySmallDark =
@@ -53,44 +52,44 @@ class ThemeTextStyle {
 
   static TextStyle button = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 16.sp,
+    fontSize: 16,
     fontWeight: weightSemibold,
-    height: 1.4.sp,
+    height: 1.4,
   );
 
 
   static TextStyle buttonSmall = button.copyWith(
-    fontSize: 12.sp,
-    height: 1.2.sp,
+    fontSize: 12,
+    height: 1.2,
   );
 
   static TextStyle linkLight = GoogleFonts.barlow(
     color: Colors.white,
     decoration: TextDecoration.underline,
     decorationStyle: TextDecorationStyle.solid,
-    decorationThickness: 1.sp,
-    fontSize: 14.sp,
+    decorationThickness: 1,
+    fontSize: 14,
     fontWeight: weightBold,
-    height: 1.4.sp,
+    height: 1.4,
   );
 
   static TextStyle linkDark = linkLight.copyWith(color: ThemeColor.primary);
 
   static TextStyle labelLight = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 11.5.sp,
+    fontSize: 11.5,
     fontWeight: weightBold,
-    height: 1.4.sp,
-    letterSpacing: 1.1.sp,
+    height: 1.4,
+    letterSpacing: 1.1,
   );
 
   static TextStyle labelDark = labelLight.copyWith(color: ThemeColor.primary);
 
   static TextStyle placeholderLight = GoogleFonts.barlow(
     color: ThemeColor.whiteDark,
-    fontSize: 11.5.sp,
+    fontSize: 11.5,
     fontWeight: weightSemibold,
-    letterSpacing: 1.1.sp,
+    letterSpacing: 1.1,
   );
 
   static TextStyle placeholderDark =
@@ -98,25 +97,25 @@ class ThemeTextStyle {
 
   static TextStyle calendarMonth = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 14.5.sp,
+    fontSize: 14.5,
     fontWeight: weightSemibold,
-    height: 1.4.sp,
+    height: 1.4,
     letterSpacing: 1.1,
   );
 
   static TextStyle calendarWeekDay = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 14.5.sp,
+    fontSize: 14.5,
     fontWeight: weightMedium,
-    height: 1.4.sp,
+    height: 1.4,
     letterSpacing: 1.1,
   );
 
   static TextStyle ctaLight = GoogleFonts.barlow(
     color: Colors.white,
-    fontSize: 14.sp,
+    fontSize: 14,
     fontWeight: weightMedium,
-    height: 1.4.sp,
+    height: 1.4,
   );
 
   static TextStyle ctaDark = ctaLight.copyWith(color: ThemeColor.primary);

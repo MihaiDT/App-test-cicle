@@ -43,9 +43,6 @@ dependencies:
   
   # This package automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
   flutter_native_splash: ^2.3.5
-
-  # A flutter plugin for adapting screen and font size.Let your UI display a reasonable layout on different screen sizes!
-  flutter_screenutil: ^5.9.0
   
   # A Flutter plugin to store data in secure storage:
   # Keychain is used for iOS
@@ -105,7 +102,6 @@ flutter:
   assets:
     - .env
     - .env.prod
-    - assets/app_icon/
     - assets/icons/
     - assets/images/
     - assets/web_views/
