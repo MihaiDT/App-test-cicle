@@ -126,6 +126,15 @@ class ThemeTextStyle {
     color: ThemeColor.darkBlue,
     fontWeight: weightBold,
   );
+
+  static TextStyle welcomeQuizMultipleSelectionLight = GoogleFonts.barlow(
+    height: 1.4,
+    fontSize: 14,
+    color: Colors.white,
+    fontWeight: weightMedium,
+  );
+
+  static TextStyle welcomeQuizMultipleSelectionDarkPink = welcomeQuizMultipleSelectionLight.copyWith(color: ThemeColor.brightPink);
 }
 
 class NewThemeTextStyle {
