@@ -8,5 +8,6 @@ class ThemeColor {
   static const Color whiteDark = Color(0xffE4D8E7);
   static const Color darkBlue = Color(0xff1f2d4f);
   static const Color brightPink = Color(0xffB438B2);
+  static const Color buttonDisableBackGround = Color(0xffdbd7eb);
   Color get inputSelection => primary.withOpacity(0.9);
 }

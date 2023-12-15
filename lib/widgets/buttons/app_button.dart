@@ -26,43 +26,66 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap ?? () => {},
-      child: Container(
-        decoration: BoxDecoration(
-          border: filled
-              ? null
-              : gradient
-                  ? GradientBoxBorder(
-                      gradient: ThemeGradient.primary,
-                      width: 2,
-                    )
-                  : Border.all(
-                      color: ThemeColor.buttonBackground,
-                      width: 2,
-                    ),
-          borderRadius: BorderRadius.circular(small ? 20 : 60),
-          boxShadow: filled ? [ThemeShadow.buttonShadow] : null,
-          color: filled
-              ? gradient
-                  ? null
-                  : ThemeColor.buttonBackground
-              : Colors.transparent,
-          gradient: gradient ? ThemeGradient.primary : null,
-        ),
-        padding: EdgeInsets.symmetric(
-          horizontal: small ? 10 : 20,
-          vertical: small ? 4 : 16,
-        ),
-        width: fullWidth ? double.maxFinite : null,
-        child: filled
-            ? gradient
-                ? _text
-                : TextGradient(text: _text)
-            : gradient
-                ? TextGradient(text: _text)
-                : _text,
-      ),
+      child: onTap == null ? _disabledState : _enabledState,
     );
   }
+
+  Container get _enabledState {
+    return Container(
+      decoration: BoxDecoration(
+        border: filled
+            ? null
+            : gradient
+                ? GradientBoxBorder(
+                    gradient: ThemeGradient.primary,
+                    width: 2,
+                  )
+                : Border.all(
+                    color: ThemeColor.buttonBackground,
+                    width: 2,
+                  ),
+        borderRadius: BorderRadius.circular(small ? 20 : 60),
+        boxShadow: filled ? [ThemeShadow.buttonShadow] : null,
+        color: filled
+            ? gradient
+                ? null
+                : ThemeColor.buttonBackground
+            : Colors.transparent,
+        gradient: gradient ? ThemeGradient.primary : null,
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: small ? 10 : 20,
+        vertical: small ? 4 : 16,
+      ),
+      width: fullWidth ? double.maxFinite : null,
+      child: filled
+          ? gradient
+              ? _text
+              : TextGradient(text: _text)
+          : gradient
+              ? TextGradient(text: _text)
+              : _text,
+    );
+  }
+
+  Container get _disabledState {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(small ? 20 : 60),
+        // boxShadow: filled ? [ThemeShadow.buttonShadow] : null,
+        color: ThemeColor.buttonDisableBackGround,
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: small ? 10 : 20,
+        vertical: small ? 4 : 16,
+      ),
+      width: fullWidth ? double.maxFinite : null,
+      child: _text,
+    );
+  }
+
+
+
 
   Text get _text {
     return Text(
@@ -71,4 +94,7 @@ class AppButton extends StatelessWidget {
       textAlign: TextAlign.center,
     );
   }
+
+
+
 }
