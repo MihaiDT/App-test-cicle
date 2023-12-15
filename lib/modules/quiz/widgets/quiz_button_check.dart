@@ -5,10 +5,10 @@ import '../../../core/theme/theme_color.dart';
 import '../../../core/theme/theme_gradient.dart';
 import '../../../core/theme/theme_icon.dart';
 
-class WelcomeSelectButtonCheck extends StatelessWidget {
+class QuizButtonCheck extends StatelessWidget {
   final bool selected;
 
-  const WelcomeSelectButtonCheck({
+  const QuizButtonCheck({
     required this.selected,
     super.key,
   });

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/theme_text_style.dart';
 import '../../../widgets/texts/text_gradient.dart';
 
-class WelcomeSelectTitle extends StatelessWidget {
+class QuizSelectTitle extends StatelessWidget {
   final String title;
   final bool selected;
 
-  const WelcomeSelectTitle({
+  const QuizSelectTitle({
     required this.title,
     required this.selected,
     super.key,
@@ -19,12 +19,12 @@ class WelcomeSelectTitle extends StatelessWidget {
         ? TextGradient(
             text: Text(
               title,
-              style: ThemeTextStyle.welcomeQuizSelectDark,
+              style: ThemeTextStyle.quizSelectDark,
             ),
           )
         : Text(
             title,
-            style: ThemeTextStyle.welcomeQuizSelectDark,
+            style: ThemeTextStyle.quizSelectDark,
           );
   }
 }

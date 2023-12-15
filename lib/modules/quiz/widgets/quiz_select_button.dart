@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'welcome_highlighted_box.dart';
-import 'welcome_select_button_checkbox.dart';
-import 'welcome_select_title.dart';
+import 'package:lines/core/theme/theme_edge_insets.dart';
+import 'quiz_highlighted_box.dart';
+import 'quiz_button_check.dart';
+import 'quiz_select_title.dart';
 
-class WelcomeSelectButton extends StatelessWidget {
+class QuizSelectButton extends StatelessWidget {
   final bool selected;
   final String title;
 
-  const WelcomeSelectButton({
+  const QuizSelectButton({
     required this.title,
     required this.selected,
     super.key,
@@ -15,23 +16,18 @@ class WelcomeSelectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HighlightedBox(
+    return QuizHighlightedBox(
       selected: selected,
       child: Padding(
-        padding: const EdgeInsets.only(
-          bottom: 17,
-          left: 24,
-          right:8,
-          top: 17,
-        ),
+        padding: ThemeEdgeInsets.allSmall,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            WelcomeSelectTitle(
+            QuizSelectTitle(
               selected: selected,
               title: title,
             ),
-            WelcomeSelectButtonCheck(
+            QuizButtonCheck(
               selected: selected,
             ),
           ],

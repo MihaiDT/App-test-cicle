@@ -119,10 +119,10 @@ class ThemeTextStyle {
 
   static TextStyle ctaDark = ctaLight.copyWith(color: ThemeColor.primary);
 
-  static TextStyle welcomeQuizSelectDark = const TextStyle(
+  static TextStyle quizSelectDark = const TextStyle(
     height: 1.4,
     letterSpacing: 2.0,
-    fontSize: 16,
+    fontSize: 12,
     color: ThemeColor.darkBlue,
     fontWeight: weightBold,
   );

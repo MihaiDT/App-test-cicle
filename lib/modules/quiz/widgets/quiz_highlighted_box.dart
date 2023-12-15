@@ -4,11 +4,11 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import '../../../core/theme/theme_color.dart';
 import '../../../core/theme/theme_gradient.dart';
 
-class HighlightedBox extends StatelessWidget {
+class QuizHighlightedBox extends StatelessWidget {
   final Widget? child;
   final bool selected;
 
-  const HighlightedBox({
+  const QuizHighlightedBox({
     this.child,
     required this.selected,
     super.key,
@@ -18,6 +18,7 @@ class HighlightedBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Colors.transparent,
         border: selected
             ? GradientBoxBorder(
                 gradient: ThemeGradient.primary,
