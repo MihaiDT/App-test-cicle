@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lines/core/theme/theme_text_style.dart';
 
 import 'theme/theme_color.dart';
 
@@ -36,5 +37,22 @@ class AppTheme {
       selectionHandleColor: ThemeColor.primary,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    textTheme: const TextTheme(
+      displayLarge: NewThemeTextStyle.displayLarge,
+      displayMedium: NewThemeTextStyle.displayMedium,
+      displaySmall: NewThemeTextStyle.displaySmall,
+      headlineLarge: NewThemeTextStyle.headlineLarge,
+      headlineMedium: NewThemeTextStyle.headlineMedium,
+      headlineSmall: NewThemeTextStyle.headlineSmall,
+      bodyLarge: NewThemeTextStyle.bodyLarge,
+      bodyMedium: NewThemeTextStyle.bodyMedium,
+      bodySmall: NewThemeTextStyle.bodySmall,
+      labelSmall: NewThemeTextStyle.labelMedium,
+      titleLarge: NewThemeTextStyle.titleLarge,
+      titleMedium: NewThemeTextStyle.titleMedium,
+      titleSmall: NewThemeTextStyle.titleSmall,
+      labelLarge: NewThemeTextStyle.labelLarge,
+      labelMedium: NewThemeTextStyle.labelSmall,
+    ),
   );
 }

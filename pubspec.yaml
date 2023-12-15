@@ -105,6 +105,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/web_views/
+    - assets/font/
 
 # App icon
 flutter_icons:
