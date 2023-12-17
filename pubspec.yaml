@@ -105,7 +105,16 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/web_views/
-    - assets/font/
+    - assets/fonts/
+
+  fonts:
+    - family: Barlow
+      fonts:
+        - asset: assets/fonts/Barlow-Regular.ttf
+        - asset: assets/fonts/Barlow-Medium.ttf
+        - asset: assets/fonts/Barlow-SemiBold.ttf
+        - asset: assets/fonts/Barlow-Bold.ttf
+        - asset: assets/fonts/Barlow-ExtraBold.ttf
 
 # App icon
 flutter_icons:
