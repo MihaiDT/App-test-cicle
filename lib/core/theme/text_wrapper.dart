@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lines/core/theme/theme_shader_text_wrapper.dart';
 
-class DisplayLarge extends TextWrapper {
+class DisplayLarge extends TextWrapper with ThemeShaderTextWrapper {
   const DisplayLarge(
     super.text, {
     super.key,
@@ -19,7 +20,7 @@ class DisplayLarge extends TextWrapper {
   }
 }
 
-class DisplayMedium extends TextWrapper {
+class DisplayMedium extends TextWrapper with ThemeShaderTextWrapper {
   const DisplayMedium(
     super.text, {
     super.key,
@@ -38,7 +39,7 @@ class DisplayMedium extends TextWrapper {
   }
 }
 
-class DisplaySmall extends TextWrapper {
+class DisplaySmall extends TextWrapper with ThemeShaderTextWrapper {
   const DisplaySmall(
     super.text, {
     super.key,
@@ -57,7 +58,7 @@ class DisplaySmall extends TextWrapper {
   }
 }
 
-class HeadlineLarge extends TextWrapper {
+class HeadlineLarge extends TextWrapper with ThemeShaderTextWrapper {
   const HeadlineLarge(
     super.text, {
     super.key,
@@ -76,7 +77,7 @@ class HeadlineLarge extends TextWrapper {
   }
 }
 
-class HeadlineMedium extends TextWrapper {
+class HeadlineMedium extends TextWrapper with ThemeShaderTextWrapper {
   const HeadlineMedium(
     super.text, {
     super.key,
@@ -95,7 +96,7 @@ class HeadlineMedium extends TextWrapper {
   }
 }
 
-class HeadlineSmall extends TextWrapper {
+class HeadlineSmall extends TextWrapper with ThemeShaderTextWrapper {
   const HeadlineSmall(
     super.text, {
     super.key,
@@ -114,7 +115,7 @@ class HeadlineSmall extends TextWrapper {
   }
 }
 
-class BodyLarge extends TextWrapper {
+class BodyLarge extends TextWrapper with ThemeShaderTextWrapper {
   const BodyLarge(
     super.text, {
     super.key,
@@ -133,7 +134,7 @@ class BodyLarge extends TextWrapper {
   }
 }
 
-class BodyMedium extends TextWrapper {
+class BodyMedium extends TextWrapper with ThemeShaderTextWrapper {
   const BodyMedium(
     super.text, {
     super.key,
@@ -152,7 +153,7 @@ class BodyMedium extends TextWrapper {
   }
 }
 
-class BodySmall extends TextWrapper {
+class BodySmall extends TextWrapper with ThemeShaderTextWrapper {
   const BodySmall(
     super.text, {
     super.key,
@@ -171,7 +172,7 @@ class BodySmall extends TextWrapper {
   }
 }
 
-class LabelSmall extends TextWrapper {
+class LabelSmall extends TextWrapper with ThemeShaderTextWrapper {
   const LabelSmall(
     super.text, {
     super.key,
@@ -190,7 +191,7 @@ class LabelSmall extends TextWrapper {
   }
 }
 
-class TitleLarge extends TextWrapper {
+class TitleLarge extends TextWrapper with ThemeShaderTextWrapper {
   const TitleLarge(
     super.text, {
     super.key,
@@ -209,7 +210,7 @@ class TitleLarge extends TextWrapper {
   }
 }
 
-class TitleMedium extends TextWrapper {
+class TitleMedium extends TextWrapper with ThemeShaderTextWrapper {
   const TitleMedium(
     super.text, {
     super.key,
@@ -228,7 +229,7 @@ class TitleMedium extends TextWrapper {
   }
 }
 
-class TitleSmall extends TextWrapper {
+class TitleSmall extends TextWrapper with ThemeShaderTextWrapper {
   const TitleSmall(
     super.text, {
     super.key,
@@ -247,7 +248,7 @@ class TitleSmall extends TextWrapper {
   }
 }
 
-class LabelLarge extends TextWrapper {
+class LabelLarge extends TextWrapper with ThemeShaderTextWrapper {
   const LabelLarge(
     super.text, {
     super.key,
@@ -266,7 +267,7 @@ class LabelLarge extends TextWrapper {
   }
 }
 
-class LabelMedium extends TextWrapper {
+class LabelMedium extends TextWrapper with ThemeShaderTextWrapper {
   const LabelMedium(
     super.text, {
     super.key,
