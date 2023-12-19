@@ -21,7 +21,7 @@ class LayoutGrid extends StatelessWidget {
       child: Container(
         color: Colors.transparent,
         height: Get.height,
-        padding: large ? ThemeSize.paddingL : ThemeSize.paddingS,
+        padding: large ? ThemeSize.paddingM : ThemeSize.paddingS,
         width: Get.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

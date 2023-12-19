@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lines/widgets/buttons/secondary_button.dart';
 
 import '../../../widgets/buttons/app_button.dart';
 import '../welcome_controller.dart';
@@ -10,11 +11,9 @@ class WelcomeSigninButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppButton(
-      gradient: false,
-      filled: true,
+    return SecondaryButton(
       text: "INIZIAMO!",
-      onTap: () => controller.onTapSignin(),
+      onPressed: () => controller.onTapSignin(),
     );
   }
 }

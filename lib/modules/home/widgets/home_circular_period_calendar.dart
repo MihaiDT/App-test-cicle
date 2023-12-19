@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/modules/home/widgets/home_circular_period_circular_calendar.dart';
-import 'package:lines/widgets/buttons/app_button.dart';
+import 'package:lines/widgets/buttons/secondary_button.dart';
 
 import '../../../core/app_theme.dart';
 import '../../../widgets/layouts/app_scaffold_padding.dart';
@@ -9,6 +9,7 @@ import '../home_controller.dart';
 
 class HomeCircularPeriodCalendar extends GetView<HomeController> {
   final size = Get.width * 0.74;
+
   HomeCircularPeriodCalendar({super.key});
 
   @override
@@ -65,19 +66,17 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
                         child: _avatar,
                       ),
                       if (controller.playButtonVisible)
-                        const Positioned(
+                        Positioned(
                           bottom: 0,
                           left: 0,
                           right: 0,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              AppButton(
-                                gradient: false,
-                                filled: true,
-                                fullWidth: false,
+                              SecondaryButton(
                                 text: "GIOCA",
                                 small: true,
+                                onPressed: () {},
                               ),
                             ],
                           ),

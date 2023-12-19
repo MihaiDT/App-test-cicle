@@ -17,4 +17,11 @@ class RegisterAndLoginController extends AppScaffoldController {
   set hidePassword(bool value) {
     _hidePassword.value = value;
   }
+
+  @override
+  void onInit() {
+    isLoginPage = Get.arguments.isLoginPage;
+
+    super.onInit();
+  }
 }

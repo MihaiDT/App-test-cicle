@@ -3,12 +3,14 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
 import "package:lines/core/app_theme.dart";
+import "package:lines/core/theme/theme_button_size.dart";
 import "package:lines/modules/register/register_controller.dart";
 import "package:lines/modules/register/section/divider_section.dart";
 import "package:lines/modules/register/widget/link_account_widget.dart";
 import "package:lines/routes/routes.dart";
 import "package:lines/widgets/appbar/transparent_app_bar.dart";
 import "package:lines/widgets/buttons/app_button.dart";
+import "package:lines/widgets/buttons/secondary_button.dart";
 import "package:lines/widgets/forms/input_text_field.dart";
 import "package:lines/widgets/layouts/app_scaffold_padding.dart";
 import "package:lines/widgets/layouts/app_scaffold_page.dart";
@@ -21,7 +23,7 @@ class RegisterAndLoginPageArguments {
   });
 }
 
-class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
+class RegisterAndLoginPage extends StatelessWidget {
   RegisterAndLoginPage({
     super.key,
   });
@@ -29,12 +31,10 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  @override
   final controller = Get.put(RegisterAndLoginController());
 
   @override
   Widget build(BuildContext context) {
-    controller.isLoginPage = Get.arguments.isLoginPage;
     return AppScaffoldPage(
       extendBodyBehindAppBar: true,
       backgroundImage: ThemeDecoration.images.bgDark,
@@ -42,9 +42,6 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
       body: AppScaffoldPadding(
         child: Column(
           children: [
-            SizedBox(
-              height: Get.height * 0.04,
-            ),
             SvgPicture.asset(
               ThemeIcon.logo,
               height: 85,
@@ -128,66 +125,74 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
               ),
               textAlign: TextAlign.center,
             ),
-            ThemeSizedBox.height16,
-            const Spacer(),
-            AppButton(
-              gradient: false,
-              filled: true,
-              text: "Avanti",
-              onTap: () {},
-            ),
-            ThemeSizedBox.height16,
-            controller.isLoginPage
-                ? RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: "Non hai un account? ",
-                      children: [
-                        TextSpan(
-                          text: "REGISTRATI",
-                          style: const TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              controller.isLoginPage = !controller.isLoginPage;
-
-                              Get.offAndToNamed(
-                                Routes.registerAndLogin,
-                                arguments: RegisterAndLoginPageArguments(
-                                  isLoginPage: false,
-                                ),
-                              );
-                            },
-                        ),
-                      ],
-                    ),
-                  )
-                : RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: "Hai un account? ",
-                      children: [
-                        TextSpan(
-                          text: "ACCEDI",
-                          style: const TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              controller.isLoginPage = !controller.isLoginPage;
-
-                              Get.offAndToNamed(
-                                Routes.registerAndLogin,
-                                arguments: RegisterAndLoginPageArguments(
-                                  isLoginPage: true,
-                                ),
-                              );
-                            },
-                        ),
-                      ],
-                    ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  PrimaryButton(
+                    text: "Avanti",
+                    onTap: () {
+                      Get.toNamed(Routes.nameSurname);
+                    },
+                    filled: false,
                   ),
+                  ThemeSizedBox.height16,
+                  controller.isLoginPage
+                      ? RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: "Non hai un account? ",
+                            children: [
+                              TextSpan(
+                                text: "REGISTRATI",
+                                style: const TextStyle(
+                                  decoration: TextDecoration.underline,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    controller.isLoginPage =
+                                        !controller.isLoginPage;
+
+                                    Get.offAndToNamed(
+                                      Routes.registerAndLogin,
+                                      arguments: RegisterAndLoginPageArguments(
+                                        isLoginPage: false,
+                                      ),
+                                    );
+                                  },
+                              ),
+                            ],
+                          ),
+                        )
+                      : RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: "Hai un account? ",
+                            children: [
+                              TextSpan(
+                                text: "ACCEDI",
+                                style: const TextStyle(
+                                  decoration: TextDecoration.underline,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    controller.isLoginPage =
+                                        !controller.isLoginPage;
+
+                                    Get.offAndToNamed(
+                                      Routes.registerAndLogin,
+                                      arguments: RegisterAndLoginPageArguments(
+                                        isLoginPage: true,
+                                      ),
+                                    );
+                                  },
+                              ),
+                            ],
+                          ),
+                        ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

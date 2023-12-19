@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/theme/theme_button_size.dart';
 
 import '../../core/app_theme.dart';
 import '../texts/text_gradient.dart';
 
-class AppButton extends StatelessWidget {
-  final bool gradient;
+class PrimaryButton extends StatelessWidget {
+  final ButtonSize buttonSize;
   final bool filled;
   final String text;
   final GestureTapCallback? onTap;
   final bool small;
   final bool fullWidth;
 
-  const AppButton({
+  const PrimaryButton({
     super.key,
-    required this.gradient,
     required this.filled,
+    this.buttonSize = ButtonSize.h55,
     this.fullWidth = true,
     required this.text,
     this.small = false,
@@ -24,77 +26,47 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap ?? () => {},
-      child: onTap == null ? _disabledState : _enabledState,
-    );
-  }
-
-  Container get _enabledState {
-    return Container(
-      decoration: BoxDecoration(
-        border: filled
-            ? null
-            : gradient
-                ? GradientBoxBorder(
-                    gradient: ThemeGradient.primary,
-                    width: 2,
-                  )
-                : Border.all(
-                    color: ThemeColor.buttonBackground,
-                    width: 2,
+    return ElevatedButton(
+      onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        elevation: 20,
+        shadowColor: Colors.black,
+        minimumSize: Size(0, buttonSize.toDouble),
+        textStyle: buttonSize.textStyle(
+          Theme.of(context),
+        ),
+        padding: EdgeInsets.zero,
+      ),
+      child: Center(
+        child: Ink(
+          padding: buttonSize.buttonPadding,
+          height: buttonSize.toDouble,
+          decoration: onTap != null
+              ? BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(small ? 20 : 61),
                   ),
-        borderRadius: BorderRadius.circular(small ? 20 : 60),
-        boxShadow: filled ? [ThemeShadow.buttonShadow] : null,
-        color: filled
-            ? gradient
-                ? null
-                : ThemeColor.buttonBackground
-            : Colors.transparent,
-        gradient: gradient ? ThemeGradient.primary : null,
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFFB63AB4),
+                      Color(0xFF513B9F),
+                    ],
+                  ),
+                )
+              : BoxDecoration(
+                  borderRadius: BorderRadius.circular(small ? 20 : 60),
+                  color: ThemeColor.buttonDisableBackGround,
+                ),
+          child: Center(
+            child: TitleLarge(
+              text,
+            ),
+          ),
+        ),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: small ? 10 : 20,
-        vertical: small ? 4 : 16,
-      ),
-      width: fullWidth ? double.maxFinite : null,
-      child: filled
-          ? gradient
-              ? _text
-              : TextGradient(text: _text)
-          : gradient
-              ? TextGradient(text: _text)
-              : _text,
     );
   }
-
-  Container get _disabledState {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(small ? 20 : 60),
-        // boxShadow: filled ? [ThemeShadow.buttonShadow] : null,
-        color: ThemeColor.buttonDisableBackGround,
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: small ? 10 : 20,
-        vertical: small ? 4 : 16,
-      ),
-      width: fullWidth ? double.maxFinite : null,
-      child: _text,
-    );
-  }
-
-
-
-
-  Text get _text {
-    return Text(
-      text.toUpperCase(),
-      style: small ? ThemeTextStyle.buttonSmall : ThemeTextStyle.button,
-      textAlign: TextAlign.center,
-    );
-  }
-
-
-
 }

@@ -315,12 +315,13 @@ abstract class TextWrapper extends StatelessWidget {
     return Text(
       text,
       style: getBaseTextStyle(context)?.copyWith(
-        color: color,
+        color: color ?? Colors.white,
         height: height,
         fontWeight: fontWeight,
         leadingDistribution:
             height != null ? null : TextLeadingDistribution.even,
         decoration: underline ? TextDecoration.underline : null,
+        decorationColor: Colors.white,
       ),
       maxLines: maxLines,
       overflow: overflow,

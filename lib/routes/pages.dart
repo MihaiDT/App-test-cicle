@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/name_surname/name_surname_page.dart';
 import 'package:lines/modules/register/register_binding.dart';
 import 'package:lines/modules/register/register_and_login_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
@@ -62,6 +63,13 @@ class Pages {
     GetPage(
       name: Routes.cookie,
       page: () => _mediaQueryWrapper(const CookiePage()),
+      transition: Transition.fade,
+    ),
+
+    // NameSurname
+    GetPage(
+      name: Routes.nameSurname,
+      page: () => _mediaQueryWrapper(const NameSurnamePage()),
       transition: Transition.fade,
     ),
   ];

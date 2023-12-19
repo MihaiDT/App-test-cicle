@@ -34,8 +34,7 @@ class WalkthroughBottom extends StatelessWidget {
               const WalktroughSkipLink(),
               ThemeSizedBox.height24,
             ],
-            AppButton(
-              gradient: true,
+            PrimaryButton(
               filled: true,
               onTap: () => controller.currentStepIndex < controller.lastStep
                   ? controller.onTapNext()

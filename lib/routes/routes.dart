@@ -9,4 +9,5 @@ class Routes {
 
   static const String registerAndLogin = '/register';
   static const String cookie = '/cookie';
+  static const String nameSurname = '/nameSurname';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 
@@ -135,11 +136,9 @@ class SigninPage extends GetView<SigninController> {
       ),
       ThemeSizedBox.height40,
       const Spacer(),
-      AppButton(
-        gradient: false,
-        filled: true,
+      SecondaryButton(
         text: "AVANTI",
-        onTap: () => {},
+        onPressed: ()  {},
       ),
       ThemeSizedBox.height16,
       Row(

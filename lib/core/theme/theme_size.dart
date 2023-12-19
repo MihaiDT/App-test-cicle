@@ -16,8 +16,11 @@ class ThemeSize {
   static const EdgeInsets paddingS = EdgeInsets.symmetric(
     horizontal: paddingSmall,
   );
-  static const EdgeInsets paddingL = EdgeInsets.symmetric(
+  static const EdgeInsets paddingM = EdgeInsets.symmetric(
     horizontal: paddingMedium,
+  );
+  static const EdgeInsets paddingL = EdgeInsets.symmetric(
+    horizontal: paddingLarge,
   );
 
 // /// Keyboard
