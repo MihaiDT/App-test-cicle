@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/theme/theme_button_size.dart';
 
 import '../../../core/app_theme.dart';
-import '../../../widgets/buttons/app_button.dart';
+import '../../../widgets/buttons/primary_button.dart';
 import '../walkthrough_controller.dart';
 import 'walkthroug_skip_link.dart';
 import 'walkthrough_dots.dart';
@@ -35,7 +36,6 @@ class WalkthroughBottom extends StatelessWidget {
               ThemeSizedBox.height24,
             ],
             PrimaryButton(
-              filled: true,
               onTap: () => controller.currentStepIndex < controller.lastStep
                   ? controller.onTapNext()
                   : controller.onTapLetsStart(),

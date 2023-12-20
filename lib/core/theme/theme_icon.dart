@@ -11,4 +11,7 @@ class ThemeIcon {
   static String checkMark = '$folderPath/white_checkmark.svg';
   static String eyeClosed = '$folderPath/eye_closed.svg';
   static String eyeOpened = '$folderPath/eye_opened.svg';
+  static String close = '$folderPath/close.svg';
+  static String coin = '$folderPath/coin.svg';
+  static String coinStack = '$folderPath/coin_stack.svg';
 }

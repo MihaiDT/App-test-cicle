@@ -38,4 +38,10 @@ class ThemeDecorationImage {
         fit: BoxFit.cover,
         alignment: Alignment.center,
       );
+
+  DecorationImage get bgQuestionMark => DecorationImage(
+        image: AssetImage(ThemeImage.quizBackgroundQuestionmark),
+        fit: BoxFit.cover,
+        alignment: Alignment.center,
+      );
 }

@@ -3,7 +3,6 @@ import 'package:lines/core/theme/theme_color.dart';
 
 import 'quiz_select_multiple_title.dart';
 
-
 class QuizSelectMultipleButton extends StatelessWidget {
   final String title;
   final bool selected;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/theme/theme_shader_text_wrapper.dart';
+import 'package:lines/core/theme/theme_text_style.dart';
 
 class DisplayLarge extends TextWrapper with ThemeShaderTextWrapper {
   const DisplayLarge(
@@ -74,6 +75,25 @@ class HeadlineLarge extends TextWrapper with ThemeShaderTextWrapper {
   @override
   TextStyle? getBaseTextStyle(BuildContext context) {
     return Theme.of(context).textTheme.headlineLarge;
+  }
+}
+
+class HeadlineExtraLarge extends TextWrapper with ThemeShaderTextWrapper {
+  const HeadlineExtraLarge(
+    super.text, {
+    super.key,
+    super.color,
+    super.fontWeight,
+    super.height,
+    super.maxLines,
+    super.overflow,
+    super.textAlign,
+    super.underline,
+  });
+
+  @override
+  TextStyle? getBaseTextStyle(BuildContext context) {
+    return NewThemeTextStyle.headlineExtraLarge;
   }
 }
 
@@ -301,7 +321,7 @@ abstract class TextWrapper extends StatelessWidget {
   const TextWrapper(
     this.text, {
     super.key,
-    required this.color,
+    this.color = Colors.white,
     required this.fontWeight,
     required this.height,
     required this.maxLines,

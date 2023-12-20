@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lines/core/theme/theme_gradient.dart';
+import 'package:lines/core/theme/theme_icon.dart';
 
 class AppRoundButton extends StatelessWidget {
-  final Color? backGroundColor;
-  final Color? iconColor;
-  final String iconPath;
   final GestureTapCallback onTap;
-  final Gradient? gradient;
-  final double? radius;
 
   const AppRoundButton({
-    this.backGroundColor,
-    this.iconColor,
-    required this.iconPath,
-    this.gradient,
     required this.onTap,
-    required this.radius,
     super.key,
   });
 
@@ -25,14 +17,15 @@ class AppRoundButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: backGroundColor,
           shape: BoxShape.circle,
-          gradient: gradient,
+          gradient: ThemeGradient.primary,
         ),
         child: CircleAvatar(
-          radius: radius,
+          radius: 16.0,
           backgroundColor: Colors.transparent,
-          child: SvgPicture.asset(iconPath),
+          child: SvgPicture.asset(
+            ThemeIcon.close,
+          ),
         ),
       ),
     );

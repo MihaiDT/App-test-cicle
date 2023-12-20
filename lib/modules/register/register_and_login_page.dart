@@ -3,13 +3,11 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
 import "package:lines/core/app_theme.dart";
-import "package:lines/core/theme/theme_button_size.dart";
 import "package:lines/modules/register/register_controller.dart";
 import "package:lines/modules/register/section/divider_section.dart";
 import "package:lines/modules/register/widget/link_account_widget.dart";
 import "package:lines/routes/routes.dart";
 import "package:lines/widgets/appbar/transparent_app_bar.dart";
-import "package:lines/widgets/buttons/app_button.dart";
 import "package:lines/widgets/buttons/secondary_button.dart";
 import "package:lines/widgets/forms/input_text_field.dart";
 import "package:lines/widgets/layouts/app_scaffold_padding.dart";
@@ -129,12 +127,11 @@ class RegisterAndLoginPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  PrimaryButton(
+                  SecondaryButton(
                     text: "Avanti",
-                    onTap: () {
+                    onPressed: () {
                       Get.toNamed(Routes.nameSurname);
                     },
-                    filled: false,
                   ),
                   ThemeSizedBox.height16,
                   controller.isLoginPage

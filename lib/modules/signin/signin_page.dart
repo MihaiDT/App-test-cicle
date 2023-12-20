@@ -6,7 +6,7 @@ import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 
 import '../../core/app_theme.dart';
-import '../../widgets/buttons/app_button.dart';
+import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/layouts/app_scaffold_page.dart';
 import '../../widgets/layouts/scrollable_appbar.dart';
 import 'signin_controller.dart';
@@ -138,7 +138,7 @@ class SigninPage extends GetView<SigninController> {
       const Spacer(),
       SecondaryButton(
         text: "AVANTI",
-        onPressed: ()  {},
+        onPressed: () {},
       ),
       ThemeSizedBox.height16,
       Row(

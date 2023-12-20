@@ -19,7 +19,8 @@ class LinkAccountWidget extends StatelessWidget {
       maxRadius: 30,
       child: Image.asset(
         imagePath,
-        height: 24,width: 24,
+        height: 24,
+        width: 24,
       ),
     );
   }

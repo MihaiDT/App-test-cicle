@@ -10,7 +10,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const TransparentAppBar({
     this.title,
-    this.actions =  const [],
+    this.actions = const [],
     this.leading,
     super.key,
   });

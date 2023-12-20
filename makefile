@@ -30,5 +30,8 @@ ios_clean_up:
 fpg:
 	fvm flutter pub get
 
+format:
+	dart format .
+
 #clean_up_gradle_cache:
  	# ./gradlew --stop; rm -rf ~/.gradle/caches/

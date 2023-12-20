@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/quiz/widgets/quiz_intro_page.dart';
+import 'package:lines/modules/quiz/widgets/quiz_outro_page.dart';
 import 'package:lines/modules/name_surname/name_surname_page.dart';
 import 'package:lines/modules/register/register_binding.dart';
 import 'package:lines/modules/register/register_and_login_page.dart';
@@ -64,6 +66,18 @@ class Pages {
       name: Routes.cookie,
       page: () => _mediaQueryWrapper(const CookiePage()),
       transition: Transition.fade,
+    ),
+
+    //QuizIntroPage
+    GetPage(
+      name: Routes.quizIntroPage,
+      page: () => _mediaQueryWrapper(const QuizIntroPage()),
+    ),
+
+    //QuizOutroPage
+    GetPage(
+      name: Routes.quizOutroPage,
+      page: () => _mediaQueryWrapper(const QuizOutroPage()),
     ),
 
     // NameSurname

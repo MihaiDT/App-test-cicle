@@ -9,7 +9,7 @@ class SecondaryButton extends StatelessWidget {
   final bool? small;
 
   const SecondaryButton({
-    this.buttonSize = ButtonSize.h55,
+    this.buttonSize = ButtonSize.h56,
     required this.text,
     required this.onPressed,
     this.small,

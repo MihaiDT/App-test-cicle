@@ -26,8 +26,12 @@ extension ThemeSizedBox on SizedBox {
 
   static SizedBox get height60 => const SizedBox(height: 60);
 
+  static SizedBox get height90 => const SizedBox(height: 90);
+
   /// Width
   static SizedBox get width4 => const SizedBox(width: 4);
+
+  static SizedBox get width6 => const SizedBox(width: 6);
 
   static SizedBox get width8 => const SizedBox(width: 8);
 

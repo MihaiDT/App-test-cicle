@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 enum ButtonSize {
   h31,
-  h55,
+  h56,
 }
 
 extension ButtonSizeExtension on ButtonSize {
@@ -12,8 +12,8 @@ extension ButtonSizeExtension on ButtonSize {
     switch (this) {
       case ButtonSize.h31:
         return 31.0;
-      case ButtonSize.h55:
-        return 55.0;
+      case ButtonSize.h56:
+        return 56.0;
     }
   }
 
@@ -21,7 +21,7 @@ extension ButtonSizeExtension on ButtonSize {
     switch (this) {
       case ButtonSize.h31:
         return themeData.textTheme.headlineSmall!;
-      case ButtonSize.h55:
+      case ButtonSize.h56:
         return themeData.textTheme.titleLarge!;
     }
   }
@@ -31,7 +31,7 @@ extension ButtonSizeExtension on ButtonSize {
     switch (this) {
       case ButtonSize.h31:
         verticalPadding = 6;
-      case ButtonSize.h55:
+      case ButtonSize.h56:
         verticalPadding = 19;
     }
 

@@ -134,13 +134,27 @@ class ThemeTextStyle {
     fontWeight: weightMedium,
   );
 
-  static TextStyle welcomeQuizMultipleSelectionDarkPink = welcomeQuizMultipleSelectionLight.copyWith(color: ThemeColor.brightPink);
+  static TextStyle welcomeQuizMultipleSelectionDarkPink =
+      welcomeQuizMultipleSelectionLight.copyWith(color: ThemeColor.brightPink);
+
+  static TextStyle welcomeQuizIntroDark = GoogleFonts.barlow(
+    height: 1.4,
+    fontSize: 20,
+    color: ThemeColor.darkBlue,
+    fontWeight: weightSemibold,
+  );
+
+  static TextStyle welcomeQuizSubTitle = GoogleFonts.barlow(
+    height: 1.4,
+    fontSize: 16,
+    color: ThemeColor.darkBlue,
+    fontWeight: weightRegular,
+  );
 }
 
 class NewThemeTextStyle {
   static const weightRegular = FontWeight.w400;
   static const weightMedium = FontWeight.w500;
-
   static const weightSemibold = FontWeight.w600;
   static const weightBold = FontWeight.w700;
   static const weightExtraBold = FontWeight.w900;
@@ -160,6 +174,11 @@ class NewThemeTextStyle {
     fontSize: 18,
     fontWeight: weightExtraBold,
     height: 1.2,
+  );
+
+  static const TextStyle headlineExtraLarge = TextStyle(
+    fontSize: 20,
+    fontWeight: weightSemibold,
   );
 
   static const TextStyle headlineLarge = TextStyle(
@@ -190,6 +209,13 @@ class NewThemeTextStyle {
     fontSize: 16,
     fontWeight: weightRegular,
     height: 1.4,
+  );
+
+  static TextStyle welcomeQuizSubTitle = GoogleFonts.barlow(
+    height: 1.4,
+    fontSize: 16,
+    color: ThemeColor.darkBlue,
+    fontWeight: weightRegular,
   );
 
   static const bodyMedium = TextStyle(

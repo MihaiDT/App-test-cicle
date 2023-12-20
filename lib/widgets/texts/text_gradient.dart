@@ -8,7 +8,7 @@ class TextGradient extends StatelessWidget {
     required this.text,
   });
 
-  final Text text;
+  final Widget text;
 
   @override
   Widget build(BuildContext context) {

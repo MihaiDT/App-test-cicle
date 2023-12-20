@@ -21,4 +21,6 @@ class ThemeImage {
   static String walkthrough4 = '$folderPath/walkthrough_4.webp';
   static String walkthrough5 = '$folderPath/walkthrough_5.webp';
   static String cookie = '$folderPath/cookie.webp';
+  static String quizBackgroundQuestionmark = '$folderPath/bg_quiz.webp';
+  static String quizIntroImage = '$folderPath/quiz_intro_image.webp';
 }

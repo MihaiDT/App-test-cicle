@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gradient_borders/gradient_borders.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_button_size.dart';
 
 import '../../core/app_theme.dart';
-import '../texts/text_gradient.dart';
 
 class PrimaryButton extends StatelessWidget {
   final ButtonSize buttonSize;
-  final bool filled;
   final String text;
   final GestureTapCallback? onTap;
   final bool small;
@@ -16,8 +13,7 @@ class PrimaryButton extends StatelessWidget {
 
   const PrimaryButton({
     super.key,
-    required this.filled,
-    this.buttonSize = ButtonSize.h55,
+    this.buttonSize = ButtonSize.h56,
     this.fullWidth = true,
     required this.text,
     this.small = false,

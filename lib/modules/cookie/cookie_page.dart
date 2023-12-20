@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/buttons/app_button.dart';
+import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
