@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/app_theme.dart';
+import '../../../core/theme/text_wrapper.dart';
 import '../../../widgets/texts/text_gradient.dart';
 
 class WalkthroughStep3 extends StatelessWidget {
@@ -27,18 +28,15 @@ class WalkthroughStep3 extends StatelessWidget {
             ),
           ),
           ThemeSizedBox.height16,
-          TextGradient(
-            text: Text(
-              "Consigli e contenuti\ndi esperti solo per te",
-              textAlign: TextAlign.center,
-              style: ThemeTextStyle.largeDark,
-            ),
-          ),
-          ThemeSizedBox.height16,
-          Text(
-            "Accedi a tanti contenuti creati per te dai nostri esperti e professionisti e approfondisci i topic più rilevanti per la fase del ciclo in cui ti trovi.",
+          const DisplayMedium(
+            "Consigli e contenuti\ndi esperti solo per te",
             textAlign: TextAlign.center,
-            style: ThemeTextStyle.bodyDark,
+          ).applyShaders(context),
+          ThemeSizedBox.height16,
+          const BodyLarge(
+            "Accedi a tanti contenuti creati per te dai nostri esperti e professionisti e approfondisci i topic più rilevanti per la fase del ciclo in cui ti trovi.",
+            color: ThemeColor.darkBlue,
+            textAlign: TextAlign.center,
           ),
         ],
       ),

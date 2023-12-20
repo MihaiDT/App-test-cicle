@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/modules/home/widgets/home_circular_period_circular_calendar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 
@@ -51,11 +52,10 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 ThemeSizedBox.height4,
-                Text(
+                const TitleSmall(
                   "FASE\nMESTRUAZIONI",
-                  style: ThemeTextStyle.boldSmallDark.copyWith(
-                    color: const Color(0xffB438B2),
-                  ),
+                  color: Color(0xffB438B2),
+                  fontWeight: NewThemeTextStyle.weightBold,
                   textAlign: TextAlign.center,
                 ),
                 Obx(

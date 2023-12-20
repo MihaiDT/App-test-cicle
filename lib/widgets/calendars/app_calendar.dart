@@ -47,7 +47,7 @@ class AppCalendar extends StatelessWidget {
               width: cellWidth,
               child: Text(
                 day.day.toString(),
-                style: ThemeTextStyle.calendarWeekDay,
+                style: NewThemeTextStyle.calendarWeekDay,
               ),
             ),
           );
@@ -64,7 +64,7 @@ class AppCalendar extends StatelessWidget {
                   child: Text(
                     day.day.toString(),
                     textAlign: TextAlign.center,
-                    style: ThemeTextStyle.calendarWeekDay,
+                    style: NewThemeTextStyle.calendarWeekDay,
                   ),
                 ),
               ),
@@ -98,7 +98,7 @@ class AppCalendar extends StatelessWidget {
 
     return Text(
       dateFormat.format(date).toUpperCase(),
-      style: ThemeTextStyle.calendarMonth,
+      style: NewThemeTextStyle.calendarMonth,
       textAlign: TextAlign.center,
     );
   }
@@ -112,64 +112,64 @@ class AppCalendar extends StatelessWidget {
       children: [
         SizedBox(
           width: cellWidth,
-          child: Center(
+          child: const Center(
             child: Text(
               'L',
-              style: ThemeTextStyle.calendarWeekDay,
+              style: NewThemeTextStyle.calendarWeekDay,
             ),
           ),
         ),
         SizedBox(
           width: cellWidth,
-          child: Center(
+          child: const Center(
             child: Text(
               'M',
-              style: ThemeTextStyle.calendarWeekDay,
+              style: NewThemeTextStyle.calendarWeekDay,
             ),
           ),
         ),
         SizedBox(
           width: cellWidth,
-          child: Center(
+          child: const Center(
             child: Text(
               'M',
-              style: ThemeTextStyle.calendarWeekDay,
+              style: NewThemeTextStyle.calendarWeekDay,
             ),
           ),
         ),
         SizedBox(
           width: cellWidth,
-          child: Center(
+          child: const Center(
             child: Text(
               'G',
-              style: ThemeTextStyle.calendarWeekDay,
+              style: NewThemeTextStyle.calendarWeekDay,
             ),
           ),
         ),
         SizedBox(
           width: cellWidth,
-          child: Center(
+          child: const Center(
             child: Text(
               'V',
-              style: ThemeTextStyle.calendarWeekDay,
+              style: NewThemeTextStyle.calendarWeekDay,
             ),
           ),
         ),
         SizedBox(
           width: cellWidth,
-          child: Center(
+          child: const Center(
             child: Text(
               'S',
-              style: ThemeTextStyle.calendarWeekDay,
+              style: NewThemeTextStyle.calendarWeekDay,
             ),
           ),
         ),
         SizedBox(
           width: cellWidth,
-          child: Center(
+          child: const Center(
             child: Text(
               'D',
-              style: ThemeTextStyle.calendarWeekDay,
+              style: NewThemeTextStyle.calendarWeekDay,
             ),
           ),
         ),

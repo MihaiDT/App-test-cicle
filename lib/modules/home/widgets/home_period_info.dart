@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 
 import '../../../core/app_theme.dart';
 import '../../../core/utils/helpers.dart';
@@ -27,9 +28,13 @@ class HomePeriodInfo extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Obx(
-                () => Text(
+                // () => Text(
+                //   _label(controller.selectedDate),
+                //   style: ThemeTextStyle.boldSmallDark,
+                // ),
+                () => TitleMedium(
                   _label(controller.selectedDate),
-                  style: ThemeTextStyle.boldSmallDark,
+                  color: ThemeColor.darkBlue,
                 ),
               ),
             ],

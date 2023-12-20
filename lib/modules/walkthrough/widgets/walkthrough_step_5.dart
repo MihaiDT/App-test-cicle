@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/app_theme.dart';
+import '../../../core/theme/text_wrapper.dart';
 import '../../../widgets/texts/text_gradient.dart';
 
 class WalkthroughStep5 extends StatelessWidget {
@@ -28,18 +29,15 @@ class WalkthroughStep5 extends StatelessWidget {
             ),
           ),
           ThemeSizedBox.height24,
-          TextGradient(
-            text: Text(
-              "Attiva il tuo calendario",
-              textAlign: TextAlign.center,
-              style: ThemeTextStyle.largeDark,
-            ),
-          ),
-          ThemeSizedBox.height16,
-          Text(
-            "Consenti a MyLines di inviarti notifiche: ti aiuterà a monitorare il tuo ciclo e il tuo benessere inviandoti periodicamente consigli e promemoria!",
+          const DisplayMedium(
+            "Attiva il tuo calendario",
             textAlign: TextAlign.center,
-            style: ThemeTextStyle.bodyDark,
+          ).applyShaders(context),
+          ThemeSizedBox.height16,
+          const BodyLarge(
+            "Consenti a MyLines di inviarti notifiche: ti aiuterà a monitorare il tuo ciclo e il tuo benessere inviandoti periodicamente consigli e promemoria!",
+            color: ThemeColor.darkBlue,
+            textAlign: TextAlign.center,
           ),
         ],
       ),

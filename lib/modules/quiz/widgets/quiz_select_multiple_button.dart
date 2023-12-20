@@ -31,7 +31,7 @@ class QuizSelectMultipleButton extends StatelessWidget {
           horizontal: 12,
           vertical: 6,
         ),
-        child: QuizSelecteMultipleTitle(
+        child: QuizSelectedMultipleTitle(
           selected: selected,
           title: title,
         ),

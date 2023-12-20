@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
 
@@ -19,14 +20,7 @@ class DividerSection extends StatelessWidget {
             ),
           ),
           ThemeSizedBox.width12,
-          const Text(
-            "OPPURE",
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 12,
-              color: Colors.white,
-            ),
-          ),
+          TitleMedium("OPPURE"),
           ThemeSizedBox.width12,
           Expanded(
             child: Container(

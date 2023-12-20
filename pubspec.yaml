@@ -56,9 +56,6 @@ dependencies:
   # GetX is an extra-light and powerful solution for Flutter. It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
   get: ^4.6.6
   
-  # A Flutter package to use fonts from fonts.google.com.
-  google_fonts: ^6.1.0
-  
   # Various borders that use gradient instead of boring plain colors.
   gradient_borders: ^1.0.0
   http_interceptor: ^2.0.0-beta.7

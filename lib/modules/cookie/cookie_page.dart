@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
@@ -28,32 +29,23 @@ class CookiePage extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             ThemeSizedBox.height32,
-            Text(
-              "Personalizza la tua esperienza",
-              style: ThemeTextStyle.largeLight,
+            const DisplayMedium(
+              "Personalizza la tua\n esperienza",
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height16,
-            RichText(
+            const BodyMedium(
+              "Quest’app utilizza cookie tecnici e cookie fingerprinting di profilazione, anche di terze parti, per offrirti contenuti, servizi e pubblicità interessanti per te sulla base delle tue attività.",
               textAlign: TextAlign.center,
-              text: TextSpan(
-                text:
-                    "Quest’app utilizza cookie tecnici e cookie fingerprinting di profilazione, anche di terze parti, per offrirti contenuti, servizi e pubblicità interessanti per te sulla base delle tue attività.\n",
-                style: ThemeTextStyle.bodyLight.copyWith(
-                  height: 1.3,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'Clicca qui per saperne di più.',
-                    style: const TextStyle(
-                      decoration: TextDecoration.underline,
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        // TODO: add function
-                      },
-                  ),
-                ],
+            ),
+            GestureDetector(
+              onTap: () {
+                // TODO: add function
+              },
+              child: const BodyMedium(
+                "Clicca qui per saperne di più.",
+                textAlign: TextAlign.center,
+                underline: true,
               ),
             ),
             const Spacer(),
@@ -61,6 +53,7 @@ class CookiePage extends StatelessWidget {
               text: "ACCONSENTO",
               onPressed: () {},
             ),
+            //TODO: costumize cookie is missing
           ],
         ),
       ),

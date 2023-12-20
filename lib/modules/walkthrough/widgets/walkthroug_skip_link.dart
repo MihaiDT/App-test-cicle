@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 
 import '../../../core/app_theme.dart';
 import '../../../widgets/texts/text_gradient.dart';
@@ -20,13 +21,12 @@ class WalktroughSkipLink extends StatelessWidget {
         opacity: controller.currentStepIndex < controller.lastStep ? 1 : 0,
         child: Column(
           children: [
-            TextGradient(
-              text: Text(
-                "SALTA",
-                style: ThemeTextStyle.linkDark,
-              ),
-            ),
+            const TitleMedium(
+              "SALTA",
+              underline: true,
+            ).applyShaders(context),
             ThemeSizedBox.height4,
+            //FIXME: what's this???
             Container(
               width: double.infinity,
               decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 
 import '../../core/app_theme.dart';
 import '../../core/utils/helpers.dart';
@@ -129,19 +130,11 @@ class ScrollableAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.only(
                 top: 4.0,
               ),
-              child: Text(
+              child: DisplayMedium(
                 title ?? '',
+                color: ThemeColor.primary,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.start,
-                style: ThemeTextStyle.largeDark,
-                // style: itemsDark
-                //     ? titleSmall
-                //         ? textStyleBodyBold
-                //         : textStyleTitleSmall
-                //     : (titleSmall ? textStyleBodyBold : textStyleTitleSmall).copyWith(
-                //         color: Colors.white,
-                //       ),
               ),
             ),
           ],

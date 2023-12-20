@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/modules/register/register_and_login_page.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -27,17 +28,15 @@ class WelcomeBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const DisplayMedium(
               "Molto più di un\ncalendario mestruale",
-              style: ThemeTextStyle.largeLight,
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height20,
-            Text(
+            BodyLarge(
               controller.startAnimation
                   ? "La tua nuova app per vivere e monitorare\nil ciclo mestruale in modo positivo,\nconsapevole e divertente.\n\nSei pronta?"
                   : '',
-              style: ThemeTextStyle.bodyLight,
               textAlign: TextAlign.center,
             ),
             const Spacer(),
@@ -49,9 +48,9 @@ class WelcomeBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Text(
+                const TitleMedium(
                   "Hai un account?",
-                  style: ThemeTextStyle.bodySmallLight,
+                  fontWeight: FontWeight.w500,
                 ),
                 ThemeSizedBox.width4,
                 GestureDetector(
@@ -63,12 +62,9 @@ class WelcomeBody extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
+                  child: const TitleMedium(
                     "ACCEDI",
-                    style: ThemeTextStyle.ctaLight.copyWith(
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.white,
-                    ),
+                    underline: true,
                   ),
                 ),
               ],

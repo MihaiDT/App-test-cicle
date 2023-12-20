@@ -50,7 +50,8 @@ InputDecoration textFieldDefaultDecoration(
     enabled: !isDisabled,
     enabledBorder:
         hasError ? errorOutlineInputBorder : enabledOutlineInputBorder,
-    errorText: null, //  Gestisco a mano l'errore
+    errorText: null,
+    //  Gestisco a mano l'errore
     floatingLabelBehavior: FloatingLabelBehavior.never,
     fillColor: Colors.transparent,
     focusedBorder:
@@ -58,7 +59,9 @@ InputDecoration textFieldDefaultDecoration(
     focusedErrorBorder: errorOutlineInputBorder,
     focusColor: ThemeColor.whiteDark,
     hintMaxLines: 1,
-    hintStyle: ThemeTextStyle.placeholderLight,
+    hintStyle: NewThemeTextStyle.bodyMedium.copyWith(
+      color: ThemeColor.whiteDark,
+    ),
     hintText: placeholder ?? label,
   );
 }

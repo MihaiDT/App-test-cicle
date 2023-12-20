@@ -11,7 +11,9 @@ mixin ThemeShaderTextWrapper on TextWrapper {
         textAlign: textAlign,
         maxLines: maxLines,
         overflow: overflow,
-        style: getBaseTextStyle(context),
+        style: getBaseTextStyle(context)!.copyWith(
+          decoration: underline ? TextDecoration.underline : null,
+        ),
       ),
     );
   }

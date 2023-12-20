@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../../core/app_theme.dart';
@@ -25,8 +26,10 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
         focusOnItemTap: true,
         initialIndex: (7 * 3) + 2,
         itemBuilder: _buildListItem,
-        itemCount: 7 * 7, // 7 days * 7 weeks
-        itemSize: Get.width / 7, // Dimensione singolo giorno del calendario
+        itemCount: 7 * 7,
+        // 7 days * 7 weeks
+        itemSize: Get.width / 7,
+        // Dimensione singolo giorno del calendario
         onItemFocus: controller.horizontalCalendarOnItemFocus,
         updateOnScroll: false,
         shrinkWrap: true,
@@ -63,10 +66,11 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
             formattedNowYMD == formattedDateYMD
                 ? 'OGGI'
                 : _weekDayFromDate(date),
-            style: ThemeTextStyle.bodyDark.copyWith(
-              color: const Color(0xffB438B2),
+            style: const TextStyle(
+              color: Color(0xffB438B2),
               fontSize: 15,
-              fontWeight: ThemeTextStyle.weightExtraBold,
+              fontWeight: FontWeight.w900,
+              height: 1.4,
             ),
           ),
           ThemeSizedBox.height4,
@@ -79,13 +83,10 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
             width: 32,
             child: Center(
               child: Padding(
-                padding: EdgeInsets.only(bottom: 2.0),
-                child: Text(
+                padding: const EdgeInsets.only(bottom: 2.0),
+                child: HeadlineMedium(
                   "${date.day}",
-                  style: ThemeTextStyle.bodyLight.copyWith(
-                    fontSize: 16,
-                    fontWeight: ThemeTextStyle.weightExtraBold,
-                  ),
+                  fontWeight: NewThemeTextStyle.weightExtraBold,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -96,16 +97,17 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
     } else {
       children.addAll(
         [
-          Text(
+          BodyLarge(
             formattedNowYMD == formattedDateYMD
                 ? 'OGGI'
                 : _weekDayFromDate(date),
-            style: ThemeTextStyle.bodyDark
-                .copyWith(color: const Color(0xffB438B2)),
+            color: const Color(0xffB438B2),
+            fontWeight: NewThemeTextStyle.weightMedium,
           ),
-          Text(
+          BodyLarge(
             "${date.day}",
-            style: ThemeTextStyle.bodyDark,
+            color: ThemeColor.primary,
+            fontWeight: NewThemeTextStyle.weightMedium,
           ),
         ],
       );

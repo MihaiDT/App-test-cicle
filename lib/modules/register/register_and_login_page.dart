@@ -1,4 +1,3 @@
-import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
@@ -12,6 +11,8 @@ import "package:lines/widgets/buttons/secondary_button.dart";
 import "package:lines/widgets/forms/input_text_field.dart";
 import "package:lines/widgets/layouts/app_scaffold_padding.dart";
 import "package:lines/widgets/layouts/app_scaffold_page.dart";
+
+import "../../core/theme/text_wrapper.dart";
 
 class RegisterAndLoginPageArguments {
   final bool? isLoginPage;
@@ -46,25 +47,23 @@ class RegisterAndLoginPage extends StatelessWidget {
               width: 70,
             ),
             ThemeSizedBox.height16,
-            Text(
+            DisplayMedium(
               controller.isLoginPage
                   ? "Accedi a myDrop"
                   : "Crea il tuo account",
-              style: ThemeTextStyle.largeLight,
-              textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height16,
             Text(
+              //FIXME: change according to figma
               controller.isLoginPage
                   ? "Inserisci username e password\n per entrare nel tuo account."
                   : "Registrati per iniziare\n la tua esperienza in myDrop",
-              style: ThemeTextStyle.calendarWeekDay,
+              style: NewThemeTextStyle.calendarWeekDay,
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height32,
-            Text(
+            const TitleLarge(
               "USA I TUOI SOCIAL",
-              style: ThemeTextStyle.calendarMonth,
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height24,
@@ -114,15 +113,12 @@ class RegisterAndLoginPage extends StatelessWidget {
               },
             ),
             ThemeSizedBox.height16,
-            Text(
-              controller.isLoginPage ? "PASSWORD DIMENTICATA" : "",
-              style: ThemeTextStyle.buttonSmall.copyWith(
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.white,
-              ),
+            TitleMedium(
+              controller.isLoginPage ? "PASSWORD DIMENTICATA?" : "",
               textAlign: TextAlign.center,
+              underline: true,
             ),
+            ThemeSizedBox.height16,
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -135,57 +131,51 @@ class RegisterAndLoginPage extends StatelessWidget {
                   ),
                   ThemeSizedBox.height16,
                   controller.isLoginPage
-                      ? RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: "Non hai un account? ",
-                            children: [
-                              TextSpan(
-                                text: "REGISTRATI",
-                                style: const TextStyle(
-                                  decoration: TextDecoration.underline,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    controller.isLoginPage =
-                                        !controller.isLoginPage;
-
-                                    Get.offAndToNamed(
-                                      Routes.registerAndLogin,
-                                      arguments: RegisterAndLoginPageArguments(
-                                        isLoginPage: false,
-                                      ),
-                                    );
-                                  },
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Non hai un account?"),
+                            ThemeSizedBox.width4,
+                            GestureDetector(
+                              onTap: () {
+                                controller.isLoginPage =
+                                    !controller.isLoginPage;
+                                Get.offAndToNamed(
+                                  Routes.registerAndLogin,
+                                  arguments: RegisterAndLoginPageArguments(
+                                    isLoginPage: false,
+                                  ),
+                                );
+                              },
+                              child: const TitleMedium(
+                                "REGISTRATI",
+                                underline: true,
                               ),
-                            ],
-                          ),
+                            )
+                          ],
                         )
-                      : RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: "Hai un account? ",
-                            children: [
-                              TextSpan(
-                                text: "ACCEDI",
-                                style: const TextStyle(
-                                  decoration: TextDecoration.underline,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    controller.isLoginPage =
-                                        !controller.isLoginPage;
-
-                                    Get.offAndToNamed(
-                                      Routes.registerAndLogin,
-                                      arguments: RegisterAndLoginPageArguments(
-                                        isLoginPage: true,
-                                      ),
-                                    );
-                                  },
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Hai un account?"),
+                            ThemeSizedBox.width4,
+                            GestureDetector(
+                              onTap: () {
+                                controller.isLoginPage =
+                                    !controller.isLoginPage;
+                                Get.offAndToNamed(
+                                  Routes.registerAndLogin,
+                                  arguments: RegisterAndLoginPageArguments(
+                                    isLoginPage: true,
+                                  ),
+                                );
+                              },
+                              child: const TitleMedium(
+                                "ACCEDI",
+                                underline: true,
                               ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                 ],
               ),

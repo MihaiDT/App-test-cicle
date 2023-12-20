@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/app_theme.dart';
+import '../../core/theme/text_wrapper.dart';
 
 class InputTextField extends StatelessWidget {
   final bool isPassword;
@@ -69,7 +70,9 @@ class InputTextField extends StatelessWidget {
                   isDisabled: isDisabled,
                   placeholder: placeholder,
                 ),
-          style: ThemeTextStyle.placeholderLight,
+          style: NewThemeTextStyle.bodyMedium.copyWith(
+            color: ThemeColor.whiteDark,
+          ),
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
           maxLines: multiline ? 5 : 1,
@@ -95,9 +98,8 @@ class InputTextField extends StatelessWidget {
         left: 24,
         bottom: 4,
       ),
-      child: Text(
+      child: TitleLarge(
         label.toUpperCase(),
-        style: ThemeTextStyle.labelLight, // FIXME:
       ),
     );
   }
@@ -134,9 +136,8 @@ class InputTextField extends StatelessWidget {
             ),
             ...(errorMessages ?? [])
                 .map(
-                  (message) => Text(
+                  (message) => HeadlineMedium.boldRegular(
                     message,
-                    style: ThemeTextStyle.bodyLight,
                   ),
                 )
                 .toList(),

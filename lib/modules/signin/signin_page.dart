@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 
 import '../../core/app_theme.dart';
-import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/layouts/app_scaffold_page.dart';
 import '../../widgets/layouts/scrollable_appbar.dart';
 import 'signin_controller.dart';
@@ -69,15 +69,13 @@ class SigninPage extends GetView<SigninController> {
           ),
           _logo(),
           ThemeSizedBox.height16,
-          Text(
+          const DisplayMedium(
             "Crea il tuo account",
-            style: ThemeTextStyle.largeLight,
             textAlign: TextAlign.center,
           ),
           ThemeSizedBox.height16,
-          Text(
+          const HeadlineMedium.boldRegular(
             "Registrati per iniziare\nla tua esperienza in MyLines",
-            style: ThemeTextStyle.bodyLight,
             textAlign: TextAlign.center,
           ),
           ThemeSizedBox.height32,
@@ -146,14 +144,13 @@ class SigninPage extends GetView<SigninController> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Text(
+          const HeadlineMedium.boldRegular(
             "Hai un account?",
-            style: ThemeTextStyle.bodyLight,
           ),
           ThemeSizedBox.width4,
-          Text(
+          const TitleMedium(
             "ACCEDI",
-            style: ThemeTextStyle.linkLight,
+            underline: true,
           ),
         ],
       ),
@@ -203,9 +200,8 @@ class SigninPage extends GetView<SigninController> {
           width: 100,
         ),
         ThemeSizedBox.width24,
-        Text(
+        const HeadlineMedium.boldRegular(
           "OPPURE",
-          style: ThemeTextStyle.bodyLight, // FIXME: fare stile
         ),
         ThemeSizedBox.width24,
         Container(
@@ -219,9 +215,8 @@ class SigninPage extends GetView<SigninController> {
 
   Widget _social() {
     return Column(children: [
-      Text(
+      const HeadlineMedium.boldRegular(
         "USA I TUOI SOCIAL",
-        style: ThemeTextStyle.bodyLight, // FIXME: fare stile
       ),
       ThemeSizedBox.height24,
       Row(

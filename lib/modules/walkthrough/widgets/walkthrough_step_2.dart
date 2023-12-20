@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/app_theme.dart';
+import '../../../core/theme/text_wrapper.dart';
 import '../../../widgets/texts/text_gradient.dart';
 
 class WalkthroughStep2 extends StatelessWidget {
@@ -27,18 +28,15 @@ class WalkthroughStep2 extends StatelessWidget {
             ),
           ),
           ThemeSizedBox.height24,
-          TextGradient(
-            text: Text(
-              "Monitora il ciclo\nmestruale",
-              textAlign: TextAlign.center,
-              style: ThemeTextStyle.largeDark,
-            ),
-          ),
-          ThemeSizedBox.height16,
-          Text(
-            "Tieni sempre sotto controllo il tuo calendario mestruale, monitora i sintomi, registra l'attività sessuale e prendi nota dell'andamento del tuo benessere lungo tutto il mese.",
+          const DisplayMedium(
+            "Monitora il ciclo\nmestruale",
             textAlign: TextAlign.center,
-            style: ThemeTextStyle.bodyDark,
+          ).applyShaders(context),
+          ThemeSizedBox.height16,
+          const BodyLarge(
+            "Tieni sempre sotto controllo il tuo calendario mestruale, monitora i sintomi, registra l'attività sessuale e prendi nota dell'andamento del tuo benessere lungo tutto il mese.",
+            color: ThemeColor.darkBlue,
+            textAlign: TextAlign.center,
           ),
         ],
       ),

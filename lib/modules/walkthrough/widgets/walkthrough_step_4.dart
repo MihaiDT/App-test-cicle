@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/app_theme.dart';
+import '../../../core/theme/text_wrapper.dart';
 import '../../../widgets/texts/text_gradient.dart';
 
 class WalkthroughStep4 extends StatelessWidget {
@@ -27,18 +28,15 @@ class WalkthroughStep4 extends StatelessWidget {
             ),
           ),
           ThemeSizedBox.height16,
-          TextGradient(
-            text: Text(
-              "Più partecipi,\npiù accumuli punti",
-              textAlign: TextAlign.center,
-              style: ThemeTextStyle.largeDark,
-            ),
-          ),
-          ThemeSizedBox.height16,
-          Text(
-            "Partecipa alle missioni e ottieni punti per accedere a premi e contenuti esclusivi.",
+          const DisplayMedium(
+            "Più partecipi,\npiù accumuli punti",
             textAlign: TextAlign.center,
-            style: ThemeTextStyle.bodyDark,
+          ).applyShaders(context),
+          ThemeSizedBox.height16,
+          const BodyLarge(
+            "Partecipa alle missioni e ottieni punti per accedere a premi e contenuti esclusivi.",
+            color: ThemeColor.darkBlue,
+            textAlign: TextAlign.center,
           ),
         ],
       ),

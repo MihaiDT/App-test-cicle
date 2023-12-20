@@ -114,6 +114,19 @@ class HeadlineMedium extends TextWrapper with ThemeShaderTextWrapper {
   TextStyle? getBaseTextStyle(BuildContext context) {
     return Theme.of(context).textTheme.headlineMedium;
   }
+
+  const HeadlineMedium.boldRegular(
+    super.text, {
+    super.key,
+    super.color,
+    super.height,
+    super.maxLines,
+    super.overflow,
+    super.textAlign,
+    super.underline,
+  }) : super(
+          fontWeight: FontWeight.w500,
+        );
 }
 
 class HeadlineSmall extends TextWrapper with ThemeShaderTextWrapper {
@@ -309,6 +322,7 @@ class LabelMedium extends TextWrapper with ThemeShaderTextWrapper {
 abstract class TextWrapper extends StatelessWidget {
   final String text;
   final Color? color;
+  final Color? decorationColor;
   final FontWeight? fontWeight;
   final double? height;
   final int? maxLines;
@@ -322,6 +336,7 @@ abstract class TextWrapper extends StatelessWidget {
     this.text, {
     super.key,
     this.color = Colors.white,
+    this.decorationColor = Colors.white,
     required this.fontWeight,
     required this.height,
     required this.maxLines,
@@ -335,13 +350,13 @@ abstract class TextWrapper extends StatelessWidget {
     return Text(
       text,
       style: getBaseTextStyle(context)?.copyWith(
-        color: color ?? Colors.white,
+        color: color,
+        decorationColor: decorationColor,
         height: height,
         fontWeight: fontWeight,
         leadingDistribution:
             height != null ? null : TextLeadingDistribution.even,
         decoration: underline ? TextDecoration.underline : null,
-        decorationColor: Colors.white,
       ),
       maxLines: maxLines,
       overflow: overflow,

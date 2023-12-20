@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 
 import '../../../core/app_theme.dart';
 import '../../../core/utils/helpers.dart';
@@ -52,14 +54,16 @@ class MainAppBar extends StatelessWidget {
   }
 
   Widget _rightWidget() {
+    BuildContext? context = Get.context;
     return Row(
       children: [
-        TextGradient(
-          text: Text(
-            'Calendario',
-            style: ThemeTextStyle.calendarMonth,
-          ),
-        ),
+        // TextGradient(
+        //   text: Text(
+        //     'Calendario',
+        //     style: ThemeTextStyle.calendarMonth,
+        //   ),
+        // ),
+        HeadlineSmall('Calendario').applyShaders(context!),
         _calendar(),
       ],
     );

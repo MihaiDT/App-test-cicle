@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 
 import '../../../core/theme/theme_text_style.dart';
 import '../../../widgets/texts/text_gradient.dart';
@@ -16,15 +18,10 @@ class QuizSelectTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return selected
-        ? TextGradient(
-            text: Text(
-              title,
-              style: ThemeTextStyle.quizSelectDark,
-            ),
-          )
-        : Text(
+        ? TitleMedium(title).applyShaders(context)
+        : TitleMedium(
             title,
-            style: ThemeTextStyle.quizSelectDark,
+            color: ThemeColor.darkBlue,
           );
   }
 }

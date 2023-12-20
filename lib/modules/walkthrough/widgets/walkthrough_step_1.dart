@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 
 import '../../../core/app_theme.dart';
 import '../../../widgets/texts/text_gradient.dart';
@@ -26,18 +27,15 @@ class WalkthroughStep1 extends StatelessWidget {
             ),
           ),
           ThemeSizedBox.height24,
-          TextGradient(
-            text: Text(
-              "Personalizza il tuo\navatar e gioca",
-              textAlign: TextAlign.center,
-              style: ThemeTextStyle.largeDark,
-            ),
-          ),
-          ThemeSizedBox.height16,
-          Text(
-            "Crea il tuo avatar e personalizzalo come più ti piace per rendere l'app ancora più tua!\nE quando ha i le mestruazioni non dimenticare di giocare e prenderti cura di lui.",
+          const DisplayMedium(
+            "Personalizza il tuo\navatar e gioca",
             textAlign: TextAlign.center,
-            style: ThemeTextStyle.bodyDark,
+          ).applyShaders(context),
+          ThemeSizedBox.height16,
+          const BodyLarge(
+            "Crea il tuo avatar e personalizzalo come più ti piace per rendere l'app ancora più tua!\nE quando ha i le mestruazioni non dimenticare di giocare e prenderti cura di lui.",
+            color: ThemeColor.darkBlue,
+            textAlign: TextAlign.center,
           ),
         ],
       ),
