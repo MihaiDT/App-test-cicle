@@ -12,7 +12,13 @@ mixin ThemeShaderTextWrapper on TextWrapper {
         maxLines: maxLines,
         overflow: overflow,
         style: getBaseTextStyle(context)!.copyWith(
+          color: color,
           decoration: underline ? TextDecoration.underline : null,
+          decorationColor: decorationColor,
+          fontWeight: fontWeight,
+          height: height,
+          leadingDistribution:
+              height != null ? null : TextLeadingDistribution.even,
         ),
       ),
     );

@@ -53,12 +53,10 @@ class RegisterAndLoginPage extends StatelessWidget {
                   : "Crea il tuo account",
             ),
             ThemeSizedBox.height16,
-            Text(
-              //FIXME: change according to figma
+            BodyMedium(
               controller.isLoginPage
                   ? "Inserisci username e password\n per entrare nel tuo account."
                   : "Registrati per iniziare\n la tua esperienza in myDrop",
-              style: NewThemeTextStyle.calendarWeekDay,
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height32,
@@ -134,7 +132,9 @@ class RegisterAndLoginPage extends StatelessWidget {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("Non hai un account?"),
+                            const TitleMedium(
+                              "Non hai un account?",
+                            ),
                             ThemeSizedBox.width4,
                             GestureDetector(
                               onTap: () {
@@ -157,7 +157,9 @@ class RegisterAndLoginPage extends StatelessWidget {
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("Hai un account?"),
+                            const TitleMedium(
+                              "Hai un account?",
+                            ),
                             ThemeSizedBox.width4,
                             GestureDetector(
                               onTap: () {
