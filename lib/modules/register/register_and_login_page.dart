@@ -11,6 +11,7 @@ import "package:lines/widgets/buttons/secondary_button.dart";
 import "package:lines/widgets/forms/input_text_field.dart";
 import "package:lines/widgets/layouts/app_scaffold_padding.dart";
 import "package:lines/widgets/layouts/app_scaffold_page.dart";
+import "package:lines/widgets/layouts/bottom_widget_layout.dart";
 
 import "../../core/theme/text_wrapper.dart";
 
@@ -38,7 +39,76 @@ class RegisterAndLoginPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       backgroundImage: ThemeDecoration.images.bgDark,
       appBar: const TransparentAppBar(),
-      body: AppScaffoldPadding(
+      body: BottomWidgetLayout(
+        scrollableAreaPadding: EdgeInsets.only(
+          left: 32,
+          right: 32,
+          top: MediaQuery.sizeOf(context).height * 0.04,
+        ),
+        bottomWidget: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SecondaryButton(
+                text: "Avanti",
+                onPressed: () {
+                  Get.toNamed(Routes.nameSurname);
+                },
+              ),
+              ThemeSizedBox.height16,
+              controller.isLoginPage
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const TitleMedium(
+                          "Non hai un account?",
+                        ),
+                        ThemeSizedBox.width4,
+                        GestureDetector(
+                          onTap: () {
+                            controller.isLoginPage = !controller.isLoginPage;
+                            Get.offAndToNamed(
+                              Routes.registerAndLogin,
+                              arguments: RegisterAndLoginPageArguments(
+                                isLoginPage: false,
+                              ),
+                            );
+                          },
+                          child: const TitleMedium(
+                            "REGISTRATI",
+                            underline: true,
+                          ),
+                        )
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const TitleMedium(
+                          "Hai un account?",
+                        ),
+                        ThemeSizedBox.width4,
+                        GestureDetector(
+                          onTap: () {
+                            controller.isLoginPage = !controller.isLoginPage;
+                            Get.offAndToNamed(
+                              Routes.registerAndLogin,
+                              arguments: RegisterAndLoginPageArguments(
+                                isLoginPage: true,
+                              ),
+                            );
+                          },
+                          child: const TitleMedium(
+                            "ACCEDI",
+                            underline: true,
+                          ),
+                        )
+                      ],
+                    ),
+            ],
+          ),
+        ),
         child: Column(
           children: [
             SvgPicture.asset(
@@ -117,71 +187,6 @@ class RegisterAndLoginPage extends StatelessWidget {
               underline: true,
             ),
             ThemeSizedBox.height16,
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SecondaryButton(
-                    text: "Avanti",
-                    onPressed: () {
-                      Get.toNamed(Routes.nameSurname);
-                    },
-                  ),
-                  ThemeSizedBox.height16,
-                  controller.isLoginPage
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const TitleMedium(
-                              "Non hai un account?",
-                            ),
-                            ThemeSizedBox.width4,
-                            GestureDetector(
-                              onTap: () {
-                                controller.isLoginPage =
-                                    !controller.isLoginPage;
-                                Get.offAndToNamed(
-                                  Routes.registerAndLogin,
-                                  arguments: RegisterAndLoginPageArguments(
-                                    isLoginPage: false,
-                                  ),
-                                );
-                              },
-                              child: const TitleMedium(
-                                "REGISTRATI",
-                                underline: true,
-                              ),
-                            )
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const TitleMedium(
-                              "Hai un account?",
-                            ),
-                            ThemeSizedBox.width4,
-                            GestureDetector(
-                              onTap: () {
-                                controller.isLoginPage =
-                                    !controller.isLoginPage;
-                                Get.offAndToNamed(
-                                  Routes.registerAndLogin,
-                                  arguments: RegisterAndLoginPageArguments(
-                                    isLoginPage: true,
-                                  ),
-                                );
-                              },
-                              child: const TitleMedium(
-                                "ACCEDI",
-                                underline: true,
-                              ),
-                            )
-                          ],
-                        ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
