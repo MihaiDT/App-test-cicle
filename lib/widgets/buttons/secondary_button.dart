@@ -20,18 +20,20 @@ class SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(0, buttonSize.toDouble),
-        textStyle: buttonSize.textStyle(
-          Theme.of(context),
+      style: ButtonStyle(
+        minimumSize:  MaterialStateProperty.all(Size(double.infinity, buttonSize.toDouble)),
+        textStyle:  MaterialStateProperty.resolveWith(
+              (Set<MaterialState> states) {
+            return buttonSize.textStyle(
+              Theme.of(context),
+            );
+          },
         ),
-        padding: buttonSize.buttonPadding,
+        padding:  MaterialStateProperty.all(buttonSize.buttonPadding),
       ),
-      child: Center(
-        child: TitleLarge(
-          text,
-        ).applyShaders(context),
-      ),
+      child: TitleLarge(
+        text,
+      ).applyShaders(context),
     );
   }
 }

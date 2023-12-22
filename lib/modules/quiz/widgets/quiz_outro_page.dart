@@ -59,7 +59,7 @@ class QuizOutroPage extends GetView<QuizController> {
             const Spacer(),
             PrimaryButton(
               //TODO add on tap callback
-              onTap: () {},
+              onPressed: () {},
               text: 'CHIUDI',
             ),
           ],

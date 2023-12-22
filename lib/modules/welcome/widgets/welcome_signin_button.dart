@@ -12,7 +12,7 @@ class WelcomeSigninButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SecondaryButton(
+    return PrimaryButton(
       text: "INIZIAMO!",
       onPressed: () => controller.onTapSignin(),
     );

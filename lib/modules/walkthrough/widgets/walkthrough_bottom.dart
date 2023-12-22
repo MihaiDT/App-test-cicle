@@ -36,7 +36,7 @@ class WalkthroughBottom extends StatelessWidget {
               ThemeSizedBox.height24,
             ],
             PrimaryButton(
-              onTap: () => controller.currentStepIndex < controller.lastStep
+              onPressed: () => controller.currentStepIndex < controller.lastStep
                   ? controller.onTapNext()
                   : controller.onTapLetsStart(),
               text: controller.currentStepIndex < controller.lastStep

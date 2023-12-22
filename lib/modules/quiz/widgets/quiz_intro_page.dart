@@ -52,7 +52,7 @@ class QuizIntroPage extends GetView<QuizController> {
             const AppCoin(coinAmount: 150),
             const Spacer(),
             PrimaryButton(
-              onTap: () {},
+              onPressed: () {},
               text: 'INIZIAMO',
             ),
           ],

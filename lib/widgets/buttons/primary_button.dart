@@ -7,7 +7,7 @@ import '../../core/app_theme.dart';
 class PrimaryButton extends StatelessWidget {
   final ButtonSize buttonSize;
   final String text;
-  final GestureTapCallback? onTap;
+  final GestureTapCallback? onPressed;
   final bool small;
   final bool fullWidth;
 
@@ -17,49 +17,43 @@ class PrimaryButton extends StatelessWidget {
     this.fullWidth = true,
     required this.text,
     this.small = false,
-    this.onTap,
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onTap,
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        elevation: 20,
-        shadowColor: Colors.black,
-        minimumSize: Size(0, buttonSize.toDouble),
-        textStyle: buttonSize.textStyle(
-          Theme.of(context),
-        ),
+        backgroundColor: Colors.transparent,
+        minimumSize: Size(double.infinity, buttonSize.toDouble),
         padding: EdgeInsets.zero,
       ),
-      child: Center(
-        child: Ink(
-          padding: buttonSize.buttonPadding,
-          height: buttonSize.toDouble,
-          decoration: onTap != null
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(small ? 20 : 61),
-                  ),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFFB63AB4),
-                      Color(0xFF513B9F),
-                    ],
-                  ),
-                )
-              : BoxDecoration(
-                  borderRadius: BorderRadius.circular(small ? 20 : 60),
-                  color: ThemeColor.buttonDisableBackGround,
+      child: Ink(
+        padding: buttonSize.buttonPadding,
+        height: buttonSize.toDouble,
+        width: double.infinity,
+        decoration: onPressed != null
+            ? BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(small ? 20 : 61),
                 ),
-          child: Center(
-            child: TitleLarge(
-              text,
-            ),
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFFB63AB4),
+                    Color(0xFF513B9F),
+                  ],
+                ),
+              )
+            : BoxDecoration(
+                borderRadius: BorderRadius.circular(small ? 20 : 60),
+                color: ThemeColor.buttonDisableBackGround,
+              ),
+        child: Center(
+          child: TitleLarge(
+            text,
           ),
         ),
       ),
