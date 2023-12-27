@@ -55,6 +55,10 @@ dependencies:
   
   # GetX is an extra-light and powerful solution for Flutter. It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
   get: ^4.6.6
+
+
+  # The flutter_markdown package renders Markdown, a lightweight markup language, into a Flutter widget containing a rich text representation.
+  flutter_markdown: ^0.6.18+2
   
   # Various borders that use gradient instead of boring plain colors.
   gradient_borders: ^1.0.0

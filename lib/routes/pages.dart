@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/birth_date/birth_date_binding.dart';
+import 'package:lines/modules/birth_date/birth_date_page.dart';
+import 'package:lines/modules/privacy/privacy_page.dart';
 import 'package:lines/modules/quiz/widgets/quiz_intro_page.dart';
 import 'package:lines/modules/quiz/widgets/quiz_outro_page.dart';
 import 'package:lines/modules/name_surname/name_surname_page.dart';
@@ -9,8 +12,6 @@ import 'package:lines/modules/cookie/cookie_page.dart';
 
 import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
-import '../modules/signin/signin_binding.dart';
-import '../modules/signin/signin_page.dart';
 import '../modules/splash/splash_binding.dart';
 import '../modules/splash/splash_page.dart';
 import '../modules/walkthrough/walkthrough_binding.dart';
@@ -27,14 +28,6 @@ class Pages {
       name: Routes.main,
       page: () => _mediaQueryWrapper(const MainPage()),
       transition: Transition.fadeIn,
-    ),
-
-    // Signin
-    GetPage(
-      binding: SigninBinding(),
-      name: Routes.signin,
-      page: () => _mediaQueryWrapper(const SigninPage()),
-      transition: Transition.rightToLeft,
     ),
 
     // Splash
@@ -83,7 +76,23 @@ class Pages {
     // NameSurname
     GetPage(
       name: Routes.nameSurname,
+      binding: BirthDateBinding(),
       page: () => _mediaQueryWrapper(const NameSurnamePage()),
+      transition: Transition.fade,
+    ),
+
+    // BirthDate
+    GetPage(
+      name: Routes.birthDate,
+      page: () => _mediaQueryWrapper(const BirthDatePage()),
+      transition: Transition.fade,
+    ),
+
+    // PrivacyPage
+    GetPage(
+      binding: RegisterBinding(),
+      name: Routes.privacy,
+      page: () => _mediaQueryWrapper(const PrivacyPage()),
       transition: Transition.fade,
     ),
   ];

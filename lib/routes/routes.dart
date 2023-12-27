@@ -3,7 +3,6 @@ class Routes {
 
   static const String main = '/main';
   static const String privacyFlags = '/privacyFlags';
-  static const String signin = '/signin';
   static const String splash = '/';
   static const String walkthrough = '/walkthrough';
   static const String registerAndLogin = '/register';
@@ -11,4 +10,7 @@ class Routes {
   static const String quizIntroPage = '/quiz_intro_page';
   static const String quizOutroPage = '/quiz_outro_page';
   static const String nameSurname = '/nameSurname';
+  static const String birthDate = '/birth_date';
+
+  static const String privacy = '/privacy';
 }

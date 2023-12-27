@@ -14,4 +14,6 @@ class ThemeIcon {
   static String close = '$folderPath/close.svg';
   static String coin = '$folderPath/coin.svg';
   static String coinStack = '$folderPath/coin_stack.svg';
+  static String checkboxOutline = '$folderPath/checkbox_outline.svg';
+  static String checkboxFilled = '$folderPath/checkbox_filled.svg';
 }

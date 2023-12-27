@@ -37,9 +37,16 @@ class BottomWidgetLayout extends StatelessWidget {
             ),
             Positioned(
               bottom: 0,
-              child: SizedBox(
-                width: constraints.maxWidth,
-                child: bottomWidget,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: constraints.maxWidth,
+                    child: bottomWidget,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
             ),
           ],

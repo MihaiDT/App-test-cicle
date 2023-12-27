@@ -1,10 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/modules/register/register_and_login_page.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
@@ -39,9 +40,7 @@ class CookiePage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             GestureDetector(
-              onTap: () {
-                // TODO: add function
-              },
+              onTap: () {},
               child: const BodyMedium(
                 "Clicca qui per saperne di più.",
                 textAlign: TextAlign.center,
@@ -51,9 +50,15 @@ class CookiePage extends StatelessWidget {
             const Spacer(),
             SecondaryButton(
               text: "ACCONSENTO",
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(
+                  Routes.registerAndLogin,
+                  arguments: RegisterAndLoginPageArguments(
+                    isLoginPage: true,
+                  ),
+                );
+              },
             ),
-            //TODO: costumize cookie is missing
           ],
         ),
       ),

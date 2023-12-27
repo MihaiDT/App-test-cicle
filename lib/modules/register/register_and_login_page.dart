@@ -9,7 +9,6 @@ import "package:lines/routes/routes.dart";
 import "package:lines/widgets/appbar/transparent_app_bar.dart";
 import "package:lines/widgets/buttons/secondary_button.dart";
 import "package:lines/widgets/forms/input_text_field.dart";
-import "package:lines/widgets/layouts/app_scaffold_padding.dart";
 import "package:lines/widgets/layouts/app_scaffold_page.dart";
 import "package:lines/widgets/layouts/bottom_widget_layout.dart";
 
@@ -46,12 +45,11 @@ class RegisterAndLoginPage extends StatelessWidget {
           top: MediaQuery.sizeOf(context).height * 0.04,
         ),
         bottomWidget: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SecondaryButton(
-                text: "Avanti",
+                text: "AVANTI",
                 onPressed: () {
                   Get.toNamed(Routes.nameSurname);
                 },

@@ -5,6 +5,8 @@ import '../../core/app_theme.dart';
 import '../../core/theme/text_wrapper.dart';
 
 class InputTextField extends StatelessWidget {
+  final FocusNode? focusNode;
+
   final bool isPassword;
 
   final bool isDisabled;
@@ -14,8 +16,10 @@ class InputTextField extends StatelessWidget {
   final String label;
   final String? placeholder;
   final bool multiline;
+
   final bool obscureText;
   final TextInputType keyboardType; // Default: .text
+  final TextAlign textAlign;
   final TextCapitalization? textCapitalization;
   final TextEditingController textEditingController;
   final TextInputAction textInputAction;
@@ -27,6 +31,7 @@ class InputTextField extends StatelessWidget {
 
   const InputTextField({
     super.key,
+    this.focusNode,
     this.isPassword = false,
     this.errorMessages,
     this.isDisabled = false,
@@ -41,6 +46,7 @@ class InputTextField extends StatelessWidget {
     this.onEditingComplete,
     this.onTapTogglePassword,
     this.placeholder,
+    this.textAlign = TextAlign.left,
     this.textCapitalization,
     required this.textEditingController,
     this.textInputAction = TextInputAction.next,
@@ -54,6 +60,8 @@ class InputTextField extends StatelessWidget {
       children: [
         _label(),
         TextFormField(
+          focusNode: focusNode,
+          textAlign: textAlign,
           controller: textEditingController,
           decoration: isPassword
               ? textFieldPasswordDecoration(

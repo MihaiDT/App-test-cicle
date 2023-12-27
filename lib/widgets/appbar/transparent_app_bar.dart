@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/theme/theme_icon.dart';
 
@@ -8,10 +9,13 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final List<Widget> actions;
 
+  final GestureTapCallback? onBackPressed;
+
   const TransparentAppBar({
     this.title,
     this.actions = const [],
     this.leading,
+    this.onBackPressed,
     super.key,
   });
 
@@ -30,15 +34,21 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget get _leading {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: ThemeSize.paddingSmall,
-        vertical: 6,
-      ), // Leading with defaults to 56
-      child: SvgPicture.asset(
-        ThemeIcon.back,
-        width: 24,
-        height: 24,
+    return GestureDetector(
+      onTap: () {
+        onBackPressed?.call();
+        Navigator.pop(Get.context!);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: ThemeSize.paddingSmall,
+          vertical: 6,
+        ), // Leading with defaults to 56
+        child: SvgPicture.asset(
+          ThemeIcon.back,
+          width: 24,
+          height: 24,
+        ),
       ),
     );
   }

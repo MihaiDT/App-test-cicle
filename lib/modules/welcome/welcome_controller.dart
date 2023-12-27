@@ -24,10 +24,7 @@ class WelcomeController extends AppScaffoldController {
 
   void onTapSignin() {
     Get.toNamed(
-      Routes.registerAndLogin,
-      arguments: RegisterAndLoginPageArguments(
-        isLoginPage: false,
-      ),
+      Routes.cookie,
     );
   }
 
