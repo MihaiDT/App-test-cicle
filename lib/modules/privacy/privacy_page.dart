@@ -31,12 +31,14 @@ class PrivacyPage extends StatelessWidget {
               right: ThemeSize.paddingLarge,
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 GestureDetector(
                   onTap: () {},
                   child: const TitleMedium(
                     "ACCETTA TUTTO",
                     underline: true,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 ThemeSizedBox.height16,

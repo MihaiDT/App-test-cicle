@@ -22,7 +22,8 @@ class SecondaryButton extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all(
-            Size(double.infinity, buttonSize.toDouble)),
+          Size(0, buttonSize.toDouble),
+        ),
         textStyle: MaterialStateProperty.resolveWith(
           (Set<MaterialState> states) {
             return buttonSize.textStyle(

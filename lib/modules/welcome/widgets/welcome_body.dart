@@ -41,7 +41,12 @@ class WelcomeBody extends StatelessWidget {
             ),
             const Spacer(),
             ThemeSizedBox.height40,
-            WelcomeSigninButton(controller),
+            SizedBox(
+              width: double.infinity,
+              child: WelcomeSigninButton(
+                controller,
+              ),
+            ),
             ThemeSizedBox.height16,
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,

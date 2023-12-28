@@ -28,6 +28,7 @@ extension ButtonSizeExtension on ButtonSize {
 
   EdgeInsetsGeometry get buttonPadding {
     double verticalPadding = 0.0;
+    double horizontalPadding = 16;
     switch (this) {
       case ButtonSize.h31:
         verticalPadding = 6;
@@ -38,6 +39,8 @@ extension ButtonSizeExtension on ButtonSize {
     return EdgeInsets.only(
       top: verticalPadding,
       bottom: verticalPadding,
+      left: horizontalPadding,
+      right: horizontalPadding,
     );
   }
 }

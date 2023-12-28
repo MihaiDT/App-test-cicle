@@ -47,6 +47,7 @@ class RegisterAndLoginPage extends StatelessWidget {
         bottomWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SecondaryButton(
                 text: "AVANTI",

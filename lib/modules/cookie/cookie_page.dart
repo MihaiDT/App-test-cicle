@@ -48,16 +48,19 @@ class CookiePage extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            SecondaryButton(
-              text: "ACCONSENTO",
-              onPressed: () {
-                Get.toNamed(
-                  Routes.registerAndLogin,
-                  arguments: RegisterAndLoginPageArguments(
-                    isLoginPage: true,
-                  ),
-                );
-              },
+            SizedBox(
+              width: double.infinity,
+              child: SecondaryButton(
+                text: "ACCONSENTO",
+                onPressed: () {
+                  Get.toNamed(
+                    Routes.registerAndLogin,
+                    arguments: RegisterAndLoginPageArguments(
+                      isLoginPage: true,
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
