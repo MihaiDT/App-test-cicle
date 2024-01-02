@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lines/modules/home/widgets/home_circular_period_circular_calendar.dart';
 
 import '../../core/app_theme.dart';
 import '../../core/theme/text_wrapper.dart';
@@ -113,43 +114,21 @@ class InputTextField extends StatelessWidget {
   }
 
   Widget _errorLabels() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
+    return Column(
       children: [
-        ThemeSizedBox.width12,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ThemeSizedBox.height4,
-            // SvgPicture.asset(
-            //   AppIcon.alertIcon.path!,
-            //   fit: BoxFit.fitWidth,
-            //   height: 16,
-            //   width: 16,
-            // ),
-          ],
-        ),
-        ThemeSizedBox.width4,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const SizedBox(
-              height: 6,
+        ThemeSizedBox.height12,
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: BodyMedium(
+              "Lorem ipsum dolor sit amet consectetur. Tortor tempus dui penatibus facilisi sed eget ",
+              color: HomeCircularPeriodCircularCalendar.cicloColor,
             ),
-            ...(errorMessages ?? [])
-                .map(
-                  (message) => HeadlineMedium.boldRegular(
-                    message,
-                  ),
-                )
-                .toList(),
-          ],
+          ),
         ),
       ],
     );
