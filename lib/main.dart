@@ -49,9 +49,9 @@ _initConnectivity() async {
 /// Private methods
 ///
 _initEnv() async {
-  await env.load(fileName: '.env');
+  await env.load(fileName: '.env.staging');
 
-  logDebug('${env.env}', tag: '.env');
+  logDebug('${env.env}', tag: '.env.staging');
 }
 
 _initFirebase() async {

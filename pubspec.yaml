@@ -34,9 +34,12 @@ dependencies:
 
   # This plugin for Flutter adds the ability to change the badge of the app in the launcher. It supports iOS, macOS, and some Android devices (the official API does not support the feature, even on Oreo).
   flutter_app_badger: ^1.5.0
-  
-  # Load configuration at runtime from a .env file which can be used throughout the application. 
+
+  # Load configuration at runtime from a .env file which can be used throughout the application.
   flutter_dotenv: ^5.1.0
+
+  # Package to manage enviroments
+  envied: ^0.5.2
 
   # A flutter utility to easily create flavors in your flutter application
   flutter_flavorizr: ^2.2.1
@@ -93,15 +96,17 @@ dependencies:
   # googleapis: ^12.0.0
   # googleapis_auth: ^1.4.1
   
-  
+
 dev_dependencies:
+  build_runner: ^2.4.7
+  envied_generator: ^0.5.2
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.1
 
 flutter:
   uses-material-design: true
   assets:
-    - .env
+    - .env.staging
     - .env.prod
     - assets/icons/
     - assets/images/

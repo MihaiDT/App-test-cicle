@@ -44,3 +44,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/lib/core/enviroment/env.prod.g.dart
+/lib/core/enviroment/env.staging.g.dart
