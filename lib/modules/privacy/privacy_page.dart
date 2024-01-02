@@ -5,6 +5,7 @@ import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
@@ -44,7 +45,9 @@ class PrivacyPage extends StatelessWidget {
                 ThemeSizedBox.height16,
                 SecondaryButton(
                   text: "REGISTRATI",
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.main);
+                  },
                 ),
               ],
             ),

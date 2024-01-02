@@ -3,7 +3,7 @@ class Routes {
 
   static const String main = '/main';
   static const String privacyFlags = '/privacyFlags';
-  static const String splash = '/';
+  static const String logo = '/';
   static const String walkthrough = '/walkthrough';
   static const String registerAndLogin = '/register';
   static const String cookie = '/cookie';

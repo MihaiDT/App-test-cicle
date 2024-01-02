@@ -50,6 +50,10 @@ dependencies:
   # With V5.0.0 we can use EncryptedSharedPreferences on Android by enabling it in the Android Options like so:
   flutter_secure_storage: ^9.0.0
 
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+
   # Draw SVG files using Flutter.
   flutter_svg: ^2.0.9
   

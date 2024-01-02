@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'app.dart';
@@ -29,6 +30,8 @@ _initApp() async {
   await _initSingletons();
   await _initNetwork();
   await _initPackageInfo();
+  await Hive.initFlutter();
+  await Hive.openBox("linesApp");
   //await _initFirebase();
 }
 
