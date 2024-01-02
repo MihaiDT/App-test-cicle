@@ -28,13 +28,13 @@ class InputTextField extends StatelessWidget {
   final Function? onEditingComplete;
   final Function(String txt)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
-  final List<String>? errorMessages;
+  final String errorMessage;
 
   const InputTextField({
     super.key,
     this.focusNode,
     this.isPassword = false,
-    this.errorMessages,
+    this.errorMessage = "",
     this.isDisabled = false,
     this.isRequired = false,
     this.hasError = false,
@@ -122,10 +122,10 @@ class InputTextField extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: BodyMedium(
-              "Lorem ipsum dolor sit amet consectetur. Tortor tempus dui penatibus facilisi sed eget ",
+              errorMessage,
               color: HomeCircularPeriodCircularCalendar.cicloColor,
             ),
           ),
