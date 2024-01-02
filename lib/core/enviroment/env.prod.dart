@@ -2,7 +2,7 @@ import 'package:envied/envied.dart';
 
 part 'env.prod.g.dart';
 
-@Envied(path: ".env.prod", obfuscate: true)
+@Envied(path: ".env.prod")
 abstract class Env {
   @EnviedField(varName: "API_ENDPOINT")
   static const String apiEndpoint = _Env.apiEndpoint;
