@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
 class RegisterAndLoginController extends AppScaffoldController {
@@ -23,5 +27,16 @@ class RegisterAndLoginController extends AppScaffoldController {
     isLoginPage = Get.arguments.isLoginPage;
 
     super.onInit();
+  }
+
+  Future<void> login({required String email, required String password}) async {
+    final response = await dio.post(
+      "/auth/login",
+      data: {
+        "email": email,
+        "password": password,
+      },
+      options: Options(headers: {"Content-Type": "application/json"}),
+    );
   }
 }
