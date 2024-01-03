@@ -38,9 +38,6 @@ dependencies:
   # Load configuration at runtime from a .env file which can be used throughout the application.
   flutter_dotenv: ^5.1.0
 
-  # Package to manage enviroments
-  envied: ^0.5.2
-
   # A flutter utility to easily create flavors in your flutter application
   flutter_flavorizr: ^2.2.1
   
