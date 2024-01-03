@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -76,7 +77,12 @@ _initPackageInfo() async {
 }
 
 _initSingletons() async {
-  Get.put(Dio());
+  Get.put(Dio(
+    BaseOptions(
+      baseUrl: apiEndpoint,
+      headers: {"Content-Type": "application/json"},
+    ),
+  ));
   Get.put(AuthHeaders());
   Get.put(AppConfig());
   Get.put(Session());
