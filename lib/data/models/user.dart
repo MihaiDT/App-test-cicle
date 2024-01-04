@@ -18,21 +18,21 @@ class User {
 
   User(
       {this.birthdate,
-        this.email,
-        this.firstName,
-        this.isConfirmed,
-        this.lastMenstrautionDate,
-        this.lastName,
-        this.legalGuardianEmail,
-        this.mgmCode,
-        this.nickname,
-        this.password,
-        this.periodDays,
-        this.periodDuration,
-        this.privacyProfiling,
-        this.privacyMarketingEmail,
-        this.provider,
-        this.sessionToken});
+      this.email,
+      this.firstName,
+      this.isConfirmed,
+      this.lastMenstrautionDate,
+      this.lastName,
+      this.legalGuardianEmail,
+      this.mgmCode,
+      this.nickname,
+      this.password,
+      this.periodDays,
+      this.periodDuration,
+      this.privacyProfiling,
+      this.privacyMarketingEmail,
+      this.provider,
+      this.sessionToken});
 
   User.fromJson(Map<String, dynamic> json) {
     birthdate = json['birthdate'];
