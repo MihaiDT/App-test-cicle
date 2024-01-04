@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 
 // import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/dependency_injection_manager.dart';
+import 'package:lines/flavors.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'app.dart';
@@ -25,7 +27,9 @@ FutureOr<void> main() async {
 }
 
 _initApp() async {
-  await _initEnv();
+  dependencyRegister(
+    flavor: F.appFlavor ?? Flavor.dev,
+  );
   await _initConnectivity();
   await _initSingletons();
   await _initNetwork();
@@ -45,14 +49,6 @@ _initConnectivity() async {
 
     logDebug(isDeviceConnected ? "Connesso" : "Non connesso", tag: "Network");
   });
-}
-
-/// Private methods
-///
-_initEnv() async {
-  await env.load(fileName: '.env.staging');
-
-  logDebug('${env.env}', tag: '.env.staging');
 }
 
 _initFirebase() async {

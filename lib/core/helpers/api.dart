@@ -1,15 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:lines/core/env/enviroment.dart';
 
 // import '../../data/models/auth_headers.dart';
 // import '../../storages/auth_storage.dart';
 import '../utils/singletons.dart';
 
-get apiEndpoint => env.env['API_ENDPOINT'];
-get proxyEndpoint => "${env.env['PROXY']}:9090";
+Environment get environment => Get.find<Environment>();
+get apiEndpoint => environment.apiEndpoint;
+get proxyEndpoint => "${environment.proxy}:9090";
 // bool get authTokenPresent => authHeaders.accessToken != null;
-get isProxymanEnabled =>
-    kDebugMode ? env.env['ENABLE_PROXYMAN'] == 'true' : false;
+get isProxymanEnabled => kDebugMode ? environment.enableProxyman : false;
 
 // Dio interceptor: se false non vengono intercettati gli errori ma viene lasciata la gestione all'utente
 bool disableDioInterceptor = false;
