@@ -52,7 +52,8 @@ class RegisterAndLoginPage extends StatelessWidget {
               SecondaryButton(
                 text: "AVANTI",
                 onPressed: () {
-                  Get.toNamed(Routes.nameSurname);
+                  controller.loginUser();
+                 // Get.toNamed(Routes.nameSurname);
                 },
               ),
               ThemeSizedBox.height16,
