@@ -1,0 +1,8 @@
+import 'package:dio/dio.dart';
+import 'package:get/get.dart';
+import 'package:lines/core/utils/response_handler.dart';
+import 'package:lines/data/models/user.dart';
+
+class AppController extends GetxController {
+  Rx<ResponseHandler<User>> user = ResponseHandler<User>.initial().obs;
+}
