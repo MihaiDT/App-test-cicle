@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/modules/access_wrapper/wrapper_access_widget.dart';
-import 'package:lines/modules/birth_date/birth_date_binding.dart';
-import 'package:lines/modules/birth_date/birth_date_page.dart';
-import 'package:lines/modules/privacy/privacy_page.dart';
-import 'package:lines/modules/quiz/widgets/quiz_intro_page.dart';
-import 'package:lines/modules/quiz/widgets/quiz_outro_page.dart';
-import 'package:lines/modules/name_surname/name_surname_page.dart';
-import 'package:lines/modules/register/register_binding.dart';
-import 'package:lines/modules/register/register_and_login_page.dart';
-import 'package:lines/modules/cookie/cookie_page.dart';
-import 'package:lines/modules/splash/splash_binding.dart';
-import 'package:lines/modules/splash/splash_page.dart';
 
+import '../modules/access_wrapper/wrapper_access_widget.dart';
+import '../modules/birth_date/birth_date_binding.dart';
+import '../modules/birth_date/birth_date_page.dart';
+import '../modules/calendar/calendar_binding.dart';
+import '../modules/calendar/calendar_page.dart';
+import '../modules/cookie/cookie_page.dart';
 import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
+import '../modules/name_surname/name_surname_page.dart';
+import '../modules/privacy/privacy_page.dart';
+import '../modules/quiz/widgets/quiz_intro_page.dart';
+import '../modules/quiz/widgets/quiz_outro_page.dart';
+import '../modules/register/register_and_login_page.dart';
+import '../modules/register/register_binding.dart';
+import '../modules/splash/splash_binding.dart';
+import '../modules/splash/splash_page.dart';
 import '../modules/walkthrough/walkthrough_binding.dart';
 import '../modules/walkthrough/walkthrough_page.dart';
 import 'routes.dart';
@@ -70,6 +72,14 @@ class Pages {
         const CookiePage(),
         authNeeded: false,
       ),
+      transition: Transition.fade,
+    ),
+
+    //Calendar
+    GetPage(
+      binding: CalendarBinding(),
+      name: Routes.calendar,
+      page: () => _mediaQueryWrapper(CalendarPage()),
       transition: Transition.fade,
     ),
 

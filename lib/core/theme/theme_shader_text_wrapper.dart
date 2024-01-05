@@ -8,6 +8,7 @@ mixin ThemeShaderTextWrapper on TextWrapper {
     return TextGradient(
       text: Text(
         text,
+        key: key,
         textAlign: textAlign,
         maxLines: maxLines,
         overflow: overflow,

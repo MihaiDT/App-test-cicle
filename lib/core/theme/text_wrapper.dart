@@ -334,7 +334,6 @@ abstract class TextWrapper extends StatelessWidget {
 
   const TextWrapper(
     this.text, {
-    super.key,
     this.color = Colors.white,
     this.decorationColor = Colors.white,
     required this.fontWeight,
@@ -343,6 +342,7 @@ abstract class TextWrapper extends StatelessWidget {
     required this.overflow,
     required this.textAlign,
     this.underline = false,
+    super.key,
   });
 
   @override

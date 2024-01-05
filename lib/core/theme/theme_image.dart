@@ -23,4 +23,7 @@ class ThemeImage {
   static String cookie = '$folderPath/cookie.webp';
   static String quizBackgroundQuestionmark = '$folderPath/bg_quiz.webp';
   static String quizIntroImage = '$folderPath/quiz_intro_image.webp';
+  static String bgCalendar = '$folderPath/bg_calendar.webp';
+  static String bgCalendarBottomSheet =
+      '$folderPath/bg_calendar_bottom_sheet.webp';
 }

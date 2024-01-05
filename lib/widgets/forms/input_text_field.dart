@@ -126,7 +126,7 @@ class InputTextField extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: BodyMedium(
               errorMessage,
-              color: HomeCircularPeriodCircularCalendar.cicloColor,
+              color: ThemeColor.cicloColor,
             ),
           ),
         ),

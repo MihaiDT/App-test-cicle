@@ -14,6 +14,10 @@ class ThemeIcon {
   static String close = '$folderPath/close.svg';
   static String coin = '$folderPath/coin.svg';
   static String coinStack = '$folderPath/coin_stack.svg';
+  static String threeDots = '$folderPath/three_dots.svg';
+  static String calendarJumpToMonth = '$folderPath/calendar_jump_to_month.svg';
+  static String calendarGradientDot = '$folderPath/calendar_gradient_dot.svg';
+  static String calendarHeart = '$folderPath/calendar_heart.svg';
   static String checkboxOutline = '$folderPath/checkbox_outline.svg';
   static String checkboxFilled = '$folderPath/checkbox_filled.svg';
 }

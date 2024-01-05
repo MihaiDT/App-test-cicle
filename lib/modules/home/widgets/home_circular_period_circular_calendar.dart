@@ -12,12 +12,9 @@ import '../../../widgets/calendars/circular_path_painter.dart';
 import '../home_controller.dart';
 
 class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
-  static const ovulazioneColor = Color(0xff6DADD0);
-
   static const follicolareColor = Color(0xff70B873);
   static const orange = Color(0xffDC874A);
 
-  static const cicloColor = Color(0xffC62F3A);
   final size = Get.width * 0.74;
   RxInt counter = 0.obs;
   bool updating = false;
@@ -56,7 +53,7 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
 
     for (int i = 0; i < controller.dates.length; i++) {
       children.add(_calendarDot(
-        color: cicloColor,
+        color: ThemeColor.cicloColor,
         isBig: i % 26 == 0,
         index: controller.dates[i].day,
       ));

@@ -54,7 +54,7 @@ InputDecoration textFieldDefaultDecoration(
     errorText: null,
     //  Gestisco a mano l'errore
     floatingLabelBehavior: FloatingLabelBehavior.never,
-    fillColor: HomeCircularPeriodCircularCalendar.cicloColor,
+    fillColor: ThemeColor.cicloColor,
     focusedBorder: focusedOutlineInputBorder,
     focusedErrorBorder: errorOutlineInputBorder,
     focusColor: ThemeColor.whiteDark,

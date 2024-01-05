@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 
-import '../../../core/theme/theme_text_style.dart';
-import '../../../widgets/texts/text_gradient.dart';
-
 class QuizSelectTitle extends StatelessWidget {
   final String title;
   final bool selected;

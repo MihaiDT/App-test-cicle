@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 
-import '../../../core/theme/theme_sized_box.dart';
-import '../../../core/theme/theme_text_style.dart';
-
 class QuizBodyText extends StatelessWidget {
   final String title;
   final String subTitle;

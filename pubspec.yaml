@@ -91,6 +91,11 @@ dependencies:
   scroll_snap_list: ^0.9.1
   shimmer: ^3.0.0
   url_launcher: ^6.2.1
+  #This widget let you jump to a desired index inside a ScrollableList
+  scrollable_positioned_list: ^0.3.8
+  #A container with a dotted border
+  dotted_border: ^2.1.0
+  modal_bottom_sheet: ^3.0.0-pre
   # webview_flutter: ^4.4.2
 
   # google_sign_in: ^6.1.6
