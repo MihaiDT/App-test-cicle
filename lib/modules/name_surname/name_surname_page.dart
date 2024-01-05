@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
@@ -11,6 +12,12 @@ import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class NameSurnamePage extends StatelessWidget {
   const NameSurnamePage({super.key});
+
+  TextEditingController get nameController => TextEditingController();
+
+  TextEditingController get surnameController => TextEditingController();
+
+  TextEditingController get nicknameController => TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +41,12 @@ class NameSurnamePage extends StatelessWidget {
           child: SecondaryButton(
             text: "AVANTI",
             onPressed: () {
+              /// Assign TextEditingController values to User saved in the state
+              appController.user.value.content?.firstName = nameController.text;
+              appController.user.value.content?.lastName =
+                  surnameController.text;
+              appController.user.value.content?.nickname =
+                  nicknameController.text;
               Get.toNamed(Routes.birthDate);
             },
           ),
@@ -51,13 +64,13 @@ class NameSurnamePage extends StatelessWidget {
             InputTextField(
               label: "Nome*",
               placeholder: "Inserisci il tuo nome",
-              textEditingController: TextEditingController(),
+              textEditingController: nameController,
             ),
             ThemeSizedBox.height24,
             InputTextField(
               label: "Cognome*",
               placeholder: "Inserisci il tuo cognome",
-              textEditingController: TextEditingController(),
+              textEditingController: surnameController,
             ),
             ThemeSizedBox.height32,
             const Divider(
@@ -67,7 +80,7 @@ class NameSurnamePage extends StatelessWidget {
             InputTextField(
               label: "Nickname (facoltativo)",
               placeholder: "Scegli un nickname",
-              textEditingController: TextEditingController(),
+              textEditingController: nicknameController,
             ),
           ],
         ),

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
 import "package:lines/core/app_theme.dart";
+import "package:lines/core/utils/singletons.dart";
 import "package:lines/modules/register/register_controller.dart";
 import "package:lines/modules/register/section/divider_section.dart";
 import "package:lines/modules/register/widget/link_account_widget.dart";
@@ -51,8 +52,17 @@ class RegisterAndLoginPage extends StatelessWidget {
             children: [
               SecondaryButton(
                 text: "AVANTI",
-                onPressed: () {
-                  Get.toNamed(Routes.nameSurname);
+                onPressed: () async {
+                  if (controller.isLoginPage) {
+                    await controller.loginUser();
+                  } else {
+                    /// Save in the state email and password values
+                    appController.user.value.content?.email =
+                        emailController.text;
+                    appController.user.value.content?.password =
+                        passwordController.text;
+                    Get.toNamed(Routes.nameSurname);
+                  }
                 },
               ),
               ThemeSizedBox.height16,
