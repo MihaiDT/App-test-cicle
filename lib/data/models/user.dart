@@ -1,20 +1,20 @@
 class User {
-  final String birthdate;
-  final String email;
-  final String firstName;
-  final bool isConfirmed;
-  final String? lastMenstrautionDate;
-  final String lastName;
-  final String? legalGuardianEmail;
-  final String? mgmCode;
-  final String? nickname;
-  final String? password;
-  final int periodDays;
-  final int periodDuration;
-  final bool? privacyProfiling;
-  final bool? privacyMarketingEmail;
-  final String provider;
-  final String sessionToken;
+  String birthdate;
+  String email;
+  String firstName;
+  bool isConfirmed;
+  String? lastMenstrautionDate;
+  String lastName;
+  String? legalGuardianEmail;
+  String? mgmCode;
+  String? nickname;
+  String? password;
+  int periodDays;
+  int periodDuration;
+  bool? privacyProfiling;
+  bool? privacyMarketingEmail;
+  String provider;
+  String sessionToken;
 
   User({
     required this.birthdate,
