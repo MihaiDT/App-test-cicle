@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
+import 'package:lines/app_controller.dart';
+import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/user.dart';
 
 class Authentication {
   Future<void> loginUser(LoginParameters loginParameters) async {
@@ -11,28 +15,38 @@ class Authentication {
       },
     );
 
-
-
+    print("response");
+    print(response.data);
   }
 
   Future<void> registration(RegisterParameter registerParameter) async {
-    final response = await dio.post(
-      "/users",
-      data: {
-        "user": {
-          "birthdate": registerParameter.birthdate,
-          "email": registerParameter.email,
-          "first_name": registerParameter.firstName,
-          "last_name": registerParameter.lastName,
-          "legal_guardian_email": registerParameter.legalGuardianEmail,
-          "nickname": registerParameter.nickname,
-          "password": registerParameter.password,
-          "privacy_profiling": registerParameter.privacyPolicy,
-          "privacy_marketing_email": registerParameter.privacyMarketingEmail,
-          "provider": registerParameter.registrationProvider.name,
-        }
-      },
-    );
+    appController.user.value = ResponseHandler.pending();
+    try {
+      final response = await dio.post(
+        "/users",
+        data: {
+          "user": {
+            "birthdate": registerParameter.birthdate,
+            "email": registerParameter.email,
+            "first_name": registerParameter.firstName,
+            "last_name": registerParameter.lastName,
+            "legal_guardian_email": registerParameter.legalGuardianEmail,
+            "nickname": registerParameter.nickname,
+            "password": registerParameter.password,
+            "privacy_profiling": registerParameter.privacyPolicy,
+            "privacy_marketing_email": registerParameter.privacyMarketingEmail,
+            "provider": registerParameter.registrationProvider.name,
+          }
+        },
+      );
+      appController.user.value = ResponseHandler.successful(
+        content: User.fromJson(
+          response.data,
+        ),
+      );
+    } catch (e) {
+      appController.user.value = ResponseHandler.failed();
+    }
   }
 }
 
@@ -47,11 +61,13 @@ class LoginParameters {
 }
 
 class RegisterParameter {
-  /// Birthdate witt yyyy-mm-dd format
+  /// Birthdate with yyyy-mm-dd format
   final String birthdate;
   final String email;
   final String firstName;
   final String lastName;
+
+  /// The registration method, with Email, Apple, Google, Facebook
   final RegistrationProvider registrationProvider;
   final String? legalGuardianEmail;
   final String? nickname;
