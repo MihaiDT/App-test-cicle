@@ -40,5 +40,17 @@ class RegisterAndLoginController extends AppScaffoldController {
     );
   }
 
-  Future<void> registrateUser() async {}
+  Future<void> registrateUser() async {
+    Authentication auth = Authentication();
+    await auth.registration(
+      RegisterParameter(
+        birthdate: "2000-01-01",
+        email: "d.spano+1@gmail.com",
+        firstName: "Danilo",
+        password: "Danilo1!",
+        lastName: "Spano",
+        registrationProvider: RegistrationProvider.email,
+      ),
+    );
+  }
 }
