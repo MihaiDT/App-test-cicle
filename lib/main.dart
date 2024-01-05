@@ -1,12 +1,9 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-// import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:get/get.dart';
 import 'package:lines/core/helpers/dependency_injection_manager.dart';
 import 'package:lines/flavors.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,9 +12,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'app.dart';
 import 'core/utils/helpers.dart';
 import 'core/utils/singletons.dart';
-import 'data/models/app_config.dart';
-import 'data/models/auth_headers.dart';
-import 'data/models/session.dart';
 import 'firebase_options.dart';
 
 FutureOr<void> main() async {
@@ -32,7 +26,6 @@ _initApp() async {
     flavor: F.appFlavor ?? Flavor.dev,
   );
   await _initConnectivity();
-  await _initSingletons();
   await _initNetwork();
   await _initPackageInfo();
   await Hive.initFlutter();
@@ -73,20 +66,4 @@ _initPackageInfo() async {
 
   logDebug("${appConfig.appVersion} (${appConfig.buildNumber})",
       tag: "App Version");
-}
-
-_initSingletons() async {
-  Get.put(Dio(
-    BaseOptions(
-      baseUrl: apiEndpoint,
-      headers: {"Content-Type": "application/json"},
-    ),
-  ));
-  Get.put(AuthHeaders());
-  Get.put(AppConfig());
-  Get.put(Session());
-
-  // Carico i dati salvati dallo storage
-  // FIXME: await AuthStorage.loadStoredData();
-  // FIXME:await SettingStorage.loadStoredData();
 }
