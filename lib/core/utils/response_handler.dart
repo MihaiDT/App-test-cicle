@@ -1,40 +1,40 @@
 /// Wrapper class containing request status and error
 class ResponseHandler<T> {
-  final ReqStatus status;
+  final RequestStatus status;
   final ErrorType? errorType;
   final T? content;
 
   ResponseHandler.failed({
     this.errorType = ErrorType.generic,
     this.content,
-  }) : status = ReqStatus.failed;
+  }) : status = RequestStatus.failed;
 
   ResponseHandler.pending({this.content})
-      : status = ReqStatus.pending,
+      : status = RequestStatus.pending,
         errorType = null;
 
   ResponseHandler.successful({this.content})
-      : status = ReqStatus.success,
+      : status = RequestStatus.success,
         errorType = null;
 
   ResponseHandler.initial()
-      : status = ReqStatus.initial,
+      : status = RequestStatus.initial,
         errorType = null,
         content = null;
 
   bool get hasError => errorType != null;
 
-  bool get isInitial => status == ReqStatus.initial;
+  bool get isInitial => status == RequestStatus.initial;
 
-  bool get isPending => status == ReqStatus.pending;
+  bool get isPending => status == RequestStatus.pending;
 
-  bool get isFailed => status == ReqStatus.failed;
+  bool get isFailed => status == RequestStatus.failed;
 
-  bool get isSuccesful => status == ReqStatus.success;
+  bool get isSuccesful => status == RequestStatus.success;
 }
 
 /// Enum used to identify request status
-enum ReqStatus {
+enum RequestStatus {
   initial,
   pending,
   failed,
