@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/theme/theme_decoration.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/widgets/logos/hero_logo.dart';
 
-import '../../core/app_theme.dart';
-import '../../widgets/layouts/app_scaffold_page.dart';
-import '../../widgets/logos/hero_logo.dart';
-import 'splash_controller.dart';
-
-class SplashPage extends GetView<SplashPageController> {
-  const SplashPage({
-    super.key,
-  });
+class LockPage extends StatelessWidget {
+  const LockPage({super.key});
 
   @override
   Widget build(BuildContext context) {

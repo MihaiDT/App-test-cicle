@@ -5,8 +5,7 @@ import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
 import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_gradient.dart';
-import '../../../core/theme/theme_icon.dart';
+
 import '../../../core/theme/theme_image.dart';
 import '../../../core/theme/theme_sized_box.dart';
 import '../../../widgets/buttons/primary_button.dart';

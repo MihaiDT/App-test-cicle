@@ -7,42 +7,9 @@ import '../../core/utils/helpers.dart';
 import '../../modules/welcome/welcome_controller.dart';
 import '../../modules/welcome/welcome_page.dart';
 
-class SplashController extends GetxController {
-  SplashController() {
+class SplashPageController extends GetxController {
+  SplashPageController() {
     _startAnimation();
-
-    // TODO: da implementare quando lo richiederanno
-    // _biometricAuth();
-  }
-
-  _biometricAuth() async {
-    final LocalAuthentication auth = LocalAuthentication();
-
-    final bool canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
-    final bool canAuthenticate =
-        canAuthenticateWithBiometrics || await auth.isDeviceSupported();
-
-    logDebug("Posso autenticare: $canAuthenticate", tag: "Biometric auth");
-
-    bool didAuthenticate = false;
-    try {
-      while (!didAuthenticate) {
-        didAuthenticate = await auth.authenticate(
-          localizedReason: 'Aaa',
-          options: const AuthenticationOptions(
-            biometricOnly: false,
-            sensitiveTransaction: false,
-            stickyAuth: true,
-            useErrorDialogs: true,
-          ),
-        );
-        logDebug("Autenticato: $didAuthenticate", tag: "Biometric auth");
-      }
-
-      _startAnimation();
-    } on PlatformException catch (error) {
-      logError(error: error.toString());
-    }
   }
 
   _pageTransition() {

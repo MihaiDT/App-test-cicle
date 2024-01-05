@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/modules/birth_date/birth_date_binding.dart';
-import 'package:lines/modules/birth_date/birth_date_page.dart';
-import 'package:lines/modules/privacy/privacy_page.dart';
-import 'package:lines/modules/quiz/widgets/quiz_intro_page.dart';
-import 'package:lines/modules/quiz/widgets/quiz_outro_page.dart';
-import 'package:lines/modules/name_surname/name_surname_page.dart';
-import 'package:lines/modules/register/register_binding.dart';
-import 'package:lines/modules/register/register_and_login_page.dart';
-import 'package:lines/modules/cookie/cookie_page.dart';
 
+import '../modules/access_wrapper/wrapper_access_widget.dart';
+import '../modules/birth_date/birth_date_binding.dart';
+import '../modules/birth_date/birth_date_page.dart';
+import '../modules/calendar/calendar_binding.dart';
+import '../modules/calendar/calendar_page.dart';
+import '../modules/cookie/cookie_page.dart';
 import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
+import '../modules/name_surname/name_surname_page.dart';
+import '../modules/privacy/privacy_page.dart';
+import '../modules/quiz/widgets/quiz_intro_page.dart';
+import '../modules/quiz/widgets/quiz_outro_page.dart';
+import '../modules/register/register_and_login_page.dart';
+import '../modules/register/register_binding.dart';
 import '../modules/splash/splash_binding.dart';
 import '../modules/splash/splash_page.dart';
 import '../modules/walkthrough/walkthrough_binding.dart';
@@ -26,15 +29,20 @@ class Pages {
     GetPage(
       binding: MainBinding(),
       name: Routes.main,
-      page: () => _mediaQueryWrapper(const MainPage()),
+      page: () => _mediaQueryWrapper(
+        const MainPage(),
+      ),
       transition: Transition.fadeIn,
     ),
 
     // Splash
     GetPage(
       binding: SplashBinding(),
-      name: Routes.splash,
-      page: () => _mediaQueryWrapper(const SplashPage()),
+      name: Routes.logo,
+      page: () => _mediaQueryWrapper(
+        const SplashPage(),
+        authNeeded: false,
+      ),
       transition: Transition.fade,
     ),
 
@@ -50,14 +58,28 @@ class Pages {
     GetPage(
       binding: RegisterBinding(),
       name: Routes.registerAndLogin,
-      page: () => _mediaQueryWrapper(RegisterAndLoginPage()),
+      page: () => _mediaQueryWrapper(
+        RegisterAndLoginPage(),
+        authNeeded: false,
+      ),
       transition: Transition.fade,
     ),
 
     // Cookie
     GetPage(
       name: Routes.cookie,
-      page: () => _mediaQueryWrapper(const CookiePage()),
+      page: () => _mediaQueryWrapper(
+        const CookiePage(),
+        authNeeded: false,
+      ),
+      transition: Transition.fade,
+    ),
+
+    //Calendar
+    GetPage(
+      binding: CalendarBinding(),
+      name: Routes.calendar,
+      page: () => _mediaQueryWrapper(CalendarPage()),
       transition: Transition.fade,
     ),
 
@@ -77,14 +99,20 @@ class Pages {
     GetPage(
       name: Routes.nameSurname,
       binding: BirthDateBinding(),
-      page: () => _mediaQueryWrapper(const NameSurnamePage()),
+      page: () => _mediaQueryWrapper(
+        const NameSurnamePage(),
+        authNeeded: false,
+      ),
       transition: Transition.fade,
     ),
 
     // BirthDate
     GetPage(
       name: Routes.birthDate,
-      page: () => _mediaQueryWrapper(const BirthDatePage()),
+      page: () => _mediaQueryWrapper(
+        const BirthDatePage(),
+        authNeeded: false,
+      ),
       transition: Transition.fade,
     ),
 
@@ -92,19 +120,28 @@ class Pages {
     GetPage(
       binding: RegisterBinding(),
       name: Routes.privacy,
-      page: () => _mediaQueryWrapper(const PrivacyPage()),
+      page: () => _mediaQueryWrapper(
+        const PrivacyPage(),
+        authNeeded: false,
+      ),
       transition: Transition.fade,
     ),
   ];
 
   /// Private methods
 
-  static MediaQuery _mediaQueryWrapper(Widget view) {
+  static MediaQuery _mediaQueryWrapper(
+    Widget view, {
+    bool authNeeded = true,
+  }) {
     return MediaQuery(
       data: MediaQuery.of(Get.context!).copyWith(
         textScaler: const TextScaler.linear(1),
       ),
-      child: view,
+      child: WrapperAccessWidget(
+        authNeeded: authNeeded,
+        child: view,
+      ),
     );
   }
 }

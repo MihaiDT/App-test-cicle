@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/dependency_injection_manager.dart';
 import 'package:lines/flavors.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'app.dart';
@@ -34,6 +35,8 @@ _initApp() async {
   await _initSingletons();
   await _initNetwork();
   await _initPackageInfo();
+  await Hive.initFlutter();
+  await Hive.openBox("linesApp");
   //await _initFirebase();
 }
 

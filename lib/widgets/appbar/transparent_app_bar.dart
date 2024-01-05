@@ -8,12 +8,14 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final Widget? leading;
   final List<Widget> actions;
+  final Color? backButtonColor;
 
   final GestureTapCallback? onBackPressed;
 
   const TransparentAppBar({
     this.title,
     this.actions = const [],
+    this.backButtonColor,
     this.leading,
     this.onBackPressed,
     super.key,
@@ -22,6 +24,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       leading: leading ?? _leading,
       title: title ?? const SizedBox(),
@@ -48,6 +51,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
           ThemeIcon.back,
           width: 24,
           height: 24,
+          color: backButtonColor ?? Colors.white,
         ),
       ),
     );

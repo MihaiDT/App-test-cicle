@@ -75,9 +75,7 @@ class BirthDatePage extends GetView<BirthDateController> {
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    errorMessages: [
-                      controller.dayError.value,
-                    ],
+                    errorMessage: controller.dayError.value,
                   ),
                 ),
                 ThemeSizedBox.width16,
@@ -91,9 +89,7 @@ class BirthDatePage extends GetView<BirthDateController> {
                     textAlign: TextAlign.center,
                     textEditingController: controller.monthController.value,
                     keyboardType: TextInputType.number,
-                    errorMessages: [
-                      controller.monthError.value,
-                    ],
+                    errorMessage: controller.monthError.value,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(2),
                     ],

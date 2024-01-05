@@ -44,4 +44,10 @@ class ThemeDecorationImage {
         fit: BoxFit.cover,
         alignment: Alignment.center,
       );
+
+  DecorationImage get bgCalendar => DecorationImage(
+        image: AssetImage(ThemeImage.bgCalendar),
+        fit: BoxFit.cover,
+        alignment: Alignment.topCenter,
+      );
 }
