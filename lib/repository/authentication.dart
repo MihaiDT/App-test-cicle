@@ -20,7 +20,7 @@ class Authentication {
   }
 
   Future<void> registration(RegisterParameter registerParameter) async {
-    appController.user.value = ResponseHandler.pending();
+    appController.user?.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
         "/users",
@@ -39,13 +39,13 @@ class Authentication {
           }
         },
       );
-      appController.user.value = ResponseHandler.successful(
+      appController.user?.responseHandler = ResponseHandler.successful(
         content: User.fromJson(
           response.data,
         ),
       );
     } catch (e) {
-      appController.user.value = ResponseHandler.failed();
+      appController.user?.responseHandler = ResponseHandler.failed();
     }
   }
 }
