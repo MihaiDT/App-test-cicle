@@ -30,7 +30,7 @@ class ResponseHandler<T> {
 
   bool get isFailed => status == RequestStatus.failed;
 
-  bool get isSuccesful => status == RequestStatus.success;
+  bool get isSuccessful => status == RequestStatus.success;
 }
 
 /// Enum used to identify request status
