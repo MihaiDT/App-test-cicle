@@ -4,5 +4,7 @@ import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/models/user.dart';
 
 class AppController extends GetxController {
-  Rx<ResponseHandler<User>> user = ResponseHandler<User>.initial().obs;
+  Rx<ResponseHandler<User>> rxUser = ResponseHandler<User>.initial().obs;
+
+  User? get user => rxUser.value.isSuccessful ? rxUser.value.content : null;
 }
