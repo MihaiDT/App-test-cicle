@@ -7,16 +7,24 @@ import 'package:lines/data/models/user.dart';
 
 class AuthenticationService {
   static Future<void> loginUser(LoginParameters loginParameters) async {
-    final response = await dio.post(
-      "/auth/login",
-      data: {
-        "email": loginParameters.email,
-        "password": loginParameters.password,
-      },
-    );
+    appController.user?.responseHandler = ResponseHandler.pending();
+    try {
+      final response = await dio.post(
+        "/auth/login",
+        data: {
+          "email": loginParameters.email,
+          "password": loginParameters.password,
+        },
+      );
 
-    print("response");
-    print(response.data);
+      appController.user?.responseHandler = ResponseHandler.successful(
+        content: User.fromJson(
+          response.data,
+        ),
+      );
+    } catch (e) {
+      appController.user?.responseHandler = ResponseHandler.failed();
+    }
   }
 
   static Future<void> registration(RegisterParameter registerParameter) async {
@@ -86,7 +94,10 @@ class RegisterParameter {
     this.password,
     this.privacyPolicy = false,
     this.privacyMarketingEmail = false,
-  });
+  }) : assert(
+            registrationProvider == RegistrationProvider.email &&
+                password?.isNotEmpty == true,
+            "When RegistrationProvider is email the password should be provided");
 }
 
 enum RegistrationProvider {
