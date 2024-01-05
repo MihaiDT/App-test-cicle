@@ -5,8 +5,8 @@ import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/user.dart';
 
-class Authentication {
-  Future<void> loginUser(LoginParameters loginParameters) async {
+class AuthenticationService {
+  static Future<void> loginUser(LoginParameters loginParameters) async {
     final response = await dio.post(
       "/auth/login",
       data: {
@@ -19,7 +19,7 @@ class Authentication {
     print(response.data);
   }
 
-  Future<void> registration(RegisterParameter registerParameter) async {
+  static Future<void> registration(RegisterParameter registerParameter) async {
     appController.user?.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(

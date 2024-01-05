@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/repository/authentication.dart';
+import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
 class RegisterAndLoginController extends AppScaffoldController {
@@ -31,8 +31,7 @@ class RegisterAndLoginController extends AppScaffoldController {
   }
 
   Future<void> loginUser() async {
-    Authentication authentication = Authentication();
-    await authentication.loginUser(
+    await AuthenticationService.loginUser(
       LoginParameters(
         email: "m.fiore@tandu.it",
         password: "Password1!",
@@ -41,8 +40,7 @@ class RegisterAndLoginController extends AppScaffoldController {
   }
 
   Future<void> registrateUser() async {
-    Authentication auth = Authentication();
-    await auth.registration(
+    await AuthenticationService.registration(
       RegisterParameter(
         birthdate: "2000-01-01",
         email: "d.spano+1@gmail.com",
