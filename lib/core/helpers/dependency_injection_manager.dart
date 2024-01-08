@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:lines/app_controller.dart';
 import 'package:lines/core/env/enviroment.dart';
@@ -43,7 +42,7 @@ void dependencyRegister({
   );
 
   Get.put(
-    AppController(),
+    AppController.initial(),
     permanent: true,
   );
 }
