@@ -25,6 +25,8 @@ migrate_working_dir/
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
+.env.staging
+.env.prod
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
@@ -42,3 +44,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/lib/core/enviroment/env.prod.g.dart
+/lib/core/enviroment/env.staging.g.dart

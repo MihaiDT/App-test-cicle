@@ -3,6 +3,13 @@ enum Flavor {
   prod,
 }
 
+/// Utils to check the current flavor
+extension FlavorExtension on Flavor {
+  bool get isDevFlavor => this == Flavor.dev;
+
+  bool get isProdFlavor => this == Flavor.prod;
+}
+
 class F {
   static Flavor? appFlavor;
 

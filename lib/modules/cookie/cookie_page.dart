@@ -55,9 +55,6 @@ class CookiePage extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed(
                     Routes.registerAndLogin,
-                    arguments: RegisterAndLoginPageArguments(
-                      isLoginPage: true,
-                    ),
                   );
                 },
               ),

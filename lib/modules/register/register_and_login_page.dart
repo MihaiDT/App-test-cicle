@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "package:get/get.dart";
+import 'package:get/get.dart';
 import "package:lines/core/app_theme.dart";
+import "package:lines/core/utils/singletons.dart";
 import "package:lines/modules/register/register_controller.dart";
 import "package:lines/modules/register/section/divider_section.dart";
 import "package:lines/modules/register/widget/link_account_widget.dart";
@@ -14,14 +15,6 @@ import "package:lines/widgets/layouts/bottom_widget_layout.dart";
 
 import "../../core/theme/text_wrapper.dart";
 
-class RegisterAndLoginPageArguments {
-  final bool? isLoginPage;
-
-  RegisterAndLoginPageArguments({
-    required this.isLoginPage,
-  });
-}
-
 class RegisterAndLoginPage extends StatelessWidget {
   RegisterAndLoginPage({
     super.key,
@@ -30,7 +23,7 @@ class RegisterAndLoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  final controller = Get.put(RegisterAndLoginController());
+  final controller = Get.find<RegisterAndLoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +44,22 @@ class RegisterAndLoginPage extends StatelessWidget {
             children: [
               SecondaryButton(
                 text: "AVANTI",
-                onPressed: () {
-                  Get.toNamed(Routes.nameSurname);
+                onPressed: () async {
+                  if (controller.isLoginPage) {
+                    await controller.loginUser(
+                      emailController.text,
+                      passwordController.text,
+                    );
+
+                    Get.offAndToNamed(Routes.main);
+                  } else {
+                    /// Save in the state email and password values
+                    appController.registerParameter.email =
+                        emailController.text;
+                    appController.registerParameter.password =
+                        passwordController.text;
+                    Get.toNamed(Routes.nameSurname);
+                  }
                 },
               ),
               ThemeSizedBox.height16,
@@ -69,9 +76,6 @@ class RegisterAndLoginPage extends StatelessWidget {
                             controller.isLoginPage = !controller.isLoginPage;
                             Get.offAndToNamed(
                               Routes.registerAndLogin,
-                              arguments: RegisterAndLoginPageArguments(
-                                isLoginPage: false,
-                              ),
                             );
                           },
                           child: const TitleMedium(
@@ -93,9 +97,6 @@ class RegisterAndLoginPage extends StatelessWidget {
                             controller.isLoginPage = !controller.isLoginPage;
                             Get.offAndToNamed(
                               Routes.registerAndLogin,
-                              arguments: RegisterAndLoginPageArguments(
-                                isLoginPage: true,
-                              ),
                             );
                           },
                           child: const TitleMedium(
@@ -161,7 +162,7 @@ class RegisterAndLoginPage extends StatelessWidget {
               placeholder: 'Inserisci la tua email',
               keyboardType: TextInputType.emailAddress,
               textCapitalization: TextCapitalization.none,
-              textEditingController: TextEditingController(),
+              textEditingController: emailController,
             ),
             ThemeSizedBox.height24,
             Obx(
