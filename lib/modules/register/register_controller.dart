@@ -38,5 +38,4 @@ class RegisterAndLoginController extends AppScaffoldController {
       ),
     );
   }
-
 }
