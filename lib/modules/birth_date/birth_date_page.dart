@@ -124,6 +124,6 @@ class BirthDatePage extends GetView<BirthDateController> {
 
   /// Save birth date in App state
   void _saveBirthDate(String day, String month, String year) {
-    appController.user.value?.birthdate = "$year-$month-$day";
+    appController.registerParameter.birthdate = "$year-$month-$day";
   }
 }

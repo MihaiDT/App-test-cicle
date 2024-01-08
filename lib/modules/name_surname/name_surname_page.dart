@@ -11,13 +11,13 @@ import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class NameSurnamePage extends StatelessWidget {
-  const NameSurnamePage({super.key});
+  NameSurnamePage({super.key});
 
-  TextEditingController get nameController => TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
-  TextEditingController get surnameController => TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
 
-  TextEditingController get nicknameController => TextEditingController();
+  final TextEditingController nicknameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,9 @@ class NameSurnamePage extends StatelessWidget {
             text: "AVANTI",
             onPressed: () {
               /// Assign TextEditingController values to User saved in the state
-              appController.user.value?.firstName = nameController.text;
-              appController.user.value?.lastName = surnameController.text;
-              appController.user.value?.nickname = nicknameController.text;
+              appController.registerParameter.firstName = nameController.text;
+              appController.registerParameter.lastName = surnameController.text;
+              appController.registerParameter.nickname = nicknameController.text;
               Get.toNamed(Routes.birthDate);
             },
           ),

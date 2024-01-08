@@ -57,8 +57,8 @@ class RegisterAndLoginPage extends StatelessWidget {
                     await controller.loginUser();
                   } else {
                     /// Save in the state email and password values
-                    appController.user.value?.email = emailController.text;
-                    appController.user.value?.password =
+                    appController.registerParameter.email = emailController.text;
+                    appController.registerParameter.password =
                         passwordController.text;
                     Get.toNamed(Routes.nameSurname);
                   }
@@ -170,7 +170,7 @@ class RegisterAndLoginPage extends StatelessWidget {
               placeholder: 'Inserisci la tua email',
               keyboardType: TextInputType.emailAddress,
               textCapitalization: TextCapitalization.none,
-              textEditingController: TextEditingController(),
+              textEditingController: emailController,
             ),
             ThemeSizedBox.height24,
             Obx(

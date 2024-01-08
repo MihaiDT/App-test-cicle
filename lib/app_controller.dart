@@ -1,14 +1,13 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/models/user.dart';
+import 'package:lines/repository/authentication_service.dart';
 
 /// Just a wrapper in order to simplify getter access
 class EasyGetter<T> {
-  final Rx<ResponseHandler<T>> rxValue;
+  Rx<ResponseHandler<T>> rxValue;
 
-  EasyGetter({
-    required this.rxValue,
-  });
+  EasyGetter() : rxValue = ResponseHandler<T>.initial().obs;
 
   T? get value => rxValue.value.content;
 
@@ -22,16 +21,17 @@ class EasyGetter<T> {
 /// The app state
 class AppController extends GetxController {
   final EasyGetter<User> user;
+  final RegisterParameter registerParameter;
 
   AppController._({
     required this.user,
+    required this.registerParameter,
   });
 
   factory AppController.initial() {
     return AppController._(
-      user: EasyGetter<User>(
-        rxValue: ResponseHandler<User>.initial().obs,
-      ),
+      user: EasyGetter<User>(),
+      registerParameter: RegisterParameter.initial(),
     );
   }
 }

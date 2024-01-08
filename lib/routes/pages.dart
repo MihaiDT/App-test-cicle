@@ -100,7 +100,7 @@ class Pages {
       name: Routes.nameSurname,
       binding: BirthDateBinding(),
       page: () => _mediaQueryWrapper(
-        const NameSurnamePage(),
+        NameSurnamePage(),
         authNeeded: false,
       ),
       transition: Transition.fade,

@@ -81,18 +81,18 @@ class LoginParameters {
 
 class RegisterParameter {
   /// Birthdate with yyyy-mm-dd format
-  final String birthdate;
-  final String email;
-  final String firstName;
-  final String lastName;
+  String birthdate;
+  String email;
+  String firstName;
+  String lastName;
 
   /// The registration method, with Email, Apple, Google, Facebook
-  final RegistrationProvider registrationProvider;
-  final String? legalGuardianEmail;
-  final String? nickname;
-  final String? password;
-  final bool privacyPolicy;
-  final bool privacyMarketingEmail;
+  RegistrationProvider registrationProvider;
+  String? legalGuardianEmail;
+  String? nickname;
+  String? password;
+  bool privacyPolicy;
+  bool privacyMarketingEmail;
 
   RegisterParameter({
     required this.birthdate,
@@ -109,6 +109,19 @@ class RegisterParameter {
             registrationProvider == RegistrationProvider.email &&
                 password?.isNotEmpty == true,
             "When RegistrationProvider is email the password should be provided");
+
+  RegisterParameter.initial({
+    this.birthdate = "",
+    this.email = "",
+    this.firstName = "",
+    this.lastName = "",
+    this.registrationProvider = RegistrationProvider.email,
+    this.legalGuardianEmail,
+    this.nickname,
+    this.password,
+    this.privacyPolicy = true,
+    this.privacyMarketingEmail = true,
+  });
 }
 
 enum RegistrationProvider {

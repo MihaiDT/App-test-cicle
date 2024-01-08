@@ -7,7 +7,6 @@ import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
 import 'package:lines/repository/authentication_service.dart';
-import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -86,15 +85,10 @@ class PrivacyPage extends StatelessWidget {
     );
   }
 
-  void registerUser() {
-    final user = appController.user.value;
-    RegisterParameter(
-      birthdate: user!.birthdate,
-      email: user.email,
-      password: user.password,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      registrationProvider: RegistrationProvider.email,
+  /// This method takes the registerParameter and pass this data to the registration method
+  void registerUser() async {
+    AuthenticationService.registration(
+      appController.registerParameter,
     );
   }
 }
