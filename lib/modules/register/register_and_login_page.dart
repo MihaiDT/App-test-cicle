@@ -58,6 +58,8 @@ class RegisterAndLoginPage extends StatelessWidget {
                       emailController.text,
                       passwordController.text,
                     );
+
+                    Get.offAndToNamed(Routes.main);
                   } else {
                     /// Save in the state email and password values
                     appController.registerParameter.email =
