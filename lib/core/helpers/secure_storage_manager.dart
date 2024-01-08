@@ -1,19 +1,25 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageManager {
-  FlutterSecureStorage secureStorage;
+  /// Create a singleton in order to use easier FlutterSecureStorage
+  SecureStorageManager._();
 
-  SecureStorageManager({
-    required this.secureStorage,
-  });
+  static final SecureStorageManager instance = SecureStorageManager._();
+
+  factory SecureStorageManager() {
+    return instance;
+  }
+
+  final FlutterSecureStorage _flutterSecureStorage =
+      const FlutterSecureStorage();
 
   static const _tokenKey = "accessToken";
 
-  void saveToken(String token) async {
-    await secureStorage.write(key: _tokenKey, value: token);
+  Future<void> saveToken(String token) async {
+    await _flutterSecureStorage.write(key: _tokenKey, value: token);
   }
 
-  void getToken() async {
-    await secureStorage.read(key: _tokenKey);
+  Future<String> getToken() async {
+    return await _flutterSecureStorage.read(key: _tokenKey) ?? "";
   }
 }
