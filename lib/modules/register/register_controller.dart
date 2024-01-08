@@ -7,12 +7,10 @@ import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
 class RegisterAndLoginController extends AppScaffoldController {
-  final RxBool _isLoginPage = RxBool(false);
-
-  bool get isLoginPage => _isLoginPage.value;
+  bool get isLoginPage => appController.isLoginFlow.value;
 
   set isLoginPage(bool value) {
-    _isLoginPage.value = value;
+    appController.isLoginFlow.value = value;
   }
 
   final RxBool _hidePassword = RxBool(true);
@@ -25,7 +23,6 @@ class RegisterAndLoginController extends AppScaffoldController {
 
   @override
   void onInit() {
-    isLoginPage = Get.arguments.isLoginPage;
 
     super.onInit();
   }

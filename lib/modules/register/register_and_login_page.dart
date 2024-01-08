@@ -15,14 +15,6 @@ import "package:lines/widgets/layouts/bottom_widget_layout.dart";
 
 import "../../core/theme/text_wrapper.dart";
 
-class RegisterAndLoginPageArguments {
-  final bool? isLoginPage;
-
-  RegisterAndLoginPageArguments({
-    required this.isLoginPage,
-  });
-}
-
 class RegisterAndLoginPage extends StatelessWidget {
   RegisterAndLoginPage({
     super.key,
@@ -84,9 +76,6 @@ class RegisterAndLoginPage extends StatelessWidget {
                             controller.isLoginPage = !controller.isLoginPage;
                             Get.offAndToNamed(
                               Routes.registerAndLogin,
-                              arguments: RegisterAndLoginPageArguments(
-                                isLoginPage: false,
-                              ),
                             );
                           },
                           child: const TitleMedium(
@@ -108,9 +97,6 @@ class RegisterAndLoginPage extends StatelessWidget {
                             controller.isLoginPage = !controller.isLoginPage;
                             Get.offAndToNamed(
                               Routes.registerAndLogin,
-                              arguments: RegisterAndLoginPageArguments(
-                                isLoginPage: true,
-                              ),
                             );
                           },
                           child: const TitleMedium(

@@ -20,18 +20,26 @@ class EasyGetter<T> {
 
 /// The app state
 class AppController extends GetxController {
+  /// The response of log in and register api
   final EasyGetter<User> user;
+
+  /// The parameter used to register the user
   final RegisterParameter registerParameter;
+
+  /// Determine if the user is trying to log in or sign up
+  final RxBool isLoginFlow;
 
   AppController._({
     required this.user,
     required this.registerParameter,
+    required this.isLoginFlow,
   });
 
   factory AppController.initial() {
     return AppController._(
       user: EasyGetter<User>(),
       registerParameter: RegisterParameter.initial(),
+      isLoginFlow: false.obs,
     );
   }
 }

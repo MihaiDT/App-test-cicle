@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/register/register_and_login_page.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -60,11 +61,10 @@ class WelcomeBody extends StatelessWidget {
                 ThemeSizedBox.width4,
                 GestureDetector(
                   onTap: () {
+                    appController.isLoginFlow.value = true;
                     Get.toNamed(
-                      Routes.registerAndLogin,
-                      arguments: RegisterAndLoginPageArguments(
-                        isLoginPage: true,
-                      ),
+                      Routes.cookie,
+
                     );
                   },
                   child: const TitleMedium(

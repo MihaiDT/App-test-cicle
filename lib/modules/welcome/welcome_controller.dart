@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/register/register_and_login_page.dart';
 
 import '../../core/utils/helpers.dart';
@@ -23,6 +24,7 @@ class WelcomeController extends AppScaffoldController {
   set webServerReady(bool newValue) => rxWebServerReady.value = newValue;
 
   void onTapSignin() {
+    appController.isLoginFlow.value = false;
     Get.toNamed(
       Routes.cookie,
     );
