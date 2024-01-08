@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:lines/app_controller.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/user.dart';
@@ -21,6 +22,11 @@ class AuthenticationService {
         content: User.fromJson(
           response.data,
         ),
+      );
+
+      /// Save accessToken in secure storage
+      await Get.find<SecureStorageManager>().saveToken(
+        response.data['user']['session_token'],
       );
     } catch (e) {
       appController.user?.responseHandler = ResponseHandler.failed();
@@ -51,6 +57,11 @@ class AuthenticationService {
         content: User.fromJson(
           response.data,
         ),
+      );
+
+      /// Save accessToken in secure storage
+      await Get.find<SecureStorageManager>().saveToken(
+        response.data['user']['session_token'],
       );
     } catch (e) {
       appController.user?.responseHandler = ResponseHandler.failed();
