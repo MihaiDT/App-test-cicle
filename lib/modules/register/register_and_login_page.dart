@@ -23,15 +23,13 @@ class RegisterAndLoginPageArguments {
   });
 }
 
-class RegisterAndLoginPage extends StatelessWidget {
+class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
   RegisterAndLoginPage({
     super.key,
   });
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  final controller = Get.put(RegisterAndLoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,7 @@ class RegisterAndLoginPage extends StatelessWidget {
             children: [
               SecondaryButton(
                 text: "AVANTI",
-                onPressed: () async {
+                onPressed: () async {controller.registrateUser();
                   if (controller.isLoginPage) {
                     await controller.loginUser();
                   } else {
