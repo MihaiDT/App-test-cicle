@@ -8,7 +8,7 @@ import 'package:lines/data/models/user.dart';
 
 class AuthenticationService {
   static Future<void> loginUser(LoginParameters loginParameters) async {
-    appController.user?.responseHandler = ResponseHandler.pending();
+    appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
         "/auth/login",
@@ -18,7 +18,7 @@ class AuthenticationService {
         },
       );
 
-      appController.user?.responseHandler = ResponseHandler.successful(
+      appController.user.responseHandler = ResponseHandler.successful(
         content: User.fromJson(
           response.data,
         ),
@@ -29,12 +29,12 @@ class AuthenticationService {
         response.data['user']['session_token'],
       );
     } catch (e) {
-      appController.user?.responseHandler = ResponseHandler.failed();
+      appController.user.responseHandler = ResponseHandler.failed();
     }
   }
 
   static Future<void> registration(RegisterParameter registerParameter) async {
-    appController.user?.responseHandler = ResponseHandler.pending();
+    appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
         "/users",
@@ -53,7 +53,7 @@ class AuthenticationService {
           }
         },
       );
-      appController.user?.responseHandler = ResponseHandler.successful(
+      appController.user.responseHandler = ResponseHandler.successful(
         content: User.fromJson(
           response.data,
         ),
@@ -64,7 +64,7 @@ class AuthenticationService {
         response.data['user']['session_token'],
       );
     } catch (e) {
-      appController.user?.responseHandler = ResponseHandler.failed();
+      appController.user.responseHandler = ResponseHandler.failed();
     }
   }
 }
