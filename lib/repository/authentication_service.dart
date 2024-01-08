@@ -103,8 +103,8 @@ class RegisterParameter {
     this.legalGuardianEmail,
     this.nickname,
     this.password,
-    this.privacyPolicy = false,
-    this.privacyMarketingEmail = false,
+    this.privacyPolicy = true,
+    this.privacyMarketingEmail = true,
   }) : assert(
             registrationProvider == RegistrationProvider.email &&
                 password?.isNotEmpty == true,
