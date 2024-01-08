@@ -39,9 +39,7 @@ void dependencyRegister({
   Get.put(Session());
 
   Get.put(
-    SecureStorageManager(
-      secureStorage: const FlutterSecureStorage(),
-    ),
+    SecureStorageManager(),
   );
 
   Get.put(
