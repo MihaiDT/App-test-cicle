@@ -118,7 +118,6 @@ class Pages {
 
     // PrivacyPage
     GetPage(
-      binding: RegisterBinding(),
       name: Routes.privacy,
       page: () => _mediaQueryWrapper(
         const PrivacyPage(),

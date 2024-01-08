@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "package:get/get.dart";
+import 'package:get/get.dart';
 import "package:lines/core/app_theme.dart";
 import "package:lines/core/utils/singletons.dart";
 import "package:lines/modules/register/register_controller.dart";
@@ -23,13 +23,15 @@ class RegisterAndLoginPageArguments {
   });
 }
 
-class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
+class RegisterAndLoginPage extends StatelessWidget {
   RegisterAndLoginPage({
     super.key,
   });
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  final controller = Get.find<RegisterAndLoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +52,14 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
             children: [
               SecondaryButton(
                 text: "AVANTI",
-                onPressed: () async {controller.registrateUser();
+                onPressed: () async {
                   if (controller.isLoginPage) {
                     await controller.loginUser();
                   } else {
                     /// Save in the state email and password values
                     appController.user?.value?.email = emailController.text;
-                    appController.user?.value?.password = passwordController.text;
+                    appController.user?.value?.password =
+                        passwordController.text;
                     Get.toNamed(Routes.nameSurname);
                   }
                 },
