@@ -57,8 +57,8 @@ class RegisterAndLoginPage extends StatelessWidget {
                     await controller.loginUser();
                   } else {
                     /// Save in the state email and password values
-                    appController.user?.value?.email = emailController.text;
-                    appController.user?.value?.password =
+                    appController.user.value?.email = emailController.text;
+                    appController.user.value?.password =
                         passwordController.text;
                     Get.toNamed(Routes.nameSurname);
                   }
