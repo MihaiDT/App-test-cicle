@@ -54,10 +54,14 @@ class RegisterAndLoginPage extends StatelessWidget {
                 text: "AVANTI",
                 onPressed: () async {
                   if (controller.isLoginPage) {
-                    await controller.loginUser();
+                    await controller.loginUser(
+                      emailController.text,
+                      passwordController.text,
+                    );
                   } else {
                     /// Save in the state email and password values
-                    appController.registerParameter.email = emailController.text;
+                    appController.registerParameter.email =
+                        emailController.text;
                     appController.registerParameter.password =
                         passwordController.text;
                     Get.toNamed(Routes.nameSurname);

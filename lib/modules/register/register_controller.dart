@@ -30,11 +30,11 @@ class RegisterAndLoginController extends AppScaffoldController {
     super.onInit();
   }
 
-  Future<void> loginUser() async {
+  Future<void> loginUser(String email, String password) async {
     await AuthenticationService.loginUser(
       LoginParameters(
-        email: "m.fiore@tandu.it",
-        password: "Password1!",
+        email: email,
+        password: password,
       ),
     );
   }

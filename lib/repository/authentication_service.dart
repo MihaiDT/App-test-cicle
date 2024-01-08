@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
 import 'package:lines/app_controller.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
@@ -18,16 +18,7 @@ class AuthenticationService {
         },
       );
 
-      appController.user.responseHandler = ResponseHandler.successful(
-        content: User.fromJson(
-          response.data,
-        ),
-      );
-
-      /// Save accessToken in secure storage
-      await Get.find<SecureStorageManager>().saveToken(
-        response.data['user']['session_token'],
-      );
+      _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
     }
@@ -53,18 +44,33 @@ class AuthenticationService {
           }
         },
       );
-      appController.user.responseHandler = ResponseHandler.successful(
-        content: User.fromJson(
-          response.data,
-        ),
-      );
 
-      /// Save accessToken in secure storage
+      _saveUserInfo(response);
+
       await Get.find<SecureStorageManager>().saveToken(
         response.data['user']['session_token'],
       );
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
+    }
+  }
+
+  static void _saveUserInfo(Response response) {
+    appController.user.responseHandler = ResponseHandler.successful(
+      content: User.fromJson(
+        response.data,
+      ),
+    );
+
+    _saveAccessTokenInDB(response.data['user']['session_token']);
+  }
+
+  /// Save accessToken in secure storage
+  static Future<void> _saveAccessTokenInDB(String? accessToken) async {
+    if (accessToken?.isNotEmpty == true) {
+      await Get.find<SecureStorageManager>().saveToken(
+        accessToken!,
+      );
     }
   }
 }

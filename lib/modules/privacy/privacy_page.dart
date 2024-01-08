@@ -7,6 +7,7 @@ import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -44,9 +45,9 @@ class PrivacyPage extends StatelessWidget {
                 ThemeSizedBox.height16,
                 SecondaryButton(
                   text: "REGISTRATI",
-                  onPressed: () {
-                    registerUser();
-                    // Get.toNamed(Routes.main);
+                  onPressed: () async {
+                    await registerUser();
+                    Get.toNamed(Routes.main);
                   },
                 ),
               ],
@@ -86,8 +87,8 @@ class PrivacyPage extends StatelessWidget {
   }
 
   /// This method takes the registerParameter and pass this data to the registration method
-  void registerUser() async {
-    AuthenticationService.registration(
+  Future<void> registerUser() async {
+    await AuthenticationService.registration(
       appController.registerParameter,
     );
   }
