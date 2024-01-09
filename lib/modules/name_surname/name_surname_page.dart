@@ -44,7 +44,8 @@ class NameSurnamePage extends StatelessWidget {
               /// Assign TextEditingController values to User saved in the state
               appController.registerParameter.firstName = nameController.text;
               appController.registerParameter.lastName = surnameController.text;
-              appController.registerParameter.nickname = nicknameController.text;
+              appController.registerParameter.nickname =
+                  nicknameController.text;
               Get.toNamed(Routes.birthDate);
             },
           ),

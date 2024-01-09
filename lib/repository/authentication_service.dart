@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
-import 'package:lines/app_controller.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -100,22 +99,6 @@ class RegisterParameter {
   bool privacyPolicy;
   bool privacyMarketingEmail;
 
-  RegisterParameter({
-    required this.birthdate,
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    required this.registrationProvider,
-    this.legalGuardianEmail,
-    this.nickname,
-    this.password,
-    this.privacyPolicy = true,
-    this.privacyMarketingEmail = true,
-  }) : assert(
-            registrationProvider == RegistrationProvider.email &&
-                password?.isNotEmpty == true,
-            "When RegistrationProvider is email the password should be provided");
-
   RegisterParameter.initial({
     this.birthdate = "",
     this.email = "",
@@ -124,7 +107,7 @@ class RegisterParameter {
     this.registrationProvider = RegistrationProvider.email,
     this.legalGuardianEmail,
     this.nickname,
-    this.password,
+    this.password = "",
     this.privacyPolicy = true,
     this.privacyMarketingEmail = true,
   });

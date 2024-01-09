@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/data/log_levels.dart';
 import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
 class BirthDateController extends AppScaffoldController {
@@ -43,6 +42,7 @@ class BirthDateController extends AppScaffoldController {
     yearController.value.addListener(() {
       if (yearController.value.text.length >= 4) {
         FocusScope.of(Get.context!).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
       }
     });
   }
@@ -69,7 +69,9 @@ class BirthDateController extends AppScaffoldController {
   }
 
   void handleFocusChange(
-      TextEditingController controller, FocusNode focusNode) {
+    TextEditingController controller,
+    FocusNode focusNode,
+  ) {
     if (controller.text.length == 1 && !focusNode.hasPrimaryFocus) {
       controller.text = "0${controller.text}";
     }

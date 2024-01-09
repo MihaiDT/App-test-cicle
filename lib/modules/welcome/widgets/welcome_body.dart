@@ -64,7 +64,6 @@ class WelcomeBody extends StatelessWidget {
                     appController.isLoginFlow.value = true;
                     Get.toNamed(
                       Routes.cookie,
-
                     );
                   },
                   child: const TitleMedium(

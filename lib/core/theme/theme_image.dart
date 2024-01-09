@@ -26,4 +26,5 @@ class ThemeImage {
   static String bgCalendar = '$folderPath/bg_calendar.webp';
   static String bgCalendarBottomSheet =
       '$folderPath/bg_calendar_bottom_sheet.webp';
+  static String talkingDroppy = '$folderPath/talking_droppy.webp';
 }

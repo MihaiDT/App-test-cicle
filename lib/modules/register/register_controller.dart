@@ -23,7 +23,6 @@ class RegisterAndLoginController extends AppScaffoldController {
 
   @override
   void onInit() {
-
     super.onInit();
   }
 
