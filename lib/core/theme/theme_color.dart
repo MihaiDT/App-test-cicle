@@ -14,4 +14,5 @@ class ThemeColor {
   static Color ovulazioneColor = const Color(0xff6dadd0);
   static Color cicloColor = const Color(0xffc62f3a);
   static Color primaryOpaque = primary.withOpacity(0.1);
+  static Color opaqueWhite = Colors.white.withOpacity(0.3);
 }

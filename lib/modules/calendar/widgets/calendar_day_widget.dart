@@ -37,18 +37,19 @@ class CalendarDayWidget extends StatelessWidget {
       children: [
         _dayWrapper,
         Positioned(top: iconYPos + 2.5, child: _bottomIcon),
-        isSelected
-            ? Container(
-                width: 48,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: GradientBoxBorder(
-                    width: 2,
-                    gradient: ThemeGradient.primary,
-                  ),
-                ),
-              )
-            : SizedBox(),
+        Visibility(
+          visible: isSelected,
+          child: Container(
+            width: 48,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: GradientBoxBorder(
+                width: 2,
+                gradient: ThemeGradient.primary,
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
@@ -79,7 +80,7 @@ class CalendarDayWidget extends StatelessWidget {
       case DayStatus.filledBlueDot:
         return SvgPicture.asset(ThemeIcon.calendarGradientDot);
       default:
-        return SizedBox();
+        return const SizedBox();
     }
   }
 

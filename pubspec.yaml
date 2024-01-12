@@ -113,6 +113,18 @@ flutter:
     - assets/images/
     - assets/web_views/
     - assets/fonts/
+    - assets/icons/attivita_fisica/
+    - assets/icons/attivita_sessuale/
+    - assets/icons/capelli/
+    - assets/icons/contraccettivi/
+    - assets/icons/desiderio_sessuale/
+    - assets/icons/flusso_mestruale/
+    - assets/icons/livello_di_energia/
+    - assets/icons/livello_di_stress/
+    - assets/icons/mood/
+    - assets/icons/pelle/
+    - assets/icons/sintomi/
+    - assets/icons/sonno/
 
   fonts:
     - family: Barlow

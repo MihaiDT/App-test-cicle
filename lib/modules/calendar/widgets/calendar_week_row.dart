@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lines/modules/calendar/calendar_controller.dart';
 
 import '../../../core/theme/text_wrapper.dart';
 import '../../../core/theme/theme_color.dart';
@@ -8,6 +7,7 @@ import '../../../core/theme/theme_gradient.dart';
 import '../../../widgets/appbar/transparent_app_bar.dart';
 import '../../../widgets/dividers/divider_with_gradient.dart';
 import '../../../widgets/layouts/app_scaffold_padding.dart';
+import '../calendar_controller.dart';
 import 'calendar_month_year_switch.dart';
 
 class CalendarWeekRow extends StatelessWidget {
@@ -17,7 +17,7 @@ class CalendarWeekRow extends StatelessWidget {
     required this.controller,
     super.key,
   });
-  double appBarHeight = const TransparentAppBar().preferredSize.height;
+  final double _appBarHeight = const TransparentAppBar().preferredSize.height;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CalendarWeekRow extends StatelessWidget {
         image: ThemeDecoration.images.bgCalendar,
       ),
       child: AppScaffoldPadding(
-        top: appBarHeight + 16,
+        top: _appBarHeight + 16,
         sidePaddingLarge: false,
         bottom: 0,
         child: Column(

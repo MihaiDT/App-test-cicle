@@ -20,4 +20,48 @@ class ThemeIcon {
   static String calendarHeart = '$folderPath/calendar_heart.svg';
   static String checkboxOutline = '$folderPath/checkbox_outline.svg';
   static String checkboxFilled = '$folderPath/checkbox_filled.svg';
+  static String attivitaFisica =
+      '$folderPath/attivita_fisica/attivita_fisica.svg';
+  static String attivitaSessuale =
+      '$folderPath/attivita_sessuale/attivita_sessuale.svg';
+  static String capelli = '$folderPath/capelli/capelli.svg';
+  static String contraccettivi =
+      '$folderPath/contraccettivi/contraccettivi.svg';
+  static String desiderioSessuale =
+      '$folderPath/desiderio_sessuale/desiderio_sessuale.svg';
+  static String flussoMestruale =
+      '$folderPath/flusso_mestruale/flusso_mestruale.svg';
+  static String flussoMestrualeLeggero =
+      '$folderPath/flusso_mestruale/leggero.svg';
+  static String flussoMestrualeMedio = '$folderPath/flusso_mestruale/medio.svg';
+  static String flussoMestrualeAbbondante =
+      '$folderPath/flusso_mestruale/abbondante.svg';
+  static String livelloDiEnergia =
+      '$folderPath/livello_di_energia/livello_di_energia.svg';
+  static String livelloDiStress =
+      '$folderPath/livello_di_stress/livello_di_stress.svg';
+  static String pelle = '$folderPath/pelle/pelle.svg';
+  static String sintomi = '$folderPath/sintomi/sintomi.svg';
+  static String sintomiCrampi = '$folderPath/sintomi/crampi.svg';
+  static String sintomiGonfiore = '$folderPath/sintomi/gonfiore.svg';
+  static String sintomiMalDiSchiena = '$folderPath/sintomi/mal_di_schiena.svg';
+  static String sintomiTensioneAlSeno =
+      '$folderPath/sintomi/tensione_al_seno.svg';
+  static String sonno = '$folderPath/sonno/sonno.svg';
+  static String mood = '$folderPath/mood/mood.svg';
+  static String moodAnsiosa = '$folderPath/mood/ansiosa.svg';
+  static String moodApatica = '$folderPath/mood/apatica.svg';
+  static String moodArrabbiata = '$folderPath/mood/arrabbiata.svg';
+  static String moodAutocritica = '$folderPath/mood/autocritica.svg';
+  static String moodEmotiva = '$folderPath/mood/emotiva.svg';
+  static String moodFelice = '$folderPath/mood/felice.svg';
+  static String moodIpersensibile = '$folderPath/mood/ipersensibile.svg';
+  static String moodIrritabile = '$folderPath/mood/irritabile.svg';
+  static String moodMotivata = '$folderPath/mood/motivata.svg';
+  static String moodSbalziDUmore = '$folderPath/mood/sbalzidumore.svg';
+  static String moodSicura = '$folderPath/mood/sicura.svg';
+  static String moodStanca = '$folderPath/mood/stanca.svg';
+  static String moodTranquilla = '$folderPath/mood/tranquilla.svg';
+  static String moodTriste = '$folderPath/mood/triste.svg';
+  static String moodVivace = '$folderPath/mood/vivace.svg';
 }
