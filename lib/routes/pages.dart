@@ -98,7 +98,6 @@ class Pages {
     // NameSurname
     GetPage(
       name: Routes.nameSurname,
-      binding: BirthDateBinding(),
       page: () => _mediaQueryWrapper(
         NameSurnamePage(),
         authNeeded: false,
@@ -109,6 +108,7 @@ class Pages {
     // BirthDate
     GetPage(
       name: Routes.birthDate,
+      binding: BirthDateBinding(),
       page: () => _mediaQueryWrapper(
         const BirthDatePage(),
         authNeeded: false,
