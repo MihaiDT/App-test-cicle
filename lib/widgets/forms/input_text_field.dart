@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lines/modules/home/widgets/home_circular_period_circular_calendar.dart';
 
 import '../../core/app_theme.dart';
 import '../../core/theme/text_wrapper.dart';
@@ -104,10 +103,10 @@ class InputTextField extends StatelessWidget {
   Widget _label() {
     return Padding(
       padding: const EdgeInsets.only(
-        left: 24,
+        left: 32,
         bottom: 4,
       ),
-      child: TitleLarge(
+      child: TitleMedium(
         label.toUpperCase(),
       ),
     );

@@ -47,7 +47,7 @@ class PrivacyPage extends StatelessWidget {
                   text: "REGISTRATI",
                   onPressed: () async {
                     await registerUser();
-                    Get.toNamed(Routes.main);
+                    Get.toNamed(Routes.lastMensesPage);
                   },
                 ),
               ],

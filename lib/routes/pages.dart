@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/birth_date/birth_date_binding.dart';
+import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
+import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
+import 'package:lines/modules/last_menses/last_menses_page.dart';
+import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 
 import '../modules/access_wrapper/wrapper_access_widget.dart';
-import '../modules/birth_date/birth_date_binding.dart';
 import '../modules/birth_date/birth_date_page.dart';
 import '../modules/calendar/calendar_binding.dart';
 import '../modules/calendar/calendar_page.dart';
@@ -79,7 +83,7 @@ class Pages {
     GetPage(
       binding: CalendarBinding(),
       name: Routes.calendar,
-      page: () => _mediaQueryWrapper(CalendarPage()),
+      page: () => _mediaQueryWrapper(const CalendarPage()),
       transition: Transition.fade,
     ),
 
@@ -98,8 +102,9 @@ class Pages {
     // NameSurname
     GetPage(
       name: Routes.nameSurname,
+      binding: NameSurnameBinding(),
       page: () => _mediaQueryWrapper(
-        NameSurnamePage(),
+        const NameSurnamePage(),
         authNeeded: false,
       ),
       transition: Transition.fade,
@@ -121,6 +126,29 @@ class Pages {
       name: Routes.privacy,
       page: () => _mediaQueryWrapper(
         const PrivacyPage(),
+        authNeeded: false,
+      ),
+      transition: Transition.fade,
+    ),
+
+    // LastMensesPage
+    GetPage(
+      name: Routes.lastMensesPage,
+      page: () => _mediaQueryWrapper(
+        const LastMensesPage(),
+        authNeeded: false,
+      ),
+      transition: Transition.fade,
+    ),
+
+    // LastMensesPage
+    GetPage(
+      name: Routes.howLongMensesPage,
+      bindings: [
+        MensesDurationCounterBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const HowLongMensesPage(),
         authNeeded: false,
       ),
       transition: Transition.fade,

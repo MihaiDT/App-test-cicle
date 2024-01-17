@@ -2,6 +2,8 @@ class ThemeIcon {
   static const String folderPath = 'assets/icons';
 
   static String back = '$folderPath/back.svg';
+  static String arrowRight = '$folderPath/arrow_right.svg';
+  static String arrowLeft = '$folderPath/arrow_left.svg';
   static String calendar = '$folderPath/calendar.svg';
   static String circularCalendarArrow =
       '$folderPath/circular_calendar_arrow.svg';
@@ -64,4 +66,5 @@ class ThemeIcon {
   static String moodTranquilla = '$folderPath/mood/tranquilla.svg';
   static String moodTriste = '$folderPath/mood/triste.svg';
   static String moodVivace = '$folderPath/mood/vivace.svg';
+  static String verticalArrows = '$folderPath/vertical_arrows.svg';
 }

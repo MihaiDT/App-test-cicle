@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lines/modules/home/widgets/home_circular_period_circular_calendar.dart';
 
 import '../app_theme.dart';
 
@@ -43,9 +42,10 @@ InputDecoration textFieldDefaultDecoration(
   String? placeholder,
 }) {
   return InputDecoration(
-    contentPadding: const EdgeInsets.symmetric(
-      horizontal: 24,
-      vertical: 22,
+    contentPadding: const EdgeInsets.only(
+      left: 32,
+      top: 18,
+      bottom: 18,
     ),
     filled: hasError,
     disabledBorder: disabledOutlineInputBorder,
@@ -61,6 +61,7 @@ InputDecoration textFieldDefaultDecoration(
     hintMaxLines: 1,
     hintStyle: NewThemeTextStyle.bodyMedium.copyWith(
       color: ThemeColor.whiteDark,
+      letterSpacing: 0,
     ),
     hintText: placeholder ?? label,
     suffixIcon: hasError

@@ -65,11 +65,6 @@ class CalendarScrollController extends GetxController {
     }
   }
 
-  List<String> getDaysOfWeek() {
-    List<String> daysOfWeek = ['L', 'M', 'M', 'G', 'V', 'S', 'D'];
-    return daysOfWeek;
-  }
-
   void onDayTapped(DateTime day) {
     selectedDate = day;
     onDayChanged(day);

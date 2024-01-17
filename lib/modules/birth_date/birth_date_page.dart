@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/birth_date/birth_date_controller.dart';
-import 'package:lines/modules/birth_date/widget/too_young_error_dialog.dart';
-import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
@@ -41,14 +37,20 @@ class BirthDatePage extends GetView<BirthDateController> {
             left: ThemeSize.paddingLarge,
             right: ThemeSize.paddingLarge,
           ),
-          child: SecondaryButton(
-            text: "AVANTI",
-            onPressed: () {
-              _checkBirthDate(
-                controller.dayController.value.text,
-                controller.monthController.value.text,
-                controller.yearController.value.text,
-                context,
+          child: Obx(
+            () {
+              return SecondaryButton(
+                text: "AVANTI",
+                onPressed: controller.canProceed
+                    ? () {
+                        controller.checkBirthDate(
+                          controller.dayController.value.text,
+                          controller.monthController.value.text,
+                          controller.yearController.value.text,
+                          context,
+                        );
+                      }
+                    : null,
               );
             },
           ),
@@ -82,6 +84,9 @@ class BirthDatePage extends GetView<BirthDateController> {
                       LengthLimitingTextInputFormatter(2),
                     ],
                     errorMessage: controller.dayError.value,
+                    onChanged: (txt) {
+                      controller.dayValue.value = txt;
+                    },
                   ),
                 ),
                 ThemeSizedBox.width16,
@@ -99,6 +104,9 @@ class BirthDatePage extends GetView<BirthDateController> {
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(2),
                     ],
+                    onChanged: (txt) {
+                      controller.monthValue.value = txt;
+                    },
                   ),
                 ),
                 ThemeSizedBox.width16,
@@ -114,6 +122,9 @@ class BirthDatePage extends GetView<BirthDateController> {
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(4),
                     ],
+                    onChanged: (txt) {
+                      controller.yearValue.value = txt;
+                    },
                   ),
                 ),
               ],
@@ -122,62 +133,5 @@ class BirthDatePage extends GetView<BirthDateController> {
         ),
       ),
     );
-  }
-
-  void _checkBirthDate(
-    String day,
-    String month,
-    String year,
-    BuildContext context,
-  ) {
-    SystemChannels.textInput.invokeMethod('TextInput.hide');
-    if (_hasMoreThen13Years(day, month, year)) {
-      _saveBirthDate(day, month, year);
-      Get.toNamed(Routes.privacy);
-    } else {
-      _showError(context);
-    }
-  }
-
-  /// Calculate the age and check if the user has 14 year or more
-  bool _hasMoreThen13Years(
-    String day,
-    String month,
-    String year,
-  ) {
-    DateTime now = DateTime.now();
-
-    // Calculate the current date
-    DateTime userBirthday = DateTime(
-      int.parse(year),
-      int.parse(month),
-      int.parse(day),
-    );
-
-    // Calculate the age difference
-    int age = now.year - userBirthday.year;
-
-    // Check if the user has already had their birthday this year or will have it later
-    if (now.month < userBirthday.month ||
-        (now.month == userBirthday.month && now.day < userBirthday.day)) {
-      age--;
-    }
-
-    // Check if the user is above 14 years old
-    return age > 14;
-  }
-
-  void _showError(BuildContext context) {
-    showErrorDialog(
-      context: context,
-      builder: (_) {
-        return const TooYoungErrorDialog();
-      },
-    );
-  }
-
-  /// Save birth date in App state
-  void _saveBirthDate(String day, String month, String year) {
-    appController.registerParameter.birthdate = "$year-$month-$day";
   }
 }

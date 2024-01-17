@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/name_surname/controller/name_surname_controller.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
@@ -10,14 +11,8 @@ import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class NameSurnamePage extends StatelessWidget {
-  NameSurnamePage({super.key});
-
-  final TextEditingController nameController = TextEditingController();
-
-  final TextEditingController surnameController = TextEditingController();
-
-  final TextEditingController nicknameController = TextEditingController();
+class NameSurnamePage extends GetView<NameSurnameController> {
+  const NameSurnamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +33,23 @@ class NameSurnamePage extends StatelessWidget {
             left: ThemeSize.paddingLarge,
             right: ThemeSize.paddingLarge,
           ),
-          child: SecondaryButton(
-            text: "AVANTI",
-            onPressed: () {
-              /// Assign TextEditingController values to User saved in the state
-              appController.registerParameter.firstName = nameController.text;
-              appController.registerParameter.lastName = surnameController.text;
-              appController.registerParameter.nickname =
-                  nicknameController.text;
-              Get.toNamed(Routes.birthDate);
+          child: Obx(
+            () {
+              return SecondaryButton(
+                text: "AVANTI",
+                onPressed: controller.canProceed
+                    ? () {
+                        /// Assign TextEditingController values to User saved in the state
+                        appController.registerParameter.firstName =
+                            controller.nameController.text;
+                        appController.registerParameter.lastName =
+                            controller.surnameController.text;
+                        appController.registerParameter.nickname =
+                            controller.nicknameController.text;
+                        Get.toNamed(Routes.birthDate);
+                      }
+                    : null,
+              );
             },
           ),
         ),
@@ -63,13 +66,19 @@ class NameSurnamePage extends StatelessWidget {
             InputTextField(
               label: "Nome*",
               placeholder: "Inserisci il tuo nome",
-              textEditingController: nameController,
+              textEditingController: controller.nameController,
+              onChanged: (txt) {
+                controller.nameValue.value = txt;
+              },
             ),
             ThemeSizedBox.height24,
             InputTextField(
               label: "Cognome*",
               placeholder: "Inserisci il tuo cognome",
-              textEditingController: surnameController,
+              textEditingController: controller.surnameController,
+              onChanged: (txt) {
+                controller.surnameValue.value = txt;
+              },
             ),
             ThemeSizedBox.height32,
             const Divider(
@@ -79,7 +88,7 @@ class NameSurnamePage extends StatelessWidget {
             InputTextField(
               label: "Nickname (facoltativo)",
               placeholder: "Scegli un nickname",
-              textEditingController: nicknameController,
+              textEditingController: controller.nicknameController,
             ),
           ],
         ),

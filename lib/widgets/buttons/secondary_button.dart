@@ -31,6 +31,15 @@ class SecondaryButton extends StatelessWidget {
             );
           },
         ),
+        backgroundColor: MaterialStateProperty.resolveWith(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return Colors.white.withOpacity(0.6);
+            }
+
+            return Colors.white;
+          },
+        ),
         padding: MaterialStateProperty.all(buttonSize.buttonPadding),
       ),
       child: TitleLarge(

@@ -75,21 +75,18 @@ class NewThemeTextStyle {
     fontSize: 14,
     fontWeight: weightBold,
     height: 1.2,
-    letterSpacing: 2,
   );
 
   static const titleMedium = TextStyle(
     fontSize: 12,
     fontWeight: weightBold,
     height: 1.2,
-    letterSpacing: 2,
   );
 
   static const labelLarge = TextStyle(
     fontSize: 10,
     fontWeight: weightBold,
     height: 1.3,
-    letterSpacing: 2,
   );
 
   static const labelMedium = TextStyle(
@@ -102,7 +99,6 @@ class NewThemeTextStyle {
     fontSize: 8,
     fontWeight: weightBold,
     height: 1.3,
-    letterSpacing: 2,
   );
 
   static const TextStyle calendarWeekDay = TextStyle(
@@ -110,7 +106,6 @@ class NewThemeTextStyle {
     fontSize: 14.5,
     fontWeight: NewThemeTextStyle.weightMedium,
     height: 1.4,
-    letterSpacing: 1.1,
   );
 
   static TextStyle calendarMonth = const TextStyle(
@@ -118,6 +113,5 @@ class NewThemeTextStyle {
     fontSize: 14.5,
     fontWeight: weightSemibold,
     height: 1.4,
-    letterSpacing: 1.1,
   );
 }
