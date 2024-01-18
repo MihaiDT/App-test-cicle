@@ -4,7 +4,7 @@ import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/modules/calendar/widgets/calendar_day_widget.dart';
 
 import '../../../data/models/day_values.dart';
-import 'calendar_scroll_controller.dart';
+import '../calendar_scroll_controller.dart';
 
 class CalendarDaysGridWidget extends StatefulWidget {
   final CalendarScrollController calendarScrollableCalendarController;
@@ -85,10 +85,10 @@ class _CalendarDaysGridWidgetState extends State<CalendarDaysGridWidget> {
                       //     .selectedDate
                       //     .isSameDay(dayValues.day),
                       isSelected: widget.calendarScrollableCalendarController
-                                  .selectedDate !=
+                                  .calendarStore.selectedDate !=
                               null
                           ? widget.calendarScrollableCalendarController
-                              .selectedDate!
+                              .calendarStore.selectedDate!
                               .isSameDay(dayValues.day)
                           : false,
                       parentConstraints: constraints,

@@ -5,7 +5,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../core/theme/text_wrapper.dart';
 import 'calendar_days_grid_widget.dart';
-import 'calendar_scroll_controller.dart';
+import '../calendar_scroll_controller.dart';
 
 class ScrollableCalendar extends StatelessWidget {
   final double spaceBetweenCalendars;

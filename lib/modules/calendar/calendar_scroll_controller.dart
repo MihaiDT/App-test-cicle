@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../../core/helpers/log.dart';
+import '../../core/helpers/log.dart';
+import 'calendar_store.dart';
 
 class CalendarScrollController extends GetxController {
   /// The mininimum date to show
@@ -11,16 +11,6 @@ class CalendarScrollController extends GetxController {
   /// The maximum date to show
   final DateTime maxDate;
 
-  final Function(DateTime day) onDayChanged;
-
-  final Rxn<DateTime> _rxSelectedDate = Rxn<DateTime>(DateTime.now());
-
-  DateTime? get selectedDate => _rxSelectedDate.value;
-
-  set selectedDate(DateTime? newDate) {
-    _rxSelectedDate.value = newDate;
-  }
-
   final int weekdayStart = DateTime.monday;
 
   final DateTime? focusDate;
@@ -28,13 +18,13 @@ class CalendarScrollController extends GetxController {
   late int weekdayEnd;
 
   ItemScrollController itemScrollController;
+  late CalendarStore calendarStore;
 
   CalendarScrollController({
     this.focusDate,
     required this.minDate,
     required this.maxDate,
     required this.itemScrollController,
-    required this.onDayChanged,
   });
 
   List<DateTime> months = [];
@@ -42,16 +32,20 @@ class CalendarScrollController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    calendarStore = Get.put(CalendarStore());
     final x = weekdayStart - 1;
     weekdayEnd = x == 0 ? 7 : x;
-
     _generateMonths();
+  }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      focusDate != null
-          ? jumpToMonth(date: focusDate!)
-          : jumpToMonth(date: DateTime.now());
-    });
+  @override
+  void onReady() {
+    super.onReady();
+    if (focusDate != null) {
+      jumpToMonth(date: focusDate!);
+    } else {
+      jumpToMonth(date: DateTime.now());
+    }
   }
 
   //add every month to list between minDate and maxDate
@@ -66,11 +60,10 @@ class CalendarScrollController extends GetxController {
   }
 
   void onDayTapped(DateTime day) {
-    selectedDate = day;
-    onDayChanged(day);
+    calendarStore.selectedDate = day;
   }
 
-  jumpToMonth({required DateTime date, double alignment = 0}) {
+  void jumpToMonth({required DateTime date}) {
     if (!(date.year >= minDate.year &&
         (date.year > minDate.year || date.month >= minDate.month) &&
         date.year <= maxDate.year &&
@@ -80,7 +73,7 @@ class CalendarScrollController extends GetxController {
     int month = ((date.year - minDate.year) * 12) - minDate.month + date.month;
 
     try {
-      itemScrollController.jumpTo(index: month, alignment: alignment);
+      itemScrollController.jumpTo(index: month);
     } catch (e) {
       logError(error: e);
     }

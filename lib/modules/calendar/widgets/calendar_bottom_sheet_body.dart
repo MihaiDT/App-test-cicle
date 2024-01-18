@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../core/theme/text_wrapper.dart';
 import '../../../core/theme/theme_color.dart';
@@ -80,11 +81,18 @@ class CalendarBottomSheetBody extends StatelessWidget {
                 child: DividerWithGradient(gradient: ThemeGradient.primary),
               ),
               ThemeSizedBox.height16,
-              CalendarBottomSheetRow(
-                categoryIndex: categoryIndex,
-                onSymptomTap: onSymptomTap,
-                symptomList: categories[categoryIndex].symptoms,
-              )
+              Obx(
+                () {
+                  return Visibility(
+                    visible: categories.isNotEmpty,
+                    child: CalendarBottomSheetRow(
+                      categoryIndex: categoryIndex,
+                      onSymptomTap: onSymptomTap,
+                      symptomList: categories[categoryIndex].symptoms,
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),

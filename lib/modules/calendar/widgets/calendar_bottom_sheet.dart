@@ -91,10 +91,12 @@ class CalendarBottomSheet extends StatelessWidget {
                               ThemeSizedBox.height24,
                               Obx(
                                 () => Visibility(
-                                  visible: controller.selectedDate != null,
+                                  visible:
+                                      controller.calendarStore.selectedDate !=
+                                          null,
                                   child: CalendarBottomSheetBody(
-                                    categories: controller
-                                        .symptomsController.currentCategories,
+                                    categories: controller.symptomsController
+                                        .calendarStore.currentCategories,
                                     onSymptomTap: controller
                                         .symptomsController.changeSelectedValue,
                                   ),
@@ -193,11 +195,11 @@ class CalendarBottomSheet extends StatelessWidget {
 
   //return the text for day inside the bottom sheet , add OGGI label if the date selected is today
   String get _bottomSheetDayText {
-    if (controller.selectedDate != null) {
+    if (controller.calendarStore.selectedDate != null) {
       String text = DateFormat('dd MMMM', 'it')
-          .format(controller.selectedDate!)
+          .format(controller.calendarStore.selectedDate!)
           .toUpperCase();
-      if (controller.selectedDate!.isToday) {
+      if (controller.calendarStore.selectedDate!.isToday) {
         return 'OGGI- $text';
       } else {
         return text;

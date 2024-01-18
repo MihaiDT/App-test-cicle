@@ -26,14 +26,17 @@ class QuizIntroPage extends GetView<QuizController> {
         sidePaddingLarge: false,
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: AppRoundButton(
-                onTap: () {
-                  Navigator.pop(Get.context!);
-                },
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.topRight,
+            //   child: InkWell(
+            //     onTap: () {},
+            //     child: AppRoundButton(
+            //       gradient: ThemeGradient.primary,
+            //       selected: true,
+            //       iconPath: ThemeIcon.close,
+            //     ),
+            //   ),
+            // ),
             const DisplayMedium('Welcome Quiz').applyShaders(context),
             ThemeSizedBox.height60,
             Image(

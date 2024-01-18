@@ -1,23 +1,22 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/controllers/symptoms_controller.dart';
-import 'package:lines/data/models/symptom.dart';
+import 'package:lines/modules/calendar/symptoms_controller.dart';
+
+import 'package:lines/modules/calendar/calendar_store.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import 'widgets/calendar_scroll_controller.dart';
+import '../../data/models/symptom.dart';
+import 'calendar_scroll_controller.dart';
 
 class CalendarController extends GetxController {
-  late CalendarScrollController scrollableCalendarController;
-  late SymptomsController symptomsController;
-  final StreamController<DateTime> _streamController =
-      StreamController.broadcast();
+  late CalendarStore calendarStore;
 
-  DateTime? get selectedDate => scrollableCalendarController.selectedDate;
+  CalendarScrollController get scrollableCalendarController {
+    return Get.find<CalendarScrollController>();
+  }
 
-  set selectedDate(DateTime? newDate) {
-    scrollableCalendarController.selectedDate = newDate;
+  SymptomsController get symptomsController {
+    return Get.find<SymptomsController>();
   }
 
   final RxBool _rxShowBarButton = true.obs;
@@ -63,32 +62,35 @@ class CalendarController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _initCleanCalendarController();
+    calendarStore = Get.put(CalendarStore());
+    ever(calendarStore.rxSelectedDate,
+        (newDayValue) => _onDayChanged(newDayValue));
+    _initScrollableCalendarController();
     _initSymptomController();
   }
 
   void _initSymptomController() {
-    symptomsController = SymptomsController.withStreamData(
-      value: selectedDate!,
-      streamSub: _streamController.stream,
-      onSymptomChanged: () {
-        showSaveButton = true;
-        List<Symptom> symptoms = symptomsController.getActiveSymptoms;
-        if (oldList.length == symptoms.length) {
-          for (int i = 0; i < oldList.length; i++) {
-            if (symptoms[i] != oldList[i]) {
-              oldList.clear();
-              oldList.addAll(symptoms);
-              return;
-            }
-          }
-          oldList.clear();
-          oldList.addAll(symptoms);
-          showSaveButton = false;
-        }
-      },
+    Get.lazyPut(
+      () => SymptomsController(
+        onSymptomChanged: _onSymptomChanged,
+      ),
     );
     oldList.addAll(symptomsController.getActiveSymptoms);
+  }
+
+  void _onSymptomChanged() {
+    showSaveButton = true;
+    List<Symptom> symptoms = symptomsController.getActiveSymptoms;
+    if (oldList.length == symptoms.length) {
+      for (int i = 0; i < oldList.length; i++) {
+        if (symptoms[i] != oldList[i]) {
+          return;
+        }
+      }
+      oldList.clear();
+      oldList.addAll(symptoms);
+      showSaveButton = false;
+    }
   }
 
   @override
@@ -111,8 +113,7 @@ class CalendarController extends GetxController {
         } else {
           showBottomMenu = false;
           showSaveButton = false;
-          scrollableCalendarController.selectedDate = null;
-          symptomsController.reset();
+          calendarStore.selectedDate = null;
         }
       },
     );
@@ -126,14 +127,14 @@ class CalendarController extends GetxController {
 
   void jumpToToday() {
     DateTime today = DateTime.now();
+    calendarStore.selectedDate = today;
     scrollableCalendarController.jumpToMonth(date: today);
-    _onDayChanged(today);
   }
 
   //TODO : for now the calendar starts at 4 months before today and ends in 4 months , later it will be dynamic according to API
-  void _initCleanCalendarController() {
-    scrollableCalendarController = Get.put(
-      CalendarScrollController(
+  void _initScrollableCalendarController() {
+    Get.lazyPut<CalendarScrollController>(
+      () => CalendarScrollController(
         itemScrollController: ItemScrollController(),
         minDate: DateTime.now().subtract(
           const Duration(
@@ -145,19 +146,18 @@ class CalendarController extends GetxController {
             days: 120,
           ),
         ),
-        onDayChanged: _onDayChanged,
       ),
     );
   }
 
-  void _onDayChanged(DateTime day) {
-    showBottomMenu = true;
-    selectedDate = day;
-    _streamController.add(day);
-    _expandBottomSheetToFullWidth();
+  void _onDayChanged(DateTime? day) {
+    if (day != null) {
+      showBottomMenu = true;
+      _expandBottomSheetToSheetVSize();
+    }
   }
 
-  void _expandBottomSheetToFullWidth() {
+  void _expandBottomSheetToSheetVSize() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         draggableScrollableController.animateTo(

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:lines/core/app_theme.dart';
 
-import '../../../controllers/symptoms_controller.dart';
+import '../symptoms_controller.dart';
 import '../../../core/theme/text_wrapper.dart';
 import 'calendar_chip.dart';
 

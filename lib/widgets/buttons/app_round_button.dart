@@ -1,33 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lines/core/theme/theme_gradient.dart';
-import 'package:lines/core/theme/theme_icon.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:lines/core/app_theme.dart';
 
 class AppRoundButton extends StatelessWidget {
-  final GestureTapCallback onTap;
+  final double borderWidth;
+  final Color? iconColor;
+  final String iconPath;
+  final double radius;
+  final Color unselectedBorderColor;
+  final Color unselectedBackGroundColor;
+  final bool value;
+  final ValueChanged<bool> onChanged;
 
   const AppRoundButton({
-    required this.onTap,
+    this.borderWidth = 1.0,
+    this.iconColor,
+    required this.iconPath,
+    this.radius = 16.0,
+    this.unselectedBorderColor = Colors.transparent,
+    this.unselectedBackGroundColor = Colors.transparent,
     super.key,
+    required this.onChanged,
+    required this.value,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: ThemeGradient.primary,
-        ),
-        child: CircleAvatar(
-          radius: 16.0,
-          backgroundColor: Colors.transparent,
-          child: SvgPicture.asset(
-            ThemeIcon.close,
-          ),
+    return InkWell(
+      onTap: () {
+        onChanged(!value);
+      },
+      child: value ? _onState : _offState,
+    );
+  }
+
+  Widget get _offState {
+    return Container(
+      decoration: BoxDecoration(
+        border: _borderUnselected,
+        shape: BoxShape.circle,
+      ),
+      child: CircleAvatar(
+        backgroundColor: unselectedBackGroundColor,
+        radius: radius,
+      ),
+    );
+  }
+
+  Widget get _onState {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: ThemeGradient.primary,
+        shape: BoxShape.circle,
+      ),
+      child: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        radius: radius,
+        child: SvgPicture.asset(
+          iconPath,
+          color: iconColor,
         ),
       ),
+    );
+  }
+
+  BoxBorder? get _borderUnselected {
+    return Border.all(
+      color: unselectedBorderColor,
+      width: borderWidth,
     );
   }
 }
