@@ -181,7 +181,7 @@ class CalendarBottomSheet extends StatelessWidget {
                   child: PrimaryButton(
                     text: 'SALVA',
                     onPressed: () {
-                      controller.saveSymptoms();
+                      controller.onSaved();
                     },
                   ),
                 ),

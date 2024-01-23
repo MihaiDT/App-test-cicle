@@ -11,11 +11,13 @@ class AppRoundButton extends StatelessWidget {
   final Color unselectedBorderColor;
   final Color unselectedBackGroundColor;
   final bool value;
+  final bool unselectedBorderGradient;
   final ValueChanged<bool> onChanged;
 
   const AppRoundButton({
     this.borderWidth = 1.0,
     this.iconColor,
+    this.unselectedBorderGradient = true,
     required this.iconPath,
     this.radius = 16.0,
     this.unselectedBorderColor = Colors.transparent,
@@ -66,6 +68,10 @@ class AppRoundButton extends StatelessWidget {
   }
 
   BoxBorder? get _borderUnselected {
+    if (unselectedBorderGradient) {
+      return GradientBoxBorder(
+          gradient: ThemeGradient.primary, width: borderWidth);
+    }
     return Border.all(
       color: unselectedBorderColor,
       width: borderWidth,

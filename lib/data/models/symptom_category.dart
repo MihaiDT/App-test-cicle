@@ -20,7 +20,22 @@ class SymptomCategory {
   SymptomCategory({
     required this.categoryTitle,
     required this.categoryIconPath,
-  });
+    bool? inHome,
+  }) {
+    if (inHome != null) {
+      this.inHome = inHome;
+    }
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SymptomCategory &&
+          runtimeType == other.runtimeType &&
+          categoryTitle == other.categoryTitle;
+
+  @override
+  int get hashCode => categoryTitle.hashCode;
 
   addSymptom(Symptom newSymptom) {
     symptoms.add(newSymptom);

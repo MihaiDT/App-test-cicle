@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
+import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/widgets/buttons/app_round_button.dart';
 import '../../../core/theme/text_wrapper.dart';
 import '../../../core/theme/theme_color.dart';
 import '../../../core/theme/theme_gradient.dart';
@@ -14,8 +15,9 @@ import 'calendar_bottom_sheet_row.dart';
 class CalendarBottomSheetBody extends StatelessWidget {
   final List<SymptomCategory> categories;
   final Function(int, int)? onSymptomTap;
+  final CalendarController controller = Get.put(CalendarController());
 
-  const CalendarBottomSheetBody({
+  CalendarBottomSheetBody({
     required this.categories,
     this.onSymptomTap,
     super.key,
@@ -56,22 +58,23 @@ class CalendarBottomSheetBody extends StatelessWidget {
                       color: ThemeColor.darkBlue,
                     ),
                     ThemeSizedBox.width6,
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: ThemeGradient.primary,
-                          shape: BoxShape.circle,
-                        ),
-                        child: CircleAvatar(
-                          radius: 6,
-                          backgroundColor: Colors.transparent,
-                          child: Padding(
-                            padding: const EdgeInsets.all(1.0),
-                            child: SvgPicture.asset(ThemeIcon.checkMark),
-                          ),
-                        ),
+                    Obx(
+                      () => AppRoundButton(
+                        radius: 6,
+                        iconPath: ThemeIcon.checkMark,
+                        onChanged: (value) {
+                          controller.symptomCategoryController.onValueChanged(
+                              categories[categoryIndex].categoryTitle,
+                              value,
+                              categoryIndex);
+                        },
+                        value: controller
+                            .symptomCategoryController
+                            .calendarStore
+                            .currentCategories[categoryIndex]
+                            .inHome,
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

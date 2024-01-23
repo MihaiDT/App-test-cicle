@@ -1,29 +1,27 @@
-import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/models/symptom.dart';
+import '../../data/models/symptom_category.dart';
 import 'calendar_store.dart';
 
 class SymptomsController extends GetxController {
-  Stream<DateTime>? streamSub;
   VoidCallback? onSymptomChanged;
   RxList<Symptom> rxSavedSymptoms = <Symptom>[].obs;
   late CalendarStore calendarStore;
 
   SymptomsController({this.onSymptomChanged}) {
     calendarStore = Get.put(CalendarStore());
-    saveSymptoms();
+    rxSavedSymptoms.addAll(getActiveSymptoms);
     ever(
       calendarStore.rxSelectedDate,
       (callback) {
-        saveSymptoms();
+        onSelectedDateChanged();
       },
     );
   }
 
-  void saveSymptoms() {
+  void onSelectedDateChanged() {
     rxSavedSymptoms.clear();
     rxSavedSymptoms.addAll(getActiveSymptoms);
   }
