@@ -16,8 +16,12 @@ class CalendarDayWidget extends StatelessWidget {
   final bool isToday;
   final BoxConstraints parentConstraints;
   final String text;
+  final double circleRadius;
+  final EdgeInsets? padding;
 
   const CalendarDayWidget({
+    this.circleRadius = 17.0,
+    this.padding,
     required this.dayStatus,
     required this.isToday,
     required this.isSelected,
@@ -27,11 +31,10 @@ class CalendarDayWidget extends StatelessWidget {
   });
 
   double get _parentHeight => parentConstraints.maxHeight;
-  static const double _circleRadius = 16.0;
 
   @override
   Widget build(BuildContext context) {
-    double iconYPos = _parentHeight - _circleRadius;
+    double iconYPos = _parentHeight - circleRadius;
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -40,7 +43,7 @@ class CalendarDayWidget extends StatelessWidget {
         Visibility(
           visible: isSelected,
           child: Container(
-            width: 48,
+            width: circleRadius * 2 + 14,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: GradientBoxBorder(
@@ -95,15 +98,18 @@ class CalendarDayWidget extends StatelessWidget {
           strokeWidth: 2,
           child: CircleAvatar(
             backgroundColor: Colors.transparent,
-            radius: _circleRadius,
-            child: _dayNumberText,
+            radius: circleRadius,
+            child: FittedBox(child: _dayNumberText),
           ),
         );
       default:
         return CircleAvatar(
           backgroundColor: _bgColor,
-          radius: _circleRadius,
-          child: _dayNumberText,
+          radius: circleRadius,
+          child: Padding(
+            padding: padding ?? EdgeInsets.zero,
+            child: FittedBox(child: _dayNumberText),
+          ),
         );
     }
   }

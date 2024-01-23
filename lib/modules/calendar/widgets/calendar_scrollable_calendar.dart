@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lines/modules/calendar/widgets/calendar_grid_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../core/theme/text_wrapper.dart';
-import 'calendar_days_grid_widget.dart';
 import '../calendar_scroll_controller.dart';
+import '../calendar_store.dart';
 
 class ScrollableCalendar extends StatelessWidget {
   final double spaceBetweenCalendars;
+  final CalendarStore calendarStore = Get.find<CalendarStore>();
+
   final CalendarScrollController calendarScrollableCalendarController;
 
-  const ScrollableCalendar({
+  ScrollableCalendar({
     required this.calendarScrollableCalendarController,
     required this.spaceBetweenCalendars,
     super.key,
@@ -53,11 +56,13 @@ class ScrollableCalendar extends StatelessWidget {
           thickness: 1,
           color: Colors.black.withOpacity(0.1),
         ),
-        CalendarDaysGridWidget(
-          calendarScrollableCalendarController:
-              calendarScrollableCalendarController,
-          gridValue: month,
-        ),
+        CalendarGridWidget(
+          year: month.year,
+          month: month.month,
+          circleRadius: 17,
+          onDayTapped: calendarScrollableCalendarController.onDayTapped,
+          calendarStore: calendarStore,
+        )
       ],
     );
   }
