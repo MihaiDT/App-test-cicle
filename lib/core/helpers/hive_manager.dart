@@ -10,15 +10,24 @@ class HiveManager {
   }
 
   static bool get appHidden {
-    return Hive.box("linesApp").get(HiveReferenceKeys.firstAccess.name) ??
-        false;
+    return Hive.box("linesApp").get(HiveReferenceKeys.appHidden.name) ?? false;
   }
 
   static set appHidden(bool symbol) {
-    Hive.box("linesApp").put(HiveReferenceKeys.firstAccess.name, symbol);
+    Hive.box("linesApp").put(HiveReferenceKeys.appHidden.name, symbol);
+  }
+
+  static get firstAccess {
+    return Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ??
+        false;
+  }
+
+  static set isFirstAccess(bool symbol) {
+    Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ?? false;
   }
 }
 
 enum HiveReferenceKeys {
-  firstAccess;
+  appHidden,
+  isFirstAccess;
 }

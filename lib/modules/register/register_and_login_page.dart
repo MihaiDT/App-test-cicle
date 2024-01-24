@@ -1,3 +1,5 @@
+import "dart:io";
+
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import 'package:get/get.dart';
@@ -31,163 +33,165 @@ class RegisterAndLoginPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       backgroundImage: ThemeDecoration.images.bgDark,
       appBar: const TransparentAppBar(),
-      body: BottomWidgetLayout(
-        scrollableAreaPadding: EdgeInsets.only(
-          left: 32,
-          right: 32,
-          top: MediaQuery.sizeOf(context).height * 0.04,
-        ),
-        bottomWidget: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SecondaryButton(
-                text: "AVANTI",
-                onPressed: () async {
-                  if (controller.isLoginPage) {
-                    await controller.loginUser(
-                      emailController.text,
-                      passwordController.text,
-                    );
+      body: SafeArea(
+        child: BottomWidgetLayout(
+          scrollableAreaPadding: const EdgeInsets.symmetric(
+            horizontal: ThemeSize.paddingLarge,
+          ),
+          bottomWidget: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SecondaryButton(
+                  text: "AVANTI",
+                  onPressed: () async {
+                    if (controller.isLoginPage) {
+                      await controller.loginUser(
+                        emailController.text,
+                        passwordController.text,
+                      );
 
-                    Get.offAndToNamed(Routes.main);
-                  } else {
-                    /// Save in the state email and password values
-                    appController.registerParameter.email =
-                        emailController.text;
-                    appController.registerParameter.password =
-                        passwordController.text;
-                    Get.toNamed(Routes.nameSurname);
-                  }
+                      Get.offAndToNamed(Routes.main);
+                    } else {
+                      /// Save in the state email and password values
+                      appController.registerParameter.email =
+                          emailController.text;
+                      appController.registerParameter.password =
+                          passwordController.text;
+                      Get.toNamed(Routes.nameSurname);
+                    }
+                  },
+                ),
+                ThemeSizedBox.height16,
+                controller.isLoginPage
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const TitleMedium(
+                            "Non hai un account?",
+                          ),
+                          ThemeSizedBox.width4,
+                          GestureDetector(
+                            onTap: () {
+                              controller.isLoginPage = !controller.isLoginPage;
+                              Get.offAndToNamed(
+                                Routes.registerAndLogin,
+                              );
+                            },
+                            child: const TitleMedium(
+                              "REGISTRATI",
+                              underline: true,
+                            ),
+                          )
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const TitleMedium(
+                            "Hai un account?",
+                          ),
+                          ThemeSizedBox.width4,
+                          GestureDetector(
+                            onTap: () {
+                              controller.isLoginPage = !controller.isLoginPage;
+                              Get.offAndToNamed(
+                                Routes.registerAndLogin,
+                              );
+                            },
+                            child: const TitleMedium(
+                              "ACCEDI",
+                              underline: true,
+                            ),
+                          )
+                        ],
+                      ),
+              ],
+            ),
+          ),
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                ThemeIcon.logo,
+                height: 85,
+                width: 70,
+              ),
+              ThemeSizedBox.height16,
+              DisplayMedium(
+                controller.isLoginPage
+                    ? "Accedi a myDrop"
+                    : "Crea il tuo account",
+              ),
+              ThemeSizedBox.height16,
+              BodyMedium(
+                controller.isLoginPage
+                    ? "Inserisci username e password\n per entrare nel tuo account."
+                    : "Registrati per iniziare\n la tua esperienza in myDrop",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height32,
+              const TitleLarge(
+                "USA I TUOI SOCIAL",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height24,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.facebook,
+                    onPressed: () {},
+                  ),
+                  ThemeSizedBox.width40,
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.google,
+                    onPressed: () {},
+                  ),
+                  if (Platform.isIOS) ...[
+                    ThemeSizedBox.width40,
+                    LinkAccountWidget(
+                      imagePath: ThemeImage.apple,
+                      onPressed: () {},
+                    ),
+                  ]
+                ],
+              ),
+              ThemeSizedBox.height32,
+              const DividerSection(),
+              ThemeSizedBox.height32,
+              InputTextField(
+                label: "EMAIL",
+                placeholder: 'Inserisci la tua email',
+                keyboardType: TextInputType.emailAddress,
+                textCapitalization: TextCapitalization.none,
+                textEditingController: emailController,
+              ),
+              ThemeSizedBox.height24,
+              Obx(
+                () {
+                  return InputTextField(
+                    label: "Password",
+                    placeholder: 'Inserisci la password',
+                    textCapitalization: TextCapitalization.none,
+                    textEditingController: passwordController,
+                    isPassword: true,
+                    obscureText: controller.hidePassword,
+                    onTapTogglePassword: () {
+                      controller.hidePassword = !controller.hidePassword;
+                    },
+                  );
                 },
               ),
               ThemeSizedBox.height16,
-              controller.isLoginPage
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const TitleMedium(
-                          "Non hai un account?",
-                        ),
-                        ThemeSizedBox.width4,
-                        GestureDetector(
-                          onTap: () {
-                            controller.isLoginPage = !controller.isLoginPage;
-                            Get.offAndToNamed(
-                              Routes.registerAndLogin,
-                            );
-                          },
-                          child: const TitleMedium(
-                            "REGISTRATI",
-                            underline: true,
-                          ),
-                        )
-                      ],
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const TitleMedium(
-                          "Hai un account?",
-                        ),
-                        ThemeSizedBox.width4,
-                        GestureDetector(
-                          onTap: () {
-                            controller.isLoginPage = !controller.isLoginPage;
-                            Get.offAndToNamed(
-                              Routes.registerAndLogin,
-                            );
-                          },
-                          child: const TitleMedium(
-                            "ACCEDI",
-                            underline: true,
-                          ),
-                        )
-                      ],
-                    ),
+              TitleMedium(
+                controller.isLoginPage ? "PASSWORD DIMENTICATA?" : "",
+                textAlign: TextAlign.center,
+                underline: true,
+              ),
+              ThemeSizedBox.height16,
             ],
           ),
-        ),
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              ThemeIcon.logo,
-              height: 85,
-              width: 70,
-            ),
-            ThemeSizedBox.height16,
-            DisplayMedium(
-              controller.isLoginPage
-                  ? "Accedi a myDrop"
-                  : "Crea il tuo account",
-            ),
-            ThemeSizedBox.height16,
-            BodyMedium(
-              controller.isLoginPage
-                  ? "Inserisci username e password\n per entrare nel tuo account."
-                  : "Registrati per iniziare\n la tua esperienza in myDrop",
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height32,
-            const TitleLarge(
-              "USA I TUOI SOCIAL",
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height24,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                LinkAccountWidget(
-                  imagePath: ThemeImage.facebook,
-                  onPressed: () {},
-                ),
-                ThemeSizedBox.width40,
-                LinkAccountWidget(
-                  imagePath: ThemeImage.google,
-                  onPressed: () {},
-                ),
-                ThemeSizedBox.width40,
-                LinkAccountWidget(
-                  imagePath: ThemeImage.apple,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            ThemeSizedBox.height32,
-            const DividerSection(),
-            ThemeSizedBox.height32,
-            InputTextField(
-              label: "EMAIL",
-              placeholder: 'Inserisci la tua email',
-              keyboardType: TextInputType.emailAddress,
-              textCapitalization: TextCapitalization.none,
-              textEditingController: emailController,
-            ),
-            ThemeSizedBox.height24,
-            Obx(
-              () {
-                return InputTextField(
-                  label: "Password",
-                  placeholder: 'Inserisci la password',
-                  textCapitalization: TextCapitalization.none,
-                  textEditingController: passwordController,
-                  isPassword: true,
-                  obscureText: controller.hidePassword,
-                  onTapTogglePassword: () {
-                    controller.hidePassword = !controller.hidePassword;
-                  },
-                );
-              },
-            ),
-            ThemeSizedBox.height16,
-            TitleMedium(
-              controller.isLoginPage ? "PASSWORD DIMENTICATA?" : "",
-              textAlign: TextAlign.center,
-              underline: true,
-            ),
-            ThemeSizedBox.height16,
-          ],
         ),
       ),
     );

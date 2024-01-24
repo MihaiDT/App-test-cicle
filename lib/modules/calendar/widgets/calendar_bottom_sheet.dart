@@ -13,7 +13,6 @@ import '../../../core/theme/theme_icon.dart';
 import '../../../core/theme/theme_image.dart';
 import '../../../core/theme/theme_sized_box.dart';
 import '../../../widgets/buttons/primary_button.dart';
-import '../../../widgets/layouts/app_scaffold_padding.dart';
 import '../calendar_controller.dart';
 import 'calendar_bottom_sheet_body.dart';
 
@@ -126,7 +125,9 @@ class CalendarBottomSheet extends StatelessWidget {
                                   _jumpToMonthButton(context),
                                   IntrinsicWidth(
                                     child: PrimaryButton(
-                                      text: 'Modifica mestruazioni',
+                                      child: const TitleLarge(
+                                        'Modifica mestruazioni',
+                                      ),
                                       buttonSize: ButtonSize.h31,
                                       onPressed: () {},
                                     ),
@@ -179,7 +180,9 @@ class CalendarBottomSheet extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: PrimaryButton(
-                    text: 'SALVA',
+                    child: const TitleLarge(
+                      'SALVA',
+                    ),
                     onPressed: () {
                       controller.onSaved();
                     },

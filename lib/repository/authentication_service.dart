@@ -4,9 +4,14 @@ import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/user.dart';
+import 'package:lines/repository/parameters_class/login_parameters.dart';
+import 'package:lines/repository/parameters_class/registration_parameters.dart';
+import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
 class AuthenticationService {
-  static Future<void> loginUser(LoginParameters loginParameters) async {
+  static Future<void> loginUser(
+    LoginParameters loginParameters,
+  ) async {
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
@@ -23,7 +28,9 @@ class AuthenticationService {
     }
   }
 
-  static Future<void> registration(RegisterParameter registerParameter) async {
+  static Future<void> registration(
+    RegistrationParameters registerParameter,
+  ) async {
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
@@ -54,6 +61,37 @@ class AuthenticationService {
     }
   }
 
+  static Future<void> updateUser(
+    UpdateUserParameters user,
+  ) async {
+    appController.user.responseHandler = ResponseHandler.pending();
+    try {
+      final response = await dio.put(
+        // todo check what is id
+        "/users/:id",
+        data: {
+          "user": {
+            "birthdate": user.birthdate,
+            "email": user.email,
+            "first_name": user.firstName,
+            "last_menstruation_date_start": user.lastMenstruationDateStart,
+            "last_menstruation_date_end": user.lastMenstruationDateEnd,
+            "last_name": user.lastName,
+            "legal_guardian_email": user.legalGuardianEmail,
+            "nickname": user.nickname,
+            "period_days": user.periodDays,
+            "period_duration": user.periodDuration,
+            "privacy_profiling": user.privacyProfiling,
+            "privacy_marketing_email": user.privacyMarketingEmail,
+          }
+        },
+      );
+      _saveUserInfo(response);
+    } catch (e) {
+      appController.user.responseHandler = ResponseHandler.pending();
+    }
+  }
+
   static void _saveUserInfo(Response response) {
     appController.user.responseHandler = ResponseHandler.successful(
       content: User.fromJson(
@@ -72,50 +110,4 @@ class AuthenticationService {
       );
     }
   }
-}
-
-class LoginParameters {
-  final String email;
-  final String password;
-
-  LoginParameters({
-    required this.email,
-    this.password = "",
-  });
-}
-
-class RegisterParameter {
-  /// Birthdate with yyyy-mm-dd format
-  String birthdate;
-  String email;
-  String firstName;
-  String lastName;
-
-  /// The registration method, with Email, Apple, Google, Facebook
-  RegistrationProvider registrationProvider;
-  String? legalGuardianEmail;
-  String? nickname;
-  String? password;
-  bool privacyPolicy;
-  bool privacyMarketingEmail;
-
-  RegisterParameter.initial({
-    this.birthdate = "",
-    this.email = "",
-    this.firstName = "",
-    this.lastName = "",
-    this.registrationProvider = RegistrationProvider.email,
-    this.legalGuardianEmail,
-    this.nickname,
-    this.password = "",
-    this.privacyPolicy = true,
-    this.privacyMarketingEmail = true,
-  });
-}
-
-enum RegistrationProvider {
-  email,
-  apple,
-  facebook,
-  google,
 }

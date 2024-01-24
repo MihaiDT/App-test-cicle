@@ -1,9 +1,7 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
 class RegisterAndLoginController extends AppScaffoldController {
@@ -19,11 +17,6 @@ class RegisterAndLoginController extends AppScaffoldController {
 
   set hidePassword(bool value) {
     _hidePassword.value = value;
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
   }
 
   Future<void> loginUser(String email, String password) async {

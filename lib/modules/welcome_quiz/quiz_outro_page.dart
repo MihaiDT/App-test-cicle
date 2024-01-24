@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/theme/theme_decoration.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_icon.dart';
-import '../../../core/theme/theme_sized_box.dart';
-import '../../../widgets/buttons/primary_button.dart';
-import '../../../widgets/coin/app_coin.dart';
-import '../../../widgets/layouts/app_scaffold_padding.dart';
-import '../quiz_controller.dart';
-import 'quiz_body_text.dart';
-import 'quiz_your_coins.dart';
+import '../../core/theme/text_wrapper.dart';
+import '../../core/theme/theme_icon.dart';
+import '../../core/theme/theme_sized_box.dart';
+import '../../widgets/buttons/primary_button.dart';
+import '../../widgets/coin/app_coin.dart';
+import '../../widgets/layouts/app_scaffold_padding.dart';
+import 'controllers/welcome_quiz_controller.dart';
+import 'widgets/quiz_body_text.dart';
+import 'widgets/quiz_your_coins.dart';
 
-class QuizOutroPage extends GetView<QuizController> {
+class QuizOutroPage extends GetView<WelcomeQuizController> {
   const QuizOutroPage({super.key});
 
   static const int totalCoins = 250;
@@ -56,9 +57,12 @@ class QuizOutroPage extends GetView<QuizController> {
             ),
             const Spacer(),
             PrimaryButton(
-              //TODO add on tap callback
-              onPressed: () {},
-              text: 'CHIUDI',
+              onPressed: () {
+                Get.offAllNamed(Routes.main);
+              },
+              child: const TitleLarge(
+                'CHIUDI',
+              ),
             ),
           ],
         ),

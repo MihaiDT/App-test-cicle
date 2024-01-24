@@ -28,108 +28,111 @@ class BirthDatePage extends GetView<BirthDateController> {
           controller.clearAll();
         },
       ),
-      body: BottomWidgetLayout(
-        scrollableAreaPadding: const EdgeInsets.symmetric(
-          horizontal: ThemeSize.paddingLarge,
-        ),
-        bottomWidget: Padding(
-          padding: const EdgeInsets.only(
-            left: ThemeSize.paddingLarge,
-            right: ThemeSize.paddingLarge,
+      body: SafeArea(
+        child: BottomWidgetLayout(
+          scrollableAreaPadding: const EdgeInsets.symmetric(
+            horizontal: ThemeSize.paddingLarge,
           ),
-          child: Obx(
-            () {
-              return SecondaryButton(
-                text: "AVANTI",
-                onPressed: controller.canProceed
-                    ? () {
-                        controller.checkBirthDate(
-                          controller.dayController.value.text,
-                          controller.monthController.value.text,
-                          controller.yearController.value.text,
-                          context,
-                        );
-                      }
-                    : null,
-              );
-            },
+          bottomWidget: Padding(
+            padding: const EdgeInsets.only(
+              left: ThemeSize.paddingLarge,
+              right: ThemeSize.paddingLarge,
+            ),
+            child: Obx(
+              () {
+                return SecondaryButton(
+                  text: "AVANTI",
+                  onPressed: controller.canProceed
+                      ? () {
+                          controller.checkBirthDate(
+                            controller.dayController.value.text,
+                            controller.monthController.value.text,
+                            controller.yearController.value.text,
+                            context,
+                          );
+                        }
+                      : null,
+                );
+              },
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: Get.statusBarHeight,
-            ),
-            const DisplayMedium(
-              "Qual è la tua data di nascita?",
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height16,
-            const BodyMedium(
-              "Inserisci la tua data di nascita corretta, così puoi avere un calendario mestruale disegnato per te.",
-              textAlign: TextAlign.center,
-            ),
-            Row(
-              children: [
-                Flexible(
-                  flex: 120,
-                  child: InputTextField(
-                    focusNode: controller.dayFocus,
-                    label: "",
-                    placeholder: "GG",
-                    textAlign: TextAlign.center,
-                    textEditingController: controller.dayController.value,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(2),
-                    ],
-                    errorMessage: controller.dayError.value,
-                    onChanged: (txt) {
-                      controller.dayValue.value = txt;
-                    },
+          child: Column(
+            children: [
+              ThemeSizedBox.height60,
+              const DisplayMedium(
+                "Qual è la tua data di nascita?",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height16,
+              const BodyMedium(
+                "Inserisci la tua data di nascita corretta, così puoi avere un calendario mestruale disegnato per te.",
+                textAlign: TextAlign.center,
+              ),
+              Row(
+                children: [
+                  Flexible(
+                    flex: 120,
+                    child: InputTextField(
+                      focusNode: controller.dayFocus,
+                      contentPaddingLeft: 0,
+                      label: "",
+                      placeholder: "GG",
+                      textAlign: TextAlign.center,
+                      textEditingController: controller.dayController.value,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(2),
+                      ],
+                      errorMessage: controller.dayError.value,
+                      onChanged: (txt) {
+                        controller.dayValue.value = txt;
+                      },
+                    ),
                   ),
-                ),
-                ThemeSizedBox.width16,
-                Flexible(
-                  flex: 120,
-                  child: InputTextField(
-                    focusNode: controller.monthFocus,
-                    label: "",
-                    placeholder: "MM",
-                    hasError: controller.hasErrors.value,
-                    textAlign: TextAlign.center,
-                    textEditingController: controller.monthController.value,
-                    keyboardType: TextInputType.number,
-                    errorMessage: controller.monthError.value,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(2),
-                    ],
-                    onChanged: (txt) {
-                      controller.monthValue.value = txt;
-                    },
+                  ThemeSizedBox.width16,
+                  Flexible(
+                    flex: 120,
+                    child: InputTextField(
+                      focusNode: controller.monthFocus,
+                      contentPaddingLeft: 0,
+                      label: "",
+                      placeholder: "MM",
+                      hasError: controller.hasErrors.value,
+                      textAlign: TextAlign.center,
+                      textEditingController: controller.monthController.value,
+                      keyboardType: TextInputType.number,
+                      errorMessage: controller.monthError.value,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(2),
+                      ],
+                      onChanged: (txt) {
+                        controller.monthValue.value = txt;
+                      },
+                    ),
                   ),
-                ),
-                ThemeSizedBox.width16,
-                Flexible(
-                  flex: 160,
-                  child: InputTextField(
-                    focusNode: controller.yearFocus,
-                    label: "",
-                    placeholder: "AAAA",
-                    textAlign: TextAlign.center,
-                    textEditingController: controller.yearController.value,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(4),
-                    ],
-                    onChanged: (txt) {
-                      controller.yearValue.value = txt;
-                    },
+                  ThemeSizedBox.width16,
+                  Flexible(
+                    flex: 160,
+                    child: InputTextField(
+                      focusNode: controller.yearFocus,
+                      contentPaddingLeft: 0,
+                      label: "",
+                      placeholder: "AAAA",
+                      textAlign: TextAlign.center,
+                      textEditingController: controller.yearController.value,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(4),
+                      ],
+                      onChanged: (txt) {
+                        controller.yearValue.value = txt;
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

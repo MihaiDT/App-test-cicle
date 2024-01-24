@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
+import 'package:lines/data/models/question.dart';
+import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/user.dart';
-import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/parameters_class/registration_parameters.dart';
 
 /// Just a wrapper in order to simplify getter access
 class EasyGetter<T> {
@@ -23,14 +25,19 @@ class AppController extends GetxController {
   /// The response of log in and register api
   final EasyGetter<User> user;
 
+  final EasyGetter<Question> question;
+  final EasyGetter<Survey> survey;
+
   /// The parameter used to register the user
-  final RegisterParameter registerParameter;
+  final RegistrationParameters registerParameter;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
 
   AppController._({
+    required this.question,
     required this.user,
+    required this.survey,
     required this.registerParameter,
     required this.isLoginFlow,
   });
@@ -38,7 +45,9 @@ class AppController extends GetxController {
   factory AppController.initial() {
     return AppController._(
       user: EasyGetter<User>(),
-      registerParameter: RegisterParameter.initial(),
+      question: EasyGetter<Question>(),
+      survey: EasyGetter<Survey>(),
+      registerParameter: RegistrationParameters.initial(),
       isLoginFlow: false.obs,
     );
   }

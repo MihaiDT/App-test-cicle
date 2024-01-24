@@ -31,64 +31,64 @@ class _LastMensesPageState extends State<LastMensesPage> {
           "PARLACI DEL TUO CICLO",
         ),
       ),
-      body: BottomWidgetLayout(
-        scrollableAreaPadding: const EdgeInsets.symmetric(
-          horizontal: ThemeSize.paddingLarge,
-        ),
-        bottomWidget: Padding(
-          padding: const EdgeInsets.only(
-            left: ThemeSize.paddingLarge,
-            right: ThemeSize.paddingLarge,
+      body: SafeArea(
+        child: BottomWidgetLayout(
+          scrollableAreaPadding: const EdgeInsets.symmetric(
+            horizontal: ThemeSize.paddingLarge,
+          ),
+          bottomWidget: Padding(
+            padding: const EdgeInsets.only(
+              left: ThemeSize.paddingLarge,
+              right: ThemeSize.paddingLarge,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: datetimeRange,
+                  builder: (_, DateTimeRange? value, __) {
+                    return SecondaryButton(
+                      text: "AVANTI",
+                      onPressed: value == null
+                          ? null
+                          : () {
+                              Get.toNamed(Routes.howLongMensesPage);
+                            },
+                    );
+                  },
+                ),
+                ThemeSizedBox.height16,
+                GestureDetector(
+                  onTap: () {},
+                  child: const TitleMedium(
+                    "NON ME LO RICORDO",
+                    underline: true,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ValueListenableBuilder(
-                valueListenable: datetimeRange,
-                builder: (_, DateTimeRange? value, __) {
-                  return SecondaryButton(
-                    text: "AVANTI",
-                    onPressed: value == null
-                        ? null
-                        : () {
-                            Get.toNamed(Routes.howLongMensesPage);
-                          },
-                  );
-                },
+              ThemeSizedBox.height60,
+              const DisplayMedium(
+                "Quando hai avuto\n le ultime mestruazioni?",
+                textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height16,
-              GestureDetector(
-                onTap: () {},
-                child: const TitleMedium(
-                  "NON ME LO RICORDO",
-                  underline: true,
-                  textAlign: TextAlign.center,
-                ),
+              const BodyMedium(
+                "Indica la data di inizio e fine\n delle tue mestruazioni",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height32,
+              HorizontalRangeCalendar(
+                onRangeSelected: (selectedRange) {
+                  datetimeRange.value = selectedRange;
+                },
               ),
             ],
           ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: Get.statusBarHeight,
-            ),
-            const DisplayMedium(
-              "Quando hai avuto\n le ultime mestruazioni?",
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height16,
-            const BodyMedium(
-              "Indica la data di inizio e fine\n delle tue mestruazioni",
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height32,
-            HorizontalRangeCalendar(
-              onRangeSelected: (selectedRange) {
-                datetimeRange.value = selectedRange;
-              },
-            ),
-          ],
         ),
       ),
     );

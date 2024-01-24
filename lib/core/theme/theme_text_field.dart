@@ -39,14 +39,16 @@ InputDecoration textFieldDefaultDecoration(
   String label, {
   required bool isDisabled,
   required bool hasError,
+  double paddingLeft = 32,
   String? placeholder,
 }) {
   return InputDecoration(
-    contentPadding: const EdgeInsets.only(
-      left: 32,
+    contentPadding: EdgeInsets.only(
       top: 18,
+      left: paddingLeft,
       bottom: 18,
     ),
+
     filled: hasError,
     disabledBorder: disabledOutlineInputBorder,
     enabled: !isDisabled,

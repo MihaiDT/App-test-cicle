@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:lines/core/helpers/dependency_injection_manager.dart';
 import 'package:lines/flavors.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lines/repository/dio_interceptor.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'app.dart';
@@ -54,7 +55,14 @@ _initFirebase() async {
 }
 
 _initNetwork() {
-  dio.interceptors.add(DioErrorInterceptor());
+  dio.interceptors.addAll(
+    [
+      DioErrorInterceptor(),
+      DioInterceptor(
+        dio: dio,
+      ),
+    ],
+  );
 
   logDebug('Dio inizializzato', tag: 'Network');
 }

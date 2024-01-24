@@ -9,8 +9,8 @@ class Routes {
   static const String registerAndLogin = '/register';
   static const String cookie = '/cookie';
   static const String calendar = '/calendar';
-  static const String quizIntroPage = '/quiz_intro_page';
-  static const String quizOutroPage = '/quiz_outro_page';
+  static const String welcomeQuizIntroPage = '/quiz_intro_page';
+  static const String welcomeQuizOutroPage = '/quiz_outro_page';
   static const String nameSurname = '/nameSurname';
   static const String birthDate = '/birth_date';
 
@@ -18,4 +18,6 @@ class Routes {
   static const String lastMensesPage = '/last_menses';
 
   static const String howLongMensesPage = '/how_long_menses_page';
+
+  static const String welcomeQuizPage = '/welcome_quiz_page';
 }

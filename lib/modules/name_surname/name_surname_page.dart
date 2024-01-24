@@ -24,73 +24,73 @@ class NameSurnamePage extends GetView<NameSurnameController> {
           "CONOSCIAMOCI",
         ),
       ),
-      body: BottomWidgetLayout(
-        scrollableAreaPadding: const EdgeInsets.symmetric(
-          horizontal: ThemeSize.paddingLarge,
-        ),
-        bottomWidget: Padding(
-          padding: const EdgeInsets.only(
-            left: ThemeSize.paddingLarge,
-            right: ThemeSize.paddingLarge,
+      body: SafeArea(
+        child: BottomWidgetLayout(
+          scrollableAreaPadding: const EdgeInsets.symmetric(
+            horizontal: ThemeSize.paddingLarge,
           ),
-          child: Obx(
-            () {
-              return SecondaryButton(
-                text: "AVANTI",
-                onPressed: controller.canProceed
-                    ? () {
-                        /// Assign TextEditingController values to User saved in the state
-                        appController.registerParameter.firstName =
-                            controller.nameController.text;
-                        appController.registerParameter.lastName =
-                            controller.surnameController.text;
-                        appController.registerParameter.nickname =
-                            controller.nicknameController.text;
-                        Get.toNamed(Routes.birthDate);
-                      }
-                    : null,
-              );
-            },
-          ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: Get.statusBarHeight,
+          bottomWidget: Padding(
+            padding: const EdgeInsets.only(
+              left: ThemeSize.paddingLarge,
+              right: ThemeSize.paddingLarge,
             ),
-            const DisplayMedium(
-              "Come ti chiami?",
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height32,
-            InputTextField(
-              label: "Nome*",
-              placeholder: "Inserisci il tuo nome",
-              textEditingController: controller.nameController,
-              onChanged: (txt) {
-                controller.nameValue.value = txt;
+            child: Obx(
+              () {
+                return SecondaryButton(
+                  text: "AVANTI",
+                  onPressed: controller.canProceed
+                      ? () {
+                          /// Assign TextEditingController values to User saved in the state
+                          appController.registerParameter.firstName =
+                              controller.nameController.text;
+                          appController.registerParameter.lastName =
+                              controller.surnameController.text;
+                          appController.registerParameter.nickname =
+                              controller.nicknameController.text;
+                          Get.toNamed(Routes.birthDate);
+                        }
+                      : null,
+                );
               },
             ),
-            ThemeSizedBox.height24,
-            InputTextField(
-              label: "Cognome*",
-              placeholder: "Inserisci il tuo cognome",
-              textEditingController: controller.surnameController,
-              onChanged: (txt) {
-                controller.surnameValue.value = txt;
-              },
-            ),
-            ThemeSizedBox.height32,
-            const Divider(
-              thickness: 2,
-            ),
-            ThemeSizedBox.height32,
-            InputTextField(
-              label: "Nickname (facoltativo)",
-              placeholder: "Scegli un nickname",
-              textEditingController: controller.nicknameController,
-            ),
-          ],
+          ),
+          child: Column(
+            children: [
+              ThemeSizedBox.height60,
+              const DisplayMedium(
+                "Come ti chiami?",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height32,
+              InputTextField(
+                label: "Nome*",
+                placeholder: "Inserisci il tuo nome",
+                textEditingController: controller.nameController,
+                onChanged: (txt) {
+                  controller.nameValue.value = txt;
+                },
+              ),
+              ThemeSizedBox.height24,
+              InputTextField(
+                label: "Cognome*",
+                placeholder: "Inserisci il tuo cognome",
+                textEditingController: controller.surnameController,
+                onChanged: (txt) {
+                  controller.surnameValue.value = txt;
+                },
+              ),
+              ThemeSizedBox.height32,
+              const Divider(
+                thickness: 2,
+              ),
+              ThemeSizedBox.height32,
+              InputTextField(
+                label: "Nickname (facoltativo)",
+                placeholder: "Scegli un nickname",
+                textEditingController: controller.nicknameController,
+              ),
+            ],
+          ),
         ),
       ),
     );

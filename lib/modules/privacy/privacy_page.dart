@@ -22,64 +22,64 @@ class PrivacyPage extends StatelessWidget {
       child: AppScaffoldPage(
         backgroundImage: ThemeDecoration.images.bgDark,
         extendBodyBehindAppBar: true,
-        body: BottomWidgetLayout(
-          scrollableAreaPadding: const EdgeInsets.symmetric(
-            horizontal: ThemeSize.paddingLarge,
-          ),
-          bottomWidget: Padding(
-            padding: const EdgeInsets.only(
-              left: ThemeSize.paddingLarge,
-              right: ThemeSize.paddingLarge,
+        body: SafeArea(
+          child: BottomWidgetLayout(
+            scrollableAreaPadding: const EdgeInsets.symmetric(
+              horizontal: ThemeSize.paddingLarge,
+            ),
+            bottomWidget: Padding(
+              padding: const EdgeInsets.only(
+                left: ThemeSize.paddingLarge,
+                right: ThemeSize.paddingLarge,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: const TitleMedium(
+                      "ACCETTA TUTTO",
+                      underline: true,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  ThemeSizedBox.height16,
+                  SecondaryButton(
+                    text: "REGISTRATI",
+                    onPressed: () async {
+                      await registerUser();
+                      Get.toNamed(Routes.lastMensesPage);
+                    },
+                  ),
+                ],
+              ),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: const TitleMedium(
-                    "ACCETTA TUTTO",
-                    underline: true,
-                    textAlign: TextAlign.center,
-                  ),
+                ThemeSizedBox.height36,
+                const DisplayMedium(
+                  "La privacy prima di tutto",
                 ),
-                ThemeSizedBox.height16,
-                SecondaryButton(
-                  text: "REGISTRATI",
-                  onPressed: () async {
-                    await registerUser();
-                    Get.toNamed(Routes.lastMensesPage);
-                  },
+                ThemeSizedBox.height32,
+                const PrivacyDetailWidget(
+                  title: "Resta aggiornato sul mondo Lines",
+                  description:
+                      "Ricevi comunicazioni su Lines e permettici di svolgere ricerche di mercato, come da [informativa privacy]. In qualsiasi momento potrai modificare la tua preferenza.",
+                ),
+                ThemeSizedBox.height24,
+                const PrivacyDetailWidget(
+                  title: "Ricevi contenuti e missioni personalizzate per te!",
+                  description:
+                      "Per noi è importante conoscere i tuoi interessi! Permettici di darti un'esperienza personalizzata inviandoti comunicazioni e promozioni non generiche su Lines e, se lo vorrai, anche sugli altri marchi della famiglia Fater e nostri partner terzi, come da informativa privacy. In qualsiasi momento potrai modificare le tue preferenze.",
+                ),
+                ThemeSizedBox.height24,
+                const PrivacyDetailWidget(
+                  title: "Ricevi comunicazioni e offerte su altri prodotti",
+                  description:
+                      "Ricevi comunicazioni sugli altri brand della famiglia Fater e nostri partner terzi, e permettici di svolgere ricerche di mercato, come da informativa privacy. In qualsiasi momento potrai modificare la tua preferenza.",
                 ),
               ],
             ),
-          ),
-          child: Column(
-            children: [
-              SizedBox(
-                height: Get.statusBarHeight,
-              ),
-              const DisplayMedium(
-                "La privacy prima di tutto",
-              ),
-              ThemeSizedBox.height32,
-              const PrivacyDetailWidget(
-                title: "Resta aggiornato sul mondo Lines",
-                description:
-                    "Ricevi comunicazioni su Lines e permettici di svolgere ricerche di mercato, come da [informativa privacy]. In qualsiasi momento potrai modificare la tua preferenza.",
-              ),
-              ThemeSizedBox.height24,
-              const PrivacyDetailWidget(
-                title: "Ricevi contenuti e missioni personalizzate per te!",
-                description:
-                    "Per noi è importante conoscere i tuoi interessi! Permettici di darti un'esperienza personalizzata inviandoti comunicazioni e promozioni non generiche su Lines e, se lo vorrai, anche sugli altri marchi della famiglia Fater e nostri partner terzi, come da informativa privacy. In qualsiasi momento potrai modificare le tue preferenze.",
-              ),
-              ThemeSizedBox.height24,
-              const PrivacyDetailWidget(
-                title: "Ricevi comunicazioni e offerte su altri prodotti",
-                description:
-                    "Ricevi comunicazioni sugli altri brand della famiglia Fater e nostri partner terzi, e permettici di svolgere ricerche di mercato, come da informativa privacy. In qualsiasi momento potrai modificare la tua preferenza.",
-              ),
-            ],
           ),
         ),
       ),

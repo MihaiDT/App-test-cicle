@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/theme/theme_button_size.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
 
 import '../../../core/app_theme.dart';
 import '../../../widgets/buttons/primary_button.dart';
@@ -39,9 +39,11 @@ class WalkthroughBottom extends StatelessWidget {
               onPressed: () => controller.currentStepIndex < controller.lastStep
                   ? controller.onTapNext()
                   : controller.onTapLetsStart(),
-              text: controller.currentStepIndex < controller.lastStep
-                  ? "CONTINUA"
-                  : "AVANTI",
+              child: TitleLarge(
+                controller.currentStepIndex < controller.lastStep
+                    ? "CONTINUA"
+                    : "AVANTI",
+              ),
             ),
             if (!controller.isLastStep) ...[
               ThemeSizedBox.height24,

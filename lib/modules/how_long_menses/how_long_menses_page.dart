@@ -4,6 +4,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/modules/how_long_menses/widget/how_often_menses_widget.dart';
 import 'package:lines/modules/how_long_menses/widget/menses_duration_counter_widget.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
@@ -30,62 +31,64 @@ class _HowLongMensesPageState extends State<HowLongMensesPage> {
           "CONOSCIAMOCI",
         ),
       ),
-      body: BottomWidgetLayout(
-        scrollableAreaPadding: const EdgeInsets.symmetric(
-          horizontal: ThemeSize.paddingLarge,
-        ),
-        bottomWidget: Padding(
-          padding: const EdgeInsets.only(
-            left: ThemeSize.paddingLarge,
-            right: ThemeSize.paddingLarge,
+      body: SafeArea(
+        child: BottomWidgetLayout(
+          scrollableAreaPadding: const EdgeInsets.symmetric(
+            horizontal: ThemeSize.paddingLarge,
+          ),
+          bottomWidget: Padding(
+            padding: const EdgeInsets.only(
+              left: ThemeSize.paddingLarge,
+              right: ThemeSize.paddingLarge,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SecondaryButton(
+                  text: "AVANTI",
+                  onPressed: () {
+                    Get.offAndToNamed(Routes.walkthrough);
+                  },
+                ),
+                ThemeSizedBox.height16,
+                GestureDetector(
+                  onTap: () {},
+                  child: const TitleMedium(
+                    "NON LO SO",
+                    underline: true,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SecondaryButton(
-                text: "AVANTI",
-                onPressed: () {},
+              ThemeSizedBox.height60,
+              const DisplayMedium(
+                "Quanto durano in media le tue mestruazioni?",
+                textAlign: TextAlign.center,
               ),
-              ThemeSizedBox.height16,
-              GestureDetector(
-                onTap: () {},
-                child: const TitleMedium(
-                  "NON LO SO",
-                  underline: true,
-                  textAlign: TextAlign.center,
-                ),
+              ThemeSizedBox.height32,
+              MensesDurationCounterWidget(
+                onTap: (value) {
+                  mensesDuration = value;
+                },
+              ),
+              ThemeSizedBox.height32,
+              const Divider(),
+              ThemeSizedBox.height32,
+              const DisplayMedium(
+                "Di solito, ogni quanti giorni ti arrivano le mestruazioni?",
+              ),
+              ThemeSizedBox.height32,
+              HowOftenMensesWidget(
+                onTap: (value) {
+                  howOftenMensesValue = value;
+                },
               ),
             ],
           ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: Get.statusBarHeight,
-            ),
-            const DisplayMedium(
-              "Quanto durano in media le tue mestruazioni?",
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height32,
-            MensesDurationCounterWidget(
-              onTap: (value) {
-                mensesDuration = value;
-              },
-            ),
-            ThemeSizedBox.height32,
-            const Divider(),
-            ThemeSizedBox.height32,
-            const DisplayMedium(
-              "Di solito, ogni quanti giorni ti arrivano le mestruazioni?",
-            ),
-            ThemeSizedBox.height32,
-            HowOftenMensesWidget(
-              onTap: (value) {
-                howOftenMensesValue = value;
-              },
-            ),
-          ],
         ),
       ),
     );

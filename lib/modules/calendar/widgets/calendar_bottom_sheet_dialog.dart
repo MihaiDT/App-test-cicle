@@ -88,13 +88,13 @@ class _CalendarBottomSheetDialogState extends State<CalendarBottomSheetDialog> {
                 ),
                 Expanded(
                   child: PrimaryButton(
-                    text: 'CONFERMA',
                     fullWidth: false,
                     small: false,
                     onPressed: () {
                       widget.onConfirmTap(widget.filteredMap);
                       Navigator.pop(context);
                     },
+                    child: const TitleLarge('CONFERMA'),
                   ),
                 )
               ],

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/modules/register/register_and_login_page.dart';
 
 import '../../core/utils/helpers.dart';
 import '../../routes/routes.dart';

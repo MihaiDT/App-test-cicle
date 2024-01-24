@@ -32,7 +32,7 @@ class AppScaffoldPage extends StatelessWidget {
       bottomNavigationBar: bottomNavigationBar,
       backgroundColor: backgroundColor ?? ThemeColor.background,
       body: _body(context),
-      extendBody: false,
+      extendBody: true,
       extendBodyBehindAppBar: extendBodyBehindAppBar,
       resizeToAvoidBottomInset: true,
     );

@@ -6,19 +6,16 @@ import '../../core/theme/text_wrapper.dart';
 
 class InputTextField extends StatelessWidget {
   final FocusNode? focusNode;
-
   final bool isPassword;
-
   final bool isDisabled;
   final bool hasError;
   final bool isRequired;
-
   final String label;
   final String? placeholder;
   final bool multiline;
-
   final bool obscureText;
   final TextInputType keyboardType; // Default: .text
+  final double contentPaddingLeft;
   final TextAlign textAlign;
   final TextCapitalization? textCapitalization;
   final TextEditingController textEditingController;
@@ -46,6 +43,7 @@ class InputTextField extends StatelessWidget {
     this.onEditingComplete,
     this.onTapTogglePassword,
     this.placeholder,
+    this.contentPaddingLeft = 32,
     this.textAlign = TextAlign.left,
     this.textCapitalization,
     required this.textEditingController,
@@ -77,6 +75,7 @@ class InputTextField extends StatelessWidget {
                   hasError: hasError,
                   isDisabled: isDisabled,
                   placeholder: placeholder,
+                  paddingLeft: contentPaddingLeft,
                 ),
           style: NewThemeTextStyle.bodyMedium.copyWith(
             color: ThemeColor.whiteDark,

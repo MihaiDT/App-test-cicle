@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_button_size.dart';
 
 import '../../core/app_theme.dart';
 
 class PrimaryButton extends StatelessWidget {
   final ButtonSize buttonSize;
-  final String text;
+  final Widget child;
   final GestureTapCallback? onPressed;
   final bool small;
   final bool fullWidth;
@@ -15,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
     super.key,
     this.buttonSize = ButtonSize.h56,
     this.fullWidth = true,
-    required this.text,
+    required this.child,
     this.small = false,
     this.onPressed,
   });
@@ -52,9 +51,7 @@ class PrimaryButton extends StatelessWidget {
                 color: ThemeColor.buttonDisableBackGround,
               ),
         child: Center(
-          child: TitleLarge(
-            text,
-          ),
+          child: child,
         ),
       ),
     );
