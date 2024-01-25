@@ -6,6 +6,9 @@ import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 
+import 'data/models/period_map.dart';
+import 'data/models/period_status.dart';
+
 /// Just a wrapper in order to simplify getter access
 class EasyGetter<T> {
   Rx<ResponseHandler<T>> rxValue;
@@ -32,6 +35,8 @@ class AppController extends GetxController {
   /// The parameter used to register the user
   final RegistrationParameters registerParameter;
 
+  final EasyGetter<PeriodMap> periodMap;
+
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
 
@@ -41,11 +46,13 @@ class AppController extends GetxController {
     required this.settings,
     required this.survey,
     required this.registerParameter,
+    required this.periodMap,
     required this.isLoginFlow,
   });
 
   factory AppController.initial() {
     return AppController._(
+      periodMap: EasyGetter<PeriodMap>(),
       user: EasyGetter<User>(),
       question: EasyGetter<Question>(),
       settings: EasyGetter<Settings>(),

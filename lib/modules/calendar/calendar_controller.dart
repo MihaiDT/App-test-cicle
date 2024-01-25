@@ -48,14 +48,18 @@ class CalendarController extends GetxController {
   }
 
   final RxBool _rxShowSaveButtonSymptoms = false.obs;
+
   bool get showSaveButtonSymptoms => _rxShowSaveButtonSymptoms.value;
+
   set showSaveButtonSymptoms(bool newValue) {
     _rxShowSaveButtonSymptoms.value = newValue;
   }
 
   final RxBool _rxShowSaveButtonSymptomCategories = false.obs;
+
   bool get showSaveButtonSymptomCategories =>
       _rxShowSaveButtonSymptomCategories.value;
+
   set showSaveButtonSymptomCategories(bool newValue) {
     _rxShowSaveButtonSymptomCategories.value = newValue;
   }
