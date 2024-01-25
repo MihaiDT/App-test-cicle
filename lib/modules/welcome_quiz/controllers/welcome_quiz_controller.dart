@@ -82,4 +82,7 @@ class WelcomeQuizController extends GetxController {
   double get progressValue {
     return (appController.survey.value?.completionPercentage ?? 0) / 100;
   }
+
+  /// Return the coin amount for the current survey fetched from settings
+  int get coinAmount => appController.settings.value?.welcomeSurveyCoins ?? 150;
 }

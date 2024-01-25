@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:local_auth/local_auth.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/repository/settings_service.dart';
 
-import '../../core/utils/helpers.dart';
 import '../../modules/welcome/welcome_controller.dart';
 import '../../modules/welcome/welcome_page.dart';
 
 class SplashPageController extends GetxController {
-  SplashPageController() {
+  @override
+  void onInit() async {
+    super.onInit();
+    await SettingsService.fetchSettings();
+
     _startAnimation();
   }
+
+  SplashPageController() {}
 
   _pageTransition() {
     // Navigazione manuale verso la WelcomePage per gestire correttamente l'animazione
@@ -36,8 +42,9 @@ class SplashPageController extends GetxController {
   }
 
   _startAnimation() async {
-    // Aspetto 2 secondi prima di iniziare l'animazione
-    await wait(seconds: 2);
-    _pageTransition();
+    if (appController.settings.responseHandler.isSuccessful) {
+      await wait(seconds: 1);
+      _pageTransition();
+    }
   }
 }

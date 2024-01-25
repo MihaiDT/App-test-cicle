@@ -38,7 +38,9 @@ class QuizOutroPage extends GetView<WelcomeQuizController> {
               ThemeIcon.coinStack,
             ),
             ThemeSizedBox.height16,
-            const AppCoin(coinAmount: 150),
+            AppCoin(
+              coinAmount: controller.coinAmount,
+            ),
             ThemeSizedBox.height40,
             const QuizBodyText(
               title: 'Complimenti!',

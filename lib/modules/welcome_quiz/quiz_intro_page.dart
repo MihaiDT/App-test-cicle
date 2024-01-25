@@ -49,7 +49,9 @@ class QuizIntroPage extends GetView<WelcomeQuizController> {
                   'Raccontaci qualcosa in più su di te:\nriceverai subito 150 Coins',
             ),
             ThemeSizedBox.height32,
-            const AppCoin(coinAmount: 150),
+            AppCoin(
+              coinAmount: controller.coinAmount,
+            ),
             const Spacer(),
             Obx(
               () => PrimaryLoadingButton(

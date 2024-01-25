@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/models/question.dart';
+import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
@@ -24,8 +25,8 @@ class EasyGetter<T> {
 class AppController extends GetxController {
   /// The response of log in and register api
   final EasyGetter<User> user;
-
   final EasyGetter<Question> question;
+  final EasyGetter<Settings> settings;
   final EasyGetter<Survey> survey;
 
   /// The parameter used to register the user
@@ -37,6 +38,7 @@ class AppController extends GetxController {
   AppController._({
     required this.question,
     required this.user,
+    required this.settings,
     required this.survey,
     required this.registerParameter,
     required this.isLoginFlow,
@@ -46,6 +48,7 @@ class AppController extends GetxController {
     return AppController._(
       user: EasyGetter<User>(),
       question: EasyGetter<Question>(),
+      settings: EasyGetter<Settings>(),
       survey: EasyGetter<Survey>(),
       registerParameter: RegistrationParameters.initial(),
       isLoginFlow: false.obs,
