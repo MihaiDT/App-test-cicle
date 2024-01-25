@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_intro_outro_controller.dart';
 import 'package:lines/repository/survey_service.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/app_round_button.dart';
@@ -11,10 +11,9 @@ import 'package:lines/widgets/coin/app_coin.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-import 'controllers/welcome_quiz_controller.dart';
 import 'widgets/quiz_body_text.dart';
 
-class QuizIntroPage extends GetView<WelcomeQuizController> {
+class QuizIntroPage extends GetView<WelcomeQuizIntroOutroController> {
   const QuizIntroPage({super.key});
 
   @override

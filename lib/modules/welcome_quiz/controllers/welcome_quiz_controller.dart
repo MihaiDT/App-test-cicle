@@ -5,7 +5,7 @@ import 'package:lines/data/models/question.dart';
 import 'package:lines/repository/survey_service.dart';
 import 'package:lines/routes/routes.dart';
 
-class WelcomeQuizController extends GetxController {
+class WelcomeQuizBodyController extends GetxController {
   List<Answers> answers = [];
   late Question question;
 
@@ -13,12 +13,12 @@ class WelcomeQuizController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     if (appController.question.responseHandler.isSuccessful &&
         appController.question.value != null) {
       answers = appController.question.value?.answers ?? [];
       question = appController.question.value!;
     }
-    super.onInit();
   }
 
   bool get isRefreshing => appController.question.responseHandler.isPending;
@@ -82,7 +82,4 @@ class WelcomeQuizController extends GetxController {
   double get progressValue {
     return (appController.survey.value?.completionPercentage ?? 0) / 100;
   }
-
-  /// Return the coin amount for the current survey fetched from settings
-  int get coinAmount => appController.settings.value?.welcomeSurveyCoins ?? 150;
 }

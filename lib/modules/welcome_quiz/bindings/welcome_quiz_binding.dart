@@ -4,6 +4,6 @@ import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_controller.d
 class WelcomeQuizBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(WelcomeQuizController());
+    Get.put(WelcomeQuizBodyController());
   }
 }

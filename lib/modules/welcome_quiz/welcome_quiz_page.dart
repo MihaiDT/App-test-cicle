@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_controller.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_body_builder.dart';
@@ -9,7 +8,7 @@ import 'package:lines/widgets/buttons/primary_loading_button.dart';
 import 'package:lines/widgets/charts/animated_linear_progress_indicator.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-class WelcomeQuizPage extends GetView<WelcomeQuizController> {
+class WelcomeQuizPage extends GetView<WelcomeQuizBodyController> {
   const WelcomeQuizPage({super.key});
 
   @override

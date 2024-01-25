@@ -6,6 +6,7 @@ import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_binding.dart';
+import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_intro_outro_binding.dart';
 import 'package:lines/modules/welcome_quiz/quiz_intro_page.dart';
 import 'package:lines/modules/welcome_quiz/quiz_outro_page.dart';
 import 'package:lines/modules/welcome_quiz/welcome_quiz_page.dart';
@@ -92,12 +93,18 @@ class Pages {
     //QuizIntroPage
     GetPage(
       name: Routes.welcomeQuizIntroPage,
+      bindings: [
+        WelcomeQuizIntroOutroBinding(),
+      ],
       page: () => _mediaQueryWrapper(const QuizIntroPage()),
     ),
 
     //QuizOutroPage
     GetPage(
       name: Routes.welcomeQuizOutroPage,
+      bindings: [
+        WelcomeQuizIntroOutroBinding(),
+      ],
       page: () => _mediaQueryWrapper(const QuizOutroPage()),
     ),
 
