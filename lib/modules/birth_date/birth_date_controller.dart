@@ -20,10 +20,11 @@ class BirthDateController extends AppScaffoldController {
 
   late FocusNode yearFocus = FocusNode();
 
-  RxBool hasErrors = false.obs;
   RxString dayError = "".obs;
   RxString monthError = "".obs;
+  RxString yearError = "".obs;
 
+  RxSet<RxString> errorList = <RxString>{}.obs;
   RxString dayValue = "".obs;
   RxString monthValue = "".obs;
   RxString yearValue = "".obs;
@@ -33,28 +34,24 @@ class BirthDateController extends AppScaffoldController {
     super.onInit();
     dayController.value.addListener(() {
       if (dayController.value.text.length >= 2) {
+        validateDay();
         FocusScope.of(Get.context!).requestFocus(monthFocus);
       }
-      ever(dayController, (_) => validateDay());
-
-      handleFocusChange(dayController.value, dayFocus);
     });
 
     monthController.value.addListener(() {
       if (monthController.value.text.length >= 2) {
+        validateMonth();
         FocusScope.of(Get.context!).requestFocus(yearFocus);
       }
-      ever(monthController, (_) => validateMonth());
-
-      handleFocusChange(monthController.value, monthFocus);
     });
 
     yearController.value.addListener(() {
       if (yearController.value.text.length >= 4) {
+        validateYear();
         FocusScope.of(Get.context!).unfocus();
         FocusManager.instance.primaryFocus?.unfocus();
       }
-      ever(yearController, (_) => validateYear());
     });
   }
 
@@ -77,36 +74,32 @@ class BirthDateController extends AppScaffoldController {
     yearController.value.clear();
   }
 
-  void handleFocusChange(
-    TextEditingController controller,
-    FocusNode focusNode,
-  ) {
-    if (controller.text.length == 1 && !focusNode.hasPrimaryFocus) {
-      controller.text = "0${controller.text}";
-    }
-  }
-
   void validateDay() {
     int? day = int.tryParse(dayController.value.text);
-
+    errorList.remove(dayError);
     if (day == null || day > 31) {
       dayError.value = "Giorno non valido";
+      errorList.add(dayError);
     }
   }
 
   void validateMonth() {
     int? month = int.tryParse(monthController.value.text);
+    errorList.remove(monthError);
 
     if (month == null || month > 12) {
       monthError.value = "Mese non valido";
+      errorList.add(monthError);
     }
   }
 
   void validateYear() {
     int? year = int.tryParse(yearController.value.text);
+    errorList.remove(yearError);
 
-    if (year == null || year > DateTime.now().year - 100) {
-      monthError.value = "Anno non valido";
+    if (year == null || year < DateTime.now().year - 100) {
+      yearError.value = "Anno non valido";
+      errorList.add(yearError);
     }
   }
 
@@ -119,8 +112,6 @@ class BirthDateController extends AppScaffoldController {
     _closeKeyboard;
     if (!_hasMoreThan13Years(day, month, year)) {
       _showError(context);
-    } else if (checkError) {
-      hasErrors.value = true;
     } else {
       _saveBirthDate(day, month, year);
       Get.toNamed(Routes.privacy);
@@ -160,15 +151,6 @@ class BirthDateController extends AppScaffoldController {
 
     // Check if the user is above 14 years old
     return age > 14;
-  }
-
-  bool get checkError {
-    int writtenValue = int.parse(dayValue.value);
-    if (writtenValue < 0 || writtenValue > 31) {
-      return true;
-    }
-
-    return false;
   }
 
   void _showError(BuildContext context) {

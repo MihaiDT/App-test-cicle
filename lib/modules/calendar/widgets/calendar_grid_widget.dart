@@ -31,6 +31,7 @@ class _CalendarGridWidgetState extends State<CalendarGridWidget> {
   late int weekdayEnd;
 
   @override
+
   /// Calculates the starting and ending days of the week,
   /// and performs setup tasks for the calendar display.
   void initState() {

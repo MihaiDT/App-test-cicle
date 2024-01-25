@@ -94,7 +94,7 @@ class InputTextField extends StatelessWidget {
           textInputAction: textInputAction,
           textAlignVertical: TextAlignVertical.center,
         ),
-        if (hasError) _errorLabels(),
+        if (hasError && errorMessage.isNotEmpty) _errorLabels(),
       ],
     );
   }

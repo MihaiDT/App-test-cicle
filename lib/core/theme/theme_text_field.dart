@@ -67,11 +67,18 @@ InputDecoration textFieldDefaultDecoration(
     ),
     hintText: placeholder ?? label,
     suffixIcon: hasError
-        ? const Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: Icon(
-              Icons.circle,
-              color: Colors.white,
+        ? Padding(
+            padding: const EdgeInsets.only(
+              right: 16.0,
+            ),
+            child: CircleAvatar(
+              radius: 12,
+              backgroundColor: Colors.white,
+              child: SvgPicture.asset(
+                ThemeIcon.close,
+                color: ThemeColor.cicloColor,
+                height: 12,
+              ),
             ),
           )
         : const SizedBox(),

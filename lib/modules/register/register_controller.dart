@@ -2,9 +2,11 @@ import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
-import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
-class RegisterAndLoginController extends AppScaffoldController {
+class RegisterAndLoginController extends GetxController {
+  RxString emailValue = "".obs;
+  RxString emailError = "".obs;
+
   bool get isLoginPage => appController.isLoginFlow.value;
 
   set isLoginPage(bool value) {
@@ -26,5 +28,14 @@ class RegisterAndLoginController extends AppScaffoldController {
         password: password,
       ),
     );
+  }
+
+  /// Check if email is valid for the regex
+  void validateEmail() {
+    if (!GetUtils.isEmail(emailValue.value)) {
+      emailError.value = "Email non valida";
+    } else {
+      emailError.value = "";
+    }
   }
 }

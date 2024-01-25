@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
@@ -57,6 +58,7 @@ class BirthDatePage extends GetView<BirthDateController> {
             ),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ThemeSizedBox.height60,
               const DisplayMedium(
@@ -68,68 +70,90 @@ class BirthDatePage extends GetView<BirthDateController> {
                 "Inserisci la tua data di nascita corretta, così puoi avere un calendario mestruale disegnato per te.",
                 textAlign: TextAlign.center,
               ),
-              Row(
-                children: [
-                  Flexible(
-                    flex: 120,
-                    child: InputTextField(
-                      focusNode: controller.dayFocus,
-                      contentPaddingLeft: 0,
-                      label: "",
-                      placeholder: "GG",
-                      textAlign: TextAlign.center,
-                      textEditingController: controller.dayController.value,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(2),
-                      ],
-                      errorMessage: controller.dayError.value,
-                      onChanged: (txt) {
-                        controller.dayValue.value = txt;
+              Obx(
+                () => Row(
+                  children: [
+                    Flexible(
+                      flex: 120,
+                      child: InputTextField(
+                        focusNode: controller.dayFocus,
+                        contentPaddingLeft: 0,
+                        label: "",
+                        placeholder: "GG",
+                        textAlign: TextAlign.center,
+                        textEditingController: controller.dayController.value,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(2),
+                        ],
+                        onChanged: (txt) {
+                          controller.dayValue.value = txt;
+                        },
+                      ),
+                    ),
+                    ThemeSizedBox.width16,
+                    Flexible(
+                      flex: 120,
+                      child: InputTextField(
+                        focusNode: controller.monthFocus,
+                        contentPaddingLeft: 0,
+                        label: "",
+                        placeholder: "MM",
+                        textAlign: TextAlign.center,
+                        textEditingController: controller.monthController.value,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(2),
+                        ],
+                        onChanged: (txt) {
+                          controller.monthValue.value = txt;
+                        },
+                      ),
+                    ),
+                    ThemeSizedBox.width16,
+                    Flexible(
+                      flex: 160,
+                      child: InputTextField(
+                        focusNode: controller.yearFocus,
+                        contentPaddingLeft: 0,
+                        label: "",
+                        placeholder: "AAAA",
+                        textAlign: TextAlign.center,
+                        textEditingController: controller.yearController.value,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(4),
+                        ],
+                        onChanged: (txt) {
+                          controller.yearValue.value = txt;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ThemeSizedBox.height12,
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: Obx(() {
+                  return Column(
+                    children: List<Widget>.generate(
+                      controller.errorList.length,
+                      (index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: BodyMedium(
+                            controller.errorList.elementAt(index).value,
+                            color: ThemeColor.cicloColor,
+                          ),
+                        );
                       },
                     ),
-                  ),
-                  ThemeSizedBox.width16,
-                  Flexible(
-                    flex: 120,
-                    child: InputTextField(
-                      focusNode: controller.monthFocus,
-                      contentPaddingLeft: 0,
-                      label: "",
-                      placeholder: "MM",
-                      hasError: controller.hasErrors.value,
-                      textAlign: TextAlign.center,
-                      textEditingController: controller.monthController.value,
-                      keyboardType: TextInputType.number,
-                      errorMessage: controller.monthError.value,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(2),
-                      ],
-                      onChanged: (txt) {
-                        controller.monthValue.value = txt;
-                      },
-                    ),
-                  ),
-                  ThemeSizedBox.width16,
-                  Flexible(
-                    flex: 160,
-                    child: InputTextField(
-                      focusNode: controller.yearFocus,
-                      contentPaddingLeft: 0,
-                      label: "",
-                      placeholder: "AAAA",
-                      textAlign: TextAlign.center,
-                      textEditingController: controller.yearController.value,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(4),
-                      ],
-                      onChanged: (txt) {
-                        controller.yearValue.value = txt;
-                      },
-                    ),
-                  ),
-                ],
+                  );
+                }),
               ),
             ],
           ),

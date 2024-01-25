@@ -160,12 +160,20 @@ class RegisterAndLoginPage extends StatelessWidget {
               ThemeSizedBox.height32,
               const DividerSection(),
               ThemeSizedBox.height32,
-              InputTextField(
-                label: "EMAIL",
-                placeholder: 'Inserisci la tua email',
-                keyboardType: TextInputType.emailAddress,
-                textCapitalization: TextCapitalization.none,
-                textEditingController: emailController,
+              Obx(
+                () => InputTextField(
+                  label: "EMAIL",
+                  placeholder: 'Inserisci la tua email',
+                  keyboardType: TextInputType.emailAddress,
+                  textCapitalization: TextCapitalization.none,
+                  textEditingController: emailController,
+                  onChanged: (text) {
+                    controller.emailValue.value = text;
+                  },
+                  onEditingComplete: controller.validateEmail,
+                  hasError: controller.emailError.value.isNotEmpty,
+                  errorMessage: controller.emailError.value,
+                ),
               ),
               ThemeSizedBox.height24,
               Obx(
