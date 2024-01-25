@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/app_theme.dart';
 
-import '../../../core/app_theme.dart';
-import '../../../widgets/texts/text_gradient.dart';
 import '../walkthrough_controller.dart';
 
 class WalktroughSkipLink extends StatelessWidget {

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../core/app_theme.dart';
-import '../../../core/theme/text_wrapper.dart';
-import '../../../widgets/texts/text_gradient.dart';
+import 'package:lines/core/app_theme.dart';
 
 class WalkthroughStep2 extends StatelessWidget {
   const WalkthroughStep2({super.key});

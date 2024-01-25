@@ -7,7 +7,10 @@ import 'package:lines/table_calendar/src/table_calendar.dart';
 class HorizontalRangeCalendar extends StatefulWidget {
   final Function(DateTimeRange?) onRangeSelected;
 
-  const HorizontalRangeCalendar({required this.onRangeSelected, super.key});
+  const HorizontalRangeCalendar({
+    required this.onRangeSelected,
+    super.key,
+  });
 
   @override
   State<HorizontalRangeCalendar> createState() =>
@@ -20,6 +23,7 @@ class _HorizontalRangeCalendarState extends State<HorizontalRangeCalendar> {
 
   @override
   Widget build(BuildContext context) {
+    /// PAY ATTENTION TO TABLE CALENDAR, IS A FORKED PACKAGE
     return TableCalendar(
       availableGestures: AvailableGestures.none,
       calendarStyle: calendarStyle,

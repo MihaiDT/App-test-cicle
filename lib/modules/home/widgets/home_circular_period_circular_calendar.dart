@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../../core/app_theme.dart';
 import '../../../core/utils/helpers.dart';
@@ -15,11 +14,7 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
   static const follicolareColor = Color(0xff70B873);
   static const orange = Color(0xffDC874A);
 
-  final size = Get.width * 0.74;
-  RxInt counter = 0.obs;
-  bool updating = false;
-
-  HomeCircularPeriodCircularCalendar({super.key});
+  const HomeCircularPeriodCircularCalendar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +64,8 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
       child: Obx(
         () => AnimatedRotation(
           duration: const Duration(milliseconds: 400),
-          turns: -(controller.periodSelectedDateIndex /
-              (datesLength *
-                  1.15)), // Negativi perché se vado in avanti col calendario devo ruotare in senso antiorario con la corona circolare
+          turns: -(controller.periodSelectedDateIndex / (datesLength * 1.15)),
+          // Negativi perché se vado in avanti col calendario devo ruotare in senso antiorario con la corona circolare
           child: Stack(
             children: [
               Center(
@@ -207,7 +201,7 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
   }
 
   _panHandler(DragUpdateDetails d) async {
-    if (!updating) {
+    if (!controller.updating) {
       /// Pan location on the wheel
       bool onTop = d.localPosition.dy <= size / 2;
       bool onLeftSide = d.localPosition.dx <= size / 2;
@@ -241,7 +235,7 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
       // Now do something interesting with these computations!
       if (movingClockwise && rotationalChange > 0.3) {
         if (controller.periodSelectedDateIndex > 0) {
-          updating = true;
+          controller.updating = true;
           HapticFeedback.lightImpact();
 
           await wait(milliseconds: 100);
@@ -251,7 +245,7 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
         }
       } else if (rotationalChange < -0.3) {
         if (controller.periodSelectedDateIndex < controller.dates.length - 2) {
-          updating = true;
+          controller.updating = true;
           HapticFeedback.lightImpact();
 
           await wait(milliseconds: 100);
@@ -268,7 +262,9 @@ class HomeCircularPeriodCircularCalendar extends GetView<HomeController> {
   }
 
   _resetUpdating() async {
-    updating = false;
+    controller.updating = false;
     await wait(milliseconds: 100);
   }
+
+  double get size => Get.width * 0.74;
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../data/models/symptom.dart';
-import '../../data/models/symptom_category.dart';
 import 'calendar_store.dart';
 
 class SymptomsController extends GetxController {

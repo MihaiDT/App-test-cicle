@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 final enabledOutlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(

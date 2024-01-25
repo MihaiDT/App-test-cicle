@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/theme/theme_edge_insets.dart';
+import 'package:lines/core/app_theme.dart';
 
 import 'quiz_button_check.dart';
 import 'quiz_highlighted_box.dart';

@@ -7,15 +7,20 @@ import '../../widgets/layouts/app_scaffold_controller.dart';
 
 class HomeController extends AppScaffoldController {
   // late final HomeHorizontalPeriodCalendarController horizontalCalendarController;
-
+  RxInt counter = 0.obs;
+  bool updating = false;
   final scrollSnapListKey = GlobalKey<ScrollSnapListState>();
 
   RxBool rxPlayButtonVisible = false.obs;
+
   bool get playButtonVisible => rxPlayButtonVisible.value;
+
   set playButtonVisible(bool newValue) => rxPlayButtonVisible.value = newValue;
 
   RxInt rxPeriodSelectedDateIndex = 0.obs;
+
   int get periodSelectedDateIndex => rxPeriodSelectedDateIndex.value;
+
   set periodSelectedDateIndex(int newValue) =>
       rxPeriodSelectedDateIndex.value = newValue;
 

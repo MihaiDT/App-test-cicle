@@ -20,7 +20,7 @@ class DividerSection extends StatelessWidget {
             ),
           ),
           ThemeSizedBox.width12,
-          TitleMedium("OPPURE"),
+          const TitleMedium("OPPURE"),
           ThemeSizedBox.width12,
           Expanded(
             child: Container(

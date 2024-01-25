@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/modules/register/register_and_login_page.dart';
 import 'package:lines/routes/routes.dart';
 
-import '../../../core/app_theme.dart';
 import '../welcome_controller.dart';
 import 'welcome_signin_button.dart';
 

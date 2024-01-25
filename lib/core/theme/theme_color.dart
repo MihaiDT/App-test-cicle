@@ -15,4 +15,5 @@ class ThemeColor {
   static Color cicloColor = const Color(0xffc62f3a);
   static Color primaryOpaque = primary.withOpacity(0.1);
   static Color opaqueWhite = Colors.white.withOpacity(0.3);
+  static Color lightGrey = const Color(0xFF75797F);
 }

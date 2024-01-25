@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class ThemeDecorationImage {
   DecorationImage get bgDark => DecorationImage(

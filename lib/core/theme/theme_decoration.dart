@@ -1,4 +1,4 @@
-import 'theme_decoration_images.dart';
+import 'package:lines/core/app_theme.dart';
 
 class ThemeDecoration {
   static ThemeDecorationImage images = ThemeDecorationImage();

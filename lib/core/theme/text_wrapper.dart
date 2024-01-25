@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/theme/theme_shader_text_wrapper.dart';
-import 'package:lines/core/theme/theme_text_style.dart';
+import 'package:lines/core/app_theme.dart';
 
 class DisplayLarge extends TextWrapper with ThemeShaderTextWrapper {
   const DisplayLarge(

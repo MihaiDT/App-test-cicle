@@ -1,7 +1,5 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../../core/theme/theme_icon.dart';
-
 class Symptom {
   final String symptomName;
   final RxBool rxSelected = false.obs;

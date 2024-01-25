@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/theme/theme_edge_insets.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_highlighted_box.dart';
 
-import '../../../core/theme/theme_sized_box.dart';
 import 'quiz_select_title.dart';
 
 class QuizSelectButtonLarge extends StatelessWidget {

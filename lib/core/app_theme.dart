@@ -3,11 +3,16 @@ import 'package:lines/core/theme/theme_text_style.dart';
 
 import 'theme/theme_color.dart';
 
+export 'theme/text_wrapper.dart';
+export 'theme/theme_button_size.dart';
 export 'theme/theme_color.dart';
 export 'theme/theme_decoration.dart';
+export 'theme/theme_decoration_images.dart';
+export 'theme/theme_edge_insets.dart';
 export 'theme/theme_gradient.dart';
 export 'theme/theme_icon.dart';
 export 'theme/theme_image.dart';
+export 'theme/theme_shader_text_wrapper.dart';
 export 'theme/theme_shadow.dart';
 export 'theme/theme_size.dart';
 export 'theme/theme_sized_box.dart';

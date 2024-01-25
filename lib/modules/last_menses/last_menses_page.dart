@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
-import 'package:lines/core/theme/theme_decoration.dart';
-import 'package:lines/core/theme/theme_size.dart';
-import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/modules/last_menses/widget/consent_bottomsheet.dart';
 import 'package:lines/modules/last_menses/widget/horizontal_range_calendar.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -20,6 +19,18 @@ class LastMensesPage extends StatefulWidget {
 
 class _LastMensesPageState extends State<LastMensesPage> {
   ValueNotifier<DateTimeRange?> datetimeRange = ValueNotifier(null);
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.bottomSheet(
+        const ConsentBottomSheet(),
+        enableDrag: false,
+        isDismissible: false,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,6 @@ class AppCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final datePickerFormat = DateFormat('yyyy-MM-dd');
     final oneDayDuration = const Duration(days: 1);
 
     final now = DateTime.now();

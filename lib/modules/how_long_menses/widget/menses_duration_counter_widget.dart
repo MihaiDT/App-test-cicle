@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
-import 'package:lines/core/theme/theme_button_size.dart';
 import 'package:lines/modules/how_long_menses/controller/menses_duration_counter_controller.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 

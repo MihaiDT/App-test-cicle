@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/theme/theme_button_size.dart';
+import 'package:lines/modules/welcome/welcome_controller.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
-
-import '../../../widgets/buttons/primary_button.dart';
-import '../welcome_controller.dart';
 
 class WelcomeSigninButton extends StatelessWidget {
   final WelcomeController controller;
 
-  const WelcomeSigninButton(this.controller, {super.key});
+  const WelcomeSigninButton(
+    this.controller, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

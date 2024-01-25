@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/texts/text_gradient.dart';
 
 mixin ThemeShaderTextWrapper on TextWrapper {

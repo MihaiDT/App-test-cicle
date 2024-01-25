@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/app_theme.dart';
 
-import '../../../core/app_theme.dart';
 import '../../../core/utils/helpers.dart';
 import '../../../widgets/layouts/scrollable_appbar.dart';
-import '../../../widgets/texts/text_gradient.dart';
 
 class MainAppBar extends StatelessWidget {
   const MainAppBar({super.key});
@@ -63,7 +61,7 @@ class MainAppBar extends StatelessWidget {
         //     style: ThemeTextStyle.calendarMonth,
         //   ),
         // ),
-        HeadlineSmall('Calendario').applyShaders(context!),
+        const HeadlineSmall('Calendario').applyShaders(context!),
         _calendar(),
       ],
     );

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
-import 'package:lines/core/theme/theme_color.dart';
-import 'package:lines/core/theme/theme_decoration.dart';
-import 'package:lines/core/theme/theme_size.dart';
-import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/birth_date/birth_date_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';

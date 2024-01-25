@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_recap.dart';
 
-import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_button_size.dart';
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_edge_insets.dart';
-import '../../../core/theme/theme_icon.dart';
-import '../../../core/theme/theme_image.dart';
-import '../../../core/theme/theme_sized_box.dart';
 import '../../../widgets/buttons/primary_button.dart';
 import '../calendar_controller.dart';
 import 'calendar_bottom_sheet_body.dart';

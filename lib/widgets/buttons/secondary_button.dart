@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
-import 'package:lines/core/theme/theme_button_size.dart';
+import 'package:lines/core/app_theme.dart';
 
 class SecondaryButton extends StatelessWidget {
   final ButtonSize buttonSize;

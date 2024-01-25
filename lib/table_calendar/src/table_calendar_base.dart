@@ -209,7 +209,7 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
               constraints: constraints,
               pageController: _pageController,
               scrollPhysics: _canScrollHorizontally
-                  ? PageScrollPhysics()
+                  ? const PageScrollPhysics()
                   : NeverScrollableScrollPhysics(),
               firstDay: widget.firstDay,
               lastDay: widget.lastDay,
