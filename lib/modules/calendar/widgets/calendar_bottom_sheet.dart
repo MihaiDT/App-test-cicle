@@ -66,8 +66,7 @@ class CalendarBottomSheet extends StatelessWidget {
                               ),
                               ThemeSizedBox.height16,
                               Obx(() => Visibility(
-                                    visible: controller.symptomsController
-                                        .getActiveSymptoms.isNotEmpty,
+                                    visible: controller.showRecapMenu,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 16),

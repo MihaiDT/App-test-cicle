@@ -7,7 +7,6 @@ import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 
 import 'data/models/period_map.dart';
-import 'data/models/period_status.dart';
 
 /// Just a wrapper in order to simplify getter access
 class EasyGetter<T> {

@@ -64,6 +64,12 @@ class CalendarController extends GetxController {
     _rxShowSaveButtonSymptomCategories.value = newValue;
   }
 
+  final RxBool _rxShowRecapMenuSizeCondition = false.obs;
+  bool get _showRecapMenuSizeCondition => _rxShowRecapMenuSizeCondition.value;
+  set _showRecapMenuSizeCondition(bool newValue) {
+    _rxShowRecapMenuSizeCondition.value = newValue;
+  }
+
   final RxDouble _rxSheetVSize = 0.5.obs;
 
   double get sheetVSize => _rxSheetVSize.value;
@@ -79,6 +85,10 @@ class CalendarController extends GetxController {
 
   final DraggableScrollableController draggableScrollableController =
       DraggableScrollableController();
+
+  bool get showRecapMenu =>
+      symptomsController.getActiveSymptoms.isNotEmpty &&
+      _showRecapMenuSizeCondition;
 
   @override
   void onInit() {
@@ -161,6 +171,11 @@ class CalendarController extends GetxController {
           showBottomMenu = false;
           showSaveButton = false;
           calendarStore.selectedDate = null;
+        }
+        if (draggableScrollableController.size > 0.3) {
+          _showRecapMenuSizeCondition = true;
+        } else {
+          _showRecapMenuSizeCondition = false;
         }
       },
     );
