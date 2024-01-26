@@ -33,8 +33,10 @@ class CalendarWeekRow extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Center(
-              child: CalendarMonthYearSwitch(),
+            Center(
+              child: CalendarMonthYearSwitch(
+                  currentSelectedTab: controller.selectedTab,
+                  onTabChanged: controller.changeTab),
             ),
             GridView.count(
               crossAxisCount: DateTime.daysPerWeek,

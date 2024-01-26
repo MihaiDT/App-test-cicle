@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
+
+import '../../../core/theme/text_wrapper.dart';
+import '../../../core/theme/theme_color.dart';
+import '../../../data/enums/calendar_tabs.dart';
 
 class CalendarMonthYearSwitch extends StatelessWidget {
-  final bool monthSelected;
+  final CalendarTabs currentSelectedTab;
+  final Function(CalendarTabs) onTabChanged;
 
-  const CalendarMonthYearSwitch({this.monthSelected = true, super.key});
+  const CalendarMonthYearSwitch(
+      {super.key,
+      required this.onTabChanged,
+      required this.currentSelectedTab});
 
   final BorderRadiusGeometry _borderRadiusGeometry =
       const BorderRadius.all(Radius.circular(40));
@@ -21,24 +27,26 @@ class CalendarMonthYearSwitch extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _innerContainer('MESE', monthSelected),
+          _innerContainer('MESE', CalendarTabs.monthTab,
+              currentSelectedTab == CalendarTabs.monthTab),
           const SizedBox(
             width: 2,
           ),
-          _innerContainer('ANNO', monthSelected == false),
+          _innerContainer('ANNO', CalendarTabs.yearTab,
+              currentSelectedTab == CalendarTabs.yearTab),
         ],
       ),
     );
   }
 
-  Widget _innerContainer(String text, bool selected) {
+  Widget _innerContainer(String text, CalendarTabs tab, bool highlighted) {
     return GestureDetector(
       onTap: () {
-        //TODO: add onTap callback
+        onTabChanged(tab);
       },
       child: Container(
         decoration: BoxDecoration(
-          color: selected ? Colors.white : Colors.transparent,
+          color: highlighted ? Colors.white : Colors.transparent,
           borderRadius: _borderRadiusGeometry,
         ),
         padding: const EdgeInsets.symmetric(

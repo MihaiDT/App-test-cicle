@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../data/models/symptom.dart';
 import 'calendar_scroll_controller.dart';
 import 'calendar_store.dart';
+import 'calendar_year_controller.dart';
 import 'symptoms_controller.dart';
 
 class CalendarController extends GetxController {
@@ -13,6 +15,10 @@ class CalendarController extends GetxController {
 
   CalendarScrollController get scrollableCalendarController {
     return Get.find<CalendarScrollController>();
+  }
+
+  CalendarYearController get calendarYearController {
+    return Get.find<CalendarYearController>();
   }
 
   SymptomsController get symptomsController {
@@ -78,6 +84,14 @@ class CalendarController extends GetxController {
     _rxSheetVSize.value = newSize;
   }
 
+  final Rx<CalendarTabs> rxSelectedTab = Rx(CalendarTabs.monthTab);
+
+  CalendarTabs get selectedTab => rxSelectedTab.value;
+
+  set selectedTab(CalendarTabs newTab) {
+    rxSelectedTab.value = newTab;
+  }
+
   final GlobalKey bottomSheetTitleKey = GlobalKey();
   final GlobalKey bottomSheetContainerKey = GlobalKey();
 
@@ -97,6 +111,7 @@ class CalendarController extends GetxController {
     ever(calendarStore.rxSelectedDate,
         (newDayValue) => _onDayChanged(newDayValue));
     _initScrollableCalendarController();
+    _initCalendarYearController();
     _initSymptomController();
     _initSymptomCategoryController();
 
@@ -113,6 +128,16 @@ class CalendarController extends GetxController {
       showSaveButton =
           showSaveButtonSymptoms || showSaveButtonSymptomCategories;
     });
+  }
+
+  void _initCalendarYearController() {
+    Get.lazyPut<CalendarYearController>(
+      () => CalendarYearController(
+        itemScrollController: ItemScrollController(),
+        minDate: DateTime(2020),
+        maxDate: DateTime(2030),
+      ),
+    );
   }
 
   void _initSymptomController() {
@@ -190,7 +215,23 @@ class CalendarController extends GetxController {
   void jumpToToday() {
     DateTime today = DateTime.now();
     calendarStore.selectedDate = today;
-    scrollableCalendarController.jumpToMonth(date: today);
+    if (selectedTab == CalendarTabs.monthTab) {
+      scrollableCalendarController.jumpToMonth(date: today);
+    } else {
+      calendarYearController.jumpToYear(today);
+    }
+  }
+
+  void changeTab(CalendarTabs newTab) {
+    selectedTab = newTab;
+  }
+
+  void goBackToMonthCalendar(DateTime month) {
+    selectedTab = CalendarTabs.monthTab;
+    calendarStore.selectedDate = month;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      scrollableCalendarController.jumpToMonth(date: month);
+    });
   }
 
   //TODO : for now the calendar starts at 4 months before today and ends in 4 months , later it will be dynamic according to API
