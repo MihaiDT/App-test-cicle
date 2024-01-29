@@ -146,8 +146,10 @@ class CalendarYearController extends GetxController {
       double headerPosition = headerBox?.localToGlobal(Offset.zero).dy ?? 0;
 
       GlobalKey currentKey = entry.value;
-      RenderBox? targetHeaderBox = currentKey.currentContext?.findRenderObject() as RenderBox?;
-      double targetHeaderPosition = targetHeaderBox?.localToGlobal(Offset.zero).dy ?? 0;
+      RenderBox? targetHeaderBox =
+          currentKey.currentContext?.findRenderObject() as RenderBox?;
+      double targetHeaderPosition =
+          targetHeaderBox?.localToGlobal(Offset.zero).dy ?? 0;
 
       double delta = targetHeaderPosition - headerPosition;
       if (delta > 0) {

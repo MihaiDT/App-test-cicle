@@ -27,5 +27,7 @@ class ThemeImage {
   static String bgCalendarBottomSheet =
       '$folderPath/bg_calendar_bottom_sheet.webp';
   static String talkingDroppy = '$folderPath/talking_droppy.webp';
+  static String friendship = '$folderPath/friendship.webp';
+  static String moneyPile = '$folderPath/money_pile.webp';
   static String welcomeEmail = '$folderPath/welcome_email.webp';
 }

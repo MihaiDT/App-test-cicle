@@ -64,11 +64,11 @@ class AuthenticationService {
   static Future<void> updateUser(
     UpdateUserParameters user,
   ) async {
+    final userId = appController.user.value?.userId;
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.put(
-        // todo check what is id
-        "/users/:id",
+        "/users/$userId",
         data: {
           "user": {
             "birthdate": user.birthdate,
@@ -89,6 +89,35 @@ class AuthenticationService {
       _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.pending();
+    }
+  }
+
+  static Future<void> completeUserRegistration(
+    UpdateUserParameters updateUserParameters,
+  ) async {
+    final userId = appController.user.value?.userId;
+
+    appController.user.responseHandler = ResponseHandler.pending();
+
+    try {
+      final response = await dio.post(
+        "/users/$userId/complete_profile",
+        data: {
+          "user": {
+            "invitation_code": updateUserParameters.referralCode,
+            "last_menstruation_date_start":
+                updateUserParameters.lastMenstruationDateStart,
+            "last_menstruation_date_end":
+                updateUserParameters.lastMenstruationDateEnd,
+            "period_days": updateUserParameters.periodDays,
+            "period_duration": updateUserParameters.periodDuration,
+          },
+        },
+      );
+
+      _saveUserInfo(response);
+    } catch (e) {
+      appController.user.responseHandler = ResponseHandler.failed();
     }
   }
 

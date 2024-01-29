@@ -1,8 +1,10 @@
 class User {
+  bool active;
   String birthdate;
   String email;
   String firstName;
   bool isConfirmed;
+  String userId;
   String? lastMenstrautionDate;
   String lastName;
   String? legalGuardianEmail;
@@ -17,10 +19,12 @@ class User {
   String sessionToken;
 
   User({
+    this.active = false,
     required this.birthdate,
     required this.email,
     required this.firstName,
     required this.isConfirmed,
+    required this.userId,
     this.lastMenstrautionDate,
     required this.lastName,
     this.legalGuardianEmail,
@@ -37,10 +41,12 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
+      active: json['user']['active'],
       birthdate: json['user']['birthdate'],
       email: json['user']['email'],
       firstName: json['user']['first_name'],
       isConfirmed: json['user']['is_confirmed'],
+      userId: json['user']['id'],
       lastMenstrautionDate: json['user']['last_menstraution_date'],
       lastName: json['user']['last_name'],
       mgmCode: json['user']['mgm_code'],

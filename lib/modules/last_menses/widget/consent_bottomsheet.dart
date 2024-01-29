@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
-import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
@@ -11,43 +10,37 @@ class ConsentBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: ThemeColor.lightGrey,
-        borderRadius: BorderRadius.circular(20),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: ThemeSize.paddingLarge,
       ),
-      height: MediaQuery.sizeOf(context).height * 0.3,
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: ThemeSize.paddingLarge,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ThemeSizedBox.height32,
-            const BodyMedium(
-              "Per utilizzare correttamente l’app e il calendario mestruale acconsenti al trattamento dei tuoi dati relativi al ciclo",
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ThemeSizedBox.height32,
+          const BodyMedium(
+            "Per utilizzare correttamente l’app e il calendario mestruale acconsenti al trattamento dei tuoi dati relativi al ciclo",
+            textAlign: TextAlign.center,
+          ),
+          ThemeSizedBox.height40,
+          SecondaryButton(
+            text: "ACCONSENTO",
+            onPressed: () {
+              Get.back();
+            },
+          ),
+          ThemeSizedBox.height16,
+          GestureDetector(
+            onTap: () {},
+            child: const TitleMedium(
+              "NON ACCONSENTO",
+              underline: true,
               textAlign: TextAlign.center,
             ),
-            ThemeSizedBox.height40,
-            SecondaryButton(
-              text: "ACCONSENTO",
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            ThemeSizedBox.height16,
-            GestureDetector(
-              onTap: () {},
-              child: const TitleMedium(
-                "NON ACCONSENTO",
-                underline: true,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
-        ),
+          ),
+          ThemeSizedBox.height32,
+        ],
       ),
     );
   }

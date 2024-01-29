@@ -1,16 +1,17 @@
 class UpdateUserParameters {
-  final String birthdate;
-  final String email;
-  final String firstName;
-  final DateTime? lastMenstruationDateStart;
-  final DateTime? lastMenstruationDateEnd;
-  final String lastName;
-  final String? legalGuardianEmail;
-  final String? nickname;
-  final int periodDays;
-  final int periodDuration;
-  final bool privacyProfiling;
-  final bool privacyMarketingEmail;
+  String birthdate;
+  String email;
+  String firstName;
+  DateTime? lastMenstruationDateStart;
+  DateTime? lastMenstruationDateEnd;
+  String lastName;
+  String? legalGuardianEmail;
+  String? nickname;
+  int? periodDays;
+  int? periodDuration;
+  bool privacyProfiling;
+  bool privacyMarketingEmail;
+  String? referralCode;
 
   UpdateUserParameters({
     required this.birthdate,
@@ -21,9 +22,22 @@ class UpdateUserParameters {
     required this.lastName,
     this.legalGuardianEmail,
     this.nickname,
-    required this.periodDays,
-    required this.periodDuration,
+    this.periodDays,
+    this.periodDuration,
     required this.privacyProfiling,
     required this.privacyMarketingEmail,
+    this.referralCode,
   });
+
+  factory UpdateUserParameters.initial() {
+    /// return an initial state fot the UpdateUserParameters
+    return UpdateUserParameters(
+      birthdate: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      privacyProfiling: false,
+      privacyMarketingEmail: false,
+    );
+  }
 }

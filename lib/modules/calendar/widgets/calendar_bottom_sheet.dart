@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
+import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_recap.dart';
 
 import '../../../widgets/buttons/primary_button.dart';
@@ -116,13 +117,19 @@ class CalendarBottomSheet extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   _jumpToMonthButton(context),
-                                  IntrinsicWidth(
-                                    child: PrimaryButton(
-                                      child: const TitleLarge(
-                                        'Modifica mestruazioni',
+                                  Obx(
+                                    () => Visibility(
+                                      visible: controller.selectedTab ==
+                                          CalendarTabs.monthTab,
+                                      child: IntrinsicWidth(
+                                        child: PrimaryButton(
+                                          buttonSize: ButtonSize.h31,
+                                          onPressed: () {},
+                                          child: const TitleLarge(
+                                            'Modifica mestruazioni',
+                                          ),
+                                        ),
                                       ),
-                                      buttonSize: ButtonSize.h31,
-                                      onPressed: () {},
                                     ),
                                   ),
                                   const IgnorePointer(
