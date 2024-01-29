@@ -92,6 +92,33 @@ class AuthenticationService {
     }
   }
 
+  static Future<void> completeUserRegistration(
+    UpdateUserParameters updateUserParameters,
+  ) async {
+    appController.user.responseHandler = ResponseHandler.pending();
+
+    try {
+      final response = await dio.post(
+        "/users/:id/complete_profile",
+        data: {
+          "user": {
+            "invitation_code": updateUserParameters.referralCode,
+            "last_menstruation_date_start":
+                updateUserParameters.lastMenstruationDateStart,
+            "last_menstruation_date_end":
+                updateUserParameters.lastMenstruationDateEnd,
+            "period_days": updateUserParameters.periodDays,
+            "period_duration": updateUserParameters.periodDuration,
+          },
+        },
+      );
+
+      _saveUserInfo(response);
+    } catch (e) {
+      appController.user.responseHandler = ResponseHandler.failed();
+    }
+  }
+
   static void _saveUserInfo(Response response) {
     appController.user.responseHandler = ResponseHandler.successful(
       content: User.fromJson(

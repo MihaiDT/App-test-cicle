@@ -21,5 +21,7 @@ class Routes {
 
   static const String welcomeQuizPage = '/welcome_quiz_page';
 
+  static const String referral = '/referral_page';
+
   static const String confirmEmailPage = '/confirm_email_page';
 }

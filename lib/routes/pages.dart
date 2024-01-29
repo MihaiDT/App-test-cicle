@@ -3,10 +3,15 @@ import 'package:get/get.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
+import 'package:lines/modules/cookie/cookie_page.dart';
+import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
+import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
+import 'package:lines/modules/referral/referral_binding.dart';
+import 'package:lines/modules/referral/referral_page.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_binding.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_intro_outro_binding.dart';
 import 'package:lines/modules/welcome_quiz/quiz_intro_page.dart';
@@ -17,7 +22,6 @@ import '../modules/access_wrapper/wrapper_access_widget.dart';
 import '../modules/birth_date/birth_date_page.dart';
 import '../modules/calendar/calendar_binding.dart';
 import '../modules/calendar/calendar_page.dart';
-import '../modules/cookie/cookie_page.dart';
 import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
 import '../modules/name_surname/name_surname_page.dart';
@@ -88,7 +92,7 @@ class Pages {
     GetPage(
       binding: CalendarBinding(),
       name: Routes.calendar,
-      page: () => _mediaQueryWrapper(CalendarPage()),
+      page: () => _mediaQueryWrapper(const CalendarPage()),
       transition: Transition.fade,
     ),
 
@@ -145,6 +149,9 @@ class Pages {
     // LastMensesPage
     GetPage(
       name: Routes.lastMensesPage,
+      bindings: [
+        LastMensesBinding(),
+      ],
       page: () => _mediaQueryWrapper(
         const LastMensesPage(),
         authNeeded: false,
@@ -156,6 +163,7 @@ class Pages {
     GetPage(
       name: Routes.howLongMensesPage,
       bindings: [
+        HowLongMensesBinding(),
         MensesDurationCounterBinding(),
       ],
       page: () => _mediaQueryWrapper(
@@ -177,6 +185,18 @@ class Pages {
       transition: Transition.fade,
     ),
 
+    /// ReferralPage
+    GetPage(
+      name: Routes.referral,
+      bindings: [
+        ReferralBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const ReferralPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
     ///ConfirmEmailPage
     GetPage(
       name: Routes.confirmEmailPage,
@@ -184,7 +204,7 @@ class Pages {
         ConfirmEmailBinding(),
       ],
       page: () => _mediaQueryWrapper(
-        ConfirmEmailPage(),
+        const ConfirmEmailPage(),
       ),
       transition: Transition.fade,
     )

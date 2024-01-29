@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
-import 'package:lines/modules/last_menses/widget/consent_bottomsheet.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/last_menses/controller/last_menses_controller.dart';
 import 'package:lines/modules/last_menses/widget/horizontal_range_calendar.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -10,27 +10,8 @@ import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class LastMensesPage extends StatefulWidget {
+class LastMensesPage extends GetView<LastMensesController> {
   const LastMensesPage({super.key});
-
-  @override
-  State<LastMensesPage> createState() => _LastMensesPageState();
-}
-
-class _LastMensesPageState extends State<LastMensesPage> {
-  ValueNotifier<DateTimeRange?> datetimeRange = ValueNotifier(null);
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.bottomSheet(
-        const ConsentBottomSheet(),
-        enableDrag: false,
-        isDismissible: false,
-      );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +37,18 @@ class _LastMensesPageState extends State<LastMensesPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ValueListenableBuilder(
-                  valueListenable: datetimeRange,
+                  valueListenable: controller.datetimeRange,
                   builder: (_, DateTimeRange? value, __) {
                     return SecondaryButton(
                       text: "AVANTI",
                       onPressed: value == null
                           ? null
                           : () {
+                              appController.updateUserParameters
+                                  .lastMenstruationDateStart = value.start;
+
+                              appController.updateUserParameters
+                                  .lastMenstruationDateEnd = value.end;
                               Get.toNamed(Routes.howLongMensesPage);
                             },
                     );
@@ -95,7 +81,7 @@ class _LastMensesPageState extends State<LastMensesPage> {
               ThemeSizedBox.height32,
               HorizontalRangeCalendar(
                 onRangeSelected: (selectedRange) {
-                  datetimeRange.value = selectedRange;
+                  controller.datetimeRange.value = selectedRange;
                 },
               ),
             ],
