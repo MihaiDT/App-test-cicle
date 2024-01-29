@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:lines/core/utils/date_time_extension.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../core/theme/text_wrapper.dart';
 import '../../../core/theme/theme_color.dart';
 import '../../../core/theme/theme_gradient.dart';
 import '../../../core/theme/theme_sized_box.dart';
-import '../../../data/models/day_values.dart';
 import '../../../widgets/dividers/divider_with_gradient.dart';
 import '../calendar_controller.dart';
-import '../calendar_store.dart';
-import 'calendar_day_widget.dart';
 import 'calendar_grid_widget.dart';
 
-class CalendarYearBody extends StatelessWidget {
+class CalendarYearBody extends StatefulWidget {
+  const CalendarYearBody({super.key});
+
+  @override
+  State<CalendarYearBody> createState() => _CalendarYearBodyState();
+}
+
+class _CalendarYearBodyState extends State<CalendarYearBody> {
   final CalendarController controller = Get.find<CalendarController>();
 
-  CalendarYearBody({super.key});
+  // @override
+  // void didUpdateWidget(covariant CalendarYearBody oldWidget) {
+  //
+  //   debugPrint('FINITOOOO');
+  //   super.didUpdateWidget(oldWidget);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -27,83 +34,85 @@ class CalendarYearBody extends StatelessWidget {
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(
-              height: 200,
+            Visibility(
+              visible: false,
+              maintainSize: true,
+              maintainInteractivity: false,
+              maintainAnimation: true,
+              maintainState: true,
+              child: Column(
+                children: [
+                  const HeadlineMedium(
+                    'notext',
+                    color: ThemeColor.primary,
+                    textAlign: TextAlign.center,
+                  ),
+                  ThemeSizedBox.height8,
+                  DividerWithGradient(gradient: ThemeGradient.primary)
+                ],
+              ),
             ),
             Flexible(
               key: controller.calendarYearController.listKey,
-              child: ScrollablePositionedList.builder(
-                scrollOffsetController:
-                    controller.calendarYearController.scrollOffsetController,
-                scrollOffsetListener:
-                    controller.calendarYearController.scrollOffsetListener,
-                padding: EdgeInsets.zero,
-                itemScrollController:
-                    controller.calendarYearController.itemScrollController,
+              child: ListView.builder(
+                controller: controller.calendarYearController.scrollController,
                 itemCount: controller.calendarYearController.years.length,
-                itemBuilder: (context, index) {
-                  return controller.calendarYearController.buildItem(
-                    context,
-                    index,
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            width: double.maxFinite,
-                            child: Visibility(
-                              visible: index != 0,
-                              child: Column(
-                                children: [
-                                  HeadlineMedium(
-                                    '${controller.calendarYearController.years[index].year}',
-                                    color: ThemeColor.primary,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  ThemeSizedBox.height8,
-                                  DividerWithGradient(
-                                    gradient: ThemeGradient.primary,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          _isLastIndex(index)
-                              ? Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    _monthGrid(
-                                        controller.calendarYearController
-                                            .years[index],
-                                        context),
-                                    const SizedBox(
-                                      height: 300,
-                                    ),
-                                  ],
-                                )
-                              : _monthGrid(
-                                  controller
-                                      .calendarYearController.years[index],
-                                  context)
-                        ],
-                      ),
+                itemBuilder: (context, index) =>
+                    controller.calendarYearController.buildItem(
+                  context,
+                  index,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
                     ),
-                  );
-                },
+                    child: Column(
+                      key: index == 1
+                          ? controller.calendarYearController.yearContainerKey
+                          : null,
+                      children: [
+                        Visibility(
+                          visible: index != 0,
+                          child: Column(
+                            children: [
+                              HeadlineMedium(
+                                '${controller.calendarYearController.years[index].year}',
+                                color: ThemeColor.primary,
+                                textAlign: TextAlign.center,
+                              ),
+                              ThemeSizedBox.height8,
+                              DividerWithGradient(
+                                gradient: ThemeGradient.primary,
+                              )
+                            ],
+                          ),
+                        ),
+                        ThemeSizedBox.height16,
+                        _isLastIndex(index)
+                            ? Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  _monthGrid(
+                                      controller
+                                          .calendarYearController.years[index],
+                                      context),
+                                  const SizedBox(
+                                    height: 300,
+                                  ),
+                                ],
+                              )
+                            : _monthGrid(
+                                controller.calendarYearController.years[index],
+                                context)
+                      ],
+                    ),
+                  ),
+                ),
               ),
             )
           ],
         ),
         Column(
           children: [
-            const SizedBox(
-              height: 170,
-            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               color: Colors.transparent,
@@ -180,31 +189,26 @@ class CalendarYearBody extends StatelessWidget {
     return Flexible(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: InkWell(
-          onTap: () {
-            controller.goBackToMonthCalendar(month);
-          },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TitleMedium(monthText).applyShaders(context),
-              ThemeSizedBox.height12,
-              InkWell(
-                onTap: () {
-                  controller.goBackToMonthCalendar(month);
-                },
-                child: IgnorePointer(
-                  child: CalendarGridWidget(
-                    year: month.year,
-                    month: month.month,
-                    circleRadius: 7,
-                    onDayTapped: (DateTime day) {},
-                    calendarStore: controller.calendarStore,
-                  ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TitleMedium(monthText).applyShaders(context),
+            ThemeSizedBox.height12,
+            InkWell(
+              onTap: () {
+                controller.goBackToMonthCalendar(month);
+              },
+              child: IgnorePointer(
+                child: CalendarGridWidget(
+                  year: month.year,
+                  month: month.month,
+                  circleRadius: 7,
+                  onDayTapped: (DateTime day) {},
+                  calendarStore: controller.calendarStore,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

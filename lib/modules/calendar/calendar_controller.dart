@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/log.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -71,7 +72,9 @@ class CalendarController extends GetxController {
   }
 
   final RxBool _rxShowRecapMenuSizeCondition = false.obs;
+
   bool get _showRecapMenuSizeCondition => _rxShowRecapMenuSizeCondition.value;
+
   set _showRecapMenuSizeCondition(bool newValue) {
     _rxShowRecapMenuSizeCondition.value = newValue;
   }
@@ -108,8 +111,26 @@ class CalendarController extends GetxController {
   void onInit() {
     super.onInit();
     calendarStore = Get.put(CalendarStore());
-    ever(calendarStore.rxSelectedDate,
-        (newDayValue) => _onDayChanged(newDayValue));
+    ever(calendarStore.rxSelectedDate, (newDayValue) {
+      _onDayChanged(newDayValue);
+    });
+
+    ever(
+      rxSelectedTab,
+      (newTab) {
+        if (newTab == CalendarTabs.yearTab) {
+          _collapseBottomSheet();
+          calendarYearController
+              .jumpToYear(calendarStore.selectedDate ?? DateTime.now());
+        } else {
+          scrollableCalendarController.jumpToMonth(
+              date: calendarStore.selectedDate ?? DateTime.now());
+          showBottomMenu = true;
+          _expandBottomSheetToSheetVSize();
+        }
+      },
+    );
+
     _initScrollableCalendarController();
     _initCalendarYearController();
     _initSymptomController();
@@ -195,7 +216,6 @@ class CalendarController extends GetxController {
         } else {
           showBottomMenu = false;
           showSaveButton = false;
-          calendarStore.selectedDate = null;
         }
         if (draggableScrollableController.size > 0.3) {
           _showRecapMenuSizeCondition = true;
@@ -227,11 +247,8 @@ class CalendarController extends GetxController {
   }
 
   void goBackToMonthCalendar(DateTime month) {
-    selectedTab = CalendarTabs.monthTab;
     calendarStore.selectedDate = month;
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      scrollableCalendarController.jumpToMonth(date: month);
-    });
+    changeTab(CalendarTabs.monthTab);
   }
 
   //TODO : for now the calendar starts at 4 months before today and ends in 4 months , later it will be dynamic according to API
@@ -254,24 +271,47 @@ class CalendarController extends GetxController {
   }
 
   void _onDayChanged(DateTime? day) {
-    if (day != null) {
+    if (day != null && selectedTab == CalendarTabs.monthTab) {
       showBottomMenu = true;
       _expandBottomSheetToSheetVSize();
     }
   }
 
   void _expandBottomSheetToSheetVSize() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        draggableScrollableController.animateTo(
-          sheetVSize,
-          duration: const Duration(
-            milliseconds: 200,
-          ),
-          curve: Curves.linear,
-        );
-      },
-    );
+    try {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          if (draggableScrollableController.isAttached) {
+            draggableScrollableController.animateTo(
+              sheetVSize,
+              duration: const Duration(
+                milliseconds: 200,
+              ),
+              curve: Curves.linear,
+            );
+          }
+        },
+      );
+    } catch (e) {
+      debugPrint('errore qua');
+      logError(error: e);
+    }
+  }
+
+  void _collapseBottomSheet() {
+    if (draggableScrollableController.isAttached) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          draggableScrollableController.animateTo(
+            0.1,
+            duration: const Duration(
+              milliseconds: 200,
+            ),
+            curve: Curves.linear,
+          );
+        },
+      );
+    }
   }
 
   ///OnSaved callback when the save button is pressed
@@ -325,5 +365,12 @@ class CalendarController extends GetxController {
     final double delta = textPosition.dy - containerPosition.dy;
 
     sheetVSize = (size.height + 20.0 + delta) / Get.height;
+  }
+
+  Future<void> executeAfterBuild(String title) async {
+    await Future.delayed(Duration.zero);
+    debugPrint(title);
+    // this code will get executed after the build method
+    // because of the way async functions are scheduled
   }
 }

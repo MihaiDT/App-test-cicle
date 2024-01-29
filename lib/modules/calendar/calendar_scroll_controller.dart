@@ -73,7 +73,7 @@ class CalendarScrollController extends GetxController {
     int month = ((date.year - minDate.year) * 12) - minDate.month + date.month;
 
     try {
-      itemScrollController.jumpTo(index: month);
+      itemScrollController.jumpTo(index: month, alignment: 0.05);
     } catch (e) {
       logError(error: e);
     }

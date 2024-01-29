@@ -14,49 +14,36 @@ import 'calendar_month_year_switch.dart';
 class CalendarWeekRow extends StatelessWidget {
   final CalendarController controller;
 
-  CalendarWeekRow({
+  const CalendarWeekRow({
     required this.controller,
     super.key,
   });
-  final double _appBarHeight = const TransparentAppBar().preferredSize.height;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: ThemeDecoration.images.bgCalendar,
-      ),
-      child: AppScaffoldPadding(
-        top: _appBarHeight + 16,
-        sidePaddingLarge: false,
-        bottom: 0,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Center(
-              child: CalendarMonthYearSwitch(
-                  currentSelectedTab: controller.selectedTab,
-                  onTabChanged: controller.changeTab),
-            ),
-            GridView.count(
-              crossAxisCount: DateTime.daysPerWeek,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              children: List.generate(DateTime.daysPerWeek, (index) {
-                final weekDay = CustomDateUtils.daysOfWeek[index];
-                return Center(
-                  child: TitleLarge(
-                    weekDay,
-                    color: ThemeColor.primary,
-                  ),
-                );
-              }),
-            ),
-            DividerWithGradient(gradient: ThemeGradient.primary)
-          ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        GridView.count(
+          crossAxisCount: DateTime.daysPerWeek,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
+          children: List.generate(
+            DateTime.daysPerWeek,
+            (index) {
+              final weekDay = CustomDateUtils.daysOfWeek[index];
+              return Center(
+                child: TitleLarge(
+                  weekDay,
+                  color: ThemeColor.primary,
+                ),
+              );
+            },
+          ),
         ),
-      ),
+        DividerWithGradient(gradient: ThemeGradient.primary)
+      ],
     );
   }
 }

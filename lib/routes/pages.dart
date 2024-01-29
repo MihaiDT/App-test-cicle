@@ -86,7 +86,7 @@ class Pages {
     GetPage(
       binding: CalendarBinding(),
       name: Routes.calendar,
-      page: () => _mediaQueryWrapper(const CalendarPage()),
+      page: () => _mediaQueryWrapper(CalendarPage()),
       transition: Transition.fade,
     ),
 

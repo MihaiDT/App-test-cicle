@@ -24,4 +24,13 @@ class ThemeGradient {
         colorQuizGradientLight,
         colorQuizGradientDark,
       ]);
+
+  static LinearGradient calendarBg = const LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Color(0xFFDFC5D8),
+        Color(0xFFFDE9F0),
+        Color(0xFFDFC5D8),
+      ]);
 }

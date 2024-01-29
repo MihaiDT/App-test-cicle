@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/calendar/widgets/calendar_grid_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -30,6 +31,15 @@ class ScrollableCalendar extends StatelessWidget {
       itemBuilder: (context, index) {
         final DateTime month =
             calendarScrollableCalendarController.months[index];
+        if (index == 0) {
+          return Column(
+            children: [
+              ThemeSizedBox.height32,
+              _childColumn(month, context),
+            ],
+          );
+        }
+
         //if you reached the end then add some space after the last month
         if (index >= calendarScrollableCalendarController.months.length - 1) {
           return Column(
