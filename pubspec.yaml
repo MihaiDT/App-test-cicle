@@ -95,6 +95,10 @@ dependencies:
   modal_bottom_sheet: ^3.0.0-pre
   simple_gesture_detector: ^0.2.0
 
+
+  sign_in_with_apple: ^5.0.0
+  flutter_facebook_auth: ^6.0.4
+  google_sign_in: ^6.2.1
   # webview_flutter: ^4.4.2
 
   # google_sign_in: ^6.1.6
