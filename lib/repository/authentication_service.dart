@@ -64,11 +64,11 @@ class AuthenticationService {
   static Future<void> updateUser(
     UpdateUserParameters user,
   ) async {
+    final userId = appController.user.value?.userId;
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.put(
-        // todo check what is id
-        "/users/:id",
+        "/users/$userId",
         data: {
           "user": {
             "birthdate": user.birthdate,
@@ -95,11 +95,13 @@ class AuthenticationService {
   static Future<void> completeUserRegistration(
     UpdateUserParameters updateUserParameters,
   ) async {
+    final userId = appController.user.value?.userId;
+
     appController.user.responseHandler = ResponseHandler.pending();
 
     try {
       final response = await dio.post(
-        "/users/:id/complete_profile",
+        "/users/$userId/complete_profile",
         data: {
           "user": {
             "invitation_code": updateUserParameters.referralCode,

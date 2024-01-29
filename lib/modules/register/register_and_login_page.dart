@@ -4,7 +4,6 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import 'package:get/get.dart';
 import "package:lines/core/app_theme.dart";
-import "package:lines/core/utils/singletons.dart";
 import "package:lines/modules/register/register_controller.dart";
 import "package:lines/modules/register/section/divider_section.dart";
 import "package:lines/modules/register/widget/link_account_widget.dart";
@@ -15,17 +14,10 @@ import "package:lines/widgets/forms/input_text_field.dart";
 import "package:lines/widgets/layouts/app_scaffold_page.dart";
 import "package:lines/widgets/layouts/bottom_widget_layout.dart";
 
-import "../../core/theme/text_wrapper.dart";
-
-class RegisterAndLoginPage extends StatelessWidget {
-  RegisterAndLoginPage({
+class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
+  const RegisterAndLoginPage({
     super.key,
   });
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  final controller = Get.find<RegisterAndLoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +37,7 @@ class RegisterAndLoginPage extends StatelessWidget {
               children: [
                 SecondaryButton(
                   text: "AVANTI",
-                  onPressed: () async {
-                    if (controller.isLoginPage) {
-                      await controller.loginUser(
-                        emailController.text,
-                        passwordController.text,
-                      );
-
-                      Get.offAndToNamed(Routes.main);
-                    } else {
-                      /// Save in the state email and password values
-                      appController.registerParameter.email =
-                          emailController.text;
-                      appController.registerParameter.password =
-                          passwordController.text;
-                      Get.toNamed(Routes.nameSurname);
-                    }
-                  },
+                  onPressed: controller.onButtonPressed,
                 ),
                 ThemeSizedBox.height16,
                 controller.isLoginPage
@@ -166,7 +142,7 @@ class RegisterAndLoginPage extends StatelessWidget {
                   placeholder: 'Inserisci la tua email',
                   keyboardType: TextInputType.emailAddress,
                   textCapitalization: TextCapitalization.none,
-                  textEditingController: emailController,
+                  textEditingController: controller.emailController,
                   onChanged: (text) {
                     controller.emailValue.value = text;
                   },
@@ -182,7 +158,7 @@ class RegisterAndLoginPage extends StatelessWidget {
                     label: "Password",
                     placeholder: 'Inserisci la password',
                     textCapitalization: TextCapitalization.none,
-                    textEditingController: passwordController,
+                    textEditingController: controller.passwordController,
                     isPassword: true,
                     obscureText: controller.hidePassword,
                     onTapTogglePassword: () {
