@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
+import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
+import 'package:lines/modules/confirm_email/confirm_email_page.dart';
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
@@ -174,6 +176,18 @@ class Pages {
       ),
       transition: Transition.fade,
     ),
+
+    ///ConfirmEmailPage
+    GetPage(
+      name: Routes.confirmEmailPage,
+      bindings: [
+        ConfirmEmailBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        ConfirmEmailPage(),
+      ),
+      transition: Transition.fade,
+    )
   ];
 
   /// Private methods

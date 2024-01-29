@@ -20,4 +20,6 @@ class Routes {
   static const String howLongMensesPage = '/how_long_menses_page';
 
   static const String welcomeQuizPage = '/welcome_quiz_page';
+
+  static const String confirmEmailPage = '/confirm_email_page';
 }
