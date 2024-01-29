@@ -15,8 +15,6 @@ import "package:lines/widgets/forms/input_text_field.dart";
 import "package:lines/widgets/layouts/app_scaffold_page.dart";
 import "package:lines/widgets/layouts/bottom_widget_layout.dart";
 
-import "../../core/theme/text_wrapper.dart";
-
 class RegisterAndLoginPage extends StatelessWidget {
   RegisterAndLoginPage({
     super.key,
