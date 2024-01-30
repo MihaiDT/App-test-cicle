@@ -17,12 +17,12 @@ class HiveManager {
     Hive.box("linesApp").put(HiveReferenceKeys.appHidden.name, symbol);
   }
 
-  static get firstAccess {
+  static bool get firstAccess {
     return Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ??
         false;
   }
 
-  static set isFirstAccess(bool symbol) {
+  static set firstAccess(bool symbol) {
     Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ?? false;
   }
 }
