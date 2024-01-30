@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/app_controller.dart';
 
@@ -6,6 +5,7 @@ import '../../routes/routes.dart';
 
 class ConfirmEmailController extends GetxController {
   late AppController appController;
+
   @override
   void onInit() {
     appController = Get.find<AppController>();
@@ -13,6 +13,6 @@ class ConfirmEmailController extends GetxController {
   }
 
   void logIn() {
-    Get.toNamed(Routes.lastMensesPage);
+    Get.offAllNamed(Routes.registerAndLogin);
   }
 }
