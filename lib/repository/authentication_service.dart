@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -59,7 +60,7 @@ class AuthenticationService {
   static Future<void> updateUser(
     UpdateUserParameters user,
   ) async {
-    final userId = appController.user.value?.userId;
+    final userId = HiveManager.userId;
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.put(
@@ -90,7 +91,7 @@ class AuthenticationService {
   static Future<void> completeUserRegistration(
     UpdateUserParameters updateUserParameters,
   ) async {
-    final userId = appController.user.value?.userId;
+    final userId = HiveManager.userId;
 
     appController.user.responseHandler = ResponseHandler.pending();
 
@@ -122,6 +123,7 @@ class AuthenticationService {
         response.data,
       ),
     );
+    HiveManager.userId = appController.user.value?.userId ?? "";
     await _saveAccessTokenInDB(response.data['user']['session_token']);
   }
 
