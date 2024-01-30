@@ -50,12 +50,7 @@ class AuthenticationService {
           }
         },
       );
-
       _saveUserInfo(response);
-
-      await Get.find<SecureStorageManager>().saveToken(
-        response.data['user']['session_token'],
-      );
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
     }
@@ -121,14 +116,13 @@ class AuthenticationService {
     }
   }
 
-  static void _saveUserInfo(Response response) {
+  static void _saveUserInfo(Response response) async {
     appController.user.responseHandler = ResponseHandler.successful(
       content: User.fromJson(
         response.data,
       ),
     );
-
-    _saveAccessTokenInDB(response.data['user']['session_token']);
+    await _saveAccessTokenInDB(response.data['user']['session_token']);
   }
 
   /// Save accessToken in secure storage
