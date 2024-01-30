@@ -23,11 +23,20 @@ class HiveManager {
   }
 
   static set firstAccess(bool symbol) {
-    Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ?? false;
+    Hive.box("linesApp").put(HiveReferenceKeys.isFirstAccess.name, symbol);
+  }
+
+  static String get userId {
+    return Hive.box("linesApp").get(HiveReferenceKeys.userId.name) ?? "";
+  }
+
+  static set userId(String userId) {
+    Hive.box("linesApp").put(HiveReferenceKeys.userId.name, userId);
   }
 }
 
 enum HiveReferenceKeys {
   appHidden,
-  isFirstAccess;
+  isFirstAccess,
+  userId;
 }
