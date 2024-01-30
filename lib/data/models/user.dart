@@ -45,7 +45,7 @@ class User {
       birthdate: json['user']['birthdate'],
       email: json['user']['email'],
       firstName: json['user']['first_name'],
-      isConfirmed: json['user']['is_confirmed'],
+      isConfirmed: json['user']['active'],
       userId: json['user']['id'],
       lastMenstrautionDate: json['user']['last_menstraution_date'],
       lastName: json['user']['last_name'],
