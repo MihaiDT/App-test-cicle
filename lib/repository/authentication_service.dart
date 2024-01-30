@@ -101,9 +101,9 @@ class AuthenticationService {
           "user": {
             "invitation_code": updateUserParameters.referralCode,
             "last_menstruation_date_start":
-                updateUserParameters.lastMenstruationDateStart,
+                updateUserParameters.formattedLastMenstruationDateStart,
             "last_menstruation_date_end":
-                updateUserParameters.lastMenstruationDateEnd,
+                updateUserParameters.formattedLastMenstruationDateEnd,
             "period_days": updateUserParameters.periodDays,
             "period_duration": updateUserParameters.periodDuration,
           },
