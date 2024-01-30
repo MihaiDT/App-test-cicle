@@ -97,7 +97,6 @@ dependencies:
 
   # A flutter plugin for social registration
   sign_in_with_apple: ^5.0.0
-  flutter_facebook_auth: ^6.0.4
   google_sign_in: ^6.2.1
   # webview_flutter: ^4.4.2
 
