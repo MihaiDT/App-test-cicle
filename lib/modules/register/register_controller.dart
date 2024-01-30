@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
@@ -16,7 +17,11 @@ class RegisterAndLoginController extends GetxController {
       if (callback.isSuccessful) {
         isButtonPending.value = false;
 
-        Get.offAndToNamed(Routes.main);
+        if (!HiveManager.firstAccess) {
+          Get.offAndToNamed(Routes.lastMensesPage);
+        } else {
+          Get.offAndToNamed(Routes.main);
+        }
       }
     });
     super.onInit();
