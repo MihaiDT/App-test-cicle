@@ -10,6 +10,7 @@ import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
+import 'package:lines/modules/privacy/privacy_binding.dart';
 import 'package:lines/modules/referral/referral_binding.dart';
 import 'package:lines/modules/referral/referral_page.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_binding.dart';
@@ -139,6 +140,9 @@ class Pages {
     // PrivacyPage
     GetPage(
       name: Routes.privacy,
+      bindings: [
+        PrivacyBinding(),
+      ],
       page: () => _mediaQueryWrapper(
         const PrivacyPage(),
         authNeeded: false,
