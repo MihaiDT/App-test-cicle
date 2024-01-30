@@ -1,9 +1,9 @@
 class User {
-  bool active;
+  bool? active;
   String birthdate;
   String email;
   String firstName;
-  bool isConfirmed;
+  bool? isConfirmed;
   String userId;
   String? lastMenstrautionDate;
   String lastName;
@@ -23,7 +23,7 @@ class User {
     required this.birthdate,
     required this.email,
     required this.firstName,
-    required this.isConfirmed,
+    this.isConfirmed = false,
     required this.userId,
     this.lastMenstrautionDate,
     required this.lastName,
@@ -45,7 +45,7 @@ class User {
       birthdate: json['user']['birthdate'],
       email: json['user']['email'],
       firstName: json['user']['first_name'],
-      isConfirmed: json['user']['active'],
+      isConfirmed: json['user']['is_confirmed'],
       userId: json['user']['id'],
       lastMenstrautionDate: json['user']['last_menstraution_date'],
       lastName: json['user']['last_name'],
