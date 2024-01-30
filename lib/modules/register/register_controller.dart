@@ -4,6 +4,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class RegisterAndLoginController extends GetxController {
   final TextEditingController emailController = TextEditingController();
@@ -32,6 +33,16 @@ class RegisterAndLoginController extends GetxController {
         password: password,
       ),
     );
+  }
+
+  Future<void> appleSignIn() async {
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+    print(credential);
   }
 
   /// Check if email is valid for the regex

@@ -128,7 +128,9 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
                     ThemeSizedBox.width40,
                     LinkAccountWidget(
                       imagePath: ThemeImage.apple,
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.appleSignIn();
+                      },
                     ),
                   ]
                 ],
