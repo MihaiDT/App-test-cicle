@@ -8,7 +8,6 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/controller/privacy_controller.dart';
 import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
 import 'package:lines/repository/authentication_service.dart';
-import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/secondary_loading_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -47,17 +46,10 @@ class PrivacyPage extends GetView<PrivacyController> {
                   ThemeSizedBox.height16,
                   Obx(
                     () => SecondaryLoadingButton(
-                      onPressed: () async {
-                        await registerUser().then(
-                          (_) {
-                            if (appController
-                                .user.responseHandler.isSuccessful) {
-                              Get.toNamed(Routes.confirmEmailPage);
-                            }
-                          },
-                        );
+                      onPressed: () {
+                        registerUser();
                       },
-                      isLoading: appController.user.responseHandler.isPending,
+                      isLoading: controller.buttonIsPending.value,
                       child: const TitleLarge(
                         "REGISTRATI",
                       ).applyShaders(context),
