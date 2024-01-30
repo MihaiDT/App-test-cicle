@@ -19,7 +19,7 @@ class HiveManager {
 
   static bool get firstAccess {
     return Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ??
-        false;
+        true;
   }
 
   static set firstAccess(bool symbol) {

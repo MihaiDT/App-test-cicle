@@ -10,20 +10,23 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 class RegisterAndLoginController extends GetxController {
   @override
   void onInit() {
-    ever(appController.user.rxValue, (callback) {
-      if (callback.isPending) {
-        isButtonPending.value = true;
-      }
-      if (callback.isSuccessful) {
-        isButtonPending.value = false;
-
-        if (!HiveManager.firstAccess) {
-          Get.offAndToNamed(Routes.lastMensesPage);
-        } else {
-          Get.offAndToNamed(Routes.main);
+    ever(
+      appController.user.rxValue,
+      (callback) {
+        if (callback.isPending) {
+          isButtonPending.value = true;
         }
-      }
-    });
+        if (callback.isSuccessful) {
+          isButtonPending.value = false;
+
+          if (HiveManager.firstAccess) {
+            Get.offAndToNamed(Routes.lastMensesPage);
+          } else {
+            Get.offAndToNamed(Routes.main);
+          }
+        }
+      },
+    );
     super.onInit();
   }
 
