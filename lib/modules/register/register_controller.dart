@@ -7,10 +7,27 @@ import 'package:lines/routes/routes.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class RegisterAndLoginController extends GetxController {
+  @override
+  void onInit() {
+    ever(appController.user.rxValue, (callback) {
+      if (callback.isPending) {
+        isButtonPending.value = true;
+      }
+      if (callback.isSuccessful) {
+        isButtonPending.value = false;
+
+        Get.offAndToNamed(Routes.main);
+      }
+    });
+    super.onInit();
+  }
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   RxString emailValue = "".obs;
   RxString emailError = "".obs;
+
+  RxBool isButtonPending = false.obs;
 
   bool get isLoginPage => appController.isLoginFlow.value;
 
@@ -60,9 +77,6 @@ class RegisterAndLoginController extends GetxController {
         emailController.text,
         passwordController.text,
       );
-      if (appController.user.responseHandler.isSuccessful) {
-        Get.offAndToNamed(Routes.main);
-      }
     } else {
       /// Save in the state email and password values
       appController.registerParameter.email = emailController.text;
