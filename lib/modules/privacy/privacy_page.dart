@@ -5,14 +5,15 @@ import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/privacy/controller/privacy_controller.dart';
 import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/routes/routes.dart';
-import 'package:lines/widgets/buttons/secondary_button.dart';
+import 'package:lines/widgets/buttons/secondary_loading_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class PrivacyPage extends StatelessWidget {
+class PrivacyPage extends GetView<PrivacyController> {
   const PrivacyPage({super.key});
 
   @override
@@ -44,19 +45,23 @@ class PrivacyPage extends StatelessWidget {
                     ),
                   ),
                   ThemeSizedBox.height16,
-                  SecondaryButton(
-                    onPressed: () async {
-                      await registerUser().then(
-                        (_) {
-                          if (appController.user.responseHandler.isSuccessful) {
-                            Get.toNamed(Routes.confirmEmailPage);
-                          }
-                        },
-                      );
-                    },
-                    child: const TitleLarge(
-                      "REGISTRATI",
-                    ).applyShaders(context),
+                  Obx(
+                    () => SecondaryLoadingButton(
+                      onPressed: () async {
+                        await registerUser().then(
+                          (_) {
+                            if (appController
+                                .user.responseHandler.isSuccessful) {
+                              Get.toNamed(Routes.confirmEmailPage);
+                            }
+                          },
+                        );
+                      },
+                      isLoading: appController.user.responseHandler.isPending,
+                      child: const TitleLarge(
+                        "REGISTRATI",
+                      ).applyShaders(context),
+                    ),
                   ),
                 ],
               ),
