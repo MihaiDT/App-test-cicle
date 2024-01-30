@@ -9,7 +9,7 @@ import "package:lines/modules/register/section/divider_section.dart";
 import "package:lines/modules/register/widget/link_account_widget.dart";
 import "package:lines/routes/routes.dart";
 import "package:lines/widgets/appbar/transparent_app_bar.dart";
-import "package:lines/widgets/buttons/secondary_button.dart";
+import "package:lines/widgets/buttons/secondary_loading_button.dart";
 import "package:lines/widgets/forms/input_text_field.dart";
 import "package:lines/widgets/layouts/app_scaffold_page.dart";
 import "package:lines/widgets/layouts/bottom_widget_layout.dart";
@@ -35,7 +35,8 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SecondaryButton(
+                SecondaryLoadingButton(
+                  isLoading: controller.isButtonPending.value,
                   onPressed: controller.onButtonPressed,
                   child: const TitleLarge(
                     "AVANTI",
@@ -157,19 +158,17 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
               ),
               ThemeSizedBox.height24,
               Obx(
-                () {
-                  return InputTextField(
-                    label: "Password",
-                    placeholder: 'Inserisci la password',
-                    textCapitalization: TextCapitalization.none,
-                    textEditingController: controller.passwordController,
-                    isPassword: true,
-                    obscureText: controller.hidePassword,
-                    onTapTogglePassword: () {
-                      controller.hidePassword = !controller.hidePassword;
-                    },
-                  );
-                },
+                () => InputTextField(
+                  label: "Password",
+                  placeholder: 'Inserisci la password',
+                  textCapitalization: TextCapitalization.none,
+                  textEditingController: controller.passwordController,
+                  isPassword: true,
+                  obscureText: controller.hidePassword,
+                  onTapTogglePassword: () {
+                    controller.hidePassword = !controller.hidePassword;
+                  },
+                ),
               ),
               ThemeSizedBox.height16,
               TitleMedium(
