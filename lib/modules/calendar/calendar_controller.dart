@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:lines/core/helpers/log.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
+
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
 
 import '../../data/models/symptom.dart';
 import 'calendar_scroll_controller.dart';
@@ -29,6 +32,8 @@ class CalendarController extends GetxController {
   SymptomCategoriesController get symptomCategoryController {
     return Get.find<SymptomCategoriesController>();
   }
+
+
 
   final RxBool _rxShowBarButton = true.obs;
 
@@ -95,6 +100,12 @@ class CalendarController extends GetxController {
     rxSelectedTab.value = newTab;
   }
 
+  final RxBool _rxModifyPeriodMode = false.obs;
+  bool get modifyPeriodMode => _rxModifyPeriodMode.value;
+  set modifyPeriodMode(bool newValue) {
+    _rxModifyPeriodMode.value = newValue;
+  }
+
   final GlobalKey bottomSheetTitleKey = GlobalKey();
   final GlobalKey bottomSheetContainerKey = GlobalKey();
 
@@ -111,10 +122,15 @@ class CalendarController extends GetxController {
   void onInit() {
     super.onInit();
     calendarStore = Get.put(CalendarStore());
+
+    _initScrollableCalendarController();
+    _initCalendarYearController();
+    _initSymptomController();
+    _initSymptomCategoryController();
+
     ever(calendarStore.rxSelectedDate, (newDayValue) {
       _onDayChanged(newDayValue);
     });
-
     ever(
       rxSelectedTab,
       (newTab) {
@@ -130,12 +146,6 @@ class CalendarController extends GetxController {
         }
       },
     );
-
-    _initScrollableCalendarController();
-    _initCalendarYearController();
-    _initSymptomController();
-    _initSymptomCategoryController();
-
     //this two listeners will controll whether or not the save button will be shown
     ever(
       _rxShowSaveButtonSymptoms,

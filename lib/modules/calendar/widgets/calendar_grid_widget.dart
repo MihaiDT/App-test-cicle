@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 
+import '../../../core/utils/singletons.dart';
 import '../../../data/models/day_values.dart';
-import '../calendar_store.dart';
+import '../../../data/models/period_status.dart';
+import '../calendar_controller.dart';
 import 'calendar_day_widget.dart';
 
 class CalendarGridWidget extends StatefulWidget {
@@ -10,7 +14,7 @@ class CalendarGridWidget extends StatefulWidget {
   final int month;
   final double circleRadius;
   final Function(DateTime) onDayTapped;
-  final CalendarStore calendarStore;
+  final bool selectMode;
 
   const CalendarGridWidget({
     super.key,
@@ -18,7 +22,7 @@ class CalendarGridWidget extends StatefulWidget {
     required this.month,
     required this.circleRadius,
     required this.onDayTapped,
-    required this.calendarStore,
+    this.selectMode = false,
   });
 
   @override
@@ -29,11 +33,11 @@ class _CalendarGridWidgetState extends State<CalendarGridWidget> {
   int start = 0;
   final int weekdayStart = DateTime.monday;
   late int weekdayEnd;
-
-  @override
+  CalendarController controller = Get.find<CalendarController>();
 
   /// Calculates the starting and ending days of the week,
   /// and performs setup tasks for the calendar display.
+  @override
   void initState() {
     final int weekdayStartOffset = weekdayStart - 1;
     weekdayEnd = weekdayStartOffset == 0 ? 7 : weekdayStartOffset;
@@ -63,6 +67,10 @@ class _CalendarGridWidgetState extends State<CalendarGridWidget> {
             widget.month,
             (index + 1 - start),
           );
+          String formattedDate = DateFormat('yyyy-MM-dd').format(day);
+          PeriodStatus? status;
+          status =
+              appController.periodMap.value?.dates[formattedDate];
           final text = (index + 1 - start).toString();
           final dayValues = DayValues(
             day: day,
@@ -81,10 +89,11 @@ class _CalendarGridWidgetState extends State<CalendarGridWidget> {
                 child: CalendarDayWidget(
                   circleRadius: widget.circleRadius,
                   padding: const EdgeInsets.all(2),
-                  dayStatus: DayStatus.empty,
+                  dayStatus:
+                      status != null ? DayStatus.filledRed : DayStatus.empty,
                   isToday: dayValues.isToday,
-                  isSelected: widget.calendarStore.selectedDate != null
-                      ? widget.calendarStore.selectedDate!
+                  isSelected: controller.calendarStore.selectedDate != null
+                      ? controller.calendarStore.selectedDate!
                           .isSameDay(dayValues.day)
                       : false,
                   parentConstraints: constraints,
