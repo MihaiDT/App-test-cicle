@@ -35,12 +35,14 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SecondaryLoadingButton(
-                  isLoading: controller.isButtonPending.value,
-                  onPressed: controller.onButtonPressed,
-                  child: const TitleLarge(
-                    "AVANTI",
-                  ).applyShaders(context),
+                Obx(
+                  () => SecondaryLoadingButton(
+                    isLoading: controller.isButtonPending.value,
+                    onPressed: controller.onButtonPressed,
+                    child: const TitleLarge(
+                      "AVANTI",
+                    ).applyShaders(context),
+                  ),
                 ),
                 ThemeSizedBox.height16,
                 controller.isLoginPage
