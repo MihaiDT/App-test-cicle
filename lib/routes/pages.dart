@@ -72,7 +72,7 @@ class Pages {
       binding: RegisterBinding(),
       name: Routes.registerAndLogin,
       page: () => _mediaQueryWrapper(
-        RegisterAndLoginPage(),
+        const RegisterAndLoginPage(),
         authNeeded: false,
       ),
       transition: Transition.fade,
