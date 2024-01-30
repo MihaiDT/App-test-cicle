@@ -71,7 +71,6 @@ class ScrollableCalendar extends StatelessWidget {
           month: month.month,
           circleRadius: 17,
           onDayTapped: calendarScrollableCalendarController.onDayTapped,
-          calendarStore: calendarStore,
         )
       ],
     );

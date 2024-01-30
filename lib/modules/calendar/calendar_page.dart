@@ -19,6 +19,7 @@ import 'widgets/calendar_week_row.dart';
 
 class CalendarPage extends GetView<CalendarController> {
   const CalendarPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AppScaffoldPage(
@@ -66,12 +67,12 @@ class CalendarPage extends GetView<CalendarController> {
                       () => Offstage(
                         offstage:
                             !(controller.selectedTab == CalendarTabs.yearTab),
-                        child: CalendarYearBody(),
+                        child: const CalendarYearBody(),
                       ),
                     ),
                   ],
                 ),
-              ),
+              )
             ],
           ),
           CalendarBottomSheet(),

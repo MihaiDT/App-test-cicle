@@ -204,7 +204,6 @@ class _CalendarYearBodyState extends State<CalendarYearBody> {
                   month: month.month,
                   circleRadius: 7,
                   onDayTapped: (DateTime day) {},
-                  calendarStore: controller.calendarStore,
                 ),
               ),
             ),

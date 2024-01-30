@@ -124,9 +124,14 @@ class CalendarBottomSheet extends StatelessWidget {
                                       child: IntrinsicWidth(
                                         child: PrimaryButton(
                                           buttonSize: ButtonSize.h31,
-                                          onPressed: () {},
-                                          child: const TitleLarge(
-                                            'Modifica mestruazioni',
+                                          onPressed: () {
+                                            controller.modifyPeriodMode =
+                                                !controller.modifyPeriodMode;
+                                          },
+                                          child: TitleLarge(
+                                            controller.modifyPeriodMode
+                                                ? 'Salva mestruazione'
+                                                : 'Modifica mestruazioni',
                                           ),
                                         ),
                                       ),
