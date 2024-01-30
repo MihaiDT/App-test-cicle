@@ -9,12 +9,15 @@ class ReferralController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    ever(appController.user.rxValue, (callback) {
-      if (callback.isSuccessful) {
-        HiveManager.firstAccess = false;
-        Get.offAndToNamed(Routes.main);
-      }
-    });
+    ever(
+      appController.user.rxValue,
+      (callback) {
+        if (callback.isSuccessful) {
+          HiveManager.firstAccess = false;
+          Get.offAndToNamed(Routes.main);
+        }
+      },
+    );
   }
 
   int get coinValue => appController.settings.value?.invitationCodeCoins ?? 25;
