@@ -25,10 +25,12 @@ class ConsentBottomSheet extends StatelessWidget {
           ),
           ThemeSizedBox.height40,
           SecondaryButton(
-            text: "ACCONSENTO",
             onPressed: () {
               Get.back();
             },
+            child: const TitleLarge(
+              "ACCONSENTO",
+            ).applyShaders(context),
           ),
           ThemeSizedBox.height16,
           GestureDetector(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/welcome/welcome_controller.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 
@@ -13,8 +14,10 @@ class WelcomeSigninButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SecondaryButton(
-      text: "INIZIAMO!",
       onPressed: () => controller.onTapSignin(),
+      child: const TitleLarge(
+        "INIZIAMO!",
+      ).applyShaders(context),
     );
   }
 }

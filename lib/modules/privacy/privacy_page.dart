@@ -45,14 +45,18 @@ class PrivacyPage extends StatelessWidget {
                   ),
                   ThemeSizedBox.height16,
                   SecondaryButton(
-                    text: "REGISTRATI",
                     onPressed: () async {
-                      await registerUser().then((_) {
-                        if (appController.user.responseHandler.isSuccessful) {
-                          Get.toNamed(Routes.confirmEmailPage);
-                        }
-                      });
+                      await registerUser().then(
+                        (_) {
+                          if (appController.user.responseHandler.isSuccessful) {
+                            Get.toNamed(Routes.confirmEmailPage);
+                          }
+                        },
+                      );
                     },
+                    child: const TitleLarge(
+                      "REGISTRATI",
+                    ).applyShaders(context),
                   ),
                 ],
               ),

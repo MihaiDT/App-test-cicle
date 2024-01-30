@@ -38,7 +38,6 @@ class BirthDatePage extends GetView<BirthDateController> {
             child: Obx(
               () {
                 return SecondaryButton(
-                  text: "AVANTI",
                   onPressed: controller.canProceed
                       ? () {
                           controller.checkBirthDate(
@@ -49,6 +48,9 @@ class BirthDatePage extends GetView<BirthDateController> {
                           );
                         }
                       : null,
+                  child: TitleLarge(
+                    "AVANTI",
+                  ).applyShaders(context),
                 );
               },
             ),

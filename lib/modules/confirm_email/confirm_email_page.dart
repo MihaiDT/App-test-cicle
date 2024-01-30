@@ -19,9 +19,11 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
         leading: const SizedBox(),
         actions: [
           SecondaryButton(
-            text: 'ASSISTENZA',
             onPressed: () {},
             buttonSize: ButtonSize.h31,
+            child: const TitleLarge(
+              'ASSISTENZA',
+            ).applyShaders(context),
           )
         ],
       ),
@@ -37,8 +39,10 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SecondaryButton(
-                  text: "ACCEDI",
                   onPressed: controller.logIn,
+                  child: const TitleLarge(
+                    "ACCEDI",
+                  ).applyShaders(context),
                 ),
               ],
             ),

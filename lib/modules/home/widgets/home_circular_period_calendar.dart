@@ -73,9 +73,11 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SecondaryButton(
-                                text: "GIOCA",
                                 small: true,
                                 onPressed: () {},
+                                child: const TitleLarge(
+                                  "GIOCA",
+                                ).applyShaders(Get.context!),
                               ),
                             ],
                           ),

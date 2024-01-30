@@ -36,8 +36,10 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SecondaryButton(
-                  text: "AVANTI",
                   onPressed: controller.onButtonPressed,
+                  child: const TitleLarge(
+                    "AVANTI",
+                  ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,
                 controller.isLoginPage

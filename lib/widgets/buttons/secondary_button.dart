@@ -3,13 +3,13 @@ import 'package:lines/core/app_theme.dart';
 
 class SecondaryButton extends StatelessWidget {
   final ButtonSize buttonSize;
-  final String text;
+  final Widget child;
   final VoidCallback? onPressed;
   final bool? small;
 
   const SecondaryButton({
     this.buttonSize = ButtonSize.h56,
-    required this.text,
+    required this.child,
     required this.onPressed,
     this.small,
     super.key,
@@ -41,9 +41,7 @@ class SecondaryButton extends StatelessWidget {
         ),
         padding: MaterialStateProperty.all(buttonSize.buttonPadding),
       ),
-      child: TitleLarge(
-        text,
-      ).applyShaders(context),
+      child: child,
     );
   }
 }

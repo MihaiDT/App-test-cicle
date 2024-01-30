@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/name_surname/controller/name_surname_controller.dart';
 import 'package:lines/routes/routes.dart';
@@ -37,7 +36,6 @@ class NameSurnamePage extends GetView<NameSurnameController> {
             child: Obx(
               () {
                 return SecondaryButton(
-                  text: "AVANTI",
                   onPressed: controller.canProceed
                       ? () {
                           /// Assign TextEditingController values to User saved in the state
@@ -50,6 +48,9 @@ class NameSurnamePage extends GetView<NameSurnameController> {
                           Get.toNamed(Routes.birthDate);
                         }
                       : null,
+                  child: const TitleLarge(
+                    "ACCONSENTO",
+                  ).applyShaders(context),
                 );
               },
             ),

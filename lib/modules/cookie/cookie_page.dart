@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
@@ -47,12 +46,14 @@ class CookiePage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: SecondaryButton(
-                  text: "ACCONSENTO",
                   onPressed: () {
                     Get.toNamed(
                       Routes.registerAndLogin,
                     );
                   },
+                  child: const TitleLarge(
+                    "ACCONSENTO",
+                  ).applyShaders(context),
                 ),
               ),
             ],
