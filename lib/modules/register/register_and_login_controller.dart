@@ -79,6 +79,19 @@ class RegisterAndLoginController extends GetxController {
     }
   }
 
+  void checkEmail(String email) async {
+    if (emailValue.value.isNotEmpty) {
+      final bool emailExists = await AuthenticationService.checkEmail(
+        emailValue.value,
+      );
+      if (emailExists) {
+        emailError.value = "Email già registrata";
+      } else {
+        emailError.value = "";
+      }
+    }
+  }
+
   Future<void> onButtonPressed() async {
     if (isLoginPage) {
       await loginUser(
@@ -86,6 +99,8 @@ class RegisterAndLoginController extends GetxController {
         passwordController.text,
       );
     } else {
+      checkEmail(emailController.text);
+
       /// Save in the state email and password values
       appController.registerParameter.email = emailController.text;
       appController.registerParameter.password = passwordController.text;

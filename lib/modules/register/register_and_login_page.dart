@@ -4,7 +4,7 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import 'package:get/get.dart';
 import "package:lines/core/app_theme.dart";
-import "package:lines/modules/register/register_controller.dart";
+import "package:lines/modules/register/register_and_login_controller.dart";
 import "package:lines/modules/register/section/divider_section.dart";
 import "package:lines/modules/register/widget/link_account_widget.dart";
 import "package:lines/routes/routes.dart";
