@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
+import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
@@ -31,6 +32,7 @@ class AppController extends GetxController {
   final EasyGetter<Question> question;
   final EasyGetter<Settings> settings;
   final EasyGetter<Survey> survey;
+  final EasyGetter<CheckEmail> checkEmail;
 
   /// The parameter used to register the user
   final RegistrationParameters registerParameter;
@@ -46,6 +48,7 @@ class AppController extends GetxController {
     required this.user,
     required this.settings,
     required this.survey,
+    required this.checkEmail,
     required this.registerParameter,
     required this.updateUserParameters,
     required this.periodMap,
@@ -59,6 +62,7 @@ class AppController extends GetxController {
       question: EasyGetter<Question>(),
       settings: EasyGetter<Settings>(),
       survey: EasyGetter<Survey>(),
+      checkEmail: EasyGetter<CheckEmail>(),
       registerParameter: RegistrationParameters.initial(),
       updateUserParameters: UpdateUserParameters.initial(),
       isLoginFlow: false.obs,

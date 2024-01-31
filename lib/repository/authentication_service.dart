@@ -4,13 +4,16 @@ import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
 class AuthenticationService {
-  static Future<void> loginUser(LoginParameters loginParameters,) async {
+  static Future<void> loginUser(
+    LoginParameters loginParameters,
+  ) async {
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
@@ -29,7 +32,8 @@ class AuthenticationService {
   }
 
   static Future<void> registration(
-      RegistrationParameters registerParameter,) async {
+    RegistrationParameters registerParameter,
+  ) async {
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
@@ -56,7 +60,9 @@ class AuthenticationService {
     }
   }
 
-  static Future<void> updateUser(UpdateUserParameters user,) async {
+  static Future<void> updateUser(
+    UpdateUserParameters user,
+  ) async {
     final userId = HiveManager.userId;
     appController.user.responseHandler = ResponseHandler.pending();
     try {
@@ -87,7 +93,8 @@ class AuthenticationService {
   }
 
   static Future<void> completeUserRegistration(
-      UpdateUserParameters updateUserParameters,) async {
+    UpdateUserParameters updateUserParameters,
+  ) async {
     final userId = HiveManager.userId;
 
     appController.user.responseHandler = ResponseHandler.pending();
@@ -99,9 +106,9 @@ class AuthenticationService {
           "user": {
             "invitation_code": updateUserParameters.referralCode,
             "last_menstruation_date_start":
-            updateUserParameters.formattedLastMenstruationDateStart,
+                updateUserParameters.formattedLastMenstruationDateStart,
             "last_menstruation_date_end":
-            updateUserParameters.formattedLastMenstruationDateEnd,
+                updateUserParameters.formattedLastMenstruationDateEnd,
             "period_days": updateUserParameters.periodDays,
             "period_duration": updateUserParameters.periodDuration,
           },
@@ -112,6 +119,24 @@ class AuthenticationService {
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
+    }
+  }
+
+  /// Return true if email exists in DB
+  static Future<void> checkEmail(String email) async {
+    appController.checkEmail.responseHandler = ResponseHandler.pending();
+    try {
+      final response = await dio.post(
+        "/auth/check_email",
+        data: {
+          "email": email,
+        },
+      );
+      _saveCheckEmail(response);
+    } catch (e) {
+      appController.checkEmail.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+      return false;
     }
   }
 
@@ -132,5 +157,11 @@ class AuthenticationService {
         accessToken!,
       );
     }
+  }
+
+  static void _saveCheckEmail(Response response) {
+    appController.checkEmail.responseHandler = ResponseHandler.successful(
+      content: CheckEmail.fromJson(response.data),
+    );
   }
 }
