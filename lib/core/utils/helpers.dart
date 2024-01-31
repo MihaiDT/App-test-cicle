@@ -6,5 +6,5 @@ export '../helpers/dio_error_interceptor.dart';
 export '../helpers/form_validators.dart';
 export '../helpers/haptick_feedback.dart';
 export '../helpers/keyboard.dart';
-export '../helpers/log.dart';
+export '../helpers/logger/log.dart';
 export '../helpers/network.dart';

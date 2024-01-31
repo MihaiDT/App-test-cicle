@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-
-import 'package:lines/core/helpers/log.dart';
+import 'package:lines/core/helpers/logger/log.dart';
 
 import '../core/utils/response_handler.dart';
 import '../core/utils/singletons.dart';
@@ -16,6 +15,7 @@ class CalendarService {
       _savePeriods(response);
     } catch (e) {
       appController.periodMap.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
     }
   }
 

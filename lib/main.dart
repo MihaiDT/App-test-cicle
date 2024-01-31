@@ -3,10 +3,8 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:lines/core/helpers/dependency_injection_manager.dart';
 import 'package:lines/flavors.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lines/repository/dio_interceptor.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -23,14 +21,13 @@ FutureOr<void> main() async {
 }
 
 _initApp() async {
-  dependencyRegister(
+  await dependencyRegister(
     flavor: F.appFlavor ?? Flavor.dev,
   );
   await _initConnectivity();
   await _initNetwork();
   await _initPackageInfo();
-  await Hive.initFlutter();
-  await Hive.openBox("linesApp");
+
   //await _initFirebase();
 }
 

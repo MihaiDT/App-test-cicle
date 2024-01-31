@@ -69,8 +69,7 @@ class _CalendarGridWidgetState extends State<CalendarGridWidget> {
           );
           String formattedDate = DateFormat('yyyy-MM-dd').format(day);
           PeriodStatus? status;
-          status =
-              appController.periodMap.value?.dates[formattedDate];
+          status = appController.periodMap.value?.dates[formattedDate];
           final text = (index + 1 - start).toString();
           final dayValues = DayValues(
             day: day,

@@ -10,9 +10,7 @@ import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
 class AuthenticationService {
-  static Future<void> loginUser(
-    LoginParameters loginParameters,
-  ) async {
+  static Future<void> loginUser(LoginParameters loginParameters,) async {
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
@@ -26,12 +24,12 @@ class AuthenticationService {
       _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
     }
   }
 
   static Future<void> registration(
-    RegistrationParameters registerParameter,
-  ) async {
+      RegistrationParameters registerParameter,) async {
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
@@ -54,12 +52,11 @@ class AuthenticationService {
       _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
     }
   }
 
-  static Future<void> updateUser(
-    UpdateUserParameters user,
-  ) async {
+  static Future<void> updateUser(UpdateUserParameters user,) async {
     final userId = HiveManager.userId;
     appController.user.responseHandler = ResponseHandler.pending();
     try {
@@ -85,12 +82,12 @@ class AuthenticationService {
       _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.pending();
+      log.logApiException(e);
     }
   }
 
   static Future<void> completeUserRegistration(
-    UpdateUserParameters updateUserParameters,
-  ) async {
+      UpdateUserParameters updateUserParameters,) async {
     final userId = HiveManager.userId;
 
     appController.user.responseHandler = ResponseHandler.pending();
@@ -102,9 +99,9 @@ class AuthenticationService {
           "user": {
             "invitation_code": updateUserParameters.referralCode,
             "last_menstruation_date_start":
-                updateUserParameters.formattedLastMenstruationDateStart,
+            updateUserParameters.formattedLastMenstruationDateStart,
             "last_menstruation_date_end":
-                updateUserParameters.formattedLastMenstruationDateEnd,
+            updateUserParameters.formattedLastMenstruationDateEnd,
             "period_days": updateUserParameters.periodDays,
             "period_duration": updateUserParameters.periodDuration,
           },
@@ -114,6 +111,7 @@ class AuthenticationService {
       _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
     }
   }
 

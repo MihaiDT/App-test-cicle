@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/utils/custom_date_utils.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/widgets/dividers/divider_with_gradient.dart';
 
-import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_decoration.dart';
-import '../../../core/theme/theme_gradient.dart';
-import '../../../widgets/appbar/transparent_app_bar.dart';
-import '../../../widgets/dividers/divider_with_gradient.dart';
-import '../../../widgets/layouts/app_scaffold_padding.dart';
-import 'calendar_month_year_switch.dart';
+import '../../../core/app_theme.dart';
 
 class CalendarWeekRow extends StatelessWidget {
   final CalendarController controller;
