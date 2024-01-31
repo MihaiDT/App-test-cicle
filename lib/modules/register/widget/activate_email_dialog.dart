@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/routes/routes.dart';
 
 class ActivateEmailDialog extends StatelessWidget {
   final String email;
@@ -45,8 +48,12 @@ class ActivateEmailDialog extends StatelessWidget {
             ),
             ThemeSizedBox.height8,
             GestureDetector(
-              onTap: () {
-                AuthenticationService.sendActivationLink(email);
+              onTap: () async {
+                await AuthenticationService.sendActivationLink(email);
+                appController.isLoginFlow.value = true;
+
+                Get.back();
+                Get.toNamed(Routes.registerAndLogin);
               },
               child: const BodyLarge(
                 "Invia di nuovo",

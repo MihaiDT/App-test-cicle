@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lines/app_controller.dart';
-
-import '../../routes/routes.dart';
+import 'package:lines/routes/routes.dart';
 
 class ConfirmEmailController extends GetxController {
   late AppController appController;
@@ -13,6 +12,7 @@ class ConfirmEmailController extends GetxController {
   }
 
   void logIn() {
+    appController.isLoginFlow.value = true;
     Get.offAllNamed(Routes.registerAndLogin);
   }
 }
