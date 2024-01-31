@@ -15,12 +15,13 @@ class DioInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     final String authToken = await Get.find<SecureStorageManager>().getToken();
-
-    options.headers.addAll(
-      {
-        "Authorization": authToken,
-      },
-    );
+    if (authToken.isNotEmpty) {
+      options.headers.addAll(
+        {
+          "Authorization": authToken,
+        },
+      );
+    }
     super.onRequest(options, handler);
   }
 }
