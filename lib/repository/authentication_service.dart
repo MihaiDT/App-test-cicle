@@ -122,11 +122,11 @@ class AuthenticationService {
     }
   }
 
-  /// Return true if email exists in DB
+  /// Check if the email is already registered and it's active
   static Future<void> checkEmail(String email) async {
     appController.checkEmail.responseHandler = ResponseHandler.pending();
     try {
-      final response = await dio.post(
+      final response = await dio.get(
         "/auth/check_email",
         data: {
           "email": email,
@@ -135,6 +135,19 @@ class AuthenticationService {
       _saveCheckEmail(response);
     } catch (e) {
       appController.checkEmail.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
+  static void sendActivationLink(String email) async {
+    try {
+      await dio.post(
+        "/auth/send_activation_link",
+        data: {
+          "email": email,
+        },
+      );
+    } catch (e) {
       log.logApiException(e);
     }
   }
@@ -160,7 +173,9 @@ class AuthenticationService {
 
   static void _saveCheckEmail(Response response) {
     appController.checkEmail.responseHandler = ResponseHandler.successful(
-      content: CheckEmail.fromJson(response.data),
+      content: CheckEmail.fromJson(
+        response.data,
+      ),
     );
   }
 }
