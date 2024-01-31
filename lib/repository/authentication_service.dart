@@ -136,7 +136,6 @@ class AuthenticationService {
     } catch (e) {
       appController.checkEmail.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
-      return false;
     }
   }
 
