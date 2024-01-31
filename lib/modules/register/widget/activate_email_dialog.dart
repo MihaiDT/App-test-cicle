@@ -3,9 +3,15 @@ import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/repository/authentication_service.dart';
 
 class ActivateEmailDialog extends StatelessWidget {
-  const ActivateEmailDialog({super.key});
+  final String email;
+
+  const ActivateEmailDialog({
+    required this.email,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +44,17 @@ class ActivateEmailDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height8,
-            const BodyLarge(
-              "Invia di nuovo",
-              color: ThemeColor.darkBlue,
-              textAlign: TextAlign.center,
-              underline: true,
-              decorationColor: ThemeColor.darkBlue,
+            GestureDetector(
+              onTap: () {
+                AuthenticationService.sendActivationLink(email);
+              },
+              child: const BodyLarge(
+                "Invia di nuovo",
+                color: ThemeColor.darkBlue,
+                textAlign: TextAlign.center,
+                underline: true,
+                decorationColor: ThemeColor.darkBlue,
+              ),
             ),
           ],
         ),
