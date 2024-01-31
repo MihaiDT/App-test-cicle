@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+
+import 'package:lines/data/models/calendar_day_dto_map.dart';
 import 'package:lines/core/helpers/logger/log.dart';
 
 import '../core/utils/response_handler.dart';
@@ -13,6 +15,7 @@ class CalendarService {
         "/periods",
       );
       _savePeriods(response);
+      _createDaysDTO(response);
     } catch (e) {
       appController.periodMap.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
@@ -22,6 +25,15 @@ class CalendarService {
   static void _savePeriods(Response response) {
     appController.periodMap.responseHandler = ResponseHandler.successful(
       content: PeriodMap.fromJson(
+        response.data,
+      ),
+    );
+  }
+
+  static void _createDaysDTO(Response response) {
+    appController.calendarDayDTOMap.responseHandler =
+        ResponseHandler.successful(
+      content: CalendarDayDTOMap.fromJSON(
         response.data,
       ),
     );
