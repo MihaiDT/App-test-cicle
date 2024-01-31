@@ -47,7 +47,7 @@ class RegisterAndLoginController extends GetxController {
               Get.toNamed(Routes.nameSurname);
             } else if (callback.content?.emailExists == true &&
                 callback.content?.emailIsActive == false) {
-              _showError();
+              _showValidateEmailDialog();
             }
           }
         },
@@ -106,17 +106,20 @@ class RegisterAndLoginController extends GetxController {
   }
 
   Future<void> onButtonPressed() async {
+    await AuthenticationService.checkEmail(emailController.text);
     if (isLoginPage) {
-      await loginUser(
-        emailController.text,
-        passwordController.text,
-      );
-    } else {
-      AuthenticationService.checkEmail(emailController.text);
+      if (appController.checkEmail.value?.emailIsActive == true) {
+        _showValidateEmailDialog();
+      } else if (appController.checkEmail.value?.emailIsValid == true) {
+        await loginUser(
+          emailController.text,
+          passwordController.text,
+        );
+      }
     }
   }
 
-  void _showError() {
+  void _showValidateEmailDialog() {
     showErrorDialog(
       context: Get.context!,
       builder: (_) {
