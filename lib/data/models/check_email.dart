@@ -23,4 +23,6 @@ class CheckEmail {
     data['active'] = emailIsActive;
     return data;
   }
+
+  bool get emailIsValid => emailExists == true && emailIsActive == true;
 }
