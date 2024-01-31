@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/register/widget/activate_email_dialog.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/routes/routes.dart';
@@ -10,23 +12,47 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 class RegisterAndLoginController extends GetxController {
   @override
   void onInit() {
-    ever(
-      appController.user.rxValue,
-      (callback) {
-        if (callback.isPending) {
-          isButtonPending.value = true;
-        }
-        if (callback.isSuccessful) {
-          isButtonPending.value = false;
-
-          if (HiveManager.firstAccess) {
-            Get.offAndToNamed(Routes.lastMensesPage);
-          } else {
-            Get.offAndToNamed(Routes.main);
+    if (isLoginPage) {
+      ever(
+        appController.user.rxValue,
+        (callback) {
+          if (callback.isPending) {
+            isButtonPending.value = true;
           }
-        }
-      },
-    );
+          if (callback.isSuccessful) {
+            isButtonPending.value = false;
+
+            if (HiveManager.firstAccess) {
+              Get.offAndToNamed(Routes.lastMensesPage);
+            } else {
+              Get.offAndToNamed(Routes.main);
+            }
+          }
+        },
+      );
+    } else {
+      ever(
+        appController.checkEmail.rxValue,
+        (callback) {
+          if (callback.isPending) {
+            isButtonPending.value = true;
+          }
+          if (callback.isSuccessful) {
+            isButtonPending.value = false;
+            if (callback.content?.emailExists == false) {
+              /// Save in the state email and password values
+              appController.registerParameter.email = emailController.text;
+              appController.registerParameter.password =
+                  passwordController.text;
+              Get.toNamed(Routes.nameSurname);
+            } else if (callback.content?.emailExists == true &&
+                callback.content?.emailIsActive == false) {
+              _showError();
+            }
+          }
+        },
+      );
+    }
     super.onInit();
   }
 
@@ -79,19 +105,6 @@ class RegisterAndLoginController extends GetxController {
     }
   }
 
-  void checkEmail(String email) async {
-    if (emailValue.value.isNotEmpty) {
-      final bool emailExists = await AuthenticationService.checkEmail(
-        emailValue.value,
-      );
-      if (emailExists) {
-        emailError.value = "Email già registrata";
-      } else {
-        emailError.value = "";
-      }
-    }
-  }
-
   Future<void> onButtonPressed() async {
     if (isLoginPage) {
       await loginUser(
@@ -99,12 +112,18 @@ class RegisterAndLoginController extends GetxController {
         passwordController.text,
       );
     } else {
-      checkEmail(emailController.text);
-
-      /// Save in the state email and password values
-      appController.registerParameter.email = emailController.text;
-      appController.registerParameter.password = passwordController.text;
-      Get.toNamed(Routes.nameSurname);
+      AuthenticationService.checkEmail(emailController.text);
     }
+  }
+
+  void _showError() {
+    showErrorDialog(
+      context: Get.context!,
+      builder: (_) {
+        return ActivateEmailDialog(
+          email: emailController.text,
+        );
+      },
+    );
   }
 }
