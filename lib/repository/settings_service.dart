@@ -16,6 +16,7 @@ class SettingsService {
       _saveSettings(response);
     } catch (e) {
       appController.settings.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
     }
   }
 

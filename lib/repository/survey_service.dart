@@ -20,6 +20,7 @@ class SurveyService {
     } catch (e) {
       appController.question.responseHandler = ResponseHandler.failed();
       appController.survey.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
     }
   }
 
@@ -49,6 +50,7 @@ class SurveyService {
       _saveQuestion(response);
     } catch (e) {
       appController.survey.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
     }
   }
 

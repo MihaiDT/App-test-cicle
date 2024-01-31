@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../core/helpers/log.dart';
+import '../../core/helpers/logger/log.dart';
 import 'calendar_store.dart';
 
 class CalendarScrollController extends GetxController {

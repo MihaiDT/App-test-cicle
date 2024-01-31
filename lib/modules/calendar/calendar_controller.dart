@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:lines/core/helpers/log.dart';
+import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
-
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-
-
 import '../../data/models/symptom.dart';
 import 'calendar_scroll_controller.dart';
 import 'calendar_store.dart';
@@ -32,8 +28,6 @@ class CalendarController extends GetxController {
   SymptomCategoriesController get symptomCategoryController {
     return Get.find<SymptomCategoriesController>();
   }
-
-
 
   final RxBool _rxShowBarButton = true.obs;
 
@@ -101,7 +95,9 @@ class CalendarController extends GetxController {
   }
 
   final RxBool _rxModifyPeriodMode = false.obs;
+
   bool get modifyPeriodMode => _rxModifyPeriodMode.value;
+
   set modifyPeriodMode(bool newValue) {
     _rxModifyPeriodMode.value = newValue;
   }
