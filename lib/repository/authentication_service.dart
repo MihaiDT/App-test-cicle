@@ -139,7 +139,7 @@ class AuthenticationService {
     }
   }
 
-  static void sendActivationLink(String email) async {
+  static Future<void> sendActivationLink(String email) async {
     try {
       await dio.post(
         "/auth/send_activation_link",
