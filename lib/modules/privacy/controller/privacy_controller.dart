@@ -7,7 +7,6 @@ class PrivacyController extends GetxController {
   final RxBool isAcceptedAll = false.obs;
   RxBool buttonIsPending = false.obs;
 
-
   void acceptAll() {
     isAcceptedAll.value = !isAcceptedAll.value;
     firstAccepted.value = isAcceptedAll.value;
@@ -21,7 +20,7 @@ class PrivacyController extends GetxController {
   void onInit() {
     ever(
       appController.user.rxValue,
-          (callback) {
+      (callback) {
         if (callback.isPending) {
           buttonIsPending = true.obs;
         }
