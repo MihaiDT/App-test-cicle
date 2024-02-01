@@ -46,7 +46,9 @@ class ConfirmReferralDialog extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: TitleLarge("Indietro").applyShaders(context),
+                  child: const TitleLarge(
+                    "Indietro",
+                  ).applyShaders(context),
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
