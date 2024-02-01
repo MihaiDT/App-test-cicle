@@ -67,4 +67,7 @@ class ThemeIcon {
   static String moodTriste = '$folderPath/mood/triste.svg';
   static String moodVivace = '$folderPath/mood/vivace.svg';
   static String verticalArrows = '$folderPath/vertical_arrows.svg';
+  static String savedEmpty = '$folderPath/save_empty.svg';
+  static String savedFilled = '$folderPath/save_filled.svg';
+  static String gallery = '$folderPath/gallery.svg';
 }
