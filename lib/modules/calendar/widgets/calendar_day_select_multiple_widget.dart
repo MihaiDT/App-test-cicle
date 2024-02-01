@@ -8,20 +8,20 @@ class CalendarDaySelectMultipleWidget extends StatelessWidget {
   final String text;
   final bool isToday;
 
-  final VoidCallback? callback;
+  final VoidCallback? onDayTapped;
 
   const CalendarDaySelectMultipleWidget({
     required this.isSelected,
     required this.text,
     required this.isToday,
-    this.callback,
+    this.onDayTapped,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: callback,
+      onTap: onDayTapped,
       child: Column(
         children: [
           BodyLarge(

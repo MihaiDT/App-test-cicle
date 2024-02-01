@@ -125,6 +125,9 @@ class CalendarBottomSheet extends StatelessWidget {
                                         child: PrimaryButton(
                                           buttonSize: ButtonSize.h31,
                                           onPressed: () {
+                                            if (controller.modifyPeriodMode) {
+                                              controller.saveDates();
+                                            }
                                             controller.modifyPeriodMode =
                                                 !controller.modifyPeriodMode;
                                           },

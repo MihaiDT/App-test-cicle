@@ -5,15 +5,15 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/calendar/widgets/calendar_grid_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../../core/theme/text_wrapper.dart';
+import '../calendar_controller.dart';
 import '../calendar_scroll_controller.dart';
 import '../calendar_store.dart';
 
 class ScrollableCalendar extends StatelessWidget {
   final double spaceBetweenCalendars;
   final CalendarStore calendarStore = Get.find<CalendarStore>();
-
   final CalendarScrollController calendarScrollableCalendarController;
+  final CalendarController calendarController = Get.find<CalendarController>();
 
   ScrollableCalendar({
     required this.calendarScrollableCalendarController,
@@ -23,33 +23,39 @@ class ScrollableCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollablePositionedList.separated(
-      itemScrollController:
-          calendarScrollableCalendarController.itemScrollController,
-      separatorBuilder: (_, __) => SizedBox(height: spaceBetweenCalendars),
-      itemCount: calendarScrollableCalendarController.months.length,
-      itemBuilder: (context, index) {
-        final DateTime month =
-            calendarScrollableCalendarController.months[index];
-        if (index == 0) {
-          return Column(
-            children: [
-              ThemeSizedBox.height32,
-              _childColumn(month, context),
-            ],
-          );
-        }
+    return Obx(
+      () {
+        calendarController.modifyPeriodMode;
+        return ScrollablePositionedList.separated(
+          itemScrollController:
+              calendarScrollableCalendarController.itemScrollController,
+          separatorBuilder: (_, __) => SizedBox(height: spaceBetweenCalendars),
+          itemCount: calendarScrollableCalendarController.months.length,
+          itemBuilder: (context, index) {
+            final DateTime month =
+                calendarScrollableCalendarController.months[index];
+            if (index == 0) {
+              return Column(
+                children: [
+                  ThemeSizedBox.height32,
+                  _childColumn(month, context),
+                ],
+              );
+            }
 
-        //if you reached the end then add some space after the last month
-        if (index >= calendarScrollableCalendarController.months.length - 1) {
-          return Column(
-            children: [
-              _childColumn(month, context),
-              SizedBox(height: Get.height * 0.3),
-            ],
-          );
-        }
-        return _childColumn(month, context);
+            //if you reached the end then add some space after the last month
+            if (index >=
+                calendarScrollableCalendarController.months.length - 1) {
+              return Column(
+                children: [
+                  _childColumn(month, context),
+                  SizedBox(height: Get.height * 0.3),
+                ],
+              );
+            }
+            return _childColumn(month, context);
+          },
+        );
       },
     );
   }
@@ -66,11 +72,14 @@ class ScrollableCalendar extends StatelessWidget {
           thickness: 1,
           color: Colors.black.withOpacity(0.1),
         ),
-        CalendarGridWidget(
-          year: month.year,
-          month: month.month,
-          circleRadius: 17,
-          onDayTapped: calendarScrollableCalendarController.onDayTapped,
+        Obx(
+          () => CalendarGridWidget(
+            year: month.year,
+            month: month.month,
+            circleRadius: 17,
+            onDayTapped: calendarScrollableCalendarController.onDayTapped,
+            multipleSelectedMode: calendarController.modifyPeriodMode,
+          ),
         )
       ],
     );

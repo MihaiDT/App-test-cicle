@@ -200,6 +200,7 @@ class _CalendarYearBodyState extends State<CalendarYearBody> {
               },
               child: IgnorePointer(
                 child: CalendarGridWidget(
+                  isAnnualCalendar: true,
                   year: month.year,
                   month: month.month,
                   circleRadius: 7,

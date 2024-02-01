@@ -5,7 +5,10 @@ import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../core/utils/singletons.dart';
+import '../../data/models/calendar_day_dto.dart';
 import '../../data/models/symptom.dart';
+import '../../repository/calendar_service.dart';
 import 'calendar_scroll_controller.dart';
 import 'calendar_store.dart';
 import 'calendar_year_controller.dart';
@@ -96,7 +99,9 @@ class CalendarController extends GetxController {
   }
 
   final RxBool _rxModifyPeriodMode = false.obs;
+
   bool get modifyPeriodMode => _rxModifyPeriodMode.value;
+
   set modifyPeriodMode(bool newValue) {
     _rxModifyPeriodMode.value = newValue;
   }
@@ -113,16 +118,26 @@ class CalendarController extends GetxController {
       symptomsController.getActiveSymptoms.isNotEmpty &&
       _showRecapMenuSizeCondition;
 
+  bool get pageShouldRefresh {
+    return appController.calendarDayDTOMap.responseHandler.isSuccessful;
+  }
+
+  final RxMap<String, bool> _rxDatesToAdd = <String, bool>{}.obs;
+
+  Map<String, bool> get datesToAdd => _rxDatesToAdd;
+
+  final RxMap<String, bool> _rxDatesToRemove = <String, bool>{}.obs;
+
+  RxMap<String, bool> get datesToRemove => _rxDatesToRemove;
+
+  final Map<String, bool> _prevSavedDates = {};
+
+  // final Map<String,bool> _prevDeletedDates = {};
+
   @override
   void onInit() {
     super.onInit();
     calendarStore = Get.put(CalendarStore());
-
-    _initScrollableCalendarController();
-    _initCalendarYearController();
-    _initSymptomController();
-    _initSymptomCategoryController();
-
     ever(calendarStore.rxSelectedDate, (newDayValue) {
       _onDayChanged(newDayValue);
     });
@@ -141,6 +156,11 @@ class CalendarController extends GetxController {
         }
       },
     );
+
+    _initScrollableCalendarController();
+    _initCalendarYearController();
+    _initSymptomController();
+    _initSymptomCategoryController();
     //this two listeners will controll whether or not the save button will be shown
     ever(
       _rxShowSaveButtonSymptoms,
@@ -202,10 +222,12 @@ class CalendarController extends GetxController {
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
     _resizeBottomSheet();
     _listenForBottomSheetSizeChanges();
+    await CalendarService.fetchPeriods();
+    _initDatesToAdd();
   }
 
   void _listenForBottomSheetSizeChanges() {
@@ -298,7 +320,6 @@ class CalendarController extends GetxController {
         },
       );
     } catch (e) {
-      debugPrint('errore qua');
       logError(error: e);
     }
   }
@@ -372,10 +393,69 @@ class CalendarController extends GetxController {
     sheetVSize = (size.height + 20.0 + delta) / Get.height;
   }
 
-  Future<void> executeAfterBuild(String title) async {
-    await Future.delayed(Duration.zero);
-    debugPrint(title);
-    // this code will get executed after the build method
-    // because of the way async functions are scheduled
+  /// Initialize the list of dates to add based on the current state of the calendarDayDTOMap.
+  void _initDatesToAdd() {
+    List<String> dates = [...?appController.calendarDayDTOMap.value?.days.keys];
+    // Initialize datesToAdd and _prevSavedDates with the retrieved dates.
+    for (String date in dates) {
+      datesToAdd[date] = true;
+      _prevSavedDates[date] = true;
+    }
   }
+
+  /// Add a date to the list of dates to be added. If the date is already marked for removal, it is removed from that list.
+  void addDate(String date) {
+    datesToRemove.remove(date);
+    // If the date is not already in the addition list, mark it to be added.
+    if (!datesToAdd.containsKey(date)) {
+      datesToAdd[date] = true;
+    }
+  }
+
+  /// Remove a date from the list of dates to be added. If the date is not already in the removal list and was previously saved, mark it for removal.
+  void removeDate(String date) {
+    datesToAdd.remove(date);
+    // If the date is not already in the removal list and was previously saved, mark it for removal.
+    if (!datesToRemove.containsKey(date) && _prevSavedDates.containsKey(date)) {
+      datesToRemove[date] = true;
+    }
+  }
+
+  /// Save the changes made to the dates. It checks if datesToAdd or datesToRemove have changes, and if so, it calls the CalendarService to save the changes.
+  void saveDates() async {
+    bool twoMapsAreEquals = true;
+    // Check if each key in datesToAdd is already present in _prevSavedDates.
+    for (String key in datesToAdd.keys) {
+      if (!_prevSavedDates.containsKey(key)) {
+        twoMapsAreEquals = false;
+        break;
+      }
+    }
+
+    // If there are dates to remove, set the flag to false.
+    if (datesToRemove.isNotEmpty) {
+      twoMapsAreEquals = false;
+    }
+
+    // If there are changes in datesToAdd or datesToRemove, save the changes using CalendarService.
+    if (!twoMapsAreEquals) {
+      SaveDatesParameter saveDatesParameter = SaveDatesParameter(
+        dates: datesToAdd.keys.toList(),
+        deletedDates: datesToRemove.keys.toList(),
+      );
+      try {
+        await CalendarService.saveDates(saveDatesParameter);
+        // Clear the lists and reinitialize the datesToAdd and _prevSavedDates.
+        datesToRemove.clear();
+        datesToAdd.clear();
+        _prevSavedDates.clear();
+        _initDatesToAdd();
+      } catch (e) {
+        logError(error: e);
+      }
+    }
+  }
+
+  CalendarDayDTO? getDTOForDay(String date) =>
+      appController.calendarDayDTOMap.value?.days[date];
 }

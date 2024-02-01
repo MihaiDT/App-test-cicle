@@ -1,32 +1,27 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_color.dart';
 import '../../../core/theme/theme_gradient.dart';
-import '../../../core/theme/theme_icon.dart';
 import '../../../core/theme/theme_text_style.dart';
+import '../../../data/models/calendar_day_dto.dart';
 
 class CalendarDayWidget extends StatelessWidget {
-  final DayStatus dayStatus;
   final bool isSelected;
   final bool isToday;
   final BoxConstraints parentConstraints;
   final String text;
-  final double circleRadius;
-  final EdgeInsets? padding;
+  final bool isAnnualCalendar;
+  final CalendarDayDTO? calendarDayDTO;
 
   const CalendarDayWidget({
-    this.circleRadius = 17.0,
-    this.padding,
-    required this.dayStatus,
     required this.isToday,
     required this.isSelected,
     required this.parentConstraints,
     required this.text,
+    required this.calendarDayDTO,
+    this.isAnnualCalendar = false,
     super.key,
   });
 
@@ -34,20 +29,28 @@ class CalendarDayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double circleRadius = isAnnualCalendar ? 7.0 : 17.0;
     double iconYPos = _parentHeight - circleRadius;
     return Stack(
       alignment: Alignment.center,
       children: [
-        _dayWrapper,
-        Positioned(top: iconYPos + 2.5, child: _bottomIcon),
+        dayContainer(circleRadius, context),
         Visibility(
-          visible: isSelected,
+          visible: !isAnnualCalendar,
+          child: Positioned(
+            top: iconYPos + 2.5,
+            child: const SizedBox
+                .shrink(), //temporary keeping this widget for later use with db info
+          ),
+        ),
+        Visibility(
+          visible: isSelected && !isAnnualCalendar,
           child: Container(
-            width: circleRadius * 2 + 14,
+            width: circleRadius * 2 + 16,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: GradientBoxBorder(
-                width: 2,
+                width: isAnnualCalendar ? 1 : 2,
                 gradient: ThemeGradient.primary,
               ),
             ),
@@ -57,98 +60,70 @@ class CalendarDayWidget extends StatelessWidget {
     );
   }
 
-  Color get _bgColor {
-    switch (dayStatus) {
-      case DayStatus.filledBlue:
-      case DayStatus.filledBlueDot:
-      case DayStatus.filledBlueHeart:
-        return ThemeColor.ovulazioneColor;
-      case DayStatus.filledRed:
-      case DayStatus.filledRedDot:
-      case DayStatus.filledRedHeart:
-        return ThemeColor.cicloColor;
-      default:
-        return Colors.transparent;
-    }
-  }
-
-  Widget get _bottomIcon {
-    switch (dayStatus) {
-      case DayStatus.emptyHeart:
-      case DayStatus.filledRedHeart:
-      case DayStatus.filledBlueHeart:
-        return SvgPicture.asset(ThemeIcon.calendarHeart);
-      case DayStatus.emptyDot:
-      case DayStatus.filledRedDot:
-      case DayStatus.filledBlueDot:
-        return SvgPicture.asset(ThemeIcon.calendarGradientDot);
-      default:
-        return const SizedBox();
-    }
-  }
-
-  Widget get _dayWrapper {
-    switch (dayStatus) {
-      case DayStatus.dottedBlue:
-      case DayStatus.dottedRed:
+  Widget dayContainer(double circleRadius, BuildContext context) {
+    if (calendarDayDTO != null) {
+      if (calendarDayDTO!.isReal) {
+        return CircleAvatar(
+          backgroundColor: calendarDayDTO != null
+              ? calendarDayDTO!.bgColor
+              : Colors.transparent,
+          radius: circleRadius,
+          child: Padding(
+            padding:
+                isAnnualCalendar ? const EdgeInsets.all(2.0) : EdgeInsets.zero,
+            child: FittedBox(
+              child: _dayNumberText(context),
+            ),
+          ),
+        );
+      } else {
         return DottedBorder(
           borderType: BorderType.Circle,
-          color: _dottedBorderColor,
+          color: calendarDayDTO!.bgColor,
           dashPattern: const [4],
-          strokeWidth: 2,
+          strokeWidth: isAnnualCalendar ? 1 : 2,
           child: CircleAvatar(
             backgroundColor: Colors.transparent,
             radius: circleRadius,
-            child: FittedBox(child: _dayNumberText),
+            child: FittedBox(
+              child: _dayNumberText(context),
+            ),
           ),
         );
-      default:
-        return CircleAvatar(
-          backgroundColor: _bgColor,
-          radius: circleRadius,
-          child: Padding(
-            padding: padding ?? EdgeInsets.zero,
-            child: FittedBox(child: _dayNumberText),
-          ),
-        );
+      }
     }
+
+    return CircleAvatar(
+      backgroundColor: Colors.transparent,
+      radius: circleRadius,
+      child: Padding(
+        padding: isAnnualCalendar ? const EdgeInsets.all(2.0) : EdgeInsets.zero,
+        child: FittedBox(
+          child: _dayNumberText(context),
+        ),
+      ),
+    );
   }
 
-  Widget get _dayNumberText {
-    BuildContext? context = Get.context;
-    switch (dayStatus) {
-      case DayStatus.filledBlue:
-      case DayStatus.filledBlueDot:
-      case DayStatus.filledBlueHeart:
-      case DayStatus.filledRed:
-      case DayStatus.filledRedDot:
-      case DayStatus.filledRedHeart:
-        return BodyLarge(
-          text,
-          fontWeight: isToday
-              ? NewThemeTextStyle.weightExtraBold
-              : NewThemeTextStyle.weightMedium,
-          textAlign: TextAlign.center,
-        );
-      default:
-        return BodyLarge(
-          text,
-          fontWeight: isToday
-              ? NewThemeTextStyle.weightExtraBold
-              : NewThemeTextStyle.weightMedium,
-          textAlign: TextAlign.center,
-        ).applyShaders(context!);
-    }
-  }
-
-  Color get _dottedBorderColor {
-    switch (dayStatus) {
-      case DayStatus.dottedRed:
-        return ThemeColor.cicloColor;
-      case DayStatus.dottedBlue:
-        return ThemeColor.ovulazioneColor;
-      default:
-        return Colors.transparent;
+  Widget _dayNumberText(BuildContext context) {
+    if (calendarDayDTO == null ||
+        calendarDayDTO!.bgColor == Colors.transparent ||
+        !calendarDayDTO!.isReal) {
+      return BodyLarge(
+        text,
+        fontWeight: isToday
+            ? NewThemeTextStyle.weightExtraBold
+            : NewThemeTextStyle.weightMedium,
+        textAlign: TextAlign.center,
+      ).applyShaders(context);
+    } else {
+      return BodyLarge(
+        text,
+        fontWeight: isToday
+            ? NewThemeTextStyle.weightExtraBold
+            : NewThemeTextStyle.weightMedium,
+        textAlign: TextAlign.center,
+      );
     }
   }
 }

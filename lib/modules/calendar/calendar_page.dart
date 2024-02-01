@@ -59,17 +59,27 @@ class CalendarPage extends GetView<CalendarController> {
                     Obx(
                       () => Offstage(
                         offstage:
-                            !(controller.selectedTab == CalendarTabs.monthTab),
+                            !(controller.selectedTab == CalendarTabs.monthTab &&
+                                controller.pageShouldRefresh),
                         child: _scrollableCalendar,
                       ),
                     ),
                     Obx(
                       () => Offstage(
                         offstage:
-                            !(controller.selectedTab == CalendarTabs.yearTab),
+                            !(controller.selectedTab == CalendarTabs.yearTab &&
+                                controller.pageShouldRefresh),
                         child: const CalendarYearBody(),
                       ),
                     ),
+                    Obx(
+                      () => Visibility(
+                        visible: !controller.pageShouldRefresh,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )
