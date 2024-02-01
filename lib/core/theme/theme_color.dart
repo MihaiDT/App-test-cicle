@@ -16,4 +16,12 @@ class ThemeColor {
   static Color primaryOpaque = primary.withOpacity(0.1);
   static Color opaqueWhite = Colors.white.withOpacity(0.3);
   static Color lightGrey = const Color(0xFF75797F);
+  static Color ginecologiaColor = const Color(0xffde76b1);
+  static Color sessualitaEFertilitaColor = const Color(0xff76a9de);
+  static Color tabuEInclusivitaColor = const Color(0xff693f91);
+  static Color fitnessAndWellnessColor = const Color(0xff7cc773);
+  static Color beautyAndLifestyleColor = const Color(0xff548f82);
+  static Color alimentazioneColor = const Color(0xffdea476);
+  static Color benessereEmotivoColor = const Color(0xff78d3c7);
+  static Color linesAlTuoFiancoColor = const Color(0xffde7676);
 }
