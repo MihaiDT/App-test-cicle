@@ -5,14 +5,14 @@ import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/privacy/controller/privacy_controller.dart';
 import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
 import 'package:lines/repository/authentication_service.dart';
-import 'package:lines/routes/routes.dart';
-import 'package:lines/widgets/buttons/secondary_button.dart';
+import 'package:lines/widgets/buttons/secondary_loading_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class PrivacyPage extends StatelessWidget {
+class PrivacyPage extends GetView<PrivacyController> {
   const PrivacyPage({super.key});
 
   @override
@@ -44,12 +44,16 @@ class PrivacyPage extends StatelessWidget {
                     ),
                   ),
                   ThemeSizedBox.height16,
-                  SecondaryButton(
-                    text: "REGISTRATI",
-                    onPressed: () async {
-                      await registerUser();
-                      Get.toNamed(Routes.confirmEmailPage);
-                    },
+                  Obx(
+                    () => SecondaryLoadingButton(
+                      onPressed: () {
+                        registerUser();
+                      },
+                      isLoading: controller.buttonIsPending.value,
+                      child: const TitleLarge(
+                        "REGISTRATI",
+                      ).applyShaders(context),
+                    ),
                   ),
                 ],
               ),
@@ -61,22 +65,28 @@ class PrivacyPage extends StatelessWidget {
                   "La privacy prima di tutto",
                 ),
                 ThemeSizedBox.height32,
-                const PrivacyDetailWidget(
+                PrivacyDetailWidget(
                   title: "Resta aggiornato sul mondo Lines",
                   description:
                       "Ricevi comunicazioni su Lines e permettici di svolgere ricerche di mercato, come da [informativa privacy]. In qualsiasi momento potrai modificare la tua preferenza.",
+                  onChanged: (value) {},
+                  value: true,
                 ),
                 ThemeSizedBox.height24,
-                const PrivacyDetailWidget(
+                PrivacyDetailWidget(
                   title: "Ricevi contenuti e missioni personalizzate per te!",
                   description:
                       "Per noi è importante conoscere i tuoi interessi! Permettici di darti un'esperienza personalizzata inviandoti comunicazioni e promozioni non generiche su Lines e, se lo vorrai, anche sugli altri marchi della famiglia Fater e nostri partner terzi, come da informativa privacy. In qualsiasi momento potrai modificare le tue preferenze.",
+                  onChanged: (value) {},
+                  value: true,
                 ),
                 ThemeSizedBox.height24,
-                const PrivacyDetailWidget(
+                PrivacyDetailWidget(
                   title: "Ricevi comunicazioni e offerte su altri prodotti",
                   description:
                       "Ricevi comunicazioni sugli altri brand della famiglia Fater e nostri partner terzi, e permettici di svolgere ricerche di mercato, come da informativa privacy. In qualsiasi momento potrai modificare la tua preferenza.",
+                  onChanged: (value) {},
+                  value: true,
                 ),
               ],
             ),
@@ -88,6 +98,8 @@ class PrivacyPage extends StatelessWidget {
 
   /// This method takes the registerParameter and pass this data to the registration method
   Future<void> registerUser() async {
+    appController.registerParameter.privacyMarketingEmail = true;
+    appController.registerParameter.privacyPolicy = true;
     await AuthenticationService.registration(
       appController.registerParameter,
     );

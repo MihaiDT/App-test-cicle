@@ -17,17 +17,26 @@ class HiveManager {
     Hive.box("linesApp").put(HiveReferenceKeys.appHidden.name, symbol);
   }
 
-  static get firstAccess {
+  static bool get firstAccess {
     return Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ??
-        false;
+        true;
   }
 
-  static set isFirstAccess(bool symbol) {
-    Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ?? false;
+  static set firstAccess(bool symbol) {
+    Hive.box("linesApp").put(HiveReferenceKeys.isFirstAccess.name, symbol);
+  }
+
+  static String get userId {
+    return Hive.box("linesApp").get(HiveReferenceKeys.userId.name) ?? "";
+  }
+
+  static set userId(String userId) {
+    Hive.box("linesApp").put(HiveReferenceKeys.userId.name, userId);
   }
 }
 
 enum HiveReferenceKeys {
   appHidden,
-  isFirstAccess;
+  isFirstAccess,
+  userId;
 }

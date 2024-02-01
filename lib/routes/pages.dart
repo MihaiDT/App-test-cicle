@@ -10,6 +10,7 @@ import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
+import 'package:lines/modules/privacy/privacy_binding.dart';
 import 'package:lines/modules/referral/referral_binding.dart';
 import 'package:lines/modules/referral/referral_page.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_binding.dart';
@@ -26,8 +27,8 @@ import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
 import '../modules/name_surname/name_surname_page.dart';
 import '../modules/privacy/privacy_page.dart';
+import '../modules/register/register_and_login_binding.dart';
 import '../modules/register/register_and_login_page.dart';
-import '../modules/register/register_binding.dart';
 import '../modules/splash/splash_binding.dart';
 import '../modules/splash/splash_page.dart';
 import '../modules/walkthrough/walkthrough_binding.dart';
@@ -72,7 +73,7 @@ class Pages {
       binding: RegisterBinding(),
       name: Routes.registerAndLogin,
       page: () => _mediaQueryWrapper(
-        RegisterAndLoginPage(),
+        const RegisterAndLoginPage(),
         authNeeded: false,
       ),
       transition: Transition.fade,
@@ -139,6 +140,9 @@ class Pages {
     // PrivacyPage
     GetPage(
       name: Routes.privacy,
+      bindings: [
+        PrivacyBinding(),
+      ],
       page: () => _mediaQueryWrapper(
         const PrivacyPage(),
         authNeeded: false,

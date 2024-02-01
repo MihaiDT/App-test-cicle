@@ -40,7 +40,6 @@ class LastMensesPage extends GetView<LastMensesController> {
                   valueListenable: controller.datetimeRange,
                   builder: (_, DateTimeRange? value, __) {
                     return SecondaryButton(
-                      text: "AVANTI",
                       onPressed: value == null
                           ? null
                           : () {
@@ -51,6 +50,9 @@ class LastMensesPage extends GetView<LastMensesController> {
                                   .lastMenstruationDateEnd = value.end;
                               Get.toNamed(Routes.howLongMensesPage);
                             },
+                      child: const TitleLarge(
+                        "AVANTI",
+                      ).applyShaders(context),
                     );
                   },
                 ),

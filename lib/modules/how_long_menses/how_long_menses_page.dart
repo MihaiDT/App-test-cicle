@@ -36,8 +36,10 @@ class HowLongMensesPage extends GetView<HowLongMensesController> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SecondaryButton(
-                  text: "AVANTI",
                   onPressed: () => controller.onButtonPressed(),
+                  child: const TitleLarge(
+                    "AVANTI",
+                  ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,
                 GestureDetector(

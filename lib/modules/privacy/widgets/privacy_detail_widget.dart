@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/widgets/forms/rounded_checkbox.dart';
 
-class PrivacyDetailWidget extends StatefulWidget {
+class PrivacyDetailWidget extends StatelessWidget {
   final String title;
   final String description;
+  final bool value;
+  final Function(bool value) onChanged;
 
   const PrivacyDetailWidget({
     required this.title,
     required this.description,
+    required this.onChanged,
+    required this.value,
     super.key,
   });
-
-  @override
-  State<PrivacyDetailWidget> createState() => _PrivacyDetailWidgetState();
-}
-
-class _PrivacyDetailWidgetState extends State<PrivacyDetailWidget> {
-  bool value = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +24,7 @@ class _PrivacyDetailWidgetState extends State<PrivacyDetailWidget> {
         RoundedCheckbox(
           value: value,
           onChanged: (p0) {
-            setState(() {
-              value = p0;
-            });
+            onChanged(p0);
           },
         ),
         ThemeSizedBox.width16,
@@ -39,11 +33,11 @@ class _PrivacyDetailWidgetState extends State<PrivacyDetailWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeadlineMedium(
-                widget.title,
+                title,
               ),
               ThemeSizedBox.height8,
               BodyMedium(
-                widget.description,
+                description,
               ),
             ],
           ),

@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
@@ -51,12 +53,7 @@ class AuthenticationService {
           }
         },
       );
-
       _saveUserInfo(response);
-
-      await Get.find<SecureStorageManager>().saveToken(
-        response.data['user']['session_token'],
-      );
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
@@ -66,7 +63,7 @@ class AuthenticationService {
   static Future<void> updateUser(
     UpdateUserParameters user,
   ) async {
-    final userId = appController.user.value?.userId;
+    final userId = HiveManager.userId;
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.put(
@@ -98,7 +95,7 @@ class AuthenticationService {
   static Future<void> completeUserRegistration(
     UpdateUserParameters updateUserParameters,
   ) async {
-    final userId = appController.user.value?.userId;
+    final userId = HiveManager.userId;
 
     appController.user.responseHandler = ResponseHandler.pending();
 
@@ -109,9 +106,9 @@ class AuthenticationService {
           "user": {
             "invitation_code": updateUserParameters.referralCode,
             "last_menstruation_date_start":
-                updateUserParameters.lastMenstruationDateStart,
+                updateUserParameters.formattedLastMenstruationDateStart,
             "last_menstruation_date_end":
-                updateUserParameters.lastMenstruationDateEnd,
+                updateUserParameters.formattedLastMenstruationDateEnd,
             "period_days": updateUserParameters.periodDays,
             "period_duration": updateUserParameters.periodDuration,
           },
@@ -125,14 +122,44 @@ class AuthenticationService {
     }
   }
 
-  static void _saveUserInfo(Response response) {
+  /// Check if the email is already registered and it's active
+  static Future<void> checkEmail(String email) async {
+    appController.checkEmail.responseHandler = ResponseHandler.pending();
+    try {
+      final response = await dio.get(
+        "/auth/check_email",
+        data: {
+          "email": email,
+        },
+      );
+      _saveCheckEmail(response);
+    } catch (e) {
+      appController.checkEmail.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> sendActivationLink(String email) async {
+    try {
+      await dio.post(
+        "/auth/send_activation_link",
+        data: {
+          "email": email,
+        },
+      );
+    } catch (e) {
+      log.logApiException(e);
+    }
+  }
+
+  static void _saveUserInfo(Response response) async {
     appController.user.responseHandler = ResponseHandler.successful(
       content: User.fromJson(
         response.data,
       ),
     );
-
-    _saveAccessTokenInDB(response.data['user']['session_token']);
+    HiveManager.userId = appController.user.value?.userId ?? "";
+    await _saveAccessTokenInDB(response.data['user']['session_token']);
   }
 
   /// Save accessToken in secure storage
@@ -142,5 +169,13 @@ class AuthenticationService {
         accessToken!,
       );
     }
+  }
+
+  static void _saveCheckEmail(Response response) {
+    appController.checkEmail.responseHandler = ResponseHandler.successful(
+      content: CheckEmail.fromJson(
+        response.data,
+      ),
+    );
   }
 }

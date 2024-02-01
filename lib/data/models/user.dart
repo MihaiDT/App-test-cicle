@@ -1,9 +1,9 @@
 class User {
-  bool active;
+  bool? active;
   String birthdate;
   String email;
   String firstName;
-  bool isConfirmed;
+  bool? isConfirmed;
   String userId;
   String? lastMenstrautionDate;
   String lastName;
@@ -23,7 +23,7 @@ class User {
     required this.birthdate,
     required this.email,
     required this.firstName,
-    required this.isConfirmed,
+    this.isConfirmed = false,
     required this.userId,
     this.lastMenstrautionDate,
     required this.lastName,

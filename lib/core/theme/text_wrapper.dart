@@ -12,6 +12,7 @@ class DisplayLarge extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -31,6 +32,7 @@ class DisplayMedium extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -50,6 +52,7 @@ class DisplaySmall extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -69,6 +72,7 @@ class HeadlineLarge extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -88,6 +92,7 @@ class HeadlineExtraLarge extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -107,6 +112,7 @@ class HeadlineMedium extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -123,6 +129,7 @@ class HeadlineMedium extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   }) : super(
           fontWeight: FontWeight.w500,
         );
@@ -139,6 +146,7 @@ class HeadlineSmall extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -158,6 +166,7 @@ class BodyLarge extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -177,6 +186,7 @@ class BodyMedium extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -196,6 +206,7 @@ class BodySmall extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -215,6 +226,7 @@ class LabelSmall extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -234,6 +246,7 @@ class TitleLarge extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -253,6 +266,7 @@ class TitleMedium extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -272,6 +286,7 @@ class TitleSmall extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -291,6 +306,7 @@ class LabelLarge extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override
@@ -310,6 +326,7 @@ class LabelMedium extends TextWrapper with ThemeShaderTextWrapper {
     super.overflow,
     super.textAlign,
     super.underline,
+    super.decorationColor,
   });
 
   @override

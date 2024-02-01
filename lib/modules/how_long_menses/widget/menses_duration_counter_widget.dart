@@ -21,24 +21,28 @@ class MensesDurationCounterWidget
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SecondaryButton(
-              text: "  -  ",
               onPressed: () {
                 controller.decrementCounter();
                 onTap.call(controller.counter.value);
               },
               buttonSize: ButtonSize.h31,
+              child: const TitleLarge(
+                "  -  ",
+              ).applyShaders(context),
             ),
             HeadlineMedium(
               "${controller.counter.value} giorni",
               fontWeight: NewThemeTextStyle.weightMedium,
             ),
             SecondaryButton(
-              text: "  +  ",
               onPressed: () {
                 controller.incrementCounter();
                 onTap.call(controller.counter.value);
               },
               buttonSize: ButtonSize.h31,
+              child: const TitleLarge(
+                "  +  ",
+              ).applyShaders(context),
             ),
           ],
         );

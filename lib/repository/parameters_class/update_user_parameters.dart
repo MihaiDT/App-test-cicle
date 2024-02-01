@@ -29,6 +29,22 @@ class UpdateUserParameters {
     this.referralCode,
   });
 
+  String get formattedLastMenstruationDateStart {
+    if (lastMenstruationDateStart != null) {
+      return "${lastMenstruationDateStart!.year}-${lastMenstruationDateStart!.month}-${lastMenstruationDateStart!.day}";
+    } else {
+      return "";
+    }
+  }
+
+  String get formattedLastMenstruationDateEnd {
+    if (lastMenstruationDateEnd != null) {
+      return "${lastMenstruationDateEnd!.year}-${lastMenstruationDateEnd!.month}-${lastMenstruationDateEnd!.day}";
+    } else {
+      return "";
+    }
+  }
+
   factory UpdateUserParameters.initial() {
     /// return an initial state fot the UpdateUserParameters
     return UpdateUserParameters(

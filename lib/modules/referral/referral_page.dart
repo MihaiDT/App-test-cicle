@@ -33,10 +33,12 @@ class ReferralPage extends GetView<ReferralController> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SecondaryButton(
-                  text: "USA IL CODICE",
                   onPressed: () {
                     controller.onButtonPressed();
                   },
+                  child: const TitleLarge(
+                    "USA IL CODICE",
+                  ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,
                 GestureDetector(
