@@ -8,6 +8,7 @@ import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
+import 'data/models/calendar_day_dto_map.dart';
 import 'data/models/period_map.dart';
 
 /// Just a wrapper in order to simplify getter access
@@ -39,6 +40,7 @@ class AppController extends GetxController {
   final UpdateUserParameters updateUserParameters;
 
   final EasyGetter<PeriodMap> periodMap;
+  final EasyGetter<CalendarDayDTOMap> calendarDayDTOMap;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
@@ -52,12 +54,14 @@ class AppController extends GetxController {
     required this.registerParameter,
     required this.updateUserParameters,
     required this.periodMap,
+    required this.calendarDayDTOMap,
     required this.isLoginFlow,
   });
 
   factory AppController.initial() {
     return AppController._(
       periodMap: EasyGetter<PeriodMap>(),
+      calendarDayDTOMap: EasyGetter<CalendarDayDTOMap>(),
       user: EasyGetter<User>(),
       question: EasyGetter<Question>(),
       settings: EasyGetter<Settings>(),
