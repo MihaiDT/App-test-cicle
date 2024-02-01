@@ -4,6 +4,7 @@ import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/register/widget/activate_email_dialog.dart';
+import 'package:lines/modules/register/widget/email_does_not_exists.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/routes/routes.dart';
@@ -106,11 +107,23 @@ class RegisterAndLoginController extends GetxController {
   }
 
   Future<void> onButtonPressed() async {
+    /// Check if email exists and if it's active
     await AuthenticationService.checkEmail(emailController.text);
+
+    /// Check if the actual page is the login page or registration page
     if (isLoginPage) {
-      if (appController.checkEmail.value?.emailIsActive == true) {
+      /// If the email doesn't exists show the dialog
+      if (appController.checkEmail.value?.emailExists == false) {
+        _showEmailDoesNotExists();
+      }
+
+      /// If the email is not active show the dialog
+      else if (appController.checkEmail.value?.emailIsActive == false) {
         _showValidateEmailDialog();
-      } else if (appController.checkEmail.value?.emailIsValid == true) {
+      }
+
+      /// If the email exists and is active login the user
+      else if (appController.checkEmail.value?.emailIsValid == true) {
         await loginUser(
           emailController.text,
           passwordController.text,
@@ -126,6 +139,15 @@ class RegisterAndLoginController extends GetxController {
         return ActivateEmailDialog(
           email: emailController.text,
         );
+      },
+    );
+  }
+
+  void _showEmailDoesNotExists() {
+    showErrorDialog(
+      context: Get.context!,
+      builder: (_) {
+        return const EmailDoesNotExists();
       },
     );
   }
