@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../core/theme/theme_color.dart';
+import 'package:lines/core/app_theme.dart';
 
 enum AdvicesCategory {
   ginecologia,
@@ -34,5 +33,25 @@ enum AdvicesCategory {
         return ThemeColor.linesAlTuoFiancoColor;
     }
   }
-  
+
+  String get iconPath {
+    switch (this) {
+      case AdvicesCategory.ginecologia:
+        return ThemeIcon.ginecologia;
+      case AdvicesCategory.sessualitaEFertilita:
+        return ThemeIcon.sessualitaEFertilita;
+      case AdvicesCategory.tabueEInclusivita:
+        return ThemeIcon.tabueEInclusivita;
+      case AdvicesCategory.fitnessAndWellness:
+        return ThemeIcon.fitnessAndWellness;
+      case AdvicesCategory.beautyAndLifestyle:
+        return ThemeIcon.beautyAndLifestyle;
+      case AdvicesCategory.alimentazione:
+        return ThemeIcon.alimentazione;
+      case AdvicesCategory.benessereEmotivo:
+        return ThemeIcon.benessereEmotivo;
+      case AdvicesCategory.linesAlTuoFianco:
+        return ThemeIcon.linesAlTuoFianco;
+    }
+  }
 }

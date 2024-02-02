@@ -131,6 +131,7 @@ flutter:
     - assets/icons/pelle/
     - assets/icons/sintomi/
     - assets/icons/sonno/
+    - assets/icons/advices_categories/
 
   fonts:
     - family: Barlow

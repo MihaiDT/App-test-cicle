@@ -70,4 +70,19 @@ class ThemeIcon {
   static String savedEmpty = '$folderPath/save_empty.svg';
   static String savedFilled = '$folderPath/save_filled.svg';
   static String gallery = '$folderPath/gallery.svg';
+  static String ginecologia = '$folderPath/advices_categories/ginecologia.svg';
+  static String sessualitaEFertilita =
+      '$folderPath/advices_categories/sessualita_e_fertilita.svg';
+  static String tabueEInclusivita =
+      '$folderPath/advices_categories/tabu_e_inclusivita.svg';
+  static String fitnessAndWellness =
+      '$folderPath/advices_categories/fitness_and_wellness.svg';
+  static String beautyAndLifestyle =
+      '$folderPath/advices_categories/beauty_and_lifestyle.svg';
+  static String alimentazione =
+      '$folderPath/advices_categories/alimentazione.svg';
+  static String benessereEmotivo =
+      '$folderPath/advices_categories/benessere_emotivo.svg';
+  static String linesAlTuoFianco =
+      '$folderPath/advices_categories/lines_al_tuo_fianco.svg';
 }
