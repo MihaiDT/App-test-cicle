@@ -11,7 +11,24 @@ enum AdvicesCategory {
   benessereEmotivo,
   linesAlTuoFianco;
 
-  String get categoryTitle => name;
+  String get categoryTitle {
+    switch (this) {
+      case AdvicesCategory.sessualitaEFertilita:
+        return 'sessualità e fertilità';
+      case AdvicesCategory.tabueEInclusivita:
+        return 'tabù e inclusività';
+      case AdvicesCategory.fitnessAndWellness:
+        return 'fitness & wellness';
+      case AdvicesCategory.beautyAndLifestyle:
+        return 'beauty & lifestyle';
+      case AdvicesCategory.benessereEmotivo:
+        return 'benessere emotivo';
+      case AdvicesCategory.linesAlTuoFianco:
+        return 'lines al tuo fianco';
+      default:
+        return name;
+    }
+  }
 
   Color get categoryColor {
     switch (this) {
