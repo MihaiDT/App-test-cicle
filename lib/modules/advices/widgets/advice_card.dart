@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lines/data/enums/advices_category.dart';
 
-import 'package:lines/core/app_theme.dart';
+import '../../../core/theme/text_wrapper.dart';
+import '../../../core/theme/theme_color.dart';
+import '../../../core/theme/theme_icon.dart';
+import '../../../core/theme/theme_sized_box.dart';
 import 'advice_card_save_button.dart';
 
 class AdviceCard extends StatelessWidget {
+  final AdvicesCategory advicesCategory;
   final bool isNew;
   final bool isSaved;
   final String text;
@@ -15,6 +20,7 @@ class AdviceCard extends StatelessWidget {
   late final bool gallery;
 
   AdviceCard({
+    required this.advicesCategory,
     this.imageUrl,
     this.hasBorder = false,
     this.isNew = false,
@@ -29,6 +35,7 @@ class AdviceCard extends StatelessWidget {
 
   AdviceCard.withTimer({
     required this.timer,
+    required this.advicesCategory,
     this.imageUrl,
     this.hasBorder = false,
     this.isNew = false,
@@ -41,6 +48,7 @@ class AdviceCard extends StatelessWidget {
   }
 
   AdviceCard.withGallery({
+    required this.advicesCategory,
     this.imageUrl,
     this.hasBorder = false,
     this.isNew = false,
@@ -141,8 +149,13 @@ class AdviceCard extends StatelessWidget {
 
   Widget get _categoryIcon {
     //temp solution
-    return const CircleAvatar(
+    return CircleAvatar(
+      backgroundColor: advicesCategory.categoryColor,
       radius: 14,
+      child: SvgPicture.asset(
+        advicesCategory.iconPath,
+        color: Colors.white,
+      ),
     );
   }
 
