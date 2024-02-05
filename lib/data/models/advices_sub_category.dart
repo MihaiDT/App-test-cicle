@@ -20,4 +20,11 @@ class AdvicesSubCategory {
       articles: articles,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'subCategoryName': subCategoryName,
+      'articles': articles.map((article) => article.toJson()).toList(),
+    };
+  }
 }

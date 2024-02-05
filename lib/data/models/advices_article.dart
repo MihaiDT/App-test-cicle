@@ -99,6 +99,40 @@ class AdvicesArticle {
         );
     }
   }
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {
+      'articleCategoryId': articleCategoryId,
+      'id': id,
+      'typology': typology.toString().split('.').last,
+      'title': title,
+      'disclaimer': disclaimer,
+    };
+
+    if (coverImageUrl != null) {
+      json['coverImageUrl'] = coverImageUrl;
+    }
+    if (slideshowImageUrls != null) {
+      json['slideshowImageUrls'] = slideshowImageUrls;
+    }
+    if (shortDescription != null) {
+      json['shortDescription'] = shortDescription;
+    }
+    if (text != null) {
+      json['text'] = text;
+    }
+    if (thumbImageUrl != null) {
+      json['thumbImageUrl'] = thumbImageUrl;
+    }
+    if (videoImagePreview != null) {
+      json['videoImagePreview'] = videoImagePreview;
+    }
+    if (videoUrl != null) {
+      json['videoUrl'] = videoUrl;
+    }
+
+    return json;
+  }
 }
 
 enum ArticleType {

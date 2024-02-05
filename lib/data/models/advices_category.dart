@@ -18,6 +18,13 @@ class AdvicesCategory {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'iconName': iconName,
+      'categoryTitle': categoryTitle,
+    };
+  }
+
   Color get categoryColor {
     switch (iconName) {
       case 'ginecologia.svg':
