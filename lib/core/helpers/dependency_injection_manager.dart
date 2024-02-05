@@ -13,6 +13,7 @@ import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/data/models/app_config.dart';
 import 'package:lines/data/models/auth_headers.dart';
 import 'package:lines/data/models/session.dart';
+import 'package:lines/data/models/symptom_adapter.dart';
 import 'package:lines/flavors.dart';
 
 Future<void> dependencyRegister({
@@ -39,8 +40,8 @@ Future<void> dependencyRegister({
   Get.put(AppConfig());
   Get.put(Session());
 
-  await Hive.initFlutter();
-  await Hive.openBox("linesApp");
+  await _registerHive();
+
   Get.put(
     SecureStorageManager(),
   );
@@ -53,4 +54,11 @@ Future<void> dependencyRegister({
     AppController.initial(),
     permanent: true,
   );
+}
+
+/// Register alla the Hive  boxes andadapters
+Future<void> _registerHive() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(SymptomAdapter());
+  await Hive.openBox("linesApp");
 }

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/models/check_email.dart';
+import 'package:lines/data/models/db_calendar_day_dto_map.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
@@ -41,6 +42,7 @@ class AppController extends GetxController {
 
   final EasyGetter<PeriodMap> periodMap;
   final EasyGetter<CalendarDayDTOMap> calendarDayDTOMap;
+  final EasyGetter<DBCalendarDayDtoMap> dbCalendarDayDtoMap;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
@@ -55,6 +57,7 @@ class AppController extends GetxController {
     required this.updateUserParameters,
     required this.periodMap,
     required this.calendarDayDTOMap,
+    required this.dbCalendarDayDtoMap,
     required this.isLoginFlow,
   });
 
@@ -62,6 +65,7 @@ class AppController extends GetxController {
     return AppController._(
       periodMap: EasyGetter<PeriodMap>(),
       calendarDayDTOMap: EasyGetter<CalendarDayDTOMap>(),
+      dbCalendarDayDtoMap: EasyGetter<DBCalendarDayDtoMap>(),
       user: EasyGetter<User>(),
       question: EasyGetter<Question>(),
       settings: EasyGetter<Settings>(),

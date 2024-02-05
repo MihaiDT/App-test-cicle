@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
+
 import '../../data/models/symptom.dart';
 import 'calendar_store.dart';
 
@@ -8,7 +10,13 @@ class SymptomsController extends GetxController {
   RxList<Symptom> rxSavedSymptoms = <Symptom>[].obs;
   late CalendarStore calendarStore;
 
-  SymptomsController({this.onSymptomChanged}) {
+  SymptomsController({
+    this.onSymptomChanged,
+  });
+
+  @override
+  void onInit() {
+    super.onInit();
     calendarStore = Get.put(CalendarStore());
     rxSavedSymptoms.addAll(getActiveSymptoms);
     ever(
@@ -49,5 +57,24 @@ class SymptomsController extends GetxController {
       onSymptomChanged!();
     }
     //TODO: save new value in db
+  }
+
+  void saveSymptomsInDB(List<Symptom> selectedSymptoms) {
+    if (calendarStore.selectedDate != null) {
+      final DateTime actualDate = _normalizeDate(calendarStore.selectedDate!);
+
+      /// Get the saved symptoms in the db
+      Map<DateTime, List<Symptom>> savedSymptoms = HiveManager.savedSymptoms;
+
+      /// Update a local map
+      savedSymptoms[actualDate] = selectedSymptoms;
+
+      /// Save the updated map in the db
+      HiveManager.savedSymptoms = savedSymptoms;
+    }
+  }
+
+  DateTime _normalizeDate(DateTime dateTime) {
+    return DateTime(dateTime.year, dateTime.month, dateTime.day);
   }
 }

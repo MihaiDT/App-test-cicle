@@ -364,6 +364,8 @@ class CalendarController extends GetxController {
     symptomsController.onSelectedDateChanged();
     oldList = symptomsController.getActiveSymptoms;
     showSaveButtonSymptoms = false;
+
+    symptomsController.saveSymptomsInDB(oldList);
   }
 
   ///Only save data for categories
