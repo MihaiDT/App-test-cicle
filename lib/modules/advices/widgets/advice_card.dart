@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lines/data/enums/advices_category.dart';
 
-import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_icon.dart';
-import '../../../core/theme/theme_sized_box.dart';
+import 'package:lines/core/app_theme.dart';
+import '../../../data/enums/advices_category.dart';
 import 'advice_card_save_button.dart';
 
 class AdviceCard extends StatelessWidget {
