@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/enums/period_phase.dart';
 import 'package:lines/data/models/period_status.dart';
+import 'package:lines/data/models/symptom.dart';
 
 class CalendarDayDTO {
-  final Color bgColor;
-  final bool isReal;
+  final Color? bgColor;
+  final bool? isReal;
+  final List<Symptom> symptoms;
 
   CalendarDayDTO({
-    required this.bgColor,
-    required this.isReal,
+    this.bgColor,
+    this.isReal,
+    this.symptoms = const [],
   });
 
   factory CalendarDayDTO.fromPeriodStatus(PeriodStatus periodStatus) {
@@ -18,16 +21,19 @@ class CalendarDayDTO {
         return CalendarDayDTO(
           bgColor: ThemeColor.cicloColor,
           isReal: periodStatus.real,
+          symptoms: [],
         );
       case PeriodPhase.ovulation:
         return CalendarDayDTO(
           bgColor: ThemeColor.ovulazioneColor,
           isReal: periodStatus.real,
+          symptoms: [],
         );
       default:
         return CalendarDayDTO(
           bgColor: Colors.transparent,
           isReal: periodStatus.real,
+          symptoms: [],
         );
     }
   }
@@ -36,4 +42,6 @@ class CalendarDayDTO {
   String toString() {
     return 'CalendarDayDTO{bgColor: $bgColor}';
   }
+
+  bool get hasSymptoms => symptoms.isNotEmpty;
 }

@@ -62,7 +62,7 @@ class CalendarDayWidget extends StatelessWidget {
 
   Widget dayContainer(double circleRadius, BuildContext context) {
     if (calendarDayDTO != null) {
-      if (calendarDayDTO!.isReal) {
+      if (calendarDayDTO!.isReal == true) {
         return CircleAvatar(
           backgroundColor: calendarDayDTO != null
               ? calendarDayDTO!.bgColor
@@ -79,7 +79,7 @@ class CalendarDayWidget extends StatelessWidget {
       } else {
         return DottedBorder(
           borderType: BorderType.Circle,
-          color: calendarDayDTO!.bgColor,
+          color: Colors.green,
           dashPattern: const [4],
           strokeWidth: isAnnualCalendar ? 1 : 2,
           child: CircleAvatar(
@@ -108,7 +108,7 @@ class CalendarDayWidget extends StatelessWidget {
   Widget _dayNumberText(BuildContext context) {
     if (calendarDayDTO == null ||
         calendarDayDTO!.bgColor == Colors.transparent ||
-        !calendarDayDTO!.isReal) {
+        calendarDayDTO!.isReal == false) {
       return BodyLarge(
         text,
         fontWeight: isToday

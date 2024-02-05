@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
+import 'package:lines/data/models/calendar_day_view_model.dart';
 import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
+import 'package:lines/repository/db_services/db_calendar_services.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../core/utils/singletons.dart';
@@ -227,6 +229,11 @@ class CalendarController extends GetxController {
     _resizeBottomSheet();
     _listenForBottomSheetSizeChanges();
     await CalendarService.fetchPeriods();
+    await DBCalendarServices.retrieveSymptoms();
+    CalendarDayViewModel.fromDBAndApi(
+      dbCalendarDayDtoMap: appController.dbCalendarDayDtoMap.value,
+      calendarDayDTOMap: appController.calendarDayDTOMap.value,
+    );
     _initDatesToAdd();
   }
 
@@ -447,6 +454,11 @@ class CalendarController extends GetxController {
       );
       try {
         await CalendarService.saveDates(saveDatesParameter);
+        await DBCalendarServices.retrieveSymptoms();
+        CalendarDayViewModel.fromDBAndApi(
+          dbCalendarDayDtoMap: appController.dbCalendarDayDtoMap.value,
+          calendarDayDTOMap: appController.calendarDayDTOMap.value,
+        );
         // Clear the lists and reinitialize the datesToAdd and _prevSavedDates.
         datesToRemove.clear();
         datesToAdd.clear();
