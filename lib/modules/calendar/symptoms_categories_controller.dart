@@ -30,10 +30,14 @@ class SymptomCategoriesController extends GetxController {
       if (category.inHome) {
         inHomeCategoriesCount++;
       }
-      savedCategories.add(SymptomCategory(
+      savedCategories.add(
+        SymptomCategory(
           categoryTitle: category.categoryTitle,
           categoryIconPath: category.categoryIconPath,
-          inHome: category.inHome));
+          inHome: category.inHome,
+          categoryIndex: category.categoryIndex,
+        ),
+      );
     }
     //fire a callback whenever the save button is supposed to be shown
     ever(_buttonShown, (newValue) => onSaveButtonValueChanged(newValue));

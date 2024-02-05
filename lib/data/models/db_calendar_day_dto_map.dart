@@ -15,7 +15,9 @@ class DBCalendarDayDtoMap {
         _normalizeDate(entry.key): entry.value,
     };
 
-    return DBCalendarDayDtoMap(symptomsDtoMap: symptomsDtoMap);
+    return DBCalendarDayDtoMap(
+      symptomsDtoMap: symptomsDtoMap,
+    );
   }
 
   static String _normalizeDate(DateTime dateTime) {

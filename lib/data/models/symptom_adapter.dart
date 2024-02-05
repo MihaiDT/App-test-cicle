@@ -10,6 +10,8 @@ class SymptomAdapter extends TypeAdapter<Symptom> {
     return Symptom(
       symptomName: reader.read(),
       iconPath: reader.read(),
+      category: reader.read(),
+      indexInSymptomCategory: reader.read(),
     );
   }
 
@@ -17,5 +19,7 @@ class SymptomAdapter extends TypeAdapter<Symptom> {
   void write(BinaryWriter writer, Symptom obj) {
     writer.write(obj.symptomName);
     writer.write(obj.iconPath);
+    writer.write(obj.category);
+    writer.write(obj.indexInSymptomCategory);
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/symptom.dart';
 
-import '../../data/models/symptom.dart';
 import 'calendar_store.dart';
 
 class SymptomsController extends GetxController {
@@ -71,6 +72,15 @@ class SymptomsController extends GetxController {
 
       /// Save the updated map in the db
       HiveManager.savedSymptoms = savedSymptoms;
+    }
+  }
+
+  void updateSymptomsList(List<Symptom> selectedSymptoms) {
+    if (calendarStore.selectedDate != null) {
+      appController.calendarDayViewModel.value?.updateSymptomList(
+        calendarStore.selectedDate!,
+        selectedSymptoms,
+      );
     }
   }
 

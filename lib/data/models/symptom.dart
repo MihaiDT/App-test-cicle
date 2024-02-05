@@ -1,7 +1,10 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:lines/data/models/symptom_category.dart';
 
 class Symptom {
   final String symptomName;
+  final int indexInSymptomCategory;
+  final SymptomCategory category;
   final RxBool rxSelected = false.obs;
 
   bool get selected => rxSelected.value;
@@ -12,7 +15,12 @@ class Symptom {
 
   final String? iconPath;
 
-  Symptom({required this.symptomName, this.iconPath});
+  Symptom({
+    required this.category,
+    required this.symptomName,
+    required this.indexInSymptomCategory,
+    this.iconPath,
+  });
 
   @override
   String toString() {

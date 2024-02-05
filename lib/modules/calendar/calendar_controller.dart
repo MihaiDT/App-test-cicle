@@ -121,7 +121,7 @@ class CalendarController extends GetxController {
       _showRecapMenuSizeCondition;
 
   bool get pageShouldRefresh {
-    return appController.calendarDayDTOMap.responseHandler.isSuccessful;
+    return appController.calendarDayViewModel.responseHandler.isSuccessful;
   }
 
   final RxMap<String, bool> _rxDatesToAdd = <String, bool>{}.obs;
@@ -260,12 +260,6 @@ class CalendarController extends GetxController {
     );
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    symptomsController.dispose();
-  }
-
   void jumpToToday() {
     DateTime today = DateTime.now();
     calendarStore.selectedDate = today;
@@ -372,6 +366,7 @@ class CalendarController extends GetxController {
     oldList = symptomsController.getActiveSymptoms;
     showSaveButtonSymptoms = false;
 
+    symptomsController.updateSymptomsList(oldList);
     symptomsController.saveSymptomsInDB(oldList);
   }
 
@@ -402,9 +397,11 @@ class CalendarController extends GetxController {
     sheetVSize = (size.height + 20.0 + delta) / Get.height;
   }
 
-  /// Initialize the list of dates to add based on the current state of the calendarDayDTOMap.
+  /// Initialize the list of dates to add based on the current state of the calendarDayViewModel.
   void _initDatesToAdd() {
-    List<String> dates = [...?appController.calendarDayDTOMap.value?.days.keys];
+    List<String> dates = [
+      ...?appController.calendarDayViewModel.value?.symptomsDtoMap.keys
+    ];
     // Initialize datesToAdd and _prevSavedDates with the retrieved dates.
     for (String date in dates) {
       datesToAdd[date] = true;
@@ -471,5 +468,5 @@ class CalendarController extends GetxController {
   }
 
   CalendarDayDTO? getDTOForDay(String date) =>
-      appController.calendarDayDTOMap.value?.days[date];
+      appController.calendarDayViewModel.value?.symptomsDtoMap[date];
 }
