@@ -97,35 +97,14 @@ class AdvicesArticle {
           videoImagePreview: data['video_image_preview'],
           videoUrl: data['video_url'],
         );
-      default:
-        throw Exception("Article can't have undefinedType");
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> json = {
-      'article_category_id': articleCategoryId,
-      'id': id,
-      'typology': typology.name,
-      'title': title,
-      'disclaimer': disclaimer,
-      'cover_image_url': coverImageUrl,
-      'slideshow_image_urls': slideshowImageUrls,
-      'short_description': shortDescription,
-      'text': text,
-      'thumb_image_url': thumbImageUrl,
-      'video_image_preview': videoImagePreview,
-      'video_url': videoUrl,
-    };
-    return json;
   }
 }
 
 enum ArticleType {
   text,
   slider,
-  video,
-  undefinedType;
+  video;
 
   static ArticleType fromString(String type) {
     switch (type) {
@@ -136,7 +115,7 @@ enum ArticleType {
       case 'video':
         return ArticleType.video;
       default:
-        return ArticleType.undefinedType;
+        return ArticleType.text;
     }
   }
 }
