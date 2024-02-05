@@ -23,7 +23,7 @@ class AdvicesCategoryContainer extends StatelessWidget {
             advicesCategory.iconPath,
             width: 53,
             height: 53,
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withOpacity(0.1),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -44,6 +44,7 @@ class AdvicesCategoryContainer extends StatelessWidget {
                     ),
                   ),
                 ),
+                const Spacer(),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: HeadlineMedium(

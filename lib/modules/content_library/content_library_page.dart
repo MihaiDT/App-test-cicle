@@ -3,13 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/content_library/content_library_controller.dart';
+
+import 'package:lines/modules/content_library/tabs/categories_tab.dart';
+
 import 'package:lines/modules/content_library/tabs/content_library_for_you_tab.dart';
+
 import 'package:lines/modules/content_library/widgets/tab_indicator.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
 class ContentLibrayPage extends StatelessWidget {
-  ContentLibraryController controller = Get.put(ContentLibraryController());
+  final ContentLibraryController controller =
+      Get.put(ContentLibraryController());
 
   ContentLibrayPage({super.key});
 
@@ -72,9 +77,7 @@ class ContentLibrayPage extends StatelessWidget {
                 controller: controller.tabController,
                 children: const [
                   ContentLibraryForYouTab(),
-                  Center(
-                    child: Text('Come'),
-                  ),
+                  CategoriesTab(),
                   Center(
                     child: Text('Stai'),
                   ),
