@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
@@ -111,6 +112,18 @@ class RegisterAndLoginController extends GetxController {
         ' Email: ${googleSignIn.currentUser?.email}\n'
         ' ID Token: $token',
       );
+    }
+  }
+
+  Future<void> facebookSignIn() async {
+    // By default the login method has the next permissions ['email','public_profile']
+    LoginResult loginResult = await FacebookAuth.instance.login();
+
+    if (loginResult.status == LoginStatus.success) {
+      final userData = await FacebookAuth.instance.getUserData(fields: "first_name, last_name, email");
+
+      print(
+          "Facebook ID: ${userData['id']} - ${userData['email']} - ${userData['first_name']} - ${userData['last_name']}");
     }
   }
 
