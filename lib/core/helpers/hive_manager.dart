@@ -44,11 +44,23 @@ class HiveManager {
     Hive.box("linesApp")
         .put(HiveReferenceKeys.savedSymptoms.name, savedSymptoms);
   }
+
+  static int get numberOfAccess {
+    return Hive.box("linesApp").get(HiveReferenceKeys.numberOfAccess.name) ?? 1;
+  }
+
+  static set numberOfAccess(int numberOfAccess) {
+    if (numberOfAccess <= 3) {
+      Hive.box("linesApp")
+          .put(HiveReferenceKeys.numberOfAccess.name, numberOfAccess);
+    }
+  }
 }
 
 enum HiveReferenceKeys {
   appHidden,
   isFirstAccess,
   userId,
-  savedSymptoms;
+  savedSymptoms,
+  numberOfAccess;
 }
