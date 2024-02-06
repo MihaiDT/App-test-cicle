@@ -72,6 +72,9 @@ dependencies:
   # This Flutter plugin provides means to perform local, on-device authentication of the user.
   # On supported devices, this includes authentication with biometrics such as fingerprint or facial recognition.
   local_auth: ^2.1.7
+
+  # Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with Bodymovin and renders them natively on mobile!  
+  lottie: ^3.0.0
   
   # This Flutter plugin provides an API for querying information about an application package.
   package_info_plus: ^4.2.0
@@ -137,6 +140,7 @@ flutter:
     - assets/icons/sintomi/
     - assets/icons/sonno/
     - assets/icons/advices_categories/
+    - assets/lottie/
 
   fonts:
     - family: Barlow
@@ -167,7 +171,7 @@ flavorizr:
       app:
         name: "MyLines"
       android:
-        applicationId: "it.advice.lines"
+        applicationId: "it.advice.mylines"
         firebase:
           config: "firebase/android/dev/google-services.json"
       ios:
