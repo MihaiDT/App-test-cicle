@@ -56,4 +56,22 @@ class UpdateUserParameters {
       privacyMarketingEmail: false,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "birthdate": birthdate,
+      "email": email,
+      "first_name": firstName,
+      "last_menstruation_date_start": formattedLastMenstruationDateStart,
+      "last_menstruation_date_end": formattedLastMenstruationDateEnd,
+      "last_name": lastName,
+      "legal_guardian_email": legalGuardianEmail,
+      "nickname": nickname,
+      "period_days": periodDays,
+      "period_duration": periodDuration,
+      "privacy_profiling": privacyProfiling,
+      "privacy_marketing_email": privacyMarketingEmail,
+      "referral_code": referralCode,
+    };
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
@@ -48,7 +49,9 @@ class CookiePage extends StatelessWidget {
                 child: SecondaryButton(
                   onPressed: () {
                     Get.toNamed(
-                      Routes.registerAndLogin,
+                      appController.isLoginFlow.value == true
+                          ? Routes.login
+                          : Routes.register,
                     );
                   },
                   child: const TitleLarge(

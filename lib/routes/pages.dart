@@ -9,6 +9,8 @@ import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_bi
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
+import 'package:lines/modules/login/login_binding.dart';
+import 'package:lines/modules/login/login_page.dart';
 import 'package:lines/modules/main/main_binding_v2.dart';
 import 'package:lines/modules/main/main_page_v2.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
@@ -29,8 +31,8 @@ import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
 import '../modules/name_surname/name_surname_page.dart';
 import '../modules/privacy/privacy_page.dart';
-import '../modules/register/register_and_login_binding.dart';
-import '../modules/register/register_and_login_page.dart';
+import '../modules/register/register_binding.dart';
+import '../modules/register/register_page.dart';
 import '../modules/splash/splash_binding.dart';
 import '../modules/splash/splash_page.dart';
 import '../modules/walkthrough/walkthrough_binding.dart';
@@ -73,9 +75,20 @@ class Pages {
     // Register
     GetPage(
       binding: RegisterBinding(),
-      name: Routes.registerAndLogin,
+      name: Routes.register,
       page: () => _mediaQueryWrapper(
-        const RegisterAndLoginPage(),
+        const RegisterPage(),
+        authNeeded: false,
+      ),
+      transition: Transition.fade,
+    ),
+
+    // Login
+    GetPage(
+      binding: LoginBinding(),
+      name: Routes.login,
+      page: () => _mediaQueryWrapper(
+        const LoginPage(),
         authNeeded: false,
       ),
       transition: Transition.fade,

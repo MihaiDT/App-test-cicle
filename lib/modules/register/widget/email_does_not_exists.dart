@@ -44,7 +44,7 @@ class EmailDoesNotExists extends StatelessWidget {
                 appController.isLoginFlow.value = false;
 
                 Get.back();
-                Get.toNamed(Routes.registerAndLogin);
+                Get.toNamed(Routes.register);
               },
               child: const TitleLarge(
                 "REGISTRATI",

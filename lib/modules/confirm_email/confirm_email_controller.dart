@@ -13,6 +13,6 @@ class ConfirmEmailController extends GetxController {
 
   void logIn() {
     appController.isLoginFlow.value = true;
-    Get.offAllNamed(Routes.registerAndLogin);
+    Get.offAllNamed(Routes.login);
   }
 }

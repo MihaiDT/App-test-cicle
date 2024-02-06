@@ -6,7 +6,8 @@ class Routes {
   static const String logo = '/';
   static const String walkthrough = '/walkthrough';
 
-  static const String registerAndLogin = '/register';
+  static const String register = '/register';
+  static const String login = '/login';
   static const String cookie = '/cookie';
   static const String calendar = '/calendar';
   static const String welcomeQuizIntroPage = '/quiz_intro_page';

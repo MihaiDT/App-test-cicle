@@ -1,42 +1,42 @@
 class User {
   bool? active;
-  String birthdate;
-  String email;
-  String firstName;
+  String? birthdate;
+  String? email;
+  String? firstName;
   bool? isConfirmed;
-  String userId;
+  String? userId;
   String? lastMenstrautionDate;
-  String lastName;
+  String? lastName;
   String? legalGuardianEmail;
   String? mgmCode;
   String? nickname;
   String? password;
-  int periodDays;
-  int periodDuration;
+  int? periodDays;
+  int? periodDuration;
   bool? privacyProfiling;
   bool? privacyMarketingEmail;
-  String provider;
-  String sessionToken;
+  String? provider;
+  String? sessionToken;
 
   User({
     this.active = false,
-    required this.birthdate,
-    required this.email,
-    required this.firstName,
+    this.birthdate,
+    this.email,
+    this.firstName,
     this.isConfirmed = false,
-    required this.userId,
+    this.userId,
     this.lastMenstrautionDate,
-    required this.lastName,
+    this.lastName,
     this.legalGuardianEmail,
-    required this.mgmCode,
+    this.mgmCode,
     this.nickname,
     this.password,
     required this.periodDays,
     required this.periodDuration,
     this.privacyProfiling,
     this.privacyMarketingEmail,
-    required this.provider,
-    required this.sessionToken,
+    this.provider,
+    this.sessionToken,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {

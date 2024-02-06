@@ -8,6 +8,7 @@ import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
+import 'package:lines/repository/parameters_class/social_registration_parameters.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
 import 'data/models/calendar_day_dto_map.dart';
@@ -39,6 +40,8 @@ class AppController extends GetxController {
 
   /// The parameter used to register the user
   final RegistrationParameters registerParameter;
+
+  final SocialRegistrationParameters socialRegisterParameter;
   final UpdateUserParameters updateUserParameters;
 
   final EasyGetter<PeriodMap> periodMap;
@@ -56,6 +59,7 @@ class AppController extends GetxController {
     required this.survey,
     required this.checkEmail,
     required this.registerParameter,
+    required this.socialRegisterParameter,
     required this.updateUserParameters,
     required this.periodMap,
     required this.calendarDayDTOMap,
@@ -76,6 +80,7 @@ class AppController extends GetxController {
       survey: EasyGetter<Survey>(),
       checkEmail: EasyGetter<CheckEmail>(),
       registerParameter: RegistrationParameters.initial(),
+      socialRegisterParameter: SocialRegistrationParameters.initial(),
       updateUserParameters: UpdateUserParameters.initial(),
       isLoginFlow: false.obs,
     );

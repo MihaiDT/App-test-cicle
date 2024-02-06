@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class PrivacyController extends GetxController {
@@ -30,5 +31,14 @@ class PrivacyController extends GetxController {
       },
     );
     super.onInit();
+  }
+
+  /// This method takes the registerParameter and pass this data to the registration method
+  Future<void> registerUser() async {
+    appController.registerParameter.privacyMarketing = true;
+    appController.registerParameter.privacyProfiling = true;
+    await AuthenticationService.registration(
+      appController.registerParameter,
+    );
   }
 }

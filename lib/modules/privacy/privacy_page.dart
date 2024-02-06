@@ -4,10 +4,8 @@ import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/controller/privacy_controller.dart';
 import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
-import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/widgets/buttons/secondary_loading_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -47,7 +45,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                   Obx(
                     () => SecondaryLoadingButton(
                       onPressed: () {
-                        registerUser();
+                        controller.registerUser();
                       },
                       isLoading: controller.buttonIsPending.value,
                       child: const TitleLarge(
@@ -93,15 +91,6 @@ class PrivacyPage extends GetView<PrivacyController> {
           ),
         ),
       ),
-    );
-  }
-
-  /// This method takes the registerParameter and pass this data to the registration method
-  Future<void> registerUser() async {
-    appController.registerParameter.privacyMarketingEmail = true;
-    appController.registerParameter.privacyPolicy = true;
-    await AuthenticationService.registration(
-      appController.registerParameter,
     );
   }
 }

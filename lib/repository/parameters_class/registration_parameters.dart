@@ -4,32 +4,41 @@ class RegistrationParameters {
   String email;
   String firstName;
   String lastName;
-
-  /// The registration method, with Email, Apple, Google, Facebook
-  RegistrationProvider registrationProvider;
   String? legalGuardianEmail;
   String? nickname;
   String? password;
-  bool privacyPolicy;
-  bool privacyMarketingEmail;
+  bool privacyProfiling;
+  bool privacyMarketing;
+  bool privacyBrandProfiling;
+  bool privacyBrandMarketing;
 
   RegistrationParameters.initial({
     this.birthdate = "",
     this.email = "",
     this.firstName = "",
     this.lastName = "",
-    this.registrationProvider = RegistrationProvider.email,
     this.legalGuardianEmail,
     this.nickname,
     this.password = "",
-    this.privacyPolicy = true,
-    this.privacyMarketingEmail = true,
+    this.privacyProfiling = false,
+    this.privacyMarketing = false,
+    this.privacyBrandProfiling = false,
+    this.privacyBrandMarketing = false,
   });
-}
 
-enum RegistrationProvider {
-  email,
-  apple,
-  facebook,
-  google,
+  Map<String, dynamic> toJson() {
+    return {
+      "birthdate": birthdate,
+      "email": email,
+      "first_name": firstName,
+      "last_name": lastName,
+      "legal_guardian_email": legalGuardianEmail,
+      "nickname": nickname,
+      "password": password,
+      "privacy_profiling": privacyProfiling,
+      "privacy_marketing_email": privacyMarketing,
+      "privacy_brand_profiling": privacyBrandProfiling,
+      "privacy_brand_marketing": privacyBrandMarketing,
+    };
+  }
 }

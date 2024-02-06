@@ -53,7 +53,7 @@ class ActivateEmailDialog extends StatelessWidget {
                 appController.isLoginFlow.value = true;
 
                 Get.back();
-                Get.toNamed(Routes.registerAndLogin);
+                Get.toNamed(Routes.login);
               },
               child: const BodyLarge(
                 "Invia di nuovo",
