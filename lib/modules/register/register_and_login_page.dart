@@ -55,7 +55,8 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
                               ThemeSizedBox.width4,
                               GestureDetector(
                                 onTap: () {
-                                  controller.isLoginPage = !controller.isLoginPage;
+                                  controller.isLoginPage =
+                                      !controller.isLoginPage;
                                   Get.offAndToNamed(
                                     Routes.registerAndLogin,
                                   );
@@ -76,7 +77,8 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
                               ThemeSizedBox.width4,
                               GestureDetector(
                                 onTap: () {
-                                  controller.isLoginPage = !controller.isLoginPage;
+                                  controller.isLoginPage =
+                                      !controller.isLoginPage;
                                   Get.offAndToNamed(
                                     Routes.registerAndLogin,
                                   );
@@ -100,7 +102,9 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
                   ),
                   ThemeSizedBox.height16,
                   DisplayMedium(
-                    controller.isLoginPage ? "Accedi a myDrop" : "Crea il tuo account",
+                    controller.isLoginPage
+                        ? "Accedi a myDrop"
+                        : "Crea il tuo account",
                   ),
                   ThemeSizedBox.height16,
                   BodyMedium(

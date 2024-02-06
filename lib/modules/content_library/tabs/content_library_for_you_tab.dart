@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lines/data/enums/advices_category.dart';
 import 'package:lines/modules/advices/widgets/advice_card.dart';
+
+import '../../../data/models/advices_category.dart';
 
 class ContentLibraryForYouTab extends StatelessWidget {
   const ContentLibraryForYouTab({super.key});
@@ -18,7 +19,7 @@ class ContentLibraryForYouTab extends StatelessWidget {
           childAspectRatio: 0.67),
       itemBuilder: (context, index) {
         return AdviceCard(
-            advicesCategory: AdvicesCategory.ginecologia,
+            advicesCategory: AdvicesCategory.fromIconName('ginecologia.svg'),
             text: 'Quando arriverà il mio primo ciclo?');
       },
     );

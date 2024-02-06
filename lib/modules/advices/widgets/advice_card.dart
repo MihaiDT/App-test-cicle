@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:lines/core/app_theme.dart';
-import '../../../data/enums/advices_category.dart';
+import '../../../data/models/advices_category.dart';
 import 'advice_card_save_button.dart';
 
 class AdviceCard extends StatelessWidget {

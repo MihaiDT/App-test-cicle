@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:lines/modules/content_library/widgets/content_library_category_tab_rows.dart';
 import '../../../core/app_theme.dart';
-import '../../../data/enums/advices_category.dart';
-import '../widgets/advices_cards_row.dart';
 import '../widgets/advices_categories_grid.dart';
 
 class CategoriesTab extends StatelessWidget {
@@ -15,22 +14,8 @@ class CategoriesTab extends StatelessWidget {
       children: [
         const AdvicesCategoriesGrid(),
         ThemeSizedBox.height24,
-        _listOfCategories,
+        const ContentLibraryCategoryTabRows(),
       ],
-    );
-  }
-
-  Widget get _listOfCategories {
-    return ListView.separated(
-      separatorBuilder: (context, index) => ThemeSizedBox.height32,
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: AdvicesCategory.values.length,
-      itemBuilder: (context, index) {
-        return AdvicesCardsRow(
-          category: AdvicesCategory.values[index],
-        );
-      },
     );
   }
 }

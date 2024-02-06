@@ -4,11 +4,11 @@ import '../../core/app_theme.dart';
 
 class AdvicesCategory {
   final String iconName;
-  final String categoryTitle;
+  final String? categoryTitle;
 
   AdvicesCategory({
     required this.iconName,
-    required this.categoryTitle,
+    this.categoryTitle,
   });
 
   factory AdvicesCategory.fromJson(Map<String, dynamic> data) {
@@ -16,6 +16,10 @@ class AdvicesCategory {
       iconName: data['icon_name'],
       categoryTitle: data['name'],
     );
+  }
+
+  factory AdvicesCategory.fromIconName(String iconName) {
+    return AdvicesCategory(iconName: iconName);
   }
 
   Map<String, dynamic> toJson() {

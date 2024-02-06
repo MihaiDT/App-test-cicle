@@ -9,6 +9,8 @@ import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_bi
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
+import 'package:lines/modules/main/main_binding_v2.dart';
+import 'package:lines/modules/main/main_page_v2.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
 import 'package:lines/modules/referral/referral_binding.dart';
@@ -209,6 +211,18 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const ConfirmEmailPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    ///MainV2
+    GetPage(
+      name: Routes.mainV2,
+      bindings: [
+        MainBindingV2(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const MainPageV2(),
       ),
       transition: Transition.fade,
     )

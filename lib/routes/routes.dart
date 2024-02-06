@@ -24,4 +24,5 @@ class Routes {
   static const String referral = '/referral_page';
 
   static const String confirmEmailPage = '/confirm_email_page';
+  static const String mainV2 = '/main_v2';
 }

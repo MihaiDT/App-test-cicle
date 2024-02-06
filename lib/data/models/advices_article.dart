@@ -1,9 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:lines/data/models/advices_category.dart';
+
 class AdvicesArticle {
   final String articleCategoryId;
   final int id;
   final ArticleType typology;
   final String title;
   final String? disclaimer;
+  final String iconName;
   late final String? coverImageUrl;
   late final List<String>? slideshowImageUrls;
   late final String? shortDescription;
@@ -18,6 +22,7 @@ class AdvicesArticle {
     required this.typology,
     required this.title,
     required this.disclaimer,
+    required this.iconName,
     required this.coverImageUrl,
     required this.shortDescription,
     required this.text,
@@ -34,6 +39,7 @@ class AdvicesArticle {
     required this.typology,
     required this.title,
     required this.disclaimer,
+    required this.iconName,
     required this.coverImageUrl,
     required this.thumbImageUrl,
     required this.slideshowImageUrls,
@@ -50,6 +56,7 @@ class AdvicesArticle {
     required this.typology,
     required this.title,
     required this.disclaimer,
+    required this.iconName,
     required this.thumbImageUrl,
     required this.videoImagePreview,
     required this.videoUrl,
@@ -70,6 +77,7 @@ class AdvicesArticle {
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'],
+          iconName: data['icon_name'],
           coverImageUrl: data['cover_image_ur'],
           shortDescription: data['short_description'],
           text: data['text'],
@@ -82,6 +90,7 @@ class AdvicesArticle {
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'],
+          iconName: data['icon_name'],
           coverImageUrl: data['cover_image_ur'],
           thumbImageUrl: data['thumb_image_url'],
           slideshowImageUrls: List<String>.from(data['slideshow_image_urls']),
@@ -93,11 +102,16 @@ class AdvicesArticle {
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'],
+          iconName: data['icon_name'],
           thumbImageUrl: data['thumb_image_url'],
           videoImagePreview: data['video_image_preview'],
           videoUrl: data['video_url'],
         );
     }
+  }
+
+  AdvicesCategory get getParentCategoryWithoutTitle {
+    return AdvicesCategory.fromIconName(iconName);
   }
 
   Map<String, dynamic> toJson() {

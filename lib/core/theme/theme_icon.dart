@@ -71,6 +71,15 @@ class ThemeIcon {
   static String savedEmpty = '$folderPath/save_empty.svg';
   static String savedFilled = '$folderPath/save_filled.svg';
   static String gallery = '$folderPath/gallery.svg';
+  static String advicesTabUnselected = '$folderPath/advices_tab_unselected.svg';
+  static String advicesTabSelected = '$folderPath/advices_tab_selected.svg';
+  static String homeTabUnselected = '$folderPath/home_tab_unselected.svg';
+  static String homeTabSelected = '$folderPath/home_tab_selected.svg';
+  static String prizesTabUnselected = '$folderPath/prizes_tab_unselected.svg';
+  static String prizesTabSelected = '$folderPath/prizes_tab_selected.svg';
+  static String profileTabUnselected = '$folderPath/profile_tab_unselected.svg';
+  static String profileTabSelected = '$folderPath/profile_tab_selected.svg';
+  static String arrowRightGradient = '$folderPath/arrow_right_gradient.svg';
   static String ginecologia = '$folderPath/advices_categories/ginecologia.svg';
   static String sessualitaEFertilita =
       '$folderPath/advices_categories/sessualita_e_fertilita.svg';
