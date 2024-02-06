@@ -14,22 +14,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "329390092342-1mn29to622ujkf3tpvctu7oklbjoodu0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "it.tandu.lines",
-            "certificate_hash": "7eccd06d197463de051975d9c6df4ecc359cab4c"
-          }
-        },
-        {
-          "client_id": "329390092342-kopdn67ol3puadrst393mvf5muspcgep.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "it.tandu.lines",
-            "certificate_hash": "5595f83d6f56a9aac322f484600282462ceb9a48"
-          }
-        },
-        {
           "client_id": "329390092342-5ua99685eb8fsojpmo6ahvqfhs5dqkbu.apps.googleusercontent.com",
           "client_type": 3
         }
