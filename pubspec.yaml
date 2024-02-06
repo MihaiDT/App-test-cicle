@@ -50,7 +50,6 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
-
   # Draw SVG files using Flutter.
   flutter_svg: ^2.0.9
   
@@ -99,10 +98,16 @@ dependencies:
 
   # A flutter plugin for social registration
   sign_in_with_apple: ^5.0.0
+  
+  # A Flutter plugin for Google Sign In
   google_sign_in: ^6.2.1
+
+  # A Flutter plugin for Facebook Sign In 
+  flutter_facebook_auth: ^6.0.4
+
   # webview_flutter: ^4.4.2
 
-  # google_sign_in: ^6.1.6
+  
   # googleapis: ^12.0.0
   # googleapis_auth: ^1.4.1
 
@@ -162,11 +167,11 @@ flavorizr:
       app:
         name: "MyLines"
       android:
-        applicationId: "it.tandu.lines"
+        applicationId: "it.advice.lines"
         firebase:
           config: "firebase/android/dev/google-services.json"
       ios:
-        bundleId: "it.tandu.lines"
+        bundleId: "it.advice.lines"
         firebase:
           config: "firebase/ios/dev/GoogleService-Info.plist"
 

@@ -55,8 +55,7 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
                               ThemeSizedBox.width4,
                               GestureDetector(
                                 onTap: () {
-                                  controller.isLoginPage =
-                                      !controller.isLoginPage;
+                                  controller.isLoginPage = !controller.isLoginPage;
                                   Get.offAndToNamed(
                                     Routes.registerAndLogin,
                                   );
@@ -77,8 +76,7 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
                               ThemeSizedBox.width4,
                               GestureDetector(
                                 onTap: () {
-                                  controller.isLoginPage =
-                                      !controller.isLoginPage;
+                                  controller.isLoginPage = !controller.isLoginPage;
                                   Get.offAndToNamed(
                                     Routes.registerAndLogin,
                                   );
@@ -102,9 +100,7 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
                   ),
                   ThemeSizedBox.height16,
                   DisplayMedium(
-                    controller.isLoginPage
-                        ? "Accedi a myDrop"
-                        : "Crea il tuo account",
+                    controller.isLoginPage ? "Accedi a myDrop" : "Crea il tuo account",
                   ),
                   ThemeSizedBox.height16,
                   BodyMedium(
@@ -124,20 +120,18 @@ class RegisterAndLoginPage extends GetView<RegisterAndLoginController> {
                     children: [
                       LinkAccountWidget(
                         imagePath: ThemeImage.facebook,
-                        onPressed: () {},
+                        onTap: () {},
                       ),
                       ThemeSizedBox.width40,
                       LinkAccountWidget(
                         imagePath: ThemeImage.google,
-                        onPressed: () {},
+                        onTap: () => controller.googleSignIn(),
                       ),
                       if (Platform.isIOS) ...[
                         ThemeSizedBox.width40,
                         LinkAccountWidget(
                           imagePath: ThemeImage.apple,
-                          onPressed: () {
-                            controller.appleSignIn();
-                          },
+                          onTap: () => controller.appleSignIn(),
                         ),
                       ]
                     ],

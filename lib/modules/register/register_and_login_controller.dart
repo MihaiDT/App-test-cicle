@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -43,11 +45,9 @@ class RegisterAndLoginController extends GetxController {
             if (callback.content?.emailExists == false) {
               /// Save in the state email and password values
               appController.registerParameter.email = emailController.text;
-              appController.registerParameter.password =
-                  passwordController.text;
+              appController.registerParameter.password = passwordController.text;
               Get.toNamed(Routes.nameSurname);
-            } else if (callback.content?.emailExists == true &&
-                callback.content?.emailIsActive == false) {
+            } else if (callback.content?.emailExists == true && callback.content?.emailIsActive == false) {
               _showValidateEmailDialog();
             }
           }
@@ -95,6 +95,36 @@ class RegisterAndLoginController extends GetxController {
       ],
     );
     print(credential);
+  }
+
+  Future<void> googleSignIn() async {
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: ['email'],
+      clientId: '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
+    );
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+    if (googleSignIn.currentUser != null) {
+      final auth = await googleSignInAccount?.authentication;
+      final token = auth?.idToken;
+      print(
+        'Google ID: ${googleSignIn.currentUser?.id}\n'
+        ' Email: ${googleSignIn.currentUser?.email}\n'
+        ' ID Token: $token',
+      );
+    }
+  }
+
+  Future<void> facebookSignIn() async {
+    // By default the login method has the next permissions ['email','public_profile']
+    LoginResult loginResult = await FacebookAuth.instance.login();
+
+    if (loginResult.status == LoginStatus.success) {
+      final userData = await FacebookAuth.instance.getUserData(fields: "first_name, last_name, email");
+
+      print(
+          "Facebook ID: ${userData['id']} - ${userData['email']} - ${userData['first_name']} - ${userData['last_name']}");
+    }
   }
 
   /// Check if email is valid for the regex

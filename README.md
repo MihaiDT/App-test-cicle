@@ -179,6 +179,7 @@ buildTypes {
 
 
 
+
 ## Disabilitare rotazione schermo Android
 
 Apri il file `android/app/src/main/AndroidManifest.xml`
@@ -191,3 +192,52 @@ Aggiungi
   android:orientation="vertical"
 >
 ```
+
+## Login social
+
+### Apple Login
+**TODO**
+### Facebook Login
+**TODO**
+
+### Google Login
+- Installare il plugin [google_sign_in](https://pub.dev/packages/google_sign_in) e seguire le istruzioni riportate nel README del plugin.
+- Verificare i permessi sulla [Google Console](https://console.cloud.google.com/apis/credentials?authuser=1&project=flying-Lines-6d48b) del progetto.
+- Nel controller aggiungere il seguente codice:
+
+
+```dart
+Future<void> _performGoogleSignin() async {
+  try {
+    // https://github.com/flutter/flutter/issues/75224
+    GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+    if (googleSignIn.currentUser != null) {
+      // Loggato con Google
+
+      ...
+    }
+
+    ...
+  } catch (error) {
+    ...
+  }
+}
+
+```
+
+
+
+#### Android
+- Seguire gli step descritti per generare le keys: [https://github.com/flutter/flutter/issues/75224](https://github.com/flutter/flutter/issues/75224)
+- Controllare su Firebase la sezione **Impronte digitali certificato SHA**
+che siano impostate le keys ottenute con questo comando:
+
+```bash
+cd android/app
+keytool -list -v -alias LinesKey -keystore LinesKey.keystore
+```
+
+#### iOS
+È sufficiente seguire gli step descritti nella guida del plugin [google_sign_in](https://pub.dev/packages/google_sign_in).
