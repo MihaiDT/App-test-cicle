@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get_utils/get_utils.dart';
-import 'package:lines/modules/content_library/widgets/article_category_widget.dart';
+import 'package:get/get.dart';
 
 import '../../core/app_theme.dart';
-import '../../data/enums/advices_category.dart';
+import 'content_library_search_page_controller.dart';
+import 'widgets/article_category_widget.dart';
 
-class ContentLibrarySearchPage extends StatelessWidget {
+class ContentLibrarySearchPage
+    extends GetView<ContentLibrarySearchPageController> {
   const ContentLibrarySearchPage({
     super.key,
   });
@@ -14,6 +15,7 @@ class ContentLibrarySearchPage extends StatelessWidget {
   static const Color textFieldBorderColor = Color(0xffe6e0ef);
   static const Color textFieldFillColor = Color(0xfff7f3f8);
   static Color placeHolderColor = const Color(0x1e2d4f80).withOpacity(0.5);
+  static Color dividerColor = const Color(0x194b399c);
 
   @override
   Widget build(BuildContext context) {
@@ -87,60 +89,104 @@ class ContentLibrarySearchPage extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: AdvicesCategory.values.length,
-                      itemBuilder: (context, index) {
-                        //temp solution , change when logic is ready
-                        const int itemCount = 2;
-                        return Column(
-                          children: [
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 14,
-                                  backgroundColor: AdvicesCategory
-                                      .values[index].categoryColor,
-                                  child: SvgPicture.asset(
-                                    AdvicesCategory.values[index].iconPath,
-                                    color: Colors.white,
+              Obx(
+                () {
+                  if (controller.pageShouldRefresh) {
+                    return Column(
+                      children: [
+                        const SizedBox(
+                          height: 100,
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            // itemCount: AdvicesCategory.values.length,
+                            itemCount: controller.categories.length,
+                            itemBuilder: (context, categoryIndex) {
+                              String categoryIconName =
+                                  controller.categories[categoryIndex].iconName;
+                              return Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 14,
+                                        backgroundColor: controller
+                                            .categories[categoryIndex]
+                                            .categoryColor,
+                                        child: SvgPicture.asset(
+                                          controller.categories[categoryIndex]
+                                              .iconPath,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      ThemeSizedBox.width6,
+                                      HeadlineLarge(
+                                        controller.categories[categoryIndex]
+                                                    .categoryTitle !=
+                                                null
+                                            ? controller
+                                                    .categories[categoryIndex]
+                                                    .categoryTitle!
+                                                    .capitalizeFirst ??
+                                                controller
+                                                    .categories[categoryIndex]
+                                                    .categoryTitle!
+                                            : "",
+                                        color: ThemeColor.darkBlue,
+                                      )
+                                    ],
                                   ),
-                                ),
-                                ThemeSizedBox.width6,
-                                HeadlineLarge(
-                                  AdvicesCategory.values[index].categoryTitle
-                                          .capitalizeFirst ??
-                                      AdvicesCategory
-                                          .values[index].categoryTitle,
-                                  color: ThemeColor.darkBlue,
-                                )
-                              ],
-                            ),
-                            const Divider(),
-                            ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: itemCount,
-                              itemBuilder: (context, index) {
-                                return const ArticleCategoryWidget(
-                                  articleName: 'Tutto ginecologia',
-                                );
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const Divider(),
-                            ),
-                            const Divider(),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                                  Divider(
+                                    color: dividerColor,
+                                  ),
+                                  ListView.separated(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        controller.subCategoriesForCategory(
+                                                    categoryIconName) !=
+                                                null
+                                            ? controller
+                                                .subCategoriesForCategory(
+                                                    categoryIconName)!
+                                                .length
+                                            : 0,
+                                    itemBuilder: (context, subCategoryIndex) {
+                                      return ArticleCategoryWidget(
+                                        articleName: controller
+                                            .articleNameFromSubCategoryFromIndex(
+                                          categoryIconName,
+                                          subCategoryIndex,
+                                        ),
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) =>
+                                        Divider(
+                                      color: dividerColor,
+                                    ),
+                                  ),
+                                  Column(
+                                    children: [
+                                      Divider(
+                                        color: dividerColor,
+                                      ),
+                                      ThemeSizedBox.height48,
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
               )
             ],
           ),

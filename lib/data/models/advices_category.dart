@@ -37,7 +37,7 @@ class AdvicesCategory {
         return ThemeColor.sessualitaEFertilitaColor;
       case 'tabu_e_inclusivita.svg':
         return ThemeColor.tabuEInclusivitaColor;
-      case 'fitness_and_wellness.svg':
+      case 'fitness.svg':
         return ThemeColor.fitnessAndWellnessColor;
       case 'beauty_and_lifestyle.svg':
         return ThemeColor.beautyAndLifestyleColor;
@@ -60,7 +60,7 @@ class AdvicesCategory {
         return ThemeIcon.sessualitaEFertilita;
       case 'tabu_e_inclusivita.svg':
         return ThemeIcon.tabueEInclusivita;
-      case 'fitness_and_wellness.svg':
+      case 'fitness.svg':
         return ThemeIcon.fitnessAndWellness;
       case 'beauty_and_lifestyle.svg':
         return ThemeIcon.beautyAndLifestyle;

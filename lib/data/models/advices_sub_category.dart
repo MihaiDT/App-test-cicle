@@ -16,7 +16,7 @@ class AdvicesSubCategory {
       articles.add(newArticle);
     }
     return AdvicesSubCategory(
-      subCategoryName: data['category']['icon_name'],
+      subCategoryName: data['category']['name'],
       articles: articles,
     );
   }

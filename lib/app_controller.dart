@@ -11,6 +11,7 @@ import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/social_registration_parameters.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
+import 'data/models/advices_grouped_by_category.dart';
 import 'data/models/calendar_day_dto_map.dart';
 import 'data/models/period_map.dart';
 
@@ -49,6 +50,8 @@ class AppController extends GetxController {
   final EasyGetter<CalendarDayViewModel> calendarDayViewModel;
   final EasyGetter<DBCalendarDayDtoMap> dbCalendarDayDtoMap;
 
+  final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
+
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
 
@@ -66,6 +69,7 @@ class AppController extends GetxController {
     required this.dbCalendarDayDtoMap,
     required this.calendarDayViewModel,
     required this.isLoginFlow,
+    required this.advicesCategories,
   });
 
   factory AppController.initial() {
@@ -82,6 +86,7 @@ class AppController extends GetxController {
       registerParameter: RegistrationParameters.initial(),
       socialRegisterParameter: SocialRegistrationParameters.initial(),
       updateUserParameters: UpdateUserParameters.initial(),
+      advicesCategories: EasyGetter<AdvicesGroupedByCategory>(),
       isLoginFlow: false.obs,
     );
   }

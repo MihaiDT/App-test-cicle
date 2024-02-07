@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:lines/data/models/advices_category.dart';
 
 class AdvicesArticle {

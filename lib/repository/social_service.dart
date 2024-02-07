@@ -36,7 +36,8 @@ class SocialService {
 
   static Future<bool> googleSignIn() async {
     GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
-    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
 
     if (googleSignIn.currentUser != null) {
       final auth = await googleSignInAccount?.authentication;

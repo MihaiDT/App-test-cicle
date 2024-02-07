@@ -9,8 +9,6 @@ import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_bi
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
-import 'package:lines/modules/login/login_binding.dart';
-import 'package:lines/modules/login/login_page.dart';
 import 'package:lines/modules/main/main_binding_v2.dart';
 import 'package:lines/modules/main/main_page_v2.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
@@ -27,6 +25,10 @@ import '../modules/access_wrapper/wrapper_access_widget.dart';
 import '../modules/birth_date/birth_date_page.dart';
 import '../modules/calendar/calendar_binding.dart';
 import '../modules/calendar/calendar_page.dart';
+import '../modules/content_library/bindings/content_library_search_page_binding.dart';
+import '../modules/content_library/content_library_search_page.dart';
+import '../modules/login/login_binding.dart';
+import '../modules/login/login_page.dart';
 import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
 import '../modules/name_surname/name_surname_page.dart';
@@ -238,7 +240,19 @@ class Pages {
         const MainPageV2(),
       ),
       transition: Transition.fade,
-    )
+    ),
+
+    ///ContentLibrarySearchPage
+    GetPage(
+      name: Routes.contentLibrarySearchPage,
+      bindings: [
+        ContentLibrarySearchPageBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const ContentLibrarySearchPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
   ];
 
   /// Private methods
