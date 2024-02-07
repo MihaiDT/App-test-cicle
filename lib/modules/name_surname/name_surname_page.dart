@@ -11,7 +11,9 @@ import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class NameSurnamePage extends GetView<NameSurnameController> {
-  const NameSurnamePage({super.key});
+  const NameSurnamePage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

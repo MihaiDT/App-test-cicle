@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/utils/singletons.dart';
 
 class NameSurnameController extends GetxController {
-  final TextEditingController nameController = TextEditingController();
+  late final TextEditingController nameController;
+
+  @override
+  void onInit() {
+    super.onInit();
+    nameController = TextEditingController();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    if (appController.registerParameter.firstName.isNotEmpty == true) {
+      nameController.text = appController.registerParameter.firstName;
+    }
+  }
 
   final TextEditingController surnameController = TextEditingController();
 

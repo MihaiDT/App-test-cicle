@@ -27,6 +27,8 @@ class SocialService {
       ],
     );
 
+    _saveUserData(credential.givenName!);
+
     return _validateEmail(
       credential.email!,
       credential.identityToken!,
@@ -38,21 +40,25 @@ class SocialService {
     GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
-
+    bool emailAlreadyExists = false;
     if (googleSignIn.currentUser != null) {
       final auth = await googleSignInAccount?.authentication;
       final token = auth?.idToken;
+
       print(
         'Google ID: ${googleSignIn.currentUser?.id}\n'
         ' Email: ${googleSignIn.currentUser?.email}\n'
         ' ID Token: $token',
       );
+
+      await _validateEmail(
+        googleSignIn.currentUser!.email,
+        googleSignIn.currentUser!.id,
+        RegistrationProvider.google,
+      );
     }
-    return _validateEmail(
-      googleSignIn.currentUser!.email,
-      googleSignIn.currentUser!.id,
-      RegistrationProvider.google,
-    );
+
+    return emailAlreadyExists;
   }
 
   static Future<bool> facebookSignIn() async {
@@ -102,5 +108,9 @@ class SocialService {
     } else {
       return false;
     }
+  }
+
+  static Future<void> _saveUserData(String name) async {
+    appController.registerParameter.firstName = name;
   }
 }

@@ -94,7 +94,7 @@ class LoginPage extends GetView<LoginController> {
                     children: [
                       LinkAccountWidget(
                         imagePath: ThemeImage.facebook,
-                        onTap: () {},
+                        onTap: () => controller.facebookSignIn(),
                       ),
                       ThemeSizedBox.width40,
                       LinkAccountWidget(
