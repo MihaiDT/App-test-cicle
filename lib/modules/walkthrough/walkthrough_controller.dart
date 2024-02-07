@@ -17,28 +17,28 @@ class WalkthroughController extends AppScaffoldController {
   final RxInt rxCurrentStepIndex = 0.obs;
 
   int get currentStepIndex => rxCurrentStepIndex.value;
+
   set currentStepIndex(int newValue) => rxCurrentStepIndex.value = newValue;
 
   double get hBottomArea => rxHBottomArea.value;
+
   set hBottomArea(double newValue) => rxHBottomArea.value = newValue;
 
   bool get isLastStep => currentStepIndex == lastStep;
 
-  onPageChanged(int newIndex) {
+  void onPageChanged(int newIndex) {
     currentStepIndex = newIndex;
   }
 
-  onTapLetsStart() {
+  void onTapLetsStart() {
     Get.offNamed(Routes.main);
-    // FIXME: Get.toNamed(Routes.signin);
   }
 
-  onTapSkip() {
+  void onTapSkip() {
     Get.offNamed(Routes.main);
-    // FIXME: Get.toNamed(Routes.signin);
   }
 
-  onTapNext() {
+  void onTapNext() {
     currentStepIndex += 1;
 
     pageViewController.animateToPage(

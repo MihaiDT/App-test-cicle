@@ -11,7 +11,7 @@ class UpdateUserParameters {
   int? periodDuration;
   bool privacyProfiling;
   bool privacyMarketingEmail;
-  String? referralCode;
+  String referralCode;
 
   UpdateUserParameters({
     required this.birthdate,
@@ -26,7 +26,7 @@ class UpdateUserParameters {
     this.periodDuration,
     required this.privacyProfiling,
     required this.privacyMarketingEmail,
-    this.referralCode,
+    this.referralCode = "",
   });
 
   String get formattedLastMenstruationDateStart {

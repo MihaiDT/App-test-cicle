@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/routes/routes.dart';
@@ -13,8 +12,7 @@ class ReferralController extends GetxController {
       appController.user.rxValue,
       (callback) {
         if (callback.isSuccessful) {
-          HiveManager.firstAccess = false;
-          Get.offAndToNamed(Routes.main);
+          Get.offAndToNamed(Routes.walkthrough);
         }
       },
     );
