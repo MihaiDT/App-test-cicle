@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/advices/widgets/advices_content_library_button.dart';
 import 'package:lines/modules/advices/widgets/advices_gynecologist_box.dart';
@@ -87,8 +86,10 @@ class AdvicesPage extends GetView<AdvicesController> {
               )
             ],
           );
-        }else{
-          return const Center(child: CircularProgressIndicator(),);
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );

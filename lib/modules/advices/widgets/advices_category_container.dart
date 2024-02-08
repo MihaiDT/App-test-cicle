@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/enums/advices_category.dart';
+
+import '../../../data/models/advices_category.dart';
 
 class AdvicesCategoryContainer extends StatelessWidget {
   final AdvicesCategory advicesCategory;
@@ -48,7 +49,9 @@ class AdvicesCategoryContainer extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: HeadlineMedium(
-                    advicesCategory.categoryTitle.toUpperCase(),
+                    advicesCategory.categoryTitle != null
+                        ? advicesCategory.categoryTitle!.toUpperCase()
+                        : "",
                     fontWeight: FontWeight.w900,
                   ),
                 )

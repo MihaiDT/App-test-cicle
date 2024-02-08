@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/enums/advices_category.dart';
+import '../../../data/models/advices_category.dart';
 import '../../advices/widgets/advices_category_container.dart';
 
 class AdvicesCategoriesGrid extends StatelessWidget {
-  const AdvicesCategoriesGrid({super.key});
+  final List<AdvicesCategory> categories;
+
+  const AdvicesCategoriesGrid({
+    required this.categories,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class AdvicesCategoriesGrid extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.all(16),
       shrinkWrap: true,
-      itemCount: AdvicesCategory.values.length,
+      itemCount: categories.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 8,
@@ -21,7 +26,7 @@ class AdvicesCategoriesGrid extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return AdvicesCategoryContainer(
-          advicesCategory: AdvicesCategory.values[index],
+          advicesCategory: categories[index],
         );
       },
     );

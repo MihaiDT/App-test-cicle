@@ -65,7 +65,7 @@ class AdviceCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: imageUrl == null ? ThemeColor.primary : Colors.transparent,
-        image: imageUrl != null
+        image: imageUrl != null && imageUrl!.isNotEmpty
             ? DecorationImage(
                 image: NetworkImage(imageUrl!),
                 fit: BoxFit.cover,

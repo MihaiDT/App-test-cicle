@@ -2,20 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/app_theme.dart';
-import '../../../data/enums/advices_category.dart';
+
+import '../../../data/models/advices_article.dart';
+import '../../../data/models/advices_category.dart';
 import '../../advices/widgets/advices_cards_row.dart';
 
 class ContentLibraryCategoryTabRows extends StatelessWidget {
-  const ContentLibraryCategoryTabRows({super.key});
+  final Map<AdvicesCategory, List<AdvicesArticle>> allCategoriesWithArticles;
+
+  const ContentLibraryCategoryTabRows({
+    super.key,
+    required this.allCategoriesWithArticles,
+  });
 
   @override
   Widget build(BuildContext context) {
+    List<AdvicesCategory> allCategories =
+        allCategoriesWithArticles.keys.toList();
     return ListView.separated(
       separatorBuilder: (context, index) => ThemeSizedBox.height32,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: AdvicesCategory.values.length,
+      itemCount: allCategoriesWithArticles.keys.length,
       itemBuilder: (context, index) {
+        List<AdvicesArticle> allArticlesForCategory = [];
+        if (allCategoriesWithArticles[allCategories[index]]?.isNotEmpty == true) {
+          allArticlesForCategory
+              .addAll(allCategoriesWithArticles[allCategories[index]]!);
+        }
         return Column(
           children: [
             Padding(
@@ -25,21 +39,26 @@ class ContentLibraryCategoryTabRows extends StatelessWidget {
               child: Row(
                 children: [
                   SvgPicture.asset(
-                    AdvicesCategory.values[index].iconPath,
-                    color: AdvicesCategory.values[index].categoryColor,
+                    allCategories[index].iconPath,
+                    color: allCategories[index].categoryColor,
                   ),
                   TitleMedium(
-                    AdvicesCategory.values[index].categoryTitle.toUpperCase(),
+                    allCategories[index].categoryTitle != null
+                        ? allCategories[index].categoryTitle!.toUpperCase()
+                        : "",
                     color: ThemeColor.darkBlue,
                   ),
                 ],
               ),
             ),
             ThemeSizedBox.height4,
-            const SizedBox(
-              height: 220,
-              child: AdvicesCardsRow(
-                articles: [],
+            Visibility(
+              visible: allArticlesForCategory.isNotEmpty,
+              child: SizedBox(
+                height: 220,
+                child: AdvicesCardsRow(
+                  articles: allArticlesForCategory,
+                ),
               ),
             ),
           ],
