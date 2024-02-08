@@ -26,7 +26,8 @@ class ContentLibraryCategoryTabRows extends StatelessWidget {
       itemCount: allCategoriesWithArticles.keys.length,
       itemBuilder: (context, index) {
         List<AdvicesArticle> allArticlesForCategory = [];
-        if (allCategoriesWithArticles[allCategories[index]]?.isNotEmpty == true) {
+        if (allCategoriesWithArticles[allCategories[index]]?.isNotEmpty ==
+            true) {
           allArticlesForCategory
               .addAll(allCategoriesWithArticles[allCategories[index]]!);
         }

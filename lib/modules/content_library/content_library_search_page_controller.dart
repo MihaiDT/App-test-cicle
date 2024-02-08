@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/data/models/advices_category_with_articles.dart';
 
@@ -7,6 +9,17 @@ import '../../data/models/advices_sub_category.dart';
 import '../../repository/advices_service.dart';
 
 class ContentLibrarySearchPageController extends GetxController {
+  final RxBool rxShowResults = false.obs;
+  bool get showResults => rxShowResults.value;
+  set showResults(bool newValue) {
+    rxShowResults.value = newValue;
+  }
+
+  final RxList<AdvicesArticle> rxResultsArticles = <AdvicesArticle>[].obs;
+  List<AdvicesArticle> get resultsArticles => rxResultsArticles;
+
+  final TextEditingController textEditingController = TextEditingController();
+
   @override
   void onReady() async {
     super.onReady();
@@ -44,5 +57,17 @@ class ContentLibrarySearchPageController extends GetxController {
       return subCatories[subCategoryIndex].subCategoryName;
     }
     return "";
+  }
+
+  void onSubCategoryTapped(AdvicesSubCategory subCategory) {
+    textEditingController.text = subCategory.subCategoryName;
+    resultsArticles.clear();
+    resultsArticles.addAll(subCategory.articles);
+    showResults = true;
+  }
+
+  void onTextFieldClearTapped() {
+    textEditingController.clear();
+    showResults = false;
   }
 }
