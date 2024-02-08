@@ -4,6 +4,7 @@ import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
+import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_quiz_card_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
@@ -237,6 +238,7 @@ class Pages {
       name: Routes.mainV2,
       bindings: [
         MainBindingV2(),
+        WelcomeQuizCardBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const MainPageV2(),
