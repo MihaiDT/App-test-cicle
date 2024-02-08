@@ -28,13 +28,36 @@ class AdvicesCardsRow extends StatelessWidget {
       itemBuilder: (context, index) {
         return SizedBox(
           width: 150,
-          child: AdviceCard(
-            advicesCategory: articles[index].getParentCategoryWithoutTitle,
-            hasBorder: withBorder,
-            text: articles[index].text ?? "",
-          ),
+          child: _adviceCard(articles[index]),
         );
       },
     );
+  }
+
+  Widget _adviceCard(AdvicesArticle article) {
+    switch (article.typology) {
+      case ArticleType.text:
+        return AdviceCard(
+          advicesCategory: article.getParentCategoryWithoutTitle,
+          hasBorder: withBorder,
+          text: article.title,
+          imageUrl: article.thumbImageUrl,
+        );
+      case ArticleType.slider:
+        return AdviceCard.withGallery(
+          advicesCategory: article.getParentCategoryWithoutTitle,
+          hasBorder: withBorder,
+          text: article.title,
+          imageUrl: article.thumbImageUrl,
+        );
+      case ArticleType.video:
+        return AdviceCard.withTimer(
+          timer: '0:00',
+          advicesCategory: article.getParentCategoryWithoutTitle,
+          hasBorder: withBorder,
+          text: article.title,
+          imageUrl: article.thumbImageUrl,
+        );
+    }
   }
 }

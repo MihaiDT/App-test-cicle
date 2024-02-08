@@ -11,8 +11,8 @@ class MainControllerV2 extends GetxController {
   set tabIndex(int newValue) => rxTabIndex.value = newValue;
 
   onTapBottomNavigationBarMenu({required int selectedTab}) async {
-    _lazyInit(tabIndex);
     tabIndex = selectedTab;
+    _lazyInit(tabIndex);
   }
 
   void _lazyInit(int selectedTab) {

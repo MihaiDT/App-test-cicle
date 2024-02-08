@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/advices/widgets/advices_content_library_button.dart';
 import 'package:lines/modules/advices/widgets/advices_gynecologist_box.dart';
@@ -17,157 +16,82 @@ class AdvicesPage extends GetView<AdvicesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TransparentAppBar(
-          title: const DisplayLarge(
-            'Consigli',
-            color: ThemeColor.primary,
-          ),
-          leading: InkWell(
-            onTap: () {
-              //TODO: add on tap
-            },
-            child: Center(
-              child: SizedBox(
-                height: 24,
-                width: 24,
-                child: SvgPicture.asset(
-                  ThemeIcon.menu,
-                  color: ThemeColor.darkBlue,
-                ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: ListView(
-            padding: const EdgeInsets.only(
-              bottom: 200,
-            ),
+    return Obx(
+      () {
+        if (controller.pageShouldRefresh) {
+          return Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
+              TransparentAppBar(
+                title: const DisplayLarge(
+                  'Consigli',
+                  color: ThemeColor.primary,
                 ),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: const DisplayMedium(
-                    'Contenuti per te',
-                  ).applyShaders(context),
+                leading: InkWell(
+                  onTap: () {
+                    //TODO: add on tap
+                  },
+                  child: Center(
+                    child: SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: SvgPicture.asset(
+                        ThemeIcon.menu,
+                        color: ThemeColor.darkBlue,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              ThemeSizedBox.height16,
-              SizedBox(
-                height: 220,
-                child: AdvicesCardsRow(
-                  withBorder: true,
-                  articles: [
-                    AdvicesArticle.textType(
-                      articleCategoryId: '',
-                      id: 2,
-                      typology: ArticleType.text,
-                      title: 'Questo è un titolo',
-                      disclaimer: '',
-                      iconName: 'alimentazione.svg',
-                      coverImageUrl: '',
-                      shortDescription: '',
-                      text: 'Questo è un testo',
-                      thumbImageUrl: '',
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.only(
+                    bottom: 200,
+                  ),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: const DisplayMedium(
+                          'Contenuti per te',
+                        ).applyShaders(context),
+                      ),
                     ),
-                    AdvicesArticle.textType(
-                      articleCategoryId: '',
-                      id: 2,
-                      typology: ArticleType.text,
-                      title: 'Questo è un titolo',
-                      disclaimer: '',
-                      iconName: 'alimentazione.svg',
-                      coverImageUrl: '',
-                      shortDescription: '',
-                      text: 'Questo è un testo',
-                      thumbImageUrl: '',
+                    ThemeSizedBox.height16,
+                    SizedBox(
+                      height: 220,
+                      child: AdvicesCardsRow(
+                        withBorder: true,
+                        articles: controller.getAllArticles,
+                      ),
                     ),
-                    AdvicesArticle.textType(
-                      articleCategoryId: '',
-                      id: 2,
-                      typology: ArticleType.text,
-                      title: 'Questo è un titolo',
-                      disclaimer: '',
-                      iconName: 'alimentazione.svg',
-                      coverImageUrl: '',
-                      shortDescription: '',
-                      text: 'Questo è un testo',
-                      thumbImageUrl: '',
+                    ThemeSizedBox.height8,
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      child: AdvicesContentLibraryButton(),
                     ),
-                    AdvicesArticle.textType(
-                      articleCategoryId: '',
-                      id: 2,
-                      typology: ArticleType.text,
-                      title: 'Questo è un titolo',
-                      disclaimer: '',
-                      iconName: 'alimentazione.svg',
-                      coverImageUrl: '',
-                      shortDescription: '',
-                      text: 'Questo è un testo',
-                      thumbImageUrl: '',
-                    ),
-                    AdvicesArticle.textType(
-                      articleCategoryId: '',
-                      id: 2,
-                      typology: ArticleType.text,
-                      title: 'Questo è un titolo',
-                      disclaimer: '',
-                      iconName: 'alimentazione.svg',
-                      coverImageUrl: '',
-                      shortDescription: '',
-                      text: 'Questo è un testo',
-                      thumbImageUrl: '',
-                    ),
-                    AdvicesArticle.textType(
-                      articleCategoryId: '',
-                      id: 2,
-                      typology: ArticleType.text,
-                      title: 'Questo è un titolo',
-                      disclaimer: '',
-                      iconName: 'alimentazione.svg',
-                      coverImageUrl: '',
-                      shortDescription: '',
-                      text: 'Questo è un testo',
-                      thumbImageUrl: '',
-                    ),
-                    AdvicesArticle.textType(
-                      articleCategoryId: '',
-                      id: 2,
-                      typology: ArticleType.text,
-                      title: 'Questo è un titolo',
-                      disclaimer: '',
-                      iconName: 'alimentazione.svg',
-                      coverImageUrl: '',
-                      shortDescription: '',
-                      text: 'Questo è un testo',
-                      thumbImageUrl: '',
+                    ThemeSizedBox.height40,
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                      ),
+                      child: AdvicesGynecologistBox(),
                     ),
                   ],
                 ),
-              ),
-              ThemeSizedBox.height8,
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
-                child: AdvicesContentLibraryButton(),
-              ),
-              ThemeSizedBox.height40,
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                ),
-                child: AdvicesGynecologistBox(),
-              ),
+              )
             ],
-          ),
-        )
-      ],
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }

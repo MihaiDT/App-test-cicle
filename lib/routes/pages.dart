@@ -3,12 +3,18 @@ import 'package:get/get.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
+import 'package:lines/modules/content_library/bindings/content_library_binding.dart';
+import 'package:lines/modules/content_library/bindings/content_library_search_page_binding.dart';
+import 'package:lines/modules/content_library/content_library_page.dart';
+import 'package:lines/modules/content_library/content_library_search_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
 import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
+import 'package:lines/modules/login/login_binding.dart';
+import 'package:lines/modules/login/login_page.dart';
 import 'package:lines/modules/main/main_binding_v2.dart';
 import 'package:lines/modules/main/main_page_v2.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
@@ -25,10 +31,6 @@ import '../modules/access_wrapper/wrapper_access_widget.dart';
 import '../modules/birth_date/birth_date_page.dart';
 import '../modules/calendar/calendar_binding.dart';
 import '../modules/calendar/calendar_page.dart';
-import '../modules/content_library/bindings/content_library_search_page_binding.dart';
-import '../modules/content_library/content_library_search_page.dart';
-import '../modules/login/login_binding.dart';
-import '../modules/login/login_page.dart';
 import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
 import '../modules/name_surname/name_surname_page.dart';
@@ -252,6 +254,18 @@ class Pages {
         const ContentLibrarySearchPage(),
       ),
       transition: Transition.rightToLeft,
+    ),
+
+    ///ContentLibraryPage
+    GetPage(
+      name: Routes.contentLibraryPage,
+      bindings: [
+        ContentLibraryBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const ContentLibraryPage(),
+      ),
+      transition: Transition.fade,
     ),
   ];
 

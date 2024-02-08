@@ -23,6 +23,7 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     /// Check if email exists and if it's active
     ever(
       appController.checkEmail.rxValue,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/routes/routes.dart';
 
 class AdvicesContentLibraryButton extends StatelessWidget {
   const AdvicesContentLibraryButton({
@@ -11,7 +13,7 @@ class AdvicesContentLibraryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        //TODO : add on tap
+        Get.toNamed(Routes.contentLibraryPage);
       },
       child: Container(
         decoration: const BoxDecoration(
