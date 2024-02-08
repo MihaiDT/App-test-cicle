@@ -7,6 +7,7 @@ import 'package:lines/modules/register/widget/activate_email_dialog.dart';
 import 'package:lines/modules/register/widget/email_does_not_exists.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
+import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/repository/social_service.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -47,10 +48,17 @@ class LoginController extends GetxController {
 
           /// If the email exists and is active login the user
           else if (appController.checkEmail.value?.emailIsValid == true) {
-            loginUser(
-              emailController.text,
-              passwordController.text,
-            );
+            // FIXME: here user in appController is not initialized yet
+            if (appController.user.value!.provider?.registrationProvider
+                    ?.isSocialProvider ==
+                true) {
+              socialLogin(RegistrationProvider.email);
+            } else {
+              loginUser(
+                emailController.text,
+                passwordController.text,
+              );
+            }
           }
         }
       },
@@ -79,16 +87,13 @@ class LoginController extends GetxController {
     await AuthenticationService.checkEmail(emailController.text);
   }
 
-  Future<void> googleSignIn() async {
-    await SocialService.googleSignIn();
-  }
-
-  Future<void> appleSignIn() async {
-    await SocialService.appleSignIn();
-  }
-
-  Future<void> facebookSignIn() async {
-    await SocialService.facebookSignIn();
+  Future<void> socialLogin(RegistrationProvider registrationProvider) async {
+    await SocialService.executeSocialLogin(
+      registrationProvider: registrationProvider,
+    );
+    await AuthenticationService.socialLoginUser(
+      appController.socialLoginParameter,
+    );
   }
 
   void validateEmail(String text) {

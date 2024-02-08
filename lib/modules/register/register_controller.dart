@@ -4,7 +4,7 @@ import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/register/widget/activate_email_dialog.dart';
 import 'package:lines/repository/authentication_service.dart';
-import 'package:lines/repository/parameters_class/social_registration_parameters.dart';
+import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/repository/social_service.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -22,7 +22,7 @@ class RegisterController extends GetxController {
           if (callback.content?.emailExists == false) {
             /// Save in the state email and password values
             appController.registerParameter.email = emailController.text;
-            appController.registerParameter.password = passwordController.text;
+            appController.registerParameter.password = password;
             Get.offAndToNamed(Routes.nameSurname);
           } else if (callback.content?.emailExists == true &&
               callback.content?.emailIsActive == false) {
@@ -54,20 +54,13 @@ class RegisterController extends GetxController {
     _hidePassword.value = value;
   }
 
-  Future<void> appleSignIn() async {
-    if (await SocialService.executeSocialLogin(
-      registrationProvider: RegistrationProvider.apple,
-    )) {}
-  }
-
-  Future<void> googleSignIn() async {
+  Future<void> setRegistrationProvider(
+    RegistrationProvider registrationProvider,
+  ) async {
     await SocialService.executeSocialLogin(
-      registrationProvider: RegistrationProvider.google,
+      registrationProvider: registrationProvider,
     );
-  }
-
-  Future<void> facebookSignIn() async {
-    SocialService.facebookSignIn();
+    appController.registerParameter.registrationProvider = registrationProvider;
   }
 
   /// Check if email is valid for the regex
@@ -89,10 +82,9 @@ class RegisterController extends GetxController {
     String socialToken,
     RegistrationProvider registrationProvider,
   ) {
-    appController.socialRegisterParameter.email = email;
-    appController.socialRegisterParameter.socialToken = socialToken;
-    appController.socialRegisterParameter.registrationProvider =
-        registrationProvider;
+    appController.registerParameter.email = email;
+    appController.registerParameter.socialToken = socialToken;
+    appController.registerParameter.registrationProvider = registrationProvider;
   }
 
   void _showValidateEmailDialog() {
@@ -105,4 +97,7 @@ class RegisterController extends GetxController {
       },
     );
   }
+
+  String? get password =>
+      passwordController.text.isEmpty ? null : passwordController.text;
 }

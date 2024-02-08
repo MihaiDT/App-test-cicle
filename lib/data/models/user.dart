@@ -1,3 +1,5 @@
+import 'package:lines/repository/parameters_class/registration_parameters.dart';
+
 class User {
   bool? active;
   String? birthdate;
@@ -15,7 +17,7 @@ class User {
   int? periodDuration;
   bool? privacyProfiling;
   bool? privacyMarketingEmail;
-  String? provider;
+  RegistrationParameters? provider;
   String? sessionToken;
 
   User({
