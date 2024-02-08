@@ -53,11 +53,9 @@ class SocialService {
     if (googleSignIn.currentUser != null) {
       final auth = await googleSignInAccount?.authentication;
 
-      googleSignIn.currentUser!.id;
-
       await _validateEmail(
         googleSignIn.currentUser!.email,
-        auth!.idToken!,
+        auth!.accessToken!,
         RegistrationProvider.google,
       );
     }
@@ -101,14 +99,12 @@ class SocialService {
     RegistrationProvider registrationProvider,
   ) async {
     await AuthenticationService.checkEmail(email);
-    if (appController.checkEmail.value?.emailExists == true &&
-        appController.checkEmail.value?.emailIsActive == true) {
-      _setSocialLoginParameters(
-        email,
-        identityToken,
-        registrationProvider,
-      );
-    }
+
+    _setSocialLoginParameters(
+      email,
+      identityToken,
+      registrationProvider,
+    );
   }
 
   static Future<void> _saveUserData(

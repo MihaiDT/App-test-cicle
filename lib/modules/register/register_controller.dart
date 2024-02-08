@@ -92,7 +92,7 @@ class RegisterController extends GetxController {
       context: Get.context!,
       builder: (_) {
         return ActivateEmailDialog(
-          email: emailController.text,
+          email: email,
         );
       },
     );
@@ -100,4 +100,7 @@ class RegisterController extends GetxController {
 
   String? get password =>
       passwordController.text.isEmpty ? null : passwordController.text;
+
+  String get email =>
+      appController.socialLoginParameter.email ?? emailController.text;
 }

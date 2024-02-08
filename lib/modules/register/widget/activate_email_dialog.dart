@@ -52,8 +52,7 @@ class ActivateEmailDialog extends StatelessWidget {
                 await AuthenticationService.sendActivationLink(email);
                 appController.isLoginFlow.value = true;
 
-                Get.back();
-                Get.toNamed(Routes.login);
+                Get.offAndToNamed(Routes.login);
               },
               child: const BodyLarge(
                 "Invia di nuovo",

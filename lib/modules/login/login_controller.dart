@@ -28,7 +28,7 @@ class LoginController extends GetxController {
     /// Check if email exists and if it's active
     ever(
       appController.checkEmail.rxValue,
-      (callback) {
+      (callback) async {
         if (callback.isPending) {
           isButtonPending.value = true;
         }
@@ -43,16 +43,19 @@ class LoginController extends GetxController {
 
           /// If the email is not active show the dialog
           else if (appController.checkEmail.value?.emailIsActive == false) {
+            print('Email is not active');
             _showValidateEmailDialog();
           }
 
           /// If the email exists and is active login the user
           else if (appController.checkEmail.value?.emailIsValid == true) {
-            // FIXME: here user in appController is not initialized yet
-            if (appController.user.value!.provider?.registrationProvider
+            // FIXME: test this
+            if (appController.socialLoginParameter.registrationProvider
                     ?.isSocialProvider ==
                 true) {
-              socialLogin(RegistrationProvider.email);
+              await AuthenticationService.socialLoginUser(
+                appController.socialLoginParameter,
+              );
             } else {
               loginUser(
                 emailController.text,
@@ -91,9 +94,6 @@ class LoginController extends GetxController {
     await SocialService.executeSocialLogin(
       registrationProvider: registrationProvider,
     );
-    await AuthenticationService.socialLoginUser(
-      appController.socialLoginParameter,
-    );
   }
 
   void validateEmail(String text) {
@@ -123,9 +123,12 @@ class LoginController extends GetxController {
       context: Get.context!,
       builder: (_) {
         return ActivateEmailDialog(
-          email: emailController.text,
+          email: email,
         );
       },
     );
   }
+
+  String get email =>
+      appController.socialLoginParameter.email ?? emailController.text;
 }
