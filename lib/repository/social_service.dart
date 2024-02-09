@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -37,9 +39,16 @@ class SocialService {
   }
 
   static Future<bool> googleSignIn() async {
-    GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+    late GoogleSignIn googleSignIn;
+    googleSignIn = Platform.isIOS ? GoogleSignIn(
+      scopes: ['email'],
+      clientId: '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
+    ) : GoogleSignIn(scopes: ['email']) ;
+
+
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
+
     bool emailAlreadyExists = false;
     if (googleSignIn.currentUser != null) {
       final auth = await googleSignInAccount?.authentication;
