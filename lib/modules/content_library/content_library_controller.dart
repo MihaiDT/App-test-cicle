@@ -3,14 +3,20 @@ import 'package:get/get.dart';
 
 import '../../core/utils/singletons.dart';
 import '../../data/models/advices_article.dart';
+import '../../data/models/advices_article_detail_pair.dart';
 import '../../data/models/advices_category.dart';
 import '../../data/models/advices_category_with_articles.dart';
 import '../../data/models/advices_sub_category.dart';
 import '../../repository/advices_service.dart';
+import '../../routes/routes.dart';
+import '../advices/controllers/advices_detail_store.dart';
 
 class ContentLibraryController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController tabController;
+  AdvicesDetailStore advicesDetailStore = Get.put(
+    AdvicesDetailStore(),
+  );
 
   @override
   void onInit() {
@@ -25,6 +31,14 @@ class ContentLibraryController extends GetxController
   void onReady() async {
     super.onReady();
     await AdvicesService.fetchArticles();
+  }
+
+  void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {
+    advicesDetailStore.articleDetail = AdvicesDetailPair(
+      category: category,
+      article: article,
+    );
+    Get.toNamed(Routes.articleDetailPage);
   }
 
   bool get pageShouldRefresh {

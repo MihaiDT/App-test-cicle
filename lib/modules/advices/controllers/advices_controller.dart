@@ -28,7 +28,6 @@ class AdvicesController extends GetxController {
   }
 
   void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {
-    debugPrint('${category.categoryTitle}');
     advicesDetailStore.articleDetail = AdvicesDetailPair(
       category: category,
       article: article,

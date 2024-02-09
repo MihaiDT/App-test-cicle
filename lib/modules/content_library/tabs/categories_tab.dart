@@ -20,6 +20,7 @@ class CategoriesTab extends GetView<ContentLibraryController> {
               AdvicesCategoriesGrid(categories: controller.getAllCategories),
               ThemeSizedBox.height24,
               ContentLibraryCategoryTabRows(
+                onCardTapped: controller.showArticleDetails,
                 allCategoriesWithArticles:
                     controller.getAllCategoriesWithArticles,
               ),

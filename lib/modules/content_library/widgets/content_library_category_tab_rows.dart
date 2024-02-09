@@ -9,10 +9,12 @@ import '../../advices/widgets/advices_cards_row.dart';
 
 class ContentLibraryCategoryTabRows extends StatelessWidget {
   final Map<AdvicesCategory, List<AdvicesArticle>> allCategoriesWithArticles;
+  final Function(AdvicesArticle, AdvicesCategory)? onCardTapped;
 
   const ContentLibraryCategoryTabRows({
     super.key,
     required this.allCategoriesWithArticles,
+    this.onCardTapped,
   });
 
   @override
@@ -58,6 +60,7 @@ class ContentLibraryCategoryTabRows extends StatelessWidget {
               child: SizedBox(
                 height: 220,
                 child: AdvicesCardsRow(
+                  onCardTapped: onCardTapped,
                   categories: allCategoriesWithArticles.keys.toList(),
                   articles: allArticlesForCategory,
                 ),

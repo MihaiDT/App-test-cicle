@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/data/models/advices_article.dart';
+import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/widgets/advice_card.dart';
 import 'package:lines/modules/content_library/content_library_controller.dart';
 
@@ -13,6 +14,7 @@ class ContentLibraryForYouTab extends GetView<ContentLibraryController> {
       () {
         if (controller.pageShouldRefresh) {
           List<AdvicesArticle> allArticles = controller.getAllArticles;
+          List<AdvicesCategory> allCategories = controller.getAllCategories;
           return GridView.builder(
             padding: const EdgeInsets.all(16),
             scrollDirection: Axis.vertical,
@@ -24,28 +26,50 @@ class ContentLibraryForYouTab extends GetView<ContentLibraryController> {
               childAspectRatio: 0.67,
             ),
             itemBuilder: (context, index) {
+              AdvicesCategory advicesCategory =
+                  AdvicesCategory.fromIconName(allArticles[index].iconName);
+              int indexOfCategory =
+                  controller.getAllCategories.indexOf(advicesCategory);
               switch (allArticles[index].typology) {
                 case ArticleType.text:
-                  return AdviceCard(
-                    advicesCategory:
-                        allArticles[index].getParentCategoryWithoutTitle,
-                    text: allArticles[index].title,
-                    imageUrl: allArticles[index].thumbImageUrl,
+                  return InkWell(
+                    onTap: () {
+                      controller.showArticleDetails(
+                          allArticles[index], allCategories[indexOfCategory]);
+                    },
+                    child: AdviceCard(
+                      advicesCategory:
+                          allArticles[index].getParentCategoryWithoutTitle,
+                      text: allArticles[index].title,
+                      imageUrl: allArticles[index].thumbImageUrl,
+                    ),
                   );
                 case ArticleType.video:
-                  return AdviceCard.withTimer(
-                    timer: "0:00",
-                    advicesCategory:
-                        allArticles[index].getParentCategoryWithoutTitle,
-                    text: allArticles[index].title,
-                    imageUrl: allArticles[index].thumbImageUrl,
+                  return InkWell(
+                    onTap: () {
+                      controller.showArticleDetails(
+                          allArticles[index], allCategories[indexOfCategory]);
+                    },
+                    child: AdviceCard.withTimer(
+                      timer: "0:00",
+                      advicesCategory:
+                          allArticles[index].getParentCategoryWithoutTitle,
+                      text: allArticles[index].title,
+                      imageUrl: allArticles[index].thumbImageUrl,
+                    ),
                   );
                 case ArticleType.slider:
-                  return AdviceCard.withGallery(
-                    advicesCategory:
-                        allArticles[index].getParentCategoryWithoutTitle,
-                    text: allArticles[index].title,
-                    imageUrl: allArticles[index].thumbImageUrl,
+                  return InkWell(
+                    onTap: () {
+                      controller.showArticleDetails(
+                          allArticles[index], allCategories[indexOfCategory]);
+                    },
+                    child: AdviceCard.withGallery(
+                      advicesCategory:
+                          allArticles[index].getParentCategoryWithoutTitle,
+                      text: allArticles[index].title,
+                      imageUrl: allArticles[index].thumbImageUrl,
+                    ),
                   );
               }
             },
