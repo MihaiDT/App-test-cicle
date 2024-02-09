@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/advices/advices_detail_page.dart';
+import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
-import 'package:lines/modules/content_library/bindings/content_library_binding.dart';
-import 'package:lines/modules/content_library/bindings/content_library_search_page_binding.dart';
-import 'package:lines/modules/content_library/content_library_page.dart';
-import 'package:lines/modules/content_library/content_library_search_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
+import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_quiz_card_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
@@ -31,6 +30,10 @@ import '../modules/access_wrapper/wrapper_access_widget.dart';
 import '../modules/birth_date/birth_date_page.dart';
 import '../modules/calendar/calendar_binding.dart';
 import '../modules/calendar/calendar_page.dart';
+import '../modules/content_library/bindings/content_library_binding.dart';
+import '../modules/content_library/bindings/content_library_search_page_binding.dart';
+import '../modules/content_library/content_library_page.dart';
+import '../modules/content_library/content_library_search_page.dart';
 import '../modules/main/main_binding.dart';
 import '../modules/main/main_page.dart';
 import '../modules/name_surname/name_surname_page.dart';
@@ -237,6 +240,7 @@ class Pages {
       name: Routes.mainV2,
       bindings: [
         MainBindingV2(),
+        WelcomeQuizCardBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const MainPageV2(),
@@ -264,6 +268,18 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const ContentLibraryPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    ///ArticleDetailPage
+    GetPage(
+      name: Routes.articleDetailPage,
+      bindings: [
+        AdvicesDetailBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const AdvicesDetailPage(),
       ),
       transition: Transition.fade,
     ),

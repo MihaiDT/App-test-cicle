@@ -8,7 +8,7 @@ import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
-import 'package:lines/repository/parameters_class/social_registration_parameters.dart';
+import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
 import 'data/models/advices_grouped_by_category.dart';
@@ -42,14 +42,14 @@ class AppController extends GetxController {
   /// The parameter used to register the user
   final RegistrationParameters registerParameter;
 
-  final SocialRegistrationParameters socialRegisterParameter;
   final UpdateUserParameters updateUserParameters;
+
+  final SocialLoginParameter socialLoginParameter;
 
   final EasyGetter<PeriodMap> periodMap;
   final EasyGetter<CalendarDayDTOMap> calendarDayDTOMap;
   final EasyGetter<CalendarDayViewModel> calendarDayViewModel;
   final EasyGetter<DBCalendarDayDtoMap> dbCalendarDayDtoMap;
-
   final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
 
   /// Determine if the user is trying to log in or sign up
@@ -62,8 +62,8 @@ class AppController extends GetxController {
     required this.survey,
     required this.checkEmail,
     required this.registerParameter,
-    required this.socialRegisterParameter,
     required this.updateUserParameters,
+    required this.socialLoginParameter,
     required this.periodMap,
     required this.calendarDayDTOMap,
     required this.dbCalendarDayDtoMap,
@@ -84,8 +84,8 @@ class AppController extends GetxController {
       survey: EasyGetter<Survey>(),
       checkEmail: EasyGetter<CheckEmail>(),
       registerParameter: RegistrationParameters.initial(),
-      socialRegisterParameter: SocialRegistrationParameters.initial(),
       updateUserParameters: UpdateUserParameters.initial(),
+      socialLoginParameter: SocialLoginParameter.initial(),
       advicesCategories: EasyGetter<AdvicesGroupedByCategory>(),
       isLoginFlow: false.obs,
     );

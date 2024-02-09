@@ -1,12 +1,12 @@
-import 'package:lines/repository/parameters_class/social_registration_parameters.dart';
+import 'package:lines/repository/parameters_class/registration_provider.dart';
 
 /// This class is used to pass the parameters to the social login API.
 class SocialLoginParameter {
   /// The provider of the social login. It can be "google", "facebook", "apple"
-  final RegistrationProvider registrationProvider;
+  RegistrationProvider? registrationProvider;
 
   /// The email of the user
-  final String email;
+  String? email;
 
   SocialLoginParameter({
     required this.registrationProvider,
@@ -22,8 +22,15 @@ class SocialLoginParameter {
 
   Map<String, dynamic> toJson() {
     return {
-      "provider": registrationProvider.name,
+      "provider": registrationProvider?.name,
       "email": email,
     };
+  }
+
+  factory SocialLoginParameter.initial() {
+    return SocialLoginParameter(
+      registrationProvider: null,
+      email: null,
+    );
   }
 }

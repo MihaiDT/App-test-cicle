@@ -1,3 +1,5 @@
+import 'package:lines/repository/parameters_class/registration_provider.dart';
+
 class RegistrationParameters {
   /// Birthdate with yyyy-mm-dd format
   String birthdate;
@@ -11,6 +13,8 @@ class RegistrationParameters {
   bool privacyMarketing;
   bool privacyBrandProfiling;
   bool privacyBrandMarketing;
+  RegistrationProvider? registrationProvider;
+  String? socialToken;
 
   RegistrationParameters.initial({
     this.birthdate = "",
@@ -19,11 +23,13 @@ class RegistrationParameters {
     this.lastName = "",
     this.legalGuardianEmail,
     this.nickname,
-    this.password = "",
-    this.privacyProfiling = false,
-    this.privacyMarketing = false,
-    this.privacyBrandProfiling = false,
-    this.privacyBrandMarketing = false,
+    this.password,
+    this.privacyProfiling = true,
+    this.privacyMarketing = true,
+    this.privacyBrandProfiling = true,
+    this.privacyBrandMarketing = true,
+    this.registrationProvider = RegistrationProvider.email,
+    this.socialToken = "",
   });
 
   Map<String, dynamic> toJson() {
@@ -36,9 +42,11 @@ class RegistrationParameters {
       "nickname": nickname,
       "password": password,
       "privacy_profiling": privacyProfiling,
-      "privacy_marketing_email": privacyMarketing,
+      "privacy_marketing": privacyMarketing,
       "privacy_brand_profiling": privacyBrandProfiling,
       "privacy_brand_marketing": privacyBrandMarketing,
+      "registration_provider": registrationProvider?.name,
+      "social_token": socialToken,
     };
   }
 }

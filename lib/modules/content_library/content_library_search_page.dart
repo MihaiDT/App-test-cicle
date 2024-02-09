@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/content_library/widgets/article_category_widget.dart';
 
 import '../../core/app_theme.dart';
+
+import '../../data/models/advices_sub_category.dart';
 import 'content_library_search_page_controller.dart';
-import 'widgets/article_category_widget.dart';
+import 'content_library_search_page_results.dart';
 
 class ContentLibrarySearchPage
     extends GetView<ContentLibrarySearchPageController> {
@@ -42,6 +45,8 @@ class ContentLibrarySearchPage
                             ),
                           ),
                           child: TextField(
+                            readOnly: true,
+                            controller: controller.textEditingController,
                             enableSuggestions: false,
                             style: NewThemeTextStyle.bodyMedium.copyWith(
                               color: ThemeColor.darkBlue,
@@ -49,9 +54,27 @@ class ContentLibrarySearchPage
                             cursorColor: ThemeColor.darkBlue,
                             textAlign: TextAlign.left,
                             decoration: InputDecoration(
+                              suffix: InkWell(
+                                onTap: () {
+                                  controller.onTextFieldClearTapped();
+                                },
+                                child: SizedBox(
+                                  width: 15,
+                                  height: 15,
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      ThemeIcon.close,
+                                      color: ThemeColor.darkBlue,
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                ),
+                              ),
                               isDense: true,
                               contentPadding: const EdgeInsets.only(
                                 left: 20,
+                                right: 20,
                               ),
                               filled: true,
                               fillColor: textFieldFillColor,
@@ -81,9 +104,14 @@ class ContentLibrarySearchPage
                         ),
                       ),
                       ThemeSizedBox.width16,
-                      const BodyMedium(
-                        'Annulla',
-                        color: ThemeColor.darkBlue,
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const BodyMedium(
+                          'Annulla',
+                          color: ThemeColor.darkBlue,
+                        ),
                       ),
                     ],
                   ),
@@ -92,95 +120,121 @@ class ContentLibrarySearchPage
               Obx(
                 () {
                   if (controller.pageShouldRefresh) {
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            // itemCount: AdvicesCategory.values.length,
-                            itemCount: controller.categories.length,
-                            itemBuilder: (context, categoryIndex) {
-                              String categoryIconName =
-                                  controller.categories[categoryIndex].iconName;
-                              return Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 14,
-                                        backgroundColor: controller
-                                            .categories[categoryIndex]
-                                            .categoryColor,
-                                        child: SvgPicture.asset(
+                    if (controller.showResults) {
+                      return const Column(
+                        children: [
+                          SizedBox(
+                            height: 100,
+                          ),
+                          Expanded(
+                            child: ContentLibrarySearchPageResults(),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Column(
+                        children: [
+                          const SizedBox(
+                            height: 100,
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              // itemCount: AdvicesCategory.values.length,
+                              itemCount: controller.categories.length,
+                              itemBuilder: (context, categoryIndex) {
+                                String categoryIconName = controller
+                                    .categories[categoryIndex].iconName;
+                                List<AdvicesSubCategory>? subCatories =
+                                    controller.subCategoriesForCategory(
+                                  categoryIconName,
+                                );
+                                return Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 14,
+                                          backgroundColor: controller
+                                              .categories[categoryIndex]
+                                              .categoryColor,
+                                          child: SvgPicture.asset(
+                                            controller.categories[categoryIndex]
+                                                .iconPath,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        ThemeSizedBox.width6,
+                                        HeadlineLarge(
                                           controller.categories[categoryIndex]
-                                              .iconPath,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      ThemeSizedBox.width6,
-                                      HeadlineLarge(
-                                        controller.categories[categoryIndex]
-                                                    .categoryTitle !=
-                                                null
-                                            ? controller
-                                                    .categories[categoryIndex]
-                                                    .categoryTitle!
-                                                    .capitalizeFirst ??
-                                                controller
-                                                    .categories[categoryIndex]
-                                                    .categoryTitle!
-                                            : "",
-                                        color: ThemeColor.darkBlue,
-                                      )
-                                    ],
-                                  ),
-                                  Divider(
-                                    color: dividerColor,
-                                  ),
-                                  ListView.separated(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount:
-                                        controller.subCategoriesForCategory(
-                                                    categoryIconName) !=
-                                                null
-                                            ? controller
-                                                .subCategoriesForCategory(
-                                                    categoryIconName)!
-                                                .length
-                                            : 0,
-                                    itemBuilder: (context, subCategoryIndex) {
-                                      return ArticleCategoryWidget(
-                                        articleName: controller
-                                            .articleNameFromSubCategoryFromIndex(
-                                          categoryIconName,
-                                          subCategoryIndex,
-                                        ),
-                                      );
-                                    },
-                                    separatorBuilder: (context, index) =>
-                                        Divider(
+                                                      .categoryTitle !=
+                                                  null
+                                              ? controller
+                                                      .categories[categoryIndex]
+                                                      .categoryTitle!
+                                                      .capitalizeFirst ??
+                                                  controller
+                                                      .categories[categoryIndex]
+                                                      .categoryTitle!
+                                              : "",
+                                          color: ThemeColor.darkBlue,
+                                        )
+                                      ],
+                                    ),
+                                    Divider(
                                       color: dividerColor,
                                     ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Divider(
+                                    ListView.separated(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount:
+                                          controller.subCategoriesForCategory(
+                                                      categoryIconName) !=
+                                                  null
+                                              ? controller
+                                                  .subCategoriesForCategory(
+                                                      categoryIconName)!
+                                                  .length
+                                              : 0,
+                                      itemBuilder: (context, subCategoryIndex) {
+                                        return InkWell(
+                                          onTap: () {
+                                            if (subCatories != null) {
+                                              controller.onSubCategoryTapped(
+                                                  subCatories[
+                                                      subCategoryIndex]);
+                                            }
+                                          },
+                                          child: ArticleCategoryWidget(
+                                            articleName: controller
+                                                .articleNameFromSubCategoryFromIndex(
+                                              categoryIconName,
+                                              subCategoryIndex,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) =>
+                                          Divider(
                                         color: dividerColor,
                                       ),
-                                      ThemeSizedBox.height48,
-                                    ],
-                                  ),
-                                ],
-                              );
-                            },
+                                    ),
+                                    Column(
+                                      children: [
+                                        Divider(
+                                          color: dividerColor,
+                                        ),
+                                        ThemeSizedBox.height48,
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    );
+                        ],
+                      );
+                    }
                   } else {
                     return const Center(
                       child: CircularProgressIndicator(),

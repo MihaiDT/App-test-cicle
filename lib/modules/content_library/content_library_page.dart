@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/app_theme.dart';
-import 'package:lines/modules/content_library/content_library_controller.dart';
+
 import 'package:lines/modules/content_library/tabs/categories_tab.dart';
 import 'package:lines/modules/content_library/tabs/content_library_for_you_tab.dart';
 import 'package:lines/modules/content_library/widgets/tab_indicator.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import '../../core/app_theme.dart';
+
+import 'content_library_controller.dart';
 
 class ContentLibraryPage extends GetView<ContentLibraryController> {
   const ContentLibraryPage({super.key});

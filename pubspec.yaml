@@ -1,5 +1,5 @@
 name: lines
-version: 0.0.1+1
+version: 0.0.2+2
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -57,8 +57,7 @@ dependencies:
   get: ^4.6.6
 
 
-  # The flutter_markdown package renders Markdown, a lightweight markup language, into a Flutter widget containing a rich text representation.
-  flutter_markdown: ^0.6.18+2
+
   
   # Various borders that use gradient instead of boring plain colors.
   gradient_borders: ^1.0.0
@@ -107,6 +106,9 @@ dependencies:
 
   # A Flutter plugin for Facebook Sign In 
   flutter_facebook_auth: ^6.0.4
+  flutter_html: ^3.0.0-beta.2
+  video_player: ^2.8.2
+
 
   # webview_flutter: ^4.4.2
 

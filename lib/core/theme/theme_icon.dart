@@ -95,4 +95,8 @@ class ThemeIcon {
       '$folderPath/advices_categories/benessere_emotivo.svg';
   static String linesAlTuoFianco =
       '$folderPath/advices_categories/lines_al_tuo_fianco.svg';
+  static String savedEmptyGradient = '$folderPath/saved_empty_gradient.svg';
+  static String share = '$folderPath/saved_empty_gradient.svg';
+  static String shareGradient = '$folderPath/share_gradient.svg';
+  static String play = '$folderPath/play.svg';
 }

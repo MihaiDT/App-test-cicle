@@ -57,7 +57,9 @@ class AuthenticationService {
       final response = await dio.post(
         "/users",
         data: {
-          "user": registerParameter.toJson(),
+          "user": registerParameter
+            ..socialToken = userIDFromDB
+            ..toJson(),
         },
       );
       _saveUserInfo(response);
@@ -171,5 +173,9 @@ class AuthenticationService {
         response.data,
       ),
     );
+  }
+
+  static String get userIDFromDB {
+    return HiveManager.userId;
   }
 }

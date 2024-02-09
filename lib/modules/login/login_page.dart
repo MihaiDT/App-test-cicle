@@ -7,6 +7,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/login/login_controller.dart';
 import 'package:lines/modules/register/section/divider_section.dart';
 import 'package:lines/modules/register/widget/link_account_widget.dart';
+import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_loading_button.dart';
@@ -94,18 +95,24 @@ class LoginPage extends GetView<LoginController> {
                     children: [
                       LinkAccountWidget(
                         imagePath: ThemeImage.facebook,
-                        onTap: () => controller.facebookSignIn(),
+                        onTap: () => controller.socialLogin(
+                          RegistrationProvider.facebook,
+                        ),
                       ),
                       ThemeSizedBox.width40,
                       LinkAccountWidget(
                         imagePath: ThemeImage.google,
-                        onTap: () => controller.googleSignIn(),
+                        onTap: () => controller.socialLogin(
+                          RegistrationProvider.google,
+                        ),
                       ),
                       if (Platform.isIOS) ...[
                         ThemeSizedBox.width40,
                         LinkAccountWidget(
                           imagePath: ThemeImage.apple,
-                          onTap: () => controller.appleSignIn(),
+                          onTap: () => controller.socialLogin(
+                            RegistrationProvider.apple,
+                          ),
                         ),
                       ]
                     ],
