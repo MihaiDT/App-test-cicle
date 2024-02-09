@@ -14,40 +14,57 @@ class MainPageV2 extends GetView<MainControllerV2> {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              ThemeImage.bgLight,
+            ),
+            fit: BoxFit.cover,
+            alignment: Alignment.bottomCenter,
+          ),
+        ),
         child: Obx(
           () => BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: (value) {
-              controller.onTapBottomNavigationBarMenu(selectedTab: value);
+              controller.onTapBottomNavigationBarMenu(
+                selectedTab: value,
+              );
             },
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+            selectedItemColor: ThemeColor.primary,
+            unselectedItemColor: Colors.white,
+            unselectedLabelStyle: NewThemeTextStyle.bodySmall.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+            selectedLabelStyle: NewThemeTextStyle.bodySmall.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
             elevation: 0,
             currentIndex: controller.tabIndex,
             items: [
-              BottomNavigationBarItem(
-                backgroundColor: Colors.transparent,
-                label: 'home',
-                activeIcon: SvgPicture.asset(ThemeIcon.homeTabSelected),
-                icon: SvgPicture.asset(ThemeIcon.homeTabUnselected),
+              _navItem(
+                label: 'Oggi',
+                context: context,
+                unselectedIcon: ThemeIcon.homeTabUnselected,
+                selectedIcon: ThemeIcon.homeTabSelected,
               ),
-              BottomNavigationBarItem(
-                backgroundColor: Colors.transparent,
-                label: 'advices',
-                activeIcon: SvgPicture.asset(ThemeIcon.advicesTabSelected),
-                icon: SvgPicture.asset(ThemeIcon.advicesTabUnselected),
+              _navItem(
+                label: 'Consigli',
+                context: context,
+                unselectedIcon: ThemeIcon.advicesTabUnselected,
+                selectedIcon: ThemeIcon.advicesTabSelected,
               ),
-              BottomNavigationBarItem(
-                backgroundColor: Colors.transparent,
-                label: 'prizes',
-                activeIcon: SvgPicture.asset(ThemeIcon.prizesTabSelected),
-                icon: SvgPicture.asset(ThemeIcon.prizesTabUnselected),
+              _navItem(
+                label: 'Premi',
+                context: context,
+                unselectedIcon: ThemeIcon.prizesTabUnselected,
+                selectedIcon: ThemeIcon.prizesTabSelected,
               ),
-              BottomNavigationBarItem(
-                backgroundColor: Colors.transparent,
-                label: 'profile',
-                activeIcon: SvgPicture.asset(ThemeIcon.profileTabSelected),
-                icon: SvgPicture.asset(ThemeIcon.profileTabUnselected),
+              _navItem(
+                label: 'Profilo',
+                context: context,
+                unselectedIcon: ThemeIcon.profileTabUnselected,
+                selectedIcon: ThemeIcon.profileTabSelected,
               ),
             ],
             backgroundColor: Colors.transparent,
@@ -67,6 +84,50 @@ class MainPageV2 extends GetView<MainControllerV2> {
                 return const HomePage();
             }
           },
+        ),
+      ),
+    );
+  }
+
+  BottomNavigationBarItem _navItem({
+    required String label,
+    required BuildContext context,
+    required String unselectedIcon,
+    required String selectedIcon,
+  }) {
+    return BottomNavigationBarItem(
+      backgroundColor: Colors.transparent,
+      label: '',
+      activeIcon: Padding(
+        padding: const EdgeInsets.only(
+          top: 8.0,
+        ),
+        child: Column(
+          children: [
+            SvgPicture.asset(
+              selectedIcon,
+            ),
+            BodySmall(
+              label,
+              fontWeight: FontWeight.w600,
+            ).applyShaders(context)
+          ],
+        ),
+      ),
+      icon: Padding(
+        padding: const EdgeInsets.only(
+          top: 8.0,
+        ),
+        child: Column(
+          children: [
+            SvgPicture.asset(
+              unselectedIcon,
+            ),
+            BodySmall(
+              label,
+              fontWeight: FontWeight.w600,
+            )
+          ],
         ),
       ),
     );

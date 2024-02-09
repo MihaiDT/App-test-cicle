@@ -33,4 +33,5 @@ class ThemeGradient {
         Color(0xFFFDE9F0),
         Color(0xFFDFC5D8),
       ]);
+
 }
