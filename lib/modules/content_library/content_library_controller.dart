@@ -66,11 +66,12 @@ class ContentLibraryController extends GetxController
           in appController.advicesCategories.value!.categories.entries) {
         AdvicesCategory category = entry.value.advicesCategory;
         List<AdvicesArticle> articlesForCategory = [];
-        for (AdvicesSubCategory subCategory in entry.value.subCategories) {
-          for (AdvicesArticle article in subCategory.articles) {
-            articlesForCategory.add(article);
-          }
+        AdvicesSubCategory firstSubCategory = entry.value.subCategories[0];
+
+        for (AdvicesArticle article in firstSubCategory.articles) {
+          articlesForCategory.add(article);
         }
+
         allCategoriesWithArticles[category] = articlesForCategory;
       }
     }

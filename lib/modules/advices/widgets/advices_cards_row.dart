@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:lines/data/models/advices_article.dart';
 
 import '../../../core/app_theme.dart';
+
+import '../../../data/models/advices_category.dart';
 import 'advice_card.dart';
 
 class AdvicesCardsRow extends StatelessWidget {
   final bool withBorder;
   final List<AdvicesArticle> articles;
+  final List<AdvicesCategory> categories;
+  final Function(AdvicesArticle, AdvicesCategory)? onCardTapped;
 
   const AdvicesCardsRow({
-    super.key,
+    this.onCardTapped,
     this.withBorder = false,
     required this.articles,
+    required this.categories,
+    super.key,
   });
 
   @override
@@ -26,9 +32,24 @@ class AdvicesCardsRow extends StatelessWidget {
         return ThemeSizedBox.width8;
       },
       itemBuilder: (context, index) {
+        int indexOfCategory = categories.indexOf(
+          articles[index].getParentCategoryWithoutTitle,
+        );
         return SizedBox(
           width: 150,
-          child: _adviceCard(articles[index]),
+          child: InkWell(
+            onTap: () {
+              if (onCardTapped != null) {
+                onCardTapped!(
+                  articles[index],
+                  categories[indexOfCategory],
+                );
+              }
+            },
+            child: _adviceCard(
+              articles[index],
+            ),
+          ),
         );
       },
     );

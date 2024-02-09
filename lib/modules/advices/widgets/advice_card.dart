@@ -62,47 +62,51 @@ class AdviceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: imageUrl == null ? ThemeColor.primary : Colors.transparent,
-        image: imageUrl != null && imageUrl!.isNotEmpty
-            ? DecorationImage(
-                image: NetworkImage(imageUrl!),
-                fit: BoxFit.cover,
-              )
-            : null,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20),
-        ),
-        border: hasBorder
-            ? Border.all(
-                width: 4,
-                color: Colors.white,
-              )
-            : null,
-      ),
-      padding: const EdgeInsets.only(
-        top: 8,
-        bottom: 16,
-        left: 8,
-        right: 8,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _categoryIcon,
-              _topCenterWidget,
-              AdviceCardSaveButton(
-                isSaved: isSaved,
-                onTap: onSaveTap,
-              ),
-            ],
+    return InkWell(
+      child: Container(
+        decoration: BoxDecoration(
+          color: imageUrl == null ? ThemeColor.primary : Colors.transparent,
+          image: imageUrl != null && imageUrl!.isNotEmpty
+              ? DecorationImage(
+                  image: NetworkImage(
+                    imageUrl!,
+                  ),
+                  fit: BoxFit.cover,
+                )
+              : null,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
           ),
-          _bottomSection(context)
-        ],
+          border: hasBorder
+              ? Border.all(
+                  width: 4,
+                  color: Colors.white,
+                )
+              : null,
+        ),
+        padding: const EdgeInsets.only(
+          top: 8,
+          bottom: 16,
+          left: 8,
+          right: 8,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _categoryIcon,
+                _topCenterWidget,
+                AdviceCardSaveButton(
+                  isSaved: isSaved,
+                  onTap: onSaveTap,
+                ),
+              ],
+            ),
+            _bottomSection(context)
+          ],
+        ),
       ),
     );
   }

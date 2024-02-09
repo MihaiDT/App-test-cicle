@@ -12,7 +12,7 @@ class AdvicesArticle {
   late final String? shortDescription;
   late final String? text;
   late final String? thumbImageUrl;
-  late final String? videoImagePreview;
+  late final String? videoImagePreviewUrl;
   late final String? videoUrl;
 
   AdvicesArticle.textType({
@@ -28,7 +28,7 @@ class AdvicesArticle {
     required this.thumbImageUrl,
   }) {
     videoUrl = null;
-    videoImagePreview = null;
+    videoImagePreviewUrl = null;
     slideshowImageUrls = null;
   }
 
@@ -44,7 +44,7 @@ class AdvicesArticle {
     required this.slideshowImageUrls,
   }) {
     videoUrl = null;
-    videoImagePreview = null;
+    videoImagePreviewUrl = null;
     text = null;
     shortDescription = null;
   }
@@ -57,7 +57,7 @@ class AdvicesArticle {
     required this.disclaimer,
     required this.iconName,
     required this.thumbImageUrl,
-    required this.videoImagePreview,
+    required this.videoImagePreviewUrl,
     required this.videoUrl,
   }) {
     text = null;
@@ -103,7 +103,7 @@ class AdvicesArticle {
           disclaimer: data['disclaimer'],
           iconName: data['icon_name'],
           thumbImageUrl: data['thumb_image_url'],
-          videoImagePreview: data['video_image_preview'],
+          videoImagePreviewUrl: data['video_image_preview_url'],
           videoUrl: data['video_url'],
         );
     }
@@ -137,8 +137,8 @@ class AdvicesArticle {
     if (thumbImageUrl != null) {
       json['thumbImageUrl'] = thumbImageUrl;
     }
-    if (videoImagePreview != null) {
-      json['videoImagePreview'] = videoImagePreview;
+    if (videoImagePreviewUrl != null) {
+      json['videoImagePreview'] = videoImagePreviewUrl;
     }
     if (videoUrl != null) {
       json['videoUrl'] = videoUrl;

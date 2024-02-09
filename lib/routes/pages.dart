@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/advices/advices_detail_page.dart';
+import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
@@ -266,6 +268,18 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const ContentLibraryPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    ///ArticleDetailPage
+    GetPage(
+      name: Routes.articleDetailPage,
+      bindings: [
+        AdvicesDetailBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const AdvicesDetailPage(),
       ),
       transition: Transition.fade,
     ),

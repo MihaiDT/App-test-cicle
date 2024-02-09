@@ -58,6 +58,7 @@ class ContentLibraryCategoryTabRows extends StatelessWidget {
               child: SizedBox(
                 height: 220,
                 child: AdvicesCardsRow(
+                  categories: allCategoriesWithArticles.keys.toList(),
                   articles: allArticlesForCategory,
                 ),
               ),

@@ -72,8 +72,10 @@ class ContentLibrarySearchPage
                                 ),
                               ),
                               isDense: true,
-                              contentPadding:
-                                  const EdgeInsets.only(left: 20, right: 20),
+                              contentPadding: const EdgeInsets.only(
+                                left: 20,
+                                right: 20,
+                              ),
                               filled: true,
                               fillColor: textFieldFillColor,
                               hintText: 'Cerca tra i contenuti',
