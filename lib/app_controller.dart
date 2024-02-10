@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/models/calendar_day_view_model.dart';
+import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/db_calendar_day_dto_map.dart';
 import 'package:lines/data/models/question.dart';
@@ -46,6 +47,7 @@ class AppController extends GetxController {
 
   final SocialLoginParameter socialLoginParameter;
 
+  final EasyGetter<CurrentPeriod> currentPeriod;
   final EasyGetter<PeriodMap> periodMap;
   final EasyGetter<CalendarDayDTOMap> calendarDayDTOMap;
   final EasyGetter<CalendarDayViewModel> calendarDayViewModel;
@@ -64,6 +66,7 @@ class AppController extends GetxController {
     required this.registerParameter,
     required this.updateUserParameters,
     required this.socialLoginParameter,
+    required this.currentPeriod,
     required this.periodMap,
     required this.calendarDayDTOMap,
     required this.dbCalendarDayDtoMap,
@@ -83,6 +86,7 @@ class AppController extends GetxController {
       settings: EasyGetter<Settings>(),
       survey: EasyGetter<Survey>(),
       checkEmail: EasyGetter<CheckEmail>(),
+      currentPeriod: EasyGetter<CurrentPeriod>(),
       registerParameter: RegistrationParameters.initial(),
       updateUserParameters: UpdateUserParameters.initial(),
       socialLoginParameter: SocialLoginParameter.initial(),
