@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar_shimmer.dart';
+import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar_shimmer.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/welcome_quiz_section.dart';
 
 import '../../core/app_theme.dart';
 import 'home_controller.dart';
-import 'widgets/home_circular_period_calendar.dart';
-import 'widgets/home_horizontal_period_calendar.dart';
+import 'widgets/circular_period/home_circular_period_calendar.dart';
+import 'widgets/horizontal_calendar/home_horizontal_calendar.dart';
 import 'widgets/home_period_info.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -16,11 +19,21 @@ class HomePage extends GetView<HomeController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const HomeHorizontalPeriodCalendar(),
-        ThemeSizedBox.height24,
-        HomeCircularPeriodCalendar(),
+        Obx(
+          () => appController.currentPeriod.responseHandler.isPending
+              ? const HomeHorizontalCalendarShimmer()
+              : const HomeHorizontalCalendar(),
+        ),
+        Obx(
+          () => appController.currentPeriod.responseHandler.isPending
+              ? const HomeCircularPeriodCalendarShimmer()
+              : HomeCircularPeriodCalendar(),
+        ),
         ThemeSizedBox.height32,
-        const HomePeriodInfo(),
+        Obx(
+          () =>
+              appController.currentPeriod.responseHandler.isPending ? const SizedBox.shrink() : const HomePeriodInfo(),
+        ),
         ThemeSizedBox.height32,
         const WelcomeQuizSection(),
       ],

@@ -27,14 +27,12 @@ class CalendarDaySelectMultipleWidget extends StatelessWidget {
           BodyLarge(
             text,
             textAlign: TextAlign.center,
-            fontWeight: isToday
-                ? NewThemeTextStyle.weightExtraBold
-                : NewThemeTextStyle.weightMedium,
+            fontWeight: isToday ? NewThemeTextStyle.weightExtraBold : NewThemeTextStyle.weightMedium,
           ).applyShaders(context),
           isSelected
               ? CircleAvatar(
                   radius: 7,
-                  backgroundColor: ThemeColor.cicloColor,
+                  backgroundColor: ThemeColor.menstruationColor,
                   child: Padding(
                     padding: const EdgeInsets.all(
                       1.0,

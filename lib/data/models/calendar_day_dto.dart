@@ -19,13 +19,13 @@ class CalendarDayDTO {
     switch (periodStatus.periodPhase) {
       case PeriodPhase.menstruation:
         return CalendarDayDTO(
-          bgColor: ThemeColor.cicloColor,
+          bgColor: ThemeColor.menstruationColor,
           isReal: periodStatus.real,
           symptoms: [],
         );
       case PeriodPhase.ovulation:
         return CalendarDayDTO(
-          bgColor: ThemeColor.ovulazioneColor,
+          bgColor: ThemeColor.ovulationColor,
           isReal: periodStatus.real,
           symptoms: [],
         );

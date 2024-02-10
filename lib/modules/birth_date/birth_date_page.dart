@@ -145,7 +145,7 @@ class BirthDatePage extends GetView<BirthDateController> {
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: BodyMedium(
                             controller.errorList.elementAt(index).value,
-                            color: ThemeColor.cicloColor,
+                            color: ThemeColor.menstruationColor,
                           ),
                         );
                       },

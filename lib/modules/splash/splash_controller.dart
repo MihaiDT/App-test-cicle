@@ -6,6 +6,7 @@ import 'package:lines/repository/settings_service.dart';
 
 import '../../modules/welcome/welcome_controller.dart';
 import '../../modules/welcome/welcome_page.dart';
+import '../../routes/routes.dart';
 
 class SplashPageController extends GetxController {
   @override
@@ -22,13 +23,12 @@ class SplashPageController extends GetxController {
     // Navigazione manuale verso la WelcomePage per gestire correttamente l'animazione
     Navigator.of(Get.context!).push(
       PageRouteBuilder(
-        pageBuilder: (BuildContext context, Animation<double> animation,
-            Animation<double> secondaryAnimation) {
+        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
           Get.put(WelcomeController());
           return const WelcomePage();
         },
-        transitionsBuilder: (BuildContext context, Animation<double> animation,
-            Animation<double> secondaryAnimation, Widget child) {
+        transitionsBuilder:
+            (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
           return Align(
             child: FadeTransition(
               opacity: animation,
@@ -42,9 +42,10 @@ class SplashPageController extends GetxController {
   }
 
   _startAnimation() async {
-    if (appController.settings.responseHandler.isSuccessful) {
-      await wait(seconds: 1);
-      _pageTransition();
-    }
+    // if (appController.settings.responseHandler.isSuccessful) {
+    //   await wait(seconds: 1);
+    //   _pageTransition();
+    // }
+    Get.toNamed(Routes.main);
   }
 }

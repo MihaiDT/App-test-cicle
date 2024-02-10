@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/app_theme.dart';
+import '../../routes/routes.dart';
 import '../../widgets/layouts/app_scaffold_page.dart';
 import '../../widgets/logos/hero_logo.dart';
 import 'splash_controller.dart';
@@ -17,8 +18,11 @@ class SplashPage extends GetView<SplashPageController> {
       backgroundImage: ThemeDecoration.images.bgDark,
       scrollController: ScrollController(),
       body: Center(
-        child: HeroLogo(
-          size: heroLogoWidth,
+        child: InkWell(
+          onTap: () => Get.toNamed(Routes.main),
+          child: HeroLogo(
+            size: heroLogoWidth,
+          ),
         ),
       ),
     );

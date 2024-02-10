@@ -85,12 +85,9 @@ class InputTextField extends StatelessWidget {
           maxLines: multiline ? 5 : 1,
           obscureText: obscureText,
           onChanged: (value) => onChanged != null ? onChanged!(value) : {},
-          onEditingComplete: () =>
-              onEditingComplete != null ? onEditingComplete!() : {},
-          scrollPadding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom + 20),
-          textCapitalization:
-              textCapitalization ?? TextCapitalization.sentences,
+          onEditingComplete: () => onEditingComplete != null ? onEditingComplete!() : {},
+          scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + 20),
+          textCapitalization: textCapitalization ?? TextCapitalization.sentences,
           textInputAction: textInputAction,
           textAlignVertical: TextAlignVertical.center,
         ),
@@ -124,7 +121,7 @@ class InputTextField extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: BodyMedium(
               errorMessage,
-              color: ThemeColor.cicloColor,
+              color: ThemeColor.menstruationColor,
             ),
           ),
         ),

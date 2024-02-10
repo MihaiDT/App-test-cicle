@@ -1,38 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
-import '../../../core/app_theme.dart';
-import '../../../core/utils/helpers.dart';
-import '../home_controller.dart';
+import '../../../../core/app_theme.dart';
+import '../../../../core/utils/helpers.dart';
+import '../../home_controller.dart';
 
-class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
-  const HomeHorizontalPeriodCalendar({super.key});
+class HomeHorizontalCalendar extends GetView<HomeController> {
+  const HomeHorizontalCalendar({super.key});
 
-  String get _selectedDateFormatYMD => dateFormatYMD
-      .format(controller.dates[controller.periodSelectedDateIndex]);
+  String get _selectedDateFormatYMD =>
+      controller.currentPeriodDatesMap.keys.toList()[controller.periodSelectedDateIndex];
 
   double get _cellWidth => Get.width / 7;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 64,
+    final dateKeys = controller.currentPeriodDatesMap.keys.toList();
+
+    return Container(
+      clipBehavior: Clip.none,
+      height: 90,
       width: Get.width,
-      child: ScrollSnapList(
-        key: controller.scrollSnapListKey,
-        dynamicItemSize: false,
-        focusOnItemTap: true,
-        initialIndex: (7 * 3) + 2,
-        itemBuilder: _buildListItem,
-        itemCount: 7 * 7,
-        // 7 days * 7 weeks
-        itemSize: Get.width / 7,
-        // Dimensione singolo giorno del calendario
-        onItemFocus: controller.horizontalCalendarOnItemFocus,
-        updateOnScroll: false,
-        shrinkWrap: true,
+      child: Stack(
+        children: [
+          ScrollSnapList(
+            key: controller.scrollSnapListKey,
+            dynamicItemSize: false,
+            focusOnItemTap: true,
+            initialIndex: controller.periodSelectedDateIndex.toDouble(),
+            itemBuilder: _buildListItem,
+            itemCount: dateKeys.length,
+            // 7 days * 7 weeks
+            itemSize: Get.width / 7,
+            // Dimensione singolo giorno del calendario
+            onItemFocus: (index) => controller.periodSelectedDateIndex = index,
+            updateOnScroll: false,
+            shrinkWrap: true,
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  ThemeIcon.horizontalCalendarMagnifier,
+                  fit: BoxFit.contain,
+                  height: 90,
+                  width: Get.width / 7,
+                ),
+                height: 90,
+                width: Get.width / 7,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -44,15 +68,19 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
       width: _cellWidth,
       child: Center(
         child: Obx(
-          () => _dayFromDate(date: controller.dates[index], index: index),
+          () => _dayFromDate(
+            formattedDateYMD: controller.currentPeriodDatesMap.keys.toList()[index],
+            index: index,
+          ),
         ),
       ),
+
+      //
     );
   }
 
-  Widget _dayFromDate({required DateTime date, required int index}) {
-    final formattedDateYMD = dateFormatYMD.format(date);
-
+  Widget _dayFromDate({required String formattedDateYMD, required int index}) {
+    final DateTime date = dateFormatYMD.parse(formattedDateYMD);
     final DateTime now = DateTime.now();
     final formattedNowYMD = dateFormatYMD.format(now);
 
@@ -63,9 +91,7 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
       children.addAll(
         [
           Text(
-            formattedNowYMD == formattedDateYMD
-                ? 'OGGI'
-                : _weekDayFromDate(date),
+            formattedNowYMD == formattedDateYMD ? 'OGGI' : _weekDayFromDate(date),
             style: const TextStyle(
               color: Color(0xffB438B2),
               fontSize: 15,
@@ -74,11 +100,7 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
             ),
           ),
           ThemeSizedBox.height4,
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32),
-              gradient: ThemeGradient.primary,
-            ),
+          SizedBox(
             height: 32,
             width: 32,
             child: Center(
@@ -86,6 +108,7 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
                 padding: const EdgeInsets.only(bottom: 2.0),
                 child: HeadlineMedium(
                   "${date.day}",
+                  color: ThemeColor.primary,
                   fontWeight: NewThemeTextStyle.weightExtraBold,
                   textAlign: TextAlign.center,
                 ),
@@ -98,9 +121,7 @@ class HomeHorizontalPeriodCalendar extends GetView<HomeController> {
       children.addAll(
         [
           BodyLarge(
-            formattedNowYMD == formattedDateYMD
-                ? 'OGGI'
-                : _weekDayFromDate(date),
+            formattedNowYMD == formattedDateYMD ? 'OGGI' : _weekDayFromDate(date),
             color: const Color(0xffB438B2),
             fontWeight: NewThemeTextStyle.weightMedium,
           ),

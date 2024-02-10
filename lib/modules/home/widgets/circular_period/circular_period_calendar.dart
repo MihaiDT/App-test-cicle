@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/modules/home/widgets/home_circular_period_circular_calendar.dart';
+import 'package:lines/modules/home/home_controller.dart';
+import 'package:lines/modules/home/widgets/circular_period/circular_calendar.dart';
+
+
 import 'package:lines/widgets/buttons/secondary_button.dart';
 
-import '../../../core/app_theme.dart';
-import '../../../widgets/layouts/app_scaffold_padding.dart';
-import '../home_controller.dart';
+import '../../../../core/app_theme.dart';
+import '../../../../widgets/layouts/app_scaffold_padding.dart';
 
-class HomeCircularPeriodCalendar extends GetView<HomeController> {
+class CircularPeriodCalendar extends GetView<HomeController> {
   final size = Get.width * 0.74;
 
-  HomeCircularPeriodCalendar({super.key});
+  CircularPeriodCalendar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
             child: SizedBox(
               height: size,
               width: size,
-              child: const HomeCircularPeriodCircularCalendar(),
+              child: const CircularCalendar(),
             ),
           ),
           _avatarContainer,

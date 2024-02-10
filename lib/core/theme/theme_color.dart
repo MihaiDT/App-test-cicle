@@ -11,8 +11,7 @@ class ThemeColor {
   static const Color brightPink = Color(0xffB438B2);
   static const Color buttonDisableBackGround = Color(0xffdbd7eb);
   static Color buttonJumpToMonth = const Color(0xffead6e9);
-  static Color ovulazioneColor = const Color(0xff6dadd0);
-  static Color cicloColor = const Color(0xffc62f3a);
+
   static Color primaryOpaque = primary.withOpacity(0.1);
   static Color opaqueWhite = Colors.white.withOpacity(0.3);
   static Color lightGrey = const Color(0xFF75797F);
@@ -24,4 +23,10 @@ class ThemeColor {
   static Color alimentazioneColor = const Color(0xffdea476);
   static Color benessereEmotivoColor = const Color(0xff78d3c7);
   static Color linesAlTuoFiancoColor = const Color(0xffde7676);
+
+  static Color ovulationColor = const Color(0xff6dadd0);
+  static Color follicularColor = const Color(0xff70b873);
+  static Color lutealColor = const Color(0xffdc874a);
+  static Color menstruationColor = const Color(0xffc62f3a);
+  static Color defaultPeriodColor = const Color(0xffb4acba);
 }

@@ -55,7 +55,7 @@ InputDecoration textFieldDefaultDecoration(
     errorText: null,
     //  Gestisco a mano l'errore
     floatingLabelBehavior: FloatingLabelBehavior.never,
-    fillColor: ThemeColor.cicloColor,
+    fillColor: ThemeColor.menstruationColor,
     focusedBorder: focusedOutlineInputBorder,
     focusedErrorBorder: errorOutlineInputBorder,
     focusColor: ThemeColor.whiteDark,
@@ -75,7 +75,7 @@ InputDecoration textFieldDefaultDecoration(
               backgroundColor: Colors.white,
               child: SvgPicture.asset(
                 ThemeIcon.close,
-                color: ThemeColor.cicloColor,
+                color: ThemeColor.menstruationColor,
                 height: 12,
               ),
             ),
