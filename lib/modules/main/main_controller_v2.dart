@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:lines/modules/advices/advices_controller.dart';
+import 'package:lines/modules/advices/controllers/advices_controller.dart';
 
 import '../home/home_controller.dart';
 

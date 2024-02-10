@@ -1,57 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/advices_category.dart';
-import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:get/get.dart';
 
-import '../../../data/models/advices_article.dart';
+import '../../../core/app_theme.dart';
+import '../../../data/models/advices_category.dart';
+import '../../../widgets/layouts/app_scaffold_page.dart';
+import '../controllers/advices_detail_controller.dart';
 
-class AdvicesTextArticleDetails extends StatefulWidget {
-  final AdvicesArticle article;
-  final AdvicesCategory category;
-
+class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
   const AdvicesTextArticleDetails({
-    required this.article,
     super.key,
-    required this.category,
   });
-
-
-
-  @override
-  State<AdvicesTextArticleDetails> createState() =>
-      _AdvicesTextArticleDetailsState();
-}
-
-class _AdvicesTextArticleDetailsState extends State<AdvicesTextArticleDetails> {
-  final ScrollController _scrollController = ScrollController();
-  double _proportion = 0;
-
 
   static const Color _dividerColor = Color(0x194b399c);
   static const Color _disclaimerColor = Color(0x7f1f2d4f);
 
   @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(() {
-      _proportion = _scrollController.offset /
-          _scrollController.position.viewportDimension;
-      setState(() {});
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    AdvicesCategory categoryFromArticle = AdvicesCategory.fromIconName(
-      widget.article.iconName,
-    );
-
+    AdvicesCategory? category = controller.category;
     return AppScaffoldPage(
       backgroundColor: Colors.white,
       body: CustomScrollView(
-        controller: _scrollController,
+        controller: controller.scrollController,
         slivers: [
           _appBar(context),
           SliverPadding(
@@ -63,26 +34,27 @@ class _AdvicesTextArticleDetailsState extends State<AdvicesTextArticleDetails> {
                 <Widget>[
                   ThemeSizedBox.height32,
                   CircleAvatar(
-                    backgroundColor: categoryFromArticle.categoryColor,
+                    backgroundColor:
+                        category?.categoryColor ?? Colors.transparent,
                     child: SvgPicture.asset(
-                      categoryFromArticle.iconPath,
+                      category?.iconPath ?? "",
                       color: Colors.white,
                     ),
                   ),
                   ThemeSizedBox.height8,
                   TitleMedium(
-                    widget.category.categoryTitle?.toUpperCase() ?? "",
+                    category?.categoryTitle?.toUpperCase() ?? "",
                     color: ThemeColor.darkBlue,
                     textAlign: TextAlign.center,
                   ),
                   ThemeSizedBox.height4,
                   DisplayMedium(
-                    widget.article.title,
+                    controller.article?.title ?? "",
                     textAlign: TextAlign.center,
                   ).applyShaders(context),
                   ThemeSizedBox.height16,
                   BodyLarge(
-                    widget.article.shortDescription ?? "",
+                    controller.article?.shortDescription ?? "",
                     color: ThemeColor.darkBlue,
                     textAlign: TextAlign.center,
                     fontWeight: FontWeight.w500,
@@ -93,11 +65,11 @@ class _AdvicesTextArticleDetailsState extends State<AdvicesTextArticleDetails> {
                   ),
                   ThemeSizedBox.height48,
                   Html(
-                    data: widget.article.text,
+                    data: controller.article?.text,
                   ),
                   ThemeSizedBox.height48,
                   LabelLarge(
-                    widget.article.disclaimer ?? "",
+                    controller.article?.disclaimer ?? "",
                     color: _disclaimerColor,
                     fontWeight: FontWeight.w500,
                   ),
@@ -113,7 +85,7 @@ class _AdvicesTextArticleDetailsState extends State<AdvicesTextArticleDetails> {
 
   Widget _appBar(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: widget.category.categoryColor,
+      backgroundColor: controller.category?.categoryColor,
       elevation: 0,
       leading: InkWell(
         onTap: () {
@@ -132,15 +104,19 @@ class _AdvicesTextArticleDetailsState extends State<AdvicesTextArticleDetails> {
       snap: false,
       flexibleSpace: Stack(
         children: [
-          Visibility(
-            visible: widget.article.thumbImageUrl?.isNotEmpty == true,
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 500),
-              opacity: _proportion <= 0.40 ? 1.0 : 0.0,
-              child: Image.network(
-                widget.article.thumbImageUrl!,
-                fit: BoxFit.cover,
-                width: double.maxFinite,
+          Obx(
+            () => Visibility(
+              visible: controller.article?.thumbImageUrl?.isNotEmpty == true,
+              child: AnimatedOpacity(
+                duration: const Duration(
+                  milliseconds: 500,
+                ),
+                opacity: controller.proportion.value <= 0.40 ? 1.0 : 0.0,
+                child: Image.network(
+                  controller.article!.thumbImageUrl!,
+                  fit: BoxFit.cover,
+                  width: double.maxFinite,
+                ),
               ),
             ),
           ),
