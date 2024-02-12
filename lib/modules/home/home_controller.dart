@@ -69,6 +69,6 @@ class HomeController extends AppScaffoldController {
 
     periodSelectedDateIndex = currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
     periodSelectedDateIndex =
-        periodSelectedDateIndex < 0 ? currentPeriodDatesMap.keys.toList().length : periodSelectedDateIndex - 1;
+        periodSelectedDateIndex < 0 ? currentPeriodDatesMap.keys.toList().length : periodSelectedDateIndex;
   }
 }

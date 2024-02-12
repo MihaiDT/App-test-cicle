@@ -5,7 +5,7 @@ class StagingEnv extends Environment {
   String get apiEndpoint => "https://ceb5-95-228-125-157.ngrok-free.app";
 
   @override
-  bool get enableProxyman => true;
+  bool get enableProxyman => false;
 
   @override
   String get proxy => '192.168.2.61';

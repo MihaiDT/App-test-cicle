@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/home/widgets/home_period_info/home_period_menstruation_card.dart';
+import 'package:lines/modules/home/widgets/home_period_info/home_period_ovulation_card.dart';
+import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 
-import '../../../core/app_theme.dart';
-import '../../../core/utils/helpers.dart';
-import '../../../widgets/layouts/app_scaffold_padding.dart';
-import '../home_controller.dart';
+import '../../home_controller.dart';
 
 class HomePeriodInfo extends GetView<HomeController> {
   const HomePeriodInfo({super.key});
@@ -28,13 +30,30 @@ class HomePeriodInfo extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Obx(
-                // () => Text(
-                //   _label(controller.selectedDate),
-                //   style: ThemeTextStyle.boldSmallDark,
-                // ),
                 () => TitleMedium(
                   _label(controller.selectedDate),
                   color: ThemeColor.darkBlue,
+                ),
+              ),
+            ],
+          ),
+          ThemeSizedBox.height8,
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: HomePeriodMenstruationCard(
+                  textRow1: appController.currentPeriod.value?.menstruationInfo[0],
+                  textRow2: appController.currentPeriod.value?.menstruationInfo[1],
+                  textRow3: appController.currentPeriod.value?.menstruationInfo[2],
+                ),
+              ),
+              ThemeSizedBox.width8,
+              Expanded(
+                child: HomePeriodOvulationCard(
+                  textRow1: appController.currentPeriod.value?.ovulationInfo[0],
+                  textRow2: appController.currentPeriod.value?.ovulationInfo[1],
+                  textRow3: appController.currentPeriod.value?.ovulationInfo[2],
                 ),
               ),
             ],

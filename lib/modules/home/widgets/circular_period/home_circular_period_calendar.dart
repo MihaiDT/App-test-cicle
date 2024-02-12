@@ -7,9 +7,9 @@ import '../../../../core/app_theme.dart';
 import '../../home_controller.dart';
 
 class HomeCircularPeriodCalendar extends GetView<HomeController> {
-  final size = Get.width * 0.74;
+  static final size = Get.width * 0.74;
 
-  HomeCircularPeriodCalendar({super.key});
+  const HomeCircularPeriodCalendar({super.key});
 
   @override
   Widget build(BuildContext context) {

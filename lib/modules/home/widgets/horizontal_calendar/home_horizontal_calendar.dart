@@ -92,43 +92,28 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
         [
           Text(
             formattedNowYMD == formattedDateYMD ? 'OGGI' : _weekDayFromDate(date),
-            style: const TextStyle(
-              color: Color(0xffB438B2),
-              fontSize: 15,
-              fontWeight: FontWeight.w900,
-              height: 1.4,
-            ),
+            style: NewThemeTextStyle.horizontalCalendarWDayToday,
+            textAlign: TextAlign.center,
           ),
-          ThemeSizedBox.height4,
-          SizedBox(
-            height: 32,
-            width: 32,
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 2.0),
-                child: HeadlineMedium(
-                  "${date.day}",
-                  color: ThemeColor.primary,
-                  fontWeight: NewThemeTextStyle.weightExtraBold,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
+          Text(
+            "${date.day}",
+            style: NewThemeTextStyle.horizontalCalendarDateToday,
+            textAlign: TextAlign.center,
           ),
         ],
       );
     } else {
       children.addAll(
         [
-          BodyLarge(
+          Text(
             formattedNowYMD == formattedDateYMD ? 'OGGI' : _weekDayFromDate(date),
-            color: const Color(0xffB438B2),
-            fontWeight: NewThemeTextStyle.weightMedium,
+            style: NewThemeTextStyle.horizontalCalendarWDay,
+            textAlign: TextAlign.center,
           ),
-          BodyLarge(
+          Text(
             "${date.day}",
-            color: ThemeColor.primary,
-            fontWeight: NewThemeTextStyle.weightMedium,
+            style: NewThemeTextStyle.horizontalCalendarDate,
+            textAlign: TextAlign.center,
           ),
         ],
       );

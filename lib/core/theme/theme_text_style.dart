@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lines/core/theme/theme_color.dart';
 
 class NewThemeTextStyle {
   static const weightRegular = FontWeight.w400;
@@ -104,7 +105,7 @@ class NewThemeTextStyle {
   static const TextStyle calendarWeekDay = TextStyle(
     color: Colors.white,
     fontSize: 14.5,
-    fontWeight: NewThemeTextStyle.weightMedium,
+    fontWeight: weightMedium,
     height: 1.4,
   );
 
@@ -113,5 +114,27 @@ class NewThemeTextStyle {
     fontSize: 14.5,
     fontWeight: weightSemibold,
     height: 1.4,
+  );
+  static TextStyle horizontalCalendarWDay = const TextStyle(
+    color: Color(0xffB438B2),
+    fontSize: 13,
+    fontWeight: weightMedium,
+    height: 1.4,
+  );
+
+  static TextStyle horizontalCalendarWDayToday = horizontalCalendarWDay.copyWith(
+    fontWeight: weightExtraBold,
+  );
+
+  static TextStyle horizontalCalendarDate = const TextStyle(
+    color: ThemeColor.primary,
+    fontSize: 16,
+    fontWeight: weightMedium,
+    height: 1.4,
+  );
+
+  static TextStyle horizontalCalendarDateToday = horizontalCalendarDate.copyWith(
+    fontSize: 20,
+    fontWeight: weightExtraBold,
   );
 }
