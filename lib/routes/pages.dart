@@ -6,6 +6,9 @@ import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
+import 'package:lines/modules/drawer/binding/account_binding.dart';
+import 'package:lines/modules/drawer/pages/account_page.dart';
+import 'package:lines/modules/drawer/pages/faq_page.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_quiz_card_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
@@ -241,6 +244,7 @@ class Pages {
       bindings: [
         MainBindingV2(),
         WelcomeQuizCardBinding(),
+        AccountBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const MainPageV2(),
@@ -268,6 +272,24 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const ContentLibraryPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    ///FaqPage
+    GetPage(
+      name: Routes.faq,
+      page: () => _mediaQueryWrapper(
+        const FaqPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    ///AccountPage
+    GetPage(
+      name: Routes.account,
+      page: () => _mediaQueryWrapper(
+        const AccountPage(),
       ),
       transition: Transition.fade,
     ),

@@ -5,8 +5,6 @@ import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/controllers/advices_detail_store.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../core/utils/singletons.dart';
-
 class AdvicesDetailController extends GetxController {
   AdvicesDetailStore advicesDetailStore = Get.put(
     AdvicesDetailStore(),

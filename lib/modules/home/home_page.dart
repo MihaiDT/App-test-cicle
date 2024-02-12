@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/home/widgets/header_section.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/welcome_quiz_section.dart';
 
 import '../../core/app_theme.dart';
@@ -13,17 +14,21 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const HomeHorizontalPeriodCalendar(),
-        ThemeSizedBox.height24,
-        HomeCircularPeriodCalendar(),
-        ThemeSizedBox.height32,
-        const HomePeriodInfo(),
-        ThemeSizedBox.height32,
-        const WelcomeQuizSection(),
-      ],
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const HeaderSection(),
+          ThemeSizedBox.height16,
+          const HomeHorizontalPeriodCalendar(),
+          ThemeSizedBox.height24,
+          HomeCircularPeriodCalendar(),
+          ThemeSizedBox.height32,
+          const HomePeriodInfo(),
+          ThemeSizedBox.height32,
+          const WelcomeQuizSection(),
+        ],
+      ),
     );
   }
 }
