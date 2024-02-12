@@ -106,9 +106,9 @@ class ContentLibrarySearchPage
                       ThemeSizedBox.width16,
                       InkWell(
                         onTap: () {
-                          if(controller.showResults){
+                          if (controller.showResults) {
                             controller.onTextFieldClearTapped();
-                          }else{
+                          } else {
                             Navigator.pop(context);
                           }
                         },
