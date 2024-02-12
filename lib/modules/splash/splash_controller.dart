@@ -42,10 +42,9 @@ class SplashPageController extends GetxController {
   }
 
   _startAnimation() async {
-    // if (appController.settings.responseHandler.isSuccessful) {
-    //   await wait(seconds: 1);
-    //   _pageTransition();
-    // }
-    Get.toNamed(Routes.main);
+    if (appController.settings.responseHandler.isSuccessful) {
+      await wait(seconds: 1);
+      _pageTransition();
+    }
   }
 }
