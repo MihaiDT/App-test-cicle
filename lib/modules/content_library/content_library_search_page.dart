@@ -106,7 +106,11 @@ class ContentLibrarySearchPage
                       ThemeSizedBox.width16,
                       InkWell(
                         onTap: () {
-                          Navigator.pop(context);
+                          if (controller.showResults) {
+                            controller.onTextFieldClearTapped();
+                          } else {
+                            Navigator.pop(context);
+                          }
                         },
                         child: const BodyMedium(
                           'Annulla',

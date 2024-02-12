@@ -18,9 +18,10 @@ class HomePeriodInfo extends GetView<HomeController> {
   Widget build(BuildContext context) {
     initializeDateFormatting();
 
-    return AppScaffoldPadding(
-      bottom: 0,
-      top: 0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: ThemeSize.paddingSmall,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -60,7 +61,7 @@ class HomePeriodInfo extends GetView<HomeController> {
           ),
         ],
       ),
-    ).padding(context);
+    );
   }
 
   /// Private method

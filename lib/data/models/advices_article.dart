@@ -1,7 +1,8 @@
 import 'package:lines/data/models/advices_category.dart';
 
 class AdvicesArticle {
-  final String articleCategoryId;
+  final String categoryName;
+  final String subCategoryName;
   final int id;
   final ArticleType typology;
   final String title;
@@ -16,7 +17,8 @@ class AdvicesArticle {
   late final String? videoUrl;
 
   AdvicesArticle.textType({
-    required this.articleCategoryId,
+    required this.categoryName,
+    required this.subCategoryName,
     required this.id,
     required this.typology,
     required this.title,
@@ -33,7 +35,8 @@ class AdvicesArticle {
   }
 
   AdvicesArticle.sliderType({
-    required this.articleCategoryId,
+    required this.categoryName,
+    required this.subCategoryName,
     required this.id,
     required this.typology,
     required this.title,
@@ -50,7 +53,8 @@ class AdvicesArticle {
   }
 
   AdvicesArticle.videoType({
-    required this.articleCategoryId,
+    required this.categoryName,
+    required this.subCategoryName,
     required this.id,
     required this.typology,
     required this.title,
@@ -71,7 +75,8 @@ class AdvicesArticle {
     switch (articleType) {
       case ArticleType.text:
         return AdvicesArticle.textType(
-          articleCategoryId: data['article_category_id'],
+          categoryName: data['article_macro_category']['name'],
+          subCategoryName: data['article_category']['name'],
           id: data['id'],
           typology: articleType,
           title: data['title'],
@@ -84,7 +89,8 @@ class AdvicesArticle {
         );
       case ArticleType.slider:
         return AdvicesArticle.sliderType(
-          articleCategoryId: data['article_category_id'],
+          categoryName: data['article_macro_category']['name'],
+          subCategoryName: data['article_category']['name'],
           id: data['id'],
           typology: articleType,
           title: data['title'],
@@ -96,7 +102,8 @@ class AdvicesArticle {
         );
       case ArticleType.video:
         return AdvicesArticle.videoType(
-          articleCategoryId: data['article_category_id'],
+          categoryName: data['article_macro_category']['name'],
+          subCategoryName: data['article_category']['name'],
           id: data['id'],
           typology: articleType,
           title: data['title'],
@@ -115,7 +122,6 @@ class AdvicesArticle {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {
-      'articleCategoryId': articleCategoryId,
       'id': id,
       'typology': typology.toString().split('.').last,
       'title': title,

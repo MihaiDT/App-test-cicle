@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/advices/advices_page.dart';
+import 'package:lines/modules/drawer/drawer_main_page.dart';
 import 'package:lines/modules/home/home_page.dart';
 import 'package:lines/modules/main/main_controller_v2.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
@@ -13,6 +14,7 @@ class MainPageV2 extends GetView<MainControllerV2> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldPage(
+      drawer: const DrawerMainPage(),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

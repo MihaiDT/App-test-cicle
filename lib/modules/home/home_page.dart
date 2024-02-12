@@ -10,7 +10,6 @@ import 'package:lines/modules/home/widgets/welcome_quiz_section/welcome_quiz_sec
 import '../../core/app_theme.dart';
 import 'home_controller.dart';
 import 'widgets/circular_period/home_circular_period_calendar.dart';
-
 import 'widgets/horizontal_calendar/home_horizontal_calendar.dart';
 
 class HomePage extends GetView<HomeController> {

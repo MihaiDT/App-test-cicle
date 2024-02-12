@@ -141,6 +141,8 @@ class CalendarController extends GetxController {
     super.onInit();
     calendarStore = Get.put(CalendarStore());
     ever(calendarStore.rxSelectedDate, (newDayValue) {
+      showSaveButtonSymptoms = false;
+      showSaveButtonSymptomCategories = false;
       _onDayChanged(newDayValue);
     });
     ever(

@@ -23,56 +23,38 @@ class ContentLibrarySearchPageResults
         childAspectRatio: 0.67,
       ),
       itemBuilder: (context, index) {
-        AdvicesCategory advicesCategory =
-            AdvicesCategory.fromIconName(allArticles[index].iconName);
-        int indexOfCategory = controller.categories.indexOf(advicesCategory);
+        int indexOfCategory = controller.categories.indexOf(
+          AdvicesCategory.fromIconName(
+            allArticles[index].iconName,
+          ),
+        );
+        AdvicesCategory category = controller.categories[indexOfCategory];
 
         switch (allArticles[index].typology) {
           case ArticleType.text:
-            return InkWell(
-              onTap: () {
-                controller.showArticleDetails(
-                  allArticles[index],
-                  controller.categories[indexOfCategory],
-                );
-              },
-              child: AdviceCard(
-                advicesCategory:
-                    allArticles[index].getParentCategoryWithoutTitle,
-                text: allArticles[index].title,
-                imageUrl: allArticles[index].thumbImageUrl,
-              ),
+            return AdviceCard(
+              onCardTap: controller.showArticleDetails,
+              article: allArticles[index],
+              category: category,
+              text: allArticles[index].title,
+              imageUrl: allArticles[index].thumbImageUrl,
             );
           case ArticleType.video:
-            return InkWell(
-              onTap: () {
-                controller.showArticleDetails(
-                  allArticles[index],
-                  controller.categories[indexOfCategory],
-                );
-              },
-              child: AdviceCard.withTimer(
-                timer: "0:00",
-                advicesCategory:
-                    allArticles[index].getParentCategoryWithoutTitle,
-                text: allArticles[index].title,
-                imageUrl: allArticles[index].thumbImageUrl,
-              ),
+            return AdviceCard.withTimer(
+              onCardTap: controller.showArticleDetails,
+              article: allArticles[index],
+              category: category,
+              timer: "0:00",
+              text: allArticles[index].title,
+              imageUrl: allArticles[index].thumbImageUrl,
             );
           case ArticleType.slider:
-            return InkWell(
-              onTap: () {
-                controller.showArticleDetails(
-                  allArticles[index],
-                  controller.categories[indexOfCategory],
-                );
-              },
-              child: AdviceCard.withGallery(
-                advicesCategory:
-                    allArticles[index].getParentCategoryWithoutTitle,
-                text: allArticles[index].title,
-                imageUrl: allArticles[index].thumbImageUrl,
-              ),
+            return AdviceCard.withGallery(
+              onCardTap: controller.showArticleDetails,
+              article: allArticles[index],
+              category: category,
+              text: allArticles[index].title,
+              imageUrl: allArticles[index].thumbImageUrl,
             );
         }
       },

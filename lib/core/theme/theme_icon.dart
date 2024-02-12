@@ -4,11 +4,14 @@ class ThemeIcon {
   static String back = '$folderPath/back.svg';
   static String arrowRight = '$folderPath/arrow_right.svg';
   static String arrowLeft = '$folderPath/arrow_left.svg';
+  static String arrowDown = '$folderPath/arrow_down.svg';
+  static String arrowUp = '$folderPath/arrow_up.svg';
   static String calendar = '$folderPath/calendar.svg';
   static String circularCalendarArrow =
       '$folderPath/circular_calendar_arrow.svg';
   static String drop = '$folderPath/drop.svg';
   static String logo = '$folderPath/logo.svg';
+  static String gradientLogo = '$folderPath/gradient_logo.svg';
   static String menu = '$folderPath/menu.svg';
   static String checkMark = '$folderPath/white_checkmark.svg';
   static String eyeClosed = '$folderPath/eye_closed.svg';
@@ -101,4 +104,9 @@ class ThemeIcon {
   static String share = '$folderPath/saved_empty_gradient.svg';
   static String shareGradient = '$folderPath/share_gradient.svg';
   static String play = '$folderPath/play.svg';
+  static String gift = '$folderPath/gift.svg';
+  static String questionMark = '$folderPath/question_mark.svg';
+  static String user = '$folderPath/user.svg';
+  static String settings = '$folderPath/settings.svg';
+  static String lock = '$folderPath/lock.svg';
 }

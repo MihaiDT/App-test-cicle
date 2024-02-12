@@ -11,6 +11,8 @@ class AppScaffoldPage extends StatelessWidget {
   final DecorationImage? backgroundImage;
   final PreferredSizeWidget? appBar;
   final Widget body;
+
+  final Widget? drawer;
   final bool extendBodyBehindAppBar;
   final ScrollController? scrollController;
 
@@ -21,6 +23,7 @@ class AppScaffoldPage extends StatelessWidget {
     this.backgroundImage,
     this.bottomNavigationBar,
     required this.body,
+    this.drawer,
     this.extendBodyBehindAppBar = false,
     this.scrollController,
   });
@@ -29,6 +32,7 @@ class AppScaffoldPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
+      drawer: drawer,
       bottomNavigationBar: bottomNavigationBar,
       backgroundColor: backgroundColor ?? ThemeColor.background,
       body: _body(context),

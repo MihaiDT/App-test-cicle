@@ -30,4 +30,6 @@ class Routes {
   static const String contentLibrarySearchPage = '/content_library/search_page';
   static const String mainV2 = '/main_v2';
   static const String articleDetailPage = '/articleDetailPage';
+  static const String faq = '/faq';
+  static const String account = '/account';
 }
