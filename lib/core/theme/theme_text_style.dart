@@ -122,7 +122,8 @@ class NewThemeTextStyle {
     height: 1.4,
   );
 
-  static TextStyle horizontalCalendarWDayToday = horizontalCalendarWDay.copyWith(
+  static TextStyle horizontalCalendarWDayToday =
+      horizontalCalendarWDay.copyWith(
     fontWeight: weightExtraBold,
   );
 
@@ -133,7 +134,8 @@ class NewThemeTextStyle {
     height: 1.4,
   );
 
-  static TextStyle horizontalCalendarDateToday = horizontalCalendarDate.copyWith(
+  static TextStyle horizontalCalendarDateToday =
+      horizontalCalendarDate.copyWith(
     fontSize: 20,
     fontWeight: weightExtraBold,
   );

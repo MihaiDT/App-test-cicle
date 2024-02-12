@@ -32,4 +32,6 @@ class Routes {
   static const String articleDetailPage = '/articleDetailPage';
   static const String faq = '/faq';
   static const String account = '/account';
+  static const String contentLibraryCategoryPage =
+      '/content_library/category_page';
 }

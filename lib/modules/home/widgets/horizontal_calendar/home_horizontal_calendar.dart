@@ -12,8 +12,8 @@ import '../../home_controller.dart';
 class HomeHorizontalCalendar extends GetView<HomeController> {
   const HomeHorizontalCalendar({super.key});
 
-  String get _selectedDateFormatYMD =>
-      controller.currentPeriodDatesMap.keys.toList()[controller.periodSelectedDateIndex];
+  String get _selectedDateFormatYMD => controller.currentPeriodDatesMap.keys
+      .toList()[controller.periodSelectedDateIndex];
 
   double get _cellWidth => Get.width / 7;
 
@@ -69,7 +69,8 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
       child: Center(
         child: Obx(
           () => _dayFromDate(
-            formattedDateYMD: controller.currentPeriodDatesMap.keys.toList()[index],
+            formattedDateYMD:
+                controller.currentPeriodDatesMap.keys.toList()[index],
             index: index,
           ),
         ),
@@ -91,7 +92,9 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
       children.addAll(
         [
           Text(
-            formattedNowYMD == formattedDateYMD ? 'OGGI' : _weekDayFromDate(date),
+            formattedNowYMD == formattedDateYMD
+                ? 'OGGI'
+                : _weekDayFromDate(date),
             style: NewThemeTextStyle.horizontalCalendarWDayToday,
             textAlign: TextAlign.center,
           ),
@@ -106,7 +109,9 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
       children.addAll(
         [
           Text(
-            formattedNowYMD == formattedDateYMD ? 'OGGI' : _weekDayFromDate(date),
+            formattedNowYMD == formattedDateYMD
+                ? 'OGGI'
+                : _weekDayFromDate(date),
             style: NewThemeTextStyle.horizontalCalendarWDay,
             textAlign: TextAlign.center,
           ),

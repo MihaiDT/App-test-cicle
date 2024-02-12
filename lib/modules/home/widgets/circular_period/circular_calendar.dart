@@ -36,8 +36,8 @@ class CircularCalendar extends GetView<HomeController> {
       index += 1;
     }
 
-    final datesLength =
-        controller.currentPeriodDatesMap.length - 1; // + (controller.currentPeriodDatesMap.length * 0.11).round() ;
+    final datesLength = controller.currentPeriodDatesMap.length -
+        1; // + (controller.currentPeriodDatesMap.length * 0.11).round() ;
 
     final double distanceAngle = _getDistanceAngle(datesLength);
 
@@ -49,7 +49,8 @@ class CircularCalendar extends GetView<HomeController> {
           child: Obx(
             () => AnimatedRotation(
               duration: const Duration(milliseconds: 400),
-              turns: -(controller.periodSelectedDateIndex / (datesLength * 1.15)),
+              turns:
+                  -(controller.periodSelectedDateIndex / (datesLength * 1.15)),
               // Negativi perché se vado in avanti col calendario devo ruotare in senso antiorario con la corona circolare
               child: Stack(
                 children: [
@@ -60,7 +61,8 @@ class CircularCalendar extends GetView<HomeController> {
                       child: CustomPaint(
                         foregroundPainter: CircularPathPainter(
                           lineColor: Colors.transparent,
-                          completeColor: const Color(0xfff5f5f5).withOpacity(0.1),
+                          completeColor:
+                              const Color(0xfff5f5f5).withOpacity(0.1),
                           completePercent: 88.4,
                           width: 16.0,
                         ),
@@ -77,7 +79,8 @@ class CircularCalendar extends GetView<HomeController> {
                           child: CustomPaint(
                             foregroundPainter: CircularPathPainter(
                               lineColor: Colors.transparent,
-                              completeColor: ThemeColor.primary.withOpacity(0.1),
+                              completeColor:
+                                  ThemeColor.primary.withOpacity(0.1),
                               completePercent: 87,
                               width: 2.0,
                             ),
@@ -104,14 +107,17 @@ class CircularCalendar extends GetView<HomeController> {
 
                   /// Dots
                   LayoutBuilder(
-                    builder: (BuildContext context, BoxConstraints constraints) {
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
                       return Stack(
                         children: List.generate(
                           children.length,
                           (index) => Align(
                             alignment: Alignment(
-                              (cos(_radians((-90 + (distanceAngle * index)))) * 1),
-                              (sin(_radians((-90 + (distanceAngle * index)))) * 1),
+                              (cos(_radians((-90 + (distanceAngle * index)))) *
+                                  1),
+                              (sin(_radians((-90 + (distanceAngle * index)))) *
+                                  1),
                             ),
                             child: children[index],
                           ),
@@ -170,9 +176,13 @@ class CircularCalendar extends GetView<HomeController> {
       double xChange = d.delta.dx.abs();
 
       /// Directional change on wheel
-      double verticalRotation = (onRightSide && panDown) || (onLeftSide && panUp) ? yChange : yChange * -1;
+      double verticalRotation =
+          (onRightSide && panDown) || (onLeftSide && panUp)
+              ? yChange
+              : yChange * -1;
 
-      double horizontalRotation = (onTop && panRight) || (onBottom && panLeft) ? xChange : xChange * -1;
+      double horizontalRotation =
+          (onTop && panRight) || (onBottom && panLeft) ? xChange : xChange * -1;
 
       // Total computed change
       double rotationalChange = verticalRotation + horizontalRotation;
@@ -186,15 +196,18 @@ class CircularCalendar extends GetView<HomeController> {
 
           await wait(milliseconds: 100);
           _resetUpdating();
-          controller.scrollSnapListKey.currentState?.focusToItem(controller.periodSelectedDateIndex -= 1);
+          controller.scrollSnapListKey.currentState
+              ?.focusToItem(controller.periodSelectedDateIndex -= 1);
         }
       } else if (rotationalChange < -0.3) {
-        if (controller.periodSelectedDateIndex < controller.currentPeriodDatesMap.length - 1) {
+        if (controller.periodSelectedDateIndex <
+            controller.currentPeriodDatesMap.length - 1) {
           controller.updating = true;
 
           await wait(milliseconds: 100);
           _resetUpdating();
-          controller.scrollSnapListKey.currentState?.focusToItem(controller.periodSelectedDateIndex += 1);
+          controller.scrollSnapListKey.currentState
+              ?.focusToItem(controller.periodSelectedDateIndex += 1);
         }
       }
     }

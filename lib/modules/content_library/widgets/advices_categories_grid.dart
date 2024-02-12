@@ -5,9 +5,11 @@ import '../../advices/widgets/advices_category_container.dart';
 
 class AdvicesCategoriesGrid extends StatelessWidget {
   final List<AdvicesCategory> categories;
+  final Function(AdvicesCategory)? onCategoryTapped;
 
   const AdvicesCategoriesGrid({
     required this.categories,
+    this.onCategoryTapped,
     super.key,
   });
 
@@ -26,6 +28,7 @@ class AdvicesCategoriesGrid extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return AdvicesCategoryContainer(
+          onCategoryTapped: onCategoryTapped,
           advicesCategory: categories[index],
         );
       },

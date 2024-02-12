@@ -6,7 +6,7 @@ import 'package:lines/modules/content_library/widgets/article_category_widget.da
 import '../../core/app_theme.dart';
 
 import '../../data/models/advices_sub_category.dart';
-import 'content_library_search_page_controller.dart';
+import 'controllers/content_library_search_page_controller.dart';
 import 'content_library_search_page_results.dart';
 
 class ContentLibrarySearchPage

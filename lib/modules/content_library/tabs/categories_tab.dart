@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:lines/modules/content_library/widgets/content_library_category_tab_rows.dart';
 import '../../../core/app_theme.dart';
-import '../content_library_controller.dart';
+import '../controllers/content_library_controller.dart';
 import '../widgets/advices_categories_grid.dart';
 
 class CategoriesTab extends GetView<ContentLibraryController> {
@@ -17,7 +17,10 @@ class CategoriesTab extends GetView<ContentLibraryController> {
           return ListView(
             scrollDirection: Axis.vertical,
             children: [
-              AdvicesCategoriesGrid(categories: controller.getAllCategories),
+              AdvicesCategoriesGrid(
+                categories: controller.getAllCategories,
+                onCategoryTapped: controller.showCategoryPage,
+              ),
               ThemeSizedBox.height24,
               ContentLibraryCategoryTabRows(
                 onCardTapped: controller.showArticleDetails,

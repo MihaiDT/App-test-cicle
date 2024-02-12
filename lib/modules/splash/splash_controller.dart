@@ -23,12 +23,13 @@ class SplashPageController extends GetxController {
     // Navigazione manuale verso la WelcomePage per gestire correttamente l'animazione
     Navigator.of(Get.context!).push(
       PageRouteBuilder(
-        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
           Get.put(WelcomeController());
           return const WelcomePage();
         },
-        transitionsBuilder:
-            (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+        transitionsBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation, Widget child) {
           return Align(
             child: FadeTransition(
               opacity: animation,

@@ -21,7 +21,6 @@ class CalendarService {
         ),
       );
     } catch (e) {
-      
       appController.periodMap.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
     }

@@ -10,7 +10,7 @@ import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import '../../core/app_theme.dart';
 
-import 'content_library_controller.dart';
+import 'controllers/content_library_controller.dart';
 
 class ContentLibraryPage extends GetView<ContentLibraryController> {
   const ContentLibraryPage({super.key});

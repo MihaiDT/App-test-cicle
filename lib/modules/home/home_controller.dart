@@ -23,10 +23,13 @@ class HomeController extends AppScaffoldController {
 
   RxInt rxPeriodSelectedDateIndex = 0.obs;
   int get periodSelectedDateIndex => rxPeriodSelectedDateIndex.value;
-  set periodSelectedDateIndex(int newValue) => rxPeriodSelectedDateIndex.value = newValue;
+  set periodSelectedDateIndex(int newValue) =>
+      rxPeriodSelectedDateIndex.value = newValue;
 
-  Map<String, PeriodDate> get currentPeriodDatesMap => appController.currentPeriod.value?.dates ?? {};
-  List<PeriodDate> get currentPeriodDates => appController.currentPeriod.value?.dates.values.toList() ?? [];
+  Map<String, PeriodDate> get currentPeriodDatesMap =>
+      appController.currentPeriod.value?.dates ?? {};
+  List<PeriodDate> get currentPeriodDates =>
+      appController.currentPeriod.value?.dates.values.toList() ?? [];
 
   @override
   void onInit() {
@@ -43,7 +46,8 @@ class HomeController extends AppScaffoldController {
   }
 
   DateTime get selectedDate {
-    return dateFormatYMD.parse(currentPeriodDatesMap.values.toList()[periodSelectedDateIndex].date);
+    return dateFormatYMD.parse(
+        currentPeriodDatesMap.values.toList()[periodSelectedDateIndex].date);
   }
 
   /// Private methods
@@ -67,8 +71,10 @@ class HomeController extends AppScaffoldController {
 
     final formattedTodayDate = dateFormatYMD.format(DateTime.now());
 
-    periodSelectedDateIndex = currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
     periodSelectedDateIndex =
-        periodSelectedDateIndex < 0 ? currentPeriodDatesMap.keys.toList().length : periodSelectedDateIndex;
+        currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
+    periodSelectedDateIndex = periodSelectedDateIndex < 0
+        ? currentPeriodDatesMap.keys.toList().length
+        : periodSelectedDateIndex;
   }
 }

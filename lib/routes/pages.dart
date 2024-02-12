@@ -5,6 +5,7 @@ import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
+import 'package:lines/modules/content_library/content_library_category_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
 import 'package:lines/modules/drawer/binding/account_binding.dart';
 import 'package:lines/modules/drawer/pages/account_page.dart';
@@ -304,6 +305,14 @@ class Pages {
         const AdvicesDetailPage(),
       ),
       transition: Transition.fade,
+    ),
+
+    GetPage(
+      name: Routes.contentLibraryCategoryPage,
+      page: () => _mediaQueryWrapper(
+        const ContentLibraryCategoryPage(),
+      ),
+      transition: Transition.rightToLeft,
     ),
   ];
 

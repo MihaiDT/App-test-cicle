@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/data/models/advices_category.dart';
-import 'package:lines/modules/content_library/content_library_search_page_controller.dart';
+import 'package:lines/modules/content_library/controllers/content_library_search_page_controller.dart';
 
 import '../../data/models/advices_article.dart';
 import '../advices/widgets/advice_card.dart';

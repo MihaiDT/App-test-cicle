@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/models/advices_article.dart';
 
 import '../../../core/app_theme.dart';
-
+import '../../../data/models/advices_article.dart';
 import '../../../data/models/advices_category.dart';
 import 'advice_card.dart';
 

@@ -44,9 +44,12 @@ class HomePeriodInfo extends GetView<HomeController> {
             children: [
               Expanded(
                 child: HomePeriodMenstruationCard(
-                  textRow1: appController.currentPeriod.value?.menstruationInfo[0],
-                  textRow2: appController.currentPeriod.value?.menstruationInfo[1],
-                  textRow3: appController.currentPeriod.value?.menstruationInfo[2],
+                  textRow1:
+                      appController.currentPeriod.value?.menstruationInfo[0],
+                  textRow2:
+                      appController.currentPeriod.value?.menstruationInfo[1],
+                  textRow3:
+                      appController.currentPeriod.value?.menstruationInfo[2],
                 ),
               ),
               ThemeSizedBox.width8,
