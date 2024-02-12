@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/advices_article.dart';
 
 import '../../../core/app_theme.dart';
@@ -37,44 +38,41 @@ class AdvicesCardsRow extends StatelessWidget {
         );
         return SizedBox(
           width: 150,
-          child: InkWell(
-            onTap: () {
-              if (onCardTapped != null) {
-                onCardTapped!(
-                  articles[index],
-                  categories[indexOfCategory],
-                );
-              }
-            },
-            child: _adviceCard(
-              articles[index],
-            ),
+          child: _adviceCard(
+            articles[index],
+            categories[indexOfCategory],
           ),
         );
       },
     );
   }
 
-  Widget _adviceCard(AdvicesArticle article) {
+  Widget _adviceCard(AdvicesArticle article, AdvicesCategory category) {
     switch (article.typology) {
       case ArticleType.text:
         return AdviceCard(
-          advicesCategory: article.getParentCategoryWithoutTitle,
+          onCardTap: onCardTapped,
+          article: article,
+          category: category,
           hasBorder: withBorder,
           text: article.title,
           imageUrl: article.thumbImageUrl,
         );
       case ArticleType.slider:
         return AdviceCard.withGallery(
-          advicesCategory: article.getParentCategoryWithoutTitle,
+          onCardTap: onCardTapped,
+          article: article,
+          category: category,
           hasBorder: withBorder,
           text: article.title,
           imageUrl: article.thumbImageUrl,
         );
       case ArticleType.video:
         return AdviceCard.withTimer(
+          onCardTap: onCardTapped,
+          article: article,
+          category: category,
           timer: '0:00',
-          advicesCategory: article.getParentCategoryWithoutTitle,
           hasBorder: withBorder,
           text: article.title,
           imageUrl: article.thumbImageUrl,

@@ -91,7 +91,10 @@ class AdvicesDetailController extends GetxController {
   void onClose() {
     super.onClose();
     scrollController.dispose();
-    videoPlayerController.dispose();
+    //this condition will ensure that the article is of type video ,otherwise it will throw an error of late initialization
+    if (article?.typology == ArticleType.video) {
+      videoPlayerController.dispose();
+    }
   }
 
   String durationToString(Duration duration) {

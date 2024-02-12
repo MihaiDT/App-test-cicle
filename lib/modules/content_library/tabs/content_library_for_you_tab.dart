@@ -32,44 +32,29 @@ class ContentLibraryForYouTab extends GetView<ContentLibraryController> {
                   controller.getAllCategories.indexOf(advicesCategory);
               switch (allArticles[index].typology) {
                 case ArticleType.text:
-                  return InkWell(
-                    onTap: () {
-                      controller.showArticleDetails(
-                          allArticles[index], allCategories[indexOfCategory]);
-                    },
-                    child: AdviceCard(
-                      advicesCategory:
-                          allArticles[index].getParentCategoryWithoutTitle,
-                      text: allArticles[index].title,
-                      imageUrl: allArticles[index].thumbImageUrl,
-                    ),
+                  return AdviceCard(
+                    onCardTap: controller.showArticleDetails,
+                    article: allArticles[index],
+                    category: allCategories[indexOfCategory],
+                    text: allArticles[index].title,
+                    imageUrl: allArticles[index].thumbImageUrl,
                   );
                 case ArticleType.video:
-                  return InkWell(
-                    onTap: () {
-                      controller.showArticleDetails(
-                          allArticles[index], allCategories[indexOfCategory]);
-                    },
-                    child: AdviceCard.withTimer(
-                      timer: "0:00",
-                      advicesCategory:
-                          allArticles[index].getParentCategoryWithoutTitle,
-                      text: allArticles[index].title,
-                      imageUrl: allArticles[index].thumbImageUrl,
-                    ),
+                  return AdviceCard.withTimer(
+                    onCardTap: controller.showArticleDetails,
+                    article: allArticles[index],
+                    timer: "0:00",
+                    category: allCategories[indexOfCategory],
+                    text: allArticles[index].title,
+                    imageUrl: allArticles[index].thumbImageUrl,
                   );
                 case ArticleType.slider:
-                  return InkWell(
-                    onTap: () {
-                      controller.showArticleDetails(
-                          allArticles[index], allCategories[indexOfCategory]);
-                    },
-                    child: AdviceCard.withGallery(
-                      advicesCategory:
-                          allArticles[index].getParentCategoryWithoutTitle,
-                      text: allArticles[index].title,
-                      imageUrl: allArticles[index].thumbImageUrl,
-                    ),
+                  return AdviceCard.withGallery(
+                    onCardTap: controller.showArticleDetails,
+                    article: allArticles[index],
+                    category: allCategories[indexOfCategory],
+                    text: allArticles[index].title,
+                    imageUrl: allArticles[index].thumbImageUrl,
                   );
               }
             },

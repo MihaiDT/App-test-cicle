@@ -2,28 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/advices_article.dart';
 import '../../../data/models/advices_category.dart';
 import 'advice_card_save_button.dart';
 
 class AdviceCard extends StatelessWidget {
-  final AdvicesCategory advicesCategory;
+  final AdvicesCategory category;
+  final AdvicesArticle article;
   final bool isNew;
   final bool isSaved;
   final String text;
   final Function(bool)? onSaveTap;
   final String? imageUrl;
   final bool hasBorder;
+  final Function(
+    AdvicesArticle,
+    AdvicesCategory,
+  )? onCardTap;
   late final String? timer;
   late final bool gallery;
 
   AdviceCard({
-    required this.advicesCategory,
+    required this.category,
+    required this.article,
     this.imageUrl,
     this.hasBorder = false,
     this.isNew = false,
     this.isSaved = false,
     this.onSaveTap,
     required this.text,
+    this.onCardTap,
     super.key,
   }) {
     timer = null;
@@ -32,26 +40,30 @@ class AdviceCard extends StatelessWidget {
 
   AdviceCard.withTimer({
     required this.timer,
-    required this.advicesCategory,
+    required this.category,
+    required this.article,
     this.imageUrl,
     this.hasBorder = false,
     this.isNew = false,
     this.isSaved = false,
     this.onSaveTap,
     required this.text,
+    this.onCardTap,
     super.key,
   }) {
     gallery = false;
   }
 
   AdviceCard.withGallery({
-    required this.advicesCategory,
+    required this.category,
+    required this.article,
     this.imageUrl,
     this.hasBorder = false,
     this.isNew = false,
     this.isSaved = false,
     this.onSaveTap,
     required this.text,
+    this.onCardTap,
     super.key,
   }) {
     timer = null;
@@ -63,6 +75,11 @@ class AdviceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        if (onCardTap != null) {
+          onCardTap!(article, category);
+        }
+      },
       child: Container(
         decoration: BoxDecoration(
           color: imageUrl == null ? ThemeColor.primary : Colors.transparent,
@@ -151,10 +168,10 @@ class AdviceCard extends StatelessWidget {
   Widget get _categoryIcon {
     //temp solution
     return CircleAvatar(
-      backgroundColor: advicesCategory.categoryColor,
+      backgroundColor: category.categoryColor,
       radius: 14,
       child: SvgPicture.asset(
-        advicesCategory.iconPath,
+        category.iconPath,
         color: Colors.white,
       ),
     );
