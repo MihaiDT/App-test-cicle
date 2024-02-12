@@ -2,7 +2,7 @@ import 'package:lines/core/env/enviroment.dart';
 
 class StagingEnv extends Environment {
   @override
-  String get apiEndpoint => "https://ceb5-95-228-125-157.ngrok-free.app";
+  String get apiEndpoint => "https://lines-api.tandu.it";
 
   @override
   bool get enableProxyman => false;
