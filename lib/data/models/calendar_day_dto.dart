@@ -4,6 +4,8 @@ import 'package:lines/data/enums/period_phase.dart';
 import 'package:lines/data/models/period_status.dart';
 import 'package:lines/data/models/symptom.dart';
 
+import '../enums/symptoms_category_title.dart';
+
 class CalendarDayDTO {
   final Color? bgColor;
   final bool? isReal;
@@ -44,4 +46,14 @@ class CalendarDayDTO {
   }
 
   bool get hasSymptoms => symptoms.isNotEmpty;
+
+  bool get hasSexualActivity {
+    for (Symptom symptom in symptoms) {
+      if (symptom.category.categoryTitle ==
+          SymptomCategoryTitle.attivitaSessuale.title) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

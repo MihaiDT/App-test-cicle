@@ -1,6 +1,8 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:lines/core/app_theme.dart';
 
 import '../../../core/theme/text_wrapper.dart';
 import '../../../core/theme/theme_gradient.dart';
@@ -39,8 +41,8 @@ class CalendarDayWidget extends StatelessWidget {
           visible: !isAnnualCalendar,
           child: Positioned(
             top: iconYPos + 2.5,
-            child: const SizedBox
-                .shrink(), //temporary keeping this widget for later use with db info
+            child:
+                _bottomIcon, //temporary keeping this widget for later use with db info
           ),
         ),
         Visibility(
@@ -58,6 +60,16 @@ class CalendarDayWidget extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Widget get _bottomIcon {
+    if (calendarDayDTO?.hasSexualActivity == true) {
+      return SvgPicture.asset(ThemeIcon.calendarHeart);
+    }
+    if (calendarDayDTO?.hasSymptoms == true) {
+      return SvgPicture.asset(ThemeIcon.calendarGradientDot);
+    }
+    return const SizedBox.shrink();
   }
 
   Widget dayContainer(double circleRadius, BuildContext context) {
