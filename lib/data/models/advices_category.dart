@@ -18,10 +18,6 @@ class AdvicesCategory {
     );
   }
 
-  factory AdvicesCategory.fromIconName(String iconName) {
-    return AdvicesCategory(iconName: iconName);
-  }
-
   Map<String, dynamic> toJson() {
     return {
       'iconName': iconName,

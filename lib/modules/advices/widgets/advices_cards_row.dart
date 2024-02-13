@@ -31,50 +31,15 @@ class AdvicesCardsRow extends StatelessWidget {
         return ThemeSizedBox.width8;
       },
       itemBuilder: (context, index) {
-        int indexOfCategory = categories.indexOf(
-          articles[index].getParentCategoryWithoutTitle,
-        );
         return SizedBox(
           width: 150,
-          child: _adviceCard(
-            articles[index],
-            categories[indexOfCategory],
+          child: AdviceCard(
+            article: articles[index],
+            onCardTap: onCardTapped,
+            hasBorder: withBorder,
           ),
         );
       },
     );
-  }
-
-  Widget _adviceCard(AdvicesArticle article, AdvicesCategory category) {
-    switch (article.typology) {
-      case ArticleType.text:
-        return AdviceCard(
-          onCardTap: onCardTapped,
-          article: article,
-          category: category,
-          hasBorder: withBorder,
-          text: article.title,
-          imageUrl: article.thumbImageUrl,
-        );
-      case ArticleType.slider:
-        return AdviceCard.withGallery(
-          onCardTap: onCardTapped,
-          article: article,
-          category: category,
-          hasBorder: withBorder,
-          text: article.title,
-          imageUrl: article.thumbImageUrl,
-        );
-      case ArticleType.video:
-        return AdviceCard.withTimer(
-          onCardTap: onCardTapped,
-          article: article,
-          category: category,
-          timer: '0:00',
-          hasBorder: withBorder,
-          text: article.title,
-          imageUrl: article.thumbImageUrl,
-        );
-    }
   }
 }

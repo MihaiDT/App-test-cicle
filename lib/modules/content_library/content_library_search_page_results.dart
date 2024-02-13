@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/content_library/controllers/content_library_search_page_controller.dart';
-
 import '../../data/models/advices_article.dart';
 import '../advices/widgets/advice_card.dart';
 
@@ -25,40 +23,10 @@ class ContentLibrarySearchPageResults
               childAspectRatio: 0.67,
             ),
             itemBuilder: (context, index) {
-              int indexOfCategory = controller.categories.indexOf(
-                AdvicesCategory.fromIconName(
-                  allArticles[index].iconName,
-                ),
+              return AdviceCard(
+                onCardTap: controller.showArticleDetails,
+                article: allArticles[index],
               );
-              AdvicesCategory category = controller.categories[indexOfCategory];
-
-              switch (allArticles[index].typology) {
-                case ArticleType.text:
-                  return AdviceCard(
-                    onCardTap: controller.showArticleDetails,
-                    article: allArticles[index],
-                    category: category,
-                    text: allArticles[index].title,
-                    imageUrl: allArticles[index].thumbImageUrl,
-                  );
-                case ArticleType.video:
-                  return AdviceCard.withTimer(
-                    onCardTap: controller.showArticleDetails,
-                    article: allArticles[index],
-                    category: category,
-                    timer: "0:00",
-                    text: allArticles[index].title,
-                    imageUrl: allArticles[index].thumbImageUrl,
-                  );
-                case ArticleType.slider:
-                  return AdviceCard.withGallery(
-                    onCardTap: controller.showArticleDetails,
-                    article: allArticles[index],
-                    category: category,
-                    text: allArticles[index].title,
-                    imageUrl: allArticles[index].thumbImageUrl,
-                  );
-              }
             },
           )
         : Obx(

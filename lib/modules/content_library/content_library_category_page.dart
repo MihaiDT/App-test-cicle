@@ -48,33 +48,10 @@ class ContentLibraryCategoryPage extends GetView<ContentLibraryController> {
                 childAspectRatio: 0.67,
               ),
               itemBuilder: (context, index) {
-                switch (allArticlesForCategory[index].typology) {
-                  case ArticleType.text:
-                    return AdviceCard(
-                      onCardTap: controller.showArticleDetails,
-                      article: allArticlesForCategory[index],
-                      category: selectedCategory,
-                      text: allArticlesForCategory[index].title,
-                      imageUrl: allArticlesForCategory[index].thumbImageUrl,
-                    );
-                  case ArticleType.video:
-                    return AdviceCard.withTimer(
-                      onCardTap: controller.showArticleDetails,
-                      article: allArticlesForCategory[index],
-                      timer: "0:00",
-                      category: selectedCategory,
-                      text: allArticlesForCategory[index].title,
-                      imageUrl: allArticlesForCategory[index].thumbImageUrl,
-                    );
-                  case ArticleType.slider:
-                    return AdviceCard.withGallery(
-                      onCardTap: controller.showArticleDetails,
-                      article: allArticlesForCategory[index],
-                      category: selectedCategory,
-                      text: allArticlesForCategory[index].title,
-                      imageUrl: allArticlesForCategory[index].thumbImageUrl,
-                    );
-                }
+                return AdviceCard(
+                  onCardTap: controller.showArticleDetails,
+                  article: allArticlesForCategory[index],
+                );
               },
             )
           : const SizedBox.shrink(),

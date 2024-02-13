@@ -7,67 +7,35 @@ import '../../../data/models/advices_category.dart';
 import 'advice_card_save_button.dart';
 
 class AdviceCard extends StatelessWidget {
-  final AdvicesCategory category;
   final AdvicesArticle article;
-  final bool isNew;
-  final bool isSaved;
-  final String text;
-  final Function(bool)? onSaveTap;
-  final String? imageUrl;
   final bool hasBorder;
+  final Function(bool)? onSaveTap;
   final Function(
     AdvicesArticle,
     AdvicesCategory,
   )? onCardTap;
+
   late final String? timer;
   late final bool gallery;
 
   AdviceCard({
-    required this.category,
     required this.article,
-    this.imageUrl,
     this.hasBorder = false,
-    this.isNew = false,
-    this.isSaved = false,
     this.onSaveTap,
-    required this.text,
     this.onCardTap,
     super.key,
   }) {
-    timer = null;
-    gallery = false;
-  }
-
-  AdviceCard.withTimer({
-    required this.timer,
-    required this.category,
-    required this.article,
-    this.imageUrl,
-    this.hasBorder = false,
-    this.isNew = false,
-    this.isSaved = false,
-    this.onSaveTap,
-    required this.text,
-    this.onCardTap,
-    super.key,
-  }) {
-    gallery = false;
-  }
-
-  AdviceCard.withGallery({
-    required this.category,
-    required this.article,
-    this.imageUrl,
-    this.hasBorder = false,
-    this.isNew = false,
-    this.isSaved = false,
-    this.onSaveTap,
-    required this.text,
-    this.onCardTap,
-    super.key,
-  }) {
-    timer = null;
-    gallery = true;
+    switch (article.typology) {
+      case ArticleType.text:
+        timer = null;
+        gallery = false;
+      case ArticleType.slider:
+        timer = null;
+        gallery = true;
+      case ArticleType.video:
+        gallery = false;
+        timer = "";
+    }
   }
 
   final Color _topWidgetBgColor = ThemeColor.darkBlue.withOpacity(0.2);
@@ -77,16 +45,21 @@ class AdviceCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (onCardTap != null) {
-          onCardTap!(article, category);
+          onCardTap!(
+            article,
+            article.getParentCategory,
+          );
         }
       },
       child: Container(
         decoration: BoxDecoration(
-          color: imageUrl == null ? ThemeColor.primary : Colors.transparent,
-          image: imageUrl != null && imageUrl!.isNotEmpty
+          color: article.thumbImageUrl == null
+              ? ThemeColor.primary
+              : Colors.transparent,
+          image: article.thumbImageUrl?.isNotEmpty == true
               ? DecorationImage(
                   image: NetworkImage(
-                    imageUrl!,
+                    article.thumbImageUrl!,
                   ),
                   fit: BoxFit.cover,
                 )
@@ -116,7 +89,7 @@ class AdviceCard extends StatelessWidget {
                 _categoryIcon,
                 _topCenterWidget,
                 AdviceCardSaveButton(
-                  isSaved: isSaved,
+                  isSaved: article.isFavorite,
                   onTap: onSaveTap,
                 ),
               ],
@@ -152,12 +125,13 @@ class AdviceCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Visibility(
-          visible: isNew,
+          //TODO: add property when api is defined
+          visible: false,
           child: _newBox(context),
         ),
         ThemeSizedBox.height4,
         TitleSmall(
-          text,
+          article.title,
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
         ),
@@ -168,10 +142,10 @@ class AdviceCard extends StatelessWidget {
   Widget get _categoryIcon {
     //temp solution
     return CircleAvatar(
-      backgroundColor: category.categoryColor,
+      backgroundColor: article.getParentCategory.categoryColor,
       radius: 14,
       child: SvgPicture.asset(
-        category.iconPath,
+        article.getParentCategory.iconPath,
         color: Colors.white,
       ),
     );

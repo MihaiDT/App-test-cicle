@@ -120,8 +120,11 @@ class AdvicesArticle {
     }
   }
 
-  AdvicesCategory get getParentCategoryWithoutTitle {
-    return AdvicesCategory.fromIconName(iconName);
+  AdvicesCategory get getParentCategory {
+    return AdvicesCategory(
+      iconName: iconName,
+      categoryTitle: categoryName,
+    );
   }
 
   Map<String, dynamic> toJson() {

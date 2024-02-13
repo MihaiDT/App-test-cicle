@@ -103,7 +103,6 @@ class ContentLibraryController extends GetxController
         AdvicesCategory category = entry.value.advicesCategory;
         List<AdvicesArticle> articlesForCategory = [];
         AdvicesSubCategory firstSubCategory = entry.value.subCategories[0];
-
         for (AdvicesArticle article in firstSubCategory.articles) {
           articlesForCategory.add(article);
         }
