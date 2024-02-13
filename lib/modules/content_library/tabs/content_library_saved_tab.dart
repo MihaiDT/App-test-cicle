@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/advices/widgets/advice_card.dart';
 import 'package:lines/modules/content_library/controllers/content_library_controller.dart';
-
-import '../../../data/models/advices_article.dart';
-import '../../../data/models/advices_category.dart';
-import '../../advices/widgets/advice_card.dart';
 
 class ContentLibrarySavedArticleTab extends GetView<ContentLibraryController> {
   const ContentLibrarySavedArticleTab({
@@ -26,41 +23,10 @@ class ContentLibrarySavedArticleTab extends GetView<ContentLibraryController> {
               childAspectRatio: 0.67,
             ),
             itemBuilder: (context, index) {
-              int indexOfCategory = controller.getAllCategories.indexOf(
-                AdvicesCategory.fromIconName(
-                  controller.savedArticles[index].iconName,
-                ),
+              return AdviceCard(
+                article: controller.savedArticles[index],
+                onCardTap: controller.showArticleDetails,
               );
-              AdvicesCategory category =
-                  controller.getAllCategories[indexOfCategory];
-
-              switch (controller.savedArticles[index].typology) {
-                case ArticleType.text:
-                  return AdviceCard(
-                    onCardTap: controller.showArticleDetails,
-                    article: controller.savedArticles[index],
-                    category: category,
-                    text: controller.savedArticles[index].title,
-                    imageUrl: controller.savedArticles[index].thumbImageUrl,
-                  );
-                case ArticleType.video:
-                  return AdviceCard.withTimer(
-                    onCardTap: controller.showArticleDetails,
-                    article: controller.savedArticles[index],
-                    category: category,
-                    timer: "0:00",
-                    text: controller.savedArticles[index].title,
-                    imageUrl: controller.savedArticles[index].thumbImageUrl,
-                  );
-                case ArticleType.slider:
-                  return AdviceCard.withGallery(
-                    onCardTap: controller.showArticleDetails,
-                    article: controller.savedArticles[index],
-                    category: category,
-                    text: controller.savedArticles[index].title,
-                    imageUrl: controller.savedArticles[index].thumbImageUrl,
-                  );
-              }
             },
           );
         } else {
