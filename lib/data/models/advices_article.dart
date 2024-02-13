@@ -7,6 +7,7 @@ class AdvicesArticle {
   final ArticleType typology;
   final String title;
   final String? disclaimer;
+  final bool isFavorite;
   final String iconName;
   late final String? coverImageUrl;
   late final List<String>? slideshowImageUrls;
@@ -20,6 +21,7 @@ class AdvicesArticle {
     required this.categoryName,
     required this.subCategoryName,
     required this.id,
+    this.isFavorite = false,
     required this.typology,
     required this.title,
     required this.disclaimer,
@@ -38,6 +40,7 @@ class AdvicesArticle {
     required this.categoryName,
     required this.subCategoryName,
     required this.id,
+    this.isFavorite = false,
     required this.typology,
     required this.title,
     required this.disclaimer,
@@ -56,6 +59,7 @@ class AdvicesArticle {
     required this.categoryName,
     required this.subCategoryName,
     required this.id,
+    this.isFavorite = false,
     required this.typology,
     required this.title,
     required this.disclaimer,

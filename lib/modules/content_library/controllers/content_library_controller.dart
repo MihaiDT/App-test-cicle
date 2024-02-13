@@ -88,6 +88,12 @@ class ContentLibraryController extends GetxController
     return allArticlesForCategory;
   }
 
+  List<AdvicesArticle> get savedArticles {
+    return getAllArticles
+        .where((article) => article.isFavorite == true)
+        .toList();
+  }
+
   /// Retrieve all categories with their associated articles
   Map<AdvicesCategory, List<AdvicesArticle>> get getAllCategoriesWithArticles {
     Map<AdvicesCategory, List<AdvicesArticle>> allCategoriesWithArticles = {};

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:lines/modules/content_library/tabs/categories_tab.dart';
 import 'package:lines/modules/content_library/tabs/content_library_for_you_tab.dart';
+import 'package:lines/modules/content_library/tabs/content_library_saved_tab.dart';
 import 'package:lines/modules/content_library/widgets/tab_indicator.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -75,9 +76,7 @@ class ContentLibraryPage extends GetView<ContentLibraryController> {
                 children: const [
                   ContentLibraryForYouTab(),
                   CategoriesTab(),
-                  Center(
-                    child: Text('Stai'),
-                  ),
+                  ContentLibrarySavedArticleTab(),
                 ],
               ),
             ),
