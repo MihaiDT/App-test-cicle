@@ -13,7 +13,9 @@ import '../../advices/controllers/advices_detail_store.dart';
 
 class ContentLibrarySearchPageController extends GetxController {
   final RxBool rxShowResults = false.obs;
+
   bool get showResults => rxShowResults.value;
+
   set showResults(bool newValue) {
     rxShowResults.value = newValue;
   }
@@ -23,14 +25,67 @@ class ContentLibrarySearchPageController extends GetxController {
   );
 
   final RxList<AdvicesArticle> rxResultsArticles = <AdvicesArticle>[].obs;
-  List<AdvicesArticle> get resultsArticles => rxResultsArticles;
+
+  RxBool forceResults = false.obs;
+  RxString text = "".obs;
+
+  ///if block will handle results that are shown when user taps on a category,
+  ///else block will handle results when user types something inside the textfield
+  List<AdvicesArticle> get resultsArticles {
+    if (forceResults.value) {
+      return rxResultsArticles;
+    } else {
+      String textToFilter = textEditingController.text.toLowerCase();
+      rxResultsArticles.clear();
+      rxResultsArticles.addAll(getAllArticles);
+      return rxResultsArticles.where((article) {
+        return _articleContainsText(article, textToFilter);
+      }).toList();
+    }
+  }
+
+  ///returns true if the article contains in the title text or in the subcategory name or in the category name
+  ///the string textToFilter, also if the article is of type text check inside the text property , false otherwise
+  bool _articleContainsText(AdvicesArticle article, String textToFilter) {
+    bool condition =
+        article.title.toLowerCase().contains(textToFilter.toLowerCase()) ||
+            article.subCategoryName.toLowerCase().contains(textToFilter) ||
+            article.categoryName.toLowerCase().contains(textToFilter);
+    //if the article is of type text che inside the text property
+    if (article.typology == ArticleType.text) {
+      return condition = condition ||
+          article.text?.toLowerCase().contains(textToFilter) == true;
+    }
+    return condition;
+  }
 
   final TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    textEditingController.addListener(() {
+      _listenForTyping();
+    });
+  }
 
   @override
   void onReady() async {
     super.onReady();
     await AdvicesService.fetchArticles();
+  }
+
+  ///listener for textfield , if the text as more then 4 character show the results
+  void _listenForTyping() {
+    if (!forceResults.value) {
+      if (textEditingController.text.length > 4) {
+        showResults = true;
+      } else {
+        showResults = false;
+      }
+    }
+    text.value = textEditingController.text;
   }
 
   void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {
@@ -74,7 +129,23 @@ class ContentLibrarySearchPageController extends GetxController {
     return "";
   }
 
+  /// Retrieve all articles from every category
+  List<AdvicesArticle> get getAllArticles {
+    List<AdvicesArticle> list = [];
+    if (appController.advicesCategories.value != null) {
+      for (MapEntry<String, AdvicesCategoryWithArticles> entry
+          in appController.advicesCategories.value!.categories.entries) {
+        AdvicesSubCategory firstSubCategory = entry.value.subCategories[0];
+        for (AdvicesArticle article in firstSubCategory.articles) {
+          list.add(article);
+        }
+      }
+    }
+    return list;
+  }
+
   void onSubCategoryTapped(AdvicesSubCategory subCategory) {
+    forceResults.value = true;
     textEditingController.text = subCategory.subCategoryName;
     resultsArticles.clear();
     resultsArticles.addAll(subCategory.articles);
@@ -84,5 +155,6 @@ class ContentLibrarySearchPageController extends GetxController {
   void onTextFieldClearTapped() {
     textEditingController.clear();
     showResults = false;
+    forceResults.value = false;
   }
 }

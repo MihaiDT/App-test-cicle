@@ -44,58 +44,61 @@ class ContentLibrarySearchPage
                               Radius.circular(12),
                             ),
                           ),
-                          child: TextField(
-                            readOnly: true,
-                            controller: controller.textEditingController,
-                            enableSuggestions: false,
-                            style: NewThemeTextStyle.bodyMedium.copyWith(
-                              color: ThemeColor.darkBlue,
-                            ),
-                            cursorColor: ThemeColor.darkBlue,
-                            textAlign: TextAlign.left,
-                            decoration: InputDecoration(
-                              suffix: InkWell(
-                                onTap: () {
-                                  controller.onTextFieldClearTapped();
-                                },
-                                child: SizedBox(
-                                  width: 15,
-                                  height: 15,
-                                  child: Center(
-                                    child: SvgPicture.asset(
-                                      ThemeIcon.close,
-                                      color: ThemeColor.darkBlue,
-                                      height: 10,
-                                      width: 10,
+                          child: Obx(
+                            () => TextField(
+                              readOnly: controller.forceResults.value,
+                              controller: controller.textEditingController,
+                              enableSuggestions: false,
+                              style: NewThemeTextStyle.bodyMedium.copyWith(
+                                color: ThemeColor.darkBlue,
+                              ),
+                              cursorColor: ThemeColor.darkBlue,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                suffix: InkWell(
+                                  onTap: () {
+                                    controller.onTextFieldClearTapped();
+                                  },
+                                  child: SizedBox(
+                                    width: 15,
+                                    height: 15,
+                                    child: Center(
+                                      child: SvgPicture.asset(
+                                        ThemeIcon.close,
+                                        color: ThemeColor.darkBlue,
+                                        height: 10,
+                                        width: 10,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              isDense: true,
-                              contentPadding: const EdgeInsets.only(
-                                left: 20,
-                                right: 20,
-                              ),
-                              filled: true,
-                              fillColor: textFieldFillColor,
-                              hintText: 'Cerca tra i contenuti',
-                              hintStyle: NewThemeTextStyle.bodyMedium.copyWith(
-                                color: placeHolderColor,
-                              ),
-                              prefixIcon: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 14,
+                                isDense: true,
+                                contentPadding: const EdgeInsets.only(
+                                  left: 20,
+                                  right: 20,
                                 ),
-                                child: SvgPicture.asset(
-                                  ThemeIcon.search,
+                                filled: true,
+                                fillColor: textFieldFillColor,
+                                hintText: 'Cerca tra i contenuti',
+                                hintStyle:
+                                    NewThemeTextStyle.bodyMedium.copyWith(
+                                  color: placeHolderColor,
                                 ),
-                              ),
-                              border: const OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                    11,
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 14,
+                                  ),
+                                  child: SvgPicture.asset(
+                                    ThemeIcon.search,
+                                  ),
+                                ),
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                      11,
+                                    ),
                                   ),
                                 ),
                               ),
