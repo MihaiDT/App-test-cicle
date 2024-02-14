@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/logger/log.dart';
@@ -471,4 +473,27 @@ class CalendarController extends GetxController {
 
   CalendarDayDTO? getDTOForDay(String date) =>
       appController.calendarDayViewModel.value?.symptomsDtoMap[date];
+
+  /// Generates a matrix of months for a given year, suitable for display in a calendar with 4 rows and 3 months per row.
+  /// [year]: The year for which to generate the months data.
+  /// Returns: A list of lists of [DateTime] objects, where each inner list represents a row of months for the calendar.
+  List<List<DateTime>> getMonthsDataForYearCalendar(DateTime year) {
+    List<DateTime> months = calendarYearController.getMonthsForYear(year);
+    const int numberOfRows = 4;
+    const int numberOfMonthsPerRow = 3;
+    List<List<DateTime>> monthMatrix = List.generate(
+      // Define the number of rows in the matrix
+      numberOfRows,
+      (i) {
+        // Calculate the starting index for the current row
+        int startIndex = i * numberOfMonthsPerRow;
+        // Calculate the ending index for the current row, ensuring it stays within the bounds of the months list
+        int endIndex =
+            min(i * numberOfMonthsPerRow + numberOfMonthsPerRow, months.length);
+        // Extract a sublist of months for the current row from the original months list
+        return months.sublist(startIndex, endIndex);
+      },
+    );
+    return monthMatrix;
+  }
 }

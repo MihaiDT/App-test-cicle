@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 extension DateTimeExtensions on DateTime {
   ///return true if the year will have 366 days , false otherwise
   bool get isLeapYear {
@@ -28,4 +30,12 @@ extension DateTimeExtensions on DateTime {
       year == other.year && month == other.month && day == other.day;
 
   bool get isToday => isSameDay(DateTime.now());
+
+  /// Returns the full name of the month for this [DateTime] object, formatted according to the current locale.
+  /// This method uses the `DateFormat` class from the `intl` package to format the month
+  /// into its full name. The locale code 'it' specifies Italian as the language,
+  /// but you can replace it with any supported locale code to get the month name in that language.
+  /// For example, calling this method on `DateTime(2024, 02, 14)` would return "Febbraio"
+  /// for the Italian locale.
+  String get formattedMonth => DateFormat('MMMM', 'it').format(this);
 }

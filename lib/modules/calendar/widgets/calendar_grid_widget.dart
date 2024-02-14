@@ -32,33 +32,32 @@ class CalendarGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int startDayOfWeek = CustomDateUtils.calculateStartDayOfWeek(year, month);
-    return GridView.count(
-      crossAxisCount: DateTime.daysPerWeek,
+    return GridView.builder(
+      itemCount: DateTime(year, month + 1, 0).day + startDayOfWeek,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: DateTime.daysPerWeek,
+      ),
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      children: List.generate(
-        DateTime(year, month + 1, 0).day + startDayOfWeek,
-        (index) {
-          final dayOfMonth = CustomDateUtils.getDayOfMonthFromIndex(
-              year, month, index, startDayOfWeek);
-
-          return Visibility(
-            visible: index >= startDayOfWeek,
-            child: LayoutBuilder(
-              builder: (context, constraints) => InkWell(
-                onTap: () {
-                  onDayTapped(dayOfMonth);
-                },
-                child: _dayWidget(
-                  dayOfMonth,
-                  constraints,
-                ),
+      itemBuilder: (context, index) {
+        final dayOfMonth = CustomDateUtils.getDayOfMonthFromIndex(
+            year, month, index, startDayOfWeek);
+        return Visibility(
+          visible: index >= startDayOfWeek,
+          child: LayoutBuilder(
+            builder: (context, constraints) => InkWell(
+              onTap: () {
+                onDayTapped(dayOfMonth);
+              },
+              child: _dayWidget(
+                dayOfMonth,
+                constraints,
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
