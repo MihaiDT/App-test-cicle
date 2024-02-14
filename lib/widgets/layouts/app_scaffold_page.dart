@@ -7,6 +7,7 @@ import '../../widgets/layouts/scroll_if_needed.dart';
 
 class AppScaffoldPage extends StatelessWidget {
   final Color? backgroundColor;
+
   final Widget? bottomNavigationBar;
   final DecorationImage? backgroundImage;
   final PreferredSizeWidget? appBar;

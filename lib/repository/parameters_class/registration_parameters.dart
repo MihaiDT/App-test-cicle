@@ -11,7 +11,6 @@ class RegistrationParameters {
   String? password;
   bool privacyProfiling;
   bool privacyMarketing;
-  bool privacyBrandProfiling;
   bool privacyBrandMarketing;
   RegistrationProvider? registrationProvider;
   String? socialToken;
@@ -26,7 +25,6 @@ class RegistrationParameters {
     this.password,
     this.privacyProfiling = true,
     this.privacyMarketing = true,
-    this.privacyBrandProfiling = true,
     this.privacyBrandMarketing = true,
     this.registrationProvider = RegistrationProvider.email,
     this.socialToken = "",
@@ -43,7 +41,6 @@ class RegistrationParameters {
       "password": password,
       "privacy_profiling": privacyProfiling,
       "privacy_marketing": privacyMarketing,
-      "privacy_brand_profiling": privacyBrandProfiling,
       "privacy_brand_marketing": privacyBrandMarketing,
       "registration_provider": registrationProvider?.name,
       "social_token": socialToken,

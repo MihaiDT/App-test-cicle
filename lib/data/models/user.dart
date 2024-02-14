@@ -3,6 +3,7 @@ import 'package:lines/repository/parameters_class/registration_parameters.dart';
 class User {
   bool? active;
   String? birthdate;
+  int? coinsCollected;
   String? email;
   String? firstName;
   bool? isConfirmed;
@@ -23,6 +24,7 @@ class User {
   User({
     this.active = false,
     this.birthdate,
+    this.coinsCollected,
     this.email,
     this.firstName,
     this.isConfirmed = false,
@@ -45,6 +47,7 @@ class User {
     return User(
       active: json['user']['active'],
       birthdate: json['user']['birthdate'],
+      coinsCollected: json['user']['coins'],
       email: json['user']['email'],
       firstName: json['user']['first_name'],
       isConfirmed: json['user']['is_confirmed'],
@@ -64,6 +67,7 @@ class User {
   Map<String, dynamic> toJson() {
     return {
       "birthdate": birthdate,
+      "coins": coinsCollected,
       "email": email,
       "first_name": firstName,
       "is_confirmed": isConfirmed,

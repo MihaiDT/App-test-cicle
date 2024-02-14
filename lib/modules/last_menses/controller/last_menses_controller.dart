@@ -10,7 +10,7 @@ class LastMensesController extends GetxController {
       const ConsentBottomSheet(),
       enableDrag: false,
       isDismissible: false,
-      backgroundColor: ThemeColor.lightGrey,
+      backgroundColor: ThemeColor.darkGrey,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),

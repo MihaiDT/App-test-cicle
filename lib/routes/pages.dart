@@ -3,6 +3,11 @@ import 'package:get/get.dart';
 import 'package:lines/modules/advices/advices_detail_page.dart';
 import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
+import 'package:lines/modules/change_profile/binding/customize_cherry_binding.dart';
+import 'package:lines/modules/change_profile/binding/your_information_section_binding.dart';
+import 'package:lines/modules/change_profile/binding/your_interests_section_binding.dart';
+import 'package:lines/modules/change_profile/binding/your_menses_section_binding.dart';
+import 'package:lines/modules/change_profile/pages/change_profile_page.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
 import 'package:lines/modules/content_library/content_library_category_page.dart';
@@ -22,6 +27,9 @@ import 'package:lines/modules/main/main_binding_v2.dart';
 import 'package:lines/modules/main/main_page_v2.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
+import 'package:lines/modules/profile/bindings/my_menses_section_binding.dart';
+import 'package:lines/modules/profile/bindings/profile_header_binding.dart';
+import 'package:lines/modules/profile/bindings/your_diary_section_binding.dart';
 import 'package:lines/modules/referral/referral_binding.dart';
 import 'package:lines/modules/referral/referral_page.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_binding.dart';
@@ -246,6 +254,9 @@ class Pages {
         MainBindingV2(),
         WelcomeQuizCardBinding(),
         AccountBinding(),
+        YourDiarySectionBinding(),
+        ProfileHeaderBinding(),
+        MyMensesSectionBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const MainPageV2(),
@@ -303,6 +314,21 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const AdvicesDetailPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    ///ChangeProfilePage
+    GetPage(
+      name: Routes.changeProfilePage,
+      bindings: [
+        CustomizeCherryBinding(),
+        YourInformationSectionBinding(),
+        YourMensesSectionBinding(),
+        YourInterestsSectionBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const ChangeProfilePage(),
       ),
       transition: Transition.fade,
     ),

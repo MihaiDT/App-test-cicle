@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/answer.dart';
+import 'package:lines/modules/welcome_quiz/widgets/chip_select_button.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_select_button.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_select_button_large.dart';
-import 'package:lines/modules/welcome_quiz/widgets/quiz_select_multiple_button.dart';
 
 class QuizBodyBuilder extends StatelessWidget {
   final String? quizType;
@@ -99,7 +99,7 @@ class QuizBodyBuilder extends StatelessWidget {
         ),
       );
     }
-    return QuizSelectMultipleButton(
+    return ChipSelectButton(
       title: answer.answer,
       selected: getIsSelected(answer),
       onPressed: () {

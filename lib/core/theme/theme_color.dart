@@ -14,7 +14,8 @@ class ThemeColor {
 
   static Color primaryOpaque = primary.withOpacity(0.1);
   static Color opaqueWhite = Colors.white.withOpacity(0.3);
-  static Color lightGrey = const Color(0xFF75797F);
+  static Color lightGrey = const Color(0xFFCDD2DE);
+  static Color darkGrey = const Color(0xFF75797F);
   static Color ginecologiaColor = const Color(0xffde76b1);
   static Color sessualitaEFertilitaColor = const Color(0xff76a9de);
   static Color tabuEInclusivitaColor = const Color(0xff693f91);

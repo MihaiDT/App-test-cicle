@@ -3,13 +3,13 @@ import 'package:lines/core/theme/theme_color.dart';
 
 import 'quiz_select_multiple_title.dart';
 
-class QuizSelectMultipleButton extends StatelessWidget {
+class ChipSelectButton extends StatelessWidget {
   final String title;
   final bool selected;
 
   final VoidCallback onPressed;
 
-  const QuizSelectMultipleButton({
+  const ChipSelectButton({
     required this.title,
     required this.selected,
     required this.onPressed,

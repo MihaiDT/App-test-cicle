@@ -109,4 +109,6 @@ class ThemeIcon {
   static String user = '$folderPath/user.svg';
   static String settings = '$folderPath/settings.svg';
   static String lock = '$folderPath/lock.svg';
+  static String circleRoundedIcon = '$folderPath/circle_rounded_icon.svg';
+  static String dropRoundedIcon = '$folderPath/drop_rounded_icon.svg';
 }

@@ -31,4 +31,5 @@ class ThemeImage {
   static String moneyPile = '$folderPath/money_pile.webp';
   static String welcomeEmail = '$folderPath/welcome_email.webp';
   static String ginecologa = '$folderPath/ginecologa.webp';
+  static String badge = '$folderPath/badge.webp';
 }

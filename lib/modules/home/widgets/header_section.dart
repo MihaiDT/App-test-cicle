@@ -14,7 +14,6 @@ class HeaderSection extends StatelessWidget {
         ThemeSizedBox.width24,
         GestureDetector(
           onTap: () {
-            print("object");
             Scaffold.of(context).openDrawer();
           },
           child: SvgPicture.asset(
