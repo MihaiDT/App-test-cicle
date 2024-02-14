@@ -125,8 +125,7 @@ class AdviceCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Visibility(
-          //TODO: add property when api is defined
-          visible: false,
+          visible: article.isNew,
           child: _newBox(context),
         ),
         ThemeSizedBox.height4,

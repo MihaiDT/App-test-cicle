@@ -8,6 +8,7 @@ class AdvicesArticle {
   final String title;
   final String? disclaimer;
   final bool isFavorite;
+  final bool isNew;
   final String iconName;
   late final String? coverImageUrl;
   late final List<String>? slideshowImageUrls;
@@ -21,7 +22,8 @@ class AdvicesArticle {
     required this.categoryName,
     required this.subCategoryName,
     required this.id,
-    this.isFavorite = false,
+    required this.isFavorite,
+    required this.isNew,
     required this.typology,
     required this.title,
     required this.disclaimer,
@@ -40,7 +42,8 @@ class AdvicesArticle {
     required this.categoryName,
     required this.subCategoryName,
     required this.id,
-    this.isFavorite = false,
+    required this.isFavorite,
+    required this.isNew,
     required this.typology,
     required this.title,
     required this.disclaimer,
@@ -59,7 +62,8 @@ class AdvicesArticle {
     required this.categoryName,
     required this.subCategoryName,
     required this.id,
-    this.isFavorite = false,
+    required this.isFavorite,
+    required this.isNew,
     required this.typology,
     required this.title,
     required this.disclaimer,
@@ -82,6 +86,8 @@ class AdvicesArticle {
           categoryName: data['article_macro_category']['name'],
           subCategoryName: data['article_category']['name'],
           id: data['id'],
+          isFavorite: data['is_fav'] ?? false,
+          isNew: data['is_new'] ?? false,
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'],
@@ -96,6 +102,8 @@ class AdvicesArticle {
           categoryName: data['article_macro_category']['name'],
           subCategoryName: data['article_category']['name'],
           id: data['id'],
+          isFavorite: data['is_fav'] ?? false,
+          isNew: data['is_new'] ?? false,
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'],
@@ -109,6 +117,8 @@ class AdvicesArticle {
           categoryName: data['article_macro_category']['name'],
           subCategoryName: data['article_category']['name'],
           id: data['id'],
+          isFavorite: data['is_fav'] ?? false,
+          isNew: data['is_new'] ?? false,
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'],
@@ -133,6 +143,8 @@ class AdvicesArticle {
       'typology': typology.toString().split('.').last,
       'title': title,
       'disclaimer': disclaimer,
+      'is_fav': isFavorite,
+      'is_new': isNew,
     };
 
     if (coverImageUrl != null) {
