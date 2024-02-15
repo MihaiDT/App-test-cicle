@@ -26,7 +26,7 @@ class CalendarYearColumn extends StatelessWidget {
               DateTime(
                 month.year,
                 month.month,
-              ).formatMonthAsShortItalian.toUpperCase(),
+              ).formattedMonth.toUpperCase(),
             ).applyShaders(context),
             ThemeSizedBox.height12,
             InkWell(
