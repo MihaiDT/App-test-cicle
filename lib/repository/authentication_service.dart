@@ -88,6 +88,20 @@ class AuthenticationService {
     }
   }
 
+  static Future<void> fetchUser() async {
+    final userId = HiveManager.userId;
+    appController.user.responseHandler = ResponseHandler.pending();
+    try {
+      final response = await dio.get(
+        "/users/$userId",
+      );
+      _saveUserInfo(response);
+    } catch (e) {
+      appController.user.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
   static Future<void> completeUserRegistration(
     UpdateUserParameters updateUserParameters,
   ) async {

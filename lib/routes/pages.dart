@@ -23,8 +23,8 @@ import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
 import 'package:lines/modules/login/login_binding.dart';
 import 'package:lines/modules/login/login_page.dart';
-import 'package:lines/modules/main/main_binding_v2.dart';
-import 'package:lines/modules/main/main_page_v2.dart';
+import 'package:lines/modules/main/main_binding.dart';
+import 'package:lines/modules/main/main_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
 import 'package:lines/modules/profile/bindings/my_menses_section_binding.dart';
@@ -46,8 +46,6 @@ import '../modules/content_library/bindings/content_library_binding.dart';
 import '../modules/content_library/bindings/content_library_search_page_binding.dart';
 import '../modules/content_library/content_library_page.dart';
 import '../modules/content_library/content_library_search_page.dart';
-import '../modules/main/main_binding.dart';
-import '../modules/main/main_page.dart';
 import '../modules/name_surname/name_surname_page.dart';
 import '../modules/privacy/privacy_page.dart';
 import '../modules/register/register_binding.dart';
@@ -62,16 +60,6 @@ class Pages {
   Pages._(); // this is to prevent anyone from instantiating this object
 
   static final List<GetPage<Pages>> pages = [
-    // Main
-    GetPage(
-      binding: MainBinding(),
-      name: Routes.main,
-      page: () => _mediaQueryWrapper(
-        const MainPage(),
-      ),
-      transition: Transition.fadeIn,
-    ),
-
     // Splash
     GetPage(
       binding: SplashBinding(),
@@ -247,11 +235,11 @@ class Pages {
       transition: Transition.fade,
     ),
 
-    ///MainV2
+    /// Main
     GetPage(
-      name: Routes.mainV2,
+      name: Routes.main,
       bindings: [
-        MainBindingV2(),
+        MainBinding(),
         WelcomeQuizCardBinding(),
         AccountBinding(),
         YourDiarySectionBinding(),
@@ -259,7 +247,7 @@ class Pages {
         MyMensesSectionBinding(),
       ],
       page: () => _mediaQueryWrapper(
-        const MainPageV2(),
+        const MainPage(),
       ),
       transition: Transition.fade,
     ),

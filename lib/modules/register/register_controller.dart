@@ -13,6 +13,7 @@ class RegisterController extends GetxController {
   void onInit() {
     ever(
       appController.checkEmail.rxValue,
+      condition: () => Get.currentRoute == Routes.register,
       (callback) {
         if (callback.isPending) {
           isButtonPending.value = true;

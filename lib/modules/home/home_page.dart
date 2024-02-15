@@ -13,12 +13,14 @@ import 'widgets/circular_period/home_circular_period_calendar.dart';
 import 'widgets/horizontal_calendar/home_horizontal_calendar.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return ListView(
+      padding: EdgeInsets.zero,
       children: [
         Obx(
           () => appController.currentPeriod.responseHandler.isPending
@@ -38,6 +40,7 @@ class HomePage extends GetView<HomeController> {
         ),
         ThemeSizedBox.height32,
         const WelcomeQuizSection(),
+        ThemeSizedBox.height90,
       ],
     );
   }

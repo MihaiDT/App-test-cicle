@@ -16,7 +16,9 @@ import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class LoginPage extends GetView<LoginController> {
-  const LoginPage({super.key});
+  const LoginPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -134,17 +136,20 @@ class LoginPage extends GetView<LoginController> {
                     errorMessage: controller.emailError.value,
                   ),
                   ThemeSizedBox.height24,
-                  InputTextField(
-                    label: "Password",
-                    placeholder: 'Inserisci la password',
-                    textCapitalization: TextCapitalization.none,
-                    textEditingController: controller.passwordController,
-                    isPassword: true,
-                    obscureText: controller.hidePassword,
-                    onTapTogglePassword: () {
-                      controller.hidePassword = !controller.hidePassword;
-                    },
-                  ),
+                  Obx(() {
+                    return InputTextField(
+                      label: "Password",
+                      placeholder: 'Inserisci la password',
+                      textCapitalization: TextCapitalization.none,
+                      textEditingController: controller.passwordController,
+                      isPassword: true,
+                      obscureText: controller.hidePassword.value,
+                      onTapTogglePassword: () {
+                        controller.hidePassword.value =
+                            !controller.hidePassword.value;
+                      },
+                    );
+                  }),
                   ThemeSizedBox.height16,
                   const TitleMedium(
                     "PASSWORD DIMENTICATA?",

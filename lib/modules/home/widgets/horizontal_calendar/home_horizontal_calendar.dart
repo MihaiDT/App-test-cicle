@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../../../core/app_theme.dart';

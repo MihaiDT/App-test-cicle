@@ -8,24 +8,16 @@ class PrivacyController extends GetxController {
   final RxBool isAcceptedAll = false.obs;
   RxBool buttonIsPending = false.obs;
 
-  void acceptAll() {
-    isAcceptedAll.value = !isAcceptedAll.value;
-    firstAccepted.value = isAcceptedAll.value;
-  }
-
-  void accept() {
-    firstAccepted.value = !firstAccepted.value;
-  }
-
   @override
   void onInit() {
     ever(
       appController.user.rxValue,
       (callback) {
         if (callback.isPending) {
-          buttonIsPending = true.obs;
+          buttonIsPending.value = true;
         }
         if (callback.isSuccessful) {
+          buttonIsPending.value = false;
           Get.offAllNamed(Routes.confirmEmailPage);
         }
       },
@@ -40,5 +32,14 @@ class PrivacyController extends GetxController {
     await AuthenticationService.registration(
       appController.registerParameter,
     );
+  }
+
+  void acceptAll() {
+    isAcceptedAll.value = !isAcceptedAll.value;
+    firstAccepted.value = isAcceptedAll.value;
+  }
+
+  void accept() {
+    firstAccepted.value = !firstAccepted.value;
   }
 }

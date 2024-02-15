@@ -7,7 +7,6 @@ import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_menstruation_card.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_ovulation_card.dart';
-import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 
 import '../../home_controller.dart';
 
@@ -32,7 +31,7 @@ class HomePeriodInfo extends GetView<HomeController> {
             children: [
               Obx(
                 () => TitleMedium(
-                  _label(controller.selectedDate),
+                  _label(controller.selectedDate.value),
                   color: ThemeColor.darkBlue,
                 ),
               ),

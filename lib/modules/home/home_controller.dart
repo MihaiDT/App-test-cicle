@@ -18,16 +18,21 @@ class HomeController extends AppScaffoldController {
   final scrollSnapListKey = GlobalKey<ScrollSnapListState>();
 
   RxBool rxPlayButtonVisible = false.obs;
+
   bool get playButtonVisible => rxPlayButtonVisible.value;
+
   set playButtonVisible(bool newValue) => rxPlayButtonVisible.value = newValue;
 
   RxInt rxPeriodSelectedDateIndex = 0.obs;
+
   int get periodSelectedDateIndex => rxPeriodSelectedDateIndex.value;
+
   set periodSelectedDateIndex(int newValue) =>
       rxPeriodSelectedDateIndex.value = newValue;
 
   Map<String, PeriodDate> get currentPeriodDatesMap =>
       appController.currentPeriod.value?.dates ?? {};
+
   List<PeriodDate> get currentPeriodDates =>
       appController.currentPeriod.value?.dates.values.toList() ?? [];
 
@@ -45,9 +50,12 @@ class HomeController extends AppScaffoldController {
     // TODO: cambio immagine avatar e colore
   }
 
-  DateTime get selectedDate {
+  Rx<DateTime> get selectedDate {
+    return DateTime.now().obs;
+
+/*    // todo: implement the right return
     return dateFormatYMD.parse(
-        currentPeriodDatesMap.values.toList()[periodSelectedDateIndex].date);
+        currentPeriodDatesMap.values.toList()[periodSelectedDateIndex].date);*/
   }
 
   /// Private methods
@@ -64,7 +72,7 @@ class HomeController extends AppScaffoldController {
   //   }
   // }
 
-  _initCalendars() async {
+  void _initCalendars() async {
     await CalendarService.fetchCurrentPeriod();
 
     Get.put(const HomeHorizontalCalendar());

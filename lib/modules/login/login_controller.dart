@@ -19,7 +19,7 @@ class LoginController extends GetxController {
 
   RxBool isButtonPending = false.obs;
   RxBool isSocialLogin = false.obs;
-  bool hidePassword = true;
+  RxBool hidePassword = true.obs;
 
   @override
   void onInit() {
@@ -28,6 +28,7 @@ class LoginController extends GetxController {
     /// Check if email exists and if it's active
     ever(
       appController.checkEmail.rxValue,
+      condition: () => Get.currentRoute == Routes.login,
       (callback) async {
         if (callback.isPending) {
           isButtonPending.value = true;
@@ -67,8 +68,10 @@ class LoginController extends GetxController {
       },
     );
     ever(
-      condition: appController.checkEmail.responseHandler.isSuccessful,
       appController.user.rxValue,
+      condition: () =>
+          Get.currentRoute == Routes.login &&
+          appController.checkEmail.responseHandler.isSuccessful,
       (callback) {
         if (callback.isPending) {
           isButtonPending.value = true;

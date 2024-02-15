@@ -1,20 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/welcome/welcome_controller.dart';
+import 'package:lines/modules/welcome/welcome_page.dart';
+import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/settings_service.dart';
-
-import '../../modules/welcome/welcome_controller.dart';
-import '../../modules/welcome/welcome_page.dart';
-import '../../routes/routes.dart';
+import 'package:lines/routes/routes.dart';
 
 class SplashPageController extends GetxController {
   @override
+  @override
   void onInit() async {
     super.onInit();
-    await SettingsService.fetchSettings();
+    ever(
+      appController.user.rxValue,
+      condition: () => Get.currentRoute == Routes.logo,
+      (callback) {
+        if (appController.user.responseHandler.isFailed) {
+          _startAnimation();
+        } else if (appController.user.responseHandler.isSuccessful) {
+          Get.offAndToNamed(Routes.main);
+        }
+      },
+    );
 
-    _startAnimation();
+    await SettingsService.fetchSettings();
+    if (HiveManager.userId.isNotEmpty) {
+      await AuthenticationService.fetchUser();
+    } else {
+      _startAnimation();
+    }
   }
 
   SplashPageController() {}

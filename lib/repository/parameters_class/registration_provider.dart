@@ -3,6 +3,20 @@ enum RegistrationProvider {
   facebook,
   apple,
   email;
+
+  static RegistrationProvider fromJson(String registrationProvider) {
+    switch (registrationProvider) {
+      case "google":
+        return RegistrationProvider.google;
+      case "facebook":
+        return RegistrationProvider.facebook;
+      case "apple":
+        return RegistrationProvider.apple;
+      case "email":
+      default:
+        return RegistrationProvider.email;
+    }
+  }
 }
 
 extension RegistrationProviderExtension on RegistrationProvider {
@@ -16,21 +30,6 @@ extension RegistrationProviderExtension on RegistrationProvider {
         return "apple";
       case RegistrationProvider.email:
         return "email";
-    }
-  }
-
-  static RegistrationProvider fromJson(String registrationProvider) {
-    switch (registrationProvider) {
-      case "google":
-        return RegistrationProvider.google;
-      case "facebook":
-        return RegistrationProvider.facebook;
-      case "apple":
-        return RegistrationProvider.apple;
-      case "email":
-        return RegistrationProvider.email;
-      default:
-        return RegistrationProvider.email;
     }
   }
 

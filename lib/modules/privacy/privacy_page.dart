@@ -11,7 +11,9 @@ import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class PrivacyPage extends GetView<PrivacyController> {
-  const PrivacyPage({super.key});
+  const PrivacyPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

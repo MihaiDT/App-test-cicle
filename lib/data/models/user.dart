@@ -1,4 +1,4 @@
-import 'package:lines/repository/parameters_class/registration_parameters.dart';
+import 'package:lines/repository/parameters_class/registration_provider.dart';
 
 class User {
   bool? active;
@@ -18,7 +18,7 @@ class User {
   int? periodDuration;
   bool? privacyProfiling;
   bool? privacyMarketingEmail;
-  RegistrationParameters? provider;
+  RegistrationProvider? provider;
   String? sessionToken;
 
   User({
@@ -59,7 +59,7 @@ class User {
       periodDuration: json['user']['period_duration'],
       privacyProfiling: json['user']['privacy_profiling'],
       privacyMarketingEmail: json['user']['privacy_marketing_email'],
-      provider: json['user']['provider'],
+      provider: RegistrationProvider.fromJson(json['user']['provider']),
       sessionToken: json['user']['session_token'],
     );
   }
