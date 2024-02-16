@@ -41,10 +41,10 @@ class CalendarBottomSheetRecap extends StatelessWidget {
               spacing: 8.0,
               runSpacing: 8.0,
               children: List.generate(
-                symptomsController.rxSavedSymptoms.length,
+                symptomsController.savedSymptoms.length,
                 (index) => CalendarChip(
-                  label: symptomsController.rxSavedSymptoms[index].symptomName,
-                  iconPath: symptomsController.rxSavedSymptoms[index].iconPath,
+                  label: symptomsController.savedSymptoms[index].symptomName,
+                  iconPath: symptomsController.savedSymptoms[index].iconPath,
                 ),
               ),
             ),

@@ -23,7 +23,7 @@ class CalendarBottomSheet extends StatelessWidget {
         children: [
           DraggableScrollableSheet(
             controller: controller.draggableScrollableController,
-            initialChildSize: controller.sheetVSize,
+            initialChildSize: controller.sheetVSize.value,
             maxChildSize: 0.95,
             minChildSize: 0.1,
             shouldCloseOnMinExtent: true,
@@ -33,7 +33,7 @@ class CalendarBottomSheet extends StatelessWidget {
                   Obx(
                     () {
                       return Visibility(
-                        visible: controller.showBottomMenu,
+                        visible: controller.showBottomMenu.value,
                         child: Container(
                           key: controller.bottomSheetContainerKey,
                           margin: const EdgeInsets.only(top: 75),
@@ -109,7 +109,7 @@ class CalendarBottomSheet extends StatelessWidget {
                             maintainSize: true,
                             maintainAnimation: true,
                             maintainState: true,
-                            visible: controller.showBarButton,
+                            visible: controller.showBarButton.value,
                             child: Padding(
                               padding: ThemeEdgeInsets.horizontalSmall,
                               child: Row(
@@ -125,14 +125,16 @@ class CalendarBottomSheet extends StatelessWidget {
                                         child: PrimaryButton(
                                           buttonSize: ButtonSize.h31,
                                           onPressed: () {
-                                            if (controller.modifyPeriodMode) {
+                                            if (controller
+                                                .modifyPeriodMode.value) {
                                               controller.saveDates();
                                             }
-                                            controller.modifyPeriodMode =
-                                                !controller.modifyPeriodMode;
+                                            controller.modifyPeriodMode.value =
+                                                !controller
+                                                    .modifyPeriodMode.value;
                                           },
                                           child: TitleLarge(
-                                            controller.modifyPeriodMode
+                                            controller.modifyPeriodMode.value
                                                 ? 'Salva mestruazione'
                                                 : 'Modifica mestruazioni',
                                           ),
@@ -154,7 +156,7 @@ class CalendarBottomSheet extends StatelessWidget {
                       ),
                       Obx(
                         () => Visibility(
-                          visible: controller.showBottomMenu,
+                          visible: controller.showBottomMenu.value,
                           child: IgnorePointer(
                             child: Column(
                               children: [
@@ -182,7 +184,7 @@ class CalendarBottomSheet extends StatelessWidget {
           ),
           Obx(
             () => Visibility(
-              visible: controller.showSaveButton,
+              visible: controller.showSaveButton.value,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(

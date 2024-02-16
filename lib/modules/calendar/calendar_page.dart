@@ -14,7 +14,7 @@ import '../../widgets/appbar/transparent_app_bar.dart';
 import '../../widgets/layouts/app_scaffold_page.dart';
 import 'calendar_controller.dart';
 import 'widgets/calendar_month_year_switch.dart';
-import 'widgets/calendar_scrollable_calendar.dart';
+import 'widgets/scrollable_calendar.dart';
 import 'widgets/calendar_week_row.dart';
 
 class CalendarPage extends GetView<CalendarController> {
@@ -38,7 +38,7 @@ class CalendarPage extends GetView<CalendarController> {
               Obx(
                 () => CalendarMonthYearSwitch(
                   onTabChanged: controller.changeTab,
-                  currentSelectedTab: controller.selectedTab,
+                  currentSelectedTab: controller.selectedTab.value,
                 ),
               ),
               ThemeSizedBox.height32,
@@ -48,7 +48,8 @@ class CalendarPage extends GetView<CalendarController> {
                 ),
                 child: Obx(
                   () => Visibility(
-                    visible: controller.selectedTab == CalendarTabs.monthTab,
+                    visible:
+                        controller.selectedTab.value == CalendarTabs.monthTab,
                     child: CalendarWeekRow(controller: controller),
                   ),
                 ),
@@ -58,17 +59,17 @@ class CalendarPage extends GetView<CalendarController> {
                   children: [
                     Obx(
                       () => Offstage(
-                        offstage:
-                            !(controller.selectedTab == CalendarTabs.monthTab &&
-                                controller.pageShouldRefresh),
+                        offstage: !(controller.selectedTab.value ==
+                                CalendarTabs.monthTab &&
+                            controller.pageShouldRefresh),
                         child: _scrollableCalendar,
                       ),
                     ),
                     Obx(
                       () => Offstage(
-                        offstage:
-                            !(controller.selectedTab == CalendarTabs.yearTab &&
-                                controller.pageShouldRefresh),
+                        offstage: !(controller.selectedTab.value ==
+                                CalendarTabs.yearTab &&
+                            controller.pageShouldRefresh),
                         child: const CalendarYearBody(),
                       ),
                     ),

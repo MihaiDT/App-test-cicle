@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/modules/calendar/calendar_store.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_dialog.dart';
+import 'package:lines/routes/routes.dart';
 
 import '../../data/models/symptom_category.dart';
 
@@ -40,7 +41,11 @@ class SymptomCategoriesController extends GetxController {
       );
     }
     //fire a callback whenever the save button is supposed to be shown
-    ever(_buttonShown, (newValue) => onSaveButtonValueChanged(newValue));
+    ever(
+      _buttonShown,
+      condition: () => Get.currentRoute == Routes.calendar,
+      (newValue) => onSaveButtonValueChanged(newValue),
+    );
     super.onInit();
   }
 

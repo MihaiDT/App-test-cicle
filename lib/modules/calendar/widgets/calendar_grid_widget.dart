@@ -67,9 +67,10 @@ class CalendarGridWidget extends StatelessWidget {
 
     return Obx(
       () {
-        if (controller.selectedTab == CalendarTabs.monthTab &&
+        if (controller.selectedTab.value == CalendarTabs.monthTab &&
             multipleSelectedMode) {
-          bool isSelected = controller.datesToAdd.containsKey(formattedDate);
+          bool isSelected =
+              controller.periodDatesToAdd.containsKey(formattedDate);
           return CalendarDaySelectMultipleWidget(
             isSelected: isSelected,
             text: dayText,

@@ -23,39 +23,33 @@ class ScrollableCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        calendarController.modifyPeriodMode;
-        return ScrollablePositionedList.separated(
-          itemScrollController:
-              calendarScrollableCalendarController.itemScrollController,
-          separatorBuilder: (_, __) => SizedBox(height: spaceBetweenCalendars),
-          itemCount: calendarScrollableCalendarController.months.length,
-          itemBuilder: (context, index) {
-            final DateTime month =
-                calendarScrollableCalendarController.months[index];
-            if (index == 0) {
-              return Column(
-                children: [
-                  ThemeSizedBox.height32,
-                  _childColumn(month, context),
-                ],
-              );
-            }
+    return ScrollablePositionedList.separated(
+      itemScrollController:
+          calendarScrollableCalendarController.itemScrollController,
+      separatorBuilder: (_, __) => SizedBox(height: spaceBetweenCalendars),
+      itemCount: calendarScrollableCalendarController.months.length,
+      itemBuilder: (context, index) {
+        final DateTime month =
+            calendarScrollableCalendarController.months[index];
+        if (index == 0) {
+          return Column(
+            children: [
+              ThemeSizedBox.height32,
+              _childColumn(month, context),
+            ],
+          );
+        }
 
-            //if you reached the end then add some space after the last month
-            if (index >=
-                calendarScrollableCalendarController.months.length - 1) {
-              return Column(
-                children: [
-                  _childColumn(month, context),
-                  SizedBox(height: Get.height * 0.3),
-                ],
-              );
-            }
-            return _childColumn(month, context);
-          },
-        );
+        //if you reached the end then add some space after the last month
+        if (index >= calendarScrollableCalendarController.months.length - 1) {
+          return Column(
+            children: [
+              _childColumn(month, context),
+              SizedBox(height: Get.height * 0.3),
+            ],
+          );
+        }
+        return _childColumn(month, context);
       },
     );
   }
@@ -78,7 +72,7 @@ class ScrollableCalendar extends StatelessWidget {
             month: month.month,
             circleRadius: 17,
             onDayTapped: calendarScrollableCalendarController.onDayTapped,
-            multipleSelectedMode: calendarController.modifyPeriodMode,
+            multipleSelectedMode: calendarController.modifyPeriodMode.value,
           ),
         )
       ],
