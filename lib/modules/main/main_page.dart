@@ -6,6 +6,7 @@ import 'package:lines/modules/advices/advices_page.dart';
 import 'package:lines/modules/drawer/drawer_main_page.dart';
 import 'package:lines/modules/home/home_page.dart';
 import 'package:lines/modules/main/main_controller.dart';
+import 'package:lines/modules/prizes/prizes_page.dart';
 import 'package:lines/modules/profile/pages/profile_page.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
@@ -85,6 +86,8 @@ class MainPage extends GetView<MainController> {
                 return const HomePage();
               case 1:
                 return const AdvicesPage();
+              case 2:
+                return const PrizesPage();
               case 3:
                 return const ProfilePage();
               default:

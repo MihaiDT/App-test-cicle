@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lines/modules/advices/controllers/advices_controller.dart';
+import 'package:lines/modules/prizes/controller/prizes_controller.dart';
 
 import '../home/home_controller.dart';
 
@@ -24,6 +25,10 @@ class MainController extends GetxController {
       case 1:
         Get.put(
           AdvicesController(),
+        );
+      case 2:
+        Get.put(
+          PrizesController(),
         );
     }
   }
