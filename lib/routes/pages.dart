@@ -37,6 +37,7 @@ import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_intro_outro_bin
 import 'package:lines/modules/welcome_quiz/quiz_intro_page.dart';
 import 'package:lines/modules/welcome_quiz/quiz_outro_page.dart';
 import 'package:lines/modules/welcome_quiz/welcome_quiz_page.dart';
+import 'package:lines/modules/welcome_walkthrough/welcome_walkthrough_page.dart';
 
 import '../modules/access_wrapper/wrapper_access_widget.dart';
 import '../modules/birth_date/birth_date_page.dart';
@@ -52,8 +53,6 @@ import '../modules/register/register_binding.dart';
 import '../modules/register/register_page.dart';
 import '../modules/splash/splash_binding.dart';
 import '../modules/splash/splash_page.dart';
-import '../modules/walkthrough/walkthrough_binding.dart';
-import '../modules/walkthrough/walkthrough_page.dart';
 import 'routes.dart';
 
 class Pages {
@@ -68,14 +67,6 @@ class Pages {
         const SplashPage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
-    ),
-
-    // Walkthrough
-    GetPage(
-      binding: WalkthroughBinding(),
-      name: Routes.walkthrough,
-      page: () => _mediaQueryWrapper(const WalkthroughPage()),
       transition: Transition.fade,
     ),
 
@@ -327,6 +318,15 @@ class Pages {
         const ContentLibraryCategoryPage(),
       ),
       transition: Transition.rightToLeft,
+    ),
+
+    /// WelcomeWalkthrough
+    GetPage(
+      name: Routes.welcomeWalkthrough,
+      page: () => _mediaQueryWrapper(
+        const WelcomeWalkthroughPage(),
+      ),
+      transition: Transition.fade,
     ),
   ];
 

@@ -12,7 +12,7 @@ class ReferralController extends GetxController {
       appController.user.rxValue,
       (callback) {
         if (callback.isSuccessful) {
-          Get.offAndToNamed(Routes.walkthrough);
+          Get.offAndToNamed(Routes.welcomeWalkthrough);
         }
       },
     );

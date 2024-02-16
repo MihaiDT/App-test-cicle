@@ -4,7 +4,7 @@ class Routes {
   static const String main = '/main';
   static const String privacyFlags = '/privacyFlags';
   static const String logo = '/';
-  static const String walkthrough = '/walkthrough';
+  static const String welcomeWalkthrough = '/welcome_walkthrough';
 
   static const String register = '/register';
   static const String login = '/login';
