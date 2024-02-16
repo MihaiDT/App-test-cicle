@@ -27,6 +27,7 @@ import 'package:lines/modules/main/main_binding.dart';
 import 'package:lines/modules/main/main_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
+import 'package:lines/modules/prizes_onboarding/prizes_onboarding_page.dart';
 import 'package:lines/modules/profile/bindings/my_menses_section_binding.dart';
 import 'package:lines/modules/profile/bindings/profile_header_binding.dart';
 import 'package:lines/modules/profile/bindings/your_diary_section_binding.dart';
@@ -325,6 +326,14 @@ class Pages {
       name: Routes.welcomeWalkthrough,
       page: () => _mediaQueryWrapper(
         const WelcomeWalkthroughPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    GetPage(
+      name: Routes.prizesOnboardingPage,
+      page: () => _mediaQueryWrapper(
+        const PrizesOnboardingPage(),
       ),
       transition: Transition.fade,
     ),
