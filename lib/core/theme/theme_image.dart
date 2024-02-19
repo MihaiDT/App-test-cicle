@@ -32,4 +32,5 @@ class ThemeImage {
   static String welcomeEmail = '$folderPath/welcome_email.webp';
   static String ginecologa = '$folderPath/ginecologa.webp';
   static String badge = '$folderPath/badge.webp';
+  static String questionMarksGroup = '$folderPath/question_marks_group.webp';
 }
