@@ -7,11 +7,21 @@ import 'package:lines/core/theme/theme_icon.dart';
 
 class AppCoin extends StatelessWidget {
   final int coinAmount;
+  final bool _isSmall;
 
   const AppCoin({
-    super.key,
     required this.coinAmount,
-  });
+    super.key,
+  }) : _isSmall = false;
+
+  const AppCoin.small({
+    required this.coinAmount,
+    super.key,
+  }) : _isSmall = true;
+
+  double get _imageRadius => _isSmall ? 12.0 : 16.0;
+
+  double get _padding => _isSmall ? 8.0 : 11.0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +35,7 @@ class AppCoin extends StatelessWidget {
 
   Widget _coinText(BuildContext context) {
     return Container(
-      height: imageRadius * 2,
+      height: _imageRadius * 2,
       decoration: BoxDecoration(
         border: GradientBoxBorder(
           gradient: ThemeGradient.primary,
@@ -36,15 +46,20 @@ class AppCoin extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.only(
-          left: 14,
-          right: 11 + imageRadius * 2,
+          left: _padding,
+          right: _padding + _imageRadius * 2,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            HeadlineMedium(
-              '+ $coinAmount',
-            ).applyShaders(context),
+            _isSmall
+                ? TitleMedium(
+                    '+ $coinAmount',
+                    fontWeight: FontWeight.w600,
+                  ).applyShaders(context)
+                : HeadlineMedium(
+                    '+ $coinAmount',
+                  ).applyShaders(context),
           ],
         ),
       ),
@@ -61,7 +76,7 @@ class AppCoin extends StatelessWidget {
         ),
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
-          radius: 16.0,
+          radius: _imageRadius,
           child: SvgPicture.asset(
             ThemeIcon.coin,
             fit: BoxFit.scaleDown,
@@ -70,6 +85,4 @@ class AppCoin extends StatelessWidget {
       ),
     );
   }
-
-  double get imageRadius => 16.0;
 }
