@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/badges/bindings/badges_binding.dart';
+import 'package:lines/badges/bindings/completed_badges_binding.dart';
+import 'package:lines/badges/bindings/in_progress_badges_binding.dart';
+import 'package:lines/badges/pages/badges_page.dart';
 import 'package:lines/modules/advices/advices_detail_page.dart';
 import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
@@ -326,6 +330,20 @@ class Pages {
       name: Routes.welcomeWalkthrough,
       page: () => _mediaQueryWrapper(
         const WelcomeWalkthroughPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    /// WelcomeWalkthrough
+    GetPage(
+      name: Routes.badges,
+      bindings: [
+        BadgesBinding(),
+        CompletedBadgesBinding(),
+        InProgressBadgesBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const BadgesPage(),
       ),
       transition: Transition.fade,
     ),

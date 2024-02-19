@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/profile/widgets/badge_tile.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/cards/elevated_card.dart';
 
 class MyBadgesSection extends StatelessWidget {
@@ -47,25 +49,30 @@ class MyBadgesSection extends StatelessWidget {
               progressLabel: "2/10",
             ),
             ThemeSizedBox.height8,
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(
-                  ThemeSize.paddingSmall,
-                ),
-                child: Row(
-                  children: [
-                    const TitleLarge(
-                      "TUTTI I BADGE",
-                    ).applyShaders(context),
-                    const Spacer(),
-                    SvgPicture.asset(
-                      ThemeIcon.arrowRight,
-                      color: ThemeColor.darkBlue,
-                      height: 24,
-                      width: 24,
-                    ),
-                  ],
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.badges);
+              },
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                    ThemeSize.paddingSmall,
+                  ),
+                  child: Row(
+                    children: [
+                      const TitleLarge(
+                        "TUTTI I BADGE",
+                      ).applyShaders(context),
+                      const Spacer(),
+                      SvgPicture.asset(
+                        ThemeIcon.arrowRight,
+                        color: ThemeColor.darkBlue,
+                        height: 24,
+                        width: 24,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

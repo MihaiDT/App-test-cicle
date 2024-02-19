@@ -34,5 +34,6 @@ class Routes {
   static const String account = '/account';
   static const String contentLibraryCategoryPage =
       '/content_library/category_page';
+  static const String badges = '/badges';
   static const String prizesOnboardingPage = '/prizes_onboarding_page';
 }
