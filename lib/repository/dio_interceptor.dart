@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
 
 class DioInterceptor extends Interceptor {
   final Dio dio;
