@@ -111,4 +111,5 @@ class ThemeIcon {
   static String lock = '$folderPath/lock.svg';
   static String circleRoundedIcon = '$folderPath/circle_rounded_icon.svg';
   static String dropRoundedIcon = '$folderPath/drop_rounded_icon.svg';
+  static String plusGradient = '$folderPath/plus_gradient.svg';
 }

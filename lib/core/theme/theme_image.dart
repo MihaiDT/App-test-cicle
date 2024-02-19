@@ -33,4 +33,5 @@ class ThemeImage {
   static String ginecologa = '$folderPath/ginecologa.webp';
   static String badge = '$folderPath/badge.webp';
   static String questionMarksGroup = '$folderPath/question_marks_group.webp';
+  static String loadCode = '$folderPath/load_code.webp';
 }
