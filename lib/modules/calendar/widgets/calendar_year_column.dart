@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/modules/calendar/widgets/calendar_grid_widget.dart';

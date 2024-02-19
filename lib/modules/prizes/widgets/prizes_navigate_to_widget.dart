@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
 
-
 class PrizesNavigateToWidget extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
