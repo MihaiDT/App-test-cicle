@@ -33,4 +33,5 @@ class ThemeColor {
   static Color menstruationColor = const Color(0xffc62f3a);
   static Color defaultPeriodColor = const Color(0xffb4acba);
   static Color historyContainerBg = const Color(0x4ce4d8e7);
+  static Color shadowColor = const Color(0xff9160D7);
 }

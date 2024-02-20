@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/app_theme.dart';
+
 class ElevatedCard extends StatelessWidget {
   final Widget child;
   final DecorationImage? backgroundImage;
@@ -40,14 +42,10 @@ class ElevatedCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.02),
-              offset: const Offset(0, -4),
-              blurRadius: 12,
-            ),
-            BoxShadow(
-              color: Colors.black.withOpacity(0.06),
-              offset: const Offset(0, 4),
-              blurRadius: 12,
+              color: ThemeColor.shadowColor.withOpacity(0.2),
+              offset: const Offset(10, 10),
+              blurRadius: 21,
+              spreadRadius: 4,
             ),
           ],
           border: border,
