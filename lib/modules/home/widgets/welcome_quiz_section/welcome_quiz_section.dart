@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/modules/home/widgets/welcome_quiz_section/welcome_quiz_card.dart';
+import 'package:lines/widgets/cards/coin_card.dart';
 
 class WelcomeQuizSection extends StatelessWidget {
   const WelcomeQuizSection({
     super.key,
   });
+
+  static const _coins = 25;
+  static const _bgColor = Color(0xffedecf6);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,20 @@ class WelcomeQuizSection extends StatelessWidget {
             color: ThemeColor.darkBlue,
           ),
           ThemeSizedBox.height12,
-          const WelcomeQuizCard(),
+          CoinCard(
+            iconPath: ThemeImage.quizIntroImage,
+            coinAmount: _coins,
+            description:
+                "Raccontaci qualcosa su di te e ricevi subito $_coins Coins",
+            title: "Welcome Quiz",
+            backgroundImage: DecorationImage(
+              image: AssetImage(
+                ThemeImage.questionMarksGroup,
+              ),
+              fit: BoxFit.cover,
+            ),
+            backgroundColor: _bgColor,
+          ),
         ],
       ),
     );
