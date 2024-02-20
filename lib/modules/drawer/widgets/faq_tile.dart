@@ -22,6 +22,7 @@ class _FaqTileState extends State<FaqTile> {
 
   @override
   Widget build(BuildContext context) {
+
     return InkWell(
       onTap: () {
         setState(() {
