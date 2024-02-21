@@ -368,6 +368,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const InfoPage(),
       ),
+      transition: Transition.rightToLeft,
     ),
 
     /// InfoDropdownResultsPage
@@ -376,6 +377,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const InfoDropDownResultsPage(),
       ),
+      transition: Transition.rightToLeft,
     ),
   ];
 
