@@ -36,4 +36,6 @@ class Routes {
       '/content_library/category_page';
   static const String badges = '/badges';
   static const String prizesOnboardingPage = '/prizes_onboarding_page';
+  static const String infoPage = '/info_page';
+  static const String infoDropdownResultsPage = '/info_dropdown_results_page';
 }

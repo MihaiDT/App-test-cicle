@@ -27,8 +27,8 @@ class InfoWidget extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ThemeSize.paddingSmall,
+          padding: const EdgeInsets.all(
+            ThemeSize.paddingSmall,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
