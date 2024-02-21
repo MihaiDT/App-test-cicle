@@ -4,7 +4,6 @@ import 'package:lines/data/models/info_group.dart';
 import 'package:lines/data/models/info_product.dart';
 import 'package:lines/modules/info/widgets/info_dropdown.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/dropdown/dropdown.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
 class InfoDropDownResultsPage extends StatelessWidget {

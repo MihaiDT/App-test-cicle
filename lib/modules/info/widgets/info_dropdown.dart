@@ -4,7 +4,7 @@ import 'package:lines/data/models/info_group.dart';
 import 'package:lines/data/models/info_product.dart';
 import 'package:lines/modules/info/widgets/info_dropdown_item.dart';
 import 'package:lines/modules/info/widgets/info_drowdown_sub_header.dart';
-import 'package:lines/widgets/dropdown/dropdown.dart';
+import 'package:lines/widgets/expandable/expandable.dart';
 
 class InfoDropDown extends StatelessWidget {
   final List<InfoGroup> groups;
@@ -16,7 +16,7 @@ class InfoDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropDown(
+    return Expandable(
       title: groups[0].title,
       child: Column(
         children: [
