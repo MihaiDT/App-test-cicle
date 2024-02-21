@@ -1,91 +1,84 @@
 import 'package:flutter/material.dart';
-import 'package:lines/core/app_theme.dart';
-import 'package:lines/modules/info/widgets/info_dropdown_header.dart';
-import 'package:lines/widgets/coin/app_coin.dart';
+import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/data/models/info_group.dart';
+import 'package:lines/data/models/info_product.dart';
+import 'package:lines/modules/info/widgets/info_dropdown_item.dart';
+import 'package:lines/modules/info/widgets/info_drowdown_sub_header.dart';
+import 'package:lines/widgets/dropdown/dropdown.dart';
 
-class InfoDropDown extends StatefulWidget {
+class InfoDropDown extends StatelessWidget {
+  final List<InfoGroup> groups;
+
   const InfoDropDown({
+    required this.groups,
     super.key,
   });
 
   @override
-  State<InfoDropDown> createState() => _InfoDropDownState();
-}
-
-class _InfoDropDownState extends State<InfoDropDown> {
-  bool _isHidden = true;
-
-  static const Color _bgColor = Color(0xfff3eef4);
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: _bgColor,
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(
-          ThemeSize.paddingSmall,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            InkWell(
-              onTap: () {
-                _isHidden = !_isHidden;
-                setState(() {});
-              },
-              child: InfoDropDownHeader(
-                title: "Lines è",
-                isHidden: _isHidden,
-              ),
+    return DropDown(
+      title: groups[0].title,
+      child: Column(
+        children: [
+          const Divider(),
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: groups.length,
+            itemBuilder: (context, index) {
+              if (index == 0) {
+                return _itemsAndTitle(products: groups[index].products);
+              }
+              return _itemsAndTitle(
+                headerText: groups[index].title,
+                products: groups[index].products,
+              );
+            },
+            separatorBuilder: (context, index) => Column(
+              children: [
+                const Divider(),
+                ThemeSizedBox.height24,
+              ],
             ),
-            Visibility(
-              visible: _isHidden,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 2,
-                ),
-                child: Divider(),
-              ),
-            ),
-            Visibility(
-              visible: _isHidden,
-              child: ListView.separated(
-                itemBuilder: (context, index) => _infoItem(
-                  "Lines è con ali",
-                  250,
-                ),
-                itemCount: 10,
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                separatorBuilder: (context, index) => const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 2,
-                  ),
-                  child: Divider(),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _infoItem(String text, int coinAmount) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        BodyMedium(
-          text,
-          color: ThemeColor.darkBlue,
+  Widget _itemsAndTitle(
+      {String? headerText, required List<InfoProduct> products}) {
+    if (headerText != null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          InfoDropDownSubHeader(
+            title: headerText,
+          ),
+          const Divider(),
+          _items(products),
+        ],
+      );
+    }
+    return _items(products);
+  }
+
+  Widget _items(List<InfoProduct> products) {
+    return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: products.length,
+      itemBuilder: (context, index) => InfoDropDownItem(
+        text: products[index].text,
+        coinAmount: products[index].coinAmount,
+      ),
+      separatorBuilder: (context, index) => const Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 4,
         ),
-        AppCoin.small(coinAmount: coinAmount),
-      ],
+        child: Divider(),
+      ),
     );
   }
 }
