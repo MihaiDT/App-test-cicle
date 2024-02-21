@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lines/core/app_theme.dart';
 
-class DropDown extends StatefulWidget {
+class Expandable extends StatefulWidget {
   final String title;
   final Widget? child;
 
-  const DropDown({
+  const Expandable({
     required this.title,
     this.child,
     super.key,
   });
 
   @override
-  State<DropDown> createState() => _DropDownState();
+  State<Expandable> createState() => _ExpandableState();
 }
 
-class _DropDownState extends State<DropDown> {
+class _ExpandableState extends State<Expandable> {
   bool _isExpanded = false;
   static const Color _bgColor = Color(0xfff3eef4);
 
