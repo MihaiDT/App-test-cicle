@@ -23,6 +23,9 @@ import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_
 import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
+import 'package:lines/modules/info/binding/info_binding.dart';
+import 'package:lines/modules/info/info_dropdown_results_page.dart';
+import 'package:lines/modules/info/info_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
 import 'package:lines/modules/login/login_binding.dart';
@@ -354,6 +357,25 @@ class Pages {
         const PrizesOnboardingPage(),
       ),
       transition: Transition.fade,
+    ),
+
+    /// InfoPage
+    GetPage(
+      name: Routes.infoPage,
+      bindings: [
+        InfoBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const InfoPage(),
+      ),
+    ),
+
+    /// InfoDropdownResultsPage
+    GetPage(
+      name: Routes.infoDropdownResultsPage,
+      page: () => _mediaQueryWrapper(
+        const InfoDropDownResultsPage(),
+      ),
     ),
   ];
 
