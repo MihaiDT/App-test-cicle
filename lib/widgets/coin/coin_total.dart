@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 
 class CoinTotal extends StatelessWidget {
   final int totalCoins;
+  final bool showSuffix;
 
-  const CoinTotal({super.key, required this.totalCoins});
+  const CoinTotal({
+    required this.totalCoins,
+    this.showSuffix = false,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +24,19 @@ class CoinTotal extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(2),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             SvgPicture.asset(
               ThemeIcon.coin,
             ),
             ThemeSizedBox.width6,
-            TitleMedium(
-                '$totalCoins'), //FIXME: Change textStyle according to figma
+            showSuffix
+                ? TitleMedium(
+                    '$totalCoins Coins',
+                  )
+                : TitleMedium(
+                    '$totalCoins',
+                  ),
             ThemeSizedBox.width8,
           ],
         ),

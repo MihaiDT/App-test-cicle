@@ -61,7 +61,7 @@ class SurveyCard extends StatelessWidget {
                     color: ThemeColor.darkBlue,
                   ),
                   ThemeSizedBox.height8,
-                  AppCoin(
+                  AppCoin.small(
                     coinAmount: coinAmount,
                   ),
                 ],

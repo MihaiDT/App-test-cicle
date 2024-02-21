@@ -31,11 +31,18 @@ class LoadCodeWidget extends StatelessWidget {
               padding: const EdgeInsets.all(
                 _externalContainerPadding,
               ),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: _borderColor,
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(_borderRadius),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(0, 7),
+                    blurRadius: 12,
+                  ),
+                ],
               ),
               child: Container(
                 decoration: const BoxDecoration(
@@ -79,18 +86,30 @@ class LoadCodeWidget extends StatelessWidget {
               ),
             ),
           ),
-          CircleAvatar(
-            backgroundColor: _borderColor,
-            radius: _externalCircleRadius,
-            child: Padding(
-              padding: const EdgeInsets.all(
-                _externalCirclePadding,
-              ),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: _externalCircleRadius - _externalCirclePadding,
-                child: SvgPicture.asset(
-                  ThemeIcon.plusGradient,
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  offset: const Offset(10, 7),
+                  blurRadius: 12,
+                ),
+              ],
+            ),
+            child: CircleAvatar(
+              backgroundColor: _borderColor,
+              radius: _externalCircleRadius,
+              child: Padding(
+                padding: const EdgeInsets.all(
+                  _externalCirclePadding,
+                ),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: _externalCircleRadius - _externalCirclePadding,
+                  child: SvgPicture.asset(
+                    ThemeIcon.plusGradient,
+                  ),
                 ),
               ),
             ),
