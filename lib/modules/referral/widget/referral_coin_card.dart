@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 
-class CoinCard extends StatelessWidget {
+class ReferralCoinCard extends StatelessWidget {
   final int coinValue;
 
-  const CoinCard({
+  const ReferralCoinCard({
     required this.coinValue,
     super.key,
   });

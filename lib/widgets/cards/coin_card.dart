@@ -40,12 +40,14 @@ class CoinCard extends StatelessWidget {
           left: 26,
           top: 16,
           bottom: 16,
-          right: 20,
+          right: 26,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
+              flex: 2,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +62,7 @@ class CoinCard extends StatelessWidget {
                     color: ThemeColor.darkBlue,
                   ),
                   ThemeSizedBox.height8,
-                  AppCoin(
+                  AppCoin.small(
                     coinAmount: coinAmount,
                   ),
                 ],

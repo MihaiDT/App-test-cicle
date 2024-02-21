@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/referral/referral_controller.dart';
-import 'package:lines/modules/referral/widget/coin_card.dart';
+import 'package:lines/modules/referral/widget/referral_coin_card.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
@@ -79,7 +79,7 @@ class ReferralPage extends GetView<ReferralController> {
                 textEditingController: controller.referralCodeController,
               ),
               ThemeSizedBox.height32,
-              CoinCard(
+              ReferralCoinCard(
                 coinValue: controller.coinValue,
               ),
             ],

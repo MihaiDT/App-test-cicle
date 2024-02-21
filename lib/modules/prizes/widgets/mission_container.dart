@@ -13,7 +13,7 @@ class MissionContainer extends StatelessWidget {
   static const Color _borderColor = Color(0x4cf5f5f5);
   static const double _borderRadius = 20.0;
   static const double _externalContainerPadding = 4.0;
-  static const Color _inProgressBgColor = Color(0xffbb1c73);
+  static const Color _inProgressBgColor = Color(0x1e2d4f33);
 
   @override
   Widget build(BuildContext context) {
@@ -37,46 +37,74 @@ class MissionContainer extends StatelessWidget {
         child: Stack(
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(
-                        _borderRadius - _externalContainerPadding,
-                      ),
-                      topRight: Radius.circular(
-                        _borderRadius - _externalContainerPadding,
+                Flexible(
+                  child: Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      image: mission.imageUrl?.isNotEmpty == true
+                          ? DecorationImage(
+                              image: NetworkImage(mission.imageUrl!),
+                            )
+                          : null,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(
+                          _borderRadius - _externalContainerPadding,
+                        ),
+                        topRight: Radius.circular(
+                          _borderRadius - _externalContainerPadding,
+                        ),
                       ),
                     ),
-                    child: mission.imageUrl?.isNotEmpty == true
-                        ? Image.network(
-                            mission.imageUrl!,
-                            fit: BoxFit.cover,
-                          )
-                        : const Placeholder(),
+                    child:
+                        mission.imageUrl == null ? const Placeholder() : null,
                   ),
+                  // child: ClipRRect(
+                  //   borderRadius: const BorderRadius.only(
+                  //     topLeft: Radius.circular(
+                  //       _borderRadius - _externalContainerPadding,
+                  //     ),
+                  //     topRight: Radius.circular(
+                  //       _borderRadius - _externalContainerPadding,
+                  //     ),
+                  //   ),
+                  //   child: mission.imageUrl?.isNotEmpty == true
+                  //       ? Image.network(
+                  //           mission.imageUrl!,
+                  //           fit: BoxFit.cover,
+                  //         )
+                  //       : const Placeholder(),
+                  // ),
                 ),
-                ThemeSizedBox.height16,
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ThemeSizedBox.height16,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+                        child: TitleMedium(
+                          "FINO AL ${mission.untilDate}",
+                          color: ThemeColor.brightPink,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+                        child: HeadlineSmall(
+                          mission.description,
+                          color: ThemeColor.darkBlue,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        ),
+                      ),
+                      ThemeSizedBox.height16,
+                    ],
                   ),
-                  child: TitleMedium(
-                    "FINO AL ${mission.untilDate}",
-                    color: ThemeColor.brightPink,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  child: HeadlineSmall(
-                    mission.description,
-                    color: ThemeColor.darkBlue,
-                  ),
-                ),
-                ThemeSizedBox.height16,
+                )
               ],
             ),
             Align(
