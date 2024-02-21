@@ -18,12 +18,13 @@ class DropDown extends StatefulWidget {
 
 class _DropDownState extends State<DropDown> {
   bool _isExpanded = false;
+  static const Color _bgColor = Color(0xfff3eef4);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xffE4D8E7),
+        color: _bgColor,
         borderRadius: BorderRadius.circular(20),
       ),
       width: double.infinity,
@@ -76,7 +77,10 @@ class _DropDownState extends State<DropDown> {
                   milliseconds: 300,
                 ),
                 curve: Curves.easeInOut,
-                child: Visibility(visible: _isExpanded, child: widget.child!),
+                child: Visibility(
+                  visible: _isExpanded,
+                  child: widget.child!,
+                ),
               ),
           ],
         ),
