@@ -10,7 +10,7 @@ import 'package:lines/tutorial_check_mark/src/widgets/animated_focus_light.dart'
 
 class TutorialCoachMarkWidget extends StatefulWidget {
   const TutorialCoachMarkWidget({
-    Key? key,
+    super.key,
     required this.targets,
     this.finish,
     this.paddingFocus = 10,
@@ -18,11 +18,9 @@ class TutorialCoachMarkWidget extends StatefulWidget {
     this.onClickTargetWithTapPosition,
     this.clickOverlay,
     this.alignSkip = Alignment.bottomRight,
-    this.textSkip = "SKIP",
     this.onClickSkip,
     this.colorShadow = Colors.black,
     this.opacityShadow = 0.8,
-    this.textStyleSkip = const TextStyle(color: Colors.white),
     this.hideSkip = false,
     this.focusAnimationDuration,
     this.unFocusAnimationDuration,
@@ -33,8 +31,7 @@ class TutorialCoachMarkWidget extends StatefulWidget {
     this.rootOverlay = false,
     this.showSkipInLastTarget = false,
     this.imageFilter,
-  })  : assert(targets.length > 0),
-        super(key: key);
+  }) : assert(targets.length > 0);
 
   final List<TargetFocus> targets;
   final FutureOr Function(TargetFocus)? clickTarget;
@@ -47,8 +44,6 @@ class TutorialCoachMarkWidget extends StatefulWidget {
   final double paddingFocus;
   final Function()? onClickSkip;
   final AlignmentGeometry alignSkip;
-  final String textSkip;
-  final TextStyle textStyleSkip;
   final bool hideSkip;
   final Duration? focusAnimationDuration;
   final Duration? unFocusAnimationDuration;
@@ -253,26 +248,7 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
 
     return Align(
       alignment: currentTarget?.alignSkip ?? widget.alignSkip,
-      child: SafeArea(
-        child: AnimatedOpacity(
-          opacity: showContent ? 1 : 0,
-          duration: const Duration(milliseconds: 300),
-          child: InkWell(
-            onTap: skip,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: IgnorePointer(
-                ignoringSemantics: false,
-                child: widget.skipWidget ??
-                    Text(
-                      widget.textSkip,
-                      style: widget.textStyleSkip,
-                    ),
-              ),
-            ),
-          ),
-        ),
-      ),
+      child: widget.skipWidget,
     );
   }
 

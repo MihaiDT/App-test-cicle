@@ -18,8 +18,6 @@ class TutorialCoachMark {
   final double paddingFocus;
   final Function()? onSkip;
   final AlignmentGeometry alignSkip;
-  final String textSkip;
-  final TextStyle textStyleSkip;
   final bool hideSkip;
   final Color colorShadow;
   final double opacityShadow;
@@ -44,8 +42,6 @@ class TutorialCoachMark {
     this.paddingFocus = 10,
     this.onSkip,
     this.alignSkip = Alignment.bottomRight,
-    this.textSkip = "SKIP",
-    this.textStyleSkip = const TextStyle(color: Colors.white),
     this.hideSkip = false,
     this.opacityShadow = 0.8,
     this.focusAnimationDuration = const Duration(milliseconds: 600),
@@ -70,8 +66,6 @@ class TutorialCoachMark {
           onClickSkip: skip,
           alignSkip: alignSkip,
           skipWidget: skipWidget,
-          textSkip: textSkip,
-          textStyleSkip: textStyleSkip,
           hideSkip: hideSkip,
           colorShadow: colorShadow,
           opacityShadow: opacityShadow,

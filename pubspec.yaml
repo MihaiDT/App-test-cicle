@@ -123,7 +123,6 @@ dependencies:
   # A Flutter plugin for iOS, Android and Web for playing back video on a Widget surface.
   video_player: ^2.8.2
 
-
   # webview_flutter: ^4.4.2
 
 

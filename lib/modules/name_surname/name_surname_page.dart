@@ -51,7 +51,7 @@ class NameSurnamePage extends GetView<NameSurnameController> {
                         }
                       : null,
                   child: const TitleLarge(
-                    "ACCONSENTO",
+                    "AVANTI",
                   ).applyShaders(context),
                 );
               },

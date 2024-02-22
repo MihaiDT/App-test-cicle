@@ -12,71 +12,69 @@ class DrawerMainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Drawer(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ThemeSize.paddingSmall,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ThemeSizedBox.height40,
-              SvgPicture.asset(
-                ThemeIcon.gradientLogo,
-                fit: BoxFit.scaleDown,
+    return Drawer(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: ThemeSize.paddingSmall,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ThemeSizedBox.height60,
+            SvgPicture.asset(
+              ThemeIcon.gradientLogo,
+              fit: BoxFit.scaleDown,
+            ),
+            ThemeSizedBox.height40,
+            const DisplayMedium(
+              "Ciao Erika",
+            ).applyShaders(context),
+            const Divider(
+              color: ThemeColor.buttonDisableBackGround,
+            ),
+            MainDrawerTileSection(
+              title: "Invita un amico",
+              leadingIcon: SvgPicture.asset(
+                ThemeIcon.gift,
               ),
-              ThemeSizedBox.height40,
-              const DisplayMedium(
-                "Ciao Erika",
-              ).applyShaders(context),
-              const Divider(
-                color: ThemeColor.buttonDisableBackGround,
+            ),
+            const Divider(
+              color: ThemeColor.buttonDisableBackGround,
+            ),
+            MainDrawerTileSection(
+              title: "Assistenza",
+              leadingIcon: SvgPicture.asset(
+                ThemeIcon.questionMark,
               ),
-              MainDrawerTileSection(
-                title: "Invita un amico",
-                leadingIcon: SvgPicture.asset(
-                  ThemeIcon.gift,
-                ),
+              onTap: () {
+                Get.toNamed(Routes.faq);
+              },
+            ),
+            const Divider(
+              color: ThemeColor.buttonDisableBackGround,
+            ),
+            MainDrawerTileSection(
+              title: "Account",
+              leadingIcon: SvgPicture.asset(
+                ThemeIcon.user,
               ),
-              const Divider(
-                color: ThemeColor.buttonDisableBackGround,
+              onTap: () {
+                Get.toNamed(Routes.account);
+              },
+            ),
+            const Divider(
+              color: ThemeColor.buttonDisableBackGround,
+            ),
+            MainDrawerTileSection(
+              title: "Impostazioni",
+              leadingIcon: SvgPicture.asset(
+                ThemeIcon.settings,
               ),
-              MainDrawerTileSection(
-                title: "Assistenza",
-                leadingIcon: SvgPicture.asset(
-                  ThemeIcon.questionMark,
-                ),
-                onTap: () {
-                  Get.toNamed(Routes.faq);
-                },
-              ),
-              const Divider(
-                color: ThemeColor.buttonDisableBackGround,
-              ),
-              MainDrawerTileSection(
-                title: "Account",
-                leadingIcon: SvgPicture.asset(
-                  ThemeIcon.user,
-                ),
-                onTap: () {
-                  Get.toNamed(Routes.account);
-                },
-              ),
-              const Divider(
-                color: ThemeColor.buttonDisableBackGround,
-              ),
-              MainDrawerTileSection(
-                title: "Impostazioni",
-                leadingIcon: SvgPicture.asset(
-                  ThemeIcon.settings,
-                ),
-              ),
-              const Divider(
-                color: ThemeColor.buttonDisableBackGround,
-              ),
-            ],
-          ),
+            ),
+            const Divider(
+              color: ThemeColor.buttonDisableBackGround,
+            ),
+          ],
         ),
       ),
     );

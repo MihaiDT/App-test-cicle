@@ -28,7 +28,7 @@ class MainDrawerTileSection extends StatelessWidget {
                     width: 24,
                   ),
               ThemeSizedBox.width8,
-              DisplayMedium(
+              HeadlineSmall(
                 title,
                 color: ThemeColor.darkBlue,
               ),

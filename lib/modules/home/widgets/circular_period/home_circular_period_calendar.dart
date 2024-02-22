@@ -57,7 +57,8 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10.0),
-                        child: _avatar,
+                        child:
+                            getAvatar(controller.homeCircularPeriodCalendarKey),
                       ),
                       if (controller.playButtonVisible)
                         Positioned(
@@ -89,8 +90,9 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
     );
   }
 
-  Widget get _avatar {
+  Widget getAvatar(Key key) {
     return SizedBox(
+      key: key,
       width: 100,
       height: 140,
       child: Image.asset(

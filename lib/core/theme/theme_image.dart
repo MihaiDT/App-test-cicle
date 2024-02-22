@@ -34,5 +34,11 @@ class ThemeImage {
   static String badge = '$folderPath/badge.webp';
   static String questionMarksGroup = '$folderPath/question_marks_group.webp';
   static String loadCode = '$folderPath/load_code.webp';
+  static String speechBubble = '$folderPath/speech_bubble.webp';
+
+  static String faseFollicolare = '$folderPath/fase_follicolare.webp';
+  static String faseOvulatoria = '$folderPath/fase_ovulatoria.webp';
+  static String faseLuteale = '$folderPath/fase_luteale.webp';
+  static String faseMestruale = '$folderPath/fase_mestruale.webp';
   static String inviteAFriend = '$folderPath/invite_a_friend.webp';
 }
