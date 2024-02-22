@@ -38,4 +38,5 @@ class Routes {
   static const String prizesOnboardingPage = '/prizes_onboarding_page';
   static const String infoPage = '/info_page';
   static const String infoDropdownResultsPage = '/info_dropdown_results_page';
+  static const String yourDiaryPage = '/your_diary_page';
 }

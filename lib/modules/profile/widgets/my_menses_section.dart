@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/profile/controllers/my_menses_section_controller.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/cards/elevated_card.dart';
 
 class MyMensesSection extends GetView<MyMensesSectionController> {
@@ -46,28 +47,33 @@ class MyMensesSection extends GetView<MyMensesSectionController> {
               ],
             ),
             ThemeSizedBox.height8,
-            Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(60),
+            InkWell(
+              onTap: () {
+                Get.toNamed(Routes.yourDiaryPage);
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(60),
+                  ),
+                  color: Colors.white,
                 ),
-                color: Colors.white,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(
-                  16,
-                ),
-                child: Row(
-                  children: [
-                    const TitleLarge(
-                      "GRAFICI E STATISTICHE",
-                    ).applyShaders(context),
-                    const Spacer(),
-                    SvgPicture.asset(
-                      ThemeIcon.arrowRight,
-                      color: ThemeGradient.colorPrimaryGradientLight,
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                    16,
+                  ),
+                  child: Row(
+                    children: [
+                      const TitleLarge(
+                        "GRAFICI E STATISTICHE",
+                      ).applyShaders(context),
+                      const Spacer(),
+                      SvgPicture.asset(
+                        ThemeIcon.arrowRight,
+                        color: ThemeGradient.colorPrimaryGradientLight,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

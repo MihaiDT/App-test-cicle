@@ -46,6 +46,8 @@ import 'package:lines/modules/welcome_quiz/quiz_intro_page.dart';
 import 'package:lines/modules/welcome_quiz/quiz_outro_page.dart';
 import 'package:lines/modules/welcome_quiz/welcome_quiz_page.dart';
 import 'package:lines/modules/welcome_walkthrough/welcome_walkthrough_page.dart';
+import 'package:lines/modules/your_diary/bindings/your_diary_binding.dart';
+import 'package:lines/modules/your_diary/pages/your_diary_page.dart';
 
 import '../modules/access_wrapper/wrapper_access_widget.dart';
 import '../modules/birth_date/birth_date_page.dart';
@@ -355,6 +357,17 @@ class Pages {
       name: Routes.prizesOnboardingPage,
       page: () => _mediaQueryWrapper(
         const PrizesOnboardingPage(),
+      ),
+      transition: Transition.fade,
+    ),
+
+    GetPage(
+      name: Routes.yourDiaryPage,
+      bindings: [
+        YourDiaryBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const YourDiaryPage(),
       ),
       transition: Transition.fade,
     ),
