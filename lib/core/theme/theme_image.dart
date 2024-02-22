@@ -41,4 +41,6 @@ class ThemeImage {
   static String faseLuteale = '$folderPath/fase_luteale.webp';
   static String faseMestruale = '$folderPath/fase_mestruale.webp';
   static String inviteAFriend = '$folderPath/invite_a_friend.webp';
+  static String luckyLines = '$folderPath/lucky_lines.webp';
+  static String bigCoin = '$folderPath/big_coin.webp';
 }
