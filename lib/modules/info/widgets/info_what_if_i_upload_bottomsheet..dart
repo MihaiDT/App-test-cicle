@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 
-class InfoWhatAreCoins extends StatelessWidget {
-  const InfoWhatAreCoins({
+class InfoWhatIfIUploadBottomSheet extends StatelessWidget {
+  const InfoWhatIfIUploadBottomSheet({
     super.key,
   });
 
@@ -16,18 +16,14 @@ class InfoWhatAreCoins extends StatelessWidget {
         children: [
           ThemeSizedBox.height32,
           const DisplayMedium(
-            "Cosa sono i Coins?",
+            "E se carico un codice prodotto di una missione?",
             textAlign: TextAlign.center,
           ).applyShaders(context),
-          ThemeSizedBox.height16,
+          ThemeSizedBox.height32,
           const BodyLarge(
-            "I Coins sono la moneta virtuale dell'app My Lines che accumuli sia utilizzando l'app che caricando i codici dei tuoi prodotti.Puoi utilizzare i Coins per partecipare alle lotterie instantanee Lucky Lines",
+            "Se carichi nella sezione generica \"Carica codice\"...missione.Ti basterà portarla a compimento nei termini stabiliti per ricevere immediatamente il tuo premio all'indirizzo email di registrazione. Se non disponibile riceverai il premio entro qualche giorno. Se il codice inserito può partecipare a più missioni potrai scegliere a quale vuoi partecipare.",
             color: ThemeColor.darkBlue,
             textAlign: TextAlign.center,
-          ),
-          Image.asset(
-            ThemeImage.bigCoin,
-            width: 230,
           ),
           ThemeSizedBox.height32,
         ],

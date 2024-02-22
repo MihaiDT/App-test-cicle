@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/widgets/buttons/app_round_button.dart';
 
-class InfoWidget extends StatelessWidget {
+class InfoQuestion extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
 
-  const InfoWidget({
+  const InfoQuestion({
     required this.text,
     this.onTap,
     super.key,
@@ -33,9 +32,11 @@ class InfoWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              HeadlineMedium(
-                text,
-                color: ThemeColor.darkBlue,
+              Flexible(
+                child: HeadlineMedium(
+                  text,
+                  color: ThemeColor.darkBlue,
+                ),
               ),
               CircleAvatar(
                 radius: 24,
