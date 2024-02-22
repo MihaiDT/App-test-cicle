@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar_shimmer.dart';
+import 'package:lines/modules/home/widgets/header_section.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_info.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_info_shimmer.dart';
 import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar_shimmer.dart';
@@ -22,6 +23,8 @@ class HomePage extends GetView<HomeController> {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
+        const HeaderSection(),
+        ThemeSizedBox.height16,
         Obx(
           () => appController.currentPeriod.responseHandler.isPending
               ? const HomeHorizontalCalendarShimmer()

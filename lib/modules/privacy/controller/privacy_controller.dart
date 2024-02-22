@@ -5,6 +5,8 @@ import 'package:lines/routes/routes.dart';
 
 class PrivacyController extends GetxController {
   final RxBool firstAccepted = false.obs;
+  final RxBool secondAccepted = false.obs;
+  final RxBool thirdAccepted = false.obs;
   final RxBool isAcceptedAll = false.obs;
   RxBool buttonIsPending = false.obs;
 
@@ -35,11 +37,10 @@ class PrivacyController extends GetxController {
   }
 
   void acceptAll() {
-    isAcceptedAll.value = !isAcceptedAll.value;
-    firstAccepted.value = isAcceptedAll.value;
+    firstAccepted.value = true;
+    secondAccepted.value = true;
+    thirdAccepted.value = true;
   }
 
-  void accept() {
-    firstAccepted.value = !firstAccepted.value;
-  }
+  void accept() {}
 }

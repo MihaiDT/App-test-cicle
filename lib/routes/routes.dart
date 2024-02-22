@@ -39,4 +39,5 @@ class Routes {
   static const String infoPage = '/info_page';
   static const String infoDropdownResultsPage = '/info_dropdown_results_page';
   static const String yourDiaryPage = '/your_diary_page';
+  static const String tutorEmailPage = '/tutor_email_page';
 }

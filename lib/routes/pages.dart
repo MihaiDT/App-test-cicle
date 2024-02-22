@@ -40,6 +40,8 @@ import 'package:lines/modules/profile/bindings/profile_header_binding.dart';
 import 'package:lines/modules/profile/bindings/your_diary_section_binding.dart';
 import 'package:lines/modules/referral/referral_binding.dart';
 import 'package:lines/modules/referral/referral_page.dart';
+import 'package:lines/modules/tutor_email/tutor_email_binding.dart';
+import 'package:lines/modules/tutor_email/tutor_email_page.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_binding.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_intro_outro_binding.dart';
 import 'package:lines/modules/welcome_quiz/quiz_intro_page.dart';
@@ -88,7 +90,7 @@ class Pages {
         const RegisterPage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     // Login
@@ -99,7 +101,7 @@ class Pages {
         const LoginPage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     // Cookie
@@ -109,7 +111,7 @@ class Pages {
         const CookiePage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     //Calendar
@@ -117,7 +119,7 @@ class Pages {
       binding: CalendarBinding(),
       name: Routes.calendar,
       page: () => _mediaQueryWrapper(const CalendarPage()),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     //QuizIntroPage
@@ -136,6 +138,7 @@ class Pages {
         WelcomeQuizIntroOutroBinding(),
       ],
       page: () => _mediaQueryWrapper(const QuizOutroPage()),
+      transition: Transition.rightToLeft,
     ),
 
     // NameSurname
@@ -146,7 +149,7 @@ class Pages {
         const NameSurnamePage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     // BirthDate
@@ -157,7 +160,7 @@ class Pages {
         const BirthDatePage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     // PrivacyPage
@@ -170,7 +173,7 @@ class Pages {
         const PrivacyPage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     // LastMensesPage
@@ -183,7 +186,7 @@ class Pages {
         const LastMensesPage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     // HowLongMensesPage
@@ -197,7 +200,7 @@ class Pages {
         const HowLongMensesPage(),
         authNeeded: false,
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     /// WelcomeQuizPage
@@ -209,7 +212,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const WelcomeQuizPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     /// ReferralPage
@@ -221,7 +224,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const ReferralPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     ///ConfirmEmailPage
@@ -233,7 +236,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const ConfirmEmailPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     /// Main
@@ -250,7 +253,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const MainPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     ///ContentLibrarySearchPage
@@ -274,7 +277,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const ContentLibraryPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     ///FaqPage
@@ -283,7 +286,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const FaqPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     ///AccountPage
@@ -292,7 +295,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const AccountPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     ///ArticleDetailPage
@@ -304,7 +307,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const AdvicesDetailPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     ///ChangeProfilePage
@@ -319,7 +322,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const ChangeProfilePage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     GetPage(
@@ -350,7 +353,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const BadgesPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     GetPage(
@@ -358,7 +361,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const PrizesOnboardingPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     GetPage(
@@ -389,6 +392,18 @@ class Pages {
       name: Routes.infoDropdownResultsPage,
       page: () => _mediaQueryWrapper(
         const InfoDropDownResultsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// InfoDropdownResultsPage
+    GetPage(
+      name: Routes.tutorEmailPage,
+      bindings: [
+        TutorEmailBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const TutorEmailPage(),
       ),
       transition: Transition.rightToLeft,
     ),

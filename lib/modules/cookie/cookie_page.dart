@@ -15,12 +15,25 @@ class CookiePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       extendBodyBehindAppBar: true,
-      appBar: const TransparentAppBar(),
+      appBar: TransparentAppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              navigateToNextPage();
+            },
+            icon: const Icon(
+              Icons.close,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
       backgroundImage: ThemeDecoration.images.bgDark,
       body: SafeArea(
         child: AppScaffoldPadding(
           child: Column(
             children: [
+              ThemeSizedBox.height32,
               Image.asset(
                 ThemeImage.cookie,
                 fit: BoxFit.contain,
@@ -32,37 +45,57 @@ class CookiePage extends StatelessWidget {
               ),
               ThemeSizedBox.height16,
               const BodyMedium(
-                "Quest’app utilizza cookie tecnici e cookie fingerprinting di profilazione, anche di terze parti, per offrirti contenuti, servizi e pubblicità interessanti per te sulla base delle tue attività.",
+                "Quest'app utilizza cookie tecnici/fingerprinting di profilazione, anche di terze parti,"
+                " per offrirti contenuti, servizi e pubblicità interessanti per te sulla base delle tue attività.",
                 textAlign: TextAlign.center,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () => _onKnowMoreAboutCookies(),
                 child: const BodyMedium(
                   "Clicca qui per saperne di più.",
                   textAlign: TextAlign.center,
                   underline: true,
                 ),
               ),
+              const BodyMedium(
+                "Clicca \"acconsento\" per accettare, clicca \"più opzioni\""
+                " per accettare selettivamente tutti o alcuni cookie/fingerprinting."
+                " Clicca sulla X per chiudere senza prestare consenso.",
+                textAlign: TextAlign.center,
+              ),
               const Spacer(),
               SizedBox(
                 width: double.infinity,
                 child: SecondaryButton(
                   onPressed: () {
-                    Get.toNamed(
-                      appController.isLoginFlow.value == true
-                          ? Routes.login
-                          : Routes.register,
-                    );
+                    navigateToNextPage();
                   },
                   child: const TitleLarge(
                     "ACCONSENTO",
                   ).applyShaders(context),
                 ),
               ),
+              ThemeSizedBox.height16,
+              GestureDetector(
+                onTap: () => _onKnowMoreAboutCookies(),
+                child: const TitleMedium(
+                  "PIÙ OPZIONI",
+                  underline: true,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _onKnowMoreAboutCookies() {}
+
+  void navigateToNextPage() {
+    Get.toNamed(
+      appController.isLoginFlow.value == true ? Routes.login : Routes.register,
     );
   }
 }

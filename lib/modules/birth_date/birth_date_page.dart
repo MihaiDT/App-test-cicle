@@ -10,7 +10,9 @@ import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class BirthDatePage extends GetView<BirthDateController> {
-  const BirthDatePage({super.key});
+  const BirthDatePage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class BirthDatePage extends GetView<BirthDateController> {
                           );
                         }
                       : null,
-                  child: TitleLarge(
+                  child: const TitleLarge(
                     "AVANTI",
                   ).applyShaders(context),
                 );

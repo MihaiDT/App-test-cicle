@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/last_menses/widget/consent_bottomsheet.dart';
+import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/routes/routes.dart';
 
 class LastMensesController extends GetxController {
   @override
-  void onReady() {
-    Get.bottomSheet(
+  Future<void> onReady() async {
+    final bool hasAcceptedPrivacyPolicy = await Get.bottomSheet(
       const ConsentBottomSheet(),
       enableDrag: false,
       isDismissible: false,
@@ -18,6 +21,12 @@ class LastMensesController extends GetxController {
         ),
       ),
     );
+    if (!hasAcceptedPrivacyPolicy) {
+      await AuthenticationService.registration(
+        appController.registerParameter,
+      );
+      Get.offAndToNamed(Routes.main);
+    }
     super.onReady();
   }
 

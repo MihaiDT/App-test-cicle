@@ -112,6 +112,8 @@ class BirthDateController extends AppScaffoldController {
     _closeKeyboard;
     if (!_hasMoreThan13Years(day, month, year)) {
       _showError(context);
+    } else if (_isAgeBetween13And18(day, month, year)) {
+      Get.toNamed(Routes.tutorEmailPage);
     } else {
       _saveBirthDate(day, month, year);
       Get.toNamed(Routes.privacy);
@@ -151,6 +153,29 @@ class BirthDateController extends AppScaffoldController {
 
     // Check if the user is above 14 years old
     return age > 14;
+  }
+
+  bool _isAgeBetween13And18(String day, String month, String year) {
+    DateTime now = DateTime.now();
+
+    // Calculate the current date
+    DateTime userBirthday = DateTime(
+      int.parse(year),
+      int.parse(month),
+      int.parse(day),
+    );
+
+    // Calculate the age difference
+    int age = now.year - userBirthday.year;
+
+    // Check if the user has already had their birthday this year or will have it later
+    if (now.month < userBirthday.month ||
+        (now.month == userBirthday.month && now.day < userBirthday.day)) {
+      age--;
+    }
+
+    // Check if the user is between 13 and 18 years old
+    return age >= 13 && age < 18;
   }
 
   void _showError(BuildContext context) {

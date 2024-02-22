@@ -25,7 +25,7 @@ class WelcomeController extends AppScaffoldController {
   void onTapSignin() {
     appController.isLoginFlow.value = false;
     Get.toNamed(
-      Routes.cookie,
+      Routes.lastMensesPage,
     );
   }
 

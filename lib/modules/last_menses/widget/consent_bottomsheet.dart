@@ -6,7 +6,9 @@ import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 
 class ConsentBottomSheet extends StatelessWidget {
-  const ConsentBottomSheet({super.key});
+  const ConsentBottomSheet({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class ConsentBottomSheet extends StatelessWidget {
           ThemeSizedBox.height40,
           SecondaryButton(
             onPressed: () {
-              Get.back();
+              Get.back(result: true);
             },
             child: const TitleLarge(
               "ACCONSENTO",
@@ -34,7 +36,9 @@ class ConsentBottomSheet extends StatelessWidget {
           ),
           ThemeSizedBox.height16,
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.back(result: false);
+            },
             child: const TitleMedium(
               "NON ACCONSENTO",
               underline: true,
