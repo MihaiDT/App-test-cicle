@@ -14,48 +14,35 @@ class InfoBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      shouldCloseOnMinExtent: true,
-      expand: false,
-      initialChildSize: 0.2,
-      minChildSize: 0.1,
-      maxChildSize: 0.9,
-      controller: draggableScrollableController,
-      builder: (context, scrollController) {
-        return Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 4,
+              width: 64,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: ThemeColor.primaryOpaque,
+              ),
             ),
           ),
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                controller: scrollController,
-                child: child,
-              ),
-              IgnorePointer(
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 4,
-                      width: 64,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: ThemeColor.primaryOpaque,
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        );
-      },
+          Flexible(
+            child: SingleChildScrollView(
+              child: child,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
