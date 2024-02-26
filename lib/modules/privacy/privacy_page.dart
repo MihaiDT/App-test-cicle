@@ -35,18 +35,16 @@ class PrivacyPage extends GetView<PrivacyController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-
                   Obx(
-                        () =>
-                        SecondaryLoadingButton(
-                          onPressed: () {
-                            controller.registerUser();
-                          },
-                          isLoading: controller.buttonIsPending.value,
-                          child: const TitleLarge(
-                            "ACCETTA TUTTO",
-                          ).applyShaders(context),
-                        ),
+                    () => SecondaryLoadingButton(
+                      onPressed: () {
+                        controller.registerUser();
+                      },
+                      isLoading: controller.buttonIsPending.value,
+                      child: const TitleLarge(
+                        "ACCETTA TUTTO",
+                      ).applyShaders(context),
+                    ),
                   ),
                   ThemeSizedBox.height16,
                   GestureDetector(
@@ -61,7 +59,7 @@ class PrivacyPage extends GetView<PrivacyController> {
               ),
             ),
             child: Obx(
-                  () {
+              () {
                 return Column(
                   children: [
                     ThemeSizedBox.height36,
@@ -72,7 +70,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                     PrivacyDetailWidget(
                       title: "Resta aggiornato sul mondo Lines",
                       description:
-                      "Ricevi comunicazioni su Lines e permettici di svolgere ricerche di mercato, come da [informativa privacy]. In qualsiasi momento potrai modificare la tua preferenza.",
+                          "Ricevi comunicazioni su Lines e permettici di svolgere ricerche di mercato, come da [informativa privacy]. In qualsiasi momento potrai modificare la tua preferenza.",
                       onChanged: (value) {
                         controller.firstAccepted.value = value;
                       },
@@ -81,9 +79,9 @@ class PrivacyPage extends GetView<PrivacyController> {
                     ThemeSizedBox.height24,
                     PrivacyDetailWidget(
                       title:
-                      "Ricevi contenuti e missioni personalizzate per te!",
+                          "Ricevi contenuti e missioni personalizzate per te!",
                       description:
-                      "Per noi è importante conoscere i tuoi interessi! Permettici di darti un'esperienza personalizzata inviandoti comunicazioni e promozioni non generiche su Lines e, se lo vorrai, anche sugli altri marchi della famiglia Fater e nostri partner terzi, come da informativa privacy. In qualsiasi momento potrai modificare le tue preferenze.",
+                          "Per noi è importante conoscere i tuoi interessi! Permettici di darti un'esperienza personalizzata inviandoti comunicazioni e promozioni non generiche su Lines e, se lo vorrai, anche sugli altri marchi della famiglia Fater e nostri partner terzi, come da informativa privacy. In qualsiasi momento potrai modificare le tue preferenze.",
                       onChanged: (value) {
                         controller.secondAccepted.value = value;
                       },
@@ -93,7 +91,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                     PrivacyDetailWidget(
                       title: "Ricevi comunicazioni e offerte su altri prodotti",
                       description:
-                      "Ricevi comunicazioni sugli altri brand della famiglia Fater e nostri partner terzi, e permettici di svolgere ricerche di mercato, come da informativa privacy. In qualsiasi momento potrai modificare la tua preferenza.",
+                          "Ricevi comunicazioni sugli altri brand della famiglia Fater e nostri partner terzi, e permettici di svolgere ricerche di mercato, come da informativa privacy. In qualsiasi momento potrai modificare la tua preferenza.",
                       onChanged: (value) {
                         controller.thirdAccepted.value = value;
                       },
