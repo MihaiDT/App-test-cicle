@@ -12,10 +12,7 @@ class ProfileCompletionPercentageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedCard.withBorder(
       color: Colors.white,
-      border: Border.all(
-        color: Colors.white.withOpacity(0.3),
-        width: 4,
-      ),
+      borderColor: Colors.white.withOpacity(0.3),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 24,

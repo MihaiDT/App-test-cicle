@@ -27,12 +27,9 @@ class CoinCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedCard(
+    return ElevatedCard.withBorder(
       onPressed: onTap,
-      border: Border.all(
-        color: _borderColor,
-        width: 4,
-      ),
+      borderColor: _borderColor,
       color: backgroundColor,
       backgroundImage: backgroundImage,
       child: Padding(

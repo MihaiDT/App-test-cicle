@@ -13,7 +13,7 @@ class ThemeIcon {
   static String logo = '$folderPath/logo.svg';
   static String gradientLogo = '$folderPath/gradient_logo.svg';
   static String menu = '$folderPath/menu.svg';
-  static String checkMark = '$folderPath/white_checkmark.svg';
+  static String checkMark = '$folderPath/checkmark.svg';
   static String eyeClosed = '$folderPath/eye_closed.svg';
   static String eyeOpened = '$folderPath/eye_opened.svg';
   static String close = '$folderPath/close.svg';
@@ -113,4 +113,5 @@ class ThemeIcon {
   static String dropRoundedIcon = '$folderPath/drop_rounded_icon.svg';
   static String plusGradient = '$folderPath/plus_gradient.svg';
   static String info = '$folderPath/info.svg';
+  static String checkMarkGradient = '$folderPath/checkmark_gradient.svg';
 }

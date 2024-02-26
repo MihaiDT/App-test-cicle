@@ -13,15 +13,12 @@ class WelcomeQuizCard extends GetView<WelcomeQuizCardController> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedCard(
+    return ElevatedCard.withBorder(
       onPressed: () {
         Get.toNamed(Routes.welcomeQuizIntroPage);
       },
       backgroundImage: ThemeDecoration.images.bgQuestionMark,
-      border: Border.all(
-        color: Colors.white,
-        width: 2,
-      ),
+      borderColor: Colors.white,
       color: ThemeColor.background,
       child: Padding(
         padding: const EdgeInsets.symmetric(
