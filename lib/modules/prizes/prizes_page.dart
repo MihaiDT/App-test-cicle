@@ -64,11 +64,13 @@ class PrizesPage extends GetView<PrizesController> {
                 ),
               ),
               ThemeSizedBox.height16,
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: ThemeSize.paddingSmall,
                 ),
-                child: LoadCodeWidget(),
+                child: LoadCodeWidget(
+                  onTap: () => Get.toNamed(Routes.loadCode),
+                ),
               ),
               ThemeSizedBox.height24,
               Padding(

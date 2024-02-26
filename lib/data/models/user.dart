@@ -3,7 +3,7 @@ import 'package:lines/repository/parameters_class/registration_provider.dart';
 class User {
   bool? active;
   String? birthdate;
-  int? coinsCollected;
+  int coinsCollected;
   String? email;
   String? firstName;
   bool? isConfirmed;
@@ -24,7 +24,7 @@ class User {
   User({
     this.active = false,
     this.birthdate,
-    this.coinsCollected,
+    this.coinsCollected = 0,
     this.email,
     this.firstName,
     this.isConfirmed = false,

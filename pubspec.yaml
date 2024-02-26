@@ -126,7 +126,6 @@ dependencies:
   # webview_flutter: ^4.4.2
 
 
-
 dev_dependencies:
   build_runner: ^2.4.7
   envied_generator: ^0.5.2

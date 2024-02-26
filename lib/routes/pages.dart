@@ -17,6 +17,7 @@ import 'package:lines/modules/confirm_email/confirm_email_page.dart';
 import 'package:lines/modules/content_library/content_library_category_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
 import 'package:lines/modules/drawer/binding/account_binding.dart';
+import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
 import 'package:lines/modules/drawer/pages/account_page.dart';
 import 'package:lines/modules/drawer/pages/faq_page.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_quiz_card_binding.dart';
@@ -28,6 +29,8 @@ import 'package:lines/modules/info/info_dropdown_results_page.dart';
 import 'package:lines/modules/info/info_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
+import 'package:lines/modules/load_code/load_code_binding.dart';
+import 'package:lines/modules/load_code/load_code_page.dart';
 import 'package:lines/modules/login/login_binding.dart';
 import 'package:lines/modules/login/login_page.dart';
 import 'package:lines/modules/main/main_binding.dart';
@@ -249,6 +252,7 @@ class Pages {
         YourDiarySectionBinding(),
         ProfileHeaderBinding(),
         MyMensesSectionBinding(),
+        DrawerMainPageBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const MainPage(),
@@ -372,7 +376,7 @@ class Pages {
       page: () => _mediaQueryWrapper(
         const YourDiaryPage(),
       ),
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     ),
 
     /// InfoPage
@@ -404,6 +408,18 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const TutorEmailPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// InfoDropdownResultsPage
+    GetPage(
+      name: Routes.loadCode,
+      bindings: [
+        LoadCodeBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const LoadCodePage(),
       ),
       transition: Transition.rightToLeft,
     ),
