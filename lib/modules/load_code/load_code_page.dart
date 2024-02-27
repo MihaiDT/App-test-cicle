@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/load_code/load_code_controller.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
@@ -36,12 +37,18 @@ class LoadCodePage extends GetView<LoadCodeController> {
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
           ),
-          child: PrimaryButton(
-            onPressed: () {},
-            child: const TitleMedium(
-              "CONFERMA",
-            ),
-          ),
+          child: Obx(() {
+            return PrimaryButton(
+              onPressed: controller.canProceed
+                  ? () {
+                      Get.offAndToNamed(Routes.loadCodeResultsPage);
+                    }
+                  : null,
+              child: const TitleMedium(
+                "CONFERMA",
+              ),
+            );
+          }),
         ),
         child: Column(
           children: [
