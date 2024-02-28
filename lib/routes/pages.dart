@@ -36,6 +36,7 @@ import 'package:lines/modules/login/login_binding.dart';
 import 'package:lines/modules/login/login_page.dart';
 import 'package:lines/modules/main/main_binding.dart';
 import 'package:lines/modules/main/main_page.dart';
+import 'package:lines/modules/missions/missions_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
 import 'package:lines/modules/prizes_onboarding/prizes_onboarding_page.dart';
@@ -430,6 +431,15 @@ class Pages {
       name: Routes.loadCodeResultsPage,
       page: () => _mediaQueryWrapper(
         const LoadCodeResultsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// MissionsPage
+    GetPage(
+      name: Routes.missionsPage,
+      page: () => _mediaQueryWrapper(
+        const MissionsPage(),
       ),
       transition: Transition.rightToLeft,
     ),

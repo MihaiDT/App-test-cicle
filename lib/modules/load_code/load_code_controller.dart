@@ -32,8 +32,6 @@ class LoadCodeController extends GetxController {
   }
 
   bool get canProceed {
-    return writtenCode
-        .join("")
-        .length == 10;
+    return writtenCode.join("").length == 10;
   }
 }

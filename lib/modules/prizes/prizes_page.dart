@@ -118,11 +118,14 @@ class PrizesPage extends GetView<PrizesController> {
                 ),
               ),
               ThemeSizedBox.height12,
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: ThemeSize.paddingSmall,
                 ),
                 child: PrizesNavigateToWidget(
+                  onTap: () => Get.toNamed(
+                    Routes.missionsPage,
+                  ),
                   text: "TUTTE LE MISSIONI",
                 ),
               ),
