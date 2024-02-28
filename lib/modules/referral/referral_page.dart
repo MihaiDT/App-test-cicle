@@ -5,6 +5,7 @@ import 'package:lines/modules/referral/referral_controller.dart';
 import 'package:lines/modules/referral/widget/referral_coin_card.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
+import 'package:lines/widgets/buttons/secondary_loading_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -32,18 +33,25 @@ class ReferralPage extends GetView<ReferralController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SecondaryButton(
-                  onPressed: () {
-                    controller.onButtonPressed();
-                  },
-                  child: const TitleLarge(
-                    "USA IL CODICE",
-                  ).applyShaders(context),
+                Obx(
+                  () => SecondaryLoadingButton(
+                    isLoading: controller.isLoading.value,
+                    onPressed: () {
+                      if (!controller.isLoading.value) {
+                        controller.onButtonPressed();
+                      }
+                    },
+                    child: const TitleLarge(
+                      "USA IL CODICE",
+                    ).applyShaders(context),
+                  ),
                 ),
                 ThemeSizedBox.height16,
                 GestureDetector(
                   onTap: () {
-                    controller.onButtonPressed();
+                    if (!controller.isLoading.value) {
+                      controller.onButtonPressed();
+                    }
                   },
                   child: const TitleMedium(
                     "CONTINUA SENZA",

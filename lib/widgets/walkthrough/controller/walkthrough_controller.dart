@@ -5,6 +5,10 @@ class WalkthroughController extends GetxController {
   final RxInt currentStepIndex = 0.obs;
   final PageController pageController = PageController();
 
+  void onPageChanged(int pageIndex) {
+    currentStepIndex.value = pageIndex;
+  }
+
   ///increase the currentPageIndex by 1 when the continue button is pressed
   void onTapNext() {
     currentStepIndex.value++;

@@ -16,7 +16,6 @@ class LoadCodeEarnedCoins extends StatelessWidget {
 
   static const Color _bgColor = Color(0xfff3eef4);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(

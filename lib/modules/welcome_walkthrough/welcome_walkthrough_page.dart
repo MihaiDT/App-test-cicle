@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/walkthrough_data.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/walkthrough/walkthrough.dart';
 
@@ -15,7 +17,7 @@ class WelcomeWalkthroughPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Walkthrough(
         onTapLetsStart: () {
-          Navigator.pop(context);
+          Get.offAndToNamed(Routes.main);
         },
         pagesData: [
           WalkthroughData(
