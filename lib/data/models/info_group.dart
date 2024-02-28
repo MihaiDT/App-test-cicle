@@ -1,8 +1,8 @@
-import 'package:lines/data/models/info_product.dart';
+import 'package:lines/data/models/product.dart';
 
 class InfoGroup {
   final String title;
-  final List<InfoProduct> products;
+  final List<Product> products;
 
   InfoGroup({
     required this.title,

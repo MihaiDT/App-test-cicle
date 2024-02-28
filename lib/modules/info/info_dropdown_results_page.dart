@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/info_group.dart';
-import 'package:lines/data/models/info_product.dart';
+import 'package:lines/data/models/product.dart';
 import 'package:lines/modules/info/widgets/info_dropdown.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
@@ -43,46 +43,46 @@ class InfoDropDownResultsPage extends StatelessWidget {
                 InfoGroup(
                   title: "Lines è",
                   products: [
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
                   ],
                 ),
                 InfoGroup(
                   title: "Special pack lines è",
                   products: [
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
-                    InfoProduct(
-                      text: "Lines è con ali",
-                      coinAmount: 250,
+                    Product(
+                      name: "Lines è con ali",
+                      points: 250,
                     ),
                   ],
                 )
