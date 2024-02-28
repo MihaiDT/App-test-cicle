@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/controllers/advices_detail_store.dart';
+import 'package:lines/repository/advices_service.dart';
 import 'package:video_player/video_player.dart';
 
 class AdvicesDetailController extends GetxController {
@@ -11,6 +12,7 @@ class AdvicesDetailController extends GetxController {
   );
   final ScrollController scrollController = ScrollController();
   late final VideoPlayerController videoPlayerController;
+  final RxBool isArticleFav = false.obs;
 
   AdvicesArticle? get article => advicesDetailStore.articleDetail?.article;
 
@@ -32,6 +34,7 @@ class AdvicesDetailController extends GetxController {
     if (article?.typology == ArticleType.video) {
       _initVideoDetail();
     }
+    isArticleFav.value = article?.isFavorite == true;
   }
 
   void _initTextDetail() {
@@ -107,5 +110,26 @@ class AdvicesDetailController extends GetxController {
   String twoDigits(int n) {
     if (n >= 10) return "$n";
     return "0$n";
+  }
+
+  void _updateArticleFavStatus(bool isFav) async {
+    AdvicesArticle? articleToSave = article;
+    if (articleToSave != null) {
+      if (isFav) {
+        await AdvicesService.addArticleToFav(articleToSave);
+      } else {
+        await AdvicesService.removeArticleFromFav(articleToSave);
+      }
+      isArticleFav.value = isFav;
+      AdvicesService.fetchArticles();
+    }
+  }
+
+  void addArticleToFav() {
+    _updateArticleFavStatus(true);
+  }
+
+  void removeArticleFromFav() {
+    _updateArticleFavStatus(false);
   }
 }

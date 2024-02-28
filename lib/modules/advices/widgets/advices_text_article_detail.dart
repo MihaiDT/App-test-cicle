@@ -135,11 +135,31 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                     ),
                   ),
                   ThemeSizedBox.width8,
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.white,
-                    child: SvgPicture.asset(
-                      ThemeIcon.savedEmptyGradient,
+                  InkWell(
+                    onTap: () {
+                      if (controller.isArticleFav.value) {
+                        controller.removeArticleFromFav();
+                      } else {
+                        controller.addArticleToFav();
+                      }
+                    },
+                    child: CircleAvatar(
+                      radius: 16,
+                      backgroundColor: Colors.white,
+                      child: Obx(
+                        () {
+                          if (controller.isArticleFav.value) {
+                            return SvgPicture.asset(
+                              ThemeIcon.savedFilled,
+                              color: ThemeColor.darkBlue,
+                            );
+                          } else {
+                            return SvgPicture.asset(
+                              ThemeIcon.savedEmptyGradient,
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ],

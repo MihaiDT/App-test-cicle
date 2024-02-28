@@ -27,9 +27,33 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
             color: ThemeColor.darkBlue,
           ),
           ThemeSizedBox.width24,
-          SvgPicture.asset(
-            ThemeIcon.savedEmpty,
-            color: ThemeColor.darkBlue,
+          InkWell(
+            onTap: () {
+              if (controller.isArticleFav.value) {
+                controller.removeArticleFromFav();
+              } else {
+                controller.addArticleToFav();
+              }
+            },
+            child: CircleAvatar(
+              radius: 16,
+              backgroundColor: Colors.white,
+              child: Obx(
+                () {
+                  if (controller.isArticleFav.value) {
+                    return SvgPicture.asset(
+                      ThemeIcon.savedFilled,
+                      color: ThemeColor.darkBlue,
+                    );
+                  } else {
+                    return SvgPicture.asset(
+                      ThemeIcon.savedEmpty,
+                      color: ThemeColor.darkBlue,
+                    );
+                  }
+                },
+              ),
+            ),
           ),
         ],
         backButtonColor: ThemeColor.darkBlue,

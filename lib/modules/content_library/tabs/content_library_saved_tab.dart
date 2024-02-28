@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/advices/widgets/advice_card.dart';
 import 'package:lines/modules/content_library/controllers/content_library_controller.dart';
 
@@ -10,31 +11,51 @@ class ContentLibrarySavedArticleTab extends GetView<ContentLibraryController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        if (controller.pageShouldRefresh) {
-          return GridView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: controller.savedArticles.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              childAspectRatio: 0.67,
-            ),
-            itemBuilder: (context, index) {
-              return AdviceCard(
-                article: controller.savedArticles[index],
-                onCardTap: controller.showArticleDetails,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: ThemeSize.paddingSmall,
+      ),
+      child: Obx(
+        () {
+          if (controller.pageShouldRefresh) {
+            if (controller.savedArticles.isNotEmpty) {
+              return GridView.builder(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                ),
+                scrollDirection: Axis.vertical,
+                itemCount: controller.savedArticles.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 0.67,
+                ),
+                itemBuilder: (context, index) {
+                  return AdviceCard(
+                    article: controller.savedArticles[index],
+                    onCardTap: controller.showArticleDetails,
+                  );
+                },
               );
-            },
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+            } else {
+              return const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 16,
+                ),
+                child: BodyMedium(
+                  "Non ci sono articoli salvati",
+                  color: ThemeColor.darkBlue,
+                ),
+              );
+            }
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }

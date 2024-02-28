@@ -3,7 +3,7 @@ import 'package:lines/data/models/advices_category.dart';
 class AdvicesArticle {
   final String categoryName;
   final String subCategoryName;
-  final int id;
+  final String id;
   final ArticleType typology;
   final String title;
   final String? disclaimer;
@@ -83,8 +83,8 @@ class AdvicesArticle {
     switch (articleType) {
       case ArticleType.text:
         return AdvicesArticle.textType(
-          categoryName: data['article_macro_category']['name'],
-          subCategoryName: data['article_category']['name'],
+          categoryName: data['category_name'],
+          subCategoryName: data['sub_category_name'],
           id: data['id'],
           isFavorite: data['is_fav'] ?? false,
           isNew: data['is_new'] ?? false,
@@ -99,8 +99,8 @@ class AdvicesArticle {
         );
       case ArticleType.slider:
         return AdvicesArticle.sliderType(
-          categoryName: data['article_macro_category']['name'],
-          subCategoryName: data['article_category']['name'],
+          categoryName: data['category_name'],
+          subCategoryName: data['sub_category_name'],
           id: data['id'],
           isFavorite: data['is_fav'] ?? false,
           isNew: data['is_new'] ?? false,
@@ -114,8 +114,8 @@ class AdvicesArticle {
         );
       case ArticleType.video:
         return AdvicesArticle.videoType(
-          categoryName: data['article_macro_category']['name'],
-          subCategoryName: data['article_category']['name'],
+          categoryName: data['category_name'],
+          subCategoryName: data['sub_category_name'],
           id: data['id'],
           isFavorite: data['is_fav'] ?? false,
           isNew: data['is_new'] ?? false,
