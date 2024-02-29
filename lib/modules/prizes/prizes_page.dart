@@ -100,18 +100,23 @@ class PrizesPage extends GetView<PrizesController> {
                     horizontal: 16,
                   ),
                   itemCount: 3,
-                  itemBuilder: (context, index) => SizedBox(
-                    width: _missionContainerSize,
-                    child: MissionContainer(
-                      mission: Mission(
-                        currentCodes: 2,
-                        description:
-                            "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
-                        totalCodes: 3,
-                        untilDate: "31/10/23",
+                  itemBuilder: (context, index) {
+                    Mission mission = Mission(
+                      currentCodes: 2,
+                      description:
+                          "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
+                      totalCodes: 3,
+                      untilDate: "31/10/23",
+                    );
+                    return SizedBox(
+                      width: _missionContainerSize,
+                      child: MissionContainer(
+                        onTap: () =>
+                            controller.navigateToMissionDetails(mission),
+                        mission: mission,
                       ),
-                    ),
-                  ),
+                    );
+                  },
                   separatorBuilder: (context, index) => ThemeSizedBox.width8,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,

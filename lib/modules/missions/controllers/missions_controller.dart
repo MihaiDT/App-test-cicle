@@ -3,7 +3,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/routes/routes.dart';
 
-class PrizesController extends GetxController {
+class MissionsController extends GetxController {
   void navigateToMissionDetails(Mission mission) {
     appController.selectedMission.value = mission;
     Get.toNamed(

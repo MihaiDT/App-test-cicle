@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/data/models/product.dart';
 import 'package:lines/modules/missions/widgets/missions_product.dart';
 
@@ -12,7 +13,7 @@ class MissionsLoadedProductsBox extends StatelessWidget {
   });
 
   static const Color _bgColor = Color(0xffe5e1ef);
-  static const double _dimension = 90.0;
+  double get _dimension => Get.width * 0.2;
   static const double _strokeWidth = 3.0;
 
   @override
@@ -30,7 +31,7 @@ class MissionsLoadedProductsBox extends StatelessWidget {
         borderType: BorderType.RRect,
         strokeWidth: _strokeWidth,
         radius: const Radius.circular(10),
-        child: const SizedBox.square(
+        child: SizedBox.square(
           dimension: _dimension,
         ),
       );

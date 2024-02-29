@@ -36,6 +36,9 @@ import 'package:lines/modules/login/login_binding.dart';
 import 'package:lines/modules/login/login_page.dart';
 import 'package:lines/modules/main/main_binding.dart';
 import 'package:lines/modules/main/main_page.dart';
+import 'package:lines/modules/missions/bindings/missions_binding.dart';
+import 'package:lines/modules/missions/bindings/missions_details_binding.dart';
+import 'package:lines/modules/missions/missions_details_page.dart';
 import 'package:lines/modules/missions/missions_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
@@ -438,8 +441,23 @@ class Pages {
     /// MissionsPage
     GetPage(
       name: Routes.missionsPage,
+      bindings: [
+        MissionsBinding(),
+      ],
       page: () => _mediaQueryWrapper(
         const MissionsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// MissionsDetailsPage
+    GetPage(
+      name: Routes.missionsDetailsPage,
+      bindings: [
+        MissionsDetailsBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const MissionsDetailsPage(),
       ),
       transition: Transition.rightToLeft,
     ),

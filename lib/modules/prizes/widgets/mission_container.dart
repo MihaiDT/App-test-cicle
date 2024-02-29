@@ -8,9 +8,11 @@ class MissionContainer extends StatelessWidget {
   final Mission mission;
   final Color? borderColor;
   final Gradient? gradientBorder;
+  final VoidCallback? onTap;
 
   const MissionContainer({
     required this.mission,
+    this.onTap,
     super.key,
   })  : borderColor = null,
         gradientBorder = null;
@@ -19,6 +21,7 @@ class MissionContainer extends StatelessWidget {
     required this.mission,
     this.borderColor,
     this.gradientBorder,
+    this.onTap,
     super.key,
   });
 
@@ -28,31 +31,32 @@ class MissionContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (gradientBorder != null || borderColor != null) {
-      return ElevatedCard.withBorder(
-        gradientBorder: gradientBorder,
-        borderColor: borderColor,
-        child: Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(
-                _borderRadius - _borderWidth,
+    return InkWell(
+      onTap: onTap,
+      child: gradientBorder != null || borderColor != null
+          ? ElevatedCard.withBorder(
+              gradientBorder: gradientBorder,
+              borderColor: borderColor,
+              child: Container(
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(
+                      _borderRadius - _borderWidth,
+                    ),
+                  ),
+                ),
+                child: _mainContent,
+              ),
+            )
+          : ElevatedCard(
+              child: Container(
+                color: Colors.white,
+                child: _mainContent,
               ),
             ),
-          ),
-          child: _mainContent,
-        ),
-      );
-    } else {
-      return ElevatedCard(
-        child: Container(
-          color: Colors.white,
-          child: _mainContent,
-        ),
-      );
-    }
+    );
   }
 
   Widget get _mainContent => Stack(

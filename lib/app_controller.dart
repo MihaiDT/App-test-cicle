@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/models/calendar_day_view_model.dart';
-import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/check_email.dart';
+import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/db_calendar_day_dto_map.dart';
+import 'package:lines/data/models/mission.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
@@ -53,6 +54,8 @@ class AppController extends GetxController {
   final EasyGetter<CalendarDayViewModel> calendarDayViewModel;
   final EasyGetter<DBCalendarDayDtoMap> dbCalendarDayDtoMap;
   final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
+
+  final Rxn<Mission> selectedMission = Rxn<Mission>();
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;

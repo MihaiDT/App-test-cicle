@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/mission.dart';
+import 'package:lines/modules/missions/controllers/missions_controller.dart';
 import 'package:lines/modules/prizes/widgets/mission_container.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-class MissionsPage extends StatelessWidget {
+class MissionsPage extends GetView<MissionsController> {
   const MissionsPage({
     super.key,
   });
@@ -47,21 +48,27 @@ class MissionsPage extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 2,
-            itemBuilder: (context, index) => SizedBox(
-              height: _containerHeight,
-              child: MissionContainer(
-                mission: Mission(
-                  currentCodes: 2,
-                  description:
-                      "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
-                  totalCodes: 3,
-                  untilDate: "31/10/23",
+            itemBuilder: (context, index) {
+              Mission mission = Mission(
+                currentCodes: 2,
+                description:
+                    "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
+                totalCodes: 3,
+                untilDate: "31/10/23",
+              );
+              return SizedBox(
+                height: _containerHeight,
+                child: MissionContainer(
+                  onTap: () => controller.navigateToMissionDetails(
+                    mission,
+                  ),
+                  mission: mission,
                 ),
-              ),
-            ),
+              );
+            },
             separatorBuilder: (context, index) => ThemeSizedBox.height16,
           ),
-          ThemeSizedBox.height8,
+          ThemeSizedBox.height24,
           const Padding(
             padding: EdgeInsets.symmetric(
               horizontal: ThemeSize.paddingSmall,
@@ -79,18 +86,24 @@ class MissionsPage extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 2,
-            itemBuilder: (context, index) => SizedBox(
-              height: _containerHeight,
-              child: MissionContainer(
-                mission: Mission(
-                  currentCodes: 2,
-                  description:
-                      "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
-                  totalCodes: 3,
-                  untilDate: "31/10/23",
+            itemBuilder: (context, index) {
+              Mission mission = Mission(
+                currentCodes: 2,
+                description:
+                    "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
+                totalCodes: 3,
+                untilDate: "31/10/23",
+              );
+              return SizedBox(
+                height: _containerHeight,
+                child: MissionContainer(
+                  onTap: () => controller.navigateToMissionDetails(
+                    mission,
+                  ),
+                  mission: mission,
                 ),
-              ),
-            ),
+              );
+            },
             separatorBuilder: (context, index) => ThemeSizedBox.height16,
           ),
           ThemeSizedBox.height32,
