@@ -35,12 +35,12 @@ class YourInterestSection extends GetView<YourInterestsSectionController> {
   }
 
   List<Widget> get buildChipAnswers {
-    return controller.interests.map((value) {
+    return controller.allInterests.map((interest) {
       return ChipSelectButton(
-        title: value,
-        selected: controller.selectedInterests.contains(value),
+        title: interest.name,
+        selected: controller.rxSelectedInterestsId.contains(interest.id),
         onPressed: () {
-          controller.toggleInterest(value);
+          controller.toggleInterest(interest.id);
         },
       );
     }).toList();

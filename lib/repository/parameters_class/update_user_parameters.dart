@@ -1,10 +1,10 @@
 class UpdateUserParameters {
-  String birthdate;
-  String email;
-  String firstName;
+  String? birthdate;
+  String? email;
+  String? firstName;
   DateTime? lastMenstruationDateStart;
   DateTime? lastMenstruationDateEnd;
-  String lastName;
+  String? lastName;
   String? legalGuardianEmail;
   String? nickname;
   int? periodDays;
@@ -12,21 +12,23 @@ class UpdateUserParameters {
   bool privacyProfiling;
   bool privacyMarketingEmail;
   String referralCode;
+  String? zipCode;
 
   UpdateUserParameters({
-    required this.birthdate,
-    required this.email,
-    required this.firstName,
+    this.birthdate,
+    this.email,
+    this.firstName,
     this.lastMenstruationDateStart,
     this.lastMenstruationDateEnd,
-    required this.lastName,
+    this.lastName,
     this.legalGuardianEmail,
     this.nickname,
     this.periodDays,
     this.periodDuration,
-    required this.privacyProfiling,
-    required this.privacyMarketingEmail,
+    this.privacyProfiling = false,
+    this.privacyMarketingEmail = false,
     this.referralCode = "",
+    this.zipCode,
   });
 
   String get formattedLastMenstruationDateStart {
@@ -47,14 +49,7 @@ class UpdateUserParameters {
 
   factory UpdateUserParameters.initial() {
     /// return an initial state fot the UpdateUserParameters
-    return UpdateUserParameters(
-      birthdate: "",
-      email: "",
-      firstName: "",
-      lastName: "",
-      privacyProfiling: false,
-      privacyMarketingEmail: false,
-    );
+    return UpdateUserParameters();
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +67,7 @@ class UpdateUserParameters {
       "privacy_profiling": privacyProfiling,
       "privacy_marketing_email": privacyMarketingEmail,
       "referral_code": referralCode,
+      "zip_code": zipCode,
     };
   }
 }

@@ -38,6 +38,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                   Obx(
                     () => SecondaryLoadingButton(
                       onPressed: () {
+                        controller.acceptAll();
                         controller.registerUser();
                       },
                       isLoading: controller.buttonIsPending.value,
@@ -47,12 +48,17 @@ class PrivacyPage extends GetView<PrivacyController> {
                     ),
                   ),
                   ThemeSizedBox.height16,
-                  GestureDetector(
-                    onTap: () {},
-                    child: const TitleMedium(
-                      "CONTINUA CON LA MIA SELEZIONE",
-                      underline: true,
-                      textAlign: TextAlign.center,
+                  IgnorePointer(
+                    ignoring: controller.buttonIsPending.value,
+                    child: GestureDetector(
+                      onTap: () {
+                        controller.registerUser();
+                      },
+                      child: const TitleMedium(
+                        "CONTINUA CON LA MIA SELEZIONE",
+                        underline: true,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],

@@ -73,6 +73,10 @@ class AuthenticationService {
     UpdateUserParameters user,
   ) async {
     final userId = HiveManager.userId;
+
+    /// Takes the email from the user saved into state
+    final email = appController.user.value?.email ?? '';
+    user.email = email;
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.put(

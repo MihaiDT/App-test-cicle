@@ -11,7 +11,7 @@ class ReferralController extends GetxController {
   void onInit() {
     super.onInit();
     ever(
-      condition: Get.currentRoute == Routes.welcomeWalkthrough,
+      condition: () => Get.currentRoute == Routes.referral,
       appController.user.rxValue,
       (callback) {
         if (callback.isPending) {

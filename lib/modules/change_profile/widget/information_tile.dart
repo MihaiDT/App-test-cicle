@@ -7,7 +7,7 @@ class InformationTile extends StatelessWidget {
   final String title;
   final String value;
   final String? percentageValue;
-  final GestureDetector? onTap;
+  final VoidCallback? onTap;
   final bool hasPadding;
 
   const InformationTile({
@@ -21,32 +21,32 @@ class InformationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // show a dot if percentageValue is not empty or null
-        if (percentageValue?.isNotEmpty == true) ...[
-          ThemeSizedBox.width6,
-          Container(
-            height: 4,
-            width: 4,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: ThemeColor.brightPink,
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        children: [
+          // show a dot if percentageValue is not empty or null
+          if (percentageValue?.isNotEmpty == true) ...[
+            ThemeSizedBox.width6,
+            Container(
+              height: 4,
+              width: 4,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: ThemeColor.brightPink,
+              ),
             ),
-          ),
-          ThemeSizedBox.width6,
-        ],
+            ThemeSizedBox.width6,
+          ],
 
-        // if percentageValue is empty, show a 16px width box instead the dot
-        if (percentageValue == null) ThemeSizedBox.width16,
-        HeadlineMedium(
-          title,
-          color: ThemeColor.darkBlue,
-        ),
-        const Spacer(),
-        GestureDetector(
-          onTap: () => onTap,
-          child: Row(
+          // if percentageValue is empty, show a 16px width box instead the dot
+          if (percentageValue == null) ThemeSizedBox.width16,
+          HeadlineMedium(
+            title,
+            color: ThemeColor.darkBlue,
+          ),
+          const Spacer(),
+          Row(
             children: [
               if (percentageValue?.isNotEmpty == true) ...[
                 Text(
@@ -71,8 +71,8 @@ class InformationTile extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

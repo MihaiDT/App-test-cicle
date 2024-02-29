@@ -1,3 +1,5 @@
+import 'package:lines/data/models/interest.dart';
+
 class Settings {
   int? androidMinBuildNumber;
   String? androidStoreUrl;
@@ -5,6 +7,7 @@ class Settings {
   final int invitationCodeCoins;
   int? iosMinBuildNumber;
   String? iosStoreUrl;
+  List<Interest> interests;
 
   Settings({
     this.androidMinBuildNumber,
@@ -13,6 +16,7 @@ class Settings {
     required this.invitationCodeCoins,
     this.iosMinBuildNumber,
     this.iosStoreUrl,
+    this.interests = const [],
   });
 
   factory Settings.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,9 @@ class Settings {
       invitationCodeCoins: json['coins']['invitation_code'],
       iosMinBuildNumber: json['ios_min_build_number'],
       iosStoreUrl: json['ios_store_url'],
+      interests: (json['interests'] as List)
+          .map((interest) => Interest.fromJson(interest))
+          .toList(),
     );
   }
 
@@ -34,6 +41,7 @@ class Settings {
       invitationCodeCoins: settings.invitationCodeCoins,
       iosMinBuildNumber: settings.iosMinBuildNumber,
       iosStoreUrl: settings.iosStoreUrl,
+      interests: settings.interests,
     );
   }
 }

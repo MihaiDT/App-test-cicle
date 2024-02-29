@@ -1,3 +1,4 @@
+import 'package:lines/data/models/interest.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
 
 class User {
@@ -21,6 +22,8 @@ class User {
   RegistrationProvider? provider;
   String? sessionToken;
 
+  List<Interest>? interests;
+
   User({
     this.active = false,
     this.birthdate,
@@ -41,6 +44,7 @@ class User {
     this.privacyMarketingEmail,
     this.provider,
     this.sessionToken,
+    this.interests,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -61,6 +65,13 @@ class User {
       privacyMarketingEmail: json['user']['privacy_marketing_email'],
       provider: RegistrationProvider.fromJson(json['user']['provider']),
       sessionToken: json['user']['session_token'],
+      interests: (json['user']['interests'] as List)
+          .map(
+              (interest) => Interest.fromJson(interest as Map<String, dynamic>))
+          .toList(),
+      password: json['user']['password'],
+      nickname: json['user']['nickname'],
+      legalGuardianEmail: json['user']['legal_guardian_email'],
     );
   }
 
@@ -82,6 +93,11 @@ class User {
       "privacy_profiling": privacyProfiling,
       "privacy_marketing_email": privacyMarketingEmail,
       "session_token": sessionToken,
+      "interests": interests!
+          .map(
+            (interest) => Interest.toJson(interest),
+          )
+          .toList(),
     };
   }
 

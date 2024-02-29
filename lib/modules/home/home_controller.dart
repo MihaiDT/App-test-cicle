@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/period_date.dart';
 import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar.dart';
@@ -61,7 +62,8 @@ class HomeController extends AppScaffoldController {
 
     ever(
       appController.currentPeriod.rxValue,
-      condition: () => Get.currentRoute == Routes.main,
+      condition: () =>
+          Get.currentRoute == Routes.main && HiveManager.firstAccess,
       (callback) {
         // The Future.delayed is a workaround to ensure that
         // the homeCircularPeriodCalendarKey is in the correct position

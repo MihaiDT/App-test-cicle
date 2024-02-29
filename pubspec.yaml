@@ -55,6 +55,7 @@ dependencies:
   
   # GetX is an extra-light and powerful solution for Flutter. It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
   get: ^4.6.6
+  equatable: ^2.0.5
 
 
 

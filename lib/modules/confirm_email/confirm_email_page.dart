@@ -9,7 +9,9 @@ import '../../widgets/appbar/transparent_app_bar.dart';
 import '../../widgets/buttons/secondary_button.dart';
 
 class ConfirmEmailPage extends GetView<ConfirmEmailController> {
-  const ConfirmEmailPage({super.key});
+  const ConfirmEmailPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

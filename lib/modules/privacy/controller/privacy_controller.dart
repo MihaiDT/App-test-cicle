@@ -14,6 +14,7 @@ class PrivacyController extends GetxController {
   void onInit() {
     ever(
       appController.user.rxValue,
+      condition: () => Get.currentRoute == Routes.privacy,
       (callback) {
         if (callback.isPending) {
           buttonIsPending.value = true;
@@ -29,8 +30,9 @@ class PrivacyController extends GetxController {
 
   /// This method takes the registerParameter and pass this data to the registration method
   Future<void> registerUser() async {
-    appController.registerParameter.privacyMarketing = true;
-    appController.registerParameter.privacyProfiling = true;
+    appController.registerParameter.privacyBrandMarketing = firstAccepted.value;
+    appController.registerParameter.privacyMarketing = secondAccepted.value;
+    appController.registerParameter.privacyProfiling = thirdAccepted.value;
     await AuthenticationService.registration(
       appController.registerParameter,
     );
@@ -41,6 +43,4 @@ class PrivacyController extends GetxController {
     secondAccepted.value = true;
     thirdAccepted.value = true;
   }
-
-  void accept() {}
 }

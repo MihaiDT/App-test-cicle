@@ -4,6 +4,7 @@ import 'package:lines/modules/home/widgets/welcome_quiz_section/controller/welco
 class WelcomeQuizCardBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<WelcomeQuizCardController>(() => WelcomeQuizCardController());
+    Get.lazyPut<WelcomeQuizSectionController>(
+        () => WelcomeQuizSectionController());
   }
 }
