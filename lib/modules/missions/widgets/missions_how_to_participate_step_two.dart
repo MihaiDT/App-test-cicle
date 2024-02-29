@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/missions/widgets/missions_how_to_participate_header.dart';
 
-
 class MissionsHowToParticipateStepTwo extends StatelessWidget {
   const MissionsHowToParticipateStepTwo({
     super.key,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/mission.dart';
+import 'package:lines/modules/prizes/widgets/mission_progress_indicator.dart';
 import 'package:lines/widgets/cards/elevated_card.dart';
 
 class MissionContainer extends StatelessWidget {
@@ -97,27 +98,15 @@ class MissionContainer extends StatelessWidget {
               )
             ],
           ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 4,
-                  horizontal: 8,
-                ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(90),
-                  ),
-                  color: _inProgressBgColor,
-                ),
-                child: BodySmall(
-                  "In corso: ${mission.currentCodes}/${mission.totalCodes}",
-                ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: MissionProgressIndicator(
+                loadedProducts: mission.currentCodes,
               ),
             ),
-          )
+          ),
         ],
       );
 }
