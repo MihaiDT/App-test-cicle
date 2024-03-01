@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/table_calendar/src/customization/calendar_style.dart';
+import 'package:lines/table_calendar/src/model/selected_range.dart';
 import 'package:lines/table_calendar/src/shared/utils.dart';
 import 'package:lines/table_calendar/src/table_calendar.dart';
 
@@ -18,38 +19,56 @@ class HorizontalRangeCalendar extends StatefulWidget {
 }
 
 class _HorizontalRangeCalendarState extends State<HorizontalRangeCalendar> {
-  DateTime? _rangeStart;
-  DateTime? _rangeEnd;
+  late ValueNotifier<SelectedRange> _selectedRange;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedRange = ValueNotifier(
+      SelectedRange(start: null, end: null),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     /// PAY ATTENTION TO TABLE CALENDAR, IS A FORKED PACKAGE
-    return TableCalendar(
-      availableGestures: AvailableGestures.none,
-      calendarStyle: calendarStyle,
-      daysOfWeekVisible: false,
-      focusedDay: DateTime.now(),
-      firstDay: firstDate,
-      locale: 'it',
-      onRangeSelected: _onRangeSelected,
-      rangeStartDay: _rangeStart,
-      rangeEndDay: _rangeEnd,
-      rangeSelectionMode: RangeSelectionMode.toggledOn,
-      lastDay: lastDate,
-      weekendDays: [],
-      weekNumbersVisible: false,
-      sixWeekMonthsEnforced: false,
-      startingDayOfWeek: StartingDayOfWeek.monday,
+    return ValueListenableBuilder(
+      valueListenable: _selectedRange,
+      builder: (context, value, _) {
+        return TableCalendar(
+          availableGestures: AvailableGestures.none,
+          calendarStyle: calendarStyle,
+          daysOfWeekVisible: false,
+          focusedDay: focusedDay,
+          firstDay: firstDate,
+          locale: 'it',
+          onRangeSelected: _onRangeSelected,
+          rangeStartDay: value.start,
+          rangeEndDay: value.end,
+          rangeSelectionMode: RangeSelectionMode.toggledOn,
+          lastDay: lastDate,
+          weekendDays: [],
+          weekNumbersVisible: false,
+          sixWeekMonthsEnforced: false,
+          pageJumpingEnabled: true,
+          startingDayOfWeek: StartingDayOfWeek.monday,
+          onDayLongPressed: (_, __) {},
+        );
+      },
     );
   }
 
   void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
-    setState(() {
-      _rangeStart = start;
-      _rangeEnd = end;
-    });
+    _selectedRange.value = SelectedRange(
+      start: start,
+      end: end,
+    );
+
     widget.onRangeSelected.call(selectedRange);
   }
+
+  DateTime get focusedDay =>
+      _selectedRange.value.end ?? _selectedRange.value.start ?? DateTime.now();
 
   DateTime get lastDate {
     DateTime last = DateTime(
@@ -104,10 +123,11 @@ class _HorizontalRangeCalendarState extends State<HorizontalRangeCalendar> {
   }
 
   DateTimeRange? get selectedRange {
-    if (_rangeStart != null && _rangeEnd != null) {
+    if (_selectedRange.value.start != null &&
+        _selectedRange.value.end != null) {
       return DateTimeRange(
-        start: _rangeStart!,
-        end: _rangeEnd!,
+        start: _selectedRange.value.start!,
+        end: _selectedRange.value.end!,
       );
     } else {
       return null;
