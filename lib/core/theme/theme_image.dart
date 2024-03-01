@@ -45,4 +45,5 @@ class ThemeImage {
   static String loadProduct = '$folderPath/load_product.webp';
   static String luckyLines = '$folderPath/lucky_lines.webp';
   static String bigCoin = '$folderPath/big_coin.webp';
+  static String coinsColumns = '$folderPath/coins_columns.webp';
 }

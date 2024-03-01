@@ -59,6 +59,7 @@ import 'package:lines/modules/welcome_quiz/quiz_intro_page.dart';
 import 'package:lines/modules/welcome_quiz/quiz_outro_page.dart';
 import 'package:lines/modules/welcome_quiz/welcome_quiz_page.dart';
 import 'package:lines/modules/welcome_walkthrough/welcome_walkthrough_page.dart';
+import 'package:lines/modules/your_coins/your_coins_page.dart';
 import 'package:lines/modules/your_diary/bindings/your_diary_binding.dart';
 import 'package:lines/modules/your_diary/pages/your_diary_page.dart';
 
@@ -466,6 +467,15 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const MissionsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// MissionsPage
+    GetPage(
+      name: Routes.yourCoinsPage,
+      page: () => _mediaQueryWrapper(
+        const YourCoinsPage(),
       ),
       transition: Transition.rightToLeft,
     ),

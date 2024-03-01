@@ -46,4 +46,5 @@ class Routes {
   static const String missionsPage = '/missions_page';
   static const String missionsDetailsPage = '/missions_details_page';
   static const String inviteFriendPage = '/invite_friend_page';
+  static const String yourCoinsPage = '/your_coins_page';
 }
