@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 
 class HowOftenMensesWidget extends StatelessWidget {
   final Function(int) onTap;
@@ -114,12 +113,22 @@ class HowOftenMensesWidget extends StatelessWidget {
       height: MediaQuery.sizeOf(context).height * 0.2,
       color: CupertinoColors.systemBackground.resolveFrom(context),
       child: SafeArea(
-        child: CupertinoPicker(
-          itemExtent: 35,
-          children: _pickerChildren,
-          onSelectedItemChanged: (int value) {
-            howOftenMensesValue.value = _rangeMenses[value];
-          },
+        child: Column(
+          children: [
+            const HeadlineLarge(
+              "Seleziona giorno",
+              color: Colors.black,
+            ),
+            Expanded(
+              child: CupertinoPicker(
+                itemExtent: 35,
+                children: _pickerChildren,
+                onSelectedItemChanged: (int value) {
+                  howOftenMensesValue.value = _rangeMenses[value];
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

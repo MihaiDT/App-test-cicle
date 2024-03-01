@@ -10,7 +10,9 @@ import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class HowLongMensesPage extends GetView<HowLongMensesController> {
-  const HowLongMensesPage({super.key});
+  const HowLongMensesPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
