@@ -49,6 +49,7 @@ import 'package:lines/modules/profile/bindings/profile_header_binding.dart';
 import 'package:lines/modules/profile/bindings/your_diary_section_binding.dart';
 import 'package:lines/modules/referral/referral_binding.dart';
 import 'package:lines/modules/referral/referral_page.dart';
+import 'package:lines/modules/surveys/surveys_page.dart';
 import 'package:lines/modules/tutor_email/tutor_email_binding.dart';
 import 'package:lines/modules/tutor_email/tutor_email_page.dart';
 import 'package:lines/modules/welcome/welcome_binding.dart';
@@ -497,6 +498,15 @@ class Pages {
       name: Routes.inviteFriendPage,
       page: () => _mediaQueryWrapper(
         const InviteFriendPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// SurveysPage
+    GetPage(
+      name: Routes.surveysPage,
+      page: () => _mediaQueryWrapper(
+        const SurveysPage(),
       ),
       transition: Transition.rightToLeft,
     ),

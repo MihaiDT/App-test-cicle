@@ -155,11 +155,14 @@ class PrizesPage extends GetView<PrizesController> {
                 ),
               ),
               ThemeSizedBox.height8,
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: ThemeSize.paddingSmall,
                 ),
                 child: PrizesNavigateToWidget(
+                  onTap: () => Get.toNamed(
+                    Routes.surveysPage,
+                  ),
                   text: "TUTTI I SONDAGGI",
                 ),
               ),
