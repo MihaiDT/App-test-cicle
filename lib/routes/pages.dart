@@ -27,6 +27,7 @@ import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/info/binding/info_binding.dart';
 import 'package:lines/modules/info/info_dropdown_results_page.dart';
 import 'package:lines/modules/info/info_page.dart';
+import 'package:lines/modules/invite_friend/invite_friend_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
 import 'package:lines/modules/load_code/load_code_binding.dart';
@@ -477,6 +478,15 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const MissionsDetailsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// InviteFriendPage
+    GetPage(
+      name: Routes.inviteFriendPage,
+      page: () => _mediaQueryWrapper(
+        const InviteFriendPage(),
       ),
       transition: Transition.rightToLeft,
     ),

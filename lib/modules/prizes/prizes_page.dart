@@ -169,6 +169,9 @@ class PrizesPage extends GetView<PrizesController> {
                   horizontal: ThemeSize.paddingSmall,
                 ),
                 child: CoinCard(
+                  onTap: () => Get.toNamed(
+                    Routes.inviteFriendPage,
+                  ),
                   backgroundColor: Colors.white,
                   coinAmount: 50,
                   description:
