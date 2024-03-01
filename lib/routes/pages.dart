@@ -29,9 +29,9 @@ import 'package:lines/modules/info/info_dropdown_results_page.dart';
 import 'package:lines/modules/info/info_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
-import 'package:lines/modules/load_code/load_code_results_page.dart';
 import 'package:lines/modules/load_code/load_code_binding.dart';
 import 'package:lines/modules/load_code/load_code_page.dart';
+import 'package:lines/modules/load_code/load_code_results_page.dart';
 import 'package:lines/modules/login/login_binding.dart';
 import 'package:lines/modules/login/login_page.dart';
 import 'package:lines/modules/main/main_binding.dart';
@@ -50,6 +50,8 @@ import 'package:lines/modules/referral/referral_binding.dart';
 import 'package:lines/modules/referral/referral_page.dart';
 import 'package:lines/modules/tutor_email/tutor_email_binding.dart';
 import 'package:lines/modules/tutor_email/tutor_email_page.dart';
+import 'package:lines/modules/welcome/welcome_binding.dart';
+import 'package:lines/modules/welcome/welcome_page.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_binding.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_intro_outro_binding.dart';
 import 'package:lines/modules/welcome_quiz/quiz_intro_page.dart';
@@ -81,13 +83,29 @@ class Pages {
   static final List<GetPage<Pages>> pages = [
     // Splash
     GetPage(
-      binding: SplashBinding(),
+      bindings: [
+        SplashBinding(),
+      ],
       name: Routes.logo,
       page: () => _mediaQueryWrapper(
         const SplashPage(),
         authNeeded: false,
       ),
       transition: Transition.fade,
+    ),
+
+    // WelcomePage
+    GetPage(
+      name: Routes.welcome,
+      bindings: [
+        WelcomeBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const WelcomePage(),
+        authNeeded: false,
+      ),
+      transition: Transition.fade,
+      transitionDuration: const Duration(milliseconds: 500),
     ),
 
     // Register
@@ -242,6 +260,7 @@ class Pages {
         ConfirmEmailBinding(),
       ],
       page: () => _mediaQueryWrapper(
+        authNeeded: false,
         const ConfirmEmailPage(),
       ),
       transition: Transition.rightToLeft,

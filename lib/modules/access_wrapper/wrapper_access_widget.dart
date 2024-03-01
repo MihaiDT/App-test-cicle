@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/modules/access_wrapper/controller/wrapper_access_controller.dart';
 import 'package:lines/modules/access_wrapper/lock_page.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -18,10 +20,16 @@ class WrapperAccessWidget extends StatefulWidget {
 }
 
 class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
+  late final WrapperAccessController controller;
+
   final LocalAuthentication _auth = LocalAuthentication();
 
   @override
   void initState() {
+    controller = Get.put(
+      WrapperAccessController(),
+      permanent: true,
+    );
     setState(() {
       HiveManager.appHidden = false;
     });
@@ -56,9 +64,19 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.authNeeded && HiveManager.appHidden
-        ? const LockPage()
-        : widget.child;
+    return Stack(
+      children: [
+        widget.authNeeded && HiveManager.appHidden
+            ? const LockPage()
+            : widget.child,
+        if (controller.lockApp.value)
+          Container(
+            width: Get.width,
+            height: Get.height,
+            color: Colors.black.withOpacity(0.5),
+          ),
+      ],
+    );
   }
 
   /// Authenticates the user using biometrics if available.
