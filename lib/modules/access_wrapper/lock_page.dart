@@ -9,12 +9,15 @@ class LockPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldPage(
-      backgroundImage: ThemeDecoration.images.bgDark,
-      scrollController: ScrollController(),
-      body: Center(
-        child: HeroLogo(
-          size: heroLogoWidth,
+    return PopScope(
+      canPop: false,
+      child: AppScaffoldPage(
+        backgroundImage: ThemeDecoration.images.bgDark,
+        scrollController: ScrollController(),
+        body: Center(
+          child: HeroLogo(
+            size: heroLogoWidth,
+          ),
         ),
       ),
     );

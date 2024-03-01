@@ -63,8 +63,10 @@ class HomeController extends AppScaffoldController {
     ever(
       appController.currentPeriod.rxValue,
       condition: () =>
-          Get.currentRoute == Routes.main && HiveManager.firstAccess,
+          Get.currentRoute == Routes.main &&
+          !HiveManager.isFirstTutorialWatched,
       (callback) {
+        HiveManager.isFirstTutorialWatched = true;
         // The Future.delayed is a workaround to ensure that
         // the homeCircularPeriodCalendarKey is in the correct position
         Future.delayed(

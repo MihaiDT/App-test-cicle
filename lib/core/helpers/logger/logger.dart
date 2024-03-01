@@ -33,7 +33,7 @@ class CustomLogger extends Logger {
       loggedMessage =
           " $message | ERROR WITH ${exception.response?.statusCode} ${exception.response?.statusMessage}";
     }
-    super.e(
+    e(
       loggedMessage,
       error: error,
       stackTrace: stackTrace,
@@ -46,7 +46,7 @@ class CustomLogger extends Logger {
     if (exception is DioException) {
       String loggedMessage =
           "ERROR ${exception.response?.statusCode} | ${exception.response?.statusMessage} \nError at path ${exception.requestOptions.path}";
-      super.e(
+      e(
         loggedMessage,
         error: exception,
       );
@@ -58,7 +58,7 @@ class CustomLogger extends Logger {
     Object? error,
     StackTrace? stackTrace,
   }) {
-    super.w(
+    w(
       message,
       error: error,
       stackTrace: stackTrace,

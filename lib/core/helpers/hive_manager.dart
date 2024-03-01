@@ -55,6 +55,17 @@ class HiveManager {
           .put(HiveReferenceKeys.numberOfAccess.name, numberOfAccess);
     }
   }
+
+  static bool get isFirstTutorialWatched {
+    return Hive.box("linesApp")
+            .get(HiveReferenceKeys.isFirstTutorialWatched.name) ??
+        true;
+  }
+
+  static set isFirstTutorialWatched(bool isFirstTutorialWatched) {
+    Hive.box("linesApp").put(
+        HiveReferenceKeys.isFirstTutorialWatched.name, isFirstTutorialWatched);
+  }
 }
 
 enum HiveReferenceKeys {
@@ -62,5 +73,6 @@ enum HiveReferenceKeys {
   isFirstAccess,
   userId,
   savedSymptoms,
+  isFirstTutorialWatched,
   numberOfAccess;
 }

@@ -27,6 +27,7 @@ import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/info/binding/info_binding.dart';
 import 'package:lines/modules/info/info_dropdown_results_page.dart';
 import 'package:lines/modules/info/info_page.dart';
+import 'package:lines/modules/invite_friend/invite_friend_binding.dart';
 import 'package:lines/modules/invite_friend/invite_friend_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
@@ -140,7 +141,7 @@ class Pages {
         const CookiePage(),
         authNeeded: false,
       ),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
 
     //Calendar
@@ -495,6 +496,7 @@ class Pages {
 
     /// InviteFriendPage
     GetPage(
+      binding: InviteFriendBinding(),
       name: Routes.inviteFriendPage,
       page: () => _mediaQueryWrapper(
         const InviteFriendPage(),

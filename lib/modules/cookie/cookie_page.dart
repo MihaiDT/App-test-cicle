@@ -9,7 +9,9 @@ import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
 class CookiePage extends StatelessWidget {
-  const CookiePage({super.key});
+  const CookiePage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

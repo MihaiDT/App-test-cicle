@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/modules/invite_friend/invite_friend_controller.dart';
 import 'package:lines/modules/invite_friend/widgets/invite_friend_code.dart';
 import 'package:lines/modules/invite_friend/widgets/invite_friend_friends_and_coins.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -9,7 +10,7 @@ import 'package:lines/widgets/coin/app_coin.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class InviteFriendPage extends StatelessWidget {
+class InviteFriendPage extends GetView<InviteFriendController> {
   const InviteFriendPage({
     super.key,
   });
@@ -31,8 +32,8 @@ class InviteFriendPage extends StatelessWidget {
             horizontal: ThemeSize.paddingSmall,
           ),
           child: PrimaryButton(
-            onPressed: () {
-              //TODO: add onTap
+            onPressed: () async {
+              await controller.shareCode();
             },
             child: const TitleLarge(
               "CONDIVIDI CODICE",
