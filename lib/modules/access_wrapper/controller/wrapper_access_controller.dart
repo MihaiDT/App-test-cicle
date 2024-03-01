@@ -43,7 +43,7 @@ class WrapperAccessController extends GetxController {
   Future<void> checkVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     if (appController.settings.value?.androidMinBuildNumber == null) {
-      rxAppNeedsUpdate.value = true;
+      rxAppNeedsUpdate.value = false;
     } else {
       rxAppNeedsUpdate.value = int.parse(packageInfo.buildNumber) <
           appController.settings.value!.androidMinBuildNumber!;
