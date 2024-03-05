@@ -43,8 +43,20 @@
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Per accedere ai tuoi dati è necessario sbloccare l'app</string>
-	<!-- Google Sign-in Section -->
+	<string>Per accedere ai tuoi dati è necessario sbloccare l&apos;app</string>
+	<key>FacebookAppID</key>
+	<string>1556384551869815</string>
+	<key>FacebookClientToken</key>
+	<string>95c99310fea081d5b76ee1abc23a9b5d</string>
+	<key>FacebookDisplayName</key>
+	<string>MyLines</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fbauth2</string>
+		<string>fb-messenger-share-api</string>
+		<string>googlegmail</string>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -52,14 +64,12 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
 				<string>com.googleusercontent.apps.329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q</string>
+				<string>fb1556384551869815</string>
 			</array>
 		</dict>
 	</array>
 	<key>GIDClientID</key>
-	<!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
 	<string>329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com</string>
-	<!-- End of the Google Sign-in Section -->
 </dict>
 </plist>

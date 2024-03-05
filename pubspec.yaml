@@ -114,7 +114,7 @@ dependencies:
   google_sign_in: ^6.2.1
 
   # A Flutter plugin for Facebook Sign In 
-  flutter_facebook_auth: ^6.0.4
+  flutter_facebook_auth: ^6.1.1
   
   # A Flutter widget for rendering HTML and CSS as Flutter widgets.
   flutter_html: ^3.0.0-beta.2

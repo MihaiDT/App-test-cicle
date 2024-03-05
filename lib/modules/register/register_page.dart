@@ -96,7 +96,9 @@ class RegisterPage extends GetView<RegisterController> {
                     children: [
                       LinkAccountWidget(
                         imagePath: ThemeImage.facebook,
-                        onTap: () {},
+                        onTap: () => controller.setRegistrationProvider(
+                          RegistrationProvider.facebook,
+                        ),
                       ),
                       ThemeSizedBox.width40,
                       LinkAccountWidget(
