@@ -40,7 +40,7 @@ class InviteFriendFriendsAndCoins extends StatelessWidget {
                 const HeadlineSmall(
                   "Amici",
                   color: ThemeColor.darkBlue,
-                )
+                ),
               ],
             ),
             SizedBox(
@@ -73,7 +73,7 @@ class InviteFriendFriendsAndCoins extends StatelessWidget {
                       fit: BoxFit.scaleDown,
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ],

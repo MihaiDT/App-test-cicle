@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/theme_icon.dart';
 
 class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;

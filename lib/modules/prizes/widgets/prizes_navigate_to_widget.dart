@@ -36,7 +36,7 @@ class PrizesNavigateToWidget extends StatelessWidget {
               TitleLarge(text).applyShaders(
                 context,
               ),
-              SvgPicture.asset(ThemeIcon.arrowRightGradient)
+              SvgPicture.asset(ThemeIcon.arrowRightGradient),
             ],
           ),
         ),

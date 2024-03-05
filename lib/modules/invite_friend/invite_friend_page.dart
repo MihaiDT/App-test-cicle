@@ -92,7 +92,7 @@ class InviteFriendPage extends GetView<InviteFriendController> {
                   TitleMedium(
                     "5 amici",
                     color: ThemeColor.darkBlue,
-                  )
+                  ),
                 ],
               ),
               ThemeSizedBox.height90,

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../../core/app_theme.dart';
-import '../../../widgets/appbar/transparent_app_bar.dart';
-import '../../../widgets/layouts/app_scaffold_page.dart';
-import '../controllers/advices_detail_controller.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 
 class AdvicesSliderArticleDetail extends GetView<AdvicesDetailController> {
   const AdvicesSliderArticleDetail({

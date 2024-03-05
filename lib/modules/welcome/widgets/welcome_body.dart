@@ -4,8 +4,8 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 
-import '../welcome_controller.dart';
-import 'welcome_signin_button.dart';
+import 'package:lines/modules/welcome/welcome_controller.dart';
+import 'package:lines/modules/welcome/widgets/welcome_signin_button.dart';
 
 class WelcomeBody extends StatelessWidget {
   final WelcomeController controller;

@@ -45,7 +45,7 @@ class ReferralCoinCard extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

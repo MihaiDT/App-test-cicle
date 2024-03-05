@@ -63,7 +63,7 @@ class RegisterPage extends GetView<RegisterController> {
                             "ACCEDI",
                             underline: true,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ],
@@ -113,7 +113,7 @@ class RegisterPage extends GetView<RegisterController> {
                             RegistrationProvider.apple,
                           ),
                         ),
-                      ]
+                      ],
                     ],
                   ),
                   ThemeSizedBox.height32,

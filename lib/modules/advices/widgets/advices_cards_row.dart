@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/app_theme.dart';
-import '../../../data/models/advices_article.dart';
-import '../../../data/models/advices_category.dart';
-import 'advice_card.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/advices_article.dart';
+import 'package:lines/data/models/advices_category.dart';
+import 'package:lines/modules/advices/widgets/advice_card.dart';
 
 class AdvicesCardsRow extends StatelessWidget {
   final bool withBorder;

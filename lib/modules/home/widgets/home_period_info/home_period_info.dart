@@ -8,7 +8,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_menstruation_card.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_ovulation_card.dart';
 
-import '../../home_controller.dart';
+import 'package:lines/modules/home/home_controller.dart';
 
 class HomePeriodInfo extends GetView<HomeController> {
   const HomePeriodInfo({super.key});

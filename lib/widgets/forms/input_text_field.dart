@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../core/app_theme.dart';
-import '../../core/theme/text_wrapper.dart';
+import 'package:lines/core/app_theme.dart';
 
 class InputTextField extends StatelessWidget {
   final FocusNode? focusNode;
@@ -88,7 +87,8 @@ class InputTextField extends StatelessWidget {
           onEditingComplete: () =>
               onEditingComplete != null ? onEditingComplete!() : {},
           scrollPadding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom + 20),
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+          ),
           textCapitalization:
               textCapitalization ?? TextCapitalization.sentences,
           textInputAction: textInputAction,

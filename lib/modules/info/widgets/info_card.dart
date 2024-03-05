@@ -60,7 +60,7 @@ class InfoCard extends StatelessWidget {
               : const SizedBox(
                   height: 120,
                   child: Placeholder(),
-                )
+                ),
         ],
       ),
     );

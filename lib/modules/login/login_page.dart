@@ -63,7 +63,7 @@ class LoginPage extends GetView<LoginController> {
                             "REGISTRATI",
                             underline: true,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ],
@@ -116,7 +116,7 @@ class LoginPage extends GetView<LoginController> {
                             RegistrationProvider.apple,
                           ),
                         ),
-                      ]
+                      ],
                     ],
                   ),
                   ThemeSizedBox.height32,

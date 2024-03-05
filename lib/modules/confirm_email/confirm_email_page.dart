@@ -5,8 +5,8 @@ import 'package:lines/modules/confirm_email/confirm_email_controller.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-import '../../widgets/appbar/transparent_app_bar.dart';
-import '../../widgets/buttons/secondary_button.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/widgets/buttons/secondary_button.dart';
 
 class ConfirmEmailPage extends GetView<ConfirmEmailController> {
   const ConfirmEmailPage({
@@ -26,7 +26,7 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
             child: const TitleLarge(
               'ASSISTENZA',
             ).applyShaders(context),
-          )
+          ),
         ],
       ),
       extendBodyBehindAppBar: true,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_gradient.dart';
+import 'package:lines/core/theme/theme_color.dart';
+import 'package:lines/core/theme/theme_gradient.dart';
 
 class QuizHighlightedBox extends StatelessWidget {
   final Widget? child;

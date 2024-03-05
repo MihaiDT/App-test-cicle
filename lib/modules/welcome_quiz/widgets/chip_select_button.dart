@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/theme/theme_color.dart';
 
-import 'quiz_select_multiple_title.dart';
+import 'package:lines/modules/welcome_quiz/widgets/quiz_select_multiple_title.dart';
 
 class ChipSelectButton extends StatelessWidget {
   final String title;

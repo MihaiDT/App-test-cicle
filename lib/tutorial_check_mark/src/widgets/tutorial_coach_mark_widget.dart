@@ -112,7 +112,7 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
             duration: const Duration(milliseconds: 300),
             child: _buildContents(),
           ),
-          _buildSkip()
+          _buildSkip(),
         ],
       ),
     );

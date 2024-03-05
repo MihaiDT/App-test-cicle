@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 
-import '../../../core/utils/custom_date_utils.dart';
-import '../../../data/enums/calendar_tabs.dart';
-import '../calendar_controller.dart';
-import 'calendar_day_select_multiple_widget.dart';
-import 'calendar_day_widget.dart';
+import 'package:lines/core/utils/custom_date_utils.dart';
+import 'package:lines/data/enums/calendar_tabs.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/modules/calendar/widgets/calendar_day_select_multiple_widget.dart';
+import 'package:lines/modules/calendar/widgets/calendar_day_widget.dart';
 
 class CalendarGridWidget extends StatelessWidget {
   final int year;
@@ -42,7 +42,11 @@ class CalendarGridWidget extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         final dayOfMonth = CustomDateUtils.getDayOfMonthFromIndex(
-            year, month, index, startDayOfWeek);
+          year,
+          month,
+          index,
+          startDayOfWeek,
+        );
         return Visibility(
           visible: index >= startDayOfWeek,
           child: LayoutBuilder(

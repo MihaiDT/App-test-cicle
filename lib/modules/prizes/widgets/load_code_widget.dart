@@ -80,7 +80,7 @@ class LoadCodeWidget extends StatelessWidget {
                           color: ThemeColor.darkBlue,
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -113,7 +113,7 @@ class LoadCodeWidget extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

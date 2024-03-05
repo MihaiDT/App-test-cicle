@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../core/helpers/logger/log.dart';
-import 'calendar_store.dart';
+import 'package:lines/core/helpers/logger/log.dart';
+import 'package:lines/modules/calendar/calendar_store.dart';
 
 class CalendarScrollController extends GetxController {
   /// The mininimum date to show

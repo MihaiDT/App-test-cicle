@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/content_library/controllers/content_library_search_page_controller.dart';
-import '../../data/models/advices_article.dart';
-import '../advices/widgets/advice_card.dart';
+import 'package:lines/data/models/advices_article.dart';
+import 'package:lines/modules/advices/widgets/advice_card.dart';
 
 class ContentLibrarySearchPageResults
     extends GetView<ContentLibrarySearchPageController> {

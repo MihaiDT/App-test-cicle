@@ -13,9 +13,10 @@ class PeriodStatus {
 
   factory PeriodStatus.fromJson(Map<String, dynamic> data) {
     return PeriodStatus(
-        date: data['date'],
-        real: data['real'],
-        periodPhase: PeriodPhase.fromString(data['period_phase'] as String));
+      date: data['date'],
+      real: data['real'],
+      periodPhase: PeriodPhase.fromString(data['period_phase'] as String),
+    );
   }
 
   @override

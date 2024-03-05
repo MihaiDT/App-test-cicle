@@ -1,4 +1,4 @@
-import 'setting.dart';
+import 'package:lines/data/models/setting.dart';
 
 class AppConfig {
   String? appVersion;

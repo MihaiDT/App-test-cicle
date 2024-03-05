@@ -120,7 +120,7 @@ class MainPage extends GetView<MainController> {
             BodySmall(
               label,
               fontWeight: FontWeight.w600,
-            ).applyShaders(context)
+            ).applyShaders(context),
           ],
         ),
       ),
@@ -136,7 +136,7 @@ class MainPage extends GetView<MainController> {
             BodySmall(
               label,
               fontWeight: FontWeight.w600,
-            )
+            ),
           ],
         ),
       ),

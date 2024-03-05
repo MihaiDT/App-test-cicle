@@ -65,21 +65,21 @@ import 'package:lines/modules/your_coins/your_coins_page.dart';
 import 'package:lines/modules/your_diary/bindings/your_diary_binding.dart';
 import 'package:lines/modules/your_diary/pages/your_diary_page.dart';
 
-import '../modules/access_wrapper/wrapper_access_widget.dart';
-import '../modules/birth_date/birth_date_page.dart';
-import '../modules/calendar/calendar_binding.dart';
-import '../modules/calendar/calendar_page.dart';
-import '../modules/content_library/bindings/content_library_binding.dart';
-import '../modules/content_library/bindings/content_library_search_page_binding.dart';
-import '../modules/content_library/content_library_page.dart';
-import '../modules/content_library/content_library_search_page.dart';
-import '../modules/name_surname/name_surname_page.dart';
-import '../modules/privacy/privacy_page.dart';
-import '../modules/register/register_binding.dart';
-import '../modules/register/register_page.dart';
-import '../modules/splash/splash_binding.dart';
-import '../modules/splash/splash_page.dart';
-import 'routes.dart';
+import 'package:lines/modules/access_wrapper/wrapper_access_widget.dart';
+import 'package:lines/modules/birth_date/birth_date_page.dart';
+import 'package:lines/modules/calendar/calendar_binding.dart';
+import 'package:lines/modules/calendar/calendar_page.dart';
+import 'package:lines/modules/content_library/bindings/content_library_binding.dart';
+import 'package:lines/modules/content_library/bindings/content_library_search_page_binding.dart';
+import 'package:lines/modules/content_library/content_library_page.dart';
+import 'package:lines/modules/content_library/content_library_search_page.dart';
+import 'package:lines/modules/name_surname/name_surname_page.dart';
+import 'package:lines/modules/privacy/privacy_page.dart';
+import 'package:lines/modules/register/register_binding.dart';
+import 'package:lines/modules/register/register_page.dart';
+import 'package:lines/modules/splash/splash_binding.dart';
+import 'package:lines/modules/splash/splash_page.dart';
+import 'package:lines/routes/routes.dart';
 
 class Pages {
   Pages._(); // this is to prevent anyone from instantiating this object

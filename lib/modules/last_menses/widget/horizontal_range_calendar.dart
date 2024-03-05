@@ -47,7 +47,7 @@ class _HorizontalRangeCalendarState extends State<HorizontalRangeCalendar> {
           rangeEndDay: value.end,
           rangeSelectionMode: RangeSelectionMode.toggledOn,
           lastDay: lastDate,
-          weekendDays: [],
+          weekendDays: const [],
           weekNumbersVisible: false,
           sixWeekMonthsEnforced: false,
           pageJumpingEnabled: true,

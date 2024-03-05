@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class AppScaffoldPadding extends StatelessWidget {
   final double? bottom;

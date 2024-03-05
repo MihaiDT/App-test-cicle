@@ -5,6 +5,7 @@ class YourMensesSectionBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<YourMensesSectionController>(
-        () => YourMensesSectionController());
+      () => YourMensesSectionController(),
+    );
   }
 }

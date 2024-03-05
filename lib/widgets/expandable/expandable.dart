@@ -37,40 +37,42 @@ class _ExpandableState extends State<Expandable> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            LayoutBuilder(builder: (context, constrains) {
-              return InkWell(
-                onTap: () {
-                  setState(() {
-                    _isExpanded = !_isExpanded;
-                  });
-                },
-                child: Row(
-                  children: [
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: constrains.maxWidth * 0.6,
+            LayoutBuilder(
+              builder: (context, constrains) {
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      _isExpanded = !_isExpanded;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: constrains.maxWidth * 0.6,
+                        ),
+                        child: HeadlineSmall(
+                          widget.title,
+                          color: ThemeColor.darkBlue,
+                          textAlign: TextAlign.start,
+                        ),
                       ),
-                      child: HeadlineSmall(
-                        widget.title,
-                        color: ThemeColor.darkBlue,
-                        textAlign: TextAlign.start,
+                      const Spacer(),
+                      AnimatedRotation(
+                        turns: _isExpanded ? 0.5 : 0,
+                        duration: const Duration(
+                          milliseconds: 300,
+                        ),
+                        curve: Curves.easeInOut,
+                        child: SvgPicture.asset(
+                          ThemeIcon.arrowUp,
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    AnimatedRotation(
-                      turns: _isExpanded ? 0.5 : 0,
-                      duration: const Duration(
-                        milliseconds: 300,
-                      ),
-                      curve: Curves.easeInOut,
-                      child: SvgPicture.asset(
-                        ThemeIcon.arrowUp,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }),
+                    ],
+                  ),
+                );
+              },
+            ),
             if (widget.child != null)
               AnimatedSize(
                 duration: const Duration(

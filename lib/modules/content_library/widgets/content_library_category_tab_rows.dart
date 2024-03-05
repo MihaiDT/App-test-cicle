@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
-import '../../../data/models/advices_article.dart';
-import '../../../data/models/advices_category.dart';
-import '../../advices/widgets/advices_cards_row.dart';
+import 'package:lines/data/models/advices_article.dart';
+import 'package:lines/data/models/advices_category.dart';
+import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 
 class ContentLibraryCategoryTabRows extends StatelessWidget {
   final Map<AdvicesCategory, List<AdvicesArticle>> allCategoriesWithArticles;

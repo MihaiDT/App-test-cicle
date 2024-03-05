@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_gradient.dart';
-import '../../../core/theme/theme_icon.dart';
+import 'package:lines/core/theme/theme_color.dart';
+import 'package:lines/core/theme/theme_gradient.dart';
+import 'package:lines/core/theme/theme_icon.dart';
 
 class QuizButtonCheck extends StatelessWidget {
   final bool selected;

@@ -51,7 +51,7 @@ class PrizesPage extends GetView<PrizesController> {
               child: SvgPicture.asset(
                 ThemeIcon.info,
               ),
-            )
+            ),
           ],
         ),
         Expanded(
@@ -183,9 +183,7 @@ class PrizesPage extends GetView<PrizesController> {
                   iconPath: ThemeImage.inviteAFriend,
                 ),
               ),
-              const SizedBox(
-                height: 200,
-              ),
+              ThemeSizedBox.height90,
             ],
           ),
         ),

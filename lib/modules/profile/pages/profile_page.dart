@@ -15,24 +15,28 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: ThemeSize.paddingSmall,
-        ),
+      child: Column(
         children: [
           const ProfileAppBar(),
-          ThemeSizedBox.height12,
-          const ProfileHeader(),
-          ThemeSizedBox.height24,
-          const ProfileCompletionPercentageSection(),
-          ThemeSizedBox.height16,
-          const MyMensesSection(),
-          ThemeSizedBox.height16,
-          const YourDiarySection(),
-          ThemeSizedBox.height16,
-          const MyBadgesSection(),
-          const SizedBox(
-            height: 200,
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: ThemeSize.paddingSmall,
+              ),
+              children: [
+                ThemeSizedBox.height12,
+                const ProfileHeader(),
+                ThemeSizedBox.height24,
+                const ProfileCompletionPercentageSection(),
+                ThemeSizedBox.height16,
+                const MyMensesSection(),
+                ThemeSizedBox.height16,
+                const YourDiarySection(),
+                ThemeSizedBox.height16,
+                const MyBadgesSection(),
+                ThemeSizedBox.height90,
+              ],
+            ),
           ),
         ],
       ),

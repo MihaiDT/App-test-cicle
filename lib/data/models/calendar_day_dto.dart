@@ -4,7 +4,7 @@ import 'package:lines/data/enums/period_phase.dart';
 import 'package:lines/data/models/period_status.dart';
 import 'package:lines/data/models/symptom.dart';
 
-import '../enums/symptoms_category_title.dart';
+import 'package:lines/data/enums/symptoms_category_title.dart';
 
 class CalendarDayDTO {
   final Color? bgColor;

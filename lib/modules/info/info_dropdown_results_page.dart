@@ -85,7 +85,7 @@ class InfoDropDownResultsPage extends StatelessWidget {
                       points: 250,
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

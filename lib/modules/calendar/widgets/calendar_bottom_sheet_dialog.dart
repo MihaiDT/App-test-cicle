@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_icon.dart';
-import '../../../core/theme/theme_sized_box.dart';
-import '../../../widgets/buttons/app_round_button.dart';
-import '../../../widgets/buttons/primary_button.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/theme/theme_color.dart';
+import 'package:lines/core/theme/theme_icon.dart';
+import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/widgets/buttons/app_round_button.dart';
+import 'package:lines/widgets/buttons/primary_button.dart';
 
 class CalendarBottomSheetDialog extends StatefulWidget {
   final Map<int, dynamic> filteredMap;
@@ -96,10 +96,10 @@ class _CalendarBottomSheetDialogState extends State<CalendarBottomSheetDialog> {
                     },
                     child: const TitleLarge('CONFERMA'),
                   ),
-                )
+                ),
               ],
             ),
-            ThemeSizedBox.height20
+            ThemeSizedBox.height20,
           ],
         ),
       ),
@@ -110,32 +110,33 @@ class _CalendarBottomSheetDialogState extends State<CalendarBottomSheetDialog> {
     return Row(
       children: [
         AppRoundButton(
-            radius: 13,
-            iconPath: ThemeIcon.checkMark,
-            onChanged: (value) {
-              //this piece of code will take care of selected non more then 3 categories inside the dialog
+          radius: 13,
+          iconPath: ThemeIcon.checkMark,
+          onChanged: (value) {
+            //this piece of code will take care of selected non more then 3 categories inside the dialog
 
-              int trueCount = 0;
-              if (filteredMap[index]['inHome'] == false) {
-                for (int key in filteredMap.keys) {
-                  if (filteredMap[key]['inHome'] == true) {
-                    trueCount++;
-                  }
+            int trueCount = 0;
+            if (filteredMap[index]['inHome'] == false) {
+              for (int key in filteredMap.keys) {
+                if (filteredMap[key]['inHome'] == true) {
+                  trueCount++;
                 }
-                if (trueCount <= 2) {
-                  filteredMap[index]['inHome'] = true;
-                }
-              } else {
-                filteredMap[index]['inHome'] = false;
               }
-              setState(() {});
-            },
-            value: filteredMap[index]['inHome']),
+              if (trueCount <= 2) {
+                filteredMap[index]['inHome'] = true;
+              }
+            } else {
+              filteredMap[index]['inHome'] = false;
+            }
+            setState(() {});
+          },
+          value: filteredMap[index]['inHome'],
+        ),
         ThemeSizedBox.width12,
         HeadlineSmall(
           filteredMap[index]['title'],
           color: ThemeColor.darkBlue,
-        )
+        ),
       ],
     );
   }

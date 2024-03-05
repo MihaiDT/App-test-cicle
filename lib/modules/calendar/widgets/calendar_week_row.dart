@@ -3,7 +3,7 @@ import 'package:lines/core/utils/custom_date_utils.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/widgets/dividers/divider_with_gradient.dart';
 
-import '../../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class CalendarWeekRow extends StatelessWidget {
   final CalendarController controller;
@@ -36,7 +36,7 @@ class CalendarWeekRow extends StatelessWidget {
             },
           ),
         ),
-        DividerWithGradient(gradient: ThemeGradient.primary)
+        DividerWithGradient(gradient: ThemeGradient.primary),
       ],
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 
 class QuizBodyText extends StatelessWidget {
   final String title;
@@ -27,7 +26,7 @@ class QuizBodyText extends StatelessWidget {
           subTitle,
           color: textColor,
           textAlign: TextAlign.center,
-        )
+        ),
       ],
     );
   }

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/modules/calendar/widgets/calendar_year_months_grid.dart';
 
-import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_gradient.dart';
-import '../../../core/theme/theme_sized_box.dart';
-import '../../../widgets/dividers/divider_with_gradient.dart';
-import '../calendar_controller.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/theme/theme_color.dart';
+import 'package:lines/core/theme/theme_gradient.dart';
+import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/widgets/dividers/divider_with_gradient.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
 
 class CalendarYearBody extends GetView<CalendarController> {
   const CalendarYearBody({super.key});
@@ -33,7 +33,7 @@ class CalendarYearBody extends GetView<CalendarController> {
                     textAlign: TextAlign.center,
                   ),
                   ThemeSizedBox.height8,
-                  DividerWithGradient(gradient: ThemeGradient.primary)
+                  DividerWithGradient(gradient: ThemeGradient.primary),
                 ],
               ),
             ),
@@ -67,7 +67,7 @@ class CalendarYearBody extends GetView<CalendarController> {
                               ThemeSizedBox.height8,
                               DividerWithGradient(
                                 gradient: ThemeGradient.primary,
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -77,10 +77,11 @@ class CalendarYearBody extends GetView<CalendarController> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   CalendarYearMonthsGrid(
-                                    months: controller
-                                        .getMonthsDataForYearCalendar(controller
-                                            .calendarYearController
-                                            .years[index]),
+                                    months:
+                                        controller.getMonthsDataForYearCalendar(
+                                      controller
+                                          .calendarYearController.years[index],
+                                    ),
                                     onMonthTapped:
                                         controller.goBackToMonthCalendar,
                                   ),
@@ -91,16 +92,17 @@ class CalendarYearBody extends GetView<CalendarController> {
                               )
                             : CalendarYearMonthsGrid(
                                 months: controller.getMonthsDataForYearCalendar(
-                                    controller
-                                        .calendarYearController.years[index]),
+                                  controller
+                                      .calendarYearController.years[index],
+                                ),
                                 onMonthTapped: controller.goBackToMonthCalendar,
-                              )
+                              ),
                       ],
                     ),
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
         Column(
@@ -119,13 +121,13 @@ class CalendarYearBody extends GetView<CalendarController> {
                       textAlign: TextAlign.center,
                     ),
                     ThemeSizedBox.height8,
-                    DividerWithGradient(gradient: ThemeGradient.primary)
+                    DividerWithGradient(gradient: ThemeGradient.primary),
                   ],
                 ),
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }

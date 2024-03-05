@@ -21,7 +21,7 @@ class CustomDateUtils {
       30,
       31,
       30,
-      31
+      31,
     ];
     return daysInMonth[month - 1];
   }
@@ -33,7 +33,11 @@ class CustomDateUtils {
   /// - index: The index of the day within the month.
   /// - start: The starting index for the days of the week (e.g., 0 for Sunday, 1 for Monday).
   static DateTime getDayOfMonthFromIndex(
-      int year, int month, int index, int start) {
+    int year,
+    int month,
+    int index,
+    int start,
+  ) {
     return DateTime(
       year,
       month,

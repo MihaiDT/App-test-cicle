@@ -67,7 +67,8 @@ class User {
       sessionToken: json['user']['session_token'],
       interests: (json['user']['interests'] as List)
           .map(
-              (interest) => Interest.fromJson(interest as Map<String, dynamic>))
+            (interest) => Interest.fromJson(interest as Map<String, dynamic>),
+          )
           .toList(),
       password: json['user']['password'],
       nickname: json['user']['nickname'],

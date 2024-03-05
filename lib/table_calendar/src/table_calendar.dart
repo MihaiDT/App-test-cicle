@@ -7,26 +7,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/utils/custom_date_utils.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
-import 'customization/calendar_builders.dart';
-import 'customization/calendar_style.dart';
-import 'customization/days_of_week_style.dart';
-import 'customization/header_style.dart';
-import 'shared/utils.dart';
-import 'table_calendar_base.dart';
-import 'widgets/cell_content.dart';
+import 'package:lines/table_calendar/src/customization/calendar_builders.dart';
+import 'package:lines/table_calendar/src/customization/calendar_style.dart';
+import 'package:lines/table_calendar/src/customization/days_of_week_style.dart';
+import 'package:lines/table_calendar/src/customization/header_style.dart';
+import 'package:lines/table_calendar/src/shared/utils.dart';
+import 'package:lines/table_calendar/src/table_calendar_base.dart';
+import 'package:lines/table_calendar/src/widgets/cell_content.dart';
 
 /// Signature for `onDaySelected` callback. Contains the selected day and focused day.
 typedef OnDaySelected = void Function(
-    DateTime selectedDay, DateTime focusedDay);
+  DateTime selectedDay,
+  DateTime focusedDay,
+);
 
 /// Signature for `onRangeSelected` callback.
 /// Contains start and end of the selected range, as well as currently focused day.
 typedef OnRangeSelected = void Function(
-    DateTime? start, DateTime? end, DateTime focusedDay);
+  DateTime? start,
+  DateTime? end,
+  DateTime focusedDay,
+);
 
 /// Modes that range selection can operate in.
 enum RangeSelectionMode { disabled, toggledOff, toggledOn, enforced }
@@ -209,7 +213,7 @@ class TableCalendar<T> extends StatefulWidget {
 
   /// Creates a `TableCalendar` widget.
   TableCalendar({
-    Key? key,
+    super.key,
     required DateTime focusedDay,
     required DateTime firstDay,
     required DateTime lastDay,
@@ -265,15 +269,17 @@ class TableCalendar<T> extends StatefulWidget {
     this.onCalendarCreated,
   })  : assert(availableCalendarFormats.keys.contains(calendarFormat)),
         assert(availableCalendarFormats.length <= CalendarFormat.values.length),
-        assert(weekendDays.isNotEmpty
-            ? weekendDays.every(
-                (day) => day >= DateTime.monday && day <= DateTime.sunday)
-            : true),
+        assert(
+          weekendDays.isNotEmpty
+              ? weekendDays.every(
+                  (day) => day >= DateTime.monday && day <= DateTime.sunday,
+                )
+              : true,
+        ),
         focusedDay = normalizeDate(focusedDay),
         firstDay = normalizeDate(firstDay),
         lastDay = normalizeDate(lastDay),
-        currentDay = currentDay ?? DateTime.now(),
-        super(key: key);
+        currentDay = currentDay ?? DateTime.now();
 
   @override
   _TableCalendarState<T> createState() => _TableCalendarState<T>();
@@ -540,17 +546,15 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
               Widget? cell = widget.calendarBuilders.weekNumberBuilder
                   ?.call(context, weekNumber);
 
-              if (cell == null) {
-                cell = Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Center(
-                    child: Text(
-                      weekNumber.toString(),
-                      style: widget.calendarStyle.weekNumberTextStyle,
-                    ),
+              cell ??= Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Center(
+                  child: Text(
+                    weekNumber.toString(),
+                    style: widget.calendarStyle.weekNumberTextStyle,
                   ),
-                );
-              }
+                ),
+              );
 
               return cell;
             },
@@ -716,10 +720,10 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
         return Stack(
           alignment: widget.calendarStyle.markersAlignment,
-          children: children,
           clipBehavior: widget.calendarStyle.canMarkersOverflow
               ? Clip.none
               : Clip.hardEdge,
+          children: children,
         );
       },
     );

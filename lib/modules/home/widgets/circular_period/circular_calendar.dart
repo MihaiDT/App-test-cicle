@@ -8,7 +8,7 @@ import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/modules/home/widgets/circular_period/circular_calendar_dot.dart';
 import 'package:lines/modules/home/widgets/circular_period/circular_path_painter.dart';
 
-import '../../home_controller.dart';
+import 'package:lines/modules/home/home_controller.dart';
 
 class CircularCalendar extends GetView<HomeController> {
   static const follicolareColor = Color(0xff70B873);

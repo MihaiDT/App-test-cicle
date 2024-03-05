@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class HeroLogo extends StatelessWidget {
   static const heroTag = 'hero_logo';

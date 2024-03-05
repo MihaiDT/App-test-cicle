@@ -2,8 +2,8 @@
 
 import 'package:get/get.dart';
 
-import '../../core/helpers/api.dart';
-import 'setting.dart';
+import 'package:lines/core/helpers/api.dart';
+import 'package:lines/data/models/setting.dart';
 
 class Session {
   // // Current user

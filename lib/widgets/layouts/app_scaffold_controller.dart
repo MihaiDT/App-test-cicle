@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../core/utils/helpers.dart';
+import 'package:lines/core/utils/helpers.dart';
 
 class AppScaffoldController extends GetxController {
   final RxBool _isBusy = false.obs;

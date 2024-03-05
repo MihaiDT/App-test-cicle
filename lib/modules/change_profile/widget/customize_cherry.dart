@@ -20,42 +20,44 @@ class CustomizeCherry extends GetView<CustomizeCherryController> {
           top: 18,
           bottom: 24,
         ),
-        child: LayoutBuilder(builder: (context, constrains) {
-          return Row(
-            children: [
-              SizedBox(
-                width: constrains.maxWidth * 0.7,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const DisplayMedium(
-                      "Personalizza Cherry",
-                    ).applyShaders(context),
-                    ThemeSizedBox.height16,
-                    const BodySmall(
-                      "oggetti selezionati:",
-                      color: ThemeColor.darkBlue,
-                    ),
-                    ThemeSizedBox.height8,
-                    Row(
-                      children: controller.selectedObjects,
-                    ),
-                    const TitleMedium(
-                      "PERSONALIZZA",
-                      underline: true,
-                    ).applyShaders(context),
-                  ],
+        child: LayoutBuilder(
+          builder: (context, constrains) {
+            return Row(
+              children: [
+                SizedBox(
+                  width: constrains.maxWidth * 0.7,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const DisplayMedium(
+                        "Personalizza Cherry",
+                      ).applyShaders(context),
+                      ThemeSizedBox.height16,
+                      const BodySmall(
+                        "oggetti selezionati:",
+                        color: ThemeColor.darkBlue,
+                      ),
+                      ThemeSizedBox.height8,
+                      Row(
+                        children: controller.selectedObjects,
+                      ),
+                      const TitleMedium(
+                        "PERSONALIZZA",
+                        underline: true,
+                      ).applyShaders(context),
+                    ],
+                  ),
                 ),
-              ),
-              Image.asset(
-                ThemeImage.mockAvatar,
-                fit: BoxFit.scaleDown,
-                width: constrains.maxWidth * 0.3,
-                height: constrains.maxWidth * 0.3,
-              ),
-            ],
-          );
-        }),
+                Image.asset(
+                  ThemeImage.mockAvatar,
+                  fit: BoxFit.scaleDown,
+                  width: constrains.maxWidth * 0.3,
+                  height: constrains.maxWidth * 0.3,
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

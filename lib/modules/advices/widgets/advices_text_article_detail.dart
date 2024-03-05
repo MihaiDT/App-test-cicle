@@ -3,10 +3,10 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../core/app_theme.dart';
-import '../../../data/models/advices_category.dart';
-import '../../../widgets/layouts/app_scaffold_page.dart';
-import '../controllers/advices_detail_controller.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/advices_category.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 
 class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
   const AdvicesTextArticleDetails({
@@ -77,7 +77,7 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -165,7 +165,7 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/info/widgets/info_bottom_sheet.dart';
 
 class InfoController extends GetxController {

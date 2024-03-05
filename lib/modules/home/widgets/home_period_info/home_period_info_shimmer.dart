@@ -5,7 +5,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../home_controller.dart';
+import 'package:lines/modules/home/home_controller.dart';
 
 class HomePeriodInfoShimmer extends GetView<HomeController> {
   const HomePeriodInfoShimmer({super.key});

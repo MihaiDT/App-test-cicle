@@ -1,6 +1,6 @@
 import 'package:lines/data/models/advices_category.dart';
 
-import 'advices_sub_category.dart';
+import 'package:lines/data/models/advices_sub_category.dart';
 
 class AdvicesCategoryWithArticles {
   final AdvicesCategory advicesCategory;

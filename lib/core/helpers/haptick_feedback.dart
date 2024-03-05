@@ -1,3 +1,3 @@
 import 'package:flutter/services.dart';
 
-hapticFeedback() => HapticFeedback.lightImpact();
+Future<void> hapticFeedback() => HapticFeedback.lightImpact();

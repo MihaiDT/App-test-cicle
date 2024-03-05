@@ -4,8 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
 
-import 'shared/utils.dart';
-import 'widgets/calendar_core.dart';
+import 'package:lines/table_calendar/src/shared/utils.dart';
+import 'package:lines/table_calendar/src/widgets/calendar_core.dart';
 
 class TableCalendarBase extends StatefulWidget {
   final DateTime firstDay;
@@ -38,7 +38,7 @@ class TableCalendarBase extends StatefulWidget {
   final void Function(PageController pageController)? onCalendarCreated;
 
   TableCalendarBase({
-    Key? key,
+    super.key,
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
@@ -76,8 +76,7 @@ class TableCalendarBase extends StatefulWidget {
     this.onCalendarCreated,
   })  : assert(!dowVisible || (dowHeight != null && dowBuilder != null)),
         assert(isSameDay(focusedDay, firstDay) || focusedDay.isAfter(firstDay)),
-        assert(isSameDay(focusedDay, lastDay) || focusedDay.isBefore(lastDay)),
-        super(key: key);
+        assert(isSameDay(focusedDay, lastDay) || focusedDay.isBefore(lastDay));
 
   @override
   _TableCalendarBaseState createState() => _TableCalendarBaseState();
@@ -99,7 +98,10 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
     _pageHeight = ValueNotifier(_getPageHeight(rowCount));
 
     final initialPage = _calculateFocusedPage(
-        widget.calendarFormat, widget.firstDay, _focusedDay);
+      widget.calendarFormat,
+      widget.firstDay,
+      _focusedDay,
+    );
 
     _pageController = PageController(initialPage: initialPage);
     widget.onCalendarCreated?.call(_pageController);
@@ -147,10 +149,16 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
 
   void _updatePage({bool shouldAnimate = false}) {
     final currentIndex = _calculateFocusedPage(
-        widget.calendarFormat, widget.firstDay, _focusedDay);
+      widget.calendarFormat,
+      widget.firstDay,
+      _focusedDay,
+    );
 
     final endIndex = _calculateFocusedPage(
-        widget.calendarFormat, widget.firstDay, widget.lastDay);
+      widget.calendarFormat,
+      widget.firstDay,
+      widget.lastDay,
+    );
 
     if (currentIndex != _previousIndex ||
         currentIndex == 0 ||
@@ -210,7 +218,7 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
               pageController: _pageController,
               scrollPhysics: _canScrollHorizontally
                   ? const PageScrollPhysics()
-                  : NeverScrollableScrollPhysics(),
+                  : const NeverScrollableScrollPhysics(),
               firstDay: widget.firstDay,
               lastDay: widget.lastDay,
               startingDayOfWeek: widget.startingDayOfWeek,
@@ -265,7 +273,10 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
   }
 
   int _calculateFocusedPage(
-      CalendarFormat format, DateTime startDay, DateTime focusedDay) {
+    CalendarFormat format,
+    DateTime startDay,
+    DateTime focusedDay,
+  ) {
     switch (format) {
       case CalendarFormat.month:
         return _getMonthCount(startDay, focusedDay);

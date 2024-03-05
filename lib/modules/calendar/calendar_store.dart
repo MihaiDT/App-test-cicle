@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/symptom.dart';
 
-import '../../data/models/symptom_category.dart';
+import 'package:lines/data/models/symptom_category.dart';
 
 class CalendarStore extends GetxController {
   final Rxn<DateTime> rxSelectedDate = Rxn();
@@ -46,7 +46,8 @@ class CalendarStore extends GetxController {
     symptom?.forEach((symptom) {
       newList
           .firstWhereOrNull(
-              (symptomCategory) => symptomCategory == symptom.category)
+            (symptomCategory) => symptomCategory == symptom.category,
+          )
           ?.symptoms[symptom.indexInSymptomCategory]
           .selected = true;
     });

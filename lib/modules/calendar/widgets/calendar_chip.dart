@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_gradient.dart';
-import '../../../core/theme/theme_text_style.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/theme/theme_color.dart';
+import 'package:lines/core/theme/theme_gradient.dart';
+import 'package:lines/core/theme/theme_text_style.dart';
 
 class CalendarChip extends StatelessWidget {
   final String? iconPath;
@@ -35,7 +35,8 @@ class CalendarChip extends StatelessWidget {
               ? SizedBox(
                   width: 18,
                   height: 18,
-                  child: SvgPicture.asset(iconPath ?? ''))
+                  child: SvgPicture.asset(iconPath ?? ''),
+                )
               : const SizedBox(
                   height: 20,
                   width: 20,
@@ -51,7 +52,7 @@ class CalendarChip extends StatelessWidget {
           ),
           const SizedBox(
             width: 4,
-          )
+          ),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
+import 'package:lottie/lottie.dart';
 
 class SecondaryLoadingButton extends SecondaryButton {
   final bool isLoading;
@@ -20,11 +21,11 @@ class _LoadingButtonIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 14,
-      width: 14,
-      child: CircularProgressIndicator(
-        strokeWidth: 2.0,
+    return SizedBox(
+      height: 20,
+      width: 20,
+      child: LottieBuilder.asset(
+        "assets/lottie/dark_loader.json",
       ),
     );
   }

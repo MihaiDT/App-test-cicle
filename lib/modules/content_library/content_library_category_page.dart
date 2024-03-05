@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/app_theme.dart';
-import '../../data/models/advices_article.dart';
-import '../../data/models/advices_category.dart';
-import '../../widgets/appbar/transparent_app_bar.dart';
-import '../../widgets/layouts/app_scaffold_page.dart';
-import '../advices/widgets/advice_card.dart';
-import 'controllers/content_library_controller.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/advices_article.dart';
+import 'package:lines/data/models/advices_category.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/modules/advices/widgets/advice_card.dart';
+import 'package:lines/modules/content_library/controllers/content_library_controller.dart';
 
 class ContentLibraryCategoryPage extends GetView<ContentLibraryController> {
   const ContentLibraryCategoryPage({

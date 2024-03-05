@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:lines/data/enums/symptom_title.dart';
 
-import '../../core/theme/theme_icon.dart';
-import '../enums/symptoms_category_title.dart';
-import 'symptom.dart';
+import 'package:lines/core/theme/theme_icon.dart';
+import 'package:lines/data/enums/symptoms_category_title.dart';
+import 'package:lines/data/models/symptom.dart';
 
 class SymptomCategory {
   final String categoryTitle;

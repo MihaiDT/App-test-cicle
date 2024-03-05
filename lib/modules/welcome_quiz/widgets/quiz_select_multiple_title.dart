@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/theme/theme_color.dart';
 
-import '../../../core/theme/theme_text_style.dart';
+import 'package:lines/core/theme/theme_text_style.dart';
 
 class QuizSelectedMultipleTitle extends StatelessWidget {
   final String title;

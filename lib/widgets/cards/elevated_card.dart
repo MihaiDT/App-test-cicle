@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-import '../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class ElevatedCard extends StatelessWidget {
   final Widget child;
@@ -31,8 +31,10 @@ class ElevatedCard extends StatelessWidget {
     this.color,
     this.margin,
     this.onPressed,
-  }) : assert(gradientBorder != null && borderColor == null ||
-            gradientBorder == null && borderColor != null);
+  }) : assert(
+          gradientBorder != null && borderColor == null ||
+              gradientBorder == null && borderColor != null,
+        );
 
   @override
   Widget build(BuildContext context) {

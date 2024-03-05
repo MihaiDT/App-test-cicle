@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import '../../../data/models/symptom.dart';
-import 'calendar_symptom_widget.dart';
+import 'package:lines/data/models/symptom.dart';
+import 'package:lines/modules/calendar/widgets/calendar_symptom_widget.dart';
 
 class CalendarBottomSheetRow extends StatelessWidget {
   final int categoryIndex;

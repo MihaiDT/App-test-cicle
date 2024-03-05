@@ -31,7 +31,7 @@ class AnimatedFocusLight extends StatefulWidget {
   final ImageFilter? imageFilter;
 
   const AnimatedFocusLight({
-    Key? key,
+    super.key,
     required this.targets,
     this.focus,
     this.finish,
@@ -49,8 +49,7 @@ class AnimatedFocusLight extends StatefulWidget {
     this.imageFilter,
     this.pulseEnable = true,
     this.rootOverlay = false,
-  })  : assert(targets.length > 0),
-        super(key: key);
+  }) : assert(targets.length > 0);
 
   @override
   // ignore: no_logic_in_create_state
@@ -278,7 +277,7 @@ class AnimatedStaticFocusLightState extends AnimatedFocusLightState {
                     height: height,
                   ),
                 ),
-              )
+              ),
             ],
           );
         },
@@ -329,13 +328,15 @@ class AnimatedPulseFocusLightState extends AnimatedFocusLightState {
   bool _finishFocus = false;
   bool _initReverse = false;
 
-  get left => (_targetPosition?.offset.dx ?? 0) - _getPaddingFocus() * 2;
+  double get left => (_targetPosition?.offset.dx ?? 0) - _getPaddingFocus() * 2;
 
-  get top => (_targetPosition?.offset.dy ?? 0) - _getPaddingFocus() * 2;
+  double get top => (_targetPosition?.offset.dy ?? 0) - _getPaddingFocus() * 2;
 
-  get width => (_targetPosition?.size.width ?? 0) + _getPaddingFocus() * 4;
+  double get width =>
+      (_targetPosition?.size.width ?? 0) + _getPaddingFocus() * 4;
 
-  get height => (_targetPosition?.size.height ?? 0) + _getPaddingFocus() * 4;
+  double get height =>
+      (_targetPosition?.size.height ?? 0) + _getPaddingFocus() * 4;
 
   @override
   void initState() {
@@ -390,7 +391,7 @@ class AnimatedPulseFocusLightState extends AnimatedFocusLightState {
                         height: height,
                       ),
                     ),
-                  )
+                  ),
                 ],
               );
             },

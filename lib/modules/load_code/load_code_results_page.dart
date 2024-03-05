@@ -27,7 +27,7 @@ class LoadCodeResultsPage extends StatelessWidget {
         actions: [
           CoinTotal(
             totalCoins: 250,
-          )
+          ),
         ],
       ),
       body: BottomWidgetLayout(
@@ -37,12 +37,7 @@ class LoadCodeResultsPage extends StatelessWidget {
           ),
           child: PrimaryButton(
             onPressed: () {
-              Get.offNamedUntil(
-                Routes.main,
-                (route) {
-                  return route.settings.name == Routes.main;
-                },
-              );
+              Get.until((route) => Get.currentRoute == Routes.main);
             },
             child: const TitleLarge(
               "CHIUDI",

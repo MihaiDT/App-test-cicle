@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class AdvicesGynecologistBox extends StatelessWidget {
   const AdvicesGynecologistBox({super.key});
@@ -47,7 +47,7 @@ class AdvicesGynecologistBox extends StatelessWidget {
                       const TitleMedium(
                         'CHIEDI ORA',
                         underline: true,
-                      ).applyShaders(context)
+                      ).applyShaders(context),
                     ],
                   ),
                 ),
@@ -66,7 +66,7 @@ class AdvicesGynecologistBox extends StatelessWidget {
               ThemeImage.ginecologa,
             ),
           ),
-        )
+        ),
       ],
     );
   }

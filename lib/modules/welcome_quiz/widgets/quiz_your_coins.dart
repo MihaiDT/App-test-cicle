@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 
-import '../../../core/theme/theme_color.dart';
-import '../../../core/theme/theme_sized_box.dart';
-import '../../../widgets/coin/coin_total.dart';
+import 'package:lines/core/theme/theme_color.dart';
+import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/widgets/coin/coin_total.dart';
 
 class QuizYourCoins extends StatelessWidget {
   final int totalCoins;

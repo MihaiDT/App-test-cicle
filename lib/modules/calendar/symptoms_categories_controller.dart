@@ -6,7 +6,7 @@ import 'package:lines/modules/calendar/calendar_store.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_dialog.dart';
 import 'package:lines/routes/routes.dart';
 
-import '../../data/models/symptom_category.dart';
+import 'package:lines/data/models/symptom_category.dart';
 
 class SymptomCategoriesController extends GetxController {
   late CalendarStore calendarStore;
@@ -51,7 +51,10 @@ class SymptomCategoriesController extends GetxController {
 
   ///This method will handle the callback for when the inHome button is pressed
   void onValueChanged(
-      String categoryTitle, bool newValue, int newCategoryIndex) {
+    String categoryTitle,
+    bool newValue,
+    int newCategoryIndex,
+  ) {
     _buttonShown.value = false;
     calendarStore.currentCategories[newCategoryIndex].inHome = newValue;
     for (int i = 0; i < savedCategories.length; i++) {
@@ -74,7 +77,9 @@ class SymptomCategoriesController extends GetxController {
 
   ///if there's more the 3 active in home categories show the dialog
   void _handleMoreThenThreeCategoriesSelected(
-      String newCategoryTitle, int newCategoryIndex) {
+    String newCategoryTitle,
+    int newCategoryIndex,
+  ) {
     //ordered map to pass as an argument to the dialog (this way even inside the dialog categories will appear in the original order)
 
     SplayTreeMap<int, dynamic> orderedMap = SplayTreeMap(
@@ -92,7 +97,7 @@ class SymptomCategoriesController extends GetxController {
       if (calendarStore.currentCategories[i].inHome == true) {
         orderedMap[i] = {
           'title': keys[i],
-          'inHome': calendarStore.currentCategories[i].inHome
+          'inHome': calendarStore.currentCategories[i].inHome,
         };
       }
     }

@@ -5,9 +5,9 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/calendar/widgets/calendar_grid_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../calendar_controller.dart';
-import '../calendar_scroll_controller.dart';
-import '../calendar_store.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/modules/calendar/calendar_scroll_controller.dart';
+import 'package:lines/modules/calendar/calendar_store.dart';
 
 class ScrollableCalendar extends StatelessWidget {
   final double spaceBetweenCalendars;
@@ -74,7 +74,7 @@ class ScrollableCalendar extends StatelessWidget {
             onDayTapped: calendarScrollableCalendarController.onDayTapped,
             multipleSelectedMode: calendarController.modifyPeriodMode.value,
           ),
-        )
+        ),
       ],
     );
   }

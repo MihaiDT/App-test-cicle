@@ -70,7 +70,9 @@ class AppRoundButton extends StatelessWidget {
   BoxBorder? get _borderUnselected {
     if (unselectedBorderGradient) {
       return GradientBoxBorder(
-          gradient: ThemeGradient.primary, width: borderWidth);
+        gradient: ThemeGradient.primary,
+        width: borderWidth,
+      );
     }
     return Border.all(
       color: unselectedBorderColor,

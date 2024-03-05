@@ -3,11 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/modules/content_library/widgets/article_category_widget.dart';
 
-import '../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
-import '../../data/models/advices_sub_category.dart';
-import 'controllers/content_library_search_page_controller.dart';
-import 'content_library_search_page_results.dart';
+import 'package:lines/data/models/advices_sub_category.dart';
+import 'package:lines/modules/content_library/controllers/content_library_search_page_controller.dart';
+import 'package:lines/modules/content_library/content_library_search_page_results.dart';
 
 class ContentLibrarySearchPage
     extends GetView<ContentLibrarySearchPageController> {
@@ -184,7 +184,7 @@ class ContentLibrarySearchPage
                                                       .categoryTitle!
                                               : "",
                                           color: ThemeColor.darkBlue,
-                                        )
+                                        ),
                                       ],
                                     ),
                                     Divider(
@@ -196,11 +196,13 @@ class ContentLibrarySearchPage
                                       shrinkWrap: true,
                                       itemCount:
                                           controller.subCategoriesForCategory(
-                                                      categoryIconName) !=
+                                                    categoryIconName,
+                                                  ) !=
                                                   null
                                               ? controller
                                                   .subCategoriesForCategory(
-                                                      categoryIconName)!
+                                                    categoryIconName,
+                                                  )!
                                                   .length
                                               : 0,
                                       itemBuilder: (context, subCategoryIndex) {
@@ -208,8 +210,8 @@ class ContentLibrarySearchPage
                                           onTap: () {
                                             if (subCatories != null) {
                                               controller.onSubCategoryTapped(
-                                                  subCatories[
-                                                      subCategoryIndex]);
+                                                subCatories[subCategoryIndex],
+                                              );
                                             }
                                           },
                                           child: ArticleCategoryWidget(
@@ -248,7 +250,7 @@ class ContentLibrarySearchPage
                     );
                   }
                 },
-              )
+              ),
             ],
           ),
         ),

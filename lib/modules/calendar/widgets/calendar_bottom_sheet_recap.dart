@@ -3,9 +3,8 @@ import 'package:get/get.dart';
 
 import 'package:lines/core/app_theme.dart';
 
-import '../symptoms_controller.dart';
-import '../../../core/theme/text_wrapper.dart';
-import 'calendar_chip.dart';
+import 'package:lines/modules/calendar/symptoms_controller.dart';
+import 'package:lines/modules/calendar/widgets/calendar_chip.dart';
 
 class CalendarBottomSheetRecap extends StatelessWidget {
   final SymptomsController symptomsController;
@@ -48,7 +47,7 @@ class CalendarBottomSheetRecap extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

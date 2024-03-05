@@ -6,11 +6,11 @@ class ScrollIfNeeded extends StatelessWidget {
   final bool disableTap;
 
   const ScrollIfNeeded({
-    Key? key,
+    super.key,
     required this.child,
     this.disableTap = false,
     required this.scrollController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

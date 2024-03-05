@@ -5,7 +5,7 @@ import 'package:lines/data/models/symptom.dart';
 import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/routes/routes.dart';
 
-import 'calendar_store.dart';
+import 'package:lines/modules/calendar/calendar_store.dart';
 
 class SymptomsController extends GetxController {
   late CalendarStore calendarStore;
@@ -59,8 +59,10 @@ class SymptomsController extends GetxController {
   ///returns a list of symptoms where each symptom has selected attribute set to true
   List<Symptom> get selectedSymptoms {
     List<Symptom> list = currentCategories
-        .expand((element) =>
-            element.symptoms.where((element) => element.selected == true))
+        .expand(
+          (element) =>
+              element.symptoms.where((element) => element.selected == true),
+        )
         .toList();
     return list;
   }

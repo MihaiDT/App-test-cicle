@@ -5,8 +5,8 @@ import 'package:lines/modules/home/widgets/circular_period/circular_calendar.dar
 
 import 'package:lines/widgets/buttons/secondary_button.dart';
 
-import '../../../../core/app_theme.dart';
-import '../../../../widgets/layouts/app_scaffold_padding.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 
 class CircularPeriodCalendar extends GetView<HomeController> {
   final size = Get.width * 0.74;

@@ -5,13 +5,13 @@ import 'package:lines/core/env/enviroment.dart';
 
 // import '../../data/models/auth_headers.dart';
 // import '../../storages/auth_storage.dart';
-import '../utils/singletons.dart';
+import 'package:lines/core/utils/singletons.dart';
 
 Environment get environment => Get.find<Environment>();
-get apiEndpoint => environment.apiEndpoint;
-get proxyEndpoint => "${environment.proxy}:9090";
+String get apiEndpoint => environment.apiEndpoint;
+String get proxyEndpoint => "${environment.proxy}:9090";
 // bool get authTokenPresent => authHeaders.accessToken != null;
-get isProxymanEnabled => kDebugMode ? environment.enableProxyman : false;
+bool get isProxymanEnabled => kDebugMode ? environment.enableProxyman : false;
 
 // Dio interceptor: se false non vengono intercettati gli errori ma viene lasciata la gestione all'utente
 bool disableDioInterceptor = false;

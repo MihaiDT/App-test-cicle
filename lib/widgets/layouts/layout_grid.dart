@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class LayoutGrid extends StatelessWidget {
   const LayoutGrid({
-    Key? key,
+    super.key,
     this.large = false,
-  }) : super(key: key);
+  });
 
   final bool large;
 

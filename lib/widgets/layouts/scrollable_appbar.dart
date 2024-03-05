@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 
-import '../../core/app_theme.dart';
-import '../../core/utils/helpers.dart';
-import '../../widgets/buttons/app_icon_button.dart';
-import 'app_scaffold_controller.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/widgets/buttons/app_icon_button.dart';
+import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
 class ScrollableAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppScaffoldController? controller;
@@ -65,7 +64,7 @@ class ScrollableAppBar extends StatelessWidget implements PreferredSizeWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 8),
                         child: _closeButton(context),
-                      )
+                      ),
                     ]
                   : [],
           backgroundColor: Colors.transparent,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class ProfileAppBar extends StatelessWidget {
   const ProfileAppBar({
@@ -9,33 +10,27 @@ class ProfileAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        getIcon(context),
-        const DisplayLarge(
-          "PROFILO",
-          color: ThemeColor.primary,
-        ),
-        // This is a hidden widget used to maintain the centered position of the title
-        Visibility(
-          maintainSize: true,
-          maintainAnimation: true,
-          maintainState: true,
-          visible: false,
-          child: getIcon(context),
-        ),
-      ],
+    return TransparentAppBar(
+      leading: getIcon(context),
+      title: const DisplayLarge(
+        "Profilo",
+        color: ThemeColor.primary,
+      ),
     );
   }
 
   Widget getIcon(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         Scaffold.of(context).openDrawer();
       },
-      child: SvgPicture.asset(
-        ThemeIcon.menu,
+      child: Center(
+        child: SvgPicture.asset(
+          height: 24,
+          width: 24,
+          ThemeIcon.menu,
+          color: ThemeColor.darkBlue,
+        ),
       ),
     );
   }

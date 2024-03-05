@@ -23,7 +23,7 @@ class SurveysPage extends StatelessWidget {
         actions: [
           CoinTotal(
             totalCoins: 250,
-          )
+          ),
         ],
       ),
       body: Padding(

@@ -40,7 +40,7 @@ class Walkthrough extends StatelessWidget {
         WalkthroughBottom(
           numberOfPages: numberOfPages,
           onTapLetsStart: onTapLetsStart,
-        )
+        ),
       ],
     );
   }

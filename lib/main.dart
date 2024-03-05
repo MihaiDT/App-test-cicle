@@ -8,10 +8,10 @@ import 'package:lines/flavors.dart';
 import 'package:lines/repository/dio_interceptor.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'app.dart';
-import 'core/utils/helpers.dart';
-import 'core/utils/singletons.dart';
-import 'firebase_options.dart';
+import 'package:lines/app.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/firebase_options.dart';
 
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,6 +69,8 @@ _initPackageInfo() async {
   appConfig.appVersion = packageInfo.version;
   appConfig.buildNumber = packageInfo.buildNumber;
 
-  logDebug("${appConfig.appVersion} (${appConfig.buildNumber})",
-      tag: "App Version");
+  logDebug(
+    "${appConfig.appVersion} (${appConfig.buildNumber})",
+    tag: "App Version",
+  );
 }

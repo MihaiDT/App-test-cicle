@@ -40,7 +40,7 @@ class InfoBottomSheet extends StatelessWidget {
             child: SingleChildScrollView(
               child: child,
             ),
-          )
+          ),
         ],
       ),
     );

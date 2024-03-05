@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../shared/utils.dart' show TextFormatter;
+import 'package:lines/table_calendar/src/shared/utils.dart' show TextFormatter;
 
 /// Class containing styling and configuration of `TableCalendar`'s header.
 class HeaderStyle {
@@ -88,8 +88,8 @@ class HeaderStyle {
     this.titleTextStyle = const TextStyle(fontSize: 17.0),
     this.formatButtonTextStyle = const TextStyle(fontSize: 14.0),
     this.formatButtonDecoration = const BoxDecoration(
-      border: const Border.fromBorderSide(BorderSide()),
-      borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+      border: Border.fromBorderSide(BorderSide()),
+      borderRadius: BorderRadius.all(Radius.circular(12.0)),
     ),
     this.headerMargin = const EdgeInsets.all(0.0),
     this.headerPadding = const EdgeInsets.symmetric(vertical: 8.0),

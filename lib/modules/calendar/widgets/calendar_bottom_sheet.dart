@@ -7,9 +7,9 @@ import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_recap.dart';
 
-import '../../../widgets/buttons/primary_button.dart';
-import '../calendar_controller.dart';
-import 'calendar_bottom_sheet_body.dart';
+import 'package:lines/widgets/buttons/primary_button.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_body.dart';
 
 class CalendarBottomSheet extends StatelessWidget {
   final CalendarController controller = Get.find();
@@ -40,20 +40,22 @@ class CalendarBottomSheet extends StatelessWidget {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  spreadRadius: 10,
-                                  blurRadius: 50,
-                                  offset: const Offset(0, -10))
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 10,
+                                blurRadius: 50,
+                                offset: const Offset(0, -10),
+                              ),
                             ],
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
                             ),
                             image: DecorationImage(
-                                image: AssetImage(
-                                  ThemeImage.bgCalendarBottomSheet,
-                                ),
-                                fit: BoxFit.cover),
+                              image: AssetImage(
+                                ThemeImage.bgCalendarBottomSheet,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           child: ListView(
                             padding: EdgeInsets.zero,
@@ -66,16 +68,20 @@ class CalendarBottomSheet extends StatelessWidget {
                                 textAlign: TextAlign.center,
                               ),
                               ThemeSizedBox.height16,
-                              Obx(() => Visibility(
-                                    visible: controller.showRecapMenu,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
-                                      child: CalendarBottomSheetRecap(
-                                          symptomsController:
-                                              controller.symptomsController),
+                              Obx(
+                                () => Visibility(
+                                  visible: controller.showRecapMenu,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
                                     ),
-                                  )),
+                                    child: CalendarBottomSheetRecap(
+                                      symptomsController:
+                                          controller.symptomsController,
+                                    ),
+                                  ),
+                                ),
+                              ),
                               DisplayMedium(
                                 key: controller.bottomSheetTitleKey,
                                 'Aggiungi sintomi e attività',
@@ -200,7 +206,7 @@ class CalendarBottomSheet extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -251,7 +257,7 @@ class CalendarBottomSheet extends StatelessWidget {
                   ).applyShaders(context),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

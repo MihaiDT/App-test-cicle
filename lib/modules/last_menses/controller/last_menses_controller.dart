@@ -22,8 +22,8 @@ class LastMensesController extends GetxController {
       ),
     );
     if (!hasAcceptedPrivacyPolicy) {
-      await AuthenticationService.registration(
-        appController.registerParameter,
+      await AuthenticationService.updateUser(
+        appController.updateUserParameters,
       );
       Get.offAndToNamed(Routes.main);
     }

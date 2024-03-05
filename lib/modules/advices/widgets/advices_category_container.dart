@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
 
-import '../../../data/models/advices_category.dart';
+import 'package:lines/data/models/advices_category.dart';
 
 class AdvicesCategoryContainer extends StatelessWidget {
   final AdvicesCategory advicesCategory;
@@ -61,10 +61,10 @@ class AdvicesCategoryContainer extends StatelessWidget {
                           : "",
                       fontWeight: FontWeight.w900,
                     ),
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

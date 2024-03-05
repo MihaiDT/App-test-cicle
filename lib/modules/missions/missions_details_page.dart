@@ -70,7 +70,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
           ThemeSizedBox.height16,
@@ -111,7 +111,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                 Product(
                   name: "Lines è",
                   points: 250,
-                )
+                ),
               ],
             ),
           ),
@@ -157,10 +157,10 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                     underline: true,
                   ).applyShaders(context),
                 ),
-                ThemeSizedBox.height90
+                ThemeSizedBox.height90,
               ],
             ),
-          )
+          ),
         ],
       ),
     );

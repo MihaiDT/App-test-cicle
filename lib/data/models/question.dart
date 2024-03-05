@@ -12,17 +12,18 @@ class Question {
   String? typology;
   int? updatedAt;
 
-  Question(
-      {this.answers,
-      this.createdAt,
-      this.description,
-      required this.id,
-      required this.maxAnswers,
-      this.minAnswers = 1,
-      this.position,
-      this.question,
-      this.typology,
-      this.updatedAt});
+  Question({
+    this.answers,
+    this.createdAt,
+    this.description,
+    required this.id,
+    required this.maxAnswers,
+    this.minAnswers = 1,
+    this.position,
+    this.question,
+    this.typology,
+    this.updatedAt,
+  });
 
   factory Question.fromJson(Map<String, dynamic> json) {
     List<Answers>? answersList;

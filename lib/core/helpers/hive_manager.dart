@@ -64,7 +64,9 @@ class HiveManager {
 
   static set isFirstTutorialWatched(bool isFirstTutorialWatched) {
     Hive.box("linesApp").put(
-        HiveReferenceKeys.isFirstTutorialWatched.name, isFirstTutorialWatched);
+      HiveReferenceKeys.isFirstTutorialWatched.name,
+      isFirstTutorialWatched,
+    );
   }
 }
 

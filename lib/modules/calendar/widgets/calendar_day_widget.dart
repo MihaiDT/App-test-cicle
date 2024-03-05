@@ -4,10 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lines/core/app_theme.dart';
 
-import '../../../core/theme/text_wrapper.dart';
-import '../../../core/theme/theme_gradient.dart';
-import '../../../core/theme/theme_text_style.dart';
-import '../../../data/models/calendar_day_dto.dart';
+import 'package:lines/data/models/calendar_day_dto.dart';
 
 class CalendarDayWidget extends StatelessWidget {
   final bool isSelected;
@@ -57,7 +54,7 @@ class CalendarDayWidget extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

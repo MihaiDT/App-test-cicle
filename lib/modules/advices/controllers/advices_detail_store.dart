@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../../data/models/advices_article_detail_pair.dart';
+import 'package:lines/data/models/advices_article_detail_pair.dart';
 
 class AdvicesDetailStore extends GetxController {
   final Rxn<AdvicesDetailPair> rxArticleDetail = Rxn<AdvicesDetailPair>();

@@ -23,7 +23,7 @@ class InfoDropDownItem extends StatelessWidget {
         ),
         AppCoin.small(
           coinAmount: coinAmount,
-        )
+        ),
       ],
     );
   }

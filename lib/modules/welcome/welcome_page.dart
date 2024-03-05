@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
-import '../../widgets/layouts/app_scaffold_padding.dart';
-import '../../widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-import '../../widgets/logos/hero_logo.dart';
-import 'welcome_controller.dart';
-import 'widgets/welcome_body.dart';
+import 'package:lines/widgets/logos/hero_logo.dart';
+import 'package:lines/modules/welcome/welcome_controller.dart';
+import 'package:lines/modules/welcome/widgets/welcome_body.dart';
 
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({super.key});

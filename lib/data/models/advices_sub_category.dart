@@ -1,4 +1,4 @@
-import 'advices_article.dart';
+import 'package:lines/data/models/advices_article.dart';
 
 class AdvicesSubCategory {
   final String subCategoryName;

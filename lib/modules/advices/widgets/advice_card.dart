@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/advices_article.dart';
-import '../../../data/models/advices_category.dart';
-import 'advice_card_save_button.dart';
+import 'package:lines/data/models/advices_category.dart';
+import 'package:lines/modules/advices/widgets/advice_card_save_button.dart';
 
 class AdviceCard extends StatelessWidget {
   final AdvicesArticle article;
@@ -94,7 +93,7 @@ class AdviceCard extends StatelessWidget {
                 ),
               ],
             ),
-            _bottomSection(context)
+            _bottomSection(context),
           ],
         ),
       ),

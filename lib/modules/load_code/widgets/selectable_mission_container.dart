@@ -4,7 +4,6 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/modules/prizes/widgets/mission_container.dart';
-import 'package:lines/widgets/buttons/app_round_button.dart';
 
 class SelectableMissionContainer extends StatelessWidget {
   final Mission mission;
@@ -61,7 +60,7 @@ class SelectableMissionContainer extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

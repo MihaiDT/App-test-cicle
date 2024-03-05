@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/history/widgets/history_symptom.dart';
 
-import '../../../data/models/symptom_category.dart';
+import 'package:lines/data/models/symptom_category.dart';
 
 class HistoryRow extends StatelessWidget {
   final DateTime day;

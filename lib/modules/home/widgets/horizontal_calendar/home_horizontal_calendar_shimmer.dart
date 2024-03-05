@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class HomeHorizontalCalendarShimmer extends StatelessWidget {
   double get _cellWidth => Get.width / 7;
@@ -60,7 +60,7 @@ class HomeHorizontalCalendarShimmer extends StatelessWidget {
             ),
             height: 32,
             width: 32,
-          )
+          ),
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
 
-import '../../../data/log_levels.dart';
+import 'package:lines/data/log_levels.dart';
 
 logDebug(
   String msg, {

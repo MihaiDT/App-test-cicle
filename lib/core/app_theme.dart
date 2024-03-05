@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/theme/theme_text_style.dart';
 
-import 'theme/theme_color.dart';
+import 'package:lines/core/theme/theme_color.dart';
 
 export 'theme/text_wrapper.dart';
 export 'theme/theme_button_size.dart';

@@ -11,7 +11,7 @@ import 'package:lines/widgets/coin/app_coin.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-import 'widgets/quiz_body_text.dart';
+import 'package:lines/modules/welcome_quiz/widgets/quiz_body_text.dart';
 
 class QuizIntroPage extends GetView<WelcomeQuizIntroOutroController> {
   const QuizIntroPage({super.key});

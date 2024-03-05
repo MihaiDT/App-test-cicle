@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 
-import '../../core/utils/helpers.dart';
-import '../../routes/routes.dart';
-import '../../widgets/layouts/app_scaffold_controller.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
 class WelcomeController extends AppScaffoldController {
   WelcomeController() {

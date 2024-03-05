@@ -5,6 +5,7 @@ class WelcomeQuizCardBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<WelcomeQuizSectionController>(
-        () => WelcomeQuizSectionController());
+      () => WelcomeQuizSectionController(),
+    );
   }
 }

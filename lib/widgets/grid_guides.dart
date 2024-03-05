@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'layouts/app_scaffold_padding.dart';
+import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 
 class GridGuides extends StatelessWidget {
   const GridGuides({super.key});

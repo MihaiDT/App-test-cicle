@@ -3,9 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
-import '../../../../core/app_theme.dart';
-import '../../../../core/utils/helpers.dart';
-import '../../home_controller.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/modules/home/home_controller.dart';
 
 class HomeHorizontalCalendar extends GetView<HomeController> {
   const HomeHorizontalCalendar({super.key});
@@ -43,14 +43,14 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
             child: Padding(
               padding: const EdgeInsets.only(top: 12.0),
               child: SizedBox(
+                height: 90,
+                width: Get.width / 7,
                 child: SvgPicture.asset(
                   ThemeIcon.horizontalCalendarMagnifier,
                   fit: BoxFit.contain,
                   height: 90,
                   width: Get.width / 7,
                 ),
-                height: 90,
-                width: Get.width / 7,
               ),
             ),
           ),

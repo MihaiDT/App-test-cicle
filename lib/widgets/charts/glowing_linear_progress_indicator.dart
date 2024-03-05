@@ -29,8 +29,11 @@ class GlowingCustomPainter extends CustomPainter {
         ..strokeCap = StrokeCap.round
         ..strokeWidth = 2.0;
 
-      canvas.drawLine(const Offset(4.0, -1.0),
-          Offset(size.width * progress - 4.0, -1.0), glossPaint);
+      canvas.drawLine(
+        const Offset(4.0, -1.0),
+        Offset(size.width * progress - 4.0, -1.0),
+        glossPaint,
+      );
     }
   }
 

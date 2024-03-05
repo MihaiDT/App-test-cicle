@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:lines/modules/advices/controllers/advices_controller.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
 
-import '../home/home_controller.dart';
+import 'package:lines/modules/home/home_controller.dart';
 
 class MainController extends GetxController {
   final RxInt rxTabIndex = 0.obs;

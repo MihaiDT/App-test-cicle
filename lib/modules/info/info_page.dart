@@ -34,7 +34,7 @@ class InfoPage extends GetView<InfoController> {
         actions: [
           CoinTotal(
             totalCoins: 250,
-          )
+          ),
         ],
       ),
       body: ListView(

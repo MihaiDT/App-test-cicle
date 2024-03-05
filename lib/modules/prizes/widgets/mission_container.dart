@@ -27,7 +27,6 @@ class MissionContainer extends StatelessWidget {
 
   static const double _borderRadius = 20.0;
   static const double _borderWidth = 4.0;
-  static const Color _inProgressBgColor = Color(0x1e2d4f33);
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +98,7 @@ class MissionContainer extends StatelessWidget {
                     ThemeSizedBox.height16,
                   ],
                 ),
-              )
+              ),
             ],
           ),
           Padding(

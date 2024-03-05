@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'calendar_controller.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
 
 class CalendarBinding implements Bindings {
   @override

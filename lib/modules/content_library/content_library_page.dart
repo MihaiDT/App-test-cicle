@@ -9,9 +9,9 @@ import 'package:lines/modules/content_library/widgets/tab_indicator.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
-import '../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
-import 'controllers/content_library_controller.dart';
+import 'package:lines/modules/content_library/controllers/content_library_controller.dart';
 
 class ContentLibraryPage extends GetView<ContentLibraryController> {
   const ContentLibraryPage({super.key});
@@ -53,7 +53,7 @@ class ContentLibraryPage extends GetView<ContentLibraryController> {
               Get.toNamed(Routes.contentLibrarySearchPage);
             },
             child: SvgPicture.asset(ThemeIcon.search),
-          )
+          ),
         ],
       ),
       body: SafeArea(

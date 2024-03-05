@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/app_theme.dart';
-import '../../core/helpers/keyboard.dart';
-import '../../widgets/layouts/scroll_if_needed.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/keyboard.dart';
+import 'package:lines/widgets/layouts/scroll_if_needed.dart';
 
 class AppScaffoldPage extends StatelessWidget {
   final Color? backgroundColor;
@@ -43,7 +43,7 @@ class AppScaffoldPage extends StatelessWidget {
     );
   }
 
-  _body(BuildContext context) {
+  Container _body(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         image: backgroundImage,
@@ -55,7 +55,8 @@ class AppScaffoldPage extends StatelessWidget {
               disableTap: true,
               scrollController: scrollController!,
               child: MediaQuery(
-                data: MediaQuery.of(Get.context!).copyWith(textScaleFactor: 1),
+                data: MediaQuery.of(Get.context!)
+                    .copyWith(textScaler: const TextScaler.linear(1)),
                 child: InkWell(
                   onTap: () => dismissKeyboard(context),
                   child: body,
@@ -63,7 +64,8 @@ class AppScaffoldPage extends StatelessWidget {
               ),
             )
           : MediaQuery(
-              data: MediaQuery.of(Get.context!).copyWith(textScaleFactor: 1),
+              data: MediaQuery.of(Get.context!)
+                  .copyWith(textScaler: const TextScaler.linear(1)),
               child: InkWell(
                 onTap: () => dismissKeyboard(context),
                 child: body,

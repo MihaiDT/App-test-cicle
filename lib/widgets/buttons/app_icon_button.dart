@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../core/app_theme.dart';
+import 'package:lines/core/app_theme.dart';
 
 class AppIconButton extends StatelessWidget {
   const AppIconButton({
-    Key? key,
+    super.key,
     this.icon,
     this.iconColor,
     this.iconPath,
@@ -13,7 +13,7 @@ class AppIconButton extends StatelessWidget {
     this.setIconColor = true,
     this.showBg = false,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   static const double size = 44;
 

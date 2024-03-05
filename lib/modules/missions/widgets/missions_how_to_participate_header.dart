@@ -23,7 +23,7 @@ class MissionsHowToParticipateHeader extends StatelessWidget {
           description,
           color: ThemeColor.darkBlue,
           textAlign: TextAlign.center,
-        )
+        ),
       ],
     );
   }

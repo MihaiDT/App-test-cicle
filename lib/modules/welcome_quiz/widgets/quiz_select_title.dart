@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/theme/text_wrapper.dart';
 
 class QuizSelectTitle extends StatelessWidget {
   final String title;

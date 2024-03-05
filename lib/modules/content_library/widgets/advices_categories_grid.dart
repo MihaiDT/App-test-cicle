@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/models/advices_category.dart';
-import '../../advices/widgets/advices_category_container.dart';
+import 'package:lines/data/models/advices_category.dart';
+import 'package:lines/modules/advices/widgets/advices_category_container.dart';
 
 class AdvicesCategoriesGrid extends StatelessWidget {
   final List<AdvicesCategory> categories;

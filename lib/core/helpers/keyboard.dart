@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-dismissKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
+void dismissKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
 
 final RxDouble rxKeyboardHeight = RxDouble(0.0);
 double get keyboardHeight => rxKeyboardHeight.value;

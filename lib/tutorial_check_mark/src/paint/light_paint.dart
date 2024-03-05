@@ -53,11 +53,12 @@ class LightPaint extends CustomPainter {
     );
     if (borderSide != null && borderSide?.style != BorderStyle.none) {
       canvas.drawPath(
-          justCircleHole,
-          Paint()
-            ..style = PaintingStyle.stroke
-            ..color = borderSide!.color
-            ..strokeWidth = borderSide!.width);
+        justCircleHole,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..color = borderSide!.color
+          ..strokeWidth = borderSide!.width,
+      );
     }
   }
 

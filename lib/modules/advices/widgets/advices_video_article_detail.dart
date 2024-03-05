@@ -3,10 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../core/app_theme.dart';
-import '../../../widgets/appbar/transparent_app_bar.dart';
-import '../../../widgets/layouts/app_scaffold_page.dart';
-import '../controllers/advices_detail_controller.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 
 class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
   const AdvicesVideoArticleDetail({

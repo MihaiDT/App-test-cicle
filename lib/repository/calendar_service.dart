@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:lines/data/models/current_period.dart';
 
-import '../core/utils/response_handler.dart';
-import '../core/utils/singletons.dart';
-import '../data/models/calendar_day_dto_map.dart';
-import '../data/models/period_map.dart';
+import 'package:lines/core/utils/response_handler.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/calendar_day_dto_map.dart';
+import 'package:lines/data/models/period_map.dart';
 
 class CalendarService {
   static Future<void> fetchCurrentPeriod() async {

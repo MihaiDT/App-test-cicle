@@ -32,7 +32,7 @@ class YourCoinsPage extends StatelessWidget {
             child: SvgPicture.asset(
               ThemeIcon.info,
             ),
-          )
+          ),
         ],
       ),
       body: Padding(

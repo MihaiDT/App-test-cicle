@@ -17,20 +17,22 @@ class ThemeGradient {
   );
 
   static LinearGradient quizBackGroundGradient = const LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [
-        colorQuizGradientDark,
-        colorQuizGradientLight,
-        colorQuizGradientDark,
-      ]);
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      colorQuizGradientDark,
+      colorQuizGradientLight,
+      colorQuizGradientDark,
+    ],
+  );
 
   static LinearGradient calendarBg = const LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [
-        Color(0xFFDFC5D8),
-        Color(0xFFFDE9F0),
-        Color(0xFFDFC5D8),
-      ]);
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color(0xFFDFC5D8),
+      Color(0xFFFDE9F0),
+      Color(0xFFDFC5D8),
+    ],
+  );
 }

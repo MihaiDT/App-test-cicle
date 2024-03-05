@@ -4,18 +4,18 @@ import 'package:get/get.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet.dart';
 import 'package:lines/modules/calendar/widgets/calendar_year_body.dart';
 
-import '../../core/theme/text_wrapper.dart';
-import '../../core/theme/theme_color.dart';
-import '../../core/theme/theme_decoration.dart';
-import '../../core/theme/theme_icon.dart';
-import '../../core/theme/theme_sized_box.dart';
-import '../../data/enums/calendar_tabs.dart';
-import '../../widgets/appbar/transparent_app_bar.dart';
-import '../../widgets/layouts/app_scaffold_page.dart';
-import 'calendar_controller.dart';
-import 'widgets/calendar_month_year_switch.dart';
-import 'widgets/scrollable_calendar.dart';
-import 'widgets/calendar_week_row.dart';
+import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/theme/theme_color.dart';
+import 'package:lines/core/theme/theme_decoration.dart';
+import 'package:lines/core/theme/theme_icon.dart';
+import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/data/enums/calendar_tabs.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/modules/calendar/widgets/calendar_month_year_switch.dart';
+import 'package:lines/modules/calendar/widgets/scrollable_calendar.dart';
+import 'package:lines/modules/calendar/widgets/calendar_week_row.dart';
 
 class CalendarPage extends GetView<CalendarController> {
   const CalendarPage({super.key});
@@ -80,10 +80,10 @@ class CalendarPage extends GetView<CalendarController> {
                           child: CircularProgressIndicator(),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
           CalendarBottomSheet(),

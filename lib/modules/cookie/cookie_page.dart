@@ -5,8 +5,8 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
-import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class CookiePage extends StatelessWidget {
   const CookiePage({
@@ -32,7 +32,37 @@ class CookiePage extends StatelessWidget {
       ),
       backgroundImage: ThemeDecoration.images.bgDark,
       body: SafeArea(
-        child: AppScaffoldPadding(
+        child: BottomWidgetLayout(
+          scrollableAreaPadding: const EdgeInsets.symmetric(
+            horizontal: 40,
+          ),
+          bottomWidget: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SecondaryButton(
+                  onPressed: () {
+                    navigateToNextPage();
+                  },
+                  child: const TitleLarge(
+                    "ACCONSENTO",
+                  ).applyShaders(context),
+                ),
+                ThemeSizedBox.height16,
+                GestureDetector(
+                  onTap: () => _onKnowMoreAboutCookies(),
+                  child: const TitleMedium(
+                    "PIÙ OPZIONI",
+                    underline: true,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
           child: Column(
             children: [
               ThemeSizedBox.height32,
@@ -65,26 +95,8 @@ class CookiePage extends StatelessWidget {
                 " Clicca sulla X per chiudere senza prestare consenso.",
                 textAlign: TextAlign.center,
               ),
-              const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: SecondaryButton(
-                  onPressed: () {
-                    navigateToNextPage();
-                  },
-                  child: const TitleLarge(
-                    "ACCONSENTO",
-                  ).applyShaders(context),
-                ),
-              ),
-              ThemeSizedBox.height16,
-              GestureDetector(
-                onTap: () => _onKnowMoreAboutCookies(),
-                child: const TitleMedium(
-                  "PIÙ OPZIONI",
-                  underline: true,
-                  textAlign: TextAlign.center,
-                ),
+              const SizedBox(
+                height: 120,
               ),
             ],
           ),

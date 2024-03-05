@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../core/theme/theme_icon.dart';
+import 'package:lines/core/theme/theme_icon.dart';
 
 class AdviceCardSaveButton extends StatelessWidget {
   final bool isSaved;

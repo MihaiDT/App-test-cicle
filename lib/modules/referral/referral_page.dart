@@ -4,7 +4,6 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/referral/referral_controller.dart';
 import 'package:lines/modules/referral/widget/referral_coin_card.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/buttons/secondary_loading_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';

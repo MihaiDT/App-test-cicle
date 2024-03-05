@@ -13,9 +13,9 @@ import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
-import 'data/models/advices_grouped_by_category.dart';
-import 'data/models/calendar_day_dto_map.dart';
-import 'data/models/period_map.dart';
+import 'package:lines/data/models/advices_grouped_by_category.dart';
+import 'package:lines/data/models/calendar_day_dto_map.dart';
+import 'package:lines/data/models/period_map.dart';
 
 /// Just a wrapper in order to simplify getter access
 class EasyGetter<T> {

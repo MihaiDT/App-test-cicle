@@ -10,13 +10,13 @@ import 'package:lines/repository/db_services/db_calendar_services.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../core/utils/singletons.dart';
-import '../../data/models/calendar_day_dto.dart';
-import '../../repository/calendar_service.dart';
-import 'calendar_scroll_controller.dart';
-import 'calendar_store.dart';
-import 'calendar_year_controller.dart';
-import 'symptoms_controller.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/calendar_day_dto.dart';
+import 'package:lines/repository/calendar_service.dart';
+import 'package:lines/modules/calendar/calendar_scroll_controller.dart';
+import 'package:lines/modules/calendar/calendar_store.dart';
+import 'package:lines/modules/calendar/calendar_year_controller.dart';
+import 'package:lines/modules/calendar/symptoms_controller.dart';
 
 class CalendarController extends GetxController {
   late CalendarStore calendarStore;
@@ -111,7 +111,8 @@ class CalendarController extends GetxController {
               .jumpToYear(calendarStore.selectedDate ?? DateTime.now());
         } else {
           scrollableCalendarController.jumpToMonth(
-              date: calendarStore.selectedDate ?? DateTime.now());
+            date: calendarStore.selectedDate ?? DateTime.now(),
+          );
           showBottomMenu.value = true;
           _expandBottomSheetToSheetVSize();
         }
@@ -339,7 +340,7 @@ class CalendarController extends GetxController {
   /// Initialize the list of dates to add based on the current state of the calendarDayViewModel.
   void _initDatesToAdd() {
     List<String> dates = [
-      ...?appController.calendarDayViewModel.value?.symptomsDtoMap.keys
+      ...?appController.calendarDayViewModel.value?.symptomsDtoMap.keys,
     ];
     // Initialize datesToAdd and _prevSavedDates with the retrieved dates.
     for (String date in dates) {

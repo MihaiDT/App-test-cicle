@@ -16,8 +16,8 @@ import 'package:lines/tutorial_check_mark/src/target/target_focus.dart';
 import 'package:lines/tutorial_check_mark/tutorial_coach_mark.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
-import '../../core/utils/helpers.dart';
-import '../../widgets/layouts/app_scaffold_controller.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
 class HomeController extends AppScaffoldController {
   TutorialCoachMark? tutorialCoachMark;

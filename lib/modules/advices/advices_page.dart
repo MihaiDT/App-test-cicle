@@ -5,9 +5,9 @@ import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/advices/widgets/advices_content_library_button.dart';
 import 'package:lines/modules/advices/widgets/advices_gynecologist_box.dart';
 
-import '../../core/app_theme.dart';
-import '../../widgets/appbar/transparent_app_bar.dart';
-import 'controllers/advices_controller.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/modules/advices/controllers/advices_controller.dart';
 
 class AdvicesPage extends GetView<AdvicesController> {
   const AdvicesPage({
@@ -85,7 +85,7 @@ class AdvicesPage extends GetView<AdvicesController> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           );
         } else {
