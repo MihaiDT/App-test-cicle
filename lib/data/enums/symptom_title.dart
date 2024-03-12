@@ -123,11 +123,11 @@ enum SymptomTitle {
 
       // Desiderio Sessuale
       case SymptomTitle.desiderioSessualeBasso:
-        return "Desiderio sessuale basso";
+        return "Desiderio basso";
       case SymptomTitle.desiderioSessualeMedio:
-        return "Desiderio sessuale medio";
+        return "Desiderio medio";
       case SymptomTitle.desiderioSessualeElevato:
-        return "Desiderio sessuale elevato";
+        return "Desiderio elevato";
 
       // Contraccettivi
       case SymptomTitle.contraccettiviNessuno:
@@ -177,7 +177,7 @@ enum SymptomTitle {
       case SymptomTitle.moodEmotiva:
         return "Emotiva";
       case SymptomTitle.moodSbalziDUmore:
-        return "Sbalzi d'Umore";
+        return "Sbalzi d'umore";
 
       // Livello di Stress
       case SymptomTitle.livelloDiStressZero:
@@ -229,7 +229,7 @@ enum SymptomTitle {
       case SymptomTitle.pelleSeccaESpenta:
         return "Secca e spenta";
       case SymptomTitle.pelleGrassaELucida:
-        return "Pelle grassa e lucida";
+        return "Grassa e lucida";
       case SymptomTitle.pelleAcneEBrufoli:
         return "Acne e brufoli";
       case SymptomTitle.pellePruritoEIrritazione:

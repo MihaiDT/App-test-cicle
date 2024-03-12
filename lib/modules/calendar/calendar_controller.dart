@@ -1,47 +1,50 @@
+// ignore_for_file: invalid_use_of_protected_member, avoid_single_cascade_in_expression_statements
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/logger/log.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/core/utils/response_handler.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
-import 'package:lines/data/models/calendar_day_view_model.dart';
+import 'package:lines/data/isar/symptom_calendar.dart';
+import 'package:lines/data/models/period_status.dart';
+import 'package:lines/modules/calendar/calendar_year_controller.dart';
+import 'package:lines/modules/calendar/month_calendar_mixin.dart';
+import 'package:lines/modules/calendar/symptom_mixin.dart';
 import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
+import 'package:lines/repository/calendar_service.dart';
 import 'package:lines/repository/db_services/db_calendar_services.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/models/calendar_day_dto.dart';
-import 'package:lines/repository/calendar_service.dart';
-import 'package:lines/modules/calendar/calendar_scroll_controller.dart';
-import 'package:lines/modules/calendar/calendar_store.dart';
-import 'package:lines/modules/calendar/calendar_year_controller.dart';
-import 'package:lines/modules/calendar/symptoms_controller.dart';
+class CalendarController extends GetxController
+    with MonthCalendarMixin, SymptomsMixin {
+  static const int weekdayStart = 1; // Monday
+  static const int weekdayEnd = 7; // Sunday
+  final GlobalKey bottomSheetTitleKey = GlobalKey();
+  final GlobalKey bottomSheetContainerKey = GlobalKey();
 
-class CalendarController extends GetxController {
-  late CalendarStore calendarStore;
+  /// Current date selected by the user.
+  final Rx<DateTime> rxSelectedDate = Rx(DateTime.now());
 
   /// DraggableScrollableController for calendarBottomSheet
   final DraggableScrollableController draggableScrollableController =
       DraggableScrollableController();
 
   /// Whether or not the bar on top of the bottom sheet must stay hidden
-  final RxBool showBarButton = true.obs;
+  final RxBool rxShowBarButton = true.obs;
 
   /// Whether or not the bottom sheet must stay hidden
-  final RxBool showBottomMenu = true.obs;
+  final RxBool rxShowBottomMenu = true.obs;
 
   /// Whether or not the save button must stay hidden ,the results depends on the value of _showSaveButtonSymptoms and _showSaveButtonSymptomCategories
-  final RxBool showSaveButton = false.obs;
-
-  /// Show the save button because some symptoms have been selected/deselected
-  bool _showSaveButtonSymptoms = false;
-
-  /// Show the save button because some categories have been added/removed from home
-  bool _showSaveButtonSymptomCategories = false;
+  bool get showSaveButton =>
+      showSaveButtonSymptoms && draggableScrollableController.size > 0.1;
 
   /// Size of the bottom sheet
-  final RxDouble sheetVSize = 0.5.obs;
+  final RxDouble rxSheetVSize = 0.5.obs;
 
   /// Currently selected tab , by default the monthly calendar is shown
   final Rx<CalendarTabs> selectedTab = Rx(CalendarTabs.monthTab);
@@ -49,39 +52,29 @@ class CalendarController extends GetxController {
   /// The mode for the calendar grid
   final RxBool modifyPeriodMode = false.obs;
 
-  final GlobalKey bottomSheetTitleKey = GlobalKey();
-  final GlobalKey bottomSheetContainerKey = GlobalKey();
-
   /// New list of dates marked as period to be added
-  final RxMap<String, bool> periodDatesToAdd = <String, bool>{}.obs;
+  final RxMap<String, bool> rxPeriodDatesToAdd = <String, bool>{}.obs;
 
   /// New list of dates marked as period to be removed
-  final RxMap<String, bool> periodDatesToRemove = <String, bool>{}.obs;
+  final RxMap<String, bool> rxPeriodDatesToRemove = <String, bool>{}.obs;
 
-  /// Old list of dates marked as period , this will be compared with periodDatesToAdd and periodDatesToRemove to avoid useless api calls
+  /// Old list of dates marked as period , this will be compared with rxPeriodDatesToAdd and rxPeriodDatesToRemove to avoid useless api calls
   final Map<String, bool> _prevSavedDatesToHome = {};
 
   /// Show/hide symptoms recap menu depending on the size of the bottom sheet or if the list of selected symptoms for a particular day is empty
-  final RxBool _showRecapMenuSizeCondition = false.obs;
+  final RxBool rxShowRecapMenuSizeCondition = false.obs;
 
   bool get showRecapMenu =>
-      symptomsController.selectedSymptoms.isNotEmpty &&
-      _showRecapMenuSizeCondition.value;
+      rxShowRecapMenuSizeCondition.value &&
+      rxSavedSymptoms.value.isNotEmpty &&
+      rxCurrentSymptoms.value.isNotEmpty;
 
-  bool get pageShouldRefresh {
-    return appController.calendarDayViewModel.responseHandler.isSuccessful;
-  }
-
-  CalendarScrollController get scrollableCalendarController {
-    return Get.find<CalendarScrollController>();
-  }
+  bool get pageShouldRefresh =>
+      appController.periodStatusCalendar.responseHandler.isSuccessful &&
+      appController.symptomsCalendar.responseHandler.isSuccessful;
 
   CalendarYearController get calendarYearController {
     return Get.find<CalendarYearController>();
-  }
-
-  SymptomsController get symptomsController {
-    return Get.find<SymptomsController>();
   }
 
   SymptomCategoriesController get symptomCategoryController {
@@ -91,51 +84,87 @@ class CalendarController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    calendarStore = Get.put(CalendarStore());
+
+    initMonthCalendar();
+
     ever(
-      calendarStore.rxSelectedDate,
+      rxSelectedDate,
       condition: () => Get.currentRoute == Routes.calendar,
       (newDayValue) {
-        _showSaveButtonSymptoms = false;
-        _showSaveButtonSymptomCategories = false;
         _onDayChanged(newDayValue);
+
+        // Symptoms
+        fillSavedSymptoms(dateFormatYMD.format(newDayValue));
       },
     );
+
     ever(
       selectedTab,
       condition: () => Get.currentRoute == Routes.calendar,
       (newTab) {
         if (newTab == CalendarTabs.yearTab) {
-          _collapseBottomSheet();
-          calendarYearController
-              .jumpToYear(calendarStore.selectedDate ?? DateTime.now());
+          collapseBottomSheet();
+          calendarYearController.jumpToYear(rxSelectedDate.value);
         } else {
-          scrollableCalendarController.jumpToMonth(
-            date: calendarStore.selectedDate ?? DateTime.now(),
-          );
-          showBottomMenu.value = true;
-          _expandBottomSheetToSheetVSize();
+          jumpToMonth(date: rxSelectedDate.value);
+          rxShowBottomMenu.value = true;
+          expandBottomSheetTorxSheetVSize();
         }
       },
     );
-    _initScrollableCalendarController();
+
     _initCalendarYearController();
-    _initSymptomController();
     _initSymptomCategoryController();
   }
 
   @override
   void onReady() async {
     super.onReady();
+
+    final t1 = DateTime.now();
     _resizeBottomSheet();
     _listenForBottomSheetSizeChanges();
-    await CalendarService.fetchPeriods();
-    await DBCalendarServices.retrieveSymptoms();
-    CalendarDayViewModel.fromDBAndApi(
-      dbCalendarDayDtoMap: appController.dbCalendarDayDtoMap.value,
-      calendarDayDTOMap: appController.calendarDayDTOMap.value,
-    );
+
+    await fetchPeriodAndSymptoms();
+
     _initDatesToAdd();
+
+    final t2 = DateTime.now();
+    debugPrint("TIME ==> ${t2.difference(t1)}");
+    jumpToMonth(date: DateTime.now());
+  }
+
+  void saveSymptoms() async {
+    final dateString = dateFormatYMD.format(rxSelectedDate.value);
+    SymptomCalendar.save(
+      date: dateString,
+      symptoms: rxCurrentSymptoms.value,
+    );
+
+    draggableScrollableController.reset();
+    await fetchPeriodAndSymptoms();
+  }
+
+  Future<void> fetchPeriodAndSymptoms() async {
+    // Fetch period data calling the API
+    appController.periodStatusCalendar.responseHandler =
+        ResponseHandler.pending();
+    appController.periodStatusCalendar.responseHandler =
+        ResponseHandler.successful(
+      content: RxMap<String, PeriodStatus>.from(
+        await CalendarService.fetchPeriods(),
+      ),
+    );
+
+    // Fetch data stored on device
+    appController.symptomsCalendar.responseHandler = ResponseHandler.pending();
+    appController.symptomsCalendar.responseHandler = ResponseHandler.successful(
+      content: RxMap<String, SymptomCalendar>.from(
+        DBCalendarServices.fetchSymptoms(),
+      ),
+    );
+
+    rxSelectedDate.refresh();
   }
 
   void _initCalendarYearController() {
@@ -148,12 +177,6 @@ class CalendarController extends GetxController {
     );
   }
 
-  void _initSymptomController() {
-    Get.lazyPut(
-      () => SymptomsController(onSaveButtonValueChanged: _symptomsValueChanged),
-    );
-  }
-
   void _initSymptomCategoryController() {
     Get.lazyPut(
       () => SymptomCategoriesController(
@@ -162,38 +185,30 @@ class CalendarController extends GetxController {
     );
   }
 
-  /// Update save button visibility because some symptoms have been selected/removed
-  void _symptomsValueChanged(bool newValue) {
-    _showSaveButtonSymptoms = newValue;
-    showSaveButton.value =
-        _showSaveButtonSymptoms || _showSaveButtonSymptomCategories;
-  }
+  /// MonthCalendarMixin
+  @override
+  void onDayTapped(DateTime day) => rxSelectedDate.value = day;
 
   /// Update save button visibility because some categories have been added/removed from home
-  void _categoriesValueChanged(bool newValue) {
-    _showSaveButtonSymptomCategories = newValue;
-    showSaveButton.value =
-        _showSaveButtonSymptoms || _showSaveButtonSymptomCategories;
-  }
+  void _categoriesValueChanged(bool newValue) {}
 
   void _listenForBottomSheetSizeChanges() {
     draggableScrollableController.addListener(
       () {
         if (draggableScrollableController.size >= 0.9) {
-          showBarButton.value = false;
+          rxShowBarButton.value = false;
         } else {
-          showBarButton.value = true;
+          rxShowBarButton.value = true;
         }
         if (draggableScrollableController.size > 0.1) {
-          showBottomMenu.value = true;
+          rxShowBottomMenu.value = true;
         } else {
-          showBottomMenu.value = false;
-          showSaveButton.value = false;
+          rxShowBottomMenu.value = false;
         }
-        if (draggableScrollableController.size > 0.3) {
-          _showRecapMenuSizeCondition.value = true;
+        if (draggableScrollableController.size > 0.2) {
+          rxShowRecapMenuSizeCondition.value = true;
         } else {
-          _showRecapMenuSizeCondition.value = false;
+          rxShowRecapMenuSizeCondition.value = false;
         }
       },
     );
@@ -202,9 +217,9 @@ class CalendarController extends GetxController {
   /// Jump to today in both month and year calendars
   void jumpToToday() {
     DateTime today = DateTime.now();
-    calendarStore.selectedDate = today;
+    rxSelectedDate.value = today;
     if (selectedTab.value == CalendarTabs.monthTab) {
-      scrollableCalendarController.jumpToMonth(date: today);
+      jumpToMonth(date: today);
     } else {
       calendarYearController.jumpToYear(today);
     }
@@ -217,50 +232,32 @@ class CalendarController extends GetxController {
 
   /// Method called when a month is tapped inside the year calendar
   void goBackToMonthCalendar(DateTime month) {
-    calendarStore.selectedDate = month;
+    rxSelectedDate.value = month;
     changeTab(CalendarTabs.monthTab);
-  }
-
-  //TODO : for now the calendar starts at 4 months before today and ends in 4 months , later it will be dynamic according to API
-  void _initScrollableCalendarController() {
-    Get.lazyPut<CalendarScrollController>(
-      () => CalendarScrollController(
-        itemScrollController: ItemScrollController(),
-        minDate: DateTime.now().subtract(
-          const Duration(
-            days: 120,
-          ),
-        ),
-        maxDate: DateTime.now().add(
-          const Duration(
-            days: 120,
-          ),
-        ),
-      ),
-    );
   }
 
   void _onDayChanged(DateTime? day) {
     if (day != null && selectedTab.value == CalendarTabs.monthTab) {
-      showBottomMenu.value = true;
-      _expandBottomSheetToSheetVSize();
+      rxShowBottomMenu.value = true;
+      expandBottomSheetTorxSheetVSize();
     } else {
-      showBottomMenu.value = false;
+      rxShowBottomMenu.value = false;
     }
   }
 
-  void _expandBottomSheetToSheetVSize() {
+  void expandBottomSheetTorxSheetVSize() {
     try {
       WidgetsBinding.instance.addPostFrameCallback(
-        (_) {
+        (_) async {
           if (draggableScrollableController.isAttached) {
-            draggableScrollableController.animateTo(
-              sheetVSize.value,
+            await draggableScrollableController.animateTo(
+              rxSheetVSize.value,
               duration: const Duration(
                 milliseconds: 200,
               ),
               curve: Curves.linear,
             );
+            rxShowBottomMenu.value = true;
           }
         },
       );
@@ -269,51 +266,21 @@ class CalendarController extends GetxController {
     }
   }
 
-  void _collapseBottomSheet() {
+  void collapseBottomSheet() {
     if (draggableScrollableController.isAttached) {
       WidgetsBinding.instance.addPostFrameCallback(
-        (_) {
-          draggableScrollableController.animateTo(
+        (_) async {
+          await draggableScrollableController.animateTo(
             0.1,
             duration: const Duration(
               milliseconds: 200,
             ),
             curve: Curves.linear,
           );
+          rxShowBottomMenu.value = false;
         },
       );
     }
-  }
-
-  /// OnSaved callback when the save button is pressed
-  /// if both showSaveButtonSymptoms and showSaveButtonSymptomCategories are active that mean we need to
-  /// save date for both , otherwise only one has some changes that need to be saved
-  void onSaved() {
-    if (_showSaveButtonSymptoms && _showSaveButtonSymptomCategories) {
-      _saveSymptoms();
-      _saveCategories();
-      return;
-    }
-    if (_showSaveButtonSymptoms) {
-      _saveSymptoms();
-      return;
-    }
-    if (_showSaveButtonSymptomCategories) {
-      _saveCategories();
-      return;
-    }
-  }
-
-  /// Only save data for symptoms
-  void _saveSymptoms() {
-    symptomsController.saveSymptoms();
-    _showSaveButtonSymptoms = false;
-  }
-
-  /// Only save data for categories
-  void _saveCategories() {
-    symptomCategoryController.onSaved();
-    _showSaveButtonSymptomCategories = false;
   }
 
   /// Change the bottom sheet dimension based on its content + some bottom padding
@@ -334,45 +301,88 @@ class CalendarController extends GetxController {
     //vertical distance between the title and the top portion of the bottom sheet container
     final double delta = textPosition.dy - containerPosition.dy;
 
-    sheetVSize.value = (size.height + 20.0 + delta) / Get.height;
+    rxSheetVSize.value = (size.height + 20.0 + delta) / Get.height;
   }
 
   /// Initialize the list of dates to add based on the current state of the calendarDayViewModel.
   void _initDatesToAdd() {
-    List<String> dates = [
-      ...?appController.calendarDayViewModel.value?.symptomsDtoMap.keys,
-    ];
+    rxPeriodDatesToRemove.clear();
+    rxPeriodDatesToAdd.clear();
+    _prevSavedDatesToHome.clear();
+
+    List<String> dates = [...?appController.periodStatusCalendar.value?.keys];
     // Initialize datesToAdd and _prevSavedDates with the retrieved dates.
     for (String date in dates) {
-      periodDatesToAdd[date] = true;
-      _prevSavedDatesToHome[date] = true;
+      if (appController.periodStatusCalendar.value?[date]?.isReal ?? false) {
+        rxPeriodDatesToAdd[date] = true;
+        _prevSavedDatesToHome[date] = true;
+      }
     }
+  }
+
+  List<String> _extraDatesToAdd(String dateString) {
+    final List<String> result = [];
+    String nextDate = dateString;
+    for (int i = 0; i < (appController.user.value?.periodDays ?? 5); i++) {
+      nextDate = dateFormatYMD.format(
+        dateFormatYMD.parse(nextDate).subtract(
+              const Duration(days: 1),
+            ),
+      );
+
+      if (rxPeriodDatesToAdd.containsKey(nextDate)) {
+        return [];
+      }
+    }
+
+    nextDate = dateString;
+    for (int i = 1; i < (appController.user.value?.periodDays ?? 5); i++) {
+      nextDate = dateFormatYMD.format(
+        dateFormatYMD.parse(nextDate).add(
+              const Duration(days: 1),
+            ),
+      );
+
+      if (rxPeriodDatesToAdd.containsKey(nextDate)) {
+        return [];
+      }
+      result.add(nextDate);
+    }
+
+    return result;
   }
 
   /// Add a date to the list of dates to be added. If the date is already marked for removal, it is removed from that list.
-  void addDate(String date) {
-    periodDatesToRemove.remove(date);
-    // If the date is not already in the addition list, mark it to be added.
-    if (!periodDatesToAdd.containsKey(date)) {
-      periodDatesToAdd[date] = true;
+  void addDate(String dateString) {
+    final extraDatesToAdd = _extraDatesToAdd(dateString);
+
+    for (String extraDate in extraDatesToAdd) {
+      rxPeriodDatesToRemove.remove(extraDate);
+      rxPeriodDatesToAdd[extraDate] = true;
     }
+
+    removeDate(dateString);
+    rxPeriodDatesToAdd[dateString] = true;
+
+    rxPeriodDatesToRemove.refresh();
+    rxPeriodDatesToAdd.refresh();
   }
 
   /// Remove a date from the list of dates to be added. If the date is not already in the removal list and was previously saved, mark it for removal.
-  void removeDate(String date) {
-    periodDatesToAdd.remove(date);
+  void removeDate(String dateString) {
+    rxPeriodDatesToAdd.remove(dateString);
     // If the date is not already in the removal list and was previously saved, mark it for removal.
-    if (!periodDatesToRemove.containsKey(date) &&
-        _prevSavedDatesToHome.containsKey(date)) {
-      periodDatesToRemove[date] = true;
+    if (!rxPeriodDatesToRemove.containsKey(dateString) &&
+        _prevSavedDatesToHome.containsKey(dateString)) {
+      rxPeriodDatesToRemove[dateString] = true;
     }
   }
 
   /// Save the changes made to the dates. It checks if datesToAdd or datesToRemove have changes, and if so, it calls the CalendarService to save the changes.
-  void saveDates() async {
+  Future<void> saveDates() async {
     bool twoMapsAreEquals = true;
     // Check if each key in datesToAdd is already present in _prevSavedDates.
-    for (String key in periodDatesToAdd.keys) {
+    for (String key in rxPeriodDatesToAdd.keys) {
       if (!_prevSavedDatesToHome.containsKey(key)) {
         twoMapsAreEquals = false;
         break;
@@ -380,27 +390,22 @@ class CalendarController extends GetxController {
     }
 
     // If there are dates to remove, set the flag to false.
-    if (periodDatesToRemove.isNotEmpty) {
+    if (rxPeriodDatesToRemove.isNotEmpty) {
       twoMapsAreEquals = false;
     }
 
     // If there are changes in datesToAdd or datesToRemove, save the changes using CalendarService.
     if (!twoMapsAreEquals) {
       SaveDatesParameter saveDatesParameter = SaveDatesParameter(
-        dates: periodDatesToAdd.keys.toList(),
-        deletedDates: periodDatesToRemove.keys.toList(),
+        dates: rxPeriodDatesToAdd.keys.toList(),
+        deletedDates: rxPeriodDatesToRemove.keys.toList(),
       );
+
       try {
         await CalendarService.saveDates(saveDatesParameter);
-        await DBCalendarServices.retrieveSymptoms();
-        CalendarDayViewModel.fromDBAndApi(
-          dbCalendarDayDtoMap: appController.dbCalendarDayDtoMap.value,
-          calendarDayDTOMap: appController.calendarDayDTOMap.value,
-        );
+        await fetchPeriodAndSymptoms();
+
         // Clear the lists and reinitialize the datesToAdd and _prevSavedDates.
-        periodDatesToRemove.clear();
-        periodDatesToAdd.clear();
-        _prevSavedDatesToHome.clear();
         _initDatesToAdd();
       } catch (e) {
         logError(error: e);
@@ -408,16 +413,14 @@ class CalendarController extends GetxController {
     }
   }
 
-  CalendarDayDTO? getDTOForDay(String date) =>
-      appController.calendarDayViewModel.value?.symptomsDtoMap[date];
-
   /// Generates a matrix of months for a given year, suitable for display in a calendar with 4 rows and 3 months per row.
   /// [year]: The year for which to generate the months data.
   /// Returns: A list of lists of [DateTime] objects, where each inner list represents a row of months for the calendar.
   List<List<DateTime>> getMonthsDataForYearCalendar(DateTime year) {
     List<DateTime> months = calendarYearController.getMonthsForYear(year);
-    const int numberOfRows = 4;
+    const int numberOfRows = 5;
     const int numberOfMonthsPerRow = 3;
+
     List<List<DateTime>> monthMatrix = List.generate(
       // Define the number of rows in the matrix
       numberOfRows,

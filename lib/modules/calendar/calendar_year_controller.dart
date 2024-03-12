@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/delay.dart';
-import 'package:lines/modules/calendar/calendar_store.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CalendarYearController extends GetxController {
@@ -20,7 +20,7 @@ class CalendarYearController extends GetxController {
   final ScrollOffsetController scrollOffsetController =
       ScrollOffsetController();
   final ScrollController scrollController = ScrollController();
-  CalendarStore calendarStore = Get.put(CalendarStore());
+  final CalendarController calendarController = Get.find<CalendarController>();
 
   Rxn<DateTime> topElem = Rxn<DateTime>();
 
@@ -67,8 +67,8 @@ class CalendarYearController extends GetxController {
   void onReady() {
     super.onReady();
     yearContainerSize = yearContainerKey.currentContext?.size;
-    jumpToYear(calendarStore.selectedDate ?? DateTime.now());
-    prevDate = calendarStore.selectedDate;
+    jumpToYear(calendarController.rxSelectedDate.value);
+    prevDate = calendarController.rxSelectedDate.value;
     scrollController.addListener(() {
       _scrollListener();
     });

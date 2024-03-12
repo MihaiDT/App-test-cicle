@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
-import 'package:lines/data/models/calendar_day_view_model.dart';
+import 'package:lines/data/isar/symptom_calendar.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/current_period.dart';
-import 'package:lines/data/models/db_calendar_day_dto_map.dart';
 import 'package:lines/data/models/mission.dart';
+import 'package:lines/data/models/period_map.dart';
+import 'package:lines/data/models/period_status.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
@@ -14,8 +15,6 @@ import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
 import 'package:lines/data/models/advices_grouped_by_category.dart';
-import 'package:lines/data/models/calendar_day_dto_map.dart';
-import 'package:lines/data/models/period_map.dart';
 
 /// Just a wrapper in order to simplify getter access
 class EasyGetter<T> {
@@ -50,9 +49,9 @@ class AppController extends GetxController {
 
   final EasyGetter<CurrentPeriod> currentPeriod;
   final EasyGetter<PeriodMap> periodMap;
-  final EasyGetter<CalendarDayDTOMap> calendarDayDTOMap;
-  final EasyGetter<CalendarDayViewModel> calendarDayViewModel;
-  final EasyGetter<DBCalendarDayDtoMap> dbCalendarDayDtoMap;
+
+  final EasyGetter<RxMap<String, PeriodStatus>> periodStatusCalendar;
+  final EasyGetter<RxMap<String, SymptomCalendar>> symptomsCalendar;
   final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
 
   final Rxn<Mission> selectedMission = Rxn<Mission>();
@@ -61,6 +60,7 @@ class AppController extends GetxController {
   final RxBool isLoginFlow;
 
   AppController._({
+    required this.periodMap,
     required this.question,
     required this.user,
     required this.settings,
@@ -70,10 +70,8 @@ class AppController extends GetxController {
     required this.updateUserParameters,
     required this.socialLoginParameter,
     required this.currentPeriod,
-    required this.periodMap,
-    required this.calendarDayDTOMap,
-    required this.dbCalendarDayDtoMap,
-    required this.calendarDayViewModel,
+    required this.periodStatusCalendar,
+    required this.symptomsCalendar,
     required this.isLoginFlow,
     required this.advicesCategories,
   });
@@ -81,9 +79,8 @@ class AppController extends GetxController {
   factory AppController.initial() {
     return AppController._(
       periodMap: EasyGetter<PeriodMap>(),
-      calendarDayDTOMap: EasyGetter<CalendarDayDTOMap>(),
-      dbCalendarDayDtoMap: EasyGetter<DBCalendarDayDtoMap>(),
-      calendarDayViewModel: EasyGetter<CalendarDayViewModel>(),
+      symptomsCalendar: EasyGetter<RxMap<String, SymptomCalendar>>(),
+      periodStatusCalendar: EasyGetter<RxMap<String, PeriodStatus>>(),
       user: EasyGetter<User>(),
       question: EasyGetter<Question>(),
       settings: EasyGetter<Settings>(),

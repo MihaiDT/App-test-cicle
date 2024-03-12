@@ -1,24 +1,35 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
-import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/models/symptom.dart';
-import 'package:lines/data/models/symptom_category.dart';
+import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/data/isar/symptom.dart';
+import 'package:lines/data/isar/symptom_category.dart';
+import 'package:lines/data/models/period_symptom.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/routes/routes.dart';
 
-import 'package:lines/modules/calendar/calendar_store.dart';
-
 class SymptomsController extends GetxController {
-  late CalendarStore calendarStore;
+  late List<Symptom> savedSymptoms;
 
-  // This list stores the symptoms that the user has saved for a particular date.
-  //It can be empty depending on the value it gets from the local db
-  final RxList<Symptom> savedSymptoms = <Symptom>[].obs;
+  RxList<Symptom> rxCurrentSymptoms = RxList<Symptom>.empty();
+  List<Symptom> get currentSymptoms => rxCurrentSymptoms.value;
+  set currentSymptoms(List<Symptom> newValue) =>
+      rxCurrentSymptoms.value = newValue;
 
-  List<SymptomCategory> get currentCategories =>
-      calendarStore.currentCategories;
+  final CalendarController calendarController = Get.find<CalendarController>();
+
+  Set<int> get currentSymptomIds {
+    return currentSymptoms.map((item) => item.id).toSet();
+  }
+
+  Set<int> get savedSymptomIds => savedSymptoms.map((item) => item.id).toSet();
+
+  List<SymptomCategory> get currentCategories => SymptomCategory.findAll();
 
   //whether or not the bottom save button must appear
-  bool _buttonShown = false;
+  bool get buttonShown =>
+      savedSymptomIds.containsAll(currentSymptomIds) &&
+      currentSymptomIds.containsAll(savedSymptomIds);
 
   //called when the _buttonShown value changes
   final Function(bool) onSaveButtonValueChanged;
@@ -30,14 +41,14 @@ class SymptomsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    calendarStore = Get.put(CalendarStore());
+    // calendarStore = Get.put(CalendarStore());
     _fillSavedSymptoms();
     _listenForDateChanges();
   }
 
   void _listenForDateChanges() {
     ever(
-      calendarStore.rxSelectedDate,
+      calendarController.rxSelectedDate,
       condition: () => Get.currentRoute == Routes.calendar,
       (callback) {
         _getNewSelectedSymptomsIntoSavedSymptoms();
@@ -45,107 +56,80 @@ class SymptomsController extends GetxController {
     );
   }
 
-  ///fill savedSymptoms with selectedSymptoms( initially selectedSymptoms will have the same selected symptoms in the local db)
+  PeriodSymptom? getDTOForDay(String date) => null;
+
+  ///fill rxSymptoms with selectedSymptoms( initially selectedSymptoms will have the same selected symptoms in the local db)
   void _fillSavedSymptoms() {
     _getNewSelectedSymptomsIntoSavedSymptoms();
   }
 
-  ///overwrite savedSymptoms list with a new list of selectedSymptoms
+  ///overwrite rxSymptoms list with a new list of selectedSymptoms
   void _getNewSelectedSymptomsIntoSavedSymptoms() {
-    savedSymptoms.clear();
-    savedSymptoms.addAll(selectedSymptoms);
-  }
+    String date = dateFormatYMD.format(calendarController.rxSelectedDate.value);
+    // final symptomCalendar = getDTOForDay(date)?.symptomCalendar;
 
-  ///returns a list of symptoms where each symptom has selected attribute set to true
-  List<Symptom> get selectedSymptoms {
-    List<Symptom> list = currentCategories
-        .expand(
-          (element) =>
-              element.symptoms.where((element) => element.selected == true),
-        )
-        .toList();
-    return list;
+    // savedSymptoms = symptomCalendar?.symptoms.toList() ?? [];
+    // currentSymptoms = savedSymptoms;
+    // rxCurrentSymptoms.refresh();
+
+    // print("Sintomi: ${getDTOForDay(date)?.symptomCalendar?.symptoms.toList()}");
   }
 
   ///change selected value for the symptom of a particular category
-  void changeSelectedValue(int categoryIndex, int symptomIndex) {
-    if (categoryIndex == 0) {
-      handlePeriodCategory(symptomIndex);
-    } else {
-      currentCategories[categoryIndex].symptoms[symptomIndex].selected =
-          !currentCategories[categoryIndex].symptoms[symptomIndex].selected;
+  void changeSelectedValue({required Symptom symptom}) {
+    if (symptom.category.value!.id == 1) {
+      resetPeriodCategory();
     }
-    _onSymptomChanged();
+
+    if (currentSymptoms.map((item) => item.id).contains(symptom.id)) {
+      currentSymptoms.removeWhere((item) => item.id == symptom.id);
+    } else {
+      currentSymptoms.add(symptom);
+    }
+
+    rxCurrentSymptoms.refresh();
   }
 
-  ///Period category doesn't have a multi selection for it's symptom so it has to be handled differently
-  void handlePeriodCategory(int symptomIndex) {
-    const int periodCategoryIndex = 0;
-    if (currentCategories[periodCategoryIndex]
-        .symptoms[symptomIndex]
-        .selected) {
-      currentCategories[periodCategoryIndex].symptoms[symptomIndex].selected =
-          false;
-    } else {
-      for (Symptom symptom in currentCategories[periodCategoryIndex].symptoms) {
-        symptom.selected = false;
+  /// Period category doesn't have a multi selection for it's symptom so it has to be handled differently
+  void resetPeriodCategory() {
+    for (Symptom symptom in currentSymptoms) {
+      final symptomId = symptom.category.value!.id;
+      if (symptom.category.value!.id == 1) {
+        currentSymptoms.removeWhere((item) => item.id == symptomId);
+        rxCurrentSymptoms.refresh();
       }
-      currentCategories[periodCategoryIndex].symptoms[symptomIndex].selected =
-          true;
-    }
-  }
-
-  ///Check if any symptoms has been selected or deselected by comparing savedSymptoms to selectedSymptoms lists,
-  ///if there are some changes set _buttonShown to true to trigger the visibility if bottom save button
-  void _onSymptomChanged() {
-    _changeButtonValue(true);
-    if (savedSymptoms.length == selectedSymptoms.length) {
-      for (int i = 0; i < savedSymptoms.length; i++) {
-        if (selectedSymptoms[i] != savedSymptoms[i]) {
-          return;
-        }
-      }
-      _changeButtonValue(false);
     }
   }
 
   ///Only save data for symptoms
   void saveSymptoms() {
     _getNewSelectedSymptomsIntoSavedSymptoms();
-    _changeButtonValue(false);
-    _updateSymptomsList(savedSymptoms);
-    _saveSymptomsInDB(savedSymptoms);
+
+// FIXME:
+    // _updateSymptomsList(rxSymptoms);
+    // _saveSymptomsInDB(rxSymptoms);
   }
 
-  ///fire the callback everytime _buttonShown value changes
-  void _changeButtonValue(bool newValue) {
-    _buttonShown = newValue;
-    onSaveButtonValueChanged(_buttonShown);
+  void _saveSymptomsInDB(List<Symptom> symptoms) {
+    final DateTime selectedDate =
+        _normalizeDate(calendarController.rxSelectedDate.value);
+
+    /// Get the saved symptoms in the db
+    // FIXME: Flower Map<DateTime, List<Symptom>> rxSymptoms = HiveManager.rxSymptoms;
+
+    /// Update a local map
+    // FIXME: Flower rxSymptoms[actualDate] = symptoms;
+
+    /// Save the updated map in the db
+    // FIXME: Flower Save on Isar HiveManager.rxSymptoms = rxSymptoms;
   }
 
-  void _saveSymptomsInDB(List<Symptom> selectedSymptoms) {
-    if (calendarStore.selectedDate != null) {
-      final DateTime actualDate = _normalizeDate(calendarStore.selectedDate!);
-
-      /// Get the saved symptoms in the db
-      Map<DateTime, List<Symptom>> savedSymptoms = HiveManager.savedSymptoms;
-
-      /// Update a local map
-      savedSymptoms[actualDate] = selectedSymptoms;
-
-      /// Save the updated map in the db
-      HiveManager.savedSymptoms = savedSymptoms;
-    }
-  }
-
-  void _updateSymptomsList(List<Symptom> selectedSymptoms) {
-    if (calendarStore.selectedDate != null) {
-      appController.calendarDayViewModel.value?.updateSymptomList(
-        calendarStore.selectedDate!,
-        selectedSymptoms,
-      );
-    }
-  }
+  // void _updateSymptomsList(List<Symptom> symptoms) {
+  //   appController.calendarDays.value?.updateSymptomList(
+  //     calendarController.rxSelectedDate.value,
+  //     symptoms,
+  //   );
+  // }
 
   DateTime _normalizeDate(DateTime dateTime) {
     return DateTime(

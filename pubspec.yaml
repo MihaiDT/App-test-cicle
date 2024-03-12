@@ -2,14 +2,13 @@ name: lines
 version: 0.0.6+6
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-
 
   # A flutter library to show images from the internet and keep them in the cache directory.
   cached_network_image: ^3.3.0
@@ -50,19 +49,24 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
+  isar: ^3.1.0+1
+  # Flutter binaries for the Isar Database
+  isar_flutter_libs:
+
   # Draw SVG files using Flutter.
   flutter_svg: ^2.0.9
   
   # GetX is an extra-light and powerful solution for Flutter. It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
   get: ^4.6.6
-  equatable: ^2.0.5
+
+
 
   
   # Various borders that use gradient instead of boring plain colors.
   gradient_borders: ^1.0.0
   http_interceptor: ^2.0.0-beta.7
   horizontal_blocked_scroll_physics: ^4.0.1
-  flutter_inappwebview: ^5.8.0
+  flutter_inappwebview: ^6.0.0
   
   # Provides internationalization and localization facilities, including message translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
   intl: ^0.18.1
@@ -127,10 +131,16 @@ dependencies:
   flutter_share: ^2.0.0
 
 dev_dependencies:
+  analyzer: ^6.4.1
   build_runner: ^2.4.7
   envied_generator: ^0.5.2
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.1
+  isar_generator:  # Code generator for the Isar Database
+
+dependency_overrides:
+  analyzer: ^6.4.1
+  meta: ^1.11.0
 
 flutter:
   uses-material-design: true

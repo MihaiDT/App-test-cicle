@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet.dart';
-import 'package:lines/modules/calendar/widgets/calendar_year_body.dart';
-
-import 'package:lines/core/theme/text_wrapper.dart';
-import 'package:lines/core/theme/theme_color.dart';
-import 'package:lines/core/theme/theme_decoration.dart';
-import 'package:lines/core/theme/theme_icon.dart';
-import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet.dart';
+import 'package:lines/modules/calendar/widgets/calendar_month_year_switch.dart';
+import 'package:lines/modules/calendar/widgets/calendar_week_row.dart';
+import 'package:lines/modules/calendar/widgets/calendar_year_body.dart';
+import 'package:lines/modules/calendar/widgets/scrollable_calendar.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
-import 'package:lines/modules/calendar/calendar_controller.dart';
-import 'package:lines/modules/calendar/widgets/calendar_month_year_switch.dart';
-import 'package:lines/modules/calendar/widgets/scrollable_calendar.dart';
-import 'package:lines/modules/calendar/widgets/calendar_week_row.dart';
+import 'package:lines/widgets/loaders/dark_loader.dart';
 
 class CalendarPage extends GetView<CalendarController> {
   const CalendarPage({super.key});
@@ -30,18 +26,17 @@ class CalendarPage extends GetView<CalendarController> {
         children: [
           Column(
             children: [
-              Visibility.maintain(
-                visible: false,
-                child: _appBar,
+              SizedBox(
+                height:
+                    ThemeSize.heightSafeAreaTop + AppBar().preferredSize.height,
               ),
-              ThemeSizedBox.height12,
               Obx(
                 () => CalendarMonthYearSwitch(
                   onTabChanged: controller.changeTab,
                   currentSelectedTab: controller.selectedTab.value,
                 ),
               ),
-              ThemeSizedBox.height32,
+              ThemeSizedBox.height24,
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -62,7 +57,9 @@ class CalendarPage extends GetView<CalendarController> {
                         offstage: !(controller.selectedTab.value ==
                                 CalendarTabs.monthTab &&
                             controller.pageShouldRefresh),
-                        child: _scrollableCalendar,
+                        child: const ScrollableCalendar(
+                          spaceBetweenCalendars: 70.0,
+                        ),
                       ),
                     ),
                     Obx(
@@ -76,8 +73,13 @@ class CalendarPage extends GetView<CalendarController> {
                     Obx(
                       () => Visibility(
                         visible: !controller.pageShouldRefresh,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: SizedBox(
+                            height: Get.width * 0.4,
+                            width: Get.width * 0.4,
+                            child: const DarkLoader(),
+                          ),
                         ),
                       ),
                     ),
@@ -86,19 +88,8 @@ class CalendarPage extends GetView<CalendarController> {
               ),
             ],
           ),
-          CalendarBottomSheet(),
+          const CalendarBottomSheet(),
         ],
-      ),
-    );
-  }
-
-  Widget get _scrollableCalendar {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ScrollableCalendar(
-        calendarScrollableCalendarController:
-            controller.scrollableCalendarController,
-        spaceBetweenCalendars: 70.0,
       ),
     );
   }

@@ -33,7 +33,9 @@ class CalendarYearBody extends GetView<CalendarController> {
                     textAlign: TextAlign.center,
                   ),
                   ThemeSizedBox.height8,
-                  DividerWithGradient(gradient: ThemeGradient.primary),
+                  DividerWithGradient(
+                    gradient: ThemeGradient.primary,
+                  ),
                 ],
               ),
             ),

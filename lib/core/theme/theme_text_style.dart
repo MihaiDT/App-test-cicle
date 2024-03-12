@@ -97,9 +97,9 @@ class NewThemeTextStyle {
   );
 
   static const labelSmall = TextStyle(
-    fontSize: 8,
+    fontSize: 9,
     fontWeight: weightBold,
-    height: 1.3,
+    height: 1.1,
   );
 
   static const TextStyle calendarWeekDay = TextStyle(

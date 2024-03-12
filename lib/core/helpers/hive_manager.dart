@@ -36,8 +36,11 @@ class HiveManager {
   }
 
   static Map<DateTime, List<Symptom>> get savedSymptoms {
-    return Hive.box("linesApp").get(HiveReferenceKeys.savedSymptoms.name) ??
-        <DateTime, List<Symptom>>{};
+    return Map<DateTime, List<Symptom>>.from(
+      (Hive.box("linesApp").get(HiveReferenceKeys.savedSymptoms.name)
+              as Map<DateTime, List<Symptom>>?) ??
+          {},
+    );
   }
 
   static set savedSymptoms(Map<DateTime, List<Symptom>> savedSymptoms) {

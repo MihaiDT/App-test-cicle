@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:lines/core/app_theme.dart';
-
-import 'package:lines/modules/calendar/symptoms_controller.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_chip.dart';
 
-class CalendarBottomSheetRecap extends StatelessWidget {
-  final SymptomsController symptomsController;
-
+class CalendarBottomSheetRecap extends GetView<CalendarController> {
   const CalendarBottomSheetRecap({
-    required this.symptomsController,
     super.key,
   });
 
@@ -24,7 +19,6 @@ class CalendarBottomSheetRecap extends StatelessWidget {
         ),
       ),
       padding: const EdgeInsets.symmetric(
-        horizontal: 50,
         vertical: 16,
       ),
       child: Column(
@@ -40,10 +34,10 @@ class CalendarBottomSheetRecap extends StatelessWidget {
               spacing: 8.0,
               runSpacing: 8.0,
               children: List.generate(
-                symptomsController.savedSymptoms.length,
+                controller.rxCurrentSymptoms.length,
                 (index) => CalendarChip(
-                  label: symptomsController.savedSymptoms[index].symptomName,
-                  iconPath: symptomsController.savedSymptoms[index].iconPath,
+                  label: controller.rxCurrentSymptoms[index].name,
+                  iconPath: controller.rxCurrentSymptoms[index].iconPath,
                 ),
               ),
             ),

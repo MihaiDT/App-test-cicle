@@ -1,18 +1,22 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/symptom.dart';
+import 'package:lines/data/isar/symptom.dart';
+import 'package:lines/data/isar/symptom_category.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_symptom_widget.dart';
 
-class CalendarBottomSheetRow extends StatelessWidget {
+class CalendarBottomSheetRow extends GetView<CalendarController> {
+  final SymptomCategory category;
   final int categoryIndex;
-  final List<Symptom> symptomList;
-  final Function(int, int)? onSymptomTap;
+
+  List<Symptom> get symptoms => category.symptoms.toList();
 
   const CalendarBottomSheetRow({
     required this.categoryIndex,
-    required this.onSymptomTap,
-    required this.symptomList,
+    required this.category,
     super.key,
   });
 
@@ -26,21 +30,23 @@ class CalendarBottomSheetRow extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: List.generate(
-            symptomList.length + 2,
+            category.symptoms.toList().length + 2,
             (symptomIndex) {
               //add left padding at the start of the list
               if (symptomIndex == 0) {
                 return ThemeSizedBox.width12;
               }
               //add right padding at the end of the list
-              if (symptomIndex == symptomList.length + 2 - 1) {
+              if (symptomIndex == category.symptoms.toList().length + 2 - 1) {
                 return ThemeSizedBox.width12;
               }
               return Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 4,
                 ),
-                child: _symptomContainer(symptomIndex - 1),
+                child: _symptomContainer(
+                  category.symptoms.toList()[symptomIndex - 1],
+                ),
               );
             },
           ),
@@ -49,21 +55,19 @@ class CalendarBottomSheetRow extends StatelessWidget {
     );
   }
 
-  Widget _symptomContainer(int symptomIndex) {
+  Widget _symptomContainer(Symptom symptom) {
     return Obx(
-      () => CalendarSymptomWidget(
-        iconPath: symptomList[symptomIndex].iconPath,
-        onTap: () {
-          if (onSymptomTap != null) {
-            onSymptomTap!(
-              categoryIndex,
-              symptomIndex,
-            );
-          }
-        },
-        selected: symptomList[symptomIndex].selected,
-        symptomName: symptomList[symptomIndex].symptomName,
-      ),
+      () {
+        return CalendarSymptomWidget(
+          selected: controller.rxCurrentSymptoms.value
+              .where(
+                (item) => item.id == symptom.id,
+              )
+              .toList()
+              .isNotEmpty,
+          symptom: symptom,
+        );
+      },
     );
   }
 }

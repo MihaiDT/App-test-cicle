@@ -52,12 +52,12 @@ class AppTheme {
       bodyLarge: NewThemeTextStyle.bodyLarge,
       bodyMedium: NewThemeTextStyle.bodyMedium,
       bodySmall: NewThemeTextStyle.bodySmall,
-      labelSmall: NewThemeTextStyle.labelMedium,
+      labelSmall: NewThemeTextStyle.labelSmall,
       titleLarge: NewThemeTextStyle.titleLarge,
       titleMedium: NewThemeTextStyle.titleMedium,
       titleSmall: NewThemeTextStyle.titleSmall,
       labelLarge: NewThemeTextStyle.labelLarge,
-      labelMedium: NewThemeTextStyle.labelSmall,
+      labelMedium: NewThemeTextStyle.labelMedium,
     ),
   );
 }

@@ -1,26 +1,25 @@
-import 'package:lines/data/models/symptom.dart';
+import 'package:lines/data/isar/symptom_calendar.dart';
 
 class DBCalendarDayDtoMap {
-  Map<String, List<Symptom>> symptomsDtoMap;
+  Map<String, SymptomCalendar> symptomCalendarsDtoMap;
 
   DBCalendarDayDtoMap({
-    required this.symptomsDtoMap,
+    required this.symptomCalendarsDtoMap,
   });
 
-  factory DBCalendarDayDtoMap.fromDateTimeAsKey({
-    required Map<DateTime, List<Symptom>> symptomsDtoMapWithDateTimeAsKey,
-  }) {
-    Map<String, List<Symptom>> symptomsDtoMap = {
-      for (final entry in symptomsDtoMapWithDateTimeAsKey.entries)
-        _normalizeDate(entry.key): entry.value,
-    };
+  // factory DBCalendarDayDtoMap.fromDateTimeAsKey({
+  //   required Map<DateTime, List<Symptom>> symptomsDtoMapWithDateTimeAsKey,
+  // }) {
+  //   Map<String, List<Symptom>> symptomsDtoMap = {
+  //     for (final entry in symptomsDtoMapWithDateTimeAsKey.entries) _normalizeDate(entry.key): entry.value,
+  //   };
 
-    return DBCalendarDayDtoMap(
-      symptomsDtoMap: symptomsDtoMap,
-    );
-  }
+  //   return DBCalendarDayDtoMap(
+  //     symptomsDtoMap: symptomsDtoMap,
+  //   );
+  // }
 
-  static String _normalizeDate(DateTime dateTime) {
-    return "${dateTime.year}-${dateTime.month}-${dateTime.day}";
-  }
+  // static String _normalizeDate(DateTime dateTime) {
+  //   return "${dateTime.year}-${dateTime.month}-${dateTime.day}";
+  // }
 }

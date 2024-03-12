@@ -1,28 +1,46 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lines/core/app_theme.dart';
-
-import 'package:lines/data/models/calendar_day_dto.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/isar/symptom_calendar.dart';
+import 'package:lines/data/models/period_status.dart';
 
 class CalendarDayWidget extends StatelessWidget {
+  final String formattedDate;
   final bool isSelected;
   final bool isToday;
   final BoxConstraints parentConstraints;
   final String text;
   final bool isAnnualCalendar;
-  final CalendarDayDTO? calendarDayDTO;
 
   const CalendarDayWidget({
+    required this.formattedDate,
     required this.isToday,
     required this.isSelected,
     required this.parentConstraints,
     required this.text,
-    required this.calendarDayDTO,
     this.isAnnualCalendar = false,
     super.key,
   });
+
+  PeriodStatus? get periodStatus =>
+      (appController.periodStatusCalendar.value)?.value[formattedDate];
+  SymptomCalendar? get symptomsCalendar =>
+      (appController.symptomsCalendar.value)?.value[formattedDate];
+
+  Widget get _bottomIcon {
+    if (symptomsCalendar?.hasSexualActivity ?? false) {
+      return SvgPicture.asset(ThemeIcon.calendarHeart);
+    }
+    if (symptomsCalendar?.hasSymptoms ?? false) {
+      return SvgPicture.asset(ThemeIcon.calendarGradientDot);
+    }
+    return const SizedBox.shrink();
+  }
 
   double get _parentHeight => parentConstraints.maxHeight;
 
@@ -30,10 +48,11 @@ class CalendarDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double circleRadius = isAnnualCalendar ? 7.0 : 17.0;
     double iconYPos = _parentHeight - circleRadius;
+
     return Stack(
       alignment: Alignment.center,
       children: [
-        dayContainer(circleRadius, context),
+        _dayContainer(circleRadius, context),
         Visibility(
           visible: !isAnnualCalendar,
           child: Positioned(
@@ -59,23 +78,11 @@ class CalendarDayWidget extends StatelessWidget {
     );
   }
 
-  Widget get _bottomIcon {
-    if (calendarDayDTO?.hasSexualActivity == true) {
-      return SvgPicture.asset(ThemeIcon.calendarHeart);
-    }
-    if (calendarDayDTO?.hasSymptoms == true) {
-      return SvgPicture.asset(ThemeIcon.calendarGradientDot);
-    }
-    return const SizedBox.shrink();
-  }
-
-  Widget dayContainer(double circleRadius, BuildContext context) {
-    if (calendarDayDTO != null) {
-      if (calendarDayDTO!.isReal == true) {
+  Widget _dayContainer(double circleRadius, BuildContext context) {
+    if (periodStatus != null) {
+      if (periodStatus!.isReal) {
         return CircleAvatar(
-          backgroundColor: calendarDayDTO != null
-              ? calendarDayDTO!.bgColor
-              : Colors.transparent,
+          backgroundColor: periodStatus!.bgColor,
           radius: circleRadius,
           child: Padding(
             padding:
@@ -88,7 +95,7 @@ class CalendarDayWidget extends StatelessWidget {
       } else {
         return DottedBorder(
           borderType: BorderType.Circle,
-          color: Colors.green,
+          color: periodStatus!.bgColor,
           dashPattern: const [4],
           strokeWidth: isAnnualCalendar ? 1 : 2,
           child: CircleAvatar(
@@ -115,9 +122,9 @@ class CalendarDayWidget extends StatelessWidget {
   }
 
   Widget _dayNumberText(BuildContext context) {
-    if (calendarDayDTO == null ||
-        calendarDayDTO!.bgColor == Colors.transparent ||
-        calendarDayDTO!.isReal == false) {
+    if (periodStatus == null ||
+        periodStatus!.bgColor == Colors.transparent ||
+        !periodStatus!.isReal) {
       return BodyLarge(
         text,
         fontWeight: isToday

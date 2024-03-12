@@ -1,29 +1,16 @@
-import 'package:lines/core/helpers/hive_manager.dart';
-import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/models/db_calendar_day_dto_map.dart';
-import 'package:lines/data/models/symptom.dart';
+import 'package:lines/data/isar/symptom_calendar.dart';
 
 class DBCalendarServices {
-  static Future<void> retrieveSymptoms() async {
-    appController.dbCalendarDayDtoMap.responseHandler =
-        ResponseHandler.pending();
+  static Map<String, SymptomCalendar> fetchSymptoms() {
     try {
-      Map<DateTime, List<Symptom>> savedSymptoms =
-          Map<DateTime, List<Symptom>>.from(
-        HiveManager.savedSymptoms,
-      );
-
-      appController.dbCalendarDayDtoMap.responseHandler =
-          ResponseHandler.successful(
-        content: DBCalendarDayDtoMap.fromDateTimeAsKey(
-          symptomsDtoMapWithDateTimeAsKey: savedSymptoms,
-        ),
-      );
+      Map<String, SymptomCalendar> savedSymptoms = SymptomCalendar.findAll();
+      return savedSymptoms;
     } catch (e) {
+      // TODO: raise Sentry
       log.logError(e);
-      appController.dbCalendarDayDtoMap.responseHandler =
-          ResponseHandler.failed();
+
+      return {};
     }
   }
 }

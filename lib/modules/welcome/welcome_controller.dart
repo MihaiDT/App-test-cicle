@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
-import 'package:lines/core/utils/singletons.dart';
-
 import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 

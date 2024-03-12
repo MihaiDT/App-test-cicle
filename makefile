@@ -35,3 +35,6 @@ format:
 
 #clean_up_gradle_cache:
  	# ./gradlew --stop; rm -rf ~/.gradle/caches/
+
+isar_build:
+	fvm flutter pub run build_runner build

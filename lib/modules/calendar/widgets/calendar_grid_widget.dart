@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:lines/core/utils/date_time_extension.dart';
-
 import 'package:lines/core/utils/custom_date_utils.dart';
+import 'package:lines/core/utils/date_time_extension.dart';
+import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_day_select_multiple_widget.dart';
 import 'package:lines/modules/calendar/widgets/calendar_day_widget.dart';
 
-class CalendarGridWidget extends StatelessWidget {
+class CalendarGridWidget extends GetView<CalendarController> {
   final int year;
   final int month;
   final double circleRadius;
@@ -17,7 +16,7 @@ class CalendarGridWidget extends StatelessWidget {
   final bool multipleSelectedMode;
   final bool isAnnualCalendar;
 
-  CalendarGridWidget({
+  const CalendarGridWidget({
     super.key,
     required this.year,
     required this.month,
@@ -26,8 +25,6 @@ class CalendarGridWidget extends StatelessWidget {
     this.multipleSelectedMode = false,
     this.isAnnualCalendar = false,
   });
-
-  final CalendarController controller = Get.find<CalendarController>();
 
   @override
   Widget build(BuildContext context) {
@@ -67,41 +64,41 @@ class CalendarGridWidget extends StatelessWidget {
 
   Widget _dayWidget(DateTime dayOfMonth, BoxConstraints constraints) {
     String dayText = '${dayOfMonth.day}';
-    String formattedDate = DateFormat('yyyy-MM-dd').format(dayOfMonth);
+    String formattedDate = dateFormatYMD.format(dayOfMonth);
 
     return Obx(
       () {
         if (controller.selectedTab.value == CalendarTabs.monthTab &&
             multipleSelectedMode) {
-          bool isSelected =
-              controller.periodDatesToAdd.containsKey(formattedDate);
-          return CalendarDaySelectMultipleWidget(
-            isSelected: isSelected,
-            text: dayText,
-            isToday: dayOfMonth.isToday,
-            onDayTapped: () {
-              DateTime tomorrow = DateTime.now().add(
-                const Duration(days: 1),
-              );
-              String tomorrowFormatted =
-                  DateFormat('yyyy-MM-dd').format(tomorrow);
+          return Obx(
+            () {
+              final isSelected =
+                  controller.rxPeriodDatesToAdd.containsKey(formattedDate);
+              return CalendarDaySelectMultipleWidget(
+                isSelected: isSelected,
+                text: dayText,
+                isToday: dayOfMonth.isToday,
+                onDayTapped: () {
+                  if (isSelected) {
+                    controller.removeDate(formattedDate);
+                  }
 
-              if (formattedDate.compareTo(tomorrowFormatted) < 0) {
-                if (isSelected) {
-                  controller.removeDate(formattedDate);
-                } else {
-                  controller.addDate(formattedDate);
-                }
-              }
+                  // Only today or past dates can be added
+                  if (dayOfMonth.isSameDayOrBefore(DateTime.now())) {
+                    if (!isSelected) {
+                      controller.addDate(formattedDate);
+                    }
+                  }
+                },
+              );
             },
           );
         }
+
         return CalendarDayWidget(
-          calendarDayDTO: controller.getDTOForDay(formattedDate),
+          formattedDate: formattedDate,
+          isSelected: controller.rxSelectedDate.value.isSameDay(dayOfMonth),
           isToday: dayOfMonth.isToday,
-          isSelected: controller.calendarStore.selectedDate != null
-              ? controller.calendarStore.selectedDate!.isSameDay(dayOfMonth)
-              : false,
           parentConstraints: constraints,
           text: dayText,
           isAnnualCalendar: isAnnualCalendar,

@@ -1,18 +1,15 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/modules/calendar/calendar_store.dart';
+import 'package:lines/data/isar/symptom_category.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_dialog.dart';
 import 'package:lines/routes/routes.dart';
 
-import 'package:lines/data/models/symptom_category.dart';
-
 class SymptomCategoriesController extends GetxController {
-  late CalendarStore calendarStore;
+  // late CalendarStore calendarStore;
 
   //List of categories wich will change only when the saved button is pressed
-  List<SymptomCategory> savedCategories = [];
+  late final RxList<SymptomCategory> symptomCategories =
+      RxList<SymptomCategory>();
   final RxBool _buttonShown = false.obs;
 
   //keep track of how many inHome categories there are
@@ -25,22 +22,9 @@ class SymptomCategoriesController extends GetxController {
 
   @override
   void onInit() {
-    calendarStore = Get.put(CalendarStore());
-    //get initial values for currentInHomeCategories
-    for (SymptomCategory category in calendarStore.currentCategories) {
-      if (category.inHome) {
-        inHomeCategoriesCount++;
-      }
-      savedCategories.add(
-        SymptomCategory(
-          categoryTitle: category.categoryTitle,
-          categoryIconPath: category.categoryIconPath,
-          inHome: category.inHome,
-          categoryIndex: category.categoryIndex,
-        ),
-      );
-    }
-    //fire a callback whenever the save button is supposed to be shown
+    symptomCategories.addAll(SymptomCategory.findAll());
+
+    // fire a callback whenever the save button is supposed to be shown
     ever(
       _buttonShown,
       condition: () => Get.currentRoute == Routes.calendar,
@@ -55,24 +39,24 @@ class SymptomCategoriesController extends GetxController {
     bool newValue,
     int newCategoryIndex,
   ) {
-    _buttonShown.value = false;
-    calendarStore.currentCategories[newCategoryIndex].inHome = newValue;
-    for (int i = 0; i < savedCategories.length; i++) {
-      if (savedCategories[i].inHome !=
-          calendarStore.currentCategories[i].inHome) {
-        _buttonShown.value = true;
-        break;
-      }
-    }
-    if (newValue == true) {
-      inHomeCategoriesCount++;
-    } else {
-      inHomeCategoriesCount--;
-    }
+    // _buttonShown.value = false;
 
-    if (inHomeCategoriesCount > 3) {
-      _handleMoreThenThreeCategoriesSelected(categoryTitle, newCategoryIndex);
-    }
+    // calendarStore.currentCategories[newCategoryIndex].inHome = newValue;
+    // for (int i = 0; i < symptomCategories.length; i++) {
+    //   if (symptomCategories[i].inHome != calendarStore.currentCategories[i].inHome) {
+    //     _buttonShown.value = true;
+    //     break;
+    //   }
+    // }
+    // if (newValue == true) {
+    //   inHomeCategoriesCount++;
+    // } else {
+    //   inHomeCategoriesCount--;
+    // }
+
+    // if (inHomeCategoriesCount > 3) {
+    //   _handleMoreThenThreeCategoriesSelected(categoryTitle, newCategoryIndex);
+    // }
   }
 
   ///if there's more the 3 active in home categories show the dialog
@@ -82,34 +66,31 @@ class SymptomCategoriesController extends GetxController {
   ) {
     //ordered map to pass as an argument to the dialog (this way even inside the dialog categories will appear in the original order)
 
-    SplayTreeMap<int, dynamic> orderedMap = SplayTreeMap(
-      (key1, key2) => key1.compareTo(key2),
-    );
+    // SplayTreeMap<int, dynamic> orderedMap = SplayTreeMap(
+    //   (key1, key2) => key1.compareTo(key2),
+    // );
 
-    //put the previous active categories inside the map
+    // //put the previous active categories inside the map
 
-    List<String> keys = [];
-    for (SymptomCategory category in calendarStore.currentCategories) {
-      keys.add(category.categoryTitle);
-    }
+    // List<String> keys = [];
+    // for (SymptomCategory category in calendarStore.currentCategories) {
+    //   keys.add(category.categoryTitle);
+    // }
 
-    for (int i = 0; i < calendarStore.currentCategories.length; i++) {
-      if (calendarStore.currentCategories[i].inHome == true) {
-        orderedMap[i] = {
-          'title': keys[i],
-          'inHome': calendarStore.currentCategories[i].inHome,
-        };
-      }
-    }
+    // for (int i = 0; i < calendarStore.currentCategories.length; i++) {
+    //   if (calendarStore.currentCategories[i].inHome == true) {
+    //     orderedMap[i] = {'title': keys[i], 'inHome': calendarStore.currentCategories[i].inHome};
+    //   }
+    // }
 
-    //put the new category inside the map
+    // //put the new category inside the map
 
-    orderedMap[newCategoryIndex] = {
-      'title': newCategoryTitle,
-      'inHome': false,
-    };
+    // orderedMap[newCategoryIndex] = {
+    //   'title': newCategoryTitle,
+    //   'inHome': false,
+    // };
 
-    _showDialog(orderedMap);
+    // _showDialog(orderedMap);
   }
 
   void _showDialog(Map<int, dynamic> filteredMap) {
@@ -140,19 +121,18 @@ class SymptomCategoriesController extends GetxController {
         inHomeCategoriesCount++;
       }
 
-      calendarStore.currentCategories[key].inHome =
-          newInHomeCategories[key]['inHome'];
+      // calendarStore.currentCategories[key].inHome = newInHomeCategories[key]['inHome'];
     }
   }
 
   ///go back to last saved values
   void _revertChanges() {
     inHomeCategoriesCount = 0;
-    for (int i = 0; i < savedCategories.length; i++) {
-      if (savedCategories[i].inHome == true) {
+    for (int i = 0; i < symptomCategories.length; i++) {
+      if (symptomCategories[i].inHome == true) {
         inHomeCategoriesCount++;
       }
-      calendarStore.currentCategories[i].inHome = savedCategories[i].inHome;
+      // calendarStore.currentCategories[i].inHome = symptomCategories[i].inHome;
     }
 
     _buttonShown.value = false;
@@ -160,9 +140,9 @@ class SymptomCategoriesController extends GetxController {
 
   ///save the new values
   void onSaved() {
-    for (int i = 0; i < calendarStore.currentCategories.length; i++) {
-      savedCategories[i].inHome = calendarStore.currentCategories[i].inHome;
-    }
+    // for (int i = 0; i < calendarStore.currentCategories.length; i++) {
+    //   symptomCategories[i].inHome = calendarStore.currentCategories[i].inHome;
+    // }
     //TODO: update local db
   }
 }

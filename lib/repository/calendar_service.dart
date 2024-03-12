@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:lines/data/models/current_period.dart';
+import 'package:lines/data/models/period_status.dart';
 
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/models/calendar_day_dto_map.dart';
-import 'package:lines/data/models/period_map.dart';
 
 class CalendarService {
   static Future<void> fetchCurrentPeriod() async {
@@ -26,24 +25,22 @@ class CalendarService {
     }
   }
 
-  static Future<void> fetchPeriods() async {
-    appController.periodMap.responseHandler = ResponseHandler.pending();
-    appController.calendarDayDTOMap.responseHandler = ResponseHandler.pending();
+  static Future<Map<String, PeriodStatus>> fetchPeriods() async {
     try {
       final response = await dio.get(
         "/periods",
       );
-      _savePeriods(response);
-      _createDaysDTO(response);
+
+      return _periodsCallback(response);
     } catch (e) {
-      appController.periodMap.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
+      return {};
     }
   }
 
-  static Future<void> saveDates(SaveDatesParameter parameter) async {
-    appController.periodMap.responseHandler = ResponseHandler.pending();
-    appController.calendarDayDTOMap.responseHandler = ResponseHandler.pending();
+  static Future<Map<String, PeriodStatus>> saveDates(
+    SaveDatesParameter parameter,
+  ) async {
     try {
       final response = await dio.post(
         "/periods",
@@ -52,29 +49,31 @@ class CalendarService {
           "delete_dates": parameter.deletedDates,
         },
       );
-      _savePeriods(response);
-      _createDaysDTO(response);
+      return _periodsCallback(response);
     } catch (e) {
-      appController.periodMap.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
+      return {};
     }
   }
 
-  static void _savePeriods(Response response) {
-    appController.periodMap.responseHandler = ResponseHandler.successful(
-      content: PeriodMap.fromJson(
-        response.data,
-      ),
-    );
+  static Map<String, PeriodStatus> _periodsCallback(Response response) {
+    Map<String, PeriodStatus> result = {};
+    List<Map<String, dynamic>> list =
+        List<Map<String, dynamic>>.from(response.data['dates']);
+
+    for (Map<String, dynamic> entry in list) {
+      result[entry['date']] = PeriodStatus.fromJson(entry);
+    }
+
+    return result;
   }
 
   static void _createDaysDTO(Response response) {
-    appController.calendarDayDTOMap.responseHandler =
-        ResponseHandler.successful(
-      content: CalendarDayDTOMap.fromJSON(
-        response.data,
-      ),
-    );
+    // appController.calendarDayDTOMap.responseHandler = ResponseHandler.successful(
+    //   content: CalendarDayDTOMap.fromJSON(
+    //     response.data,
+    //   ),
+    // );
   }
 }
 

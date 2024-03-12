@@ -24,6 +24,18 @@
       ]
     },
     {
+      "name": "Lines - Staging - Profile",
+      "flutterMode": "profile",
+      "program": "lib/main_dev.dart",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "lib/main_dev.dart",
+        "--flavor",
+        "dev"
+      ]
+    },
+    {
       "name": "Lines - Staging - Release",
       "flutterMode": "release",
       "program": "lib/main_dev.dart",
