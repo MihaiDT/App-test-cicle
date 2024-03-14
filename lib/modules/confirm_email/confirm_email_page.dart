@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/confirm_email/confirm_email_controller.dart';
+import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
-
-import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/buttons/secondary_button.dart';
 
 class ConfirmEmailPage extends GetView<ConfirmEmailController> {
   const ConfirmEmailPage({
@@ -17,18 +15,6 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       backgroundImage: ThemeDecoration.images.bgDark,
-      appBar: TransparentAppBar(
-        leading: const SizedBox(),
-        actions: [
-          SecondaryButton(
-            onPressed: () {},
-            buttonSize: ButtonSize.h31,
-            child: const TitleLarge(
-              'ASSISTENZA',
-            ).applyShaders(context),
-          ),
-        ],
-      ),
       extendBodyBehindAppBar: true,
       body: SafeArea(
         child: BottomWidgetLayout(
@@ -46,6 +32,17 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                     "ACCEDI",
                   ).applyShaders(context),
                 ),
+                ThemeSizedBox.height16,
+                GestureDetector(
+                  onTap: () {
+                    // TODO : implement _onNeedHelp
+                  },
+                  child: const TitleMedium(
+                    "HAI BISOGNO DI AIUTO?",
+                    underline: true,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ],
             ),
           ),
@@ -55,7 +52,7 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
             ),
             child: Column(
               children: [
-                ThemeSizedBox.height90,
+                ThemeSizedBox.height48,
                 Image.asset(
                   ThemeImage.welcomeEmail,
                 ),
@@ -69,7 +66,9 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                   "Abbiamo mandato una mail all'indirizzo:",
                   textAlign: TextAlign.center,
                 ),
-                TitleLarge(controller.appController.registerParameter.email),
+                TitleLarge(
+                  controller.email,
+                ),
                 const BodyMedium(
                   "Aprila per confermare la tua registrazione a\n My Lines",
                   textAlign: TextAlign.center,
@@ -86,7 +85,9 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                 ),
                 ThemeSizedBox.height8,
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    controller.sendNewEmail();
+                  },
                   child: const TitleMedium(
                     "INVIA DI NUOVO",
                     underline: true,

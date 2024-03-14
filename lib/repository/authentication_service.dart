@@ -72,32 +72,34 @@ class AuthenticationService {
   static Future<void> updateUser(
     UpdateUserParameters user,
   ) async {
-    final userId = HiveManager.userId;
+    final userID = userIDFromDB;
 
     /// Takes the email from the user saved into state
     final email = appController.user.value?.email ?? '';
     user.email = email;
-    appController.user.responseHandler = ResponseHandler.pending();
+    appController.user.responseHandler = ResponseHandler.pending(
+      content: appController.user.value,
+    );
     try {
       final response = await dio.put(
-        "/users/$userId",
+        "/users/$userID",
         data: {
           "user": user.toJson(),
         },
       );
       _saveUserInfo(response);
     } catch (e) {
-      appController.user.responseHandler = ResponseHandler.pending();
+      appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
     }
   }
 
   static Future<void> fetchUser() async {
-    final userId = HiveManager.userId;
+    final userID = userIDFromDB;
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.get(
-        "/users/$userId",
+        "/users/$userID",
       );
       _saveUserInfo(response);
     } catch (e) {
@@ -109,16 +111,22 @@ class AuthenticationService {
   static Future<void> completeUserRegistration(
     UpdateUserParameters updateUserParameters,
   ) async {
-    final userId = HiveManager.userId;
+    final userID = userIDFromDB;
+    final email = appController.user.value?.email ?? '';
 
     appController.user.responseHandler = ResponseHandler.pending();
 
+    updateUserParameters.email = email;
     try {
       final response = await dio.post(
-        "/users/$userId/complete_profile",
+        "/users/$userID/complete_profile",
         data: {
           "user": {
-            "invitation_code": updateUserParameters.referralCode,
+            "email": email,
+            "first_name": updateUserParameters.firstName,
+            "last_name": updateUserParameters.lastName,
+            "nickname": updateUserParameters.nickname,
+            "birthdate": updateUserParameters.birthdate,
             "last_menstruation_date_start":
                 updateUserParameters.formattedLastMenstruationDateStart,
             "last_menstruation_date_end":
@@ -162,6 +170,38 @@ class AuthenticationService {
         },
       );
     } catch (e) {
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> recoverPassword(String email) async {
+    try {
+      await dio.post(
+        "/auth/password_recovery",
+        data: {
+          "email": email,
+        },
+      );
+    } catch (e) {
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> updateInterests(List<String> interestsId) async {
+    try {
+      appController.user.responseHandler = ResponseHandler.pending(
+        content: appController.user.value,
+      );
+      final userID = userIDFromDB;
+      final response = await dio.post(
+        "/users/$userID/update_interests",
+        data: {
+          "interest_ids": interestsId,
+        },
+      );
+      _saveUserInfo(response);
+    } catch (e) {
+      appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
     }
   }

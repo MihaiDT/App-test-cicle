@@ -11,26 +11,47 @@ class YourInterestSection extends GetView<YourInterestsSectionController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const DisplayMedium(
-          "Interessi",
-        ).applyShaders(context),
-        ThemeSizedBox.height4,
-        const BodySmall(
-          "Seleziona almeno 3 interessi",
-          color: ThemeColor.darkBlue,
-        ),
-        ThemeSizedBox.height16,
-        Obx(
-          () => Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: buildChipAnswers,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: ThemeSize.paddingSmall,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const DisplayMedium(
+            "Interessi",
+          ).applyShaders(context),
+          ThemeSizedBox.height4,
+          Row(
+            children: [
+              const BodySmall(
+                "Seleziona almeno 3 interessi",
+                color: ThemeColor.darkBlue,
+              ),
+              const Spacer(),
+              if (controller.percentageValue.isNotEmpty) ...[
+                Text(
+                  controller.percentageValue,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 12,
+                    color: ThemeColor.primary,
+                  ),
+                ),
+                ThemeSizedBox.width12,
+              ],
+            ],
           ),
-        ),
-      ],
+          ThemeSizedBox.height16,
+          Obx(
+            () => Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: buildChipAnswers,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

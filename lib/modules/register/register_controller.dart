@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
+import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/register/widget/activate_email_dialog.dart';
 import 'package:lines/repository/authentication_service.dart';
@@ -9,8 +10,33 @@ import 'package:lines/repository/social_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class RegisterController extends GetxController {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  RxString emailValue = "".obs;
+  RxString emailError = "".obs;
+
+  RxBool isButtonPending = false.obs;
+
+  RxBool isSocialLogin = false.obs;
+
+  RxBool canProceed = false.obs;
+
+  final RxBool _hidePassword = RxBool(true);
+
+  bool get hidePassword => _hidePassword.value;
+
+  set hidePassword(bool value) {
+    _hidePassword.value = value;
+  }
+
   @override
   void onInit() {
+    emailController.addListener(() {
+      canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
+    });
+    passwordController.addListener(() {
+      canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
+    });
     ever(
       appController.checkEmail.rxValue,
       condition: () => Get.currentRoute == Routes.register,
@@ -38,21 +64,11 @@ class RegisterController extends GetxController {
     super.onInit();
   }
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  RxString emailValue = "".obs;
-  RxString emailError = "".obs;
-
-  RxBool isButtonPending = false.obs;
-
-  RxBool isSocialLogin = false.obs;
-
-  final RxBool _hidePassword = RxBool(true);
-
-  bool get hidePassword => _hidePassword.value;
-
-  set hidePassword(bool value) {
-    _hidePassword.value = value;
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   Future<void> setRegistrationProvider(
@@ -104,4 +120,9 @@ class RegisterController extends GetxController {
 
   String get email =>
       appController.socialLoginParameter.email ?? emailController.text;
+
+  /// Check if the email is valid using a regex
+  bool isEmailValid() {
+    return RegexUtils.isEmail(email);
+  }
 }

@@ -9,7 +9,7 @@ import 'package:lines/modules/welcome_quiz/widgets/quiz_select_button_large.dart
 class QuizBodyBuilder extends StatelessWidget {
   final String? quizType;
   final List<Answers>? answers;
-  final List<Answers> selectedAnswers;
+  final RxList<Answers> selectedAnswers;
   final Function(Answers answer) onAnswerTap;
 
   const QuizBodyBuilder({
@@ -24,88 +24,71 @@ class QuizBodyBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(
-        horizontal: ThemeSize.paddingSmall,
-      ),
-      child: Obx(
-        () {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: _buildAnswerWidgets(answers ?? []),
+      child: buildBody(answers ?? []),
+    );
+  }
+
+  Widget buildBody(List<Answers> answers) {
+    if (quizType == "select" && answers.first.imageUrl?.isNotEmpty == true) {
+      return GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: answers.length,
+        itemBuilder: (context, index) {
+          return QuizSelectButtonLarge(
+            title: answers[index].answer,
+            imagePath: answers[index].imageUrl ?? '',
+            selected: getIsSelected(answers[index]),
+            onPressed: () {
+              onAnswerTap(answers[index]);
+            },
           );
         },
-      ),
-    );
-  }
-
-  /// Helper method to build the Column of the page basing on the quiz type
-  List<Widget> _buildAnswerWidgets(List<Answers> answers) {
-    List<Widget> result = [];
-    for (int i = 0; i < answers.length; i += 2) {
-      Answers answer = answers[i];
-      Answers? secondAnswer = answers.elementAtOrNull(i + 1);
-      if (quizType == "select" && answer.imageUrl == null) {
-        // Refactor the repeated code into a helper method
-        result.add(_buildSelectButton(answer));
-        if (secondAnswer != null) {
-          result.add(ThemeSizedBox.height8);
-          result.add(_buildSelectButton(secondAnswer));
-        }
-      } else {
-        // Refactor the singleLine list into a method that returns a row widget
-        result.add(_buildAnswerRow(answer, secondAnswer));
-      }
-      result.add(ThemeSizedBox.height8);
-    }
-    return result;
-  }
-
-  /// Helper method to build a select button widget
-  Widget _buildSelectButton(Answers answer) {
-    return QuizSelectButton(
-      title: answer.answer,
-      selected: getIsSelected(answer),
-      onPressed: () {
-        onAnswerTap(answer);
-      },
-    );
-  }
-
-  /// Helper method to build a row widget with two answer widgets
-  Widget _buildAnswerRow(Answers answer, Answers? secondAnswer) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        buildSingleAnswer(answer),
-        if (secondAnswer != null) ...[
-          ThemeSizedBox.width8,
-          buildSingleAnswer(secondAnswer),
-        ],
-      ],
-    );
-  }
-
-  /// Helper method to build a single answer widget depending on the quiz type
-  Widget buildSingleAnswer(Answers answer) {
-    if (answer.imageUrl != null) {
-      return Expanded(
-        child: QuizSelectButtonLarge(
-          imagePath: answer.imageUrl!,
-          selected: getIsSelected(answer),
-          title: answer.answer,
-          onPressed: () {
-            onAnswerTap(answer);
+      );
+    } else if (quizType == "select") {
+      return ListView.separated(
+        separatorBuilder: (_, __) => ThemeSizedBox.height8,
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: answers.length,
+        itemBuilder: (context, index) {
+          return Obx(
+            () {
+              return QuizSelectButton(
+                title: answers[index].answer,
+                selected: getIsSelected(answers[index]),
+                onPressed: () {
+                  onAnswerTap(answers[index]);
+                },
+              );
+            },
+          );
+        },
+      );
+    } else {
+      return Wrap(
+        alignment: WrapAlignment.center,
+        runSpacing: 8,
+        spacing: 8,
+        children: List.generate(
+          answers.length,
+          (index) {
+            return ChipSelectButton(
+              title: answers[index].answer,
+              selected: getIsSelected(answers[index]),
+              onPressed: () {
+                onAnswerTap(answers[index]);
+              },
+            );
           },
         ),
       );
     }
-    return ChipSelectButton(
-      title: answer.answer,
-      selected: getIsSelected(answer),
-      onPressed: () {
-        onAnswerTap(answer);
-      },
-    );
   }
 
   /// Return true if the current answer is selected

@@ -112,24 +112,23 @@ class HowOftenMensesWidget extends StatelessWidget {
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.2,
       color: CupertinoColors.systemBackground.resolveFrom(context),
-      child: SafeArea(
-        child: Column(
-          children: [
-            const HeadlineLarge(
-              "Seleziona giorno",
-              color: Colors.black,
+      child: Column(
+        children: [
+          ThemeSizedBox.height8,
+          const HeadlineLarge(
+            "Seleziona giorno",
+            color: Colors.black,
+          ),
+          Expanded(
+            child: CupertinoPicker(
+              itemExtent: 35,
+              children: _pickerChildren,
+              onSelectedItemChanged: (int value) {
+                howOftenMensesValue.value = _rangeMenses[value];
+              },
             ),
-            Expanded(
-              child: CupertinoPicker(
-                itemExtent: 35,
-                children: _pickerChildren,
-                onSelectedItemChanged: (int value) {
-                  howOftenMensesValue.value = _rangeMenses[value];
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/last_menses/widget/consent_bottomsheet.dart';
 import 'package:lines/repository/authentication_service.dart';
@@ -22,10 +23,14 @@ class LastMensesController extends GetxController {
       ),
     );
     if (!hasAcceptedPrivacyPolicy) {
-      await AuthenticationService.updateUser(
+      await AuthenticationService.completeUserRegistration(
         appController.updateUserParameters,
       );
-      Get.offAndToNamed(Routes.main);
+      if (HiveManager.isFirstTutorialWatched) {
+        Get.offAndToNamed(Routes.welcomeWalkthrough);
+      } else {
+        Get.offAndToNamed(Routes.main);
+      }
     }
     super.onReady();
   }

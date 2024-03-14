@@ -11,9 +11,6 @@ class WalkthroughBody extends StatelessWidget {
     super.key,
   });
 
-  double get _imageSize => Get.height * 0.2;
-  double get _topPadding => Get.height * 0.2;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,8 +20,13 @@ class WalkthroughBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: _topPadding),
-          SizedBox(height: _imageSize, width: _imageSize, child: data.image),
+          SizedBox(
+            height: Get.height * 0.1,
+          ),
+          SizedBox(
+            height: Get.height * 0.4,
+            child: data.image,
+          ),
           ThemeSizedBox.height24,
           DisplayMedium(
             data.title,

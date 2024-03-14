@@ -53,16 +53,14 @@ class HiveManager {
   }
 
   static set numberOfAccess(int numberOfAccess) {
-    if (numberOfAccess <= 3) {
-      Hive.box("linesApp")
-          .put(HiveReferenceKeys.numberOfAccess.name, numberOfAccess);
-    }
+    Hive.box("linesApp")
+        .put(HiveReferenceKeys.numberOfAccess.name, numberOfAccess);
   }
 
   static bool get isFirstTutorialWatched {
     return Hive.box("linesApp")
             .get(HiveReferenceKeys.isFirstTutorialWatched.name) ??
-        true;
+        false;
   }
 
   static set isFirstTutorialWatched(bool isFirstTutorialWatched) {

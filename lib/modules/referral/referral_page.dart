@@ -10,11 +10,12 @@ import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class ReferralPage extends GetView<ReferralController> {
-  const ReferralPage({super.key});
+  const ReferralPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final appBarHeight = const TransparentAppBar().preferredSize.height;
     return AppScaffoldPage(
       backgroundImage: ThemeDecoration.images.bgDark,
       extendBodyBehindAppBar: true,
@@ -35,11 +36,13 @@ class ReferralPage extends GetView<ReferralController> {
                 Obx(
                   () => SecondaryLoadingButton(
                     isLoading: controller.isLoading.value,
-                    onPressed: () {
-                      if (!controller.isLoading.value) {
-                        controller.onButtonPressed();
-                      }
-                    },
+                    onPressed: controller.canProceed.value
+                        ? () {
+                            if (!controller.isLoading.value) {
+                              controller.onUseCodePressed(context);
+                            }
+                          }
+                        : null,
                     child: const TitleLarge(
                       "USA IL CODICE",
                     ).applyShaders(context),
@@ -49,7 +52,7 @@ class ReferralPage extends GetView<ReferralController> {
                 GestureDetector(
                   onTap: () {
                     if (!controller.isLoading.value) {
-                      controller.onButtonPressed();
+                      controller.onSkipPressed(context);
                     }
                   },
                   child: const TitleMedium(
@@ -64,9 +67,6 @@ class ReferralPage extends GetView<ReferralController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(
-                height: appBarHeight,
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 50,

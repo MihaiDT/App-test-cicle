@@ -33,14 +33,14 @@ class MyMensesSection extends GetView<MyMensesSectionController> {
               children: [
                 if (controller.periodDuration != null)
                   _infoCard(
-                    value: controller.periodDuration.toString(),
+                    value: controller.periodDays.toString(),
                     description: "Durata media flusso",
                     imagePath: ThemeIcon.dropRoundedIcon,
                   ),
                 ThemeSizedBox.width8,
                 if (controller.periodDays != null)
                   _infoCard(
-                    value: controller.periodDays.toString(),
+                    value: controller.periodDuration.toString(),
                     description: "Durata media ciclo",
                     imagePath: ThemeIcon.circleRoundedIcon,
                   ),

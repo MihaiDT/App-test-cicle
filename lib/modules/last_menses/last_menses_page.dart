@@ -11,7 +11,9 @@ import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class LastMensesPage extends GetView<LastMensesController> {
-  const LastMensesPage({super.key});
+  const LastMensesPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,9 @@ class LastMensesPage extends GetView<LastMensesController> {
                 ),
                 ThemeSizedBox.height16,
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.howLongMensesPage);
+                  },
                   child: const TitleMedium(
                     "NON ME LO RICORDO",
                     underline: true,
@@ -70,7 +74,7 @@ class LastMensesPage extends GetView<LastMensesController> {
           ),
           child: Column(
             children: [
-              ThemeSizedBox.height60,
+              ThemeSizedBox.height16,
               const DisplayMedium(
                 "Quando hai avuto\n le ultime mestruazioni?",
                 textAlign: TextAlign.center,

@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/theme/theme_decoration.dart';
-import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_intro_outro_controller.dart';
-import 'package:lines/routes/routes.dart';
-import 'package:lines/widgets/layouts/app_scaffold_page.dart';
-
 import 'package:lines/core/theme/text_wrapper.dart';
+import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_icon.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_intro_outro_controller.dart';
+import 'package:lines/modules/welcome_quiz/widgets/quiz_body_text.dart';
+import 'package:lines/modules/welcome_quiz/widgets/quiz_your_coins.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/coin/app_coin.dart';
 import 'package:lines/widgets/layouts/app_scaffold_padding.dart';
-import 'package:lines/modules/welcome_quiz/widgets/quiz_body_text.dart';
-import 'package:lines/modules/welcome_quiz/widgets/quiz_your_coins.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
 class QuizOutroPage extends GetView<WelcomeQuizIntroOutroController> {
-  const QuizOutroPage({super.key});
+  const QuizOutroPage({
+    super.key,
+  });
 
   static const int totalCoins = 250;
 

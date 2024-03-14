@@ -4,6 +4,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/how_long_menses/controller/how_long_menses_controller.dart';
 import 'package:lines/modules/how_long_menses/widget/how_often_menses_widget.dart';
 import 'package:lines/modules/how_long_menses/widget/menses_duration_counter_widget.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
@@ -45,7 +46,9 @@ class HowLongMensesPage extends GetView<HowLongMensesController> {
                 ),
                 ThemeSizedBox.height16,
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.referral);
+                  },
                   child: const TitleMedium(
                     "NON LO SO",
                     underline: true,
@@ -57,7 +60,7 @@ class HowLongMensesPage extends GetView<HowLongMensesController> {
           ),
           child: Column(
             children: [
-              ThemeSizedBox.height60,
+              ThemeSizedBox.height16,
               const DisplayMedium(
                 "Quanto durano in media le tue mestruazioni?",
                 textAlign: TextAlign.center,

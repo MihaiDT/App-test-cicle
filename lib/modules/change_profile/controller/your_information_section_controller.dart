@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/user.dart';
-import 'package:lines/modules/change_profile/widget/change_profile_bottomsheet.dart';
+import 'package:lines/modules/change_profile/widget/change_profile_alert_dialog.dart';
 import 'package:lines/routes/routes.dart';
 
 class YourInformationSectionController extends GetxController {
   User? get user {
     return appController.user.value;
+  }
+
+  bool get isZipCodeCompleted {
+    return appController.user.value?.profileCompletedAreas?.zipCode ?? false;
   }
 
   RxBool isBottomsheetButtonLoading = false.obs;
@@ -34,11 +39,11 @@ class YourInformationSectionController extends GetxController {
     required String initialText,
     required TextEditingController controller,
   }) {
-    showModalBottomSheet(
+    showErrorDialog(
       context: Get.context!,
       builder: (context) => Obx(
         () {
-          return ChangeProfileBottomsheet(
+          return ChangeProfileAlertDialog(
             title: title,
             onConfirm: onConfirm,
             controller: controller,

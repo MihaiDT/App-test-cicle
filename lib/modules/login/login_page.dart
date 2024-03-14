@@ -30,8 +30,9 @@ class LoginPage extends GetView<LoginController> {
           appBar: const TransparentAppBar(),
           body: SafeArea(
             child: BottomWidgetLayout(
-              scrollableAreaPadding: const EdgeInsets.symmetric(
-                horizontal: ThemeSize.paddingLarge,
+              scrollableAreaPadding: const EdgeInsets.only(
+                left: ThemeSize.paddingLarge,
+                right: ThemeSize.paddingLarge,
               ),
               bottomWidget: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -40,7 +41,9 @@ class LoginPage extends GetView<LoginController> {
                   children: [
                     SecondaryLoadingButton(
                       isLoading: controller.isButtonPending.value,
-                      onPressed: controller.onButtonPressed,
+                      onPressed: controller.canProceed.value
+                          ? controller.onButtonPressed
+                          : null,
                       child: const TitleLarge(
                         "AVANTI",
                       ).applyShaders(context),
@@ -131,32 +134,36 @@ class LoginPage extends GetView<LoginController> {
                     onChanged: (text) {
                       controller.emailValue.value = text;
                     },
-                    onEditingComplete: controller.validateEmail,
-                    hasError: controller.emailError.value.isNotEmpty,
-                    errorMessage: controller.emailError.value,
+                    onEditingComplete: controller.isEmailValid,
                   ),
                   ThemeSizedBox.height24,
-                  Obx(() {
-                    return InputTextField(
-                      label: "Password",
-                      placeholder: 'Inserisci la password',
-                      textCapitalization: TextCapitalization.none,
-                      textEditingController: controller.passwordController,
-                      isPassword: true,
-                      obscureText: controller.hidePassword.value,
-                      onTapTogglePassword: () {
-                        controller.hidePassword.value =
-                            !controller.hidePassword.value;
-                      },
-                    );
-                  }),
-                  ThemeSizedBox.height16,
-                  const TitleMedium(
-                    "PASSWORD DIMENTICATA?",
-                    textAlign: TextAlign.center,
-                    underline: true,
+                  Obx(
+                    () {
+                      return InputTextField(
+                        label: "Password",
+                        placeholder: 'Inserisci la password',
+                        textCapitalization: TextCapitalization.none,
+                        textEditingController: controller.passwordController,
+                        isPassword: true,
+                        obscureText: controller.hidePassword.value,
+                        onTapTogglePassword: () {
+                          controller.hidePassword.value =
+                              !controller.hidePassword.value;
+                        },
+                      );
+                    },
                   ),
                   ThemeSizedBox.height16,
+                  GestureDetector(
+                    onTap: () {
+                      controller.onForgotPasswordTap(context);
+                    },
+                    child: const TitleMedium(
+                      "PASSWORD DIMENTICATA?",
+                      textAlign: TextAlign.center,
+                      underline: true,
+                    ),
+                  ),
                 ],
               ),
             ),

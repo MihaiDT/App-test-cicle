@@ -59,7 +59,7 @@ class NameSurnamePage extends GetView<NameSurnameController> {
           ),
           child: Column(
             children: [
-              ThemeSizedBox.height60,
+              ThemeSizedBox.height16,
               const DisplayMedium(
                 "Come ti chiami?",
                 textAlign: TextAlign.center,

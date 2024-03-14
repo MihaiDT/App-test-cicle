@@ -53,13 +53,13 @@ class WelcomeQuizAlertDialog extends StatelessWidget {
               AppCoin(
                 coinAmount: controller.coinAmount,
               ),
-              ThemeSizedBox.height60,
+              ThemeSizedBox.height40,
               Image(
                 image: AssetImage(
                   ThemeImage.quizIntroImage,
                 ),
               ),
-              ThemeSizedBox.height60,
+              ThemeSizedBox.height40,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

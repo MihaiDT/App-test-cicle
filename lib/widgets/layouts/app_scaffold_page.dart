@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/helpers/keyboard.dart';
-import 'package:lines/widgets/layouts/scroll_if_needed.dart';
 
 class AppScaffoldPage extends StatelessWidget {
   final Color? backgroundColor;
@@ -36,41 +33,24 @@ class AppScaffoldPage extends StatelessWidget {
       drawer: drawer,
       bottomNavigationBar: bottomNavigationBar,
       backgroundColor: backgroundColor ?? ThemeColor.background,
-      body: _body(context),
-      extendBody: true,
+      body: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            image: backgroundImage,
+          ),
+          height: Get.height,
+          width: Get.width,
+          child: body,
+        ),
+      ),
       extendBodyBehindAppBar: extendBodyBehindAppBar,
       resizeToAvoidBottomInset: true,
-    );
-  }
-
-  Container _body(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: backgroundImage,
-      ),
-      height: Get.height,
-      width: Get.width,
-      child: scrollController != null
-          ? ScrollIfNeeded(
-              disableTap: true,
-              scrollController: scrollController!,
-              child: MediaQuery(
-                data: MediaQuery.of(Get.context!)
-                    .copyWith(textScaler: const TextScaler.linear(1)),
-                child: InkWell(
-                  onTap: () => dismissKeyboard(context),
-                  child: body,
-                ),
-              ),
-            )
-          : MediaQuery(
-              data: MediaQuery.of(Get.context!)
-                  .copyWith(textScaler: const TextScaler.linear(1)),
-              child: InkWell(
-                onTap: () => dismissKeyboard(context),
-                child: body,
-              ),
-            ),
     );
   }
 }

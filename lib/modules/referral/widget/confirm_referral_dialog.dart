@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 
 class ConfirmReferralDialog extends StatelessWidget {
-  const ConfirmReferralDialog({super.key});
+  const ConfirmReferralDialog({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,10 @@ class ConfirmReferralDialog extends StatelessWidget {
             ),
             ThemeSizedBox.height8,
             Image.asset(
+              ThemeImage.speechBubble,
+            ),
+            Image.asset(
+              height: 100,
               ThemeImage.talkingDroppy,
             ),
             ThemeSizedBox.height32,
@@ -44,14 +50,14 @@ class ConfirmReferralDialog extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, false);
                   },
                   child: const TitleLarge(
                     "Indietro",
                   ).applyShaders(context),
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => Navigator.pop(context, true),
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: ThemeGradient.primary,
@@ -65,7 +71,7 @@ class ConfirmReferralDialog extends StatelessWidget {
                         horizontal: 22,
                       ),
                       child: TitleMedium(
-                        "CHIUDI",
+                        "AVANTI",
                       ),
                     ),
                   ),

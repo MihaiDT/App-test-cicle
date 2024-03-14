@@ -60,7 +60,7 @@ class BirthDatePage extends GetView<BirthDateController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ThemeSizedBox.height60,
+              ThemeSizedBox.height16,
               const DisplayMedium(
                 "Qual è la tua data di nascita?",
                 textAlign: TextAlign.center,

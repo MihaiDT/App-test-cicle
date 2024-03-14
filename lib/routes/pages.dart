@@ -4,9 +4,13 @@ import 'package:lines/badges/bindings/badges_binding.dart';
 import 'package:lines/badges/bindings/completed_badges_binding.dart';
 import 'package:lines/badges/bindings/in_progress_badges_binding.dart';
 import 'package:lines/badges/pages/badges_page.dart';
+import 'package:lines/modules/access_wrapper/wrapper_access_widget.dart';
 import 'package:lines/modules/advices/advices_detail_page.dart';
 import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
+import 'package:lines/modules/birth_date/birth_date_page.dart';
+import 'package:lines/modules/calendar/calendar_binding.dart';
+import 'package:lines/modules/calendar/calendar_page.dart';
 import 'package:lines/modules/change_profile/binding/customize_cherry_binding.dart';
 import 'package:lines/modules/change_profile/binding/your_information_section_binding.dart';
 import 'package:lines/modules/change_profile/binding/your_interests_section_binding.dart';
@@ -14,12 +18,17 @@ import 'package:lines/modules/change_profile/binding/your_menses_section_binding
 import 'package:lines/modules/change_profile/pages/change_profile_page.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
+import 'package:lines/modules/content_library/bindings/content_library_binding.dart';
+import 'package:lines/modules/content_library/bindings/content_library_search_page_binding.dart';
 import 'package:lines/modules/content_library/content_library_category_page.dart';
+import 'package:lines/modules/content_library/content_library_page.dart';
+import 'package:lines/modules/content_library/content_library_search_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
 import 'package:lines/modules/drawer/binding/account_binding.dart';
 import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
 import 'package:lines/modules/drawer/pages/account_page.dart';
 import 'package:lines/modules/drawer/pages/faq_page.dart';
+import 'package:lines/modules/home/home_binding.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_quiz_card_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
@@ -43,13 +52,20 @@ import 'package:lines/modules/missions/bindings/missions_details_binding.dart';
 import 'package:lines/modules/missions/missions_details_page.dart';
 import 'package:lines/modules/missions/missions_page.dart';
 import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
+import 'package:lines/modules/name_surname/name_surname_page.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
+import 'package:lines/modules/privacy/privacy_page.dart';
 import 'package:lines/modules/prizes_onboarding/prizes_onboarding_page.dart';
 import 'package:lines/modules/profile/bindings/my_menses_section_binding.dart';
+import 'package:lines/modules/profile/bindings/profile_completion_percentage_binding.dart';
 import 'package:lines/modules/profile/bindings/profile_header_binding.dart';
 import 'package:lines/modules/profile/bindings/your_diary_section_binding.dart';
 import 'package:lines/modules/referral/referral_binding.dart';
 import 'package:lines/modules/referral/referral_page.dart';
+import 'package:lines/modules/register/register_binding.dart';
+import 'package:lines/modules/register/register_page.dart';
+import 'package:lines/modules/splash/splash_binding.dart';
+import 'package:lines/modules/splash/splash_page.dart';
 import 'package:lines/modules/surveys/surveys_page.dart';
 import 'package:lines/modules/tutor_email/tutor_email_binding.dart';
 import 'package:lines/modules/tutor_email/tutor_email_page.dart';
@@ -64,21 +80,6 @@ import 'package:lines/modules/welcome_walkthrough/welcome_walkthrough_page.dart'
 import 'package:lines/modules/your_coins/your_coins_page.dart';
 import 'package:lines/modules/your_diary/bindings/your_diary_binding.dart';
 import 'package:lines/modules/your_diary/pages/your_diary_page.dart';
-
-import 'package:lines/modules/access_wrapper/wrapper_access_widget.dart';
-import 'package:lines/modules/birth_date/birth_date_page.dart';
-import 'package:lines/modules/calendar/calendar_binding.dart';
-import 'package:lines/modules/calendar/calendar_page.dart';
-import 'package:lines/modules/content_library/bindings/content_library_binding.dart';
-import 'package:lines/modules/content_library/bindings/content_library_search_page_binding.dart';
-import 'package:lines/modules/content_library/content_library_page.dart';
-import 'package:lines/modules/content_library/content_library_search_page.dart';
-import 'package:lines/modules/name_surname/name_surname_page.dart';
-import 'package:lines/modules/privacy/privacy_page.dart';
-import 'package:lines/modules/register/register_binding.dart';
-import 'package:lines/modules/register/register_page.dart';
-import 'package:lines/modules/splash/splash_binding.dart';
-import 'package:lines/modules/splash/splash_page.dart';
 import 'package:lines/routes/routes.dart';
 
 class Pages {
@@ -274,6 +275,7 @@ class Pages {
     GetPage(
       name: Routes.main,
       bindings: [
+        HomeBinding(),
         MainBinding(),
         WelcomeQuizCardBinding(),
         AccountBinding(),
@@ -281,6 +283,7 @@ class Pages {
         ProfileHeaderBinding(),
         MyMensesSectionBinding(),
         DrawerMainPageBinding(),
+        ProfileCompletionPercentageBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const MainPage(),
@@ -516,18 +519,13 @@ class Pages {
 
   /// Private methods
 
-  static MediaQuery _mediaQueryWrapper(
+  static Widget _mediaQueryWrapper(
     Widget view, {
     bool authNeeded = true,
   }) {
-    return MediaQuery(
-      data: MediaQuery.of(Get.context!).copyWith(
-        textScaler: const TextScaler.linear(1),
-      ),
-      child: WrapperAccessWidget(
-        authNeeded: authNeeded,
-        child: view,
-      ),
+    return WrapperAccessWidget(
+      authNeeded: authNeeded,
+      child: view,
     );
   }
 }

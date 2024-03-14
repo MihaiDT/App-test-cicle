@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({
@@ -11,18 +12,22 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ThemeSizedBox.width24,
-        GestureDetector(
-          onTap: () {
-            Scaffold.of(context).openDrawer();
-          },
-          child: SvgPicture.asset(
-            ThemeIcon.menu,
+    return TransparentAppBar(
+      leading: InkWell(
+        onTap: () {
+          Scaffold.of(context).openDrawer();
+        },
+        child: Center(
+          child: SizedBox(
+            height: 24,
+            width: 24,
+            child: SvgPicture.asset(
+              ThemeIcon.menu,
+            ),
           ),
         ),
-        const Spacer(),
+      ),
+      actions: [
         GestureDetector(
           onTap: () {
             Get.toNamed(Routes.calendar);
@@ -39,7 +44,6 @@ class HeaderSection extends StatelessWidget {
             ],
           ),
         ),
-        ThemeSizedBox.width24,
       ],
     );
   }

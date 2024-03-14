@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/repository/advices_service.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/settings_service.dart';
 import 'package:lines/routes/routes.dart';
@@ -13,21 +13,22 @@ class SplashPageController extends GetxController {
     ever(
       appController.user.rxValue,
       condition: () => Get.currentRoute == Routes.logo,
-      (callback) {
+      (callback) async {
         if (appController.user.responseHandler.isFailed) {
           _startAnimation();
         } else if (appController.user.responseHandler.isSuccessful) {
-          Get.offAndToNamed(Routes.main);
+          if (appController.user.value?.routeAfterLogin == "complete_profile") {
+            Get.offAndToNamed(Routes.lastMensesPage);
+          } else {
+            Get.offAndToNamed(Routes.main);
+          }
         }
       },
     );
 
     await SettingsService.fetchSettings();
-    if (HiveManager.userId.isNotEmpty) {
-      await AuthenticationService.fetchUser();
-    } else {
-      _startAnimation();
-    }
+    await AuthenticationService.fetchUser();
+    await AdvicesService.fetchArticles();
   }
 
   void _pageTransition() {

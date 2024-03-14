@@ -21,7 +21,9 @@ class AdvicesService {
 
   static Future<void> addArticleToFav(AdvicesArticle article) async {
     try {
-      await dio.post("/articles/${article.id}/add_to_favs");
+      await dio.post(
+        "/articles/${article.id}/add_to_favs",
+      );
     } catch (e) {
       log.logError(e);
     }
@@ -29,7 +31,9 @@ class AdvicesService {
 
   static Future<void> removeArticleFromFav(AdvicesArticle article) async {
     try {
-      await dio.post("/articles/${article.id}/remove_from_favs");
+      await dio.post(
+        "/articles/${article.id}/remove_from_favs",
+      );
     } catch (e) {
       log.logError(e);
     }

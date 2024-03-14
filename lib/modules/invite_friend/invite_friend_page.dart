@@ -52,8 +52,8 @@ class InviteFriendPage extends GetView<InviteFriendController> {
                 height: 206,
               ),
               ThemeSizedBox.height36,
-              const InviteFriendCode(
-                code: "ERKDEL56",
+              InviteFriendCode(
+                code: controller.referralCode,
               ),
               ThemeSizedBox.height16,
               const Padding(
@@ -95,7 +95,6 @@ class InviteFriendPage extends GetView<InviteFriendController> {
                   ),
                 ],
               ),
-              ThemeSizedBox.height90,
             ],
           ),
         ),

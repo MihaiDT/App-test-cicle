@@ -1,4 +1,5 @@
 import 'package:lines/data/models/interest.dart';
+import 'package:lines/data/models/profile_completed_areas.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
 
 class User {
@@ -21,8 +22,13 @@ class User {
   bool? privacyMarketingEmail;
   RegistrationProvider? provider;
   String? sessionToken;
-
   List<Interest>? interests;
+  String? zipCode;
+  ProfileCompletedAreas? profileCompletedAreas;
+
+  bool? isWelcomeQuizCompleted;
+  int? profileCompletionPercentage;
+  String? routeAfterLogin;
 
   User({
     this.active = false,
@@ -45,6 +51,11 @@ class User {
     this.provider,
     this.sessionToken,
     this.interests,
+    this.zipCode,
+    this.profileCompletedAreas,
+    this.isWelcomeQuizCompleted,
+    this.profileCompletionPercentage,
+    this.routeAfterLogin,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -73,6 +84,13 @@ class User {
       password: json['user']['password'],
       nickname: json['user']['nickname'],
       legalGuardianEmail: json['user']['legal_guardian_email'],
+      zipCode: json['user']['zip_code'],
+      profileCompletedAreas: ProfileCompletedAreas.fromJson(
+        json['user']['profile_completed_areas'],
+      ),
+      isWelcomeQuizCompleted: json['user']['is_welcome_quiz_completed'],
+      profileCompletionPercentage: json['user']['profile_percentage'],
+      routeAfterLogin: json['user']['route_after_login'],
     );
   }
 
@@ -99,11 +117,41 @@ class User {
             (interest) => Interest.toJson(interest),
           )
           .toList(),
+      "zip_code": zipCode,
+      "active": active,
+      "user_id": userId,
+      "profile_completed_areas": profileCompletedAreas?.toJson(),
+      "is_welcome_quiz_completed": isWelcomeQuizCompleted,
+      "profile_percentage": profileCompletionPercentage,
+      "route_after_login": routeAfterLogin,
     };
   }
 
   @override
   String toString() {
-    return 'User{birthdate: $birthdate, email: $email, firstName: $firstName, isConfirmed: $isConfirmed, lastMenstrautionDate: $lastMenstrautionDate, lastName: $lastName, legalGuardianEmail: $legalGuardianEmail, mgmCode: $mgmCode, nickname: $nickname, password: $password, periodDays: $periodDays, periodDuration: $periodDuration, privacyProfiling: $privacyProfiling, privacyMarketingEmail: $privacyMarketingEmail, provider: $provider, sessionToken: $sessionToken}';
+    return 'User{birthdate: $birthdate, email: $email, firstName: $firstName,'
+        ' isConfirmed: $isConfirmed, lastMenstrautionDate: $lastMenstrautionDate,'
+        ' lastName: $lastName, legalGuardianEmail: $legalGuardianEmail,'
+        ' mgmCode: $mgmCode, nickname: $nickname, password: $password,'
+        ' periodDays: $periodDays, periodDuration: $periodDuration,'
+        ' privacyProfiling: $privacyProfiling, privacyMarketingEmail: $privacyMarketingEmail,'
+        ' provider: $provider, sessionToken: $sessionToken, interests: $interests,'
+        ' zipCode: $zipCode, active: $active, coinsCollected: $coinsCollected, userId: $userId,'
+        ' profileCompletedAreas: ${profileCompletedAreas.toString()},'
+        ' isWelcomeQuizCompleted: $isWelcomeQuizCompleted,'
+        ' profileCompletionPercentage: $profileCompletionPercentage,'
+        ' routeAfterLogin: $routeAfterLogin, }';
+  }
+
+  bool get hasCompletedInterests {
+    return profileCompletedAreas?.interests ?? false;
+  }
+
+  bool get hasCompletedZipCode {
+    return profileCompletedAreas?.zipCode ?? false;
+  }
+
+  bool get hasCompletedPeriodData {
+    return profileCompletedAreas?.periodData ?? false;
   }
 }

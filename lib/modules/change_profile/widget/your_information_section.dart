@@ -86,18 +86,18 @@ class YourInformationSection extends GetView<YourInformationSectionController> {
               ThemeSizedBox.height8,
               InformationTile(
                 title: "CAP",
-                value: 'inserisci',
-                percentageValue: '10%',
+                value: controller.user?.zipCode ?? '',
+                percentageValue: controller.isZipCodeCompleted ? null : '10%',
                 onTap: () => controller.updateZipCode(
-                  title: "Modifica Cognome",
-                  onConfirm: (lastName) {
+                  title: "Modifica CAP",
+                  onConfirm: (zipCode) {
                     AuthenticationService.updateUser(
                       UpdateUserParameters(
-                        zipCode: lastName,
+                        zipCode: zipCode,
                       ),
                     );
                   },
-                  initialText: controller.user?.lastName ?? '',
+                  initialText: controller.user?.zipCode ?? '',
                 ),
               ),
               ThemeSizedBox.height8,

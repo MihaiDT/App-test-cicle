@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
+import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/login/widget/forgot_password_bottomsheet.dart';
 import 'package:lines/modules/register/widget/activate_email_dialog.dart';
 import 'package:lines/modules/register/widget/email_does_not_exists.dart';
 import 'package:lines/repository/authentication_service.dart';
@@ -15,15 +16,23 @@ class LoginController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   RxString emailValue = "".obs;
-  RxString emailError = "".obs;
-
   RxBool isButtonPending = false.obs;
   RxBool isSocialLogin = false.obs;
   RxBool hidePassword = true.obs;
 
+  RxBool canProceed = false.obs;
+
   @override
   void onInit() {
     super.onInit();
+    emailController.addListener(() {
+      emailValue.value = emailController.text;
+      canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
+    });
+
+    passwordController.addListener(() {
+      canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
+    });
 
     /// Check if email exists and if it's active
     ever(
@@ -79,7 +88,7 @@ class LoginController extends GetxController {
         if (callback.isSuccessful) {
           isButtonPending.value = false;
 
-          if (HiveManager.firstAccess) {
+          if (appController.user.value?.routeAfterLogin == "complete_profile") {
             Get.offAndToNamed(Routes.lastMensesPage);
           } else {
             Get.offAndToNamed(Routes.main);
@@ -87,6 +96,13 @@ class LoginController extends GetxController {
         }
       },
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   Future<void> onButtonPressed() async {
@@ -99,10 +115,6 @@ class LoginController extends GetxController {
     );
   }
 
-  void validateEmail(String text) {
-    print('Email validated');
-  }
-
   Future<void> loginUser(String email, String password) async {
     await AuthenticationService.loginUser(
       LoginParameters(
@@ -112,6 +124,7 @@ class LoginController extends GetxController {
     );
   }
 
+  /// Show the dialog for email that does not exist
   void _showEmailDoesNotExists() {
     showErrorDialog(
       context: Get.context!,
@@ -121,6 +134,7 @@ class LoginController extends GetxController {
     );
   }
 
+  /// Show the dialog for email that exist but is not active
   void _showValidateEmailDialog() {
     showErrorDialog(
       context: Get.context!,
@@ -134,4 +148,22 @@ class LoginController extends GetxController {
 
   String get email =>
       appController.socialLoginParameter.email ?? emailController.text;
+
+  /// Open the bottomsheet to recover the password
+  void onForgotPasswordTap(BuildContext context) async {
+    final TextEditingController emailController = TextEditingController();
+    await Get.bottomSheet(
+      ForgotPasswordBottomsheet(
+        controller: emailController,
+        onConfirm: (email) async {
+          await AuthenticationService.recoverPassword(email);
+        },
+      ),
+    );
+  }
+
+  /// Check if the email is valid using a regex
+  bool isEmailValid() {
+    return RegexUtils.isEmail(email);
+  }
 }

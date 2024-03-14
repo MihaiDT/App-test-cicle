@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/home/home_controller.dart';
+import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar.dart';
 import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar_shimmer.dart';
 import 'package:lines/modules/home/widgets/header_section.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_info.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_info_shimmer.dart';
+import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar.dart';
 import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar_shimmer.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/welcome_quiz_section.dart';
-
-import 'package:lines/core/app_theme.dart';
-import 'package:lines/modules/home/home_controller.dart';
-import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar.dart';
-import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({
@@ -20,30 +19,37 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.zero,
+    return Column(
       children: [
         const HeaderSection(),
-        ThemeSizedBox.height16,
-        Obx(
-          () => appController.currentPeriod.responseHandler.isPending
-              ? const HomeHorizontalCalendarShimmer()
-              : const HomeHorizontalCalendar(),
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Obx(
+                () => appController.currentPeriod.responseHandler.isPending
+                    ? const HomeHorizontalCalendarShimmer()
+                    : const HomeHorizontalCalendar(),
+              ),
+              Obx(
+                () => appController.currentPeriod.responseHandler.isPending
+                    ? const HomeCircularPeriodCalendarShimmer()
+                    : const HomeCircularPeriodCalendar(),
+              ),
+              ThemeSizedBox.height32,
+              Obx(
+                () => appController.currentPeriod.responseHandler.isPending
+                    ? const HomePeriodInfoShimmer()
+                    : const HomePeriodInfo(),
+              ),
+              if (!controller.isWelcomeQuizCompleted) ...[
+                ThemeSizedBox.height32,
+                const WelcomeQuizSection(),
+              ],
+              ThemeSizedBox.height90,
+            ],
+          ),
         ),
-        Obx(
-          () => appController.currentPeriod.responseHandler.isPending
-              ? const HomeCircularPeriodCalendarShimmer()
-              : const HomeCircularPeriodCalendar(),
-        ),
-        ThemeSizedBox.height32,
-        Obx(
-          () => appController.currentPeriod.responseHandler.isPending
-              ? const HomePeriodInfoShimmer()
-              : const HomePeriodInfo(),
-        ),
-        ThemeSizedBox.height32,
-        const WelcomeQuizSection(),
-        ThemeSizedBox.height90,
       ],
     );
   }

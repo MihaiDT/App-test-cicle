@@ -129,6 +129,8 @@ dependencies:
   # webview_flutter: ^4.4.2
 
   flutter_share: ^2.0.0
+  flutter_keyboard_visibility: ^6.0.0
+
 
 dev_dependencies:
   analyzer: ^6.4.1

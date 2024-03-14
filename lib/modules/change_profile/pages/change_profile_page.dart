@@ -43,12 +43,7 @@ class ChangeProfilePage extends StatelessWidget {
             ThemeSizedBox.height32,
             _divider,
             ThemeSizedBox.height32,
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: ThemeSize.paddingSmall,
-              ),
-              child: YourInterestSection(),
-            ),
+            const YourInterestSection(),
             ThemeSizedBox.height32,
           ],
         ),

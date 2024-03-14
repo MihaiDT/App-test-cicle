@@ -18,9 +18,14 @@ class YourMensesSection extends GetView<YourMensesSectionController> {
           padding: const EdgeInsets.only(
             left: ThemeSize.paddingSmall,
           ),
-          child: const DisplayMedium(
-            "Il tuo ciclo",
-          ).applyShaders(context),
+          child: Row(
+            children: [
+              const DisplayMedium(
+                "Il tuo ciclo",
+              ).applyShaders(context),
+              const Spacer(),
+            ],
+          ),
         ),
         ThemeSizedBox.height16,
         Column(

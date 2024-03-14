@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/badges/controllers/completed_badges_controller.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/widgets/cards/elevated_card.dart';
 
 class CompletedBadgesPage extends GetView<CompletedBadgesController> {
   const CompletedBadgesPage({
@@ -20,11 +19,15 @@ class CompletedBadgesPage extends GetView<CompletedBadgesController> {
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
+        childAspectRatio: 0.9,
       ),
       itemCount: controller.badges.length,
       itemBuilder: (context, index) {
-        return ElevatedCard(
-          color: ThemeColor.normalGrey.withOpacity(0.3),
+        return Container(
+          decoration: BoxDecoration(
+            color: ThemeColor.normalGrey.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Padding(
             padding: const EdgeInsets.only(
               top: 8,

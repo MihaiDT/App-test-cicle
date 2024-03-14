@@ -56,7 +56,9 @@ class TutorEmailPage extends GetView<TutorEmailController> {
               ),
               ThemeSizedBox.height16,
               const BodyMedium(
-                "Siccome sei ancora minorenne, hai bisogno dell'autorizzazione di un genitore o di un tutore legale per registrarti.  Invieremo una mail all'indirizzo indicato per approvare la tua registrazione.  Puoi stare tranquilla: il tuo account  non sarà mai accessibile ad altri.",
+                "Siccome sei ancora minorenne, hai bisogno dell'autorizzazione di un genitore o di un tutore legale per registrarti. "
+                "\nInvieremo una mail all'indirizzo indicato per approvare la tua registrazione. "
+                "\nPuoi stare tranquilla: il tuo account  non sarà mai accessibile ad altri.",
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,

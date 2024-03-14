@@ -24,7 +24,9 @@ class WelcomeWalkthroughPage extends StatelessWidget {
             title: "Personalizza la tua Cherry e gioca",
             description:
                 "Personalizza la tua Cherry come più ti piace per rendere l'app ancora più tua!\nE quando ha i le mestruazioni non dimenticare di giocare e prenderti cura di lei.",
-            image: const Placeholder(),
+            image: Image.asset(
+              ThemeImage.walkthrough1,
+            ),
           ),
           WalkthroughData(
             title: "Monitora il ciclo mestruale",

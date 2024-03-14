@@ -23,18 +23,18 @@ class Walkthrough extends StatelessWidget {
     return Stack(
       children: [
         Obx(
-          () => PageView(
+          () => PageView.builder(
             controller: _controller.pageController,
             onPageChanged: (value) => _controller.onPageChanged(value),
             physics: _controller.currentStepIndex.value >= pagesData.length - 1
                 ? const NeverScrollableScrollPhysics()
                 : null,
-            children: List.generate(
-              pagesData.length,
-              (index) => WalkthroughBody(
+            itemCount: pagesData.length,
+            itemBuilder: (BuildContext context, int index) {
+              return WalkthroughBody(
                 data: pagesData[index],
-              ),
-            ),
+              );
+            },
           ),
         ),
         WalkthroughBottom(

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/data/models/advices_category_with_articles.dart';
 import 'package:lines/data/models/advices_sub_category.dart';
+import 'package:lines/modules/advices/controllers/advices_detail_store.dart';
 import 'package:lines/repository/advices_service.dart';
 import 'package:lines/routes/routes.dart';
-import 'package:lines/modules/advices/controllers/advices_detail_store.dart';
 
 class ContentLibraryController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -54,46 +53,30 @@ class ContentLibraryController extends GetxController
 
   /// Retrieve all articles from every category
   List<AdvicesArticle> get getAllArticles {
-    List<AdvicesArticle> list = [];
-    if (appController.advicesCategories.value != null) {
-      for (MapEntry<String, AdvicesCategoryWithArticles> entry
-          in appController.advicesCategories.value!.categories.entries) {
-        AdvicesSubCategory firstSubCategory = entry.value.subCategories[0];
-        for (AdvicesArticle article in firstSubCategory.articles) {
-          list.add(article);
-        }
-      }
-    }
-    return list;
+    return appController.advicesCategories.value?.categories.entries
+            .expand((entry) => entry.value.subCategories[0].articles)
+            .toList() ??
+        [];
   }
 
   /// Retrieve all categories
   List<AdvicesCategory> get getAllCategories {
-    List<AdvicesCategory> allCategories = [];
-    if (appController.advicesCategories.value != null) {
-      for (MapEntry<String, AdvicesCategoryWithArticles> entry
-          in appController.advicesCategories.value!.categories.entries) {
-        allCategories.add(entry.value.advicesCategory);
-      }
-    }
-    return allCategories;
+    return appController.advicesCategories.value?.categories.entries
+            .map((entry) => entry.value.advicesCategory)
+            .toList() ??
+        [];
   }
 
+  /// Retrieves all articles for a specific category.
   List<AdvicesArticle> getAllArticleForCategory(AdvicesCategory category) {
-    List<AdvicesArticle> allArticlesForCategory = [];
-    if (appController.advicesCategories.value != null) {
-      allArticlesForCategory.addAll(
-        appController.advicesCategories.value!.categories[category.iconName]!
-            .subCategories[0].articles,
-      );
-    }
-    return allArticlesForCategory;
+    return appController.advicesCategories.value?.categories[category.iconName]
+            ?.subCategories[0].articles ??
+        [];
   }
 
+  /// Retrieves all saved articles.
   List<AdvicesArticle> get savedArticles {
-    return getAllArticles
-        .where((article) => article.isFavorite == true)
-        .toList();
+    return getAllArticles.where((article) => article.isFavorite).toList();
   }
 
   /// Retrieve all categories with their associated articles

@@ -22,7 +22,7 @@ class ConsentBottomSheet extends StatelessWidget {
         children: [
           ThemeSizedBox.height32,
           const BodyMedium(
-            "Per utilizzare correttamente l’app e il calendario mestruale acconsenti al trattamento dei tuoi dati relativi al ciclo",
+            "Per utilizzare il calendario mestruale acconsenti al trattamento dei dati relativi al ciclo, come da informativa privacy.",
             textAlign: TextAlign.center,
           ),
           ThemeSizedBox.height40,

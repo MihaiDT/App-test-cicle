@@ -11,7 +11,7 @@ class UpdateUserParameters {
   int? periodDuration;
   bool privacyProfiling;
   bool privacyMarketingEmail;
-  String referralCode;
+  String? referralCode;
   String? zipCode;
 
   UpdateUserParameters({
@@ -27,23 +27,23 @@ class UpdateUserParameters {
     this.periodDuration,
     this.privacyProfiling = false,
     this.privacyMarketingEmail = false,
-    this.referralCode = "",
+    this.referralCode,
     this.zipCode,
   });
 
-  String get formattedLastMenstruationDateStart {
+  String? get formattedLastMenstruationDateStart {
     if (lastMenstruationDateStart != null) {
       return "${lastMenstruationDateStart!.year}-${lastMenstruationDateStart!.month}-${lastMenstruationDateStart!.day}";
     } else {
-      return "";
+      return null;
     }
   }
 
-  String get formattedLastMenstruationDateEnd {
+  String? get formattedLastMenstruationDateEnd {
     if (lastMenstruationDateEnd != null) {
       return "${lastMenstruationDateEnd!.year}-${lastMenstruationDateEnd!.month}-${lastMenstruationDateEnd!.day}";
     } else {
-      return "";
+      return null;
     }
   }
 
@@ -66,7 +66,7 @@ class UpdateUserParameters {
       "period_duration": periodDuration,
       "privacy_profiling": privacyProfiling,
       "privacy_marketing_email": privacyMarketingEmail,
-      "referral_code": referralCode,
+      "invitation_code": referralCode,
       "zip_code": zipCode,
     };
   }

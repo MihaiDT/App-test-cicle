@@ -65,7 +65,6 @@ class CookiePage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              ThemeSizedBox.height32,
               Image.asset(
                 ThemeImage.cookie,
                 fit: BoxFit.contain,
@@ -94,9 +93,6 @@ class CookiePage extends StatelessWidget {
                 " per accettare selettivamente tutti o alcuni cookie/fingerprinting."
                 " Clicca sulla X per chiudere senza prestare consenso.",
                 textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 120,
               ),
             ],
           ),

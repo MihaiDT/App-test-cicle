@@ -4,20 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/show_error_dialog.dart';
+import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/period_date.dart';
 import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar.dart';
 import 'package:lines/modules/tutorial/widgets/menses_phase_card.dart';
 import 'package:lines/modules/tutorial/widgets/tutorial_continue_button.dart';
+import 'package:lines/modules/welcome_quiz/widgets/welcome_quiz_alert_dialog.dart';
 import 'package:lines/repository/calendar_service.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/tutorial_check_mark/src/target/target_content.dart';
 import 'package:lines/tutorial_check_mark/src/target/target_focus.dart';
 import 'package:lines/tutorial_check_mark/tutorial_coach_mark.dart';
-import 'package:scroll_snap_list/scroll_snap_list.dart';
-
-import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class HomeController extends AppScaffoldController {
   TutorialCoachMark? tutorialCoachMark;
@@ -51,14 +52,9 @@ class HomeController extends AppScaffoldController {
   List<TargetFocus> targets = <TargetFocus>[];
 
   @override
-  void onInit() {
-    super.onInit();
-    _initCalendars();
-  }
-
-  @override
   void onReady() {
     super.onReady();
+    _initCalendars();
 
     ever(
       appController.currentPeriod.rxValue,
@@ -177,6 +173,19 @@ class HomeController extends AppScaffoldController {
         );
       },
     );
+
+    if (HiveManager.numberOfAccess >= 2 &&
+        HiveManager.numberOfAccess <= 4 &&
+        !isWelcomeQuizCompleted) {
+      showErrorDialog(
+        context: Get.context!,
+        builder: (_) {
+          return WelcomeQuizAlertDialog();
+        },
+      );
+    }
+
+    HiveManager.numberOfAccess++;
   }
 
   void showTutorial() {
@@ -234,4 +243,7 @@ class HomeController extends AppScaffoldController {
         ? currentPeriodDatesMap.keys.toList().length
         : periodSelectedDateIndex;
   }
+
+  bool get isWelcomeQuizCompleted =>
+      appController.user.value?.isWelcomeQuizCompleted ?? false;
 }

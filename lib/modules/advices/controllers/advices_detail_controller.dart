@@ -121,7 +121,7 @@ class AdvicesDetailController extends GetxController {
         await AdvicesService.removeArticleFromFav(articleToSave);
       }
       isArticleFav.value = isFav;
-      AdvicesService.fetchArticles();
+      await AdvicesService.fetchArticles();
     }
   }
 

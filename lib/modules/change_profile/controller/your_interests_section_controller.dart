@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/interest.dart';
+import 'package:lines/repository/authentication_service.dart';
 
 class YourInterestsSectionController extends GetxController {
   /// All available interests.
@@ -21,6 +23,9 @@ class YourInterestsSectionController extends GetxController {
   /// Timer for checking changes in selected interests.
   Timer? timer;
 
+  String percentageValue =
+      appController.user.value?.hasCompletedInterests == true ? '' : "20%";
+
   @override
   void onInit() {
     super.onInit();
@@ -38,20 +43,23 @@ class YourInterestsSectionController extends GetxController {
   }
 
   /// Checks if there are changes in the selected interests.
-  void checkForChanges() {
-    if (rxSelectedInterestsId != previousInterestsId) {
+  Future<void> checkForChanges() async {
+    if (!listEquals(rxSelectedInterestsId, previousInterestsId)) {
       /// Update previous state if there are changes.
       previousInterestsId = List.from(rxSelectedInterestsId);
+      await AuthenticationService.updateInterests(previousInterestsId);
     }
   }
 
   /// Toggles the selection of an interest.
   void toggleInterest(String interest) {
     if (rxSelectedInterestsId.contains(interest)) {
-      /// Remove interest if it's already selected.
-      rxSelectedInterestsId.remove(interest);
-    } else if (rxSelectedInterestsId.length < 3) {
-      /// Add interest if less than 3 are selected.
+      /// Remove interest if it's already selected and total selected interests are more than 3.
+      if (rxSelectedInterestsId.length > 3) {
+        rxSelectedInterestsId.remove(interest);
+      }
+    } else {
+      /// Add interest.
       rxSelectedInterestsId.add(interest);
     }
   }

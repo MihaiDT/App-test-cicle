@@ -40,7 +40,9 @@ class RegisterPage extends GetView<RegisterController> {
                   children: [
                     SecondaryLoadingButton(
                       isLoading: controller.isButtonPending.value,
-                      onPressed: controller.onButtonPressed,
+                      onPressed: controller.canProceed.value
+                          ? controller.onButtonPressed
+                          : null,
                       child: const TitleLarge(
                         "AVANTI",
                       ).applyShaders(context),
@@ -146,7 +148,6 @@ class RegisterPage extends GetView<RegisterController> {
                       controller.hidePassword = !controller.hidePassword;
                     },
                   ),
-                  ThemeSizedBox.height32,
                 ],
               ),
             ),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
-import 'package:lines/widgets/walkthrough/walkthrough_dots_row.dart';
 import 'package:lines/widgets/walkthrough/controller/walkthrough_controller.dart';
+import 'package:lines/widgets/walkthrough/walkthrough_dots_row.dart';
 
 class WalkthroughBottom extends GetView<WalkthroughController> {
   final int numberOfPages;
@@ -22,66 +22,62 @@ class WalkthroughBottom extends GetView<WalkthroughController> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 32,
+        padding: const EdgeInsets.only(
+          left: 32,
+          right: 32,
+          bottom: 10,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Obx(
-              () => Visibility(
-                visible: controller.currentStepIndex.value < numberOfPages - 1,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    bottom: verticalPadding,
+        child: Obx(
+          () {
+            return SizedBox(
+              height: Get.height * 0.2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Visibility(
+                    visible:
+                        controller.currentStepIndex.value < numberOfPages - 1,
+                    child: WalkthroughDotsRow(
+                      currentStepIndex: controller.currentStepIndex.value,
+                      numberOfDots: numberOfPages - 1,
+                    ),
                   ),
-                  child: WalkthroughDotsRow(
-                    currentStepIndex: controller.currentStepIndex.value,
-                    numberOfDots: numberOfPages - 1,
-                  ),
-                ),
-              ),
-            ),
-            PrimaryButton(
-              onPressed: () {
-                if (controller.currentStepIndex.value < numberOfPages - 1) {
-                  controller.onTapNext();
-                } else {
-                  onTapLetsStart?.call();
-                }
-              },
-              child: Obx(
-                () => TitleLarge(
-                  controller.currentStepIndex.value < numberOfPages - 1
-                      ? "CONTINUA"
-                      : "AVANTI",
-                ),
-              ),
-            ),
-            Obx(
-              () => Visibility(
-                visible: controller.currentStepIndex.value < numberOfPages - 1,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 16,
-                  ),
-                  child: InkWell(
-                    onTap: () {
+                  PrimaryButton(
+                    onPressed: () {
                       if (controller.currentStepIndex.value <
                           numberOfPages - 1) {
-                        controller.goToLastPage(numberOfPages - 1);
+                        controller.onTapNext();
+                      } else {
+                        onTapLetsStart?.call();
                       }
                     },
-                    child: const TitleMedium(
-                      "SALTA",
-                      underline: true,
-                    ).applyShaders(context),
+                    child: TitleLarge(
+                      controller.currentStepIndex.value < numberOfPages - 1
+                          ? "CONTINUA"
+                          : "AVANTI",
+                    ),
                   ),
-                ),
+                  Visibility(
+                    visible:
+                        controller.currentStepIndex.value < numberOfPages - 1,
+                    child: InkWell(
+                      onTap: () {
+                        if (controller.currentStepIndex.value <
+                            numberOfPages - 1) {
+                          controller.goToLastPage(numberOfPages - 1);
+                        }
+                      },
+                      child: const TitleMedium(
+                        "SALTA",
+                        underline: true,
+                      ).applyShaders(context),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            ThemeSizedBox.height32,
-          ],
+            );
+          },
         ),
       ),
     );
