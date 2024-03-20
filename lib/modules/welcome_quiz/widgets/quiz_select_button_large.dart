@@ -31,7 +31,7 @@ class QuizSelectButtonLarge extends StatelessWidget {
                 imagePath,
                 height: 100,
               ),
-              ThemeSizedBox.height12,
+              const Spacer(),
               QuizSelectTitle(
                 title: title,
                 selected: selected,

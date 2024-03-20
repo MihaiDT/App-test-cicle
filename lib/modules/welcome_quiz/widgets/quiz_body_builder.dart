@@ -40,12 +40,16 @@ class QuizBodyBuilder extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: answers.length,
         itemBuilder: (context, index) {
-          return QuizSelectButtonLarge(
-            title: answers[index].answer,
-            imagePath: answers[index].imageUrl ?? '',
-            selected: getIsSelected(answers[index]),
-            onPressed: () {
-              onAnswerTap(answers[index]);
+          return Obx(
+            () {
+              return QuizSelectButtonLarge(
+                title: answers[index].answer,
+                imagePath: answers[index].imageUrl ?? '',
+                selected: getIsSelected(answers[index]),
+                onPressed: () {
+                  onAnswerTap(answers[index]);
+                },
+              );
             },
           );
         },

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/advices_service.dart';
@@ -25,7 +27,11 @@ class SplashPageController extends GetxController {
         }
       },
     );
-
+    final String authToken = await Get.find<SecureStorageManager>().getToken();
+    if (authToken.isNotEmpty && HiveManager.firstAccess) {
+      Get.find<SecureStorageManager>().saveToken("");
+      HiveManager.firstAccess = false;
+    }
     await SettingsService.fetchSettings();
     await AuthenticationService.fetchUser();
     await AdvicesService.fetchArticles();

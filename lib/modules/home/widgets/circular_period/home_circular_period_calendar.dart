@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/modules/home/widgets/circular_period/circular_calendar.dart';
-import 'package:lines/widgets/buttons/secondary_button.dart';
-
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/home/home_controller.dart';
+import 'package:lines/modules/home/widgets/circular_period/circular_calendar.dart';
+import 'package:lines/widgets/buttons/secondary_button.dart';
 
 class HomeCircularPeriodCalendar extends GetView<HomeController> {
   static final size = Get.width * 0.74;

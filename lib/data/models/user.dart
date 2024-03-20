@@ -154,4 +154,16 @@ class User {
   bool get hasCompletedPeriodData {
     return profileCompletedAreas?.periodData ?? false;
   }
+
+  int get age {
+    DateTime birthDate = DateTime.parse(birthdate ?? "");
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthDate.year;
+    if (currentDate.month < birthDate.month ||
+        (currentDate.month == birthDate.month &&
+            currentDate.day < birthDate.day)) {
+      age--;
+    }
+    return age;
+  }
 }

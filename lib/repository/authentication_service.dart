@@ -113,6 +113,8 @@ class AuthenticationService {
   ) async {
     final userID = userIDFromDB;
     final email = appController.user.value?.email ?? '';
+    final name = appController.user.value?.firstName ?? '';
+    final lastName = appController.user.value?.lastName ?? '';
 
     appController.user.responseHandler = ResponseHandler.pending();
 
@@ -123,8 +125,8 @@ class AuthenticationService {
         data: {
           "user": {
             "email": email,
-            "first_name": updateUserParameters.firstName,
-            "last_name": updateUserParameters.lastName,
+            "first_name": name,
+            "last_name": lastName,
             "nickname": updateUserParameters.nickname,
             "birthdate": updateUserParameters.birthdate,
             "last_menstruation_date_start":

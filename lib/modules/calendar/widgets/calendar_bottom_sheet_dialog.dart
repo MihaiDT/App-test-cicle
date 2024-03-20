@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_icon.dart';
@@ -75,7 +74,7 @@ class _CalendarBottomSheetDialogState extends State<CalendarBottomSheetDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: () {
                       widget.onCancelTap();
                       Navigator.pop(context);

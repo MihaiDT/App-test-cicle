@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/isar/symptom_calendar.dart';
+import 'package:lines/data/models/advices_grouped_by_category.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/mission.dart';
@@ -13,8 +14,6 @@ import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
-
-import 'package:lines/data/models/advices_grouped_by_category.dart';
 
 /// Just a wrapper in order to simplify getter access
 class EasyGetter<T> {
@@ -59,6 +58,8 @@ class AppController extends GetxController {
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
 
+  final RxBool showLockPage;
+
   AppController._({
     required this.periodMap,
     required this.question,
@@ -74,6 +75,7 @@ class AppController extends GetxController {
     required this.symptomsCalendar,
     required this.isLoginFlow,
     required this.advicesCategories,
+    required this.showLockPage,
   });
 
   factory AppController.initial() {
@@ -92,6 +94,7 @@ class AppController extends GetxController {
       socialLoginParameter: SocialLoginParameter.initial(),
       advicesCategories: EasyGetter<AdvicesGroupedByCategory>(),
       isLoginFlow: false.obs,
+      showLockPage: false.obs,
     );
   }
 }

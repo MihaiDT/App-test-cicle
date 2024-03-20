@@ -17,72 +17,74 @@ class WelcomePage extends GetView<WelcomeController> {
     return AppScaffoldPage(
       backgroundImage: ThemeDecoration.images.bgDark,
       scrollController: ScrollController(),
-      body: BottomWidgetLayout(
-        bottomWidget: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ThemeSize.paddingSmall,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              WelcomeSigninButton(
-                controller,
-              ),
-              ThemeSizedBox.height16,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  const TitleMedium(
-                    "Hai un account?",
-                    fontWeight: FontWeight.w500,
-                  ),
-                  ThemeSizedBox.width4,
-                  GestureDetector(
-                    onTap: () {
-                      appController.isLoginFlow.value = true;
-                      Get.toNamed(
-                        Routes.cookie,
-                      );
-                    },
-                    child: const TitleMedium(
-                      "ACCEDI",
-                      underline: true,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        child: Obx(
-          () {
-            return Column(
+      body: SafeArea(
+        child: BottomWidgetLayout(
+          bottomWidget: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: ThemeSize.paddingSmall,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  height: Get.height * 0.05,
+                WelcomeSigninButton(
+                  controller,
                 ),
-                HeroLogo(
-                  size: Get.height * 0.3,
-                ),
-                SizedBox(
-                  height: Get.height * 0.05,
-                ),
-                const DisplayMedium(
-                  "Molto più di un\ncalendario mestruale",
-                  textAlign: TextAlign.center,
-                ),
-                ThemeSizedBox.height20,
-                BodyLarge(
-                  controller.startAnimation
-                      ? "La tua nuova app per vivere e monitorare\nil ciclo mestruale in modo positivo,\nconsapevole e divertente.\n\nSei pronta?"
-                      : '',
-                  textAlign: TextAlign.center,
+                ThemeSizedBox.height16,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    const TitleMedium(
+                      "Hai un account?",
+                      fontWeight: FontWeight.w500,
+                    ),
+                    ThemeSizedBox.width4,
+                    GestureDetector(
+                      onTap: () {
+                        appController.isLoginFlow.value = true;
+                        Get.toNamed(
+                          Routes.cookie,
+                        );
+                      },
+                      child: const TitleMedium(
+                        "ACCEDI",
+                        underline: true,
+                      ),
+                    ),
+                  ],
                 ),
               ],
-            );
-          },
+            ),
+          ),
+          child: Obx(
+            () {
+              return Column(
+                children: [
+                  SizedBox(
+                    height: Get.height * 0.05,
+                  ),
+                  HeroLogo(
+                    size: Get.height * 0.3,
+                  ),
+                  SizedBox(
+                    height: Get.height * 0.05,
+                  ),
+                  const DisplayMedium(
+                    "Molto più di un\ncalendario mestruale",
+                    textAlign: TextAlign.center,
+                  ),
+                  ThemeSizedBox.height20,
+                  BodyLarge(
+                    controller.startAnimation
+                        ? "La tua nuova app per vivere e monitorare\nil ciclo mestruale in modo positivo,\nconsapevole e divertente.\n\nSei pronta?"
+                        : '',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

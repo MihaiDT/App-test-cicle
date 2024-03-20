@@ -21,11 +21,6 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CalendarController extends GetxController
     with MonthCalendarMixin, SymptomsMixin {
-  static const int weekdayStart = 1; // Monday
-  static const int weekdayEnd = 7; // Sunday
-  final GlobalKey bottomSheetTitleKey = GlobalKey();
-  final GlobalKey bottomSheetContainerKey = GlobalKey();
-
   /// Current date selected by the user.
   final Rx<DateTime> rxSelectedDate = Rx(DateTime.now());
 
@@ -33,18 +28,17 @@ class CalendarController extends GetxController
   final DraggableScrollableController draggableScrollableController =
       DraggableScrollableController();
 
-  /// Whether or not the bar on top of the bottom sheet must stay hidden
-  final RxBool rxShowBarButton = true.obs;
-
   /// Whether or not the bottom sheet must stay hidden
   final RxBool rxShowBottomMenu = true.obs;
 
-  /// Whether or not the save button must stay hidden ,the results depends on the value of _showSaveButtonSymptoms and _showSaveButtonSymptomCategories
-  bool get showSaveButton =>
-      showSaveButtonSymptoms && draggableScrollableController.size > 0.1;
+  /// Show save button on top of the bottom sheet
+  RxBool showSaveButton = true.obs;
+
+  /// Maximum height of the bottom sheet
+  final bottomSheetMaxHeight = 0.96;
 
   /// Size of the bottom sheet
-  final RxDouble rxSheetVSize = 0.5.obs;
+  final RxDouble rxSheetVSize = 0.21.obs;
 
   /// Currently selected tab , by default the monthly calendar is shown
   final Rx<CalendarTabs> selectedTab = Rx(CalendarTabs.monthTab);
@@ -61,13 +55,8 @@ class CalendarController extends GetxController
   /// Old list of dates marked as period , this will be compared with rxPeriodDatesToAdd and rxPeriodDatesToRemove to avoid useless api calls
   final Map<String, bool> _prevSavedDatesToHome = {};
 
-  /// Show/hide symptoms recap menu depending on the size of the bottom sheet or if the list of selected symptoms for a particular day is empty
-  final RxBool rxShowRecapMenuSizeCondition = false.obs;
-
   bool get showRecapMenu =>
-      rxShowRecapMenuSizeCondition.value &&
-      rxSavedSymptoms.value.isNotEmpty &&
-      rxCurrentSymptoms.value.isNotEmpty;
+      rxSavedSymptoms.value.isNotEmpty && rxCurrentSymptoms.value.isNotEmpty;
 
   bool get pageShouldRefresh =>
       appController.periodStatusCalendar.responseHandler.isSuccessful &&
@@ -120,18 +109,22 @@ class CalendarController extends GetxController
   @override
   void onReady() async {
     super.onReady();
-
-    final t1 = DateTime.now();
-    _resizeBottomSheet();
-    _listenForBottomSheetSizeChanges();
-
+    draggableScrollableController.addListener(() {
+      draggableScrollableController.size == bottomSheetMaxHeight
+          ? showSaveButton.value = false
+          : showSaveButton.value = true;
+    });
     await fetchPeriodAndSymptoms();
 
     _initDatesToAdd();
 
-    final t2 = DateTime.now();
-    debugPrint("TIME ==> ${t2.difference(t1)}");
     jumpToMonth(date: DateTime.now());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    draggableScrollableController.dispose();
   }
 
   void saveSymptoms() async {
@@ -191,28 +184,6 @@ class CalendarController extends GetxController
 
   /// Update save button visibility because some categories have been added/removed from home
   void _categoriesValueChanged(bool newValue) {}
-
-  void _listenForBottomSheetSizeChanges() {
-    draggableScrollableController.addListener(
-      () {
-        if (draggableScrollableController.size >= 0.9) {
-          rxShowBarButton.value = false;
-        } else {
-          rxShowBarButton.value = true;
-        }
-        if (draggableScrollableController.size > 0.1) {
-          rxShowBottomMenu.value = true;
-        } else {
-          rxShowBottomMenu.value = false;
-        }
-        if (draggableScrollableController.size > 0.2) {
-          rxShowRecapMenuSizeCondition.value = true;
-        } else {
-          rxShowRecapMenuSizeCondition.value = false;
-        }
-      },
-    );
-  }
 
   /// Jump to today in both month and year calendars
   void jumpToToday() {
@@ -281,27 +252,6 @@ class CalendarController extends GetxController
         },
       );
     }
-  }
-
-  /// Change the bottom sheet dimension based on its content + some bottom padding
-  void _resizeBottomSheet() {
-    RenderBox? titleRenderBox =
-        bottomSheetTitleKey.currentContext?.findRenderObject() as RenderBox?;
-    RenderBox? containerRenderBox = bottomSheetContainerKey.currentContext
-        ?.findRenderObject() as RenderBox?;
-
-    //position of the bottom sheet's title inside the page
-    final Offset textPosition = titleRenderBox!.localToGlobal(Offset.zero);
-    //size of the bottom sheet's title
-    final Size size = titleRenderBox.size;
-    //position of the container that wraps the bottom sheet inside the page
-    final Offset containerPosition =
-        containerRenderBox!.localToGlobal(Offset.zero);
-
-    //vertical distance between the title and the top portion of the bottom sheet container
-    final double delta = textPosition.dy - containerPosition.dy;
-
-    rxSheetVSize.value = (size.height + 20.0 + delta) / Get.height;
   }
 
   /// Initialize the list of dates to add based on the current state of the calendarDayViewModel.
@@ -418,7 +368,7 @@ class CalendarController extends GetxController
   /// Returns: A list of lists of [DateTime] objects, where each inner list represents a row of months for the calendar.
   List<List<DateTime>> getMonthsDataForYearCalendar(DateTime year) {
     List<DateTime> months = calendarYearController.getMonthsForYear(year);
-    const int numberOfRows = 5;
+    const int numberOfRows = 4;
     const int numberOfMonthsPerRow = 3;
 
     List<List<DateTime>> monthMatrix = List.generate(

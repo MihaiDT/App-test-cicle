@@ -46,23 +46,18 @@ class CalendarGridWidget extends GetView<CalendarController> {
         );
         return Visibility(
           visible: index >= startDayOfWeek,
-          child: LayoutBuilder(
-            builder: (context, constraints) => InkWell(
-              onTap: () {
-                onDayTapped(dayOfMonth);
-              },
-              child: _dayWidget(
-                dayOfMonth,
-                constraints,
-              ),
-            ),
+          child: GestureDetector(
+            onTap: () {
+              onDayTapped(dayOfMonth);
+            },
+            child: _dayWidget(dayOfMonth),
           ),
         );
       },
     );
   }
 
-  Widget _dayWidget(DateTime dayOfMonth, BoxConstraints constraints) {
+  Widget _dayWidget(DateTime dayOfMonth) {
     String dayText = '${dayOfMonth.day}';
     String formattedDate = dateFormatYMD.format(dayOfMonth);
 
@@ -70,27 +65,23 @@ class CalendarGridWidget extends GetView<CalendarController> {
       () {
         if (controller.selectedTab.value == CalendarTabs.monthTab &&
             multipleSelectedMode) {
-          return Obx(
-            () {
-              final isSelected =
-                  controller.rxPeriodDatesToAdd.containsKey(formattedDate);
-              return CalendarDaySelectMultipleWidget(
-                isSelected: isSelected,
-                text: dayText,
-                isToday: dayOfMonth.isToday,
-                onDayTapped: () {
-                  if (isSelected) {
-                    controller.removeDate(formattedDate);
-                  }
+          final isSelected =
+              controller.rxPeriodDatesToAdd.containsKey(formattedDate);
+          return CalendarDaySelectMultipleWidget(
+            isSelected: isSelected,
+            text: dayText,
+            isToday: dayOfMonth.isToday,
+            onDayTapped: () {
+              if (isSelected) {
+                controller.removeDate(formattedDate);
+              }
 
-                  // Only today or past dates can be added
-                  if (dayOfMonth.isSameDayOrBefore(DateTime.now())) {
-                    if (!isSelected) {
-                      controller.addDate(formattedDate);
-                    }
-                  }
-                },
-              );
+              // Only today or past dates can be added
+              if (dayOfMonth.isSameDayOrBefore(DateTime.now())) {
+                if (!isSelected) {
+                  controller.addDate(formattedDate);
+                }
+              }
             },
           );
         }
@@ -99,7 +90,6 @@ class CalendarGridWidget extends GetView<CalendarController> {
           formattedDate: formattedDate,
           isSelected: controller.rxSelectedDate.value.isSameDay(dayOfMonth),
           isToday: dayOfMonth.isToday,
-          parentConstraints: constraints,
           text: dayText,
           isAnnualCalendar: isAnnualCalendar,
         );

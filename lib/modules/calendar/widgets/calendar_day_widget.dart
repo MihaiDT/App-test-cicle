@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,7 +11,6 @@ class CalendarDayWidget extends StatelessWidget {
   final String formattedDate;
   final bool isSelected;
   final bool isToday;
-  final BoxConstraints parentConstraints;
   final String text;
   final bool isAnnualCalendar;
 
@@ -21,16 +18,16 @@ class CalendarDayWidget extends StatelessWidget {
     required this.formattedDate,
     required this.isToday,
     required this.isSelected,
-    required this.parentConstraints,
     required this.text,
     this.isAnnualCalendar = false,
     super.key,
   });
 
   PeriodStatus? get periodStatus =>
-      (appController.periodStatusCalendar.value)?.value[formattedDate];
+      (appController.periodStatusCalendar.value)?[formattedDate];
+
   SymptomCalendar? get symptomsCalendar =>
-      (appController.symptomsCalendar.value)?.value[formattedDate];
+      (appController.symptomsCalendar.value)?[formattedDate];
 
   Widget get _bottomIcon {
     if (symptomsCalendar?.hasSexualActivity ?? false) {
@@ -42,12 +39,9 @@ class CalendarDayWidget extends StatelessWidget {
     return const SizedBox.shrink();
   }
 
-  double get _parentHeight => parentConstraints.maxHeight;
-
   @override
   Widget build(BuildContext context) {
     double circleRadius = isAnnualCalendar ? 7.0 : 17.0;
-    double iconYPos = _parentHeight - circleRadius;
 
     return Stack(
       alignment: Alignment.center,
@@ -56,7 +50,7 @@ class CalendarDayWidget extends StatelessWidget {
         Visibility(
           visible: !isAnnualCalendar,
           child: Positioned(
-            top: iconYPos + 2.5,
+            bottom: 4,
             child:
                 _bottomIcon, //temporary keeping this widget for later use with db info
           ),
@@ -131,7 +125,8 @@ class CalendarDayWidget extends StatelessWidget {
             ? NewThemeTextStyle.weightExtraBold
             : NewThemeTextStyle.weightMedium,
         textAlign: TextAlign.center,
-      ).applyShaders(context);
+        color: ThemeColor.primary,
+      );
     } else {
       return BodyLarge(
         text,
@@ -142,18 +137,4 @@ class CalendarDayWidget extends StatelessWidget {
       );
     }
   }
-}
-
-enum DayStatus {
-  empty,
-  emptyDot,
-  emptyHeart,
-  filledBlue,
-  filledBlueDot,
-  filledBlueHeart,
-  filledRed,
-  filledRedDot,
-  filledRedHeart,
-  dottedBlue,
-  dottedRed,
 }

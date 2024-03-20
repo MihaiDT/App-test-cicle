@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/access_wrapper/controller/wrapper_access_controller.dart';
 import 'package:lines/modules/access_wrapper/lock_page.dart';
 import 'package:local_auth/local_auth.dart';
@@ -28,34 +29,18 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
   void initState() {
     controller = Get.put(
       WrapperAccessController(),
-      permanent: true,
     );
-    setState(() {
-      HiveManager.appHidden = false;
-    });
 
     /// The listener will be added only if the page need an authentication
     if (widget.authNeeded) {
       AppLifecycleListener(
-        onRestart: () async {
-          await authenticate().then(
-            (value) {
-              if (value == false) {
-                /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
-                /// TODO: CHECK HOW TO MANAGE THIS SCENARIO
-                return value;
-              } else {
-                setState(() {
-                  HiveManager.appHidden = false;
-                });
-              }
-            },
-          );
+        onResume: () {
+          setState(() {});
         },
-        onHide: () {
-          setState(() {
-            HiveManager.appHidden = true;
-          });
+        onPause: () {
+          print("App is in onPause");
+          HiveManager.showLockPage = true;
+          appController.showLockPage.value = true;
         },
       );
     }
@@ -64,18 +49,37 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        widget.authNeeded && HiveManager.appHidden
-            ? const LockPage()
-            : widget.child,
-        if (controller.lockApp.value)
-          Container(
-            width: Get.width,
-            height: Get.height,
-            color: Colors.black.withOpacity(0.5),
-          ),
-      ],
+    if (widget.authNeeded &&
+        (HiveManager.showLockPage || appController.showLockPage.value)) {
+      authenticate().then((value) {
+        if (value == false) {
+          /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
+          /// TODO: CHECK HOW TO MANAGE THIS SCENARIO
+          return value;
+        } else {
+          appController.showLockPage.value = false;
+          HiveManager.showLockPage = false;
+        }
+      });
+    }
+    return Obx(
+      () {
+        return Stack(
+          children: [
+            widget.authNeeded &&
+                    (appController.showLockPage.value ||
+                        HiveManager.showLockPage)
+                ? const LockPage()
+                : widget.child,
+            if (controller.lockApp.value)
+              Container(
+                width: Get.width,
+                height: Get.height,
+                color: Colors.black.withOpacity(0.5),
+              ),
+          ],
+        );
+      },
     );
   }
 

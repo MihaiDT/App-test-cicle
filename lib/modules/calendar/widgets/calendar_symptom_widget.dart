@@ -18,7 +18,7 @@ class CalendarSymptomWidget extends GetView<CalendarController> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () => controller.changeSelectedSymptom(symptom: symptom),
       child: Container(
         decoration: BoxDecoration(

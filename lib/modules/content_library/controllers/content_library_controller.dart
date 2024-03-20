@@ -31,7 +31,9 @@ class ContentLibraryController extends GetxController
   @override
   void onReady() async {
     super.onReady();
-    await AdvicesService.fetchArticles();
+    if (!appController.advicesCategories.responseHandler.isSuccessful) {
+      await AdvicesService.fetchArticles();
+    }
   }
 
   void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {

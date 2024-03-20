@@ -10,6 +10,7 @@ import 'package:lines/modules/calendar/widgets/calendar_week_row.dart';
 import 'package:lines/modules/calendar/widgets/calendar_year_body.dart';
 import 'package:lines/modules/calendar/widgets/scrollable_calendar.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/loaders/dark_loader.dart';
 
@@ -89,6 +90,28 @@ class CalendarPage extends GetView<CalendarController> {
             ],
           ),
           const CalendarBottomSheet(),
+
+          /// Save button that appear only when the user is modifying the symptoms
+          /// for the selected date
+          Obx(
+            () => Visibility(
+              visible: controller.showSaveButtonSymptoms,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: PrimaryButton(
+                    child: const TitleLarge(
+                      'SALVA',
+                    ),
+                    onPressed: () {
+                      controller.saveSymptoms();
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
