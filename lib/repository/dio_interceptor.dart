@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
-import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:dio/io.dart';
-import 'package:lines/core/utils/helpers.dart';
+import 'package:get/get.dart';
+import 'package:lines/core/helpers/api.dart';
+import 'package:lines/core/helpers/logger/log.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
 
 class DioInterceptor extends Interceptor {
   final Dio dio;
@@ -26,16 +27,17 @@ class DioInterceptor extends Interceptor {
         },
       );
     }
-
     if (isProxymanEnabled) {
       try {
-        (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-            (client) {
-          client.findProxy = (uri) => "PROXY $proxyEndpoint";
-          client.badCertificateCallback =
-              (X509Certificate cert, String host, int port) => true;
-          return null;
-        };
+        dio.httpClientAdapter = IOHttpClientAdapter(
+          createHttpClient: () {
+            final HttpClient client =
+                HttpClient(context: SecurityContext(withTrustedRoots: false));
+            client.badCertificateCallback =
+                ((X509Certificate cert, String host, int port) => true);
+            return client;
+          },
+        );
       } catch (error) {
         logError(error: error, tag: "PROXY");
       }

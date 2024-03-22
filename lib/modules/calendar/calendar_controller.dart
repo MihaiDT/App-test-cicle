@@ -17,7 +17,6 @@ import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
 import 'package:lines/repository/calendar_service.dart';
 import 'package:lines/repository/db_services/db_calendar_services.dart';
 import 'package:lines/routes/routes.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CalendarController extends GetxController
     with MonthCalendarMixin, SymptomsMixin {
@@ -93,7 +92,6 @@ class CalendarController extends GetxController
       (newTab) {
         if (newTab == CalendarTabs.yearTab) {
           collapseBottomSheet();
-          calendarYearController.jumpToYear(rxSelectedDate.value);
         } else {
           jumpToMonth(date: rxSelectedDate.value);
           rxShowBottomMenu.value = true;
@@ -163,7 +161,6 @@ class CalendarController extends GetxController
   void _initCalendarYearController() {
     Get.lazyPut<CalendarYearController>(
       () => CalendarYearController(
-        itemScrollController: ItemScrollController(),
         minDate: DateTime(2020),
         maxDate: DateTime(2030),
       ),
@@ -172,18 +169,13 @@ class CalendarController extends GetxController
 
   void _initSymptomCategoryController() {
     Get.lazyPut(
-      () => SymptomCategoriesController(
-        onSaveButtonValueChanged: _categoriesValueChanged,
-      ),
+      () => SymptomCategoriesController(),
     );
   }
 
   /// MonthCalendarMixin
   @override
   void onDayTapped(DateTime day) => rxSelectedDate.value = day;
-
-  /// Update save button visibility because some categories have been added/removed from home
-  void _categoriesValueChanged(bool newValue) {}
 
   /// Jump to today in both month and year calendars
   void jumpToToday() {

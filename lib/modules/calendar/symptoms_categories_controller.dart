@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/data/isar/symptom_category.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_dialog.dart';
-import 'package:lines/routes/routes.dart';
 
 class SymptomCategoriesController extends GetxController {
   // late CalendarStore calendarStore;
@@ -14,22 +13,11 @@ class SymptomCategoriesController extends GetxController {
 
   //keep track of how many inHome categories there are
   int inHomeCategoriesCount = 0;
-  final Function(bool) onSaveButtonValueChanged;
-
-  SymptomCategoriesController({
-    required this.onSaveButtonValueChanged,
-  });
 
   @override
   void onInit() {
     symptomCategories.addAll(SymptomCategory.findAll());
-
     // fire a callback whenever the save button is supposed to be shown
-    ever(
-      _buttonShown,
-      condition: () => Get.currentRoute == Routes.calendar,
-      (newValue) => onSaveButtonValueChanged(newValue),
-    );
     super.onInit();
   }
 

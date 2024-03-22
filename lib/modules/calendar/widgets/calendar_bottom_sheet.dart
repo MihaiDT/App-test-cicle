@@ -42,7 +42,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
             ),
             Expanded(
               child: Container(
-                margin: const EdgeInsets.only(top: 30),
+                margin: const EdgeInsets.only(top: 40),
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(

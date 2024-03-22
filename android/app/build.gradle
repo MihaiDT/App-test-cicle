@@ -34,7 +34,7 @@ android {
         }
         prod {
             dimension "flavor-type"
-            applicationId "it.fater.lines"
+            applicationId "it.tandu.lines"
             resValue "string", "app_name", "Lines"
         }
     }

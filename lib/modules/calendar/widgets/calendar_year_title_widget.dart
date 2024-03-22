@@ -16,17 +16,17 @@ class CalendarYearTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isAttached ? Colors.transparent : null,
+        color: isAttached ? null : Colors.transparent,
         gradient: isAttached
-            ? null
-            : const LinearGradient(
+            ? const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
                   Color(0xFFE9D1E0),
                   Color(0xFFF2DCE7),
                 ],
-              ),
+              )
+            : null,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       width: double.maxFinite,

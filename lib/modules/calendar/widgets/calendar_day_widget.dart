@@ -51,8 +51,7 @@ class CalendarDayWidget extends StatelessWidget {
           visible: !isAnnualCalendar,
           child: Positioned(
             bottom: 4,
-            child:
-                _bottomIcon, //temporary keeping this widget for later use with db info
+            child: _bottomIcon,
           ),
         ),
         Visibility(
