@@ -5,6 +5,7 @@ import 'package:lines/data/models/advices_grouped_by_category.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/mission.dart';
+import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/data/models/period_map.dart';
 import 'package:lines/data/models/period_status.dart';
 import 'package:lines/data/models/question.dart';
@@ -53,6 +54,8 @@ class AppController extends GetxController {
   final EasyGetter<RxMap<String, SymptomCalendar>> symptomsCalendar;
   final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
 
+  final EasyGetter<List<NewSymptomCategory>> symptomCategory;
+
   final Rxn<Mission> selectedMission = Rxn<Mission>();
 
   /// Determine if the user is trying to log in or sign up
@@ -76,6 +79,7 @@ class AppController extends GetxController {
     required this.isLoginFlow,
     required this.advicesCategories,
     required this.showLockPage,
+    required this.symptomCategory,
   });
 
   factory AppController.initial() {
@@ -93,6 +97,7 @@ class AppController extends GetxController {
       updateUserParameters: UpdateUserParameters.initial(),
       socialLoginParameter: SocialLoginParameter.initial(),
       advicesCategories: EasyGetter<AdvicesGroupedByCategory>(),
+      symptomCategory: EasyGetter<List<NewSymptomCategory>>(),
       isLoginFlow: false.obs,
       showLockPage: false.obs,
     );

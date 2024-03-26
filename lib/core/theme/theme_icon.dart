@@ -38,7 +38,8 @@ class ThemeIcon {
       '$folderPath/flusso_mestruale/flusso_mestruale.svg';
   static String flussoMestrualeLeggero =
       '$folderPath/flusso_mestruale/leggero.svg';
-  static String flussoMestrualeMedio = '$folderPath/flusso_mestruale/medio.svg';
+  static String flussoMestrualeMedio =
+      '$folderPath/flusso_mestruale/flusso_medio.svg';
   static String flussoMestrualeAbbondante =
       '$folderPath/flusso_mestruale/abbondante.svg';
   static String horizontalCalendarMagnifier =

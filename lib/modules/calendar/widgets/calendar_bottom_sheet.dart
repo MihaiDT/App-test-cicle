@@ -6,13 +6,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
-import 'package:lines/data/enums/calendar_tabs.dart';
-import 'package:lines/data/isar/symptom_category.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_recap.dart';
-import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_row.dart';
+import 'package:lines/modules/calendar/widgets/calendar_bottomsheet_top_buttons.dart';
+import 'package:lines/modules/calendar/widgets/new_calendar_bottom_sheet_row.dart';
 import 'package:lines/widgets/bottom_sheets/bottom_sheet_dragger.dart';
-import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/dividers/divider_with_gradient.dart';
 
 class CalendarBottomSheet extends GetView<CalendarController> {
@@ -36,7 +34,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                 return AnimatedOpacity(
                   opacity: controller.showSaveButton.value ? 1 : 0,
                   duration: const Duration(milliseconds: 300),
-                  child: topButtons(context),
+                  child: const CalendarBottomsheetTopButtons(),
                 );
               },
             ),
@@ -87,7 +85,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                       textAlign: TextAlign.center,
                     ).applyShaders(context),
                     ThemeSizedBox.height24,
-                    ...calendarBottomsheetBody(context),
+                    calendarBottomsheetBody(context),
                     ThemeSizedBox.height48,
                   ],
                 ),
@@ -111,42 +109,6 @@ class CalendarBottomSheet extends GetView<CalendarController> {
     }
   }
 
-  Widget _jumpToMonthButton(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        controller.jumpToToday();
-      },
-      child: CircleAvatar(
-        backgroundColor: ThemeColor.buttonJumpToMonth,
-        radius: 24,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  ThemeIcon.calendarJumpToMonth,
-                ),
-              ],
-            ),
-            Flexible(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const LabelLarge(
-                    'OGGI',
-                    height: 0.77,
-                  ).applyShaders(context),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _selectedDateLabel() {
     return Obx(
       () => LabelLarge(
@@ -157,90 +119,42 @@ class CalendarBottomSheet extends GetView<CalendarController> {
     );
   }
 
-  List<SymptomCategory> get _categories => SymptomCategory.findAll();
-
-  List<Widget> calendarBottomsheetBody(BuildContext context) {
-    return List.generate(
-      _categories.length,
-      (categoryIndex) {
+  Widget calendarBottomsheetBody(BuildContext context) {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+      ),
+      itemCount: controller.symptomCategories.length,
+      itemBuilder: (context, index) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SvgPicture.asset(
-                    _categories[categoryIndex].iconPath,
-                  ),
-                  ThemeSizedBox.width16,
-                  TitleMedium(
-                    _categories[categoryIndex].name.toUpperCase(),
-                    color: ThemeColor.brightPink,
-                  ),
-                ],
-              ),
+            Row(
+              children: [
+                SvgPicture.asset(
+                  controller.symptomCategories[index].iconPath,
+                ),
+                ThemeSizedBox.width16,
+                TitleMedium(
+                  controller.symptomCategories[index].name.toUpperCase(),
+                  color: ThemeColor.brightPink,
+                ),
+              ],
             ),
             ThemeSizedBox.height8,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: DividerWithGradient(gradient: ThemeGradient.primary),
+            DividerWithGradient(
+              gradient: ThemeGradient.primary,
             ),
             ThemeSizedBox.height16,
-            CalendarBottomSheetRow(
-              categoryIndex: categoryIndex,
-              category: _categories[categoryIndex],
+            NewCalendarBottomSheetRow(
+              category: controller.symptomCategories[index],
             ),
             ThemeSizedBox.height48,
           ],
         );
       },
-    );
-  }
-
-  Widget topButtons(BuildContext context) {
-    return Padding(
-      padding: ThemeEdgeInsets.horizontalSmall,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _jumpToMonthButton(context),
-          Visibility(
-            visible: controller.selectedTab.value == CalendarTabs.monthTab,
-            child: IntrinsicWidth(
-              child: PrimaryButton(
-                buttonSize: ButtonSize.h31,
-                onPressed: () async {
-                  if (controller.modifyPeriodMode.value) {
-                    await controller.saveDates();
-                    controller.expandBottomSheetTorxSheetVSize();
-                    controller.rxSelectedDate.refresh();
-                  } else {
-                    controller.collapseBottomSheet();
-                  }
-                  controller.modifyPeriodMode.value =
-                      !controller.modifyPeriodMode.value;
-                },
-                child: TitleLarge(
-                  controller.modifyPeriodMode.value
-                      ? 'Salva mestruazione'
-                      : 'Modifica mestruazioni',
-                ),
-              ),
-            ),
-          ),
-          const IgnorePointer(
-            child: CircleAvatar(
-              radius: 24,
-              backgroundColor: Colors.transparent,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

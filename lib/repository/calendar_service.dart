@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:lines/data/models/current_period.dart';
-import 'package:lines/data/models/period_status.dart';
-
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/current_period.dart';
+import 'package:lines/data/models/new_symptom_category.dart';
+import 'package:lines/data/models/period_status.dart';
 
 class CalendarService {
   static Future<void> fetchCurrentPeriod() async {
@@ -38,6 +38,19 @@ class CalendarService {
     }
   }
 
+  static Future<void> get symptomCategories async {
+    try {
+      appController.symptomCategory.responseHandler = ResponseHandler.pending();
+      final response = await dio.get(
+        "/symptoms_categories",
+      );
+      _saveSymptomsCategories(response);
+    } catch (e) {
+      appController.symptomCategory.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
   static Future<Map<String, PeriodStatus>> saveDates(
     SaveDatesParameter parameter,
   ) async {
@@ -68,12 +81,14 @@ class CalendarService {
     return result;
   }
 
-  static void _createDaysDTO(Response response) {
-    // appController.calendarDayDTOMap.responseHandler = ResponseHandler.successful(
-    //   content: CalendarDayDTOMap.fromJSON(
-    //     response.data,
-    //   ),
-    // );
+  static void _saveSymptomsCategories(Response response) {
+    appController.symptomCategory.responseHandler = ResponseHandler.successful(
+      content: (response.data["symptoms_categories"] as List)
+          .map(
+            (e) => NewSymptomCategory.fromJson(e),
+          )
+          .toList(),
+    );
   }
 }
 

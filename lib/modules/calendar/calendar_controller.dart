@@ -9,6 +9,7 @@ import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/data/isar/symptom_calendar.dart';
+import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/data/models/period_status.dart';
 import 'package:lines/modules/calendar/calendar_year_controller.dart';
 import 'package:lines/modules/calendar/month_calendar_mixin.dart';
@@ -54,20 +55,39 @@ class CalendarController extends GetxController
   /// Old list of dates marked as period , this will be compared with rxPeriodDatesToAdd and rxPeriodDatesToRemove to avoid useless api calls
   final Map<String, bool> _prevSavedDatesToHome = {};
 
+  List<NewSymptomCategory> get symptomCategories =>
+      appController.symptomCategory.value ?? [];
+
   bool get showRecapMenu =>
       rxSavedSymptoms.value.isNotEmpty && rxCurrentSymptoms.value.isNotEmpty;
 
   bool get pageShouldRefresh =>
       appController.periodStatusCalendar.responseHandler.isSuccessful &&
-      appController.symptomsCalendar.responseHandler.isSuccessful;
+      appController.symptomsCalendar.responseHandler.isSuccessful &&
+      appController.symptomCategory.responseHandler.isSuccessful;
 
   CalendarYearController get calendarYearController {
     return Get.find<CalendarYearController>();
   }
 
-  SymptomCategoriesController get symptomCategoryController {
-    return Get.find<SymptomCategoriesController>();
-  }
+  RxString oreDiSonnoValue = "8:30 ore".obs;
+
+  RxList<String> oreDiSonnoValues = List.generate(17, (index) {
+    final hour = (index / 2 + 4).floor();
+    final minute = index % 2 == 0 ? '00' : '30';
+    return '$hour:$minute Ore';
+  }).obs;
+
+  RxString quantitaAcquaValue = "1.5 litri".obs;
+
+  RxList<String> quantitaAcquaValues =
+      List.generate(10, (index) => '${(index + 1) * 0.5} litri').obs;
+
+  RxString pesoValue = "50 kg".obs;
+  RxList<String> pesoValues =
+      List.generate(291, (index) => '${index + 40} kg').obs;
+
+  String notesInitialValue = '';
 
   @override
   void onInit() {
@@ -112,6 +132,7 @@ class CalendarController extends GetxController
           ? showSaveButton.value = false
           : showSaveButton.value = true;
     });
+    await CalendarService.symptomCategories;
     await fetchPeriodAndSymptoms();
 
     _initDatesToAdd();
