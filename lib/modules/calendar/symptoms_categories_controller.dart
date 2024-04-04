@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/data/isar/symptom_category.dart';
-import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_dialog.dart';
 
 class SymptomCategoriesController extends GetxController {
   // late CalendarStore calendarStore;
@@ -79,21 +77,6 @@ class SymptomCategoriesController extends GetxController {
     // };
 
     // _showDialog(orderedMap);
-  }
-
-  void _showDialog(Map<int, dynamic> filteredMap) {
-    showDialog(
-      //disable outside tap
-      barrierDismissible: false,
-      context: Get.context!,
-      builder: (context) => CalendarBottomSheetDialog(
-        filteredMap: filteredMap,
-        onConfirmTap: (Map<int, dynamic> map) => onConfirmTap(map),
-        onCancelTap: () {
-          _revertChanges();
-        },
-      ),
-    );
   }
 
   ///fired whenever the confirm button inside the dialog is pressed

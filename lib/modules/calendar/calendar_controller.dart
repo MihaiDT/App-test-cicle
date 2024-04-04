@@ -9,12 +9,14 @@ import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/data/isar/symptom_calendar.dart';
+import 'package:lines/data/models/new_symptom.dart';
 import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/data/models/period_status.dart';
+import 'package:lines/data/models/symptom_diaries.dart';
 import 'package:lines/modules/calendar/calendar_year_controller.dart';
 import 'package:lines/modules/calendar/month_calendar_mixin.dart';
 import 'package:lines/modules/calendar/symptom_mixin.dart';
-import 'package:lines/modules/calendar/symptoms_categories_controller.dart';
+import 'package:lines/modules/calendar/widgets/too_much_categories_dialog.dart';
 import 'package:lines/repository/calendar_service.dart';
 import 'package:lines/repository/db_services/db_calendar_services.dart';
 import 'package:lines/routes/routes.dart';
@@ -24,15 +26,48 @@ class CalendarController extends GetxController
   /// Current date selected by the user.
   final Rx<DateTime> rxSelectedDate = Rx(DateTime.now());
 
+  RxList<String> symptomIds = <String>[].obs;
+  RxList<String> savedCategoryIds = <String>[].obs;
+
   /// DraggableScrollableController for calendarBottomSheet
   final DraggableScrollableController draggableScrollableController =
       DraggableScrollableController();
+
+  bool get newShowSaveButtonSymptoms {
+    return pageShouldRefresh &&
+        selectedTab.value == CalendarTabs.monthTab &&
+        symptomIds.isNotEmpty &&
+        (symptomsHasChanged.value ||
+            textInputHasChanged.value ||
+            savedCategoryHasChanged);
+  }
+
+  RxBool get symptomsHasChanged {
+    final symptomsIDsSet = symptomIds.toSet();
+    final symptomsIDsSetFromDiaries =
+        appController.symptomsDiaries.value?.symptomsIDs?.toSet();
+    if (symptomsIDsSet.isEmpty || symptomsIDsSetFromDiaries?.isEmpty == true) {
+      return RxBool(false);
+    }
+
+    if (symptomsIDsSet.length != symptomsIDsSetFromDiaries?.length) {
+      return RxBool(true);
+    }
+
+    for (final symptomId in symptomsIDsSet) {
+      if (symptomsIDsSetFromDiaries?.contains(symptomId) == false) {
+        return RxBool(true);
+      }
+    }
+
+    return RxBool(false);
+  }
 
   /// Whether or not the bottom sheet must stay hidden
   final RxBool rxShowBottomMenu = true.obs;
 
   /// Show save button on top of the bottom sheet
-  RxBool showSaveButton = true.obs;
+  RxBool showTopButton = true.obs;
 
   /// Maximum height of the bottom sheet
   final bottomSheetMaxHeight = 0.96;
@@ -58,8 +93,7 @@ class CalendarController extends GetxController
   List<NewSymptomCategory> get symptomCategories =>
       appController.symptomCategory.value ?? [];
 
-  bool get showRecapMenu =>
-      rxSavedSymptoms.value.isNotEmpty && rxCurrentSymptoms.value.isNotEmpty;
+  RxBool get showRecapMenu => symptomIds.isNotEmpty.obs;
 
   bool get pageShouldRefresh =>
       appController.periodStatusCalendar.responseHandler.isSuccessful &&
@@ -70,7 +104,9 @@ class CalendarController extends GetxController
     return Get.find<CalendarYearController>();
   }
 
-  RxString oreDiSonnoValue = "8:30 ore".obs;
+  RxBool bottomSheetIsPending = false.obs;
+
+  RxString oreDiSonnoValue = "".obs;
 
   RxList<String> oreDiSonnoValues = List.generate(17, (index) {
     final hour = (index / 2 + 4).floor();
@@ -78,16 +114,16 @@ class CalendarController extends GetxController
     return '$hour:$minute Ore';
   }).obs;
 
-  RxString quantitaAcquaValue = "1.5 litri".obs;
+  RxString quantitaAcquaValue = "".obs;
 
   RxList<String> quantitaAcquaValues =
       List.generate(10, (index) => '${(index + 1) * 0.5} litri').obs;
 
-  RxString pesoValue = "50 kg".obs;
+  RxString pesoValue = "".obs;
   RxList<String> pesoValues =
       List.generate(291, (index) => '${index + 40} kg').obs;
 
-  String notesInitialValue = '';
+  RxString notesInitialValue = ''.obs;
 
   @override
   void onInit() {
@@ -120,8 +156,19 @@ class CalendarController extends GetxController
       },
     );
 
+    ever(
+      appController.symptomsDiaries.rxValue,
+      (callback) {
+        if (callback.isSuccessful) {
+          initSymptomForDate();
+          bottomSheetIsPending.value = true;
+        } else {
+          bottomSheetIsPending.value = false;
+        }
+      },
+    );
+
     _initCalendarYearController();
-    _initSymptomCategoryController();
   }
 
   @override
@@ -129,15 +176,46 @@ class CalendarController extends GetxController
     super.onReady();
     draggableScrollableController.addListener(() {
       draggableScrollableController.size == bottomSheetMaxHeight
-          ? showSaveButton.value = false
-          : showSaveButton.value = true;
+          ? showTopButton.value = false
+          : showTopButton.value = true;
     });
     await CalendarService.symptomCategories;
+    await CalendarService.fetchSymptomsForSpecificDate(rxSelectedDate.value);
+    await CalendarService.homePageSymptomCategories;
+
     await fetchPeriodAndSymptoms();
 
     _initDatesToAdd();
-
+    _initSavedCategory();
     jumpToMonth(date: DateTime.now());
+  }
+
+  void initSymptomForDate() {
+    if (appController.symptomsDiaries.value?.date ==
+        dateFormatYMD.format(rxSelectedDate.value)) {
+      symptomIds.value.clear();
+      symptomIds.value
+          .addAll(appController.symptomsDiaries.value?.symptomsIDs ?? []);
+      oreDiSonnoValue.value =
+          appController.symptomsDiaries.value?.hoursOfSleep ?? "";
+      quantitaAcquaValue.value =
+          appController.symptomsDiaries.value?.waterLiters ?? "";
+      pesoValue.value = appController.symptomsDiaries.value?.weight ?? "";
+      notesInitialValue.value =
+          appController.symptomsDiaries.value?.notes ?? "";
+    } else {
+      symptomIds.value = [];
+      oreDiSonnoValue.value = "";
+    }
+    symptomIds.refresh();
+  }
+
+  /// Initialize the list of categories saved in home
+  void _initSavedCategory() {
+    savedCategoryIds.value.clear();
+    savedCategoryIds.value.addAll(
+        appController.categoriesSavedInHome.value?.map((e) => e.id) ?? []);
+    savedCategoryIds.refresh();
   }
 
   @override
@@ -146,15 +224,59 @@ class CalendarController extends GetxController
     draggableScrollableController.dispose();
   }
 
+  void updateSymptomList(String symptomId) {
+    _updateFlowMensesSymptomList(symptomId);
+    if (symptomIds.contains(symptomId)) {
+      symptomIds.remove(symptomId);
+    } else {
+      symptomIds.add(symptomId);
+    }
+
+    symptomIds.refresh();
+  }
+
+  /// Check if the symptom is in the category
+  bool _isSymptomInCategory(NewSymptomCategory? category, String symptomId) {
+    if (category == null) return false;
+    return category.symptoms.any((element) => element.id == symptomId);
+  }
+
+  /// Managed exception for the symptoms of the "Perdite" and "Flusso mestruale" categories that can select only one symptom at a time.
+  void _updateFlowMensesSymptomList(String symptomId) {
+    final perditeCategory = appController.symptomCategory.value
+        ?.firstWhere((element) => element.name == "Perdite");
+    final flowMensesCategory = appController.symptomCategory.value
+        ?.firstWhere((element) => element.name == "Flusso mestruale");
+
+    bool isSymptomInList = _isSymptomInCategory(perditeCategory, symptomId) ||
+        _isSymptomInCategory(flowMensesCategory, symptomId);
+
+    if (isSymptomInList) {
+      perditeCategory?.symptoms
+          .forEach((element) => symptomIds.remove(element.id));
+      flowMensesCategory?.symptoms
+          .forEach((element) => symptomIds.remove(element.id));
+    }
+  }
+
   void saveSymptoms() async {
     final dateString = dateFormatYMD.format(rxSelectedDate.value);
-    SymptomCalendar.save(
-      date: dateString,
-      symptoms: rxCurrentSymptoms.value,
+    if (savedCategoryHasChanged) {
+      await CalendarService.setHomePageSymptomCategories(savedCategoryIds);
+    }
+
+    await CalendarService.saveSymptomsForSpecificDate(
+      SymptomDiaries(
+        date: dateString,
+        symptomsIDs: symptomIds,
+        hoursOfSleep: oreDiSonnoValue.value,
+        waterLiters: quantitaAcquaValue.value,
+        weight: pesoValue.value,
+        notes: notesInitialValue.value,
+      ),
     );
 
     draggableScrollableController.reset();
-    await fetchPeriodAndSymptoms();
   }
 
   Future<void> fetchPeriodAndSymptoms() async {
@@ -188,12 +310,6 @@ class CalendarController extends GetxController
     );
   }
 
-  void _initSymptomCategoryController() {
-    Get.lazyPut(
-      () => SymptomCategoriesController(),
-    );
-  }
-
   /// MonthCalendarMixin
   @override
   void onDayTapped(DateTime day) => rxSelectedDate.value = day;
@@ -220,8 +336,9 @@ class CalendarController extends GetxController
     changeTab(CalendarTabs.monthTab);
   }
 
-  void _onDayChanged(DateTime? day) {
+  Future<void> _onDayChanged(DateTime? day) async {
     if (day != null && selectedTab.value == CalendarTabs.monthTab) {
+      await CalendarService.fetchSymptomsForSpecificDate(day);
       rxShowBottomMenu.value = true;
       expandBottomSheetTorxSheetVSize();
     } else {
@@ -398,5 +515,94 @@ class CalendarController extends GetxController
       },
     );
     return monthMatrix;
+  }
+
+  NewSymptom getSymptomFromId(String id) {
+    return symptomCategories
+        .expand((category) => category.symptoms)
+        .firstWhere((symptom) => symptom.id == id);
+  }
+
+  RxBool get textInputHasChanged {
+    return (oreDiSonnoValue.value !=
+                appController.symptomsDiaries.value?.hoursOfSleep ||
+            quantitaAcquaValue.value !=
+                appController.symptomsDiaries.value?.waterLiters ||
+            pesoValue.value != appController.symptomsDiaries.value?.weight ||
+            notesInitialValue.value !=
+                appController.symptomsDiaries.value?.notes)
+        .obs;
+  }
+
+  bool get isMensesDay {
+    return appController.calendarData.value?.calendarDays
+            .firstWhereOrNull((element) {
+          return element.date == dateFormatYMD.format(rxSelectedDate.value);
+        })?.isMensesDay ??
+        false;
+  }
+
+  bool isCategorySavedInHome(
+    NewSymptomCategory category,
+    List<String> categoryIds,
+  ) {
+    return savedCategoryIds.contains(category.id);
+  }
+
+  void saveCategoryInHome(
+    NewSymptomCategory category,
+    List<String> categoryIds,
+  ) {
+    if (isCategorySavedInHome(category, categoryIds)) {
+      categoryIds.remove(category.id);
+    } else {
+      if (categoryIds.length >= 3) {
+        _showTooMuchCategoriesDialog({});
+      }
+      categoryIds.add(category.id);
+    }
+  }
+
+  void _showTooMuchCategoriesDialog(Map<int, dynamic> filteredMap) {
+    showDialog(
+      //disable outside tap
+      barrierDismissible: false,
+      context: Get.context!,
+      builder: (context) => TooMuchCategoriesDialog(
+        onConfirmTap: (list) {
+          savedCategoryIds.clear();
+          savedCategoryIds.addAll(list.map((e) => e.id));
+          savedCategoryIds.refresh();
+        },
+        onCancelTap: () {},
+        initialList: List.generate(
+          savedCategoryIds.length,
+          (index) {
+            return getSymptomCategoryFromId(savedCategoryIds[index]);
+          },
+        ),
+      ),
+    );
+  }
+
+  /// Return the [NewSymptomCategory] from the list of categories based on the id.
+  NewSymptomCategory getSymptomCategoryFromId(String id) {
+    return symptomCategories.firstWhere((element) => element.id == id);
+  }
+
+  /// Returns true if the list of saved categories has changed after the last save
+  bool get savedCategoryHasChanged {
+    if (savedCategoryIds.length !=
+        appController.categoriesSavedInHome.value?.length) {
+      return true;
+    } else {
+      for (final categoryId in savedCategoryIds) {
+        if (!appController.categoriesSavedInHome.value!
+            .any((element) => element.id == categoryId)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

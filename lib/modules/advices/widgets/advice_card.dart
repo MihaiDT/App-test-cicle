@@ -61,6 +61,10 @@ class AdviceCard extends StatelessWidget {
                     article.thumbImageUrl!,
                   ),
                   fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.2),
+                    BlendMode.darken,
+                  ),
                 )
               : null,
           borderRadius: const BorderRadius.all(
@@ -79,21 +83,25 @@ class AdviceCard extends StatelessWidget {
           left: 8,
           right: 8,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
           children: [
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _categoryIcon,
-                _topCenterWidget,
-                AdviceCardSaveButton(
-                  isSaved: article.isFavorite,
-                  onTap: onSaveTap,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _categoryIcon,
+                    _topCenterWidget,
+                    AdviceCardSaveButton(
+                      isSaved: article.isFavorite,
+                      onTap: onSaveTap,
+                    ),
+                  ],
                 ),
+                _bottomSection(context),
               ],
             ),
-            _bottomSection(context),
           ],
         ),
       ),

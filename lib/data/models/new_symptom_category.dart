@@ -45,4 +45,8 @@ class NewSymptomCategory {
   }
 
   String get iconPath => 'assets/icons/symptoms/$iconName';
+
+  NewSymptom getSymptomsFromId(String id) {
+    return symptoms.firstWhere((element) => element.id == id);
+  }
 }

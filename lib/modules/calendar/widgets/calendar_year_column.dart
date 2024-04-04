@@ -38,7 +38,6 @@ class CalendarYearColumn extends StatelessWidget {
                   isAnnualCalendar: true,
                   year: month.year,
                   month: month.month,
-                  circleRadius: 7,
                   onDayTapped: (DateTime day) {},
                 ),
               ),

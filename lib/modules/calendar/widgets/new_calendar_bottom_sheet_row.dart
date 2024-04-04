@@ -9,9 +9,11 @@ import 'package:lines/modules/calendar/widgets/new_calendar_symptom_widget.dart'
 
 class NewCalendarBottomSheetRow extends GetView<CalendarController> {
   final NewSymptomCategory category;
+  final Function(String) saveSymptom;
 
   const NewCalendarBottomSheetRow({
     required this.category,
+    required this.saveSymptom,
     super.key,
   });
 
@@ -34,9 +36,16 @@ class NewCalendarBottomSheetRow extends GetView<CalendarController> {
                       padding: const EdgeInsets.symmetric(
                         horizontal: 4,
                       ),
-                      child: NewCalendarSymptomWidget(
-                        selected: false,
-                        symptom: category.symptoms[index],
+                      child: Obx(
+                        () {
+                          return NewCalendarSymptomWidget(
+                            selected: controller.symptomIds.contains(
+                              category.symptoms[index].id,
+                            ),
+                            symptom: category.symptoms[index],
+                            saveSymptom: saveSymptom,
+                          );
+                        },
                       ),
                     );
                   },
@@ -93,9 +102,15 @@ class NewCalendarBottomSheetRow extends GetView<CalendarController> {
         ],
         if (category.code.toLowerCase() == "altre_note") ...[
           ThemeSizedBox.height16,
-          CalendarOtherNotesWidget(
-            initialValue: "PRova",
-            onChanged: (value) {},
+          Obx(
+            () {
+              return CalendarOtherNotesWidget(
+                initialValue: controller.notesInitialValue.value,
+                onChanged: (value) {
+                  controller.notesInitialValue.value = value;
+                },
+              );
+            },
           ),
         ],
       ],

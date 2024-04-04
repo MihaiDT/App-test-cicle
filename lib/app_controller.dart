@@ -5,12 +5,14 @@ import 'package:lines/data/models/advices_grouped_by_category.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/mission.dart';
+import 'package:lines/data/models/new_calendar_data.dart';
 import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/data/models/period_map.dart';
 import 'package:lines/data/models/period_status.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
+import 'package:lines/data/models/symptom_diaries.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
@@ -50,11 +52,17 @@ class AppController extends GetxController {
   final EasyGetter<CurrentPeriod> currentPeriod;
   final EasyGetter<PeriodMap> periodMap;
 
+  final EasyGetter<NewCalendarData> calendarData;
+
   final EasyGetter<RxMap<String, PeriodStatus>> periodStatusCalendar;
   final EasyGetter<RxMap<String, SymptomCalendar>> symptomsCalendar;
   final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
 
   final EasyGetter<List<NewSymptomCategory>> symptomCategory;
+
+  final EasyGetter<List<NewSymptomCategory>> categoriesSavedInHome;
+
+  final EasyGetter<SymptomDiaries> symptomsDiaries;
 
   final Rxn<Mission> selectedMission = Rxn<Mission>();
 
@@ -65,6 +73,7 @@ class AppController extends GetxController {
 
   AppController._({
     required this.periodMap,
+    required this.calendarData,
     required this.question,
     required this.user,
     required this.settings,
@@ -80,11 +89,14 @@ class AppController extends GetxController {
     required this.advicesCategories,
     required this.showLockPage,
     required this.symptomCategory,
+    required this.categoriesSavedInHome,
+    required this.symptomsDiaries,
   });
 
   factory AppController.initial() {
     return AppController._(
       periodMap: EasyGetter<PeriodMap>(),
+      calendarData: EasyGetter<NewCalendarData>(),
       symptomsCalendar: EasyGetter<RxMap<String, SymptomCalendar>>(),
       periodStatusCalendar: EasyGetter<RxMap<String, PeriodStatus>>(),
       user: EasyGetter<User>(),
@@ -98,6 +110,8 @@ class AppController extends GetxController {
       socialLoginParameter: SocialLoginParameter.initial(),
       advicesCategories: EasyGetter<AdvicesGroupedByCategory>(),
       symptomCategory: EasyGetter<List<NewSymptomCategory>>(),
+      categoriesSavedInHome: EasyGetter<List<NewSymptomCategory>>(),
+      symptomsDiaries: EasyGetter<SymptomDiaries>(),
       isLoginFlow: false.obs,
       showLockPage: false.obs,
     );

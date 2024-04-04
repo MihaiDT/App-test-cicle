@@ -37,6 +37,7 @@ class SplashPageController extends GetxController {
     await AuthenticationService.fetchUser();
     await AdvicesService.fetchArticles();
     await CalendarService.symptomCategories;
+    await CalendarService.homePageSymptomCategories;
   }
 
   void _pageTransition() {

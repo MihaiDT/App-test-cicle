@@ -46,9 +46,6 @@ class HomeController extends AppScaffoldController {
 
   Map<String, PeriodDate> get currentPeriodDatesMap =>
       appController.currentPeriod.value?.dates ?? {};
-
-  List<PeriodDate> get currentPeriodDates =>
-      appController.currentPeriod.value?.dates.values.toList() ?? [];
   List<TargetFocus> targets = <TargetFocus>[];
 
   @override
@@ -232,6 +229,7 @@ class HomeController extends AppScaffoldController {
 
   void _initCalendars() async {
     await CalendarService.fetchCurrentPeriod();
+    await CalendarService.fetchCalendarData();
 
     Get.put(const HomeHorizontalCalendar());
 

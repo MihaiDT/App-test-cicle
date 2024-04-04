@@ -3,15 +3,15 @@ import 'package:get/get.dart';
 import 'package:lines/core/utils/custom_date_utils.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_day_select_multiple_widget.dart';
-import 'package:lines/modules/calendar/widgets/calendar_day_widget.dart';
+import 'package:lines/modules/calendar/widgets/new_calendar_day_widget.dart';
 
 class CalendarGridWidget extends GetView<CalendarController> {
   final int year;
   final int month;
-  final double circleRadius;
   final Function(DateTime) onDayTapped;
   final bool multipleSelectedMode;
   final bool isAnnualCalendar;
@@ -20,7 +20,6 @@ class CalendarGridWidget extends GetView<CalendarController> {
     super.key,
     required this.year,
     required this.month,
-    required this.circleRadius,
     required this.onDayTapped,
     this.multipleSelectedMode = false,
     this.isAnnualCalendar = false,
@@ -50,7 +49,11 @@ class CalendarGridWidget extends GetView<CalendarController> {
             onTap: () {
               onDayTapped(dayOfMonth);
             },
-            child: _dayWidget(dayOfMonth),
+            child: Obx(
+              () {
+                return _dayWidget(dayOfMonth);
+              },
+            ),
           ),
         );
       },
@@ -60,40 +63,37 @@ class CalendarGridWidget extends GetView<CalendarController> {
   Widget _dayWidget(DateTime dayOfMonth) {
     String dayText = '${dayOfMonth.day}';
     String formattedDate = dateFormatYMD.format(dayOfMonth);
+    if (controller.selectedTab.value == CalendarTabs.monthTab &&
+        multipleSelectedMode) {
+      final isSelected =
+          controller.rxPeriodDatesToAdd.containsKey(formattedDate);
+      return CalendarDaySelectMultipleWidget(
+        isSelected: isSelected,
+        text: dayText,
+        isToday: dayOfMonth.isToday,
+        onDayTapped: () {
+          if (isSelected) {
+            controller.removeDate(formattedDate);
+          }
 
-    return Obx(
-      () {
-        if (controller.selectedTab.value == CalendarTabs.monthTab &&
-            multipleSelectedMode) {
-          final isSelected =
-              controller.rxPeriodDatesToAdd.containsKey(formattedDate);
-          return CalendarDaySelectMultipleWidget(
-            isSelected: isSelected,
-            text: dayText,
-            isToday: dayOfMonth.isToday,
-            onDayTapped: () {
-              if (isSelected) {
-                controller.removeDate(formattedDate);
-              }
+          // Only today or past dates can be added
+          if (dayOfMonth.isSameDayOrBefore(DateTime.now())) {
+            if (!isSelected) {
+              controller.addDate(formattedDate);
+            }
+          }
+        },
+      );
+    }
 
-              // Only today or past dates can be added
-              if (dayOfMonth.isSameDayOrBefore(DateTime.now())) {
-                if (!isSelected) {
-                  controller.addDate(formattedDate);
-                }
-              }
-            },
-          );
-        }
-
-        return CalendarDayWidget(
-          formattedDate: formattedDate,
-          isSelected: controller.rxSelectedDate.value.isSameDay(dayOfMonth),
-          isToday: dayOfMonth.isToday,
-          text: dayText,
-          isAnnualCalendar: isAnnualCalendar,
-        );
-      },
+    return NewCalendarDayWidget(
+      singleDayData: appController.calendarData.value?.calendarDays
+          .firstWhereOrNull((element) {
+        return element.date == formattedDate;
+      }),
+      formattedDate: formattedDate,
+      isAnnualCalendar: isAnnualCalendar,
+      isSelected: controller.rxSelectedDate.value.isSameDay(dayOfMonth),
     );
   }
 }

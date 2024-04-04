@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_grid_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-
-import 'package:lines/modules/calendar/calendar_controller.dart';
 
 class ScrollableCalendar extends GetView<CalendarController> {
   final double spaceBetweenCalendars;
@@ -71,7 +70,6 @@ class ScrollableCalendar extends GetView<CalendarController> {
           () => CalendarGridWidget(
             year: month.year,
             month: month.month,
-            circleRadius: 17,
             onDayTapped: controller.onDayTapped,
             multipleSelectedMode: controller.modifyPeriodMode.value,
           ),

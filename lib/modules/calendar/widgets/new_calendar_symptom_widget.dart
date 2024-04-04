@@ -7,17 +7,21 @@ import 'package:lines/data/models/new_symptom.dart';
 class NewCalendarSymptomWidget extends StatelessWidget {
   final NewSymptom symptom;
   final bool selected;
+  final Function(String) saveSymptom;
 
   const NewCalendarSymptomWidget({
     required this.symptom,
     required this.selected,
+    required this.saveSymptom,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        saveSymptom(symptom.id);
+      },
       child: Container(
         decoration: BoxDecoration(
           border: selected

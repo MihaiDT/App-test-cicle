@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/new_symptom.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_chip.dart';
 
@@ -30,17 +31,28 @@ class CalendarBottomSheetRecap extends GetView<CalendarController> {
           ),
           ThemeSizedBox.height8,
           Obx(
-            () => Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
-              children: List.generate(
-                controller.rxCurrentSymptoms.length,
-                (index) => CalendarChip(
-                  label: controller.rxCurrentSymptoms[index].name,
-                  iconPath: controller.rxCurrentSymptoms[index].iconPath,
+            () {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Wrap(
+                  spacing: 8.0,
+                  runSpacing: 8.0,
+                  alignment: WrapAlignment.center,
+                  children: List.generate(
+                    controller.symptomIds.length,
+                    (index) {
+                      final NewSymptom symptom = controller.getSymptomFromId(
+                        controller.symptomIds[index],
+                      );
+                      return CalendarChip(
+                        label: symptom.name,
+                        iconPath: symptom.iconPath,
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         ],
       ),

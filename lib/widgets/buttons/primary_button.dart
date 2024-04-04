@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:lines/core/app_theme.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -7,12 +6,10 @@ class PrimaryButton extends StatelessWidget {
   final Widget child;
   final GestureTapCallback? onPressed;
   final bool small;
-  final bool fullWidth;
 
   const PrimaryButton({
     super.key,
     this.buttonSize = ButtonSize.h56,
-    this.fullWidth = true,
     required this.child,
     this.small = false,
     this.onPressed,

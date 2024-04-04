@@ -13,8 +13,16 @@ class CalendarOtherNotesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = TextEditingController(text: initialValue);
+    controller.selection = TextSelection.fromPosition(
+      TextPosition(
+        offset: controller.text.length,
+      ),
+    );
+
     return TextField(
-      controller: TextEditingController(text: initialValue),
+      onChanged: onChanged,
+      controller: controller,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,

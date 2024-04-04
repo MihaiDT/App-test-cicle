@@ -32,7 +32,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
             Obx(
               () {
                 return AnimatedOpacity(
-                  opacity: controller.showSaveButton.value ? 1 : 0,
+                  opacity: controller.showTopButton.value ? 1 : 0,
                   duration: const Duration(milliseconds: 300),
                   child: const CalendarBottomsheetTopButtons(),
                 );
@@ -71,21 +71,31 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                     ThemeSizedBox.height12,
                     _selectedDateLabel(),
                     ThemeSizedBox.height16,
-                    Visibility(
-                      visible: controller.showRecapMenu,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: ThemeSize.paddingSmall,
-                        ),
-                        child: CalendarBottomSheetRecap(),
-                      ),
+                    Obx(
+                      () {
+                        return Visibility(
+                          visible: controller.showRecapMenu.value,
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: ThemeSize.paddingSmall,
+                            ),
+                            child: CalendarBottomSheetRecap(),
+                          ),
+                        );
+                      },
                     ),
                     const DisplayMedium(
                       'Aggiungi sintomi e attività',
                       textAlign: TextAlign.center,
                     ).applyShaders(context),
                     ThemeSizedBox.height24,
-                    calendarBottomsheetBody(context),
+                    Obx(
+                      () {
+                        return controller.bottomSheetIsPending.value
+                            ? calendarBottomsheetBody(context)
+                            : const SizedBox();
+                      },
+                    ),
                     ThemeSizedBox.height48,
                   ],
                 ),
@@ -128,6 +138,13 @@ class CalendarBottomSheet extends GetView<CalendarController> {
       ),
       itemCount: controller.symptomCategories.length,
       itemBuilder: (context, index) {
+        if (controller.isMensesDay &&
+            controller.symptomCategories[index].code == "perdite") {
+          return const SizedBox();
+        } else if (!controller.isMensesDay &&
+            controller.symptomCategories[index].code == "flusso_mestruale") {
+          return const SizedBox();
+        }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -141,6 +158,40 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                   controller.symptomCategories[index].name.toUpperCase(),
                   color: ThemeColor.brightPink,
                 ),
+                const Spacer(),
+                // perdite and flusso_mestruale categories should not have the "Aggiungi in home" button because they are always in home
+                if (controller.symptomCategories[index].code != "perdite" &&
+                    controller.symptomCategories[index].code !=
+                        "flusso_mestruale") ...[
+                  const BodySmall(
+                    "Aggiungi in home",
+                    color: ThemeColor.primary,
+                  ),
+                  ThemeSizedBox.width6,
+                  Obx(
+                    () {
+                      final bool isSaved = controller.isCategorySavedInHome(
+                        controller.symptomCategories[index],
+                        controller.savedCategoryIds,
+                      );
+                      return GestureDetector(
+                        onTap: () {
+                          controller.saveCategoryInHome(
+                            controller.symptomCategories[index],
+                            controller.savedCategoryIds,
+                          );
+                        },
+                        child: SvgPicture.asset(
+                          isSaved
+                              ? ThemeIcon.checkboxFilled
+                              : ThemeIcon.checkboxOutline,
+                          height: 12,
+                          width: 12,
+                        ),
+                      );
+                    },
+                  ),
+                ]
               ],
             ),
             ThemeSizedBox.height8,
@@ -150,6 +201,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
             ThemeSizedBox.height16,
             NewCalendarBottomSheetRow(
               category: controller.symptomCategories[index],
+              saveSymptom: (id) => controller.updateSymptomList(id),
             ),
             ThemeSizedBox.height48,
           ],

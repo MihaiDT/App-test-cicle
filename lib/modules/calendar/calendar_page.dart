@@ -95,7 +95,7 @@ class CalendarPage extends GetView<CalendarController> {
           /// for the selected date
           Obx(
             () => Visibility(
-              visible: controller.showSaveButtonSymptoms,
+              visible: controller.newShowSaveButtonSymptoms,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
