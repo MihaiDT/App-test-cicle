@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lines/app.dart';
 import 'package:lines/core/helpers/dependency_injection_manager.dart';
-import 'package:lines/core/helpers/isar_manager.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/firebase_options.dart';
@@ -24,35 +22,15 @@ _initApp() async {
   await dependencyRegister(
     flavor: F.appFlavor ?? Flavor.dev,
   );
-  await _initConnectivity();
   await _initNetwork();
   await _initPackageInfo();
-  await _initIsar();
   //await _initFirebase();
-}
-
-_initConnectivity() async {
-  final connectivity = Connectivity();
-
-  final connectivityResult = await connectivity.checkConnectivity();
-  isDeviceConnected = connectivityResult != ConnectivityResult.none;
-
-  Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-    // TODO: facciamo uscire un qualche alert?
-    isDeviceConnected = (result != ConnectivityResult.none);
-
-    logDebug(isDeviceConnected ? "Connesso" : "Non connesso", tag: "Network");
-  });
 }
 
 _initFirebase() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-}
-
-_initIsar() {
-  IsarManager.init();
 }
 
 _initNetwork() {

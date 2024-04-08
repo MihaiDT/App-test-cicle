@@ -191,7 +191,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                       );
                     },
                   ),
-                ]
+                ],
               ],
             ),
             ThemeSizedBox.height8,

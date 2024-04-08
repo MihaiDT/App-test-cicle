@@ -200,32 +200,14 @@ class HomeController extends AppScaffoldController {
   void horizontalCalendarOnItemFocus(int index) {
     periodSelectedDateIndex = index;
 
-    playButtonVisible =
-        false; // FIXME: dateFormatYMD.format(dates[periodSelectedDateIndex]) == dateFormatYMD.format(DateTime.now());
+    playButtonVisible = false;
+    // FIXME: dateFormatYMD.format(dates[periodSelectedDateIndex]) == dateFormatYMD.format(DateTime.now());
     // TODO: cambio immagine avatar e colore
   }
 
   Rx<DateTime> get selectedDate {
     return DateTime.now().obs;
-
-/*    // todo: implement the right return
-    return dateFormatYMD.parse(
-        currentPeriodDatesMap.values.toList()[periodSelectedDateIndex].date);*/
   }
-
-  /// Private methods
-
-  // _generateDates() {
-  //   final DateTime today = DateTime.now();
-
-  //   int dateMilliseconds = today.add(Duration(days: (-(7 * numberOfWeeksBefore) - 3))).millisecondsSinceEpoch;
-  //   final lastDateMilliseconds = today.add(Duration(days: ((7 * numberOfWeeksAfter) + 4))).millisecondsSinceEpoch;
-
-  //   while (dateMilliseconds <= lastDateMilliseconds) {
-  //     dateMilliseconds = dateMilliseconds + const Duration(days: 1).inMilliseconds;
-  //     dates.add(DateTime.fromMillisecondsSinceEpoch(dateMilliseconds));
-  //   }
-  // }
 
   void _initCalendars() async {
     await CalendarService.fetchCurrentPeriod();

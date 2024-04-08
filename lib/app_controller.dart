@@ -1,14 +1,12 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
-import 'package:lines/data/isar/symptom_calendar.dart';
 import 'package:lines/data/models/advices_grouped_by_category.dart';
+import 'package:lines/data/models/calendar_data.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/mission.dart';
-import 'package:lines/data/models/new_calendar_data.dart';
 import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/data/models/period_map.dart';
-import 'package:lines/data/models/period_status.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
@@ -54,8 +52,6 @@ class AppController extends GetxController {
 
   final EasyGetter<NewCalendarData> calendarData;
 
-  final EasyGetter<RxMap<String, PeriodStatus>> periodStatusCalendar;
-  final EasyGetter<RxMap<String, SymptomCalendar>> symptomsCalendar;
   final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
 
   final EasyGetter<List<NewSymptomCategory>> symptomCategory;
@@ -83,8 +79,6 @@ class AppController extends GetxController {
     required this.updateUserParameters,
     required this.socialLoginParameter,
     required this.currentPeriod,
-    required this.periodStatusCalendar,
-    required this.symptomsCalendar,
     required this.isLoginFlow,
     required this.advicesCategories,
     required this.showLockPage,
@@ -97,8 +91,6 @@ class AppController extends GetxController {
     return AppController._(
       periodMap: EasyGetter<PeriodMap>(),
       calendarData: EasyGetter<NewCalendarData>(),
-      symptomsCalendar: EasyGetter<RxMap<String, SymptomCalendar>>(),
-      periodStatusCalendar: EasyGetter<RxMap<String, PeriodStatus>>(),
       user: EasyGetter<User>(),
       question: EasyGetter<Question>(),
       settings: EasyGetter<Settings>(),

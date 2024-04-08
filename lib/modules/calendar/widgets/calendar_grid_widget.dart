@@ -7,7 +7,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_day_select_multiple_widget.dart';
-import 'package:lines/modules/calendar/widgets/new_calendar_day_widget.dart';
+import 'package:lines/modules/calendar/widgets/calendar_day_widget.dart';
 
 class CalendarGridWidget extends GetView<CalendarController> {
   final int year;
@@ -65,28 +65,20 @@ class CalendarGridWidget extends GetView<CalendarController> {
     String formattedDate = dateFormatYMD.format(dayOfMonth);
     if (controller.selectedTab.value == CalendarTabs.monthTab &&
         multipleSelectedMode) {
-      final isSelected =
-          controller.rxPeriodDatesToAdd.containsKey(formattedDate);
+      final isSelected = controller.addedMensesDates.contains(formattedDate);
       return CalendarDaySelectMultipleWidget(
         isSelected: isSelected,
         text: dayText,
         isToday: dayOfMonth.isToday,
         onDayTapped: () {
-          if (isSelected) {
-            controller.removeDate(formattedDate);
-          }
-
-          // Only today or past dates can be added
           if (dayOfMonth.isSameDayOrBefore(DateTime.now())) {
-            if (!isSelected) {
-              controller.addDate(formattedDate);
-            }
+            controller.updateMensesDay(formattedDate);
           }
         },
       );
     }
 
-    return NewCalendarDayWidget(
+    return CalendarDayWidget(
       singleDayData: appController.calendarData.value?.calendarDays
           .firstWhereOrNull((element) {
         return element.date == formattedDate;

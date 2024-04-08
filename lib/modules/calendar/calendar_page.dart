@@ -89,13 +89,20 @@ class CalendarPage extends GetView<CalendarController> {
               ),
             ],
           ),
-          const CalendarBottomSheet(),
+          Obx(
+            () {
+              return Visibility(
+                visible: controller.showBottomSheet,
+                child: const CalendarBottomSheet(),
+              );
+            },
+          ),
 
           /// Save button that appear only when the user is modifying the symptoms
           /// for the selected date
           Obx(
             () => Visibility(
-              visible: controller.newShowSaveButtonSymptoms,
+              visible: controller.showSaveButtonSymptoms,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(

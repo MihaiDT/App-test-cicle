@@ -1,6 +1,6 @@
 import 'package:lines/data/enums/period_phase.dart';
 
-class NewSingleDayData {
+class SingleDayData {
   final String date;
   final bool isReal;
   final bool hasSex;
@@ -8,7 +8,7 @@ class NewSingleDayData {
   final bool ovulationDay;
   final PeriodPhase periodPhase;
 
-  NewSingleDayData({
+  SingleDayData({
     required this.date,
     required this.isReal,
     required this.hasSex,
@@ -17,8 +17,8 @@ class NewSingleDayData {
     required this.periodPhase,
   });
 
-  factory NewSingleDayData.fromJson(Map<String, dynamic> json) {
-    return NewSingleDayData(
+  factory SingleDayData.fromJson(Map<String, dynamic> json) {
+    return SingleDayData(
       date: json['date'],
       isReal: json['real'],
       hasSex: json['has_sex'],

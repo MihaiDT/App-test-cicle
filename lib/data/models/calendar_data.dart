@@ -1,18 +1,18 @@
-import 'package:lines/data/models/new_single_day_data.dart';
+import 'package:lines/data/models/single_day_data.dart';
 
 class NewCalendarData {
-  final List<NewSingleDayData> calendarDays;
+  final List<SingleDayData> calendarDays;
 
   NewCalendarData({
     required this.calendarDays,
   });
 
   factory NewCalendarData.fromJson(Map<String, dynamic> json) {
-    final List<NewSingleDayData> calendarDays = [];
+    final List<SingleDayData> calendarDays = [];
 
     for (final jsonItem in json['dates']) {
       calendarDays.add(
-        NewSingleDayData.fromJson(jsonItem),
+        SingleDayData.fromJson(jsonItem),
       );
     }
 

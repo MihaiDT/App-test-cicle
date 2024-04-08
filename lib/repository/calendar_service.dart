@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/calendar_data.dart';
 import 'package:lines/data/models/current_period.dart';
-import 'package:lines/data/models/new_calendar_data.dart';
 import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/data/models/period_status.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
@@ -33,6 +33,27 @@ class CalendarService {
     try {
       final response = await dio.get(
         "/periods",
+      );
+
+      _saveCalendarData(response);
+    } catch (e) {
+      appController.calendarData.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> updateCalendarData(
+    List<String> addedDates,
+    List<String> removedDates,
+  ) async {
+    appController.calendarData.responseHandler = ResponseHandler.pending();
+    try {
+      final response = await dio.post(
+        "/periods",
+        data: {
+          "dates": addedDates,
+          "delete_dates": removedDates,
+        },
       );
 
       _saveCalendarData(response);

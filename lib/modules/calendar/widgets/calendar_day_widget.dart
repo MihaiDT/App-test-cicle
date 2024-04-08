@@ -1,52 +1,33 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:gradient_borders/gradient_borders.dart';
+import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/isar/symptom_calendar.dart';
-import 'package:lines/data/models/period_status.dart';
+import 'package:lines/data/models/single_day_data.dart';
 
 class CalendarDayWidget extends StatelessWidget {
-  final String formattedDate;
-  final bool isSelected;
-  final bool isToday;
-  final String text;
+  final SingleDayData? singleDayData;
+
+  final String? formattedDate;
   final bool isAnnualCalendar;
 
+  final bool isSelected;
+
   const CalendarDayWidget({
-    required this.formattedDate,
-    required this.isToday,
-    required this.isSelected,
-    required this.text,
+    this.singleDayData,
+    this.formattedDate,
     this.isAnnualCalendar = false,
+    this.isSelected = false,
     super.key,
   });
 
-  PeriodStatus? get periodStatus =>
-      (appController.periodStatusCalendar.value)?[formattedDate];
-
-  SymptomCalendar? get symptomsCalendar =>
-      (appController.symptomsCalendar.value)?[formattedDate];
-
-  Widget get _bottomIcon {
-    if (symptomsCalendar?.hasSexualActivity ?? false) {
-      return SvgPicture.asset(ThemeIcon.calendarHeart);
-    }
-    if (symptomsCalendar?.hasSymptoms ?? false) {
-      return SvgPicture.asset(ThemeIcon.calendarGradientDot);
-    }
-    return const SizedBox.shrink();
-  }
-
   @override
   Widget build(BuildContext context) {
-    double circleRadius = isAnnualCalendar ? 7.0 : 17.0;
-
     return Stack(
       alignment: Alignment.center,
       children: [
-        _dayContainer(circleRadius, context),
+        _dayContainer(context),
         Visibility(
           visible: !isAnnualCalendar,
           child: Positioned(
@@ -71,11 +52,11 @@ class CalendarDayWidget extends StatelessWidget {
     );
   }
 
-  Widget _dayContainer(double circleRadius, BuildContext context) {
-    if (periodStatus != null) {
-      if (periodStatus!.isReal) {
+  Widget _dayContainer(BuildContext context) {
+    if (singleDayData != null) {
+      if (singleDayData!.isReal) {
         return CircleAvatar(
-          backgroundColor: periodStatus!.bgColor,
+          backgroundColor: singleDayData?.periodPhase.periodColor,
           radius: circleRadius,
           child: Padding(
             padding:
@@ -85,21 +66,20 @@ class CalendarDayWidget extends StatelessWidget {
             ),
           ),
         );
-      } else {
-        return DottedBorder(
-          borderType: BorderType.Circle,
-          color: periodStatus!.bgColor,
-          dashPattern: const [4],
-          strokeWidth: isAnnualCalendar ? 1 : 2,
-          child: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            radius: circleRadius,
-            child: FittedBox(
-              child: _dayNumberText(context),
-            ),
-          ),
-        );
       }
+      return DottedBorder(
+        borderType: BorderType.Circle,
+        color: singleDayData!.periodPhase.periodColor,
+        dashPattern: const [4],
+        strokeWidth: isAnnualCalendar ? 1 : 2,
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          radius: circleRadius,
+          child: FittedBox(
+            child: _dayNumberText(context),
+          ),
+        ),
+      );
     }
 
     return CircleAvatar(
@@ -114,26 +94,48 @@ class CalendarDayWidget extends StatelessWidget {
     );
   }
 
-  Widget _dayNumberText(BuildContext context) {
-    if (periodStatus == null ||
-        periodStatus!.bgColor == Colors.transparent ||
-        !periodStatus!.isReal) {
-      return BodyLarge(
-        text,
-        fontWeight: isToday
-            ? NewThemeTextStyle.weightExtraBold
-            : NewThemeTextStyle.weightMedium,
-        textAlign: TextAlign.center,
-        color: ThemeColor.primary,
-      );
-    } else {
-      return BodyLarge(
-        text,
-        fontWeight: isToday
-            ? NewThemeTextStyle.weightExtraBold
-            : NewThemeTextStyle.weightMedium,
-        textAlign: TextAlign.center,
-      );
-    }
+  Widget _dayNumberText(
+    BuildContext context,
+  ) {
+    return BodyLarge(
+      text,
+      fontWeight: isToday
+          ? NewThemeTextStyle.weightExtraBold
+          : NewThemeTextStyle.weightMedium,
+      textAlign: TextAlign.center,
+      color: textColor,
+    );
   }
+
+  double get circleRadius => isAnnualCalendar ? 7.0 : 17.0;
+
+  bool get isToday {
+    final today = DateTime.now();
+    final inputDate = DateFormat('yyyy-MM-dd').parse(formattedDate!);
+
+    return inputDate.year == today.year &&
+        inputDate.month == today.month &&
+        inputDate.day == today.day;
+  }
+
+  Widget get _bottomIcon {
+    if (singleDayData?.hasSex ?? false) {
+      return SvgPicture.asset(ThemeIcon.calendarHeart);
+    }
+    if (singleDayData?.hasSymptoms ?? false) {
+      return SvgPicture.asset(ThemeIcon.calendarGradientDot);
+    }
+    return const SizedBox.shrink();
+  }
+
+  Color? get textColor => singleDayData == null ||
+          singleDayData?.periodPhase.periodColor == Colors.transparent ||
+          singleDayData?.isReal == false
+      ? ThemeColor.primary
+      : Colors.white;
+
+  String get text =>
+      singleDayData?.date.split('-').last ??
+      formattedDate?.split('-').last ??
+      '';
 }

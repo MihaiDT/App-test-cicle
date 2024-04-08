@@ -53,11 +53,9 @@ mixin MonthCalendarMixin {
     int month = ((date.year - minDate.year) * 12) - minDate.month + date.month;
 
     try {
-      monthCalendarItemScrollController.jumpTo(index: month, alignment: 0.05);
+      monthCalendarItemScrollController.jumpTo(index: month);
     } catch (e) {
       logError(error: e);
     }
   }
-
-  void onDayTapped(DateTime day);
 }

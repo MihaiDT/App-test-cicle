@@ -19,29 +19,33 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _jumpToMonthButton(context),
-          Visibility(
-            visible: controller.selectedTab.value == CalendarTabs.monthTab,
-            child: IntrinsicWidth(
-              child: PrimaryButton(
-                buttonSize: ButtonSize.h31,
-                onPressed: () async {
-                  if (controller.modifyPeriodMode.value) {
-                    await controller.saveDates();
-                    controller.expandBottomSheetTorxSheetVSize();
-                    controller.rxSelectedDate.refresh();
-                  } else {
-                    controller.collapseBottomSheet();
-                  }
-                  controller.modifyPeriodMode.value =
-                      !controller.modifyPeriodMode.value;
-                },
-                child: TitleLarge(
-                  controller.modifyPeriodMode.value
-                      ? 'Salva mestruazione'
-                      : 'Modifica mestruazioni',
+          Obx(
+            () {
+              return Visibility(
+                visible: controller.selectedTab.value == CalendarTabs.monthTab,
+                child: IntrinsicWidth(
+                  child: PrimaryButton(
+                    buttonSize: ButtonSize.h31,
+                    onPressed: () async {
+                      if (controller.modifyPeriodMode.value) {
+                        await controller.newSaveDates();
+                        controller.expandBottomSheetTorxSheetVSize();
+                        controller.rxSelectedDate.refresh();
+                      } else {
+                        controller.collapseBottomSheet();
+                      }
+                      controller.modifyPeriodMode.value =
+                          !controller.modifyPeriodMode.value;
+                    },
+                    child: TitleLarge(
+                      controller.modifyPeriodMode.value
+                          ? 'Salva mestruazione'
+                          : 'Modifica mestruazioni',
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
           const IgnorePointer(
             child: CircleAvatar(

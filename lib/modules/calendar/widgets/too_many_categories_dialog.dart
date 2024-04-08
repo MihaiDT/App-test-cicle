@@ -4,24 +4,22 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 
-class TooMuchCategoriesDialog extends StatefulWidget {
+class TooManyCategoriesDialog extends StatefulWidget {
   final List<NewSymptomCategory> initialList;
   final Function(List<NewSymptomCategory>) onConfirmTap;
-  final VoidCallback onCancelTap;
 
-  const TooMuchCategoriesDialog({
+  const TooManyCategoriesDialog({
     super.key,
     required this.initialList,
     required this.onConfirmTap,
-    required this.onCancelTap,
   });
 
   @override
-  State<TooMuchCategoriesDialog> createState() =>
-      _TooMuchCategoriesDialogState();
+  State<TooManyCategoriesDialog> createState() =>
+      _TooManyCategoriesDialogState();
 }
 
-class _TooMuchCategoriesDialogState extends State<TooMuchCategoriesDialog> {
+class _TooManyCategoriesDialogState extends State<TooManyCategoriesDialog> {
   final List<NewSymptomCategory> filteredList = [];
 
   @override
@@ -104,7 +102,7 @@ class _TooMuchCategoriesDialogState extends State<TooMuchCategoriesDialog> {
                   child: PrimaryButton(
                     onPressed: () {
                       widget.onConfirmTap(filteredList);
-                      Navigator.pop(context);
+                      Navigator.pop(context, filteredList);
                     },
                     child: const TitleLarge('CONFERMA'),
                   ),
