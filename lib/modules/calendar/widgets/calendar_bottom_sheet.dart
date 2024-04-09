@@ -8,8 +8,8 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_recap.dart';
+import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet_row.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottomsheet_top_buttons.dart';
-import 'package:lines/modules/calendar/widgets/new_calendar_bottom_sheet_row.dart';
 import 'package:lines/widgets/bottom_sheets/bottom_sheet_dragger.dart';
 import 'package:lines/widgets/dividers/divider_with_gradient.dart';
 
@@ -199,7 +199,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
               gradient: ThemeGradient.primary,
             ),
             ThemeSizedBox.height16,
-            NewCalendarBottomSheetRow(
+            CalendarBottomSheetRow(
               category: controller.symptomCategories[index],
               saveSymptom: (id) => controller.updateSymptomList(id),
             ),

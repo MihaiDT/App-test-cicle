@@ -3,8 +3,8 @@ import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/calendar_data.dart';
 import 'package:lines/data/models/current_period.dart';
-import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/data/models/period_status.dart';
+import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
 
 class CalendarService {
@@ -196,7 +196,7 @@ class CalendarService {
     appController.symptomCategory.responseHandler = ResponseHandler.successful(
       content: (response.data["symptoms_categories"] as List)
           .map(
-            (e) => NewSymptomCategory.fromJson(e),
+            (e) => SymptomCategory.fromJson(e),
           )
           .toList(),
     );
@@ -207,7 +207,7 @@ class CalendarService {
         ResponseHandler.successful(
       content: (response.data["symptoms_categories"] as List)
           .map(
-            (e) => NewSymptomCategory.fromJson(e),
+            (e) => SymptomCategory.fromJson(e),
           )
           .toList(),
     );

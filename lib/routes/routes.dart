@@ -48,4 +48,5 @@ class Routes {
   static const String inviteFriendPage = '/invite_friend_page';
   static const String surveysPage = '/surveys_page';
   static const String yourCoinsPage = '/your_coins_page';
+  static const String historyPage = '/your_coins_page';
 }

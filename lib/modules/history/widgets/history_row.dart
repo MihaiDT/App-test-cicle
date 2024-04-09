@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/modules/history/widgets/history_symptom.dart';
-
 import 'package:lines/data/models/symptom_category.dart';
+import 'package:lines/modules/history/widgets/history_symptom.dart';
 
 class HistoryRow extends StatelessWidget {
   final DateTime day;
@@ -14,10 +13,8 @@ class HistoryRow extends StatelessWidget {
   });
 
   //only for testing purpose
-  static final List<SymptomCategory> _tmpList = [
-    SymptomCategory.flussoMestrualeCategory,
-    SymptomCategory.moodCategory,
-  ];
+  static final List<SymptomCategory> _tmpList = [];
+
   //only for testing purpose
   static final Color _dayColor = ThemeColor.menstruationColor;
 
@@ -54,7 +51,6 @@ class HistoryRow extends StatelessWidget {
               itemCount: _tmpList.length,
               itemBuilder: (context, index) => HistorySymptom(
                 symptomCategory: _tmpList[index],
-                symptoms: _tmpList[index].symptoms,
               ),
               separatorBuilder: (context, index) => ThemeSizedBox.height8,
             ),

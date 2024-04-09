@@ -28,6 +28,7 @@ import 'package:lines/modules/drawer/binding/account_binding.dart';
 import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
 import 'package:lines/modules/drawer/pages/account_page.dart';
 import 'package:lines/modules/drawer/pages/faq_page.dart';
+import 'package:lines/modules/history/history_page.dart';
 import 'package:lines/modules/home/home_binding.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_quiz_card_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
@@ -56,6 +57,7 @@ import 'package:lines/modules/name_surname/name_surname_page.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
 import 'package:lines/modules/privacy/privacy_page.dart';
 import 'package:lines/modules/prizes_onboarding/prizes_onboarding_page.dart';
+import 'package:lines/modules/profile/bindings/my_badges_binding.dart';
 import 'package:lines/modules/profile/bindings/my_menses_section_binding.dart';
 import 'package:lines/modules/profile/bindings/profile_completion_percentage_binding.dart';
 import 'package:lines/modules/profile/bindings/profile_header_binding.dart';
@@ -284,6 +286,7 @@ class Pages {
         MyMensesSectionBinding(),
         DrawerMainPageBinding(),
         ProfileCompletionPercentageBinding(),
+        MyBadgesBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const MainPage(),
@@ -512,6 +515,15 @@ class Pages {
       name: Routes.surveysPage,
       page: () => _mediaQueryWrapper(
         const SurveysPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// HistoryPage
+    GetPage(
+      name: Routes.historyPage,
+      page: () => _mediaQueryWrapper(
+        const HistoryPage(),
       ),
       transition: Transition.rightToLeft,
     ),

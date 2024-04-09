@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/new_symptom_category.dart';
+import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 
 class TooManyCategoriesDialog extends StatefulWidget {
-  final List<NewSymptomCategory> initialList;
-  final Function(List<NewSymptomCategory>) onConfirmTap;
+  final List<SymptomCategory> initialList;
+  final Function(List<SymptomCategory>) onConfirmTap;
 
   const TooManyCategoriesDialog({
     super.key,
@@ -20,7 +20,7 @@ class TooManyCategoriesDialog extends StatefulWidget {
 }
 
 class _TooManyCategoriesDialogState extends State<TooManyCategoriesDialog> {
-  final List<NewSymptomCategory> filteredList = [];
+  final List<SymptomCategory> filteredList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -116,11 +116,11 @@ class _TooManyCategoriesDialogState extends State<TooManyCategoriesDialog> {
     );
   }
 
-  bool isCategorySelected(NewSymptomCategory category) {
+  bool isCategorySelected(SymptomCategory category) {
     return filteredList.contains(category);
   }
 
-  void updateFilteredList(NewSymptomCategory category) {
+  void updateFilteredList(SymptomCategory category) {
     if (filteredList.contains(category)) {
       filteredList.remove(category);
     } else {

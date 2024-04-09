@@ -41,8 +41,8 @@ class YourDiaryPage extends GetView<YourDiaryController> {
               ),
               itemBuilder: (context, index) {
                 return CategorySymptomTile(
-                  imagePath: controller.list[index].categoryIconPath,
-                  title: controller.list[index].categoryTitle,
+                  imagePath: controller.list[index].iconPath,
+                  title: controller.list[index].name,
                 );
               },
               separatorBuilder: (context, index) => _divider,

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/modules/profile/controllers/my_badges_controller.dart';
 import 'package:lines/modules/profile/widgets/badge_tile.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/cards/elevated_card.dart';
 
-class MyBadgesSection extends StatelessWidget {
+class MyBadgesSection extends GetView<MyBadgesController> {
   const MyBadgesSection({
     super.key,
   });
@@ -28,26 +29,13 @@ class MyBadgesSection extends StatelessWidget {
               textAlign: TextAlign.center,
             ).applyShaders(context),
             ThemeSizedBox.height16,
-            const BadgeTile(
-              title: "Badge 1",
-              description: "Descrizione badge 1",
-              progressPercentage: 0.8,
-              progressLabel: " 14/15",
-            ),
-            ThemeSizedBox.height32,
-            const BadgeTile(
-              title: "Profilo completo",
-              description: "Completa il profilo al 100%",
-              progressPercentage: 0.8,
-              progressLabel: " 20%",
-            ),
-            ThemeSizedBox.height32,
-            const BadgeTile(
-              title: "Appassionata",
-              description: "Effettua 10 accessi in app",
-              progressPercentage: 0.8,
-              progressLabel: "2/10",
-            ),
+            ...List.generate(3, (index) {
+              return BadgeTile(
+                title: controller.badges[index].title,
+                description: controller.badges[index].title,
+                imagePath: controller.badges[index].imageUrl,
+              );
+            }),
             ThemeSizedBox.height8,
             GestureDetector(
               onTap: () {

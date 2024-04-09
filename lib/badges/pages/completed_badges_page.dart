@@ -47,11 +47,11 @@ class CompletedBadgesPage extends GetView<CompletedBadgesController> {
                 ),
                 const Spacer(),
                 HeadlineSmall(
-                  controller.badges[index].name,
+                  controller.badges[index].badgeType,
                   color: ThemeColor.darkBlue,
                 ),
                 BodySmall(
-                  controller.badges[index].description,
+                  controller.badges[index].title,
                   color: ThemeColor.darkBlue,
                 ),
                 ThemeSizedBox.height16,

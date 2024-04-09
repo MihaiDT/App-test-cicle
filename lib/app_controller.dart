@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/models/advices_grouped_by_category.dart';
+import 'package:lines/data/models/badge.dart';
 import 'package:lines/data/models/calendar_data.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/mission.dart';
-import 'package:lines/data/models/new_symptom_category.dart';
 import 'package:lines/data/models/period_map.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/survey.dart';
+import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
@@ -54,11 +55,13 @@ class AppController extends GetxController {
 
   final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
 
-  final EasyGetter<List<NewSymptomCategory>> symptomCategory;
+  final EasyGetter<List<SymptomCategory>> symptomCategory;
 
-  final EasyGetter<List<NewSymptomCategory>> categoriesSavedInHome;
+  final EasyGetter<List<SymptomCategory>> categoriesSavedInHome;
 
   final EasyGetter<SymptomDiaries> symptomsDiaries;
+
+  final EasyGetter<List<Badge>> badges;
 
   final Rxn<Mission> selectedMission = Rxn<Mission>();
 
@@ -85,6 +88,7 @@ class AppController extends GetxController {
     required this.symptomCategory,
     required this.categoriesSavedInHome,
     required this.symptomsDiaries,
+    required this.badges,
   });
 
   factory AppController.initial() {
@@ -101,9 +105,10 @@ class AppController extends GetxController {
       updateUserParameters: UpdateUserParameters.initial(),
       socialLoginParameter: SocialLoginParameter.initial(),
       advicesCategories: EasyGetter<AdvicesGroupedByCategory>(),
-      symptomCategory: EasyGetter<List<NewSymptomCategory>>(),
-      categoriesSavedInHome: EasyGetter<List<NewSymptomCategory>>(),
+      symptomCategory: EasyGetter<List<SymptomCategory>>(),
+      categoriesSavedInHome: EasyGetter<List<SymptomCategory>>(),
       symptomsDiaries: EasyGetter<SymptomDiaries>(),
+      badges: EasyGetter<List<Badge>>(),
       isLoginFlow: false.obs,
       showLockPage: false.obs,
     );

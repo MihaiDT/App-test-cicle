@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/new_symptom_category.dart';
+import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_open_bottomsheet_button.dart';
 import 'package:lines/modules/calendar/widgets/calendar_other_notes_widget.dart';
-import 'package:lines/modules/calendar/widgets/new_calendar_symptom_widget.dart';
+import 'package:lines/modules/calendar/widgets/calendar_symptom_widget.dart';
 
-class NewCalendarBottomSheetRow extends GetView<CalendarController> {
-  final NewSymptomCategory category;
+class CalendarBottomSheetRow extends GetView<CalendarController> {
+  final SymptomCategory category;
   final Function(String) saveSymptom;
 
-  const NewCalendarBottomSheetRow({
+  const CalendarBottomSheetRow({
     required this.category,
     required this.saveSymptom,
     super.key,
@@ -38,7 +38,7 @@ class NewCalendarBottomSheetRow extends GetView<CalendarController> {
                       ),
                       child: Obx(
                         () {
-                          return NewCalendarSymptomWidget(
+                          return CalendarSymptomWidget(
                             selected: controller.symptomIds.contains(
                               category.symptoms[index].id,
                             ),

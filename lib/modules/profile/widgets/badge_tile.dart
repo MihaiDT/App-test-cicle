@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/charts/glowing_linear_progress_indicator.dart';
 
@@ -35,14 +36,8 @@ class BadgeTile extends StatelessWidget {
               children: [
                 SizedBox.square(
                   dimension: constrains.maxWidth * 0.2,
-                  child: Image.network(
+                  child: SvgPicture.network(
                     imagePath ?? "",
-                    errorBuilder: (_, __, ___) {
-                      return const Placeholder(
-                        fallbackWidth: 100,
-                        fallbackHeight: 100,
-                      );
-                    },
                   ),
                 ),
                 ThemeSizedBox.width16,

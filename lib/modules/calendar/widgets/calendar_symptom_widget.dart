@@ -4,12 +4,12 @@ import 'package:gradient_borders/gradient_borders.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/new_symptom.dart';
 
-class NewCalendarSymptomWidget extends StatelessWidget {
+class CalendarSymptomWidget extends StatelessWidget {
   final NewSymptom symptom;
   final bool selected;
   final Function(String) saveSymptom;
 
-  const NewCalendarSymptomWidget({
+  const CalendarSymptomWidget({
     required this.symptom,
     required this.selected,
     required this.saveSymptom,

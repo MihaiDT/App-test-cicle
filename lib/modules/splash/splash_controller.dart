@@ -5,6 +5,7 @@ import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/advices_service.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/badges_service.dart';
 import 'package:lines/repository/calendar_service.dart';
 import 'package:lines/repository/settings_service.dart';
 import 'package:lines/routes/routes.dart';
@@ -38,6 +39,7 @@ class SplashPageController extends GetxController {
     await AdvicesService.fetchArticles();
     await CalendarService.symptomCategories;
     await CalendarService.homePageSymptomCategories;
+    await BadgesService.fetchBadges();
   }
 
   void _pageTransition() {

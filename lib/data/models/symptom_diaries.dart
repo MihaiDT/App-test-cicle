@@ -2,10 +2,10 @@ class SymptomDiaries {
   final String date;
   List<String>? symptomsIDs;
   String? id;
-  String hoursOfSleep;
-  String notes;
-  String waterLiters;
-  String weight;
+  String? hoursOfSleep;
+  String? notes;
+  String? waterLiters;
+  String? weight;
 
   SymptomDiaries({
     required this.date,

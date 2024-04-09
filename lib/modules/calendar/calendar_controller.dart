@@ -9,7 +9,7 @@ import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/data/models/new_symptom.dart';
-import 'package:lines/data/models/new_symptom_category.dart';
+import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
 import 'package:lines/modules/calendar/calendar_year_controller.dart';
 import 'package:lines/modules/calendar/month_calendar_mixin.dart';
@@ -31,6 +31,13 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       DraggableScrollableController();
 
   bool get showSaveButtonSymptoms {
+    if (pageShouldRefresh &&
+        selectedTab.value == CalendarTabs.monthTab &&
+        (symptomsHasChanged.value ||
+            textInputHasChanged.value ||
+            savedCategoryHasChanged)) {
+      print("showSaveButtonSymptoms");
+    }
     return pageShouldRefresh &&
         selectedTab.value == CalendarTabs.monthTab &&
         (symptomsHasChanged.value ||
@@ -46,7 +53,9 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     final symptomsIDsSet = symptomIds.toSet();
     final symptomsIDsSetFromDiaries =
         appController.symptomsDiaries.value?.symptomsIDs?.toSet();
-
+    if (appController.symptomsDiaries.value?.symptomsIDs == null) {
+      return RxBool(false);
+    }
     if (symptomsIDsSet.length != symptomsIDsSetFromDiaries?.length) {
       return RxBool(true);
     }
@@ -78,7 +87,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   /// The mode for the calendar grid
   final RxBool modifyPeriodMode = false.obs;
 
-  List<NewSymptomCategory> get symptomCategories =>
+  List<SymptomCategory> get symptomCategories =>
       appController.symptomCategory.value ?? [];
 
   RxBool get showRecapMenu => symptomIds.isNotEmpty.obs;
@@ -225,7 +234,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   /// Check if the symptom is in the category
-  bool _isSymptomInCategory(NewSymptomCategory? category, String symptomId) {
+  bool _isSymptomInCategory(SymptomCategory? category, String symptomId) {
     if (category == null) return false;
     return category.symptoms.any((element) => element.id == symptomId);
   }
@@ -420,6 +429,9 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   RxBool get textInputHasChanged {
+    if (appController.symptomsDiaries.value == null) {
+      return false.obs;
+    }
     return (oreDiSonnoValue.value !=
                 appController.symptomsDiaries.value?.hoursOfSleep ||
             quantitaAcquaValue.value !=
@@ -439,14 +451,14 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   bool isCategorySavedInHome(
-    NewSymptomCategory category,
+    SymptomCategory category,
     List<String> categoryIds,
   ) {
     return savedCategoryIds.contains(category.id);
   }
 
   Future<void> saveCategoryInHome(
-    NewSymptomCategory category,
+    SymptomCategory category,
     List<String> categoryIds,
   ) async {
     if (isCategorySavedInHome(category, categoryIds)) {
@@ -466,10 +478,10 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     }
   }
 
-  Future<List<NewSymptomCategory>> _showTooMuchCategoriesDialog(
+  Future<List<SymptomCategory>> _showTooMuchCategoriesDialog(
     List<String> savedCategoryIds,
   ) async {
-    List<NewSymptomCategory> selectedCategories = await showDialog(
+    List<SymptomCategory> selectedCategories = await showDialog(
       barrierDismissible: false,
       context: Get.context!,
       builder: (context) => TooManyCategoriesDialog(
@@ -492,8 +504,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     return selectedCategories;
   }
 
-  /// Return the [NewSymptomCategory] from the list of categories based on the id.
-  NewSymptomCategory getSymptomCategoryFromId(String id) {
+  /// Return the [SymptomCategory] from the list of categories based on the id.
+  SymptomCategory getSymptomCategoryFromId(String id) {
     return symptomCategories.firstWhere((element) => element.id == id);
   }
 

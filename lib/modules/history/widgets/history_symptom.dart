@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/symptom.dart';
 import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/modules/calendar/widgets/calendar_chip.dart';
 
 class HistorySymptom extends StatelessWidget {
   final SymptomCategory symptomCategory;
-  final List<Symptom> symptoms;
 
   const HistorySymptom({
     required this.symptomCategory,
-    required this.symptoms,
     super.key,
   });
 
@@ -21,7 +18,7 @@ class HistorySymptom extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SvgPicture.asset(
-          symptomCategory.categoryIconPath,
+          symptomCategory.iconName,
         ),
         ThemeSizedBox.width8,
         Flexible(
@@ -29,7 +26,7 @@ class HistorySymptom extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeadlineSmall(
-                symptomCategory.categoryTitle,
+                symptomCategory.name,
                 color: ThemeColor.darkBlue,
               ),
               ThemeSizedBox.height4,
@@ -37,10 +34,10 @@ class HistorySymptom extends StatelessWidget {
                 spacing: 8.0,
                 runSpacing: 8.0,
                 children: List.generate(
-                  symptoms.length,
+                  symptomCategory.symptoms.length,
                   (index) => CalendarChip(
-                    label: symptoms[index].symptomName,
-                    iconPath: symptoms[index].iconPath,
+                    label: symptomCategory.symptoms[index].name,
+                    iconPath: symptomCategory.symptoms[index].iconPath,
                   ),
                 ),
               ),

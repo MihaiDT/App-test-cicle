@@ -26,48 +26,45 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
             color: ThemeColor.darkBlue,
           ),
           ThemeSizedBox.height16,
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: ThemeSize.paddingMedium,
-            ),
-            child: ElevatedCard(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  ThemeSizedBox.height12,
-                  const TitleMedium(
-                    "SINTOMI PIÙ FREQUENTI",
-                    color: ThemeColor.brightPink,
-                  ),
-                  ThemeSizedBox.height12,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: List.generate(
-                      controller.mostFrequentSymptoms.length,
-                      (index) => Column(
-                        children: [
-                          controller.mostFrequentSymptoms[index].iconPath !=
-                                  null
-                              ? SvgPicture.asset(
-                                  controller
-                                      .mostFrequentSymptoms[index].iconPath!,
-                                  width: 32,
-                                )
-                              : const Placeholder(),
-                          ThemeSizedBox.height4,
-                          LabelMedium(
-                            controller.mostFrequentSymptoms[index].symptomName,
-                            color: ThemeColor.darkBlue,
-                          ),
-                          ThemeSizedBox.height16,
-                        ],
+          if (controller.mostFrequentSymptoms.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: ThemeSize.paddingMedium,
+              ),
+              child: ElevatedCard(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    ThemeSizedBox.height12,
+                    const TitleMedium(
+                      "SINTOMI PIÙ FREQUENTI",
+                      color: ThemeColor.brightPink,
+                    ),
+                    ThemeSizedBox.height12,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(
+                        controller.mostFrequentSymptoms.length,
+                        (index) => Column(
+                          children: [
+                            SvgPicture.asset(
+                              controller.mostFrequentSymptoms[index].iconPath,
+                              width: 32,
+                            ),
+                            ThemeSizedBox.height4,
+                            LabelMedium(
+                              controller.mostFrequentSymptoms[index].name,
+                              color: ThemeColor.darkBlue,
+                            ),
+                            ThemeSizedBox.height16,
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.only(
               top: 8,
@@ -96,14 +93,13 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
                                 children: [
                                   ThemeSizedBox.height12,
                                   SvgPicture.asset(
-                                    controller.symptomCategories[index]
-                                        .categoryIconPath,
-                                    width: 40,
+                                    controller
+                                        .symptomCategories[index].iconPath,
+                                    width: 30,
                                   ),
                                   ThemeSizedBox.height4,
                                   LabelLarge(
-                                    controller
-                                        .symptomCategories[index].categoryTitle
+                                    controller.symptomCategories[index].name
                                         .toUpperCase(),
                                     textAlign: TextAlign.center,
                                     color: ThemeColor.brightPink,
