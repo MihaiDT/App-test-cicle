@@ -65,7 +65,7 @@ class _ExpandableState extends State<Expandable> {
                         ),
                         curve: Curves.easeInOut,
                         child: SvgPicture.asset(
-                          ThemeIcon.arrowUp,
+                          ThemeIcon.arrowDown,
                         ),
                       ),
                     ],

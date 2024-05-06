@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/modules/history/history_controller.dart';
 import 'package:lines/modules/history/widgets/history_row.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-class HistoryPage extends StatelessWidget {
+class HistoryPage extends GetView<HistoryController> {
   const HistoryPage({
     super.key,
   });
@@ -20,16 +22,15 @@ class HistoryPage extends StatelessWidget {
           color: ThemeColor.darkBlue,
         ),
       ),
-      body: ListView(
+      body: ListView.builder(
         padding: const EdgeInsets.symmetric(
           vertical: 32,
           horizontal: 16,
         ),
-        children: [
-          HistoryRow(
-            day: DateTime(DateTime.january),
-          ),
-        ],
+        itemCount: 1,
+        itemBuilder: (context, index) => HistoryRow(
+          day: DateTime.now(),
+        ),
       ),
     );
   }

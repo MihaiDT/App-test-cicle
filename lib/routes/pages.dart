@@ -9,6 +9,7 @@ import 'package:lines/modules/advices/advices_detail_page.dart';
 import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_page.dart';
+import 'package:lines/modules/calendar/calendar_app_bar_binding.dart';
 import 'package:lines/modules/calendar/calendar_binding.dart';
 import 'package:lines/modules/calendar/calendar_page.dart';
 import 'package:lines/modules/change_profile/binding/customize_cherry_binding.dart';
@@ -16,8 +17,12 @@ import 'package:lines/modules/change_profile/binding/your_information_section_bi
 import 'package:lines/modules/change_profile/binding/your_interests_section_binding.dart';
 import 'package:lines/modules/change_profile/binding/your_menses_section_binding.dart';
 import 'package:lines/modules/change_profile/pages/change_profile_page.dart';
+import 'package:lines/modules/charts_and_statistics/charts_and_statistics_bindings.dart';
+import 'package:lines/modules/charts_and_statistics/charts_and_statistics_page.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
+import 'package:lines/modules/confirm_tutor_email/confirm_tutor_email.dart';
+import 'package:lines/modules/confirm_tutor_email/confirm_tutor_email_binding.dart';
 import 'package:lines/modules/content_library/bindings/content_library_binding.dart';
 import 'package:lines/modules/content_library/bindings/content_library_search_page_binding.dart';
 import 'package:lines/modules/content_library/content_library_category_page.dart';
@@ -28,6 +33,7 @@ import 'package:lines/modules/drawer/binding/account_binding.dart';
 import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
 import 'package:lines/modules/drawer/pages/account_page.dart';
 import 'package:lines/modules/drawer/pages/faq_page.dart';
+import 'package:lines/modules/history/history_binding.dart';
 import 'package:lines/modules/history/history_page.dart';
 import 'package:lines/modules/home/home_binding.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_quiz_card_binding.dart';
@@ -35,6 +41,7 @@ import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.da
 import 'package:lines/modules/how_long_menses/binding/menses_duration_counter_binding.dart';
 import 'package:lines/modules/how_long_menses/how_long_menses_page.dart';
 import 'package:lines/modules/info/binding/info_binding.dart';
+import 'package:lines/modules/info/binding/info_dropdown_result_binding.dart';
 import 'package:lines/modules/info/info_dropdown_results_page.dart';
 import 'package:lines/modules/info/info_page.dart';
 import 'package:lines/modules/invite_friend/invite_friend_binding.dart';
@@ -66,9 +73,14 @@ import 'package:lines/modules/referral/referral_binding.dart';
 import 'package:lines/modules/referral/referral_page.dart';
 import 'package:lines/modules/register/register_binding.dart';
 import 'package:lines/modules/register/register_page.dart';
+import 'package:lines/modules/settings/settings_binding.dart';
+import 'package:lines/modules/settings/settings_page.dart';
+import 'package:lines/modules/specific_menses_stats/specific_menses_stats_binding.dart';
+import 'package:lines/modules/specific_menses_stats/specific_menses_stats_page.dart';
 import 'package:lines/modules/splash/splash_binding.dart';
 import 'package:lines/modules/splash/splash_page.dart';
 import 'package:lines/modules/surveys/surveys_page.dart';
+import 'package:lines/modules/tamagochi_web_view.dart';
 import 'package:lines/modules/tutor_email/tutor_email_binding.dart';
 import 'package:lines/modules/tutor_email/tutor_email_page.dart';
 import 'package:lines/modules/welcome/welcome_binding.dart';
@@ -82,6 +94,8 @@ import 'package:lines/modules/welcome_walkthrough/welcome_walkthrough_page.dart'
 import 'package:lines/modules/your_coins/your_coins_page.dart';
 import 'package:lines/modules/your_diary/bindings/your_diary_binding.dart';
 import 'package:lines/modules/your_diary/pages/your_diary_page.dart';
+import 'package:lines/modules/your_menses_stats/your_menses_stats_binding.dart';
+import 'package:lines/modules/your_menses_stats/your_menses_stats_page.dart';
 import 'package:lines/routes/routes.dart';
 
 class Pages {
@@ -149,7 +163,10 @@ class Pages {
 
     //Calendar
     GetPage(
-      binding: CalendarBinding(),
+      bindings: [
+        CalendarBinding(),
+        CalendarAppBarBinding(),
+      ],
       name: Routes.calendar,
       page: () => _mediaQueryWrapper(const CalendarPage()),
       transition: Transition.rightToLeft,
@@ -428,6 +445,9 @@ class Pages {
     /// InfoDropdownResultsPage
     GetPage(
       name: Routes.infoDropdownResultsPage,
+      bindings: [
+        InfoDropdownResultBinding(),
+      ],
       page: () => _mediaQueryWrapper(
         const InfoDropDownResultsPage(),
       ),
@@ -441,6 +461,7 @@ class Pages {
         TutorEmailBinding(),
       ],
       page: () => _mediaQueryWrapper(
+        authNeeded: false,
         const TutorEmailPage(),
       ),
       transition: Transition.rightToLeft,
@@ -522,8 +543,69 @@ class Pages {
     /// HistoryPage
     GetPage(
       name: Routes.historyPage,
+      binding: HistoryBinding(),
       page: () => _mediaQueryWrapper(
         const HistoryPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// ChartsAndStaticsPage
+    GetPage(
+      name: Routes.chartsAndStaticsPage,
+      binding: ChartsAndStatisticsBindings(),
+      page: () => _mediaQueryWrapper(
+        const ChartsAndStaticsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// YourMensesStatsPage
+    GetPage(
+      name: Routes.yourMensesStatsPage,
+      binding: YourMensesStatsBinding(),
+      page: () => _mediaQueryWrapper(
+        const YourMensesStatsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// SettingsPage
+    GetPage(
+      name: Routes.settings,
+      binding: SettingsBinding(),
+      page: () => _mediaQueryWrapper(
+        const SettingsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// SpecificMensesStatsPage
+    GetPage(
+      name: Routes.specificMensesStats,
+      binding: SpecificMensesStatsBinding(),
+      page: () => _mediaQueryWrapper(
+        const SpecificMensesStatsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// TamagochiWebView
+    GetPage(
+      name: Routes.tamagochiWebView,
+      page: () => _mediaQueryWrapper(
+        const TamagochiWebView(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// ConfirmTutorEmailPage
+    GetPage(
+      name: Routes.confirmTutorEmail,
+      binding: ConfirmTutorEmailBinding(),
+      page: () => _mediaQueryWrapper(
+        authNeeded: false,
+        const ConfirmTutorEmailPage(),
       ),
       transition: Transition.rightToLeft,
     ),

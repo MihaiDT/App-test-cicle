@@ -14,6 +14,9 @@ class MyBadgesSection extends GetView<MyBadgesController> {
 
   @override
   Widget build(BuildContext context) {
+    if (controller.badges.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return ElevatedCard(
       color: Colors.white,
       child: Padding(
@@ -29,11 +32,11 @@ class MyBadgesSection extends GetView<MyBadgesController> {
               textAlign: TextAlign.center,
             ).applyShaders(context),
             ThemeSizedBox.height16,
-            ...List.generate(3, (index) {
+            ...List.generate(controller.badges.length, (index) {
               return BadgeTile(
                 title: controller.badges[index].title,
-                description: controller.badges[index].title,
-                imagePath: controller.badges[index].imageUrl,
+                description: controller.badges[index].description,
+                imagePath: controller.badges[index].iconUrl,
               );
             }),
             ThemeSizedBox.height8,

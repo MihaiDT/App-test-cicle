@@ -1,22 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:lines/data/models/advices_article.dart';
+import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
-import 'package:lines/modules/advices/controllers/advices_detail_store.dart';
 import 'package:lines/repository/advices_service.dart';
 import 'package:video_player/video_player.dart';
 
 class AdvicesDetailController extends GetxController {
-  AdvicesDetailStore advicesDetailStore = Get.put(
-    AdvicesDetailStore(),
-  );
+  final AdvicesDetailPair? articleDetail = Get.arguments;
   final ScrollController scrollController = ScrollController();
   late final VideoPlayerController videoPlayerController;
   final RxBool isArticleFav = false.obs;
 
-  AdvicesArticle? get article => advicesDetailStore.articleDetail?.article;
+  AdvicesArticle? get article => articleDetail?.article;
 
-  AdvicesCategory? get category => advicesDetailStore.articleDetail?.category;
+  AdvicesCategory? get category => articleDetail?.category;
 
   RxDouble proportion = 0.0.obs;
   RxInt currentSlide = 0.obs;

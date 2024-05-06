@@ -7,6 +7,8 @@ import 'package:lines/repository/advices_service.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/badges_service.dart';
 import 'package:lines/repository/calendar_service.dart';
+import 'package:lines/repository/menses_service.dart';
+import 'package:lines/repository/product_service.dart';
 import 'package:lines/repository/settings_service.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -21,6 +23,9 @@ class SplashPageController extends GetxController {
         if (appController.user.responseHandler.isFailed) {
           _startAnimation();
         } else if (appController.user.responseHandler.isSuccessful) {
+          /* if (appController.hasUsedDeepLink.value) {
+            Get.offAndToNamed(Routes.cookie);
+          }*/
           if (appController.user.value?.routeAfterLogin == "complete_profile") {
             Get.offAndToNamed(Routes.lastMensesPage);
           } else {
@@ -30,6 +35,8 @@ class SplashPageController extends GetxController {
       },
     );
     final String authToken = await Get.find<SecureStorageManager>().getToken();
+
+    /// If the token is not empty and it's the first access, the saved token is removed
     if (authToken.isNotEmpty && HiveManager.firstAccess) {
       Get.find<SecureStorageManager>().saveToken("");
       HiveManager.firstAccess = false;
@@ -40,6 +47,10 @@ class SplashPageController extends GetxController {
     await CalendarService.symptomCategories;
     await CalendarService.homePageSymptomCategories;
     await BadgesService.fetchBadges();
+    await MensesService.statisticPeriod;
+    await MensesService.mensesStatistics;
+    await ProductService.products;
+    await ProductService.mission;
   }
 
   void _pageTransition() {

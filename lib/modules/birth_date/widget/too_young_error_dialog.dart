@@ -30,12 +30,12 @@ class TooYoungErrorDialog extends StatelessWidget {
           children: [
             ThemeSizedBox.height40,
             const DisplayMedium(
-              "Ops... Devi avere almeno 14 anni per registrarti!",
+              "Ops... Devi avere almeno 14 anni per accedere!",
               textAlign: TextAlign.center,
             ).applyShaders(context),
             ThemeSizedBox.height16,
             const BodyLarge(
-              "Ci dispiace: sei minore di 14 anni non puoi registrarti a My Lines per questioni di sicurezza e privacy.",
+              "Ci dispiace: sei minore di 14 anni non puoi accedere all'app My Lines per questioni di sicurezza e privacy.",
               color: ThemeColor.darkBlue,
               textAlign: TextAlign.center,
             ),

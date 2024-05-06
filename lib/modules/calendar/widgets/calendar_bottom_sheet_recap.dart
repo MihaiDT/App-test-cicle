@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/new_symptom.dart';
+import 'package:lines/data/models/symptom.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/modules/calendar/widgets/calendar_chip.dart';
 
@@ -41,7 +41,7 @@ class CalendarBottomSheetRecap extends GetView<CalendarController> {
                   children: List.generate(
                     controller.symptomIds.length,
                     (index) {
-                      final NewSymptom symptom = controller.getSymptomFromId(
+                      final Symptom symptom = controller.getSymptomFromId(
                         controller.symptomIds[index],
                       );
                       return CalendarChip(

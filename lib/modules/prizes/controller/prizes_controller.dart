@@ -5,9 +5,13 @@ import 'package:lines/routes/routes.dart';
 
 class PrizesController extends GetxController {
   void navigateToMissionDetails(Mission mission) {
-    appController.selectedMission.value = mission;
     Get.toNamed(
       Routes.missionsDetailsPage,
+      arguments: mission,
     );
   }
+
+  List<Mission> get missions => appController.missions.value ?? [];
+
+  int get numberOfMissions => 3;
 }

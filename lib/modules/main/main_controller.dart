@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/controllers/advices_controller.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
 
 import 'package:lines/modules/home/home_controller.dart';
+import 'package:lines/routes/routes.dart';
 
 class MainController extends GetxController {
   final RxInt rxTabIndex = 0.obs;
@@ -11,7 +13,7 @@ class MainController extends GetxController {
 
   set tabIndex(int newValue) => rxTabIndex.value = newValue;
 
-  onTapBottomNavigationBarMenu({required int selectedTab}) async {
+  void onTapBottomNavigationBarMenu({required int selectedTab}) async {
     tabIndex = selectedTab;
     _lazyInit(tabIndex);
   }
@@ -37,5 +39,13 @@ class MainController extends GetxController {
   void onInit() {
     super.onInit();
     _lazyInit(tabIndex);
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    if (appController.hasUsedDeepLink.value) {
+      Get.toNamed(Routes.cookie);
+    }
   }
 }

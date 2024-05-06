@@ -48,7 +48,7 @@ class InformationTile extends StatelessWidget {
           const Spacer(),
           Row(
             children: [
-              if (percentageValue?.isNotEmpty == true) ...[
+              if (percentageValue?.isNotEmpty == true && value.isEmpty) ...[
                 Text(
                   percentageValue ?? '',
                   style: const TextStyle(

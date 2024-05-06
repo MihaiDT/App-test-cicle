@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/mission.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
 import 'package:lines/modules/prizes/widgets/load_code_widget.dart';
 import 'package:lines/modules/prizes/widgets/mission_container.dart';
@@ -19,9 +18,6 @@ class PrizesPage extends GetView<PrizesController> {
   });
 
   double get _missionContainerSize => Get.height * 0.3;
-
-  //TODO: remove this variable when api is available
-  static const int _numberOfMissions = 6;
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +81,8 @@ class PrizesPage extends GetView<PrizesController> {
                       "Missioni in corso",
                     ).applyShaders(context),
                     ThemeSizedBox.width8,
-                    const TitleLarge(
-                      "($_numberOfMissions)",
+                    TitleLarge(
+                      "(${controller.numberOfMissions})",
                       color: ThemeColor.darkBlue,
                     ),
                   ],
@@ -99,21 +95,15 @@ class PrizesPage extends GetView<PrizesController> {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
-                  itemCount: 3,
+                  itemCount: controller.missions.length,
                   itemBuilder: (context, index) {
-                    Mission mission = Mission(
-                      currentCodes: 2,
-                      description:
-                          "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
-                      totalCodes: 3,
-                      untilDate: "31/10/23",
-                    );
                     return SizedBox(
                       width: _missionContainerSize,
                       child: MissionContainer(
-                        onTap: () =>
-                            controller.navigateToMissionDetails(mission),
-                        mission: mission,
+                        onTap: () => controller.navigateToMissionDetails(
+                          controller.missions[index],
+                        ),
+                        mission: controller.missions[index],
                       ),
                     );
                   },

@@ -4,6 +4,8 @@ import 'package:lines/repository/parameters_class/registration_provider.dart';
 
 class User {
   bool? active;
+
+  bool? appConsents;
   String? birthdate;
   int coinsCollected;
   String? email;
@@ -32,6 +34,7 @@ class User {
 
   User({
     this.active = false,
+    this.appConsents = false,
     this.birthdate,
     this.coinsCollected = 0,
     this.email,
@@ -61,6 +64,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       active: json['user']['active'],
+      appConsents: json['user']['app_consents'],
       birthdate: json['user']['birthdate'],
       coinsCollected: json['user']['coins'],
       email: json['user']['email'],
@@ -97,6 +101,7 @@ class User {
   Map<String, dynamic> toJson() {
     return {
       "birthdate": birthdate,
+      "app_consents": appConsents,
       "coins": coinsCollected,
       "email": email,
       "first_name": firstName,
@@ -165,5 +170,13 @@ class User {
       age--;
     }
     return age;
+  }
+
+  bool get hasMoreThan14Years {
+    return age >= 14;
+  }
+
+  bool get hasMoreThan18Years {
+    return age >= 18;
   }
 }

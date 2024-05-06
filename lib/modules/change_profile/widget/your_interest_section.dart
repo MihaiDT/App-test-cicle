@@ -22,25 +22,29 @@ class YourInterestSection extends GetView<YourInterestsSectionController> {
             "Interessi",
           ).applyShaders(context),
           ThemeSizedBox.height4,
-          Row(
-            children: [
-              const BodySmall(
-                "Seleziona almeno 3 interessi",
-                color: ThemeColor.darkBlue,
-              ),
-              const Spacer(),
-              if (controller.percentageValue.isNotEmpty) ...[
-                Text(
-                  controller.percentageValue,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 12,
-                    color: ThemeColor.primary,
+          Obx(
+            () {
+              return Row(
+                children: [
+                  const BodySmall(
+                    "Seleziona almeno 3 interessi",
+                    color: ThemeColor.darkBlue,
                   ),
-                ),
-                ThemeSizedBox.width12,
-              ],
-            ],
+                  const Spacer(),
+                  if (controller.percentageValue.value.isNotEmpty) ...[
+                    Text(
+                      controller.percentageValue.value,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 12,
+                        color: ThemeColor.primary,
+                      ),
+                    ),
+                    ThemeSizedBox.width12,
+                  ],
+                ],
+              );
+            },
           ),
           ThemeSizedBox.height16,
           Obx(

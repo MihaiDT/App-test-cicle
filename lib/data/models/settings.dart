@@ -9,6 +9,9 @@ class Settings {
   String? iosStoreUrl;
   List<Interest> interests;
 
+  /// Returns true if the feature "Symptoms in home" is active
+  final bool symptomsInHomeActive;
+
   Settings({
     this.androidMinBuildNumber,
     this.androidStoreUrl,
@@ -16,6 +19,7 @@ class Settings {
     required this.invitationCodeCoins,
     this.iosMinBuildNumber,
     this.iosStoreUrl,
+    required this.symptomsInHomeActive,
     this.interests = const [],
   });
 
@@ -27,6 +31,7 @@ class Settings {
       invitationCodeCoins: json['coins']['invitation_code'],
       iosMinBuildNumber: json['ios_min_build_number'],
       iosStoreUrl: json['ios_store_url'],
+      symptomsInHomeActive: json['show_sections']['symptoms_in_home'],
       interests: (json['interests'] as List)
           .map((interest) => Interest.fromJson(interest))
           .toList(),
@@ -41,6 +46,7 @@ class Settings {
       invitationCodeCoins: settings.invitationCodeCoins,
       iosMinBuildNumber: settings.iosMinBuildNumber,
       iosStoreUrl: settings.iosStoreUrl,
+      symptomsInHomeActive: settings.symptomsInHomeActive,
       interests: settings.interests,
     );
   }

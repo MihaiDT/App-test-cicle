@@ -29,7 +29,7 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                 SecondaryButton(
                   onPressed: controller.logIn,
                   child: const TitleLarge(
-                    "ACCEDI",
+                    "PROCEDI",
                   ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,
@@ -63,14 +63,14 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                 ),
                 ThemeSizedBox.height16,
                 const BodyMedium(
-                  "Abbiamo mandato una mail all'indirizzo:",
+                  "Abbiamo inviato un'e-mail all'indirizzo",
                   textAlign: TextAlign.center,
                 ),
                 TitleLarge(
                   controller.email,
                 ),
                 const BodyMedium(
-                  "Aprila per confermare la tua registrazione a\n My Lines",
+                  "Visiona e accetta le condizioni di utilizzo per poter accedere all'app.",
                   textAlign: TextAlign.center,
                 ),
                 ThemeSizedBox.height32,

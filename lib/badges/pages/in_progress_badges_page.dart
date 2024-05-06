@@ -22,10 +22,10 @@ class InProgressBadgePage extends GetView<InProgressBadgesController> {
       itemCount: controller.badges.length,
       itemBuilder: (context, index) {
         return BadgeTile(
-          imagePath: controller.badges[index].imageUrl,
+          imagePath: controller.badges[index].iconUrl,
           backgroundColor: ThemeColor.normalGrey.withOpacity(0.3),
-          title: controller.badges[index].badgeType,
-          description: controller.badges[index].title,
+          title: controller.badges[index].title,
+          description: controller.badges[index].description,
           progressPercentage: controller.badges[index].progressValue != null
               ? controller.badges[index].progressValue! / 10
               : 0,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/badges/controllers/completed_badges_controller.dart';
-import 'package:lines/core/app_theme.dart';
+import 'package:lines/badges/widgets/completed_badge_widget.dart';
 
 class CompletedBadgesPage extends GetView<CompletedBadgesController> {
   const CompletedBadgesPage({
@@ -23,41 +23,10 @@ class CompletedBadgesPage extends GetView<CompletedBadgesController> {
       ),
       itemCount: controller.badges.length,
       itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            color: ThemeColor.normalGrey.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 8,
-              left: 8,
-              right: 8,
-              bottom: 4,
-            ),
-            child: Column(
-              children: [
-                ThemeSizedBox.height8,
-                Image.asset(
-                  ThemeImage.ginecologa,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const Placeholder(
-                    fallbackHeight: 60,
-                  ),
-                ),
-                const Spacer(),
-                HeadlineSmall(
-                  controller.badges[index].badgeType,
-                  color: ThemeColor.darkBlue,
-                ),
-                BodySmall(
-                  controller.badges[index].title,
-                  color: ThemeColor.darkBlue,
-                ),
-                ThemeSizedBox.height16,
-              ],
-            ),
-          ),
+        return CompletedBadgeWidget(
+          imageUrl: controller.badges[index].iconUrl ?? "",
+          title: controller.badges[index].title,
+          description: controller.badges[index].description,
         );
       },
     );

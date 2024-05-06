@@ -50,6 +50,10 @@ class CustomLogger extends Logger {
         loggedMessage,
         error: exception,
       );
+    } else {
+      e(
+        exception,
+      );
     }
   }
 

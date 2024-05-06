@@ -11,6 +11,7 @@ import 'package:lines/modules/home/widgets/home_period_info/home_period_info_shi
 import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar.dart';
 import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar_shimmer.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/welcome_quiz_section.dart';
+import 'package:lines/routes/routes.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({
@@ -34,7 +35,12 @@ class HomePage extends GetView<HomeController> {
               Obx(
                 () => appController.currentPeriod.responseHandler.isPending
                     ? const HomeCircularPeriodCalendarShimmer()
-                    : const HomeCircularPeriodCalendar(),
+                    : GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.tamagochiWebView);
+                        },
+                        child: const HomeCircularPeriodCalendar(),
+                      ),
               ),
               ThemeSizedBox.height32,
               Obx(

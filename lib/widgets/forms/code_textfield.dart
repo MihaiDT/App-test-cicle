@@ -24,22 +24,20 @@ class _CodeTextfieldState extends State<CodeTextfield> {
       children: [
         Obx(() {
           return GestureDetector(
-            onTap: controller.openKeyboard,
-            child: SizedBox(
-              height: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(
-                  10,
-                  (index) {
-                    String writtenText = "";
-                    ("controller.writtenCode[index]");
-                    if (controller.writtenCode[index].isNotEmpty) {
-                      writtenText = controller.writtenCode[index];
-                    }
-                    return _buildSingleCell(writtenText);
-                  },
-                ),
+            onTap: () {
+              controller.openKeyboard();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(
+                10,
+                (index) {
+                  String writtenText = "";
+                  if (controller.writtenCode[index].isNotEmpty) {
+                    writtenText = controller.writtenCode[index];
+                  }
+                  return _buildSingleCell(writtenText);
+                },
               ),
             ),
           );

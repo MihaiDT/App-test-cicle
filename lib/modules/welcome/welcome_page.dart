@@ -36,7 +36,7 @@ class WelcomePage extends GetView<WelcomeController> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     const TitleMedium(
-                      "Hai un account?",
+                      "Hai già un account Lines?",
                       fontWeight: FontWeight.w500,
                     ),
                     ThemeSizedBox.width4,

@@ -3,8 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/drawer/controller/account_page_controller.dart';
-import 'package:lines/modules/drawer/sections/main_drawer_tile_section.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/widgets/buttons/primary_button.dart';
+import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class AccountPage extends GetView<AccountPageController> {
   const AccountPage({
@@ -19,35 +20,51 @@ class AccountPage extends GetView<AccountPageController> {
           "ASSISTENZA",
           color: ThemeColor.primary,
         ),
+        backButtonColor: ThemeColor.darkBlue,
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
+      body: BottomWidgetLayout(
+        scrollableAreaPadding: const EdgeInsets.symmetric(
           horizontal: ThemeSize.paddingSmall,
         ),
-        children: [
-          const DisplayMedium(
-            "Il tuo account MyLines",
-          ).applyShaders(context),
-          ThemeSizedBox.height32,
-          Row(
-            children: [
-              const DisplayMedium(
-                "Email",
-                color: ThemeColor.darkBlue,
-              ),
-              const Spacer(),
-              BodyMedium(
-                controller.email,
-              ),
-              SvgPicture.asset(
-                ThemeIcon.lock,
-              ),
-            ],
+        bottomWidget: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: ThemeSize.paddingSmall,
           ),
-          const MainDrawerTileSection(
-            title: "Password",
+          child: PrimaryButton(
+            onPressed: () {
+              controller.performLogout();
+            },
+            child: const TitleLarge(
+              "LOG OUT",
+            ),
           ),
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const DisplayMedium(
+              "Il tuo account MyLines",
+            ).applyShaders(context),
+            ThemeSizedBox.height32,
+            Row(
+              children: [
+                const DisplayMedium(
+                  "Email",
+                  color: ThemeColor.darkBlue,
+                ),
+                const Spacer(),
+                BodyMedium(
+                  controller.email,
+                  color: ThemeColor.darkBlue,
+                ),
+                ThemeSizedBox.width8,
+                SvgPicture.asset(
+                  ThemeIcon.lock,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

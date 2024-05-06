@@ -197,14 +197,6 @@ class HomeController extends AppScaffoldController {
     tutorialStep.value++;
   }
 
-  void horizontalCalendarOnItemFocus(int index) {
-    periodSelectedDateIndex = index;
-
-    playButtonVisible = false;
-    // FIXME: dateFormatYMD.format(dates[periodSelectedDateIndex]) == dateFormatYMD.format(DateTime.now());
-    // TODO: cambio immagine avatar e colore
-  }
-
   Rx<DateTime> get selectedDate {
     return DateTime.now().obs;
   }

@@ -31,11 +31,15 @@ class LoadCodeCompletedMission extends StatelessWidget {
             height: _missionContainerSize,
             child: MissionContainer(
               mission: Mission(
-                currentCodes: 3,
-                description:
-                    "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
-                totalCodes: 3,
-                untilDate: "31/10/23",
+                code: 'code',
+                completeCounter: 2,
+                title: 'title',
+                description: 'description',
+                id: 1,
+                imageUrl: 'imageUrl',
+                isCompleted: true,
+                totalCounter: 3,
+                products: [],
               ),
             ),
           ),

@@ -7,10 +7,13 @@ class CategorySymptomTile extends StatelessWidget {
   final String title;
   final VoidCallback? onTap;
 
+  final bool canBePressed;
+
   const CategorySymptomTile({
     super.key,
     required this.imagePath,
     required this.title,
+    this.canBePressed = true,
     this.onTap,
   });
 
@@ -21,7 +24,7 @@ class CategorySymptomTile extends StatelessWidget {
         vertical: 8,
       ),
       child: GestureDetector(
-        onTap: onTap,
+        onTap: canBePressed ? onTap : null,
         child: Row(
           children: [
             SvgPicture.asset(
@@ -32,13 +35,17 @@ class CategorySymptomTile extends StatelessWidget {
             ThemeSizedBox.width6,
             HeadlineSmall(
               title,
-              color: ThemeColor.darkBlue,
+              color: canBePressed
+                  ? ThemeColor.darkBlue
+                  : ThemeColor.defaultPeriodColor,
             ),
             const Spacer(),
-            const Icon(
+            Icon(
               Icons.arrow_forward_ios,
-              size: 24,
-              color: ThemeColor.primary,
+              size: 15,
+              color: canBePressed
+                  ? ThemeColor.primary
+                  : ThemeColor.defaultPeriodColor,
             ),
           ],
         ),

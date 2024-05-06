@@ -6,7 +6,6 @@ import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/data/models/advices_category_with_articles.dart';
 import 'package:lines/data/models/advices_sub_category.dart';
-import 'package:lines/modules/advices/controllers/advices_detail_store.dart';
 import 'package:lines/repository/advices_service.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -18,10 +17,6 @@ class ContentLibrarySearchPageController extends GetxController {
   set showResults(bool newValue) {
     rxShowResults.value = newValue;
   }
-
-  AdvicesDetailStore advicesDetailStore = Get.put(
-    AdvicesDetailStore(),
-  );
 
   final RxList<AdvicesArticle> rxResultsArticles = <AdvicesArticle>[].obs;
 
@@ -90,11 +85,13 @@ class ContentLibrarySearchPageController extends GetxController {
   }
 
   void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {
-    advicesDetailStore.articleDetail = AdvicesDetailPair(
-      category: category,
-      article: article,
+    Get.toNamed(
+      Routes.articleDetailPage,
+      arguments: AdvicesDetailPair(
+        category: category,
+        article: article,
+      ),
     );
-    Get.toNamed(Routes.articleDetailPage);
   }
 
   bool get pageShouldRefresh {

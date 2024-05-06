@@ -10,9 +10,7 @@ import 'package:lines/core/env/staging_env.dart';
 import 'package:lines/core/helpers/api.dart';
 import 'package:lines/core/helpers/logger/logger.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
-import 'package:lines/data/models/app_config.dart';
 import 'package:lines/data/models/auth_headers.dart';
-import 'package:lines/data/models/session.dart';
 import 'package:lines/flavors.dart';
 
 Future<void> dependencyRegister({
@@ -36,8 +34,6 @@ Future<void> dependencyRegister({
   );
 
   Get.put(AuthHeaders());
-  Get.put(AppConfig());
-  Get.put(Session());
 
   await _registerHive();
 

@@ -4,10 +4,12 @@ import 'package:lines/data/models/mission.dart';
 import 'package:lines/routes/routes.dart';
 
 class MissionsController extends GetxController {
+  List<Mission> get missions => appController.missions.value ?? [];
+
   void navigateToMissionDetails(Mission mission) {
-    appController.selectedMission.value = mission;
     Get.toNamed(
       Routes.missionsDetailsPage,
+      arguments: mission,
     );
   }
 }

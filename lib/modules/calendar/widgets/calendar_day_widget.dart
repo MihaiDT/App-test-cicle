@@ -66,20 +66,21 @@ class CalendarDayWidget extends StatelessWidget {
             ),
           ),
         );
-      }
-      return DottedBorder(
-        borderType: BorderType.Circle,
-        color: singleDayData!.periodPhase.periodColor,
-        dashPattern: const [4],
-        strokeWidth: isAnnualCalendar ? 1 : 2,
-        child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: circleRadius,
-          child: FittedBox(
-            child: _dayNumberText(context),
+      } else if (singleDayData!.isReal == false) {
+        return DottedBorder(
+          borderType: BorderType.Circle,
+          color: singleDayData!.periodPhase.periodColor,
+          dashPattern: const [4],
+          strokeWidth: isAnnualCalendar ? 1 : 2,
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: circleRadius,
+            child: FittedBox(
+              child: _dayNumberText(context),
+            ),
           ),
-        ),
-      );
+        );
+      }
     }
 
     return CircleAvatar(

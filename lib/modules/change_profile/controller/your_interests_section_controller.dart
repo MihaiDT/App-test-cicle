@@ -23,8 +23,9 @@ class YourInterestsSectionController extends GetxController {
   /// Timer for checking changes in selected interests.
   Timer? timer;
 
-  String percentageValue =
-      appController.user.value?.hasCompletedInterests == true ? '' : "20%";
+  RxString percentageValue =
+      (appController.user.value?.hasCompletedInterests == true ? '' : "20%")
+          .obs;
 
   @override
   void onInit() {

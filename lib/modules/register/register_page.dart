@@ -52,7 +52,7 @@ class RegisterPage extends GetView<RegisterController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const TitleMedium(
-                          "Hai un account?",
+                          "Hai già un account?",
                         ),
                         ThemeSizedBox.width4,
                         GestureDetector(
@@ -84,7 +84,7 @@ class RegisterPage extends GetView<RegisterController> {
                   ),
                   ThemeSizedBox.height16,
                   const BodyMedium(
-                    "Registrati per iniziare\n la tua esperienza in myDrop",
+                    "Registrati per iniziare la tua esperienza in My Lines. Se invece hai già un account Lines creato in app o sul sito Lines.it clicca su ACCEDI in basso",
                     textAlign: TextAlign.center,
                   ),
                   ThemeSizedBox.height32,

@@ -10,7 +10,7 @@ class ThemeColor {
   static const Color darkBlue = Color(0xff1f2d4f);
   static const Color brightPink = Color(0xffB438B2);
   static const Color buttonDisableBackGround = Color(0xffdbd7eb);
-  static Color buttonJumpToMonth = const Color(0xffead6e9);
+  static const Color buttonJumpToMonth = Color(0xffead6e9);
 
   static Color primaryOpaque = primary.withOpacity(0.1);
   static Color opaqueWhite = Colors.white.withOpacity(0.3);

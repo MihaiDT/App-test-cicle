@@ -48,5 +48,11 @@ class Routes {
   static const String inviteFriendPage = '/invite_friend_page';
   static const String surveysPage = '/surveys_page';
   static const String yourCoinsPage = '/your_coins_page';
-  static const String historyPage = '/your_coins_page';
+  static const String historyPage = '/history_page';
+  static const String chartsAndStaticsPage = '/charts_and_statics_page';
+  static const String yourMensesStatsPage = '/your_menses_stats_page';
+  static const String settings = '/settings';
+  static const String specificMensesStats = '/specific_menses_stats';
+  static const String tamagochiWebView = '/tamagochi_web_view';
+  static const String confirmTutorEmail = '/confirm_tutor_email';
 }

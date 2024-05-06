@@ -85,8 +85,7 @@ class LoginPage extends GetView<LoginController> {
                   ),
                   ThemeSizedBox.height16,
                   const BodyMedium(
-                    "Inserisci username e password\n"
-                    " per entrare nel tuo account.",
+                    "Inserisci username e password per entrare nel tuo account se hai già un account Lines creato in app o sul sito Lines.it",
                     textAlign: TextAlign.center,
                   ),
                   ThemeSizedBox.height32,

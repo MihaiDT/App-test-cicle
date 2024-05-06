@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/mission.dart';
 import 'package:lines/modules/missions/controllers/missions_controller.dart';
 import 'package:lines/modules/prizes/widgets/mission_container.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -47,60 +46,15 @@ class MissionsPage extends GetView<MissionsController> {
             ),
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 2,
+            itemCount: controller.missions.length,
             itemBuilder: (context, index) {
-              Mission mission = Mission(
-                currentCodes: 2,
-                description:
-                    "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
-                totalCodes: 3,
-                untilDate: "31/10/23",
-              );
               return SizedBox(
                 height: _containerHeight,
                 child: MissionContainer(
                   onTap: () => controller.navigateToMissionDetails(
-                    mission,
+                    controller.missions[index],
                   ),
-                  mission: mission,
-                ),
-              );
-            },
-            separatorBuilder: (context, index) => ThemeSizedBox.height16,
-          ),
-          ThemeSizedBox.height24,
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ThemeSize.paddingSmall,
-            ),
-            child: TitleMedium(
-              "PROSSIME MISSIONI",
-              color: ThemeColor.darkBlue,
-            ),
-          ),
-          ThemeSizedBox.height8,
-          ListView.separated(
-            padding: const EdgeInsets.symmetric(
-              horizontal: ThemeSize.paddingSmall,
-            ),
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 2,
-            itemBuilder: (context, index) {
-              Mission mission = Mission(
-                currentCodes: 2,
-                description:
-                    "Acquista 3 prodotti Lines di cui almeno 1 notte /extra, riceverai un buono sconto su Zalando di 5€",
-                totalCodes: 3,
-                untilDate: "31/10/23",
-              );
-              return SizedBox(
-                height: _containerHeight,
-                child: MissionContainer(
-                  onTap: () => controller.navigateToMissionDetails(
-                    mission,
-                  ),
-                  mission: mission,
+                  mission: controller.missions[index],
                 ),
               );
             },

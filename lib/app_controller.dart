@@ -7,11 +7,15 @@ import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/data/models/period_map.dart';
+import 'package:lines/data/models/periods_stats.dart';
+import 'package:lines/data/models/product_category.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/settings.dart';
+import 'package:lines/data/models/specific_date_period_stats.dart';
 import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
+import 'package:lines/data/models/symtpom_category_stats.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
@@ -63,12 +67,20 @@ class AppController extends GetxController {
 
   final EasyGetter<List<Badge>> badges;
 
-  final Rxn<Mission> selectedMission = Rxn<Mission>();
+  final EasyGetter<List<PeriodsStats>> periodsStats;
+
+  final EasyGetter<SpecificDatePeriodsStats> specificDatePeriodsStats;
+
+  final EasyGetter<List<ProductCategory>> productCategory;
+  final EasyGetter<SymptomCategoryStats> symptomCategoryStats;
+  final EasyGetter<List<Mission>> missions;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
 
   final RxBool showLockPage;
+
+  final RxBool hasUsedDeepLink;
 
   AppController._({
     required this.periodMap,
@@ -87,8 +99,14 @@ class AppController extends GetxController {
     required this.showLockPage,
     required this.symptomCategory,
     required this.categoriesSavedInHome,
+    required this.periodsStats,
+    required this.specificDatePeriodsStats,
+    required this.productCategory,
+    required this.symptomCategoryStats,
+    required this.missions,
     required this.symptomsDiaries,
     required this.badges,
+    required this.hasUsedDeepLink,
   });
 
   factory AppController.initial() {
@@ -109,8 +127,14 @@ class AppController extends GetxController {
       categoriesSavedInHome: EasyGetter<List<SymptomCategory>>(),
       symptomsDiaries: EasyGetter<SymptomDiaries>(),
       badges: EasyGetter<List<Badge>>(),
+      periodsStats: EasyGetter<List<PeriodsStats>>(),
+      specificDatePeriodsStats: EasyGetter<SpecificDatePeriodsStats>(),
+      productCategory: EasyGetter<List<ProductCategory>>(),
+      symptomCategoryStats: EasyGetter<SymptomCategoryStats>(),
+      missions: EasyGetter<List<Mission>>(),
       isLoginFlow: false.obs,
       showLockPage: false.obs,
+      hasUsedDeepLink: false.obs,
     );
   }
 }

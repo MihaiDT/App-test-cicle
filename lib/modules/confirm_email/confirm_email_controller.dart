@@ -5,8 +5,12 @@ import 'package:lines/routes/routes.dart';
 
 class ConfirmEmailController extends GetxController {
   void logIn() {
-    appController.isLoginFlow.value = true;
-    Get.offAllNamed(Routes.login);
+    if (appController.isLoginFlow.value == true) {
+      Get.back();
+    } else {
+      appController.isLoginFlow.value = true;
+      Get.offAllNamed(Routes.login);
+    }
   }
 
   Future<void> sendNewEmail() async {

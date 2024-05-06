@@ -49,16 +49,13 @@ class TutorEmailPage extends GetView<TutorEmailController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ThemeSizedBox.height60,
               const DisplayMedium(
                 "Inserisci la mail di un\n genitore o tutore legale",
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height16,
               const BodyMedium(
-                "Siccome sei ancora minorenne, hai bisogno dell'autorizzazione di un genitore o di un tutore legale per registrarti. "
-                "\nInvieremo una mail all'indirizzo indicato per approvare la tua registrazione. "
-                "\nPuoi stare tranquilla: il tuo account  non sarà mai accessibile ad altri.",
+                "Siccome sei ancora minorenne, hai bisogno che un tuo genitore o tutore visioni e accetti le condizioni dell’app MyLines per poter accedere\ninvieremo una mail all’indirizzoda te indicato. Puoi stare tranquilla: il tuo account non  sarà mai accessibile ad altri",
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,

@@ -189,6 +189,16 @@ class AuthenticationService {
     }
   }
 
+  static Future<void> logout() async {
+    try {
+      await dio.delete(
+        "/auth/logout",
+      );
+    } catch (e) {
+      log.logApiException(e);
+    }
+  }
+
   static Future<void> updateInterests(List<String> interestsId) async {
     try {
       appController.user.responseHandler = ResponseHandler.pending(
@@ -204,6 +214,20 @@ class AuthenticationService {
       _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> sendConsentsEmail([String? legalGuardianEmail]) async {
+    try {
+      final userID = userIDFromDB;
+      await dio.post(
+        "/users/$userID/send_consents_email",
+        data: {
+          "legal_guardian_email": legalGuardianEmail,
+        },
+      );
+    } catch (e) {
       log.logApiException(e);
     }
   }

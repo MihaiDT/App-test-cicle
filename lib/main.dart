@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lines/app.dart';
@@ -9,7 +10,6 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/firebase_options.dart';
 import 'package:lines/flavors.dart';
 import 'package:lines/repository/dio_interceptor.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ _initApp() async {
     flavor: F.appFlavor ?? Flavor.dev,
   );
   await _initNetwork();
-  await _initPackageInfo();
+  _initDeepLinking();
   //await _initFirebase();
 }
 
@@ -46,13 +46,11 @@ _initNetwork() {
   logDebug('Dio inizializzato', tag: 'Network');
 }
 
-_initPackageInfo() async {
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
-  appConfig.appVersion = packageInfo.version;
-  appConfig.buildNumber = packageInfo.buildNumber;
-
-  logDebug(
-    "${appConfig.appVersion} (${appConfig.buildNumber})",
-    tag: "App Version",
-  );
+/// Manage deep linking
+void _initDeepLinking() {
+  final _appLinks = AppLinks();
+  _appLinks.allUriLinkStream.listen((uri) {
+    logDebug('Deep link: $uri', tag: 'DeepLinkDeepLinkDeepLinkDeepLink');
+    appController.hasUsedDeepLink.value = true;
+  });
 }

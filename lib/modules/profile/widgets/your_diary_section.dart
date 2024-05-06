@@ -82,8 +82,11 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
                         padding: const EdgeInsets.only(right: 8),
                         child: SizedBox.square(
                           dimension: 100,
-                          child: ElevatedCard(
-                            color: Colors.white,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 4,

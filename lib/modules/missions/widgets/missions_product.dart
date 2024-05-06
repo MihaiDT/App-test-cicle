@@ -19,8 +19,6 @@ class MissionsProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: dimension,
-      width: dimension,
       decoration: BoxDecoration(
         border: border,
         color: backGroundColor,
@@ -34,6 +32,7 @@ class MissionsProduct extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          ThemeSizedBox.height8,
           Visibility.maintain(
             visible: product.isNight,
             child: Container(
@@ -44,25 +43,30 @@ class MissionsProduct extends StatelessWidget {
                   Radius.circular(4),
                 ),
               ),
-              child: LabelLarge(
+              child: const LabelLarge(
                 "NOTTE",
-                color: backGroundColor,
               ),
             ),
           ),
-          SizedBox.square(
-            dimension: dimension / 2.0,
-            child: product.imageUrl != null
-                ? Image.network(
-                    product.imageUrl!,
-                    fit: BoxFit.cover,
-                  )
-                : const Placeholder(),
+          ThemeSizedBox.height4,
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 23,
+            ),
+            child: SizedBox.square(
+              dimension: 45,
+              child: product.imageUrl != null
+                  ? Image.network(
+                      product.imageUrl!,
+                    )
+                  : const Placeholder(),
+            ),
           ),
           LabelMedium(
             product.name,
             color: ThemeColor.darkBlue,
           ),
+          ThemeSizedBox.height4,
         ],
       ),
     );

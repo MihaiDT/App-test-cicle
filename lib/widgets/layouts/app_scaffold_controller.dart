@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'package:lines/core/utils/helpers.dart';
 
 class AppScaffoldController extends GetxController {
@@ -9,20 +8,12 @@ class AppScaffoldController extends GetxController {
 
   set isBusy(bool newValue) => _isBusy.value = newValue;
 
-  onTapDefaultBeahaviour() {
+  void onTapDefaultBeahaviour() {
     dismissKeyboard(Get.context!);
   }
 
-  onTapView() {
-    dismissKeyboard(Get.context!);
-  }
-
-  onTapBack() {
+  void onTapBack() {
     onTapDefaultBeahaviour();
     Get.back();
-  }
-
-  onTapClose() {
-    onTapBack();
   }
 }

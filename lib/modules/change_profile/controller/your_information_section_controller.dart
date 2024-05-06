@@ -12,7 +12,8 @@ class YourInformationSectionController extends GetxController {
   }
 
   bool get isZipCodeCompleted {
-    return appController.user.value?.profileCompletedAreas?.zipCode ?? false;
+    return appController.user.value?.profileCompletedAreas?.zipCode == true &&
+        user?.zipCode?.isNotEmpty == true;
   }
 
   RxBool isBottomsheetButtonLoading = false.obs;

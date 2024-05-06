@@ -20,6 +20,7 @@ class MissionsHowToParticipateStepTwo extends StatelessWidget {
         ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
           ThemeSizedBox.height20,

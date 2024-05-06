@@ -5,15 +5,10 @@ import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/data/models/advices_category_with_articles.dart';
 import 'package:lines/data/models/advices_sub_category.dart';
-import 'package:lines/modules/advices/controllers/advices_detail_store.dart';
 import 'package:lines/repository/advices_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class AdvicesController extends GetxController {
-  AdvicesDetailStore advicesDetailStore = Get.put(
-    AdvicesDetailStore(),
-  );
-
   @override
   void onReady() async {
     super.onReady();
@@ -27,11 +22,13 @@ class AdvicesController extends GetxController {
   }
 
   void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {
-    advicesDetailStore.articleDetail = AdvicesDetailPair(
-      category: category,
-      article: article,
+    Get.toNamed(
+      Routes.articleDetailPage,
+      arguments: AdvicesDetailPair(
+        category: category,
+        article: article,
+      ),
     );
-    Get.toNamed(Routes.articleDetailPage);
   }
 
   /// Retrieve all categories

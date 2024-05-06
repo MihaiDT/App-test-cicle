@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/routes/routes.dart';
+import 'package:lines/modules/tutor_email/tutor_email_arguments.dart';
 
 class TutorEmailController extends GetxController {
+  final TutorEmailArguments? arguments = Get.arguments;
   final emailController = TextEditingController();
+
   final rxCanProceed = false.obs;
+
+  String get registrationEmail => appController.registerParameter.email;
 
   @override
   void onInit() {
@@ -17,11 +21,13 @@ class TutorEmailController extends GetxController {
   }
 
   bool isValidEmail(String email) {
-    return RegexUtils.isEmail(email);
+    return RegexUtils.isEmail(email) && email != registrationEmail;
   }
 
   void onContinue() {
     appController.registerParameter.legalGuardianEmail = emailController.text;
-    Get.offAndToNamed(Routes.privacy);
+    if (arguments?.onContinue != null) {
+      arguments!.onContinue(emailController.text);
+    }
   }
 }

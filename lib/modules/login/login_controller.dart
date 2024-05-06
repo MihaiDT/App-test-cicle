@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/birth_date/widget/too_young_error_dialog.dart';
 import 'package:lines/modules/login/widget/forgot_password_bottomsheet.dart';
 import 'package:lines/modules/register/widget/activate_email_dialog.dart';
 import 'package:lines/modules/register/widget/email_does_not_exists.dart';
+import 'package:lines/modules/tutor_email/tutor_email_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
@@ -53,7 +55,6 @@ class LoginController extends GetxController {
 
           /// If the email is not active show the dialog
           else if (appController.checkEmail.value?.emailIsActive == false) {
-            print('Email is not active');
             _showValidateEmailDialog();
           }
 
@@ -88,7 +89,33 @@ class LoginController extends GetxController {
         if (callback.isSuccessful) {
           isButtonPending.value = false;
 
-          if (appController.user.value?.routeAfterLogin == "complete_profile") {
+          if (appController.user.value?.appConsents == false) {
+            /// If user has less than 14 years show the dialog and cancel the login
+            if (appController.user.value?.hasMoreThan14Years == false) {
+              Get.dialog(const TooYoungErrorDialog());
+
+              /// If user has more than 14 years but less than 18 years
+              /// needs the confirm from the tutor by email
+            } else if (appController.user.value?.hasMoreThan18Years == false) {
+              Get.toNamed(
+                Routes.tutorEmailPage,
+                arguments: TutorEmailArguments(
+                  onContinue: (tutorEmail) async {
+                    await AuthenticationService.sendConsentsEmail(tutorEmail);
+                    Get.offAndToNamed(
+                      Routes.confirmTutorEmail,
+                      arguments: tutorEmail,
+                    );
+                  },
+                ),
+              );
+            } else {
+              /// Send confirm email
+              AuthenticationService.sendConsentsEmail();
+              Get.toNamed(Routes.confirmEmailPage);
+            }
+          } else if (appController.user.value?.routeAfterLogin ==
+              "complete_profile") {
             Get.offAndToNamed(Routes.lastMensesPage);
           } else {
             Get.offAndToNamed(Routes.main);

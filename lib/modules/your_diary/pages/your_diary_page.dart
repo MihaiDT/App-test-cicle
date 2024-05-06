@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/your_diary/widgets/category_symptom_tile.dart';
 import 'package:lines/modules/your_diary/your_diary_controller.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class YourDiaryPage extends GetView<YourDiaryController> {
@@ -28,32 +30,42 @@ class YourDiaryPage extends GetView<YourDiaryController> {
             textAlign: TextAlign.center,
           ).applyShaders(context),
           ThemeSizedBox.height16,
-          Divider(
-            color: ThemeColor.lightGrey,
-            thickness: 1,
-            indent: ThemeSize.paddingSmall,
-            endIndent: ThemeSize.paddingSmall,
-          ),
-          Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                horizontal: ThemeSize.paddingSmall,
-              ),
-              itemBuilder: (context, index) {
-                return CategorySymptomTile(
-                  imagePath: controller.list[index].iconPath,
-                  title: controller.list[index].name,
+          Obx(
+            () {
+              if (appController
+                      .symptomCategoryStats.responseHandler.isSuccessful &&
+                  controller.symptomCategoryStats != null) {
+                return Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.only(
+                      left: ThemeSize.paddingSmall,
+                      right: ThemeSize.paddingSmall,
+                      bottom: ThemeSize.paddingMedium,
+                    ),
+                    itemBuilder: (context, index) {
+                      return CategorySymptomTile(
+                        canBePressed: controller.symptomCategoryStats!
+                            .symptomsCategories[index].enabled,
+                        imagePath: controller.symptomCategoryStats!
+                            .symptomsCategories[index].iconPath,
+                        title: controller.symptomCategoryStats!
+                            .symptomsCategories[index].name,
+                        onTap: () {
+                          Get.toNamed(Routes.chartsAndStaticsPage);
+                        },
+                      );
+                    },
+                    separatorBuilder: (context, index) => _divider,
+                    itemCount: controller
+                            .symptomCategoryStats?.symptomsCategories.length ??
+                        0,
+                  ),
                 );
-              },
-              separatorBuilder: (context, index) => _divider,
-              itemCount: controller.list.length,
-            ),
-          ),
-          Divider(
-            color: ThemeColor.lightGrey,
-            thickness: 1,
-            indent: ThemeSize.paddingSmall,
-            endIndent: ThemeSize.paddingSmall,
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
         ],
       ),

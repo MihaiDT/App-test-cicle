@@ -1,11 +1,11 @@
-class NewSymptom {
+class Symptom {
   final String id;
   final String code;
   final String name;
   final String iconName;
   final int position;
 
-  NewSymptom({
+  Symptom({
     required this.id,
     required this.code,
     required this.name,
@@ -13,8 +13,8 @@ class NewSymptom {
     required this.position,
   });
 
-  factory NewSymptom.fromJson(Map<String, dynamic> json) {
-    return NewSymptom(
+  factory Symptom.fromJson(Map<String, dynamic> json) {
+    return Symptom(
       id: json['id'],
       code: json['code'],
       name: json['name'],

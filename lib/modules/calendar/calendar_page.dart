@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/modules/calendar/widgets/calendar_app_bar.dart';
 import 'package:lines/modules/calendar/widgets/calendar_bottom_sheet.dart';
 import 'package:lines/modules/calendar/widgets/calendar_month_year_switch.dart';
 import 'package:lines/modules/calendar/widgets/calendar_week_row.dart';
 import 'package:lines/modules/calendar/widgets/calendar_year_body.dart';
 import 'package:lines/modules/calendar/widgets/scrollable_calendar.dart';
-import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/loaders/dark_loader.dart';
@@ -20,7 +19,7 @@ class CalendarPage extends GetView<CalendarController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldPage(
-      appBar: _appBar,
+      appBar: const CalendarAppBar(),
       backgroundImage: ThemeDecoration.images.bgCalendar,
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -120,26 +119,6 @@ class CalendarPage extends GetView<CalendarController> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  PreferredSizeWidget get _appBar {
-    return TransparentAppBar(
-      actions: [
-        InkWell(
-          //TODO: add onTap
-          onTap: () {},
-          child: SvgPicture.asset(
-            ThemeIcon.threeDots,
-            color: ThemeColor.darkBlue,
-          ),
-        ),
-      ],
-      backButtonColor: ThemeColor.darkBlue,
-      title: const TitleLarge(
-        'CALENDARIO',
-        color: ThemeColor.darkBlue,
       ),
     );
   }

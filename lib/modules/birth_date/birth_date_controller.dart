@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/birth_date/widget/too_young_error_dialog.dart';
+import 'package:lines/modules/tutor_email/tutor_email_arguments.dart';
 import 'package:lines/routes/routes.dart';
-import 'package:lines/widgets/layouts/app_scaffold_controller.dart';
 
-class BirthDateController extends AppScaffoldController {
+class BirthDateController extends GetxController {
   final Rx<TextEditingController> dayController = TextEditingController().obs;
   final Rx<TextEditingController> monthController = TextEditingController().obs;
   final Rx<TextEditingController> yearController = TextEditingController().obs;
@@ -110,12 +110,19 @@ class BirthDateController extends AppScaffoldController {
     BuildContext context,
   ) {
     _closeKeyboard;
+    _saveBirthDate(day, month, year);
     if (_isLessThan14Years(day, month, year)) {
       _showError(context);
     } else if (_isAgeBetween13And18(day, month, year)) {
-      Get.toNamed(Routes.tutorEmailPage);
+      Get.toNamed(
+        Routes.tutorEmailPage,
+        arguments: TutorEmailArguments(
+          onContinue: (_) {
+            Get.offAndToNamed(Routes.privacy);
+          },
+        ),
+      );
     } else {
-      _saveBirthDate(day, month, year);
       Get.toNamed(Routes.privacy);
     }
   }

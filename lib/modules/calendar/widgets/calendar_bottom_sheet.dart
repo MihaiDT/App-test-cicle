@@ -162,7 +162,8 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                 // perdite and flusso_mestruale categories should not have the "Aggiungi in home" button because they are always in home
                 if (controller.symptomCategories[index].code != "perdite" &&
                     controller.symptomCategories[index].code !=
-                        "flusso_mestruale") ...[
+                        "flusso_mestruale" &&
+                    controller.isSymptomInHomeActive) ...[
                   const BodySmall(
                     "Aggiungi in home",
                     color: ThemeColor.primary,

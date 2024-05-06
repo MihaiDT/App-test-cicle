@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/change_profile/controller/your_menses_section_controller.dart';
 import 'package:lines/modules/change_profile/widget/information_tile.dart';
+import 'package:lines/routes/routes.dart';
 
 class YourMensesSection extends GetView<YourMensesSectionController> {
   const YourMensesSection({
@@ -34,11 +35,17 @@ class YourMensesSection extends GetView<YourMensesSectionController> {
             InformationTile(
               title: "Durata mestruazioni",
               value: controller.periodDays.toString(),
+              onTap: () {
+                Get.toNamed(Routes.yourMensesStatsPage);
+              },
             ),
             ThemeSizedBox.height8,
             InformationTile(
               title: "Sintomi",
               value: controller.periodDuration.toString(),
+              onTap: () {
+                Get.toNamed(Routes.yourMensesStatsPage);
+              },
             ),
             ThemeSizedBox.height8,
           ],

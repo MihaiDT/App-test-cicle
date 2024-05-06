@@ -43,12 +43,10 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
             children: [
               SizedBox(
                 height: 195,
-                child: controller.selectedMission?.imageUrl?.isNotEmpty == true
-                    ? Image.network(
-                        controller.selectedMission!.imageUrl!,
-                        fit: BoxFit.cover,
-                      )
-                    : const Placeholder(),
+                child: Image.network(
+                  controller.selectedMission.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
               Align(
                 alignment: Alignment.topRight,
@@ -66,7 +64,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                       color: _inProgressBgColor,
                     ),
                     child: BodySmall(
-                      "In corso: ${controller.selectedMission?.currentCodes ?? 0}/${controller.selectedMission?.totalCodes ?? 3}",
+                      "In corso: ${controller.selectedMission.completeCounter}/3",
                     ),
                   ),
                 ),
@@ -74,8 +72,9 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
             ],
           ),
           ThemeSizedBox.height16,
-          TitleMedium(
-            "FINO AL ${controller.selectedMission?.untilDate ?? ""}",
+          const TitleMedium(
+            // TODO: add until date
+            "FINO AL ",
             color: ThemeColor.brightPink,
             textAlign: TextAlign.center,
           ),
@@ -85,7 +84,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
               horizontal: ThemeSize.paddingSmall,
             ),
             child: HeadlineLarge(
-              controller.selectedMission?.description ?? "",
+              controller.selectedMission.description,
               color: ThemeColor.darkBlue,
               textAlign: TextAlign.center,
             ),
@@ -111,6 +110,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                 Product(
                   name: "Lines è",
                   points: 250,
+                  category: "LINES E",
                 ),
               ],
             ),
@@ -134,7 +134,9 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                   "Come partecipare",
                 ).applyShaders(context),
                 ThemeSizedBox.height16,
-                const MissionsHowToParticipateStepOne(),
+                MissionsHowToParticipateStepOne(
+                  mission: controller.selectedMission,
+                ),
                 ThemeSizedBox.height16,
                 const MissionsHowToParticipateStepTwo(),
                 ThemeSizedBox.height16,

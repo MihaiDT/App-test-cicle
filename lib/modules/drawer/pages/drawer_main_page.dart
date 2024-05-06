@@ -71,6 +71,9 @@ class DrawerMainPage extends GetView<DrawerMainPageController> {
               leadingIcon: SvgPicture.asset(
                 ThemeIcon.settings,
               ),
+              onTap: () {
+                Get.offAndToNamed(Routes.settings);
+              },
             ),
             const Divider(
               color: ThemeColor.buttonDisableBackGround,

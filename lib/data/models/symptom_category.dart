@@ -1,4 +1,4 @@
-import 'package:lines/data/models/new_symptom.dart';
+import 'package:lines/data/models/symptom.dart';
 
 class SymptomCategory {
   final String id;
@@ -7,7 +7,7 @@ class SymptomCategory {
   final String iconName;
   final int position;
 
-  final List<NewSymptom> symptoms;
+  final List<Symptom> symptoms;
 
   SymptomCategory({
     required this.id,
@@ -27,7 +27,7 @@ class SymptomCategory {
       position: json['position'],
       symptoms: (json['symptoms'] as List)
           .map(
-            (e) => NewSymptom.fromJson(e),
+            (e) => Symptom.fromJson(e),
           )
           .toList(),
     );
@@ -46,7 +46,7 @@ class SymptomCategory {
 
   String get iconPath => 'assets/icons/symptoms/$iconName';
 
-  NewSymptom getSymptomsFromId(String id) {
+  Symptom getSymptomsFromId(String id) {
     return symptoms.firstWhere((element) => element.id == id);
   }
 }

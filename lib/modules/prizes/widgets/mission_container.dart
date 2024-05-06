@@ -63,24 +63,23 @@ class MissionContainer extends StatelessWidget {
           Column(
             children: [
               Flexible(
-                child: mission.imageUrl != null
-                    ? Image.network(
-                        mission.imageUrl!,
-                        fit: BoxFit.cover,
-                      )
-                    : const Placeholder(),
+                child: Image.network(
+                  mission.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
               Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ThemeSizedBox.height16,
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 16,
                       ),
                       child: TitleMedium(
-                        "FINO AL ${mission.untilDate}",
+                        // TODO add until date
+                        "FINO AL ",
                         color: ThemeColor.brightPink,
                       ),
                     ),
@@ -106,7 +105,7 @@ class MissionContainer extends StatelessWidget {
             child: Align(
               alignment: Alignment.topRight,
               child: MissionProgressIndicator(
-                loadedProducts: mission.currentCodes,
+                loadedProducts: mission.totalCounter,
               ),
             ),
           ),

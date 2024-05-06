@@ -3,7 +3,6 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/expandable/expandable.dart';
-
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class FaqPage extends StatefulWidget {
@@ -16,8 +15,6 @@ class FaqPage extends StatefulWidget {
 }
 
 class _FaqPageState extends State<FaqPage> {
-  bool isExpanded = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

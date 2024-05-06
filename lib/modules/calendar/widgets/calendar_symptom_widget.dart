@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/new_symptom.dart';
+import 'package:lines/data/models/symptom.dart';
 
 class CalendarSymptomWidget extends StatelessWidget {
-  final NewSymptom symptom;
+  final Symptom symptom;
   final bool selected;
   final Function(String) saveSymptom;
 

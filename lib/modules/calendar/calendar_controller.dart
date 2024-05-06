@@ -8,7 +8,7 @@ import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
-import 'package:lines/data/models/new_symptom.dart';
+import 'package:lines/data/models/symptom.dart';
 import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
 import 'package:lines/modules/calendar/calendar_year_controller.dart';
@@ -35,9 +35,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
         selectedTab.value == CalendarTabs.monthTab &&
         (symptomsHasChanged.value ||
             textInputHasChanged.value ||
-            savedCategoryHasChanged)) {
-      print("showSaveButtonSymptoms");
-    }
+            savedCategoryHasChanged)) {}
     return pageShouldRefresh &&
         selectedTab.value == CalendarTabs.monthTab &&
         (symptomsHasChanged.value ||
@@ -422,7 +420,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     return monthMatrix;
   }
 
-  NewSymptom getSymptomFromId(String id) {
+  Symptom getSymptomFromId(String id) {
     return symptomCategories
         .expand((category) => category.symptoms)
         .firstWhere((symptom) => symptom.id == id);
@@ -523,5 +521,10 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       }
     }
     return false;
+  }
+
+  /// Returns true if the feature "Symptoms in home" is active
+  bool get isSymptomInHomeActive {
+    return appController.settings.value?.symptomsInHomeActive ?? false;
   }
 }
