@@ -32,6 +32,8 @@ class User {
   int? profileCompletionPercentage;
   String? routeAfterLogin;
 
+  bool? hasConsentCookie;
+
   User({
     this.active = false,
     this.appConsents = false,
@@ -59,6 +61,7 @@ class User {
     this.isWelcomeQuizCompleted,
     this.profileCompletionPercentage,
     this.routeAfterLogin,
+    this.hasConsentCookie,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -95,6 +98,7 @@ class User {
       isWelcomeQuizCompleted: json['user']['is_welcome_quiz_completed'],
       profileCompletionPercentage: json['user']['profile_percentage'],
       routeAfterLogin: json['user']['route_after_login'],
+      hasConsentCookie: json['user']['cookie_consent'],
     );
   }
 
@@ -129,6 +133,7 @@ class User {
       "is_welcome_quiz_completed": isWelcomeQuizCompleted,
       "profile_percentage": profileCompletionPercentage,
       "route_after_login": routeAfterLogin,
+      "cookie_consent": hasConsentCookie,
     };
   }
 
@@ -145,7 +150,8 @@ class User {
         ' profileCompletedAreas: ${profileCompletedAreas.toString()},'
         ' isWelcomeQuizCompleted: $isWelcomeQuizCompleted,'
         ' profileCompletionPercentage: $profileCompletionPercentage,'
-        ' routeAfterLogin: $routeAfterLogin, }';
+        ' routeAfterLogin: $routeAfterLogin,'
+        ' hasConsentCookie: $hasConsentCookie, }';
   }
 
   bool get hasCompletedInterests {

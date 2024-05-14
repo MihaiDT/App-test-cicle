@@ -3,9 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/drawer/controller/account_page_controller.dart';
+import 'package:lines/modules/drawer/sections/remove_account_section.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
-import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class AccountPage extends GetView<AccountPageController> {
   const AccountPage({
@@ -22,47 +23,82 @@ class AccountPage extends GetView<AccountPageController> {
         ),
         backButtonColor: ThemeColor.darkBlue,
       ),
-      body: BottomWidgetLayout(
-        scrollableAreaPadding: const EdgeInsets.symmetric(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
           horizontal: ThemeSize.paddingSmall,
         ),
-        bottomWidget: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ThemeSize.paddingSmall,
-          ),
-          child: PrimaryButton(
-            onPressed: () {
-              controller.performLogout();
-            },
-            child: const TitleLarge(
-              "LOG OUT",
-            ),
-          ),
-        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const DisplayMedium(
               "Il tuo account MyLines",
             ).applyShaders(context),
             ThemeSizedBox.height32,
-            Row(
-              children: [
-                const DisplayMedium(
-                  "Email",
-                  color: ThemeColor.darkBlue,
-                ),
-                const Spacer(),
-                BodyMedium(
-                  controller.email,
-                  color: ThemeColor.darkBlue,
-                ),
-                ThemeSizedBox.width8,
-                SvgPicture.asset(
-                  ThemeIcon.lock,
-                ),
-              ],
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: ThemeSize.paddingSmall,
+              ),
+              child: Row(
+                children: [
+                  const HeadlineSmall(
+                    "Email",
+                    color: ThemeColor.darkBlue,
+                  ),
+                  const Spacer(),
+                  BodyMedium(
+                    controller.email,
+                    color: ThemeColor.darkBlue,
+                  ),
+                  ThemeSizedBox.width8,
+                  SvgPicture.asset(
+                    ThemeIcon.lock,
+                  ),
+                ],
+              ),
             ),
+            const Divider(),
+            if (controller.showPasswordSection) ...[
+              InkWell(
+                onTap: () {
+                  Get.toNamed(Routes.changePassword);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: ThemeSize.paddingSmall,
+                  ),
+                  child: Row(
+                    children: [
+                      const HeadlineSmall(
+                        "Password",
+                        color: ThemeColor.darkBlue,
+                      ),
+                      const Spacer(),
+                      SvgPicture.asset(
+                        ThemeIcon.arrowRight,
+                        color: ThemeColor.darkBlue,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Divider(),
+            ],
+            Align(
+              alignment: Alignment.centerLeft,
+              child: IntrinsicWidth(
+                child: PrimaryButton(
+                  buttonSize: ButtonSize.h31,
+                  onPressed: () {
+                    controller.performLogout();
+                  },
+                  child: const TitleLarge(
+                    "LOG OUT",
+                  ),
+                ),
+              ),
+            ),
+            ThemeSizedBox.height24,
+            const RemoveAccountSection(),
           ],
         ),
       ),

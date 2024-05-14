@@ -65,9 +65,11 @@ class HowOftenMensesWidget extends StatelessWidget {
   List<Widget> get _pickerChildren {
     return _rangeMenses
         .map(
-          (rangeValue) => HeadlineSmall(
-            "$rangeValue giorni",
-            color: Colors.black,
+          (rangeValue) => Center(
+            child: HeadlineSmall(
+              "$rangeValue giorni",
+              color: Colors.black,
+            ),
           ),
         )
         .toList();

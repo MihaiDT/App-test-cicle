@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/regex_extension.dart';
+import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/birth_date/widget/too_young_error_dialog.dart';
 import 'package:lines/modules/login/widget/forgot_password_bottomsheet.dart';
@@ -13,8 +14,11 @@ import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/repository/social_service.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class LoginController extends GetxController {
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   RxString emailValue = "".obs;
@@ -82,11 +86,21 @@ class LoginController extends GetxController {
       condition: () =>
           Get.currentRoute == Routes.login &&
           appController.checkEmail.responseHandler.isSuccessful,
-      (callback) {
-        if (callback.isPending) {
+      (userStatus) async {
+        if (userStatus.isPending) {
           isButtonPending.value = true;
         }
-        if (callback.isSuccessful) {
+        if (userStatus.isFailed) {
+          if (userStatus.errorType == ErrorType.wrongPassword) {
+            FlushBar(
+              child: const Text(
+                "Password errata",
+              ),
+            ).show(Get.context!);
+          }
+          isButtonPending.value = false;
+        }
+        if (userStatus.isSuccessful) {
           isButtonPending.value = false;
 
           if (appController.user.value?.appConsents == false) {
@@ -111,7 +125,7 @@ class LoginController extends GetxController {
               );
             } else {
               /// Send confirm email
-              AuthenticationService.sendConsentsEmail();
+              await AuthenticationService.sendConsentsEmail();
               Get.toNamed(Routes.confirmEmailPage);
             }
           } else if (appController.user.value?.routeAfterLogin ==

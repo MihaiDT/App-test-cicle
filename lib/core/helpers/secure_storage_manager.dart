@@ -22,4 +22,8 @@ class SecureStorageManager {
   Future<String> getToken() async {
     return await _flutterSecureStorage.read(key: _tokenKey) ?? "";
   }
+
+  Future<void> clearToken() async {
+    await _flutterSecureStorage.delete(key: _tokenKey);
+  }
 }

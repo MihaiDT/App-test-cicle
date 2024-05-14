@@ -62,7 +62,6 @@ class AdvicesPage extends GetView<AdvicesController> {
                     SizedBox(
                       height: 220,
                       child: AdvicesCardsRow(
-                        categories: controller.getAllCategories,
                         onCardTapped: controller.showArticleDetails,
                         withBorder: true,
                         articles: controller.getAllArticles,

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class CustomLogger extends Logger {
@@ -41,11 +42,19 @@ class CustomLogger extends Logger {
   }
 
   void logApiException(
-    dynamic exception,
-  ) {
+    dynamic exception, [
+    StackTrace? stackTrace,
+  ]) {
+    if (stackTrace != null) {
+      stackTrace.printInfo();
+    }
     if (exception is DioException) {
+      String errorMessage = "";
+      if (exception.response != null && exception.response?.statusCode == 422) {
+        errorMessage = exception.response?.data['error'] ?? '';
+      }
       String loggedMessage =
-          "ERROR ${exception.response?.statusCode} | ${exception.response?.statusMessage} \nError at path ${exception.requestOptions.path}";
+          "ERROR ${exception.response?.statusCode} | ${exception.response?.statusMessage} \nError at path ${exception.requestOptions.path}\n ERROR MESSAGE: $errorMessage";
       e(
         loggedMessage,
         error: exception,

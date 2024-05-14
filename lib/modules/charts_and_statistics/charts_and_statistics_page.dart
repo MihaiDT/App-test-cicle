@@ -49,7 +49,9 @@ class ChartsAndStaticsPage extends GetView<ChartsAndStatisticsController> {
             ThemeSizedBox.height24,
             const ChartLegendWidget(),
             ThemeSizedBox.height32,
-            const SymptomResumeSection(),
+            SymptomResumeSection(
+              mensesStatistics: controller.mensesStatistics,
+            ),
           ],
         ),
       ),

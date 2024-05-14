@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/response_handler.dart';
+import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_grouped_by_category.dart';
 import 'package:lines/data/models/badge.dart';
 import 'package:lines/data/models/calendar_data.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/current_period.dart';
+import 'package:lines/data/models/menses_statistics.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/data/models/period_map.dart';
 import 'package:lines/data/models/periods_stats.dart';
@@ -59,6 +61,8 @@ class AppController extends GetxController {
 
   final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
 
+  final EasyGetter<List<AdvicesArticle>> suggestedAdvicesArticle;
+
   final EasyGetter<List<SymptomCategory>> symptomCategory;
 
   final EasyGetter<List<SymptomCategory>> categoriesSavedInHome;
@@ -74,6 +78,7 @@ class AppController extends GetxController {
   final EasyGetter<List<ProductCategory>> productCategory;
   final EasyGetter<SymptomCategoryStats> symptomCategoryStats;
   final EasyGetter<List<Mission>> missions;
+  final EasyGetter<List<MensesStatistics>> mensesStatistics;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
@@ -96,6 +101,7 @@ class AppController extends GetxController {
     required this.currentPeriod,
     required this.isLoginFlow,
     required this.advicesCategories,
+    required this.suggestedAdvicesArticle,
     required this.showLockPage,
     required this.symptomCategory,
     required this.categoriesSavedInHome,
@@ -104,6 +110,7 @@ class AppController extends GetxController {
     required this.productCategory,
     required this.symptomCategoryStats,
     required this.missions,
+    required this.mensesStatistics,
     required this.symptomsDiaries,
     required this.badges,
     required this.hasUsedDeepLink,
@@ -123,6 +130,7 @@ class AppController extends GetxController {
       updateUserParameters: UpdateUserParameters.initial(),
       socialLoginParameter: SocialLoginParameter.initial(),
       advicesCategories: EasyGetter<AdvicesGroupedByCategory>(),
+      suggestedAdvicesArticle: EasyGetter<List<AdvicesArticle>>(),
       symptomCategory: EasyGetter<List<SymptomCategory>>(),
       categoriesSavedInHome: EasyGetter<List<SymptomCategory>>(),
       symptomsDiaries: EasyGetter<SymptomDiaries>(),
@@ -132,6 +140,7 @@ class AppController extends GetxController {
       productCategory: EasyGetter<List<ProductCategory>>(),
       symptomCategoryStats: EasyGetter<SymptomCategoryStats>(),
       missions: EasyGetter<List<Mission>>(),
+      mensesStatistics: EasyGetter<List<MensesStatistics>>(),
       isLoginFlow: false.obs,
       showLockPage: false.obs,
       hasUsedDeepLink: false.obs,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -104,7 +105,8 @@ class CookiePage extends StatelessWidget {
   void _onKnowMoreAboutCookies() {}
 
   void navigateToNextPage() {
-    Get.toNamed(
+    HiveManager.hasAcceptedCookie = true;
+    Get.offAndToNamed(
       appController.isLoginFlow.value == true ? Routes.login : Routes.register,
     );
   }

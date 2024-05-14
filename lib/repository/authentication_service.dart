@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
+import 'package:lines/core/error/error_manager.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
@@ -8,6 +9,7 @@ import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
+import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
@@ -27,7 +29,9 @@ class AuthenticationService {
 
       _saveUserInfo(response);
     } catch (e) {
-      appController.user.responseHandler = ResponseHandler.failed();
+      appController.user.responseHandler = ResponseHandler.failed(
+        errorType: ErrorManager.checkError(e),
+      );
       log.logApiException(e);
     }
   }
@@ -39,7 +43,10 @@ class AuthenticationService {
     try {
       final response = await dio.post(
         "/auth/social_login",
-        data: socialLoginParameter.toJson(),
+        data: {
+          "provider": socialLoginParameter.registrationProvider?.name,
+          "email": socialLoginParameter.email,
+        },
       );
 
       _saveUserInfo(response);
@@ -52,14 +59,15 @@ class AuthenticationService {
   static Future<void> registration(
     RegistrationParameters registerParameter,
   ) async {
+    if (registerParameter.registrationProvider != RegistrationProvider.email) {
+      registerParameter.socialToken = userIDFromDB;
+    }
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
         "/users",
         data: {
-          "user": registerParameter
-            ..socialToken = userIDFromDB
-            ..toJson(),
+          "user": registerParameter.toJson(),
         },
       );
       _saveUserInfo(response);
@@ -77,6 +85,8 @@ class AuthenticationService {
     /// Takes the email from the user saved into state
     final email = appController.user.value?.email ?? '';
     user.email = email;
+
+    user.hasConsentCookie = HiveManager.hasAcceptedCookie;
     appController.user.responseHandler = ResponseHandler.pending(
       content: appController.user.value,
     );
@@ -225,6 +235,19 @@ class AuthenticationService {
         "/users/$userID/send_consents_email",
         data: {
           "legal_guardian_email": legalGuardianEmail,
+        },
+      );
+    } catch (e) {
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> updateCookieConsent() async {
+    try {
+      await dio.post(
+        "/users/$userIDFromDB/cookie_consent",
+        data: {
+          "consent": HiveManager.hasAcceptedCookie,
         },
       );
     } catch (e) {

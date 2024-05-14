@@ -18,31 +18,36 @@ class PrivacyDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RoundedCheckbox(
-          value: value,
-          onChanged: (p0) {
-            onChanged(p0);
-          },
-        ),
-        ThemeSizedBox.width16,
-        Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeadlineMedium(
-                title,
-              ),
-              ThemeSizedBox.height8,
-              BodyMedium(
-                description,
-              ),
-            ],
+    return InkWell(
+      onTap: () {
+        onChanged(!value);
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          IgnorePointer(
+            child: RoundedCheckbox(
+              value: value,
+              onChanged: (p0) {},
+            ),
           ),
-        ),
-      ],
+          ThemeSizedBox.width16,
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                HeadlineMedium(
+                  title,
+                ),
+                ThemeSizedBox.height8,
+                BodyMedium(
+                  description,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

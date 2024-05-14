@@ -110,6 +110,10 @@ class _FlushBarState extends State<FlushBar> with TickerProviderStateMixin {
             key: _key,
             color: Colors.transparent,
             child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
               margin: const EdgeInsets.only(
                 top: ThemeSize.paddingLarge,
                 left: ThemeSize.paddingLarge,

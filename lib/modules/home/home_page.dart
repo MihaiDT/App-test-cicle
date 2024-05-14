@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/home/home_controller.dart';
 import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar.dart';
 import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar_shimmer.dart';
@@ -10,6 +11,7 @@ import 'package:lines/modules/home/widgets/home_period_info/home_period_info.dar
 import 'package:lines/modules/home/widgets/home_period_info/home_period_info_shimmer.dart';
 import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar.dart';
 import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_calendar_shimmer.dart';
+import 'package:lines/modules/home/widgets/mission_row_section.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/welcome_quiz_section.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -48,9 +50,38 @@ class HomePage extends GetView<HomeController> {
                     ? const HomePeriodInfoShimmer()
                     : const HomePeriodInfo(),
               ),
-              if (!controller.isWelcomeQuizCompleted) ...[
+              if (controller.showWelcomeQuizSection) ...[
                 ThemeSizedBox.height32,
                 const WelcomeQuizSection(),
+              ],
+              if (controller.showMissionSection) ...[
+                ThemeSizedBox.height32,
+                const MissionRowSection(),
+              ],
+              if (controller.showSuggestedArticlesSection) ...[
+                ThemeSizedBox.height32,
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: TitleMedium(
+                      'CONTENUTI PER TE',
+                      color: ThemeColor.darkBlue,
+                    ),
+                  ),
+                ),
+                ThemeSizedBox.height16,
+                SizedBox(
+                  height: 220,
+                  child: AdvicesCardsRow(
+                    onCardTapped: (article, category) =>
+                        controller.showArticleDetails(article, category),
+                    withBorder: true,
+                    articles: controller.allSuggestedArticles,
+                  ),
+                ),
               ],
               ThemeSizedBox.height90,
             ],

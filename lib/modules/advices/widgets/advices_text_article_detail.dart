@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/advices_category.dart';
-import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
+import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
+import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
 class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
   const AdvicesTextArticleDetails({
@@ -74,6 +74,7 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                     fontWeight: FontWeight.w500,
                   ),
                   ThemeSizedBox.height60,
+                  const SuggestedArticleSection(),
                 ],
               ),
             ),

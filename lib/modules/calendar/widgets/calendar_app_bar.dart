@@ -54,7 +54,7 @@ class CalendarAppBar extends GetView<CalendarAppBarController>
                 GestureDetector(
                   onTap: () {
                     controller.onActionTap();
-                    Get.toNamed(Routes.chartsAndStaticsPage);
+                    Get.toNamed(Routes.yourDiaryPage);
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

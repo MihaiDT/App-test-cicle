@@ -3,13 +3,11 @@ import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 
 class NameSurnameController extends GetxController {
-  late final TextEditingController nameController;
+  late final TextEditingController nameController = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-    nameController = TextEditingController();
-  }
+  final TextEditingController surnameController = TextEditingController();
+
+  final TextEditingController nicknameController = TextEditingController();
 
   @override
   void onReady() {
@@ -19,13 +17,17 @@ class NameSurnameController extends GetxController {
     }
   }
 
-  final TextEditingController surnameController = TextEditingController();
-
-  final TextEditingController nicknameController = TextEditingController();
-
   RxString nameValue = "".obs;
   RxString surnameValue = "".obs;
 
   bool get canProceed =>
       nameValue.value.isNotEmpty && surnameValue.value.isNotEmpty;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    surnameController.dispose();
+    nicknameController.dispose();
+    super.dispose();
+  }
 }

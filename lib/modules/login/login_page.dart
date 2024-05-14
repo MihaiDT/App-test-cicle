@@ -13,7 +13,6 @@ import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_loading_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
-import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({
@@ -28,144 +27,141 @@ class LoginPage extends GetView<LoginController> {
           extendBodyBehindAppBar: true,
           backgroundImage: ThemeDecoration.images.bgDark,
           appBar: const TransparentAppBar(),
-          body: SafeArea(
-            child: BottomWidgetLayout(
-              scrollableAreaPadding: const EdgeInsets.only(
-                left: ThemeSize.paddingLarge,
-                right: ThemeSize.paddingLarge,
+          body: ListView(
+            padding: EdgeInsets.only(
+              left: ThemeSize.paddingLarge,
+              right: ThemeSize.paddingLarge,
+              top: MediaQuery.of(context).padding.top * 1.5,
+            ),
+            children: [
+              SvgPicture.asset(
+                ThemeIcon.logo,
+                height: 85,
+                width: 70,
               ),
-              bottomWidget: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SecondaryLoadingButton(
-                      isLoading: controller.isButtonPending.value,
-                      onPressed: controller.canProceed.value
-                          ? controller.onButtonPressed
-                          : null,
-                      child: const TitleLarge(
-                        "AVANTI",
-                      ).applyShaders(context),
+              ThemeSizedBox.height16,
+              const DisplayMedium(
+                "Accedi a My Lines",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height16,
+              const BodyMedium(
+                "Inserisci username e password se hai già un account Lines creato in app o sul sito Lines.it",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height32,
+              const TitleLarge(
+                "USA I TUOI SOCIAL",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height24,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.facebook,
+                    onTap: () => controller.socialLogin(
+                      RegistrationProvider.facebook,
                     ),
-                    ThemeSizedBox.height16,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const TitleMedium(
-                          "Non hai un account?",
-                        ),
-                        ThemeSizedBox.width4,
-                        GestureDetector(
-                          onTap: () {
-                            Get.offAndToNamed(
-                              Routes.register,
-                            );
-                          },
-                          child: const TitleMedium(
-                            "REGISTRATI",
-                            underline: true,
-                          ),
-                        ),
-                      ],
+                  ),
+                  ThemeSizedBox.width40,
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.google,
+                    onTap: () => controller.socialLogin(
+                      RegistrationProvider.google,
+                    ),
+                  ),
+                  if (Platform.isIOS) ...[
+                    ThemeSizedBox.width40,
+                    LinkAccountWidget(
+                      imagePath: ThemeImage.apple,
+                      onTap: () => controller.socialLogin(
+                        RegistrationProvider.apple,
+                      ),
                     ),
                   ],
+                ],
+              ),
+              ThemeSizedBox.height32,
+              const DividerSection(),
+              ThemeSizedBox.height32,
+              InputTextField(
+                label: "EMAIL",
+                placeholder: 'Inserisci la tua email',
+                keyboardType: TextInputType.emailAddress,
+                textCapitalization: TextCapitalization.none,
+                textEditingController: controller.emailController,
+                onChanged: (text) {
+                  controller.emailValue.value = text;
+                },
+                onEditingComplete: controller.isEmailValid,
+                onSubmitted: (text) {
+                  FocusScope.of(context)
+                      .requestFocus(controller.passwordFocusNode);
+                },
+                focusNode: controller.emailFocusNode,
+              ),
+              ThemeSizedBox.height24,
+              Obx(
+                () {
+                  return InputTextField(
+                    label: "Password",
+                    placeholder: 'Inserisci la password',
+                    textCapitalization: TextCapitalization.none,
+                    textEditingController: controller.passwordController,
+                    isPassword: true,
+                    obscureText: controller.hidePassword.value,
+                    onTapTogglePassword: () {
+                      controller.hidePassword.value =
+                          !controller.hidePassword.value;
+                    },
+                    focusNode: controller.passwordFocusNode,
+                  );
+                },
+              ),
+              ThemeSizedBox.height16,
+              GestureDetector(
+                onTap: () {
+                  controller.onForgotPasswordTap(context);
+                },
+                child: const TitleMedium(
+                  "PASSWORD DIMENTICATA?",
+                  textAlign: TextAlign.center,
+                  underline: true,
                 ),
               ),
-              child: Column(
+              ThemeSizedBox.height32,
+              SecondaryLoadingButton(
+                isLoading: controller.isButtonPending.value,
+                onPressed: controller.canProceed.value
+                    ? controller.onButtonPressed
+                    : null,
+                child: const TitleLarge(
+                  "AVANTI",
+                ).applyShaders(context),
+              ),
+              ThemeSizedBox.height16,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    ThemeIcon.logo,
-                    height: 85,
-                    width: 70,
+                  const TitleMedium(
+                    "Non hai un account?",
                   ),
-                  ThemeSizedBox.height16,
-                  const DisplayMedium(
-                    "Accedi a myDrop",
-                  ),
-                  ThemeSizedBox.height16,
-                  const BodyMedium(
-                    "Inserisci username e password per entrare nel tuo account se hai già un account Lines creato in app o sul sito Lines.it",
-                    textAlign: TextAlign.center,
-                  ),
-                  ThemeSizedBox.height32,
-                  const TitleLarge(
-                    "USA I TUOI SOCIAL",
-                    textAlign: TextAlign.center,
-                  ),
-                  ThemeSizedBox.height24,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      LinkAccountWidget(
-                        imagePath: ThemeImage.facebook,
-                        onTap: () => controller.socialLogin(
-                          RegistrationProvider.facebook,
-                        ),
-                      ),
-                      ThemeSizedBox.width40,
-                      LinkAccountWidget(
-                        imagePath: ThemeImage.google,
-                        onTap: () => controller.socialLogin(
-                          RegistrationProvider.google,
-                        ),
-                      ),
-                      if (Platform.isIOS) ...[
-                        ThemeSizedBox.width40,
-                        LinkAccountWidget(
-                          imagePath: ThemeImage.apple,
-                          onTap: () => controller.socialLogin(
-                            RegistrationProvider.apple,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                  ThemeSizedBox.height32,
-                  const DividerSection(),
-                  ThemeSizedBox.height32,
-                  InputTextField(
-                    label: "EMAIL",
-                    placeholder: 'Inserisci la tua email',
-                    keyboardType: TextInputType.emailAddress,
-                    textCapitalization: TextCapitalization.none,
-                    textEditingController: controller.emailController,
-                    onChanged: (text) {
-                      controller.emailValue.value = text;
-                    },
-                    onEditingComplete: controller.isEmailValid,
-                  ),
-                  ThemeSizedBox.height24,
-                  Obx(
-                    () {
-                      return InputTextField(
-                        label: "Password",
-                        placeholder: 'Inserisci la password',
-                        textCapitalization: TextCapitalization.none,
-                        textEditingController: controller.passwordController,
-                        isPassword: true,
-                        obscureText: controller.hidePassword.value,
-                        onTapTogglePassword: () {
-                          controller.hidePassword.value =
-                              !controller.hidePassword.value;
-                        },
-                      );
-                    },
-                  ),
-                  ThemeSizedBox.height16,
+                  ThemeSizedBox.width4,
                   GestureDetector(
                     onTap: () {
-                      controller.onForgotPasswordTap(context);
+                      Get.offAndToNamed(
+                        Routes.register,
+                      );
                     },
                     child: const TitleMedium(
-                      "PASSWORD DIMENTICATA?",
-                      textAlign: TextAlign.center,
+                      "REGISTRATI",
                       underline: true,
                     ),
                   ),
                 ],
               ),
-            ),
+            ],
           ),
         );
       },

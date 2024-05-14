@@ -7,6 +7,7 @@ import 'package:lines/badges/pages/badges_page.dart';
 import 'package:lines/modules/access_wrapper/wrapper_access_widget.dart';
 import 'package:lines/modules/advices/advices_detail_page.dart';
 import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
+import 'package:lines/modules/advices/binding/suggested_article_section_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_page.dart';
 import 'package:lines/modules/calendar/calendar_app_bar_binding.dart';
@@ -30,11 +31,14 @@ import 'package:lines/modules/content_library/content_library_page.dart';
 import 'package:lines/modules/content_library/content_library_search_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
 import 'package:lines/modules/drawer/binding/account_binding.dart';
+import 'package:lines/modules/drawer/binding/change_password_binding.dart';
 import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
 import 'package:lines/modules/drawer/pages/account_page.dart';
+import 'package:lines/modules/drawer/pages/change_password_page.dart';
 import 'package:lines/modules/drawer/pages/faq_page.dart';
 import 'package:lines/modules/history/history_binding.dart';
 import 'package:lines/modules/history/history_page.dart';
+import 'package:lines/modules/home/bindings/mission_row_section_binding.dart';
 import 'package:lines/modules/home/home_binding.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/binding/welcome_quiz_card_binding.dart';
 import 'package:lines/modules/how_long_menses/binding/how_long_menses_binding.dart';
@@ -304,6 +308,7 @@ class Pages {
         DrawerMainPageBinding(),
         ProfileCompletionPercentageBinding(),
         MyBadgesBinding(),
+        MissionRowSectionBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const MainPage(),
@@ -358,6 +363,7 @@ class Pages {
       name: Routes.articleDetailPage,
       bindings: [
         AdvicesDetailBinding(),
+        SuggestedArticleSectionBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const AdvicesDetailPage(),
@@ -606,6 +612,17 @@ class Pages {
       page: () => _mediaQueryWrapper(
         authNeeded: false,
         const ConfirmTutorEmailPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// ChangePasswordPage
+    GetPage(
+      name: Routes.changePassword,
+      binding: ChangePasswordBinding(),
+      page: () => _mediaQueryWrapper(
+        authNeeded: false,
+        const ChangePasswordPage(),
       ),
       transition: Transition.rightToLeft,
     ),

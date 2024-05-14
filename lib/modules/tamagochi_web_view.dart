@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -47,6 +49,17 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
           ),
           onWebViewCreated: (controller) {
             webViewController = controller;
+          },
+          initialUserScripts: UnmodifiableListView<UserScript>([
+            UserScript(
+              source: "function showToast(message) { alert(message) }",
+              injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+            ),
+          ]),
+          onLoadStop: (controller, url) async {
+            await controller.evaluateJavascript(
+              source: "showToast('Hello from Dart!');",
+            );
           },
         ),
       ),

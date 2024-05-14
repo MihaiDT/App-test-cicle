@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_category.dart';
@@ -8,14 +7,12 @@ import 'package:lines/modules/advices/widgets/advice_card.dart';
 class AdvicesCardsRow extends StatelessWidget {
   final bool withBorder;
   final List<AdvicesArticle> articles;
-  final List<AdvicesCategory> categories;
   final Function(AdvicesArticle, AdvicesCategory)? onCardTapped;
 
   const AdvicesCardsRow({
     this.onCardTapped,
     this.withBorder = false,
     required this.articles,
-    required this.categories,
     super.key,
   });
 

@@ -10,7 +10,7 @@ class SymptomCategoryStats {
   factory SymptomCategoryStats.fromJson(Map<String, dynamic> json) {
     return SymptomCategoryStats(
       symptomsCategories: List<SingleCategoryStats>.from(
-        json['symptoms_category_stats'].map(
+        json['stats'].map(
           (singleCategoryStats) => SingleCategoryStats.fromJson(
             singleCategoryStats,
           ),

@@ -21,9 +21,9 @@ class WelcomeWalkthroughPage extends StatelessWidget {
         },
         pagesData: [
           WalkthroughData(
-            title: "Personalizza la tua Cherry e gioca",
+            title: "Personalizza Cherry, la mascotte di My Lines",
             description:
-                "Personalizza la tua Cherry come più ti piace per rendere l'app ancora più tua!\nE quando ha i le mestruazioni non dimenticare di giocare e prenderti cura di lei.",
+                "Cherry è la simpatica goccina che seguirà tutte le fasi del tuo ciclo mestruale. Personalizzala scegliendo tra tantissime espressioni ed accessori e prenditi cura di lei durante le mestruazioni.",
             image: Image.asset(
               ThemeImage.walkthrough1,
             ),
@@ -31,15 +31,15 @@ class WelcomeWalkthroughPage extends StatelessWidget {
           WalkthroughData(
             title: "Monitora il ciclo mestruale",
             description:
-                "Tieni sempre sotto controllo il tuo calendario mestruale, monitora i sintomi, registra l'attività sessuale e prendi nota dell'andamento del tuo benessere lungo tutto il mese.",
+                "Aggiungi le tue ultime mestruazioni nel calendario per seguire e tenere sotto controllo il tuo ciclo.",
             image: Image.asset(
               ThemeImage.walkthrough2,
             ),
           ),
           WalkthroughData(
-            title: "Consigli e contenuti di esperti solo per te",
+            title: "Esplora un mondo di contenuti e consigli per te",
             description:
-                "Accedi a tanti contenuti creati per te dai nostri esperti e professionisti e approfondisci i topic più rilevanti per la fase del ciclo in cui ti trovi.",
+                "Articoli, tips e video divisi per area tematica per rispondere a tanti dubbi e curiosità sul mondo femminile.",
             image: Image.asset(
               ThemeImage.walkthrough3,
             ),

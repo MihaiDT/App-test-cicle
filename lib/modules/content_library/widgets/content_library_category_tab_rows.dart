@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:lines/core/app_theme.dart';
-
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
@@ -61,7 +59,6 @@ class ContentLibraryCategoryTabRows extends StatelessWidget {
                 height: 220,
                 child: AdvicesCardsRow(
                   onCardTapped: onCardTapped,
-                  categories: allCategoriesWithArticles.keys.toList(),
                   articles: allArticlesForCategory,
                 ),
               ),

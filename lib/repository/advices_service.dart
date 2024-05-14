@@ -19,6 +19,21 @@ class AdvicesService {
     }
   }
 
+  static Future<void> fetchSuggestedArticles() async {
+    try {
+      appController.suggestedAdvicesArticle.responseHandler =
+          ResponseHandler.pending();
+      final response = await dio.get(
+        "/articles/suggested",
+      );
+      _saveSuggestedArticle(response);
+    } catch (e) {
+      appController.suggestedAdvicesArticle.responseHandler =
+          ResponseHandler.failed();
+      log.logError(e);
+    }
+  }
+
   static Future<void> addArticleToFav(AdvicesArticle article) async {
     try {
       await dio.post(
@@ -45,6 +60,17 @@ class AdvicesService {
       content: AdvicesGroupedByCategory.fromJson(
         response.data,
       ),
+    );
+  }
+
+  static void _saveSuggestedArticle(Response response) {
+    appController.suggestedAdvicesArticle.responseHandler =
+        ResponseHandler.successful(
+      content: response.data["suggested"]
+          .map<AdvicesArticle>(
+            (article) => AdvicesArticle.fromJson(article),
+          )
+          .toList(),
     );
   }
 }

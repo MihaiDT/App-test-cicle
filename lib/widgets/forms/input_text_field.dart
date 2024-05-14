@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:lines/core/app_theme.dart';
 
 class InputTextField extends StatelessWidget {
@@ -21,6 +20,7 @@ class InputTextField extends StatelessWidget {
   final TextInputAction textInputAction;
   final GestureTapCallback? onTapTogglePassword;
   final Function? onEditingComplete;
+  final Function? onSubmitted;
   final Function(String txt)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
   final String errorMessage;
@@ -40,6 +40,7 @@ class InputTextField extends StatelessWidget {
     this.obscureText = false,
     this.onChanged,
     this.onEditingComplete,
+    this.onSubmitted,
     this.onTapTogglePassword,
     this.placeholder,
     this.contentPaddingLeft = 32,
@@ -86,6 +87,8 @@ class InputTextField extends StatelessWidget {
           onChanged: (value) => onChanged != null ? onChanged!(value) : {},
           onEditingComplete: () =>
               onEditingComplete != null ? onEditingComplete!() : {},
+          onFieldSubmitted: (value) =>
+              onSubmitted != null ? onSubmitted!(value) : {},
           scrollPadding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom + 20,
           ),

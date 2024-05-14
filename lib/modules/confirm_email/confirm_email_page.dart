@@ -70,7 +70,7 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                   controller.email,
                 ),
                 const BodyMedium(
-                  "Visiona e accetta le condizioni di utilizzo per poter accedere all'app.",
+                  "Visiona e accetta le condizioni di utilizzo per poter accedere all'app e conferma la tua registrazione cliccando sul link apposito.",
                   textAlign: TextAlign.center,
                 ),
                 ThemeSizedBox.height32,

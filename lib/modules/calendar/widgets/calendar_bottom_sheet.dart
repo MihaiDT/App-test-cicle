@@ -38,69 +38,70 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                 );
               },
             ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(top: 40),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 50,
-                      color: Colors.black.withOpacity(0.2),
-                      offset: const Offset(0, -10),
-                      spreadRadius: 10,
+            if (controller.userIsAdult)
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 40),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 50,
+                        color: Colors.black.withOpacity(0.2),
+                        offset: const Offset(0, -10),
+                        spreadRadius: 10,
+                      ),
+                    ],
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
-                  ],
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  image: DecorationImage(
-                    image: AssetImage(
-                      ThemeImage.bgCalendarBottomSheet,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        ThemeImage.bgCalendarBottomSheet,
+                      ),
+                      fit: BoxFit.cover,
                     ),
-                    fit: BoxFit.cover,
                   ),
-                ),
-                child: ListView(
-                  shrinkWrap: true,
-                  controller: scrollController,
-                  padding: EdgeInsets.zero,
-                  children: [
-                    ThemeSizedBox.height8,
-                    const BottomSheetDragger(),
-                    ThemeSizedBox.height12,
-                    _selectedDateLabel(),
-                    ThemeSizedBox.height16,
-                    Obx(
-                      () {
-                        return Visibility(
-                          visible: controller.showRecapMenu.value,
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: ThemeSize.paddingSmall,
+                  child: ListView(
+                    shrinkWrap: true,
+                    controller: scrollController,
+                    padding: EdgeInsets.zero,
+                    children: [
+                      ThemeSizedBox.height8,
+                      const BottomSheetDragger(),
+                      ThemeSizedBox.height12,
+                      _selectedDateLabel(),
+                      ThemeSizedBox.height16,
+                      Obx(
+                        () {
+                          return Visibility(
+                            visible: controller.showRecapMenu.value,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: ThemeSize.paddingSmall,
+                              ),
+                              child: CalendarBottomSheetRecap(),
                             ),
-                            child: CalendarBottomSheetRecap(),
-                          ),
-                        );
-                      },
-                    ),
-                    const DisplayMedium(
-                      'Aggiungi sintomi e attività',
-                      textAlign: TextAlign.center,
-                    ).applyShaders(context),
-                    ThemeSizedBox.height24,
-                    Obx(
-                      () {
-                        return controller.bottomSheetIsPending.value
-                            ? calendarBottomsheetBody(context)
-                            : const SizedBox();
-                      },
-                    ),
-                    ThemeSizedBox.height48,
-                  ],
+                          );
+                        },
+                      ),
+                      const DisplayMedium(
+                        'Aggiungi sintomi e attività',
+                        textAlign: TextAlign.center,
+                      ).applyShaders(context),
+                      ThemeSizedBox.height24,
+                      Obx(
+                        () {
+                          return controller.bottomSheetIsPending.value
+                              ? calendarBottomsheetBody(context)
+                              : const SizedBox();
+                        },
+                      ),
+                      ThemeSizedBox.height48,
+                    ],
+                  ),
                 ),
               ),
-            ),
           ],
         );
       },

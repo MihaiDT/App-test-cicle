@@ -55,7 +55,7 @@ class TutorEmailPage extends GetView<TutorEmailController> {
               ),
               ThemeSizedBox.height16,
               const BodyMedium(
-                "Siccome sei ancora minorenne, hai bisogno che un tuo genitore o tutore visioni e accetti le condizioni dell’app MyLines per poter accedere\ninvieremo una mail all’indirizzoda te indicato. Puoi stare tranquilla: il tuo account non  sarà mai accessibile ad altri",
+                "Siccome sei ancora minorenne, hai bisogno che un tuo genitore o tutore visioni e accetti le condizioni dell’app My Lines per poter accedere\ninvieremo una mail all’indirizzo da te indicato. Puoi stare tranquilla: il tuo account non  sarà mai accessibile ad altri.",
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,

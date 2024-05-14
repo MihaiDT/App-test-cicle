@@ -10,6 +10,8 @@ import 'package:lines/repository/social_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class RegisterController extends GetxController {
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   RxString emailValue = "".obs;

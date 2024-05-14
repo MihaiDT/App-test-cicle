@@ -48,7 +48,7 @@ class ReferralController extends GetxController {
     referralCodeController.dispose();
   }
 
-  int get coinValue => appController.settings.value?.invitationCodeCoins ?? 25;
+  int get coinValue => appController.settings.value?.invitationCodeCoins ?? 50;
 
   TextEditingController referralCodeController = TextEditingController();
 
@@ -77,6 +77,7 @@ class ReferralController extends GetxController {
       await AuthenticationService.completeUserRegistration(
         appController.updateUserParameters,
       );
+      await AuthenticationService.updateCookieConsent();
     }
   }
 }

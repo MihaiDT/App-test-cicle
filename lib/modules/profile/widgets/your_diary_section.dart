@@ -12,6 +12,9 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
 
   @override
   Widget build(BuildContext context) {
+    if (!controller.isUserAdult) {
+      return const SizedBox.shrink();
+    }
     return ElevatedCard(
       color: Colors.white.withOpacity(0.9),
       child: Column(

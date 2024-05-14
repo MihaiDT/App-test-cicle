@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:scroll_snap_list/scroll_snap_list.dart';
-
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/modules/home/home_controller.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class HomeHorizontalCalendar extends GetView<HomeController> {
-  const HomeHorizontalCalendar({super.key});
+  const HomeHorizontalCalendar({
+    super.key,
+  });
 
   String get _selectedDateFormatYMD => controller.currentPeriodDatesMap.keys
       .toList()[controller.periodSelectedDateIndex];
@@ -25,20 +27,23 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
       width: Get.width,
       child: Stack(
         children: [
-          ScrollSnapList(
-            key: controller.scrollSnapListKey,
-            dynamicItemSize: false,
-            focusOnItemTap: true,
-            initialIndex: controller.periodSelectedDateIndex.toDouble(),
-            itemBuilder: _buildListItem,
-            itemCount: dateKeys.length,
-            // 7 days * 7 weeks
-            itemSize: Get.width / 7,
-            // Dimensione singolo giorno del calendario
-            onItemFocus: (index) => controller.periodSelectedDateIndex = index,
-            updateOnScroll: false,
-            shrinkWrap: true,
-          ),
+          dateKeys.isNotEmpty
+              ? ScrollSnapList(
+                  key: controller.scrollSnapListKey,
+                  dynamicItemSize: false,
+                  focusOnItemTap: true,
+                  initialIndex: controller.periodSelectedDateIndex.toDouble(),
+                  itemBuilder: _buildListItem,
+                  itemCount: dateKeys.length,
+                  // 7 days * 7 weeks
+                  itemSize: Get.width / 7,
+                  // Dimensione singolo giorno del calendario
+                  onItemFocus: (index) =>
+                      controller.periodSelectedDateIndex = index,
+                  updateOnScroll: false,
+                  shrinkWrap: true,
+                )
+              : _buildFakeCalendar(context),
           Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 12.0),
@@ -59,7 +64,37 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
     );
   }
 
-  /// Private methods
+  /// When the user hasn't inserted any period, we show a fake calendar
+  Widget _buildFakeCalendar(BuildContext context) {
+    return Row(
+      children: List.generate(
+        generateDateList().length,
+        (index) {
+          return SizedBox(
+            width: _cellWidth,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  generateDateList()[index].isToday
+                      ? 'OGGI'
+                      : _weekDayFromDate(generateDateList()[index]),
+                  style: NewThemeTextStyle.horizontalCalendarWDayToday,
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  generateDateList()[index].day.toString(),
+                  style: NewThemeTextStyle.horizontalCalendarDate,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   Widget _buildListItem(BuildContext context, int index) {
     return SizedBox(
@@ -73,9 +108,20 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
           ),
         ),
       ),
-
-      //
     );
+  }
+
+  List<DateTime> generateDateList() {
+    DateTime today = DateTime.now();
+
+    List<DateTime> dateList = [];
+
+    for (int i = -3; i <= 3; i++) {
+      DateTime date = today.add(Duration(days: i));
+      dateList.add(date);
+    }
+
+    return dateList;
   }
 
   Widget _dayFromDate({required String formattedDateYMD, required int index}) {

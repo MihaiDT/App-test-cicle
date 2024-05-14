@@ -1,7 +1,7 @@
 import 'package:lines/data/models/advices_category.dart';
 
 class AdvicesArticle {
-  final String categoryName;
+  final String? categoryName;
   final String subCategoryName;
   final String id;
   final ArticleType typology;
@@ -19,7 +19,7 @@ class AdvicesArticle {
   late final String? videoUrl;
 
   AdvicesArticle.textType({
-    required this.categoryName,
+    this.categoryName,
     required this.subCategoryName,
     required this.id,
     required this.isFavorite,
@@ -39,7 +39,7 @@ class AdvicesArticle {
   }
 
   AdvicesArticle.sliderType({
-    required this.categoryName,
+    this.categoryName,
     required this.subCategoryName,
     required this.id,
     required this.isFavorite,
@@ -59,7 +59,7 @@ class AdvicesArticle {
   }
 
   AdvicesArticle.videoType({
-    required this.categoryName,
+    this.categoryName,
     required this.subCategoryName,
     required this.id,
     required this.isFavorite,
@@ -170,6 +170,11 @@ class AdvicesArticle {
     }
 
     return json;
+  }
+
+  @override
+  String toString() {
+    return 'AdvicesArticle{categoryName: $categoryName, subCategoryName: $subCategoryName, id: $id, typology: $typology, title: $title, disclaimer: $disclaimer, isFavorite: $isFavorite, isNew: $isNew, iconName: $iconName, coverImageUrl: $coverImageUrl, slideshowImageUrls: $slideshowImageUrls, shortDescription: $shortDescription, text: $text, thumbImageUrl: $thumbImageUrl, videoImagePreviewUrl: $videoImagePreviewUrl, videoUrl: $videoUrl}';
   }
 }
 

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/welcome/welcome_controller.dart';
 import 'package:lines/modules/welcome/widgets/welcome_signin_button.dart';
-import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 import 'package:lines/widgets/logos/hero_logo.dart';
@@ -15,6 +14,8 @@ class WelcomePage extends GetView<WelcomeController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldPage(
+      appBar: const TransparentAppBar(),
+      extendBodyBehindAppBar: true,
       backgroundImage: ThemeDecoration.images.bgDark,
       scrollController: ScrollController(),
       body: SafeArea(
@@ -41,12 +42,7 @@ class WelcomePage extends GetView<WelcomeController> {
                     ),
                     ThemeSizedBox.width4,
                     GestureDetector(
-                      onTap: () {
-                        appController.isLoginFlow.value = true;
-                        Get.toNamed(
-                          Routes.cookie,
-                        );
-                      },
+                      onTap: controller.onTapLogin,
                       child: const TitleMedium(
                         "ACCEDI",
                         underline: true,
@@ -75,11 +71,16 @@ class WelcomePage extends GetView<WelcomeController> {
                     textAlign: TextAlign.center,
                   ),
                   ThemeSizedBox.height20,
-                  BodyLarge(
-                    controller.startAnimation
-                        ? "La tua nuova app per vivere e monitorare\nil ciclo mestruale in modo positivo,\nconsapevole e divertente.\n\nSei pronta?"
-                        : '',
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: ThemeSize.paddingLarge,
+                    ),
+                    child: BodyLarge(
+                      controller.startAnimation
+                          ? "Un mondo di contenuti e consigli sull'universo femminile, tanti fantastici premi e sconti pensati per te e una simpatica mascotte di cui prenderti cura!\n\n Cosa aspetti?"
+                          : '',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               );

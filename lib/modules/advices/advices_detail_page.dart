@@ -18,7 +18,20 @@ class AdvicesDetailPage extends GetView<AdvicesDetailController> {
         case (ArticleType.text):
           return const AdvicesTextArticleDetails();
         case (ArticleType.slider):
-          return const AdvicesSliderArticleDetail();
+          return Obx(
+            () {
+              return AdvicesSliderArticleDetail(
+                category: controller.category,
+                article: controller.article,
+                isArticleFav: controller.isArticleFav.value,
+                images: controller.getSliderImages,
+                currentSlide: controller.currentSlide.value,
+                onFavChanged: (isFav) =>
+                    controller.updateArticleFavStatus(isFav),
+                onSlideChanged: (value) => controller.onSlideChanged(value),
+              );
+            },
+          );
         case (ArticleType.video):
           return const AdvicesVideoArticleDetail();
       }

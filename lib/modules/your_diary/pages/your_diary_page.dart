@@ -4,7 +4,6 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/your_diary/widgets/category_symptom_tile.dart';
 import 'package:lines/modules/your_diary/your_diary_controller.dart';
-import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class YourDiaryPage extends GetView<YourDiaryController> {
@@ -43,16 +42,14 @@ class YourDiaryPage extends GetView<YourDiaryController> {
                       bottom: ThemeSize.paddingMedium,
                     ),
                     itemBuilder: (context, index) {
+                      final currentCategory = controller
+                          .symptomCategoryStats!.symptomsCategories[index];
                       return CategorySymptomTile(
-                        canBePressed: controller.symptomCategoryStats!
-                            .symptomsCategories[index].enabled,
-                        imagePath: controller.symptomCategoryStats!
-                            .symptomsCategories[index].iconPath,
-                        title: controller.symptomCategoryStats!
-                            .symptomsCategories[index].name,
-                        onTap: () {
-                          Get.toNamed(Routes.chartsAndStaticsPage);
-                        },
+                        canBePressed: currentCategory.enabled,
+                        imagePath: currentCategory.iconPath,
+                        title: currentCategory.name,
+                        onTap: () => controller
+                            .onSymptomCategoryPressed(currentCategory.id),
                       );
                     },
                     separatorBuilder: (context, index) => _divider,

@@ -47,6 +47,10 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     return selectedTab.value == CalendarTabs.monthTab;
   }
 
+  bool get userIsAdult {
+    return appController.user.value?.hasMoreThan18Years == true;
+  }
+
   RxBool get symptomsHasChanged {
     final symptomsIDsSet = symptomIds.toSet();
     final symptomsIDsSetFromDiaries =
@@ -77,7 +81,12 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   final bottomSheetMaxHeight = 0.96;
 
   /// Size of the bottom sheet
-  final RxDouble rxSheetVSize = 0.21.obs;
+  RxDouble get rxSheetVSize {
+    if (!userIsAdult) {
+      return 0.1.obs;
+    }
+    return 0.21.obs;
+  }
 
   /// Currently selected tab , by default the monthly calendar is shown
   final Rx<CalendarTabs> selectedTab = Rx(CalendarTabs.monthTab);

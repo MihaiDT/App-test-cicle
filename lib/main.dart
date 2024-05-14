@@ -48,8 +48,8 @@ _initNetwork() {
 
 /// Manage deep linking
 void _initDeepLinking() {
-  final _appLinks = AppLinks();
-  _appLinks.allUriLinkStream.listen((uri) {
+  final appLinks = AppLinks();
+  appLinks.allUriLinkStream.listen((uri) {
     logDebug('Deep link: $uri', tag: 'DeepLinkDeepLinkDeepLinkDeepLink');
     appController.hasUsedDeepLink.value = true;
   });

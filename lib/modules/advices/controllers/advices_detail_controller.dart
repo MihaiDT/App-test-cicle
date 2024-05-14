@@ -7,14 +7,15 @@ import 'package:lines/repository/advices_service.dart';
 import 'package:video_player/video_player.dart';
 
 class AdvicesDetailController extends GetxController {
-  final AdvicesDetailPair? articleDetail = Get.arguments;
+  late final AdvicesDetailPair? articleDetail = Get.arguments;
+
   final ScrollController scrollController = ScrollController();
   late final VideoPlayerController videoPlayerController;
   final RxBool isArticleFav = false.obs;
 
-  AdvicesArticle? get article => articleDetail?.article;
+  late AdvicesArticle? article;
 
-  AdvicesCategory? get category => articleDetail?.category;
+  late AdvicesCategory? category;
 
   RxDouble proportion = 0.0.obs;
   RxInt currentSlide = 0.obs;
@@ -26,6 +27,8 @@ class AdvicesDetailController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    article = articleDetail?.article;
+    category = articleDetail?.category;
     if (article?.typology == ArticleType.text) {
       _initTextDetail();
     }
@@ -54,24 +57,24 @@ class AdvicesDetailController extends GetxController {
             duration.value = videoPlayerController.value.duration;
           },
         );
+      videoPlayerController.addListener(
+        () {
+          if (videoPlayerController.value.isPlaying) {
+            duration.value = videoPlayerController.value.duration -
+                videoPlayerController.value.position;
+            isPlaying.value = true;
+          } else {
+            isPlaying.value = false;
+          }
+          if (videoPlayerController.value.position ==
+              videoPlayerController.value.duration) {
+            hasStarted.value = false;
+            videoPlayerController.seekTo(Duration.zero);
+            duration.value = videoPlayerController.value.duration;
+          }
+        },
+      );
     }
-    videoPlayerController.addListener(
-      () {
-        if (videoPlayerController.value.isPlaying) {
-          duration.value = videoPlayerController.value.duration -
-              videoPlayerController.value.position;
-          isPlaying.value = true;
-        } else {
-          isPlaying.value = false;
-        }
-        if (videoPlayerController.value.position ==
-            videoPlayerController.value.duration) {
-          hasStarted.value = false;
-          videoPlayerController.seekTo(Duration.zero);
-          duration.value = videoPlayerController.value.duration;
-        }
-      },
-    );
   }
 
   void onSlideChanged(int newValue) {
@@ -89,13 +92,10 @@ class AdvicesDetailController extends GetxController {
   }
 
   @override
-  void onClose() {
-    super.onClose();
+  void dispose() {
+    super.dispose();
     scrollController.dispose();
-    //this condition will ensure that the article is of type video ,otherwise it will throw an error of late initialization
-    if (article?.typology == ArticleType.video) {
-      videoPlayerController.dispose();
-    }
+    videoPlayerController.dispose();
   }
 
   String durationToString(Duration duration) {
@@ -121,6 +121,10 @@ class AdvicesDetailController extends GetxController {
       isArticleFav.value = isFav;
       await AdvicesService.fetchArticles();
     }
+  }
+
+  void updateArticleFavStatus(bool isFav) {
+    _updateArticleFavStatus(isFav);
   }
 
   void addArticleToFav() {

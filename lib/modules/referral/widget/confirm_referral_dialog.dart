@@ -53,7 +53,7 @@ class ConfirmReferralDialog extends StatelessWidget {
                     Navigator.pop(context, false);
                   },
                   child: const TitleLarge(
-                    "Indietro",
+                    "INDIETRO",
                   ).applyShaders(context),
                 ),
                 GestureDetector(

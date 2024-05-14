@@ -5,12 +5,14 @@ class SingleCategoryStats {
   final String iconName;
 
   final bool enabled;
+  final String id;
 
   SingleCategoryStats({
     required this.code,
     required this.name,
     required this.iconName,
     required this.enabled,
+    required this.id,
   });
 
   factory SingleCategoryStats.fromJson(
@@ -21,6 +23,7 @@ class SingleCategoryStats {
       name: json['symptom_category']['name'],
       iconName: json['symptom_category']['icon_name'],
       enabled: json['enabled'],
+      id: json['symptom_category']['id'],
     );
   }
 
@@ -30,6 +33,7 @@ class SingleCategoryStats {
       'name': name,
       'iconName': iconName,
       'enabled': enabled,
+      'id': id,
     };
   }
 

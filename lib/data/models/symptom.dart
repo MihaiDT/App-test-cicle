@@ -14,12 +14,13 @@ class Symptom {
   });
 
   factory Symptom.fromJson(Map<String, dynamic> json) {
+    // TODO FIX THIS MODEL
     return Symptom(
       id: json['id'],
-      code: json['code'],
+      code: json['code'] ?? json['name'],
       name: json['name'],
-      iconName: json['icon_name'],
-      position: json['position'],
+      iconName: json['icon_name'] ?? '',
+      position: json['position'] ?? 0,
     );
   }
 

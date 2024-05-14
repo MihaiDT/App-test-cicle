@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lines/modules/content_library/widgets/article_category_widget.dart';
-
 import 'package:lines/core/app_theme.dart';
-
 import 'package:lines/data/models/advices_sub_category.dart';
-import 'package:lines/modules/content_library/controllers/content_library_search_page_controller.dart';
 import 'package:lines/modules/content_library/content_library_search_page_results.dart';
+import 'package:lines/modules/content_library/controllers/content_library_search_page_controller.dart';
+import 'package:lines/modules/content_library/widgets/article_category_widget.dart';
 
 class ContentLibrarySearchPage
     extends GetView<ContentLibrarySearchPageController> {
@@ -146,12 +144,11 @@ class ContentLibrarySearchPage
                           ),
                           Expanded(
                             child: ListView.builder(
-                              // itemCount: AdvicesCategory.values.length,
                               itemCount: controller.categories.length,
                               itemBuilder: (context, categoryIndex) {
                                 String categoryIconName = controller
                                     .categories[categoryIndex].iconName;
-                                List<AdvicesSubCategory>? subCatories =
+                                List<AdvicesSubCategory>? subCategories =
                                     controller.subCategoriesForCategory(
                                   categoryIconName,
                                 );
@@ -208,9 +205,9 @@ class ContentLibrarySearchPage
                                       itemBuilder: (context, subCategoryIndex) {
                                         return InkWell(
                                           onTap: () {
-                                            if (subCatories != null) {
+                                            if (subCategories != null) {
                                               controller.onSubCategoryTapped(
-                                                subCatories[subCategoryIndex],
+                                                subCategories[subCategoryIndex],
                                               );
                                             }
                                           },

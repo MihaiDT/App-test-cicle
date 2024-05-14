@@ -84,12 +84,25 @@ class SocialService {
       final userData = await FacebookAuth.instance
           .getUserData(fields: "first_name, last_name, email");
 
-      _setSocialLoginParameters(
+      _validateEmail(
         userData['email'],
         loginResult.accessToken!.token,
         RegistrationProvider.facebook,
       );
     }
+  }
+
+  static Future<void> _validateEmail(
+    String email,
+    String identityToken,
+    RegistrationProvider registrationProvider,
+  ) async {
+    _setSocialLoginParameters(
+      email,
+      identityToken,
+      registrationProvider,
+    );
+    await AuthenticationService.checkEmail(email);
   }
 
   static void _setSocialLoginParameters(
@@ -100,20 +113,6 @@ class SocialService {
     appController.socialLoginParameter.email = email;
     appController.socialLoginParameter.registrationProvider =
         registrationProvider;
-  }
-
-  static Future<void> _validateEmail(
-    String email,
-    String identityToken,
-    RegistrationProvider registrationProvider,
-  ) async {
-    await AuthenticationService.checkEmail(email);
-
-    _setSocialLoginParameters(
-      email,
-      identityToken,
-      registrationProvider,
-    );
   }
 
   static Future<void> _saveUserData(

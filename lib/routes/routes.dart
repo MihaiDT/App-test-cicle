@@ -55,4 +55,5 @@ class Routes {
   static const String specificMensesStats = '/specific_menses_stats';
   static const String tamagochiWebView = '/tamagochi_web_view';
   static const String confirmTutorEmail = '/confirm_tutor_email';
+  static const String changePassword = '/change_password';
 }

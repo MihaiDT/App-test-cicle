@@ -75,22 +75,26 @@ class QuizBodyBuilder extends StatelessWidget {
         },
       );
     } else {
-      return Wrap(
-        alignment: WrapAlignment.center,
-        runSpacing: 8,
-        spacing: 8,
-        children: List.generate(
-          answers.length,
-          (index) {
-            return ChipSelectButton(
-              title: answers[index].answer,
-              selected: getIsSelected(answers[index]),
-              onPressed: () {
-                onAnswerTap(answers[index]);
+      return Obx(
+        () {
+          return Wrap(
+            alignment: WrapAlignment.center,
+            runSpacing: 8,
+            spacing: 8,
+            children: List.generate(
+              answers.length,
+              (index) {
+                return ChipSelectButton(
+                  title: answers[index].answer,
+                  selected: getIsSelected(answers[index]),
+                  onPressed: () {
+                    onAnswerTap(answers[index]);
+                  },
+                );
               },
-            );
-          },
-        ),
+            ),
+          );
+        },
       );
     }
   }

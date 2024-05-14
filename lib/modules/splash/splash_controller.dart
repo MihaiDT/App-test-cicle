@@ -24,12 +24,28 @@ class SplashPageController extends GetxController {
           _startAnimation();
         } else if (appController.user.responseHandler.isSuccessful) {
           /* if (appController.hasUsedDeepLink.value) {
-            Get.offAndToNamed(Routes.cookie);
-          }*/
-          if (appController.user.value?.routeAfterLogin == "complete_profile") {
-            Get.offAndToNamed(Routes.lastMensesPage);
-          } else {
+            /// Set to false to avoid entering the same condition
+            appController.hasUsedDeepLink.value = false;
+            AdvicesCategory? category = appController
+                .advicesCategories.value?.categories.values
+                .toList()
+                .first
+                .advicesCategory;
+            AdvicesArticle? article = appController.advicesCategories.value
+                ?.categories.values.first.subCategories.first.articles.first;
+
+            Get.offAndToNamed(
+              Routes.articleDetailPage,
+              arguments: AdvicesDetailPair(
+                category: category!,
+                article: article!,
+              ),
+            );
+          } else*/
+          if (appController.user.value?.routeAfterLogin == "main") {
             Get.offAndToNamed(Routes.main);
+          } else {
+            Get.offAndToNamed(Routes.login);
           }
         }
       },
@@ -42,8 +58,8 @@ class SplashPageController extends GetxController {
       HiveManager.firstAccess = false;
     }
     await SettingsService.fetchSettings();
-    await AuthenticationService.fetchUser();
     await AdvicesService.fetchArticles();
+    await AdvicesService.fetchSuggestedArticles();
     await CalendarService.symptomCategories;
     await CalendarService.homePageSymptomCategories;
     await BadgesService.fetchBadges();
@@ -51,6 +67,7 @@ class SplashPageController extends GetxController {
     await MensesService.mensesStatistics;
     await ProductService.products;
     await ProductService.mission;
+    await AuthenticationService.fetchUser();
   }
 
   void _pageTransition() {

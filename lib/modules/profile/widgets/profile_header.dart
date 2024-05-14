@@ -12,7 +12,6 @@ class ProfileHeader extends GetView<ProfileHeaderController> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CircleAvatar(
           radius: 60,
@@ -31,6 +30,7 @@ class ProfileHeader extends GetView<ProfileHeaderController> {
             Get.toNamed(Routes.changeProfilePage);
           },
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DisplayMedium(
                 controller.userName,

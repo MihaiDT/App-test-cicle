@@ -27,10 +27,13 @@ class CategorySymptomTile extends StatelessWidget {
         onTap: canBePressed ? onTap : null,
         child: Row(
           children: [
-            SvgPicture.asset(
-              imagePath,
-              width: 14,
-              height: 14,
+            Opacity(
+              opacity: canBePressed ? 1 : 0.5,
+              child: SvgPicture.asset(
+                imagePath,
+                width: 14,
+                height: 14,
+              ),
             ),
             ThemeSizedBox.width6,
             HeadlineSmall(

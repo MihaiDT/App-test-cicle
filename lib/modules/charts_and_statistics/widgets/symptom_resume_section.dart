@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/menses_statistics.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/follicular_line_widget.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/luteal_line_widget.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/menses_line_widget.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/ovulation_line_widget.dart';
 
 class SymptomResumeSection extends StatefulWidget {
+  final List<MensesStatistics> mensesStatistics;
+
   const SymptomResumeSection({
+    this.mensesStatistics = const [],
     super.key,
   });
-
-  static const List<int> list = [
-    0,
-    1,
-    2,
-    3,
-    6,
-    5,
-    15,
-    20,
-    26,
-    25,
-    27,
-  ];
 
   @override
   State<SymptomResumeSection> createState() => _SymptomResumeSectionState();
@@ -31,160 +22,104 @@ class SymptomResumeSection extends StatefulWidget {
 class _SymptomResumeSectionState extends State<SymptomResumeSection> {
   List<ScrollController> _scrollControllers = [];
 
-  final List<int> list = List.generate(
-    60,
-    (index) => index,
-  );
-
   @override
   void initState() {
     super.initState();
 
-    _scrollControllers = List.generate(4, (index) {
+    _scrollControllers = List.generate(10, (index) {
       return ScrollController();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final constraints = lineWidth;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+    return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      separatorBuilder: (context, index) {
+        return ThemeSizedBox.height8;
+      },
+      itemCount: widget.mensesStatistics.length,
+      itemBuilder: (context, currentMensesStatisticIndex) {
+        final currentMensesStatistic =
+            widget.mensesStatistics[currentMensesStatisticIndex];
+        final double constraints = widget
+                .mensesStatistics[currentMensesStatisticIndex].symptom.length *
+            singleDotSize.width;
+
+        return Column(
           children: [
-            const HeadlineMedium(
-              "20 sett",
-              color: ThemeColor.darkBlue,
+            _buildSingleHeader(
+              currentMensesStatistic.periodsStats.startingDate,
+              currentMensesStatistic.periodsStats.endingDate,
             ),
-            ThemeSizedBox.width8,
-            Container(
-              decoration: BoxDecoration(
-                color: ThemeColor.darkBlue,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 1,
-                  horizontal: 6,
-                ),
-                child: LabelSmall(
-                  "IN CORSO",
-                  color: Colors.white,
-                ),
+            ThemeSizedBox.height16,
+            NotificationListener<ScrollNotification>(
+              onNotification: (scrollNotification) {
+                if (scrollNotification is ScrollUpdateNotification) {
+                  _syncScrolling(
+                    _scrollControllers.last,
+                    scrollNotification.metrics.pixels,
+                  );
+                }
+                return true;
+              },
+              child: Column(
+                children: [
+                  _buildPhasesRow(
+                    mensesDuration: constraints *
+                        currentMensesStatistic.periodsStats.periodDays,
+                    follicularDuration: constraints *
+                        currentMensesStatistic.periodsStats.periodDays,
+                    ovulationDuration: constraints *
+                        currentMensesStatistic
+                            .periodsStats.ovulationDays.length,
+                    lutealDuration: 50,
+                  ),
+                  ThemeSizedBox.height16,
+                  ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Stack(
+                        children: [
+                          buildSingleRow(
+                            widget.mensesStatistics[currentMensesStatisticIndex]
+                                .periodsStats.periodDuration,
+                            _scrollControllers[currentMensesStatisticIndex],
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              color: Colors.white,
+                              child: BodySmall(
+                                widget
+                                    .mensesStatistics[
+                                        currentMensesStatisticIndex]
+                                    .symptom[index]
+                                    .name,
+                                color: ThemeColor.darkBlue,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return ThemeSizedBox.height20;
+                    },
+                    itemCount: widget
+                        .mensesStatistics[currentMensesStatisticIndex]
+                        .symptom
+                        .length,
+                  ),
+                ],
               ),
             ),
           ],
-        ),
-        ThemeSizedBox.height16,
-        NotificationListener<ScrollNotification>(
-          onNotification: (scrollNotification) {
-            if (scrollNotification is ScrollUpdateNotification) {
-              _syncScrolling(
-                _scrollControllers.last,
-                scrollNotification.metrics.pixels,
-              );
-            }
-            return true;
-          },
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            controller: _scrollControllers.last,
-            child: Row(
-              children: [
-                MensesLineWidget(
-                  indicatorWidth: constraints * 0.1,
-                ),
-                const SizedBox(width: 2),
-                FollicularLineWidget(
-                  indicatorWidth: constraints * 0.1,
-                ),
-                const SizedBox(width: 2),
-                OvulationLineWidget(
-                  indicatorWidth: constraints * 0.1,
-                ),
-                const SizedBox(width: 2),
-                LutealLineWidget(
-                  indicatorWidth: constraints * 0.7,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                ),
-              ],
-            ),
-          ),
-        ),
-        ThemeSizedBox.height16,
-        ListView.separated(
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return Stack(
-              alignment: Alignment.centerLeft,
-              children: [
-                SizedBox(
-                  height: 8,
-                  child: NotificationListener<ScrollNotification>(
-                    onNotification: (scrollNotification) {
-                      if (scrollNotification is ScrollUpdateNotification) {
-                        _syncScrolling(
-                          _scrollControllers[index],
-                          scrollNotification.metrics.pixels,
-                        );
-                      }
-                      return true;
-                    },
-                    child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      controller: _scrollControllers[index],
-                      scrollDirection: Axis.horizontal,
-                      // + 1 to add a space at the end
-                      itemCount: 50 + 1,
-                      itemBuilder: (context, index) {
-                        // Add a space at the end
-                        if (index >= 50) {
-                          return SizedBox(
-                            width: MediaQuery.sizeOf(context).width * 0.5,
-                          );
-                        }
-                        Color color = SymptomResumeSection.list.contains(index)
-                            ? ThemeColor.menstruationColor
-                            : ThemeColor.lightGrey;
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: CircleAvatar(
-                            radius: singleDotSize.width / 2,
-                            backgroundColor: color,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                ThemeSizedBox.height4,
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    color: Colors.white,
-                    child: const BodySmall(
-                      "Tranquilla",
-                      fontWeight: FontWeight.w500,
-                      color: ThemeColor.darkBlue,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-          separatorBuilder: (context, index) {
-            return ThemeSizedBox.height8;
-          },
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -201,5 +136,95 @@ class _SymptomResumeSectionState extends State<SymptomResumeSection> {
 
   Size get singleDotSize => const Size(8, 8);
 
-  double get lineWidth => list.length * singleDotSize.width;
+  Widget _buildSingleHeader(String startingDate, String? endingDate) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        HeadlineMedium(
+          parseDate(startingDate),
+          color: ThemeColor.darkBlue,
+        ),
+        endingDate?.isNotEmpty == true
+            ? HeadlineMedium(
+                " - ${parseDate(endingDate!)}",
+                color: ThemeColor.darkBlue,
+              )
+            : Container(
+                margin: const EdgeInsets.only(left: 8),
+                decoration: BoxDecoration(
+                  color: ThemeColor.darkBlue,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 1,
+                    horizontal: 6,
+                  ),
+                  child: LabelSmall(
+                    "IN CORSO",
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+      ],
+    );
+  }
+
+  /// Return parsed date as DD/mm
+  String parseDate(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    String formattedDate = DateFormat.d('it_IT').format(dateTime);
+    String monthAbbreviation = DateFormat.MMM('it_IT').format(dateTime);
+    return '$formattedDate $monthAbbreviation';
+  }
+
+  Widget _buildPhasesRow({
+    required double mensesDuration,
+    required double follicularDuration,
+    required double ovulationDuration,
+    required double lutealDuration,
+  }) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      controller: _scrollControllers.last,
+      child: Row(
+        children: [
+          MensesLineWidget(
+            indicatorWidth: mensesDuration,
+          ),
+          const SizedBox(width: 2),
+          FollicularLineWidget(
+            indicatorWidth: follicularDuration,
+          ),
+          const SizedBox(width: 2),
+          OvulationLineWidget(
+            indicatorWidth: ovulationDuration,
+          ),
+          const SizedBox(width: 2),
+          LutealLineWidget(
+            indicatorWidth: lutealDuration,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.5,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSingleRow(int length, ScrollController controller) {
+    return SingleChildScrollView(
+      controller: controller,
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          length,
+          (index) => CircleAvatar(
+            radius: singleDotSize.width / 2,
+            backgroundColor: ThemeColor.lightGrey,
+          ),
+        ),
+      ),
+    );
+  }
 }

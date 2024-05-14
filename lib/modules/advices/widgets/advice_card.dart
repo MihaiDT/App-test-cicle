@@ -9,10 +9,7 @@ class AdviceCard extends StatelessWidget {
   final AdvicesArticle article;
   final bool hasBorder;
   final Function(bool)? onSaveTap;
-  final Function(
-    AdvicesArticle,
-    AdvicesCategory,
-  )? onCardTap;
+  final Function(AdvicesArticle, AdvicesCategory)? onCardTap;
 
   late final String? timer;
   late final bool gallery;

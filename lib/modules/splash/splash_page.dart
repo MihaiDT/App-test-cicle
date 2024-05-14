@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/modules/splash/splash_controller.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/logos/hero_logo.dart';
-import 'package:lines/modules/splash/splash_controller.dart';
 
 class SplashPage extends GetView<SplashPageController> {
   const SplashPage({

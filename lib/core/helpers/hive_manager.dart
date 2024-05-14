@@ -34,6 +34,10 @@ class HiveManager {
     Hive.box("linesApp").put(HiveReferenceKeys.userId.name, userId);
   }
 
+  static void removeUserId() {
+    Hive.box("linesApp").delete(HiveReferenceKeys.userId.name);
+  }
+
   static int get numberOfAccess {
     return Hive.box("linesApp").get(HiveReferenceKeys.numberOfAccess.name) ?? 1;
   }
@@ -55,6 +59,16 @@ class HiveManager {
       isFirstTutorialWatched,
     );
   }
+
+  static bool get hasAcceptedCookie {
+    return Hive.box("linesApp").get(HiveReferenceKeys.hasAcceptedCookie.name) ??
+        false;
+  }
+
+  static set hasAcceptedCookie(bool hasAcceptedCookie) {
+    Hive.box("linesApp")
+        .put(HiveReferenceKeys.hasAcceptedCookie.name, hasAcceptedCookie);
+  }
 }
 
 enum HiveReferenceKeys {
@@ -63,5 +77,6 @@ enum HiveReferenceKeys {
   userId,
   savedSymptoms,
   isFirstTutorialWatched,
+  hasAcceptedCookie,
   numberOfAccess;
 }

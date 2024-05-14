@@ -43,4 +43,16 @@ enum RequestStatus {
 
 enum ErrorType {
   generic,
+  wrongPassword,
+}
+
+extension ErrorTypeExtension on ErrorType {
+  static ErrorType fromString(String errorType) {
+    switch (errorType.toLowerCase()) {
+      case "wrong_password":
+        return ErrorType.wrongPassword;
+      default:
+        return ErrorType.generic;
+    }
+  }
 }

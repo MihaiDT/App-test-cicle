@@ -22,13 +22,12 @@ class PeriodsStats {
       periodDays: json['period_days'],
       periodDuration: json['period_duration'],
       menstruationDays:
-          (json['period_phases'].first['menstruation_days'] as List<dynamic>)
+          (json['period_phases']['menstruation_days'] as List<dynamic>)
               .map((item) => item as int)
               .toList(),
-      ovulationDays:
-          (json['period_phases'].first['ovulation_days'] as List<dynamic>)
-              .map((item) => item as int)
-              .toList(),
+      ovulationDays: (json['period_phases']['ovulation_days'] as List<dynamic>)
+          .map((item) => item as int)
+          .toList(),
     );
   }
 

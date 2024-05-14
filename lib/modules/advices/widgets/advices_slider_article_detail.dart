@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/advices_article.dart';
+import 'package:lines/data/models/advices_category.dart';
+import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
-import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 
-class AdvicesSliderArticleDetail extends GetView<AdvicesDetailController> {
+class AdvicesSliderArticleDetail extends StatelessWidget {
+  final AdvicesCategory? category;
+
+  final AdvicesArticle? article;
+  final List<Widget> images;
+
+  final bool isArticleFav;
+
+  final Function(bool isFav) onFavChanged;
+  final Function(int value) onSlideChanged;
+
+  final int currentSlide;
+
   const AdvicesSliderArticleDetail({
+    required this.category,
+    required this.article,
+    required this.images,
+    required this.isArticleFav,
+    required this.currentSlide,
+    required this.onFavChanged,
+    required this.onSlideChanged,
     super.key,
   });
 
@@ -17,7 +36,6 @@ class AdvicesSliderArticleDetail extends GetView<AdvicesDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> images = controller.getSliderImages;
     return AppScaffoldPage(
       backgroundColor: Colors.white,
       appBar: TransparentAppBar(
@@ -29,88 +47,75 @@ class AdvicesSliderArticleDetail extends GetView<AdvicesDetailController> {
           ThemeSizedBox.width24,
           InkWell(
             onTap: () {
-              if (controller.isArticleFav.value) {
-                controller.removeArticleFromFav();
-              } else {
-                controller.addArticleToFav();
-              }
+              onFavChanged(!isArticleFav);
             },
             child: CircleAvatar(
               radius: 16,
               backgroundColor: Colors.white,
-              child: Obx(
-                () {
-                  if (controller.isArticleFav.value) {
-                    return SvgPicture.asset(
-                      ThemeIcon.savedFilled,
-                      color: ThemeColor.darkBlue,
-                    );
-                  } else {
-                    return SvgPicture.asset(
-                      ThemeIcon.savedEmpty,
-                      color: ThemeColor.darkBlue,
-                    );
-                  }
-                },
+              child: SvgPicture.asset(
+                isArticleFav ? ThemeIcon.savedFilled : ThemeIcon.savedEmpty,
+                color: ThemeColor.darkBlue,
               ),
             ),
           ),
         ],
         backButtonColor: ThemeColor.darkBlue,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
-        child: ListView(
-          children: [
-            CircleAvatar(
-              radius: 14,
-              backgroundColor: controller.category?.categoryColor,
-              child: SvgPicture.asset(
-                controller.category?.iconPath ?? "",
-                color: Colors.white,
+      body: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
+            children: [
+              CircleAvatar(
+                radius: 14,
+                backgroundColor: category?.categoryColor,
+                child: SvgPicture.asset(
+                  category?.iconPath ?? "",
+                  color: Colors.white,
+                ),
               ),
-            ),
-            ThemeSizedBox.height8,
-            TitleMedium(
-              controller.category?.categoryTitle?.toUpperCase() ?? "",
-              color: ThemeColor.darkBlue,
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height4,
-            DisplayMedium(
-              controller.article?.title ?? "",
-              textAlign: TextAlign.center,
-            ).applyShaders(context),
-            ThemeSizedBox.height40,
-            Visibility(
-              visible:
-                  controller.article?.slideshowImageUrls?.isNotEmpty == true,
-              child: Container(
-                height: 500,
-                clipBehavior: Clip.hardEdge,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+              ThemeSizedBox.height8,
+              TitleMedium(
+                category?.categoryTitle?.toUpperCase() ?? "",
+                color: ThemeColor.darkBlue,
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height4,
+              DisplayMedium(
+                article?.title ?? "",
+                textAlign: TextAlign.center,
+              ).applyShaders(context),
+              ThemeSizedBox.height40,
+              Visibility(
+                visible: article?.slideshowImageUrls?.isNotEmpty == true,
+                child: Container(
+                  height: 500,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                  child: PageView(
+                    onPageChanged: (value) {
+                      onSlideChanged(value);
+                    },
+                    clipBehavior: Clip.hardEdge,
+                    children: images,
                   ),
                 ),
-                child: PageView(
-                  onPageChanged: (value) {
-                    controller.onSlideChanged(value);
-                  },
-                  clipBehavior: Clip.hardEdge,
-                  children: images,
-                ),
               ),
-            ),
-            ThemeSizedBox.height16,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: images.asMap().entries.map(
-                (entry) {
-                  return Obx(
-                    () => Container(
+              ThemeSizedBox.height16,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: images.asMap().entries.map(
+                  (entry) {
+                    return Container(
                       width: 8.0,
                       height: 8.0,
                       margin: const EdgeInsets.symmetric(
@@ -119,24 +124,25 @@ class AdvicesSliderArticleDetail extends GetView<AdvicesDetailController> {
                       ),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: controller.currentSlide.value == entry.key
+                        color: currentSlide == entry.key
                             ? Colors.black
                             : _unselectedDotColor,
                       ),
-                    ),
-                  );
-                },
-              ).toList(),
-            ),
-            ThemeSizedBox.height40,
-            LabelLarge(
-              controller.article?.disclaimer ?? "",
-              color: _disclaimerColor,
-              fontWeight: FontWeight.w500,
-            ),
-            ThemeSizedBox.height60,
-          ],
-        ),
+                    );
+                  },
+                ).toList(),
+              ),
+              ThemeSizedBox.height40,
+              LabelLarge(
+                article?.disclaimer ?? "",
+                color: _disclaimerColor,
+                fontWeight: FontWeight.w500,
+              ),
+              ThemeSizedBox.height60,
+            ],
+          ),
+          const SuggestedArticleSection(),
+        ],
       ),
     );
   }
