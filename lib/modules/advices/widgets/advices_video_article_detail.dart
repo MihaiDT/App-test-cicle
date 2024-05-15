@@ -6,7 +6,7 @@ import 'package:lines/modules/advices/controllers/advices_detail_controller.dart
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
   const AdvicesVideoArticleDetail({
@@ -59,131 +59,138 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
         backButtonColor: ThemeColor.darkBlue,
       ),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
-        child: Obx(
-          () => controller.videoIsInitialized.value
-              ? ListView(
-                  children: [
-                    ListView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      children: [
-                        CircleAvatar(
-                          radius: 14,
-                          backgroundColor: controller.category?.categoryColor,
-                          child: SvgPicture.asset(
-                            controller.category?.iconPath ?? "",
-                            color: Colors.white,
-                          ),
-                        ),
-                        ThemeSizedBox.height8,
-                        TitleMedium(
-                          controller.category?.categoryTitle?.toUpperCase() ??
-                              "",
-                          color: ThemeColor.darkBlue,
-                          textAlign: TextAlign.center,
-                        ),
-                        ThemeSizedBox.height4,
-                        DisplayMedium(
-                          controller.article?.title ?? "",
-                          textAlign: TextAlign.center,
-                        ).applyShaders(context),
-                        ThemeSizedBox.height40,
-                        AspectRatio(
-                          aspectRatio: controller
-                              .videoPlayerController.value.aspectRatio,
-                          child: Stack(
-                            children: [
-                              Container(
-                                clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: VideoPlayer(
-                                  controller.videoPlayerController,
-                                ),
-                              ),
-                              Visibility(
-                                visible: controller.hasStarted.value == false,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.network(
-                                    controller.article?.videoImagePreviewUrl ??
-                                        "",
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: !controller.isPlaying.value,
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(
-                                      10,
-                                    ),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(4),
-                                      decoration: const BoxDecoration(
-                                        color: _timerBgColor,
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(90),
-                                        ),
-                                      ),
-                                      child: BodySmall(
-                                        controller.durationToString(
-                                          controller.duration.value,
-                                        ),
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  controller.hasStarted.value = true;
-                                  if (controller
-                                      .videoPlayerController.value.isPlaying) {
-                                    controller.videoPlayerController.pause();
-                                  } else {
-                                    controller.videoPlayerController.play();
-                                  }
-                                },
-                                child: !controller.isPlaying.value
-                                    ? Center(
-                                        child: CircleAvatar(
-                                          radius: 28,
-                                          backgroundColor: playButtonColor,
-                                          child: SvgPicture.asset(
-                                            ThemeIcon.play,
-                                          ),
-                                        ),
-                                      )
-                                    : const SizedBox.expand(),
-                              ),
-                            ],
-                          ),
-                        ),
-                        ThemeSizedBox.height40,
-                        LabelLarge(
-                          controller.article?.disclaimer ?? "",
-                          color: _disclaimerColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        ThemeSizedBox.height60,
-                        const SuggestedArticleSection(),
-                      ],
+      body: Obx(
+        () => controller.videoIsInitialized.value
+            ? ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  ListView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
                     ),
-                  ],
-                )
-              : const Center(
-                  child: CircularProgressIndicator(),
-                ),
-        ),
+                    children: [
+                      CircleAvatar(
+                        radius: 14,
+                        backgroundColor: controller.category?.categoryColor,
+                        child: SvgPicture.asset(
+                          controller.category?.iconPath ?? "",
+                          color: Colors.white,
+                        ),
+                      ),
+                      ThemeSizedBox.height8,
+                      TitleMedium(
+                        controller.category?.categoryTitle?.toUpperCase() ?? "",
+                        color: ThemeColor.darkBlue,
+                        textAlign: TextAlign.center,
+                      ),
+                      ThemeSizedBox.height4,
+                      DisplayMedium(
+                        controller.article?.title ?? "",
+                        textAlign: TextAlign.center,
+                      ).applyShaders(context),
+                      ThemeSizedBox.height40,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: YoutubePlayerBuilder(
+                          player: YoutubePlayer(
+                            controller: controller.youtubePlayerController,
+                          ),
+                          builder: (_, Widget player) {
+                            return InkWell(
+                              onTap: () {
+                                if (controller.hasStarted.value) {
+                                  controller.youtubePlayerController.pause();
+                                  controller.hasStarted.value = false;
+                                } else {
+                                  controller.youtubePlayerController.play();
+                                  controller.hasStarted.value = true;
+                                }
+                              },
+                              child: Stack(
+                                fit: StackFit.passthrough,
+                                children: [
+                                  player,
+                                  Column(
+                                    children: [
+                                      Obx(
+                                        () {
+                                          return Visibility(
+                                            visible:
+                                                !controller.hasStarted.value,
+                                            child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(
+                                                  10,
+                                                ),
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(4),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    color: _timerBgColor,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(90),
+                                                    ),
+                                                  ),
+                                                  child: BodySmall(
+                                                    controller.durationToString(
+                                                      controller.duration.value,
+                                                    ),
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      ThemeSizedBox.height12,
+                                      Obx(
+                                        () {
+                                          return Align(
+                                            alignment: Alignment.center,
+                                            child: Visibility(
+                                              visible:
+                                                  !controller.hasStarted.value,
+                                              child: CircleAvatar(
+                                                radius: 28,
+                                                backgroundColor:
+                                                    playButtonColor,
+                                                child: SvgPicture.asset(
+                                                  ThemeIcon.play,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      ThemeSizedBox.height40,
+                      LabelLarge(
+                        controller.article?.disclaimer ?? "",
+                        color: _disclaimerColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      ThemeSizedBox.height60,
+                    ],
+                  ),
+                  const SuggestedArticleSection(),
+                ],
+              )
+            : const Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
     );
   }

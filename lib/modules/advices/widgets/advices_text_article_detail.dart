@@ -25,58 +25,62 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
         controller: controller.scrollController,
         slivers: [
           _appBar(context),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 32,
-            ),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                <Widget>[
-                  ThemeSizedBox.height32,
-                  CircleAvatar(
-                    backgroundColor:
-                        category?.categoryColor ?? Colors.transparent,
-                    child: SvgPicture.asset(
-                      category?.iconPath ?? "",
-                      color: Colors.white,
-                    ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: ThemeSize.paddingLarge,
                   ),
-                  ThemeSizedBox.height8,
-                  TitleMedium(
-                    category?.categoryTitle?.toUpperCase() ?? "",
-                    color: ThemeColor.darkBlue,
-                    textAlign: TextAlign.center,
+                  child: Column(
+                    children: [
+                      ThemeSizedBox.height32,
+                      CircleAvatar(
+                        backgroundColor:
+                            category?.categoryColor ?? Colors.transparent,
+                        child: SvgPicture.asset(
+                          category?.iconPath ?? "",
+                          color: Colors.white,
+                        ),
+                      ),
+                      ThemeSizedBox.height8,
+                      TitleMedium(
+                        category?.categoryTitle?.toUpperCase() ?? "",
+                        color: ThemeColor.darkBlue,
+                        textAlign: TextAlign.center,
+                      ),
+                      ThemeSizedBox.height4,
+                      DisplayMedium(
+                        controller.article?.title ?? "",
+                        textAlign: TextAlign.center,
+                      ).applyShaders(context),
+                      ThemeSizedBox.height16,
+                      BodyLarge(
+                        controller.article?.shortDescription ?? "",
+                        color: ThemeColor.darkBlue,
+                        textAlign: TextAlign.center,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      ThemeSizedBox.height48,
+                      const Divider(
+                        color: _dividerColor,
+                      ),
+                      ThemeSizedBox.height48,
+                      Html(
+                        data: controller.article?.text,
+                      ),
+                      ThemeSizedBox.height48,
+                      LabelLarge(
+                        controller.article?.disclaimer ?? "",
+                        color: _disclaimerColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      ThemeSizedBox.height60,
+                    ],
                   ),
-                  ThemeSizedBox.height4,
-                  DisplayMedium(
-                    controller.article?.title ?? "",
-                    textAlign: TextAlign.center,
-                  ).applyShaders(context),
-                  ThemeSizedBox.height16,
-                  BodyLarge(
-                    controller.article?.shortDescription ?? "",
-                    color: ThemeColor.darkBlue,
-                    textAlign: TextAlign.center,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  ThemeSizedBox.height48,
-                  const Divider(
-                    color: _dividerColor,
-                  ),
-                  ThemeSizedBox.height48,
-                  Html(
-                    data: controller.article?.text,
-                  ),
-                  ThemeSizedBox.height48,
-                  LabelLarge(
-                    controller.article?.disclaimer ?? "",
-                    color: _disclaimerColor,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  ThemeSizedBox.height60,
-                  const SuggestedArticleSection(),
-                ],
-              ),
+                ),
+                const SuggestedArticleSection(),
+              ],
             ),
           ),
         ],

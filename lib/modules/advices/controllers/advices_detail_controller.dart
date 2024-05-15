@@ -4,13 +4,15 @@ import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/repository/advices_service.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AdvicesDetailController extends GetxController {
   late final AdvicesDetailPair? articleDetail = Get.arguments;
 
   final ScrollController scrollController = ScrollController();
-  late final VideoPlayerController videoPlayerController;
+
+  late final YoutubePlayerController youtubePlayerController;
+
   final RxBool isArticleFav = false.obs;
 
   late AdvicesArticle? article;
@@ -48,32 +50,20 @@ class AdvicesDetailController extends GetxController {
   }
 
   void _initVideoDetail() {
-    if (article?.videoUrl?.isNotEmpty == true) {
-      videoPlayerController = VideoPlayerController.networkUrl(
-        Uri.parse(article!.videoUrl!),
-      )..initialize().then(
-          (_) {
-            videoIsInitialized.value = true;
-            duration.value = videoPlayerController.value.duration;
-          },
-        );
-      videoPlayerController.addListener(
-        () {
-          if (videoPlayerController.value.isPlaying) {
-            duration.value = videoPlayerController.value.duration -
-                videoPlayerController.value.position;
-            isPlaying.value = true;
-          } else {
-            isPlaying.value = false;
-          }
-          if (videoPlayerController.value.position ==
-              videoPlayerController.value.duration) {
-            hasStarted.value = false;
-            videoPlayerController.seekTo(Duration.zero);
-            duration.value = videoPlayerController.value.duration;
-          }
-        },
+    String videoUrl = article?.videoUrl ?? "";
+    if (videoUrl.isNotEmpty == true) {
+      String? id = YoutubePlayer.convertUrlToId(videoUrl);
+
+      youtubePlayerController = YoutubePlayerController(
+        initialVideoId: id ?? '',
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+          showLiveFullscreenButton: false,
+          hideControls: true,
+        ),
       );
+      videoIsInitialized.value = true;
     }
   }
 
@@ -95,7 +85,7 @@ class AdvicesDetailController extends GetxController {
   void dispose() {
     super.dispose();
     scrollController.dispose();
-    videoPlayerController.dispose();
+    youtubePlayerController.dispose();
   }
 
   String durationToString(Duration duration) {

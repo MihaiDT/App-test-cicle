@@ -123,9 +123,6 @@ dependencies:
   # A Flutter widget for rendering HTML and CSS as Flutter widgets.
   flutter_html: ^3.0.0-beta.2
 
-  # A Flutter plugin for iOS, Android and Web for playing back video on a Widget surface.
-  video_player: ^2.8.2
-
   # webview_flutter: ^4.4.2
 
   flutter_share: ^2.0.0
@@ -136,6 +133,10 @@ dependencies:
 
   # Manage deep linking
   app_links: ^5.0.0
+
+  # A Flutter plugin for launching a video youtube
+  youtube_player_flutter: ^9.0.1
+
 
 dev_dependencies:
   analyzer: ^6.4.1
