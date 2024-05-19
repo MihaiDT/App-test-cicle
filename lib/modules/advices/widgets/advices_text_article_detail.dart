@@ -30,7 +30,7 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
               [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: ThemeSize.paddingLarge,
+                    horizontal: ThemeSize.paddingSmall,
                   ),
                   child: Column(
                     children: [

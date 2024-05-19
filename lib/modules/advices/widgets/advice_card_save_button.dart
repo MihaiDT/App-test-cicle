@@ -17,9 +17,12 @@ class AdviceCardSaveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap != null ? () => onTap!(!isSaved) : null,
-      child: isSaved
-          ? SvgPicture.asset(ThemeIcon.savedFilled)
-          : SvgPicture.asset(ThemeIcon.savedEmpty),
+      child: SvgPicture.asset(
+        isSaved ? ThemeIcon.savedFilled : ThemeIcon.savedEmpty,
+        height: 24,
+        width: 24,
+        fit: BoxFit.scaleDown,
+      ),
     );
   }
 }

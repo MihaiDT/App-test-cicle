@@ -133,11 +133,13 @@ class AdviceCard extends StatelessWidget {
           child: _newBox(context),
         ),
         ThemeSizedBox.height4,
-        TitleSmall(
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [TitleSmall(
           article.title,
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
-        ),
+        ),],),
       ],
     );
   }
