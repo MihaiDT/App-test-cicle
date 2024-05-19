@@ -30,7 +30,7 @@ class AccountPage extends GetView<AccountPageController> {
         child: Column(
           children: [
             const DisplayMedium(
-              "Il tuo account MyLines",
+              "Il tuo account My Lines",
             ).applyShaders(context),
             ThemeSizedBox.height32,
             const Divider(),

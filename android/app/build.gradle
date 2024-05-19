@@ -30,12 +30,12 @@ android {
         dev {
             dimension "flavor-type"
             applicationId "it.tandu.lines"
-            resValue "string", "app_name", "[DEV] Lines"
+            resValue "string", "app_name", "[DEV] My Lines"
         }
         prod {
             dimension "flavor-type"
             applicationId "it.tandu.lines"
-            resValue "string", "app_name", "Lines"
+            resValue "string", "app_name", "My Lines"
         }
     }
 

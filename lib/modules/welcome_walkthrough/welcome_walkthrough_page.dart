@@ -46,8 +46,7 @@ class WelcomeWalkthroughPage extends StatelessWidget {
           ),
           WalkthroughData(
             title: "Più partecipi, più accumuli punti",
-            description:
-                "Partecipa alle missioni e ottieni punti per accedere a premi e contenuti esclusivi.",
+            description: "Partecipa alle missioni e ottieni punti per accedere a premi e contenuti esclusivi.",
             image: Image.asset(
               ThemeImage.walkthrough4,
             ),
@@ -55,7 +54,7 @@ class WelcomeWalkthroughPage extends StatelessWidget {
           WalkthroughData(
             title: "Attiva il tuo calendario",
             description:
-                "Consenti a MyLines di inviarti notifiche: ti aiuterà a monitorare il tuo ciclo e il tuo benessere inviandoti consigli e promemoria.",
+                "Consenti a My Lines di inviarti notifiche: ti aiuterà a monitorare il tuo ciclo e il tuo benessere inviandoti consigli e promemoria.",
             image: Image.asset(
               ThemeImage.walkthrough5,
             ),

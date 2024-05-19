@@ -18,11 +18,11 @@ class F {
   static String get title {
     switch (appFlavor) {
       case Flavor.dev:
-        return 'Lines';
+        return 'My Lines';
       case Flavor.prod:
-        return 'Lines';
+        return 'My Lines';
       default:
-        return 'Lines';
+        return 'My Lines';
     }
   }
 }
