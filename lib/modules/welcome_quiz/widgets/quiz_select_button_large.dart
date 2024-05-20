@@ -29,7 +29,7 @@ class QuizSelectButtonLarge extends StatelessWidget {
             children: [
               Image.network(
                 imagePath,
-                height: 100,
+                height: 90,
               ),
               const Spacer(),
               QuizSelectTitle(
