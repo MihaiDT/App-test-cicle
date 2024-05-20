@@ -2,7 +2,8 @@ import 'package:lines/core/env/enviroment.dart';
 
 class StagingEnv extends Environment {
   @override
-  String get apiEndpoint => "https://staging.lines-test.advicelab.io/";
+  String get apiEndpoint => "https://staging.lines-test.advicelab.io";
+
   //"https://lines-api.tandu.it";
 
   @override
