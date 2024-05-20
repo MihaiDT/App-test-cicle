@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/welcome/welcome_controller.dart';
 import 'package:lines/modules/welcome/widgets/welcome_signin_button.dart';
-import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 import 'package:lines/widgets/logos/hero_logo.dart';
@@ -14,7 +13,6 @@ class WelcomePage extends GetView<WelcomeController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldPage(
-      appBar: const TransparentAppBar(),
       extendBodyBehindAppBar: true,
       backgroundImage: ThemeDecoration.images.bgDark,
       scrollController: ScrollController(),
