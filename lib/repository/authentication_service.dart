@@ -125,6 +125,7 @@ class AuthenticationService {
     final email = appController.user.value?.email ?? '';
     final name = appController.user.value?.firstName ?? '';
     final lastName = appController.user.value?.lastName ?? '';
+    final cookieConsent = HiveManager.hasAcceptedCookie;
 
     appController.user.responseHandler = ResponseHandler.pending();
 
@@ -145,6 +146,8 @@ class AuthenticationService {
                 updateUserParameters.formattedLastMenstruationDateEnd,
             "period_days": updateUserParameters.periodDays,
             "period_duration": updateUserParameters.periodDuration,
+            "cookie_consent": cookieConsent,
+            "calendar_consent": updateUserParameters.calendarConsent,
           },
         },
       );
