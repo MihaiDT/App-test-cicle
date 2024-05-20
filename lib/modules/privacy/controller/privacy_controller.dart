@@ -37,7 +37,6 @@ class PrivacyController extends GetxController {
     appController.registerParameter.privacyBrandMarketing = firstAccepted.value;
     appController.registerParameter.privacyMarketing = secondAccepted.value;
     appController.registerParameter.privacyProfiling = thirdAccepted.value;
-    await AuthenticationService.updateCookieConsent();
     await AuthenticationService.registration(
       appController.registerParameter,
     );

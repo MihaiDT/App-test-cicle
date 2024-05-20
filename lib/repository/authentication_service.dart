@@ -249,19 +249,6 @@ class AuthenticationService {
     }
   }
 
-  static Future<void> updateCookieConsent() async {
-    try {
-      await dio.post(
-        "/users/$userIDFromDB/cookie_consent",
-        data: {
-          "consent": HiveManager.hasAcceptedCookie,
-        },
-      );
-    } catch (e) {
-      log.logApiException(e);
-    }
-  }
-
   static void _saveUserInfo(Response response) async {
     appController.user.responseHandler = ResponseHandler.successful(
       content: User.fromJson(

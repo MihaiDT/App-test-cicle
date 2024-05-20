@@ -77,7 +77,6 @@ class ReferralController extends GetxController {
       await AuthenticationService.completeUserRegistration(
         appController.updateUserParameters,
       );
-      await AuthenticationService.updateCookieConsent();
     }
   }
 }

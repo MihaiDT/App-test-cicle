@@ -26,7 +26,6 @@ class LastMensesController extends GetxController {
       await AuthenticationService.completeUserRegistration(
         appController.updateUserParameters,
       );
-      await AuthenticationService.updateCookieConsent();
       if (HiveManager.isFirstTutorialWatched) {
         Get.offAndToNamed(Routes.welcomeWalkthrough);
       } else {
