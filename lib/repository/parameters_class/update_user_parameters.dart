@@ -13,7 +13,8 @@ class UpdateUserParameters {
   bool privacyMarketingEmail;
   String? referralCode;
   String? zipCode;
-  bool hasConsentCookie;
+  bool? hasConsentCookie;
+  bool? calendarConsent;
 
   UpdateUserParameters({
     this.birthdate,
@@ -30,7 +31,8 @@ class UpdateUserParameters {
     this.privacyMarketingEmail = false,
     this.referralCode,
     this.zipCode,
-    this.hasConsentCookie = false,
+    this.hasConsentCookie,
+    this.calendarConsent,
   });
 
   String? get formattedLastMenstruationDateStart {
@@ -71,6 +73,7 @@ class UpdateUserParameters {
       "invitation_code": referralCode,
       "zip_code": zipCode,
       "cookie_consent": hasConsentCookie,
+      "calendar_consent": calendarConsent,
     };
   }
 }
