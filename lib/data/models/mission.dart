@@ -6,6 +6,9 @@ class Mission {
   final String title;
   final String description;
   final String? description2;
+  final String? regolamento;
+  final String? prizeImage;
+  final String? prizeDescription;
   final String? endAt;
   final int id;
   final String imageUrl;
@@ -22,6 +25,9 @@ class Mission {
     required this.title,
     required this.description,
     this.description2 = "",
+    this.regolamento,
+    this.prizeImage,
+    this.prizeDescription,
     this.endAt = "",
     required this.id,
     required this.imageUrl,
@@ -38,6 +44,9 @@ class Mission {
       title: json['title'],
       description: json['description'],
       description2: json['description_2'],
+      regolamento: json['regolamento'],
+      prizeImage: json['prize_image'],
+      prizeDescription: json['prize_description'],
       endAt: json['end_at'],
       id: json['id'],
       imageUrl: json['image_url'],

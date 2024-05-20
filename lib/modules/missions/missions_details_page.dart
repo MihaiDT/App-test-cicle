@@ -130,7 +130,10 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                 ThemeSizedBox.height16,
                 const MissionsHowToParticipateStepTwo(),
                 ThemeSizedBox.height16,
-                const MissionsHowToParticipateStepThree(),
+                MissionsHowToParticipateStepThree(
+                  prizeDescription: controller.selectedMission.prizeDescription,
+                  prizeImage: controller.selectedMission.prizeImage,
+                ),
                 ThemeSizedBox.height32,
                 LabelMedium(
                   "Lorem ipsum dolor sit amet consectetur. Fames at elit congue odio nisl diam morbi. Et nunc velit ut vitae. Purus pellentesque et purus gravida at eget in. Mi tincidunt diam tincidunt curabitur nunc varius arcu.",
