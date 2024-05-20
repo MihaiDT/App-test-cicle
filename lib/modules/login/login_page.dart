@@ -140,26 +140,29 @@ class LoginPage extends GetView<LoginController> {
                   "AVANTI",
                 ).applyShaders(context),
               ),
-              ThemeSizedBox.height16,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const TitleMedium(
-                    "Non hai un account?",
+              ThemeSizedBox.height8,
+              GestureDetector(
+                onTap: () {
+                  Get.offAndToNamed(
+                    Routes.register,
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const TitleMedium(
+                        "Non hai un account?",
+                      ),
+                      ThemeSizedBox.width4,
+                      const TitleMedium(
+                        "REGISTRATI",
+                        underline: true,
+                      ),
+                    ],
                   ),
-                  ThemeSizedBox.width4,
-                  GestureDetector(
-                    onTap: () {
-                      Get.offAndToNamed(
-                        Routes.register,
-                      );
-                    },
-                    child: const TitleMedium(
-                      "REGISTRATI",
-                      underline: true,
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),

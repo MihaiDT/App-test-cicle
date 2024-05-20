@@ -126,26 +126,31 @@ class RegisterPage extends GetView<RegisterController> {
                   "AVANTI",
                 ).applyShaders(context),
               ),
-              ThemeSizedBox.height16,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const TitleMedium(
-                    "Hai già un account?",
+              ThemeSizedBox.height8,
+              GestureDetector(
+                onTap: () {
+                  Get.offAndToNamed(
+                    Routes.login,
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
                   ),
-                  ThemeSizedBox.width4,
-                  GestureDetector(
-                    onTap: () {
-                      Get.offAndToNamed(
-                        Routes.login,
-                      );
-                    },
-                    child: const TitleMedium(
-                      "ACCEDI",
-                      underline: true,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const TitleMedium(
+                        "Hai già un account?",
+                      ),
+                      ThemeSizedBox.width4,
+                      const TitleMedium(
+                        "ACCEDI",
+                        underline: true,
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ],
           ),
