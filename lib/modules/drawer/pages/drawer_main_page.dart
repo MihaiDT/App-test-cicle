@@ -38,6 +38,9 @@ class DrawerMainPage extends GetView<DrawerMainPageController> {
               leadingIcon: SvgPicture.asset(
                 ThemeIcon.gift,
               ),
+              onTap: () {
+                Get.offAndToNamed(Routes.inviteFriendPage);
+              },
             ),
             const Divider(
               color: ThemeColor.buttonDisableBackGround,
