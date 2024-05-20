@@ -3,7 +3,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/models/product.dart';
 import 'package:lines/modules/missions/controllers/missions_details_controller.dart';
 import 'package:lines/modules/missions/widgets/missions_how_to_participate_step_one.dart';
 import 'package:lines/modules/missions/widgets/missions_how_to_participate_step_three.dart';
@@ -103,13 +102,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
               horizontal: ThemeSize.paddingSmall,
             ),
             child: MissionsLoadedProducts(
-              products: [
-                Product(
-                  name: "Lines è",
-                  points: 250,
-                  category: "LINES E",
-                ),
-              ],
+              products: controller.selectedMission.loadedProducts,
             ),
           ),
           ThemeSizedBox.height32,

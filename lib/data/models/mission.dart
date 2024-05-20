@@ -14,6 +14,7 @@ class Mission {
   final int totalCounter;
 
   final List<Product> products;
+  final List<Product> loadedProducts;
 
   Mission({
     required this.code,
@@ -27,6 +28,7 @@ class Mission {
     required this.isCompleted,
     required this.totalCounter,
     required this.products,
+    required this.loadedProducts,
   });
 
   factory Mission.fromJson(Map<String, dynamic> json) {
@@ -43,6 +45,11 @@ class Mission {
       totalCounter: json['total_counter'],
       products: List<Product>.from(
         json['products'].map(
+          (product) => Product.fromJson(product),
+        ),
+      ),
+      loadedProducts: List<Product>.from(
+        json["uploaded_products"].map(
           (product) => Product.fromJson(product),
         ),
       ),

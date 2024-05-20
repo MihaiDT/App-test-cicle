@@ -40,6 +40,7 @@ class LoadCodeInProgressMission extends StatelessWidget {
                 isCompleted: true,
                 totalCounter: 3,
                 products: [],
+                loadedProducts: [],
               ),
             ),
           ),
