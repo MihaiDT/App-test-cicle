@@ -239,7 +239,6 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const LastMensesPage(),
-        authNeeded: false,
       ),
       transition: Transition.rightToLeft,
     ),

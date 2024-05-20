@@ -6,7 +6,6 @@ import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
-import 'package:lines/routes/routes.dart';
 
 class ActivateEmailDialog extends StatelessWidget {
   final String email;
@@ -52,7 +51,7 @@ class ActivateEmailDialog extends StatelessWidget {
                 await AuthenticationService.sendActivationLink(email);
                 appController.isLoginFlow.value = true;
 
-                Get.offAndToNamed(Routes.login);
+                Get.back();
               },
               child: const BodyLarge(
                 "Invia di nuovo",

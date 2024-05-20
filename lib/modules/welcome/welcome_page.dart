@@ -28,25 +28,32 @@ class WelcomePage extends GetView<WelcomeController> {
                 WelcomeSigninButton(
                   controller,
                 ),
-                ThemeSizedBox.height16,
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const TitleMedium(
-                      "Hai già un account Lines?",
-                      fontWeight: FontWeight.w500,
+                ThemeSizedBox.height8,
+                GestureDetector(
+                  onTap: () {
+                    controller.onTapLogin();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
                     ),
-                    ThemeSizedBox.width4,
-                    GestureDetector(
-                      onTap: controller.onTapLogin,
-                      child: const TitleMedium(
-                        "ACCEDI",
-                        underline: true,
-                      ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const TitleMedium(
+                          "Hai già un account Lines?",
+                          fontWeight: FontWeight.w500,
+                        ),
+                        ThemeSizedBox.width4,
+                        const TitleMedium(
+                          "ACCEDI",
+                          underline: true,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
