@@ -82,7 +82,6 @@ class HowOftenMensesWidget extends StatelessWidget {
         29,
         30,
         31,
-        32,
       ];
 
   /// This is the showed widget, it's fake because is not tappable

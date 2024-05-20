@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -8,16 +9,17 @@ import 'package:lines/modules/missions/widgets/missions_how_to_participate_step_
 import 'package:lines/modules/missions/widgets/missions_how_to_participate_step_three.dart';
 import 'package:lines/modules/missions/widgets/missions_how_to_participate_step_two.dart';
 import 'package:lines/modules/missions/widgets/missions_loaded_products.dart';
+import 'package:lines/modules/prizes/widgets/mission_progress_indicator.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MissionsDetailsPage extends GetView<MissionsDetailsController> {
   const MissionsDetailsPage({
     super.key,
   });
 
-  static const Color _inProgressBgColor = Color(0x1e2d4f33);
   static const Color _bottomContainerColor = Color(0xfff3eef4);
 
   @override
@@ -52,29 +54,16 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                 alignment: Alignment.topRight,
                 child: Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                      horizontal: 8,
-                    ),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(90),
-                      ),
-                      color: _inProgressBgColor,
-                    ),
-                    child: BodySmall(
-                      "In corso: ${controller.selectedMission.completeCounter}/3",
-                    ),
+                  child: MissionProgressIndicator(
+                    loadedProducts: controller.selectedMission.totalCounter,
                   ),
                 ),
               ),
             ],
           ),
           ThemeSizedBox.height16,
-          const TitleMedium(
-            // TODO: add until date
-            "FINO AL ",
+          TitleMedium(
+            "CARICA CODICI ENTRO IL ${controller.selectedMission.endAt}",
             color: ThemeColor.brightPink,
             textAlign: TextAlign.center,
           ),
@@ -90,14 +79,22 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
             ),
           ),
           ThemeSizedBox.height8,
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: ThemeSize.paddingSmall,
             ),
-            child: BodyMedium(
-              "Lorem ipsum dolor sit amet consectetur. Tristique lobortis gravida malesuada massa cursus.",
-              color: ThemeColor.darkBlue,
-              textAlign: TextAlign.center,
+            child: Html(
+              data: controller.selectedMission.description2 ?? '',
+              onLinkTap: (url, _, __) async {
+                await launchUrl(Uri.parse(url ?? ''));
+              },
+              style: {
+                "body": Style(
+                  color: ThemeColor.darkBlue,
+                  fontSize: FontSize(16),
+                  alignment: Alignment.center,
+                ),
+              },
             ),
           ),
           ThemeSizedBox.height24,

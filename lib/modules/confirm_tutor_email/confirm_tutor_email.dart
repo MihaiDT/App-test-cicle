@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/confirm_tutor_email/confirm_tutor_email_controller.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -23,7 +24,12 @@ class ConfirmTutorEmailPage extends GetView<ConfirmTutorEmailController> {
               horizontal: ThemeSize.paddingSmall,
             ),
             child: SecondaryButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.offNamedUntil(
+                  Routes.login,
+                  (route) => false,
+                );
+              },
               child: const TitleLarge("PROCEDI").applyShaders(context),
             ),
           ),

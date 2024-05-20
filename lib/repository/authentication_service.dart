@@ -175,13 +175,20 @@ class AuthenticationService {
 
   static Future<void> sendActivationLink(String email) async {
     try {
+      appController.sendConfirmEmail.responseHandler =
+          ResponseHandler.pending();
       await dio.post(
         "/auth/send_activation_link",
         data: {
           "email": email,
         },
       );
+      appController.sendConfirmEmail.responseHandler =
+          ResponseHandler.successful();
     } catch (e) {
+      appController.sendConfirmEmail.responseHandler = ResponseHandler.failed(
+        errorType: ErrorManager.checkError(e),
+      );
       log.logApiException(e);
     }
   }

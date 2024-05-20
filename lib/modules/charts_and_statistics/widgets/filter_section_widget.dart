@@ -26,10 +26,13 @@ class FilterSectionWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                SvgPicture.asset(
-                  "assets/icons/symptoms/a_mille.svg",
-                  width: 14,
-                  height: 14,
+                Visibility.maintain(
+                  visible: symptom != null,
+                  child: SvgPicture.asset(
+                    symptom?.iconPath ?? "",
+                    width: 14,
+                    height: 14,
+                  ),
                 ),
                 ThemeSizedBox.width6,
                 const HeadlineSmall(
@@ -37,9 +40,11 @@ class FilterSectionWidget extends StatelessWidget {
                   color: ThemeColor.darkBlue,
                 ),
                 const Spacer(),
-                const BodyMedium(
-                  "Tutti i mood",
+                BodyMedium(
+                  symptom == null ? "Tutti i sintomi" : symptom?.name ?? '',
+                  color: ThemeColor.darkBlue,
                 ),
+                ThemeSizedBox.width8,
                 const Icon(
                   Icons.arrow_forward_ios,
                   size: 15,

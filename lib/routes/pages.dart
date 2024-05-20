@@ -90,7 +90,8 @@ import 'package:lines/modules/tutor_email/tutor_email_page.dart';
 import 'package:lines/modules/welcome/welcome_binding.dart';
 import 'package:lines/modules/welcome/welcome_page.dart';
 import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_binding.dart';
-import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_intro_outro_binding.dart';
+import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_intro_binding.dart';
+import 'package:lines/modules/welcome_quiz/bindings/welcome_quiz_outro_binding.dart';
 import 'package:lines/modules/welcome_quiz/quiz_intro_page.dart';
 import 'package:lines/modules/welcome_quiz/quiz_outro_page.dart';
 import 'package:lines/modules/welcome_quiz/welcome_quiz_page.dart';
@@ -180,7 +181,7 @@ class Pages {
     GetPage(
       name: Routes.welcomeQuizIntroPage,
       bindings: [
-        WelcomeQuizIntroOutroBinding(),
+        WelcomeQuizIntroBinding(),
       ],
       page: () => _mediaQueryWrapper(const QuizIntroPage()),
     ),
@@ -189,7 +190,7 @@ class Pages {
     GetPage(
       name: Routes.welcomeQuizOutroPage,
       bindings: [
-        WelcomeQuizIntroOutroBinding(),
+        WelcomeQuizOutroBinding(),
       ],
       page: () => _mediaQueryWrapper(const QuizOutroPage()),
       transition: Transition.rightToLeft,

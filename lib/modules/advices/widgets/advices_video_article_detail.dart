@@ -6,6 +6,7 @@ import 'package:lines/modules/advices/controllers/advices_detail_controller.dart
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
@@ -22,10 +23,18 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
     return AppScaffoldPage(
       appBar: TransparentAppBar(
         actions: [
-          SvgPicture.asset(
-            ThemeIcon.shareGradient,
-            color: ThemeColor.darkBlue,
-          ),
+          if (controller.article?.id.isNotEmpty == true)
+            InkWell(
+              onTap: () async {
+                await Share.share(
+                  'https://lines-test-link.s3.amazonaws.com/articles/${controller.article?.id}',
+                );
+              },
+              child: SvgPicture.asset(
+                ThemeIcon.shareGradient,
+                color: ThemeColor.darkBlue,
+              ),
+            ),
           ThemeSizedBox.width24,
           InkWell(
             onTap: () {

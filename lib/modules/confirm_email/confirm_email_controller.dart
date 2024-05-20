@@ -1,15 +1,34 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class ConfirmEmailController extends GetxController {
+  @override
+  void onReady() {
+    ever(appController.sendConfirmEmail.rxValue, (sendConfirmEmailStatus) {
+      if (sendConfirmEmailStatus.isFailed) {
+        FlushBar(
+          child: Text(sendConfirmEmailStatus.errorType?.errorText ?? ''),
+        ).show(
+          Get.context!,
+        );
+      }
+    });
+    super.onReady();
+  }
+
   void logIn() {
     if (appController.isLoginFlow.value == true) {
       Get.back();
     } else {
       appController.isLoginFlow.value = true;
-      Get.offAllNamed(Routes.login);
+      Get.offNamedUntil(
+        Routes.login,
+        (route) => false,
+      );
     }
   }
 

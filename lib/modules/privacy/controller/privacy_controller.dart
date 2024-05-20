@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/privacy/privacy_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class PrivacyController extends GetxController {
+  final PrivacyArguments? arguments = Get.arguments;
   final RxBool firstAccepted = false.obs;
   final RxBool secondAccepted = false.obs;
   final RxBool thirdAccepted = false.obs;
@@ -21,7 +23,9 @@ class PrivacyController extends GetxController {
         }
         if (callback.isSuccessful) {
           buttonIsPending.value = false;
-          Get.offAllNamed(Routes.confirmEmailPage);
+          arguments?.userIsAdult == true
+              ? Get.offAllNamed(Routes.confirmEmailPage)
+              : Get.offAllNamed(Routes.confirmTutorEmail);
         }
       },
     );

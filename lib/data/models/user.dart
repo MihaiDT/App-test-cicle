@@ -185,4 +185,8 @@ class User {
   bool get hasMoreThan18Years {
     return age >= 18;
   }
+
+  String get formattedDateWithPipes {
+    return birthdate?.split("-").reversed.join(" | ") ?? "";
+  }
 }

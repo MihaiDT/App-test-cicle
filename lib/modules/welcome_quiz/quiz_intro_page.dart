@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_intro_outro_controller.dart';
+import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_intro_controller.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_body_text.dart';
 import 'package:lines/repository/survey_service.dart';
 import 'package:lines/routes/routes.dart';
@@ -12,7 +12,7 @@ import 'package:lines/widgets/coin/app_coin.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class QuizIntroPage extends GetView<WelcomeQuizIntroOutroController> {
+class QuizIntroPage extends GetView<WelcomeQuizIntroController> {
   const QuizIntroPage({
     super.key,
   });

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/profile/controllers/profile_completion_percentage_controller.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/cards/elevated_card.dart';
 import 'package:lines/widgets/charts/glowing_linear_progress_indicator.dart';
 
@@ -16,6 +17,9 @@ class ProfileCompletionPercentageSection
     return Visibility(
       visible: !controller.profileIsCompleted,
       child: ElevatedCard.withBorder(
+        onPressed: () {
+          Get.toNamed(Routes.changeProfilePage);
+        },
         color: Colors.white,
         borderColor: Colors.white.withOpacity(0.3),
         child: Padding(

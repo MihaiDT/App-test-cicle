@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/birth_date/widget/too_young_error_dialog.dart';
+import 'package:lines/modules/privacy/privacy_arguments.dart';
 import 'package:lines/modules/tutor_email/tutor_email_arguments.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -118,12 +119,22 @@ class BirthDateController extends GetxController {
         Routes.tutorEmailPage,
         arguments: TutorEmailArguments(
           onContinue: (_) {
-            Get.offAndToNamed(Routes.privacy);
+            Get.offAndToNamed(
+              Routes.privacy,
+              arguments: PrivacyArguments(
+                userIsAdult: false,
+              ),
+            );
           },
         ),
       );
     } else {
-      Get.toNamed(Routes.privacy);
+      Get.toNamed(
+        Routes.privacy,
+        arguments: PrivacyArguments(
+          userIsAdult: true,
+        ),
+      );
     }
   }
 

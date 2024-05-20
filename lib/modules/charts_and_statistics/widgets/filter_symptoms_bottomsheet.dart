@@ -91,6 +91,8 @@ class FilterSymptomsBottomSheet extends StatelessWidget {
                   );
                 },
               ),
+              const Divider(),
+              ThemeSizedBox.height32,
             ],
           ),
         ),

@@ -11,6 +11,7 @@ class OvulationLineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (indicatorWidth == 0) return const SizedBox.shrink();
     return Stack(
       alignment: Alignment.center,
       children: [

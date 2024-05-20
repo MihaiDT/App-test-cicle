@@ -26,8 +26,7 @@ class ChartsAndStaticsPage extends GetView<ChartsAndStatisticsController> {
         padding: const EdgeInsets.symmetric(
           horizontal: ThemeSize.paddingSmall,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
           children: [
             ThemeSizedBox.height16,
             const DisplayMedium(
@@ -41,16 +40,28 @@ class ChartsAndStaticsPage extends GetView<ChartsAndStatisticsController> {
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height24,
-            FilterSectionWidget(
-              onTap: () {
-                controller.onFilterSectionTapped();
+            Obx(
+              () {
+                return FilterSectionWidget(
+                  symptom: controller.selectedSymptom?.value,
+                  onTap: () async {
+                    await controller.onFilterSectionTapped(
+                      filterSymptoms: controller.filterSymptom,
+                    );
+                  },
+                );
               },
             ),
             ThemeSizedBox.height24,
             const ChartLegendWidget(),
             ThemeSizedBox.height32,
-            SymptomResumeSection(
-              mensesStatistics: controller.mensesStatistics,
+            Obx(
+              () {
+                controller.mensesStatistics.refresh();
+                return SymptomResumeSection(
+                  mensesStatistics: controller.mensesStatistics(),
+                );
+              },
             ),
           ],
         ),

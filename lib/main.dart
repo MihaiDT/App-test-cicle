@@ -9,7 +9,7 @@ import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/firebase_options.dart';
 import 'package:lines/flavors.dart';
-import 'package:lines/repository/dio_interceptor.dart';
+import 'package:lines/repository/interceptor/dio_interceptor.dart';
 
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,8 +49,20 @@ _initNetwork() {
 /// Manage deep linking
 void _initDeepLinking() {
   final appLinks = AppLinks();
-  appLinks.allUriLinkStream.listen((uri) {
-    logDebug('Deep link: $uri', tag: 'DeepLinkDeepLinkDeepLinkDeepLink');
+  appLinks.allUriLinkStream.listen((uri) async {
+    /* logDebug('Deep link: $uri', tag: 'DeepLinkDeepLinkDeepLinkDeepLink');
     appController.hasUsedDeepLink.value = true;
+    if (uri.pathSegments.isNotEmpty) {
+      final id = uri.pathSegments.last;
+      if (id.isNotEmpty) {
+        await AdvicesService.fetchSingleArticle(
+          "1de3b05f-dfd3-43e7-90a1-72e3e572e0d7",
+        );
+        Get.toNamed(
+          Routes.articleDetailPage,
+          arguments: appController.singleArticle.value,
+        );
+      }
+    }*/
   });
 }

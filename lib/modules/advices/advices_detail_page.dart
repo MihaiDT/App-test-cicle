@@ -26,6 +26,7 @@ class AdvicesDetailPage extends GetView<AdvicesDetailController> {
                 isArticleFav: controller.isArticleFav.value,
                 images: controller.getSliderImages,
                 currentSlide: controller.currentSlide.value,
+                id: controller.article?.id ?? "",
                 onFavChanged: (isFav) =>
                     controller.updateArticleFavStatus(isFav),
                 onSlideChanged: (value) => controller.onSlideChanged(value),

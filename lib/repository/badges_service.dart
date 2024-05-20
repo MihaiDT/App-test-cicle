@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/badge.dart';
@@ -13,6 +14,16 @@ class BadgesService {
       _saveBadges(response);
     } catch (e) {
       appController.badges.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> get wallet async {
+    try {
+      final response = await dio.get(
+        "/users/${HiveManager.userId}/wallet",
+      );
+    } catch (e) {
       log.logApiException(e);
     }
   }

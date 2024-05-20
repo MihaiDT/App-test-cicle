@@ -44,6 +44,18 @@ enum RequestStatus {
 enum ErrorType {
   generic,
   wrongPassword,
+  userAlreadyActive;
+
+  String get errorText {
+    switch (this) {
+      case ErrorType.generic:
+        return "C'è stato un errore";
+      case ErrorType.wrongPassword:
+        return "Password errata";
+      case ErrorType.userAlreadyActive:
+        return "L'utente è già attivo";
+    }
+  }
 }
 
 extension ErrorTypeExtension on ErrorType {
@@ -51,6 +63,8 @@ extension ErrorTypeExtension on ErrorType {
     switch (errorType.toLowerCase()) {
       case "wrong_password":
         return ErrorType.wrongPassword;
+      case "user_already_active":
+        return ErrorType.userAlreadyActive;
       default:
         return ErrorType.generic;
     }

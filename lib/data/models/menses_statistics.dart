@@ -1,21 +1,21 @@
 import 'package:lines/data/models/periods_stats.dart';
-import 'package:lines/data/models/symptom.dart';
+import 'package:lines/data/models/symptom_period_statistics.dart';
 
 class MensesStatistics {
   final PeriodsStats periodsStats;
-  final List<Symptom> symptom;
+  final List<SymptomPeriodStatistics> symptomPeriodStatistics;
 
   MensesStatistics({
     required this.periodsStats,
-    required this.symptom,
+    required this.symptomPeriodStatistics,
   });
 
   factory MensesStatistics.fromJson(Map<String, dynamic> json) {
     return MensesStatistics(
       periodsStats: PeriodsStats.fromJson(json),
-      symptom: (json['symptoms'] as List)
+      symptomPeriodStatistics: (json['symptoms'] as List)
           .map(
-            (e) => Symptom.fromJson(e),
+            (e) => SymptomPeriodStatistics.fromJson(e),
           )
           .toList(),
     );

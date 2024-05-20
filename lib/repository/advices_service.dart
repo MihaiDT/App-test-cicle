@@ -34,6 +34,20 @@ class AdvicesService {
     }
   }
 
+  static Future<void> fetchSingleArticle(String articleId) async {
+    articleId = "091a3ad5-5f53-4f28-b239-e4dbcacac97d";
+    try {
+      appController.singleArticle.responseHandler = ResponseHandler.pending();
+      final response = await dio.get(
+        "/articles/$articleId",
+      );
+      _saveSingleArticle(response);
+    } catch (e) {
+      appController.singleArticle.responseHandler = ResponseHandler.failed();
+      log.logError(e);
+    }
+  }
+
   static Future<void> addArticleToFav(AdvicesArticle article) async {
     try {
       await dio.post(
@@ -71,6 +85,14 @@ class AdvicesService {
             (article) => AdvicesArticle.fromJson(article),
           )
           .toList(),
+    );
+  }
+
+  static void _saveSingleArticle(Response response) {
+    appController.singleArticle.responseHandler = ResponseHandler.successful(
+      content: AdvicesArticle.fromJson(
+        response.data,
+      ),
     );
   }
 }

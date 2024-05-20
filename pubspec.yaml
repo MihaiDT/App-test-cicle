@@ -39,7 +39,8 @@ dependencies:
   
   # This package automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
   flutter_native_splash: ^2.3.5
-  
+  share_plus: ^7.2.2
+
   # A Flutter plugin to store data in secure storage:
   # Keychain is used for iOS
   # AES encryption is used for Android. AES secret key is encrypted with RSA and RSA key is stored in KeyStore

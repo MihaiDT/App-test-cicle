@@ -6,6 +6,7 @@ import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:share_plus/share_plus.dart';
 
 class AdvicesSliderArticleDetail extends StatelessWidget {
   final AdvicesCategory? category;
@@ -19,6 +20,7 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
   final Function(int value) onSlideChanged;
 
   final int currentSlide;
+  final String id;
 
   const AdvicesSliderArticleDetail({
     required this.category,
@@ -28,6 +30,7 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
     required this.currentSlide,
     required this.onFavChanged,
     required this.onSlideChanged,
+    required this.id,
     super.key,
   });
 
@@ -40,10 +43,18 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: TransparentAppBar(
         actions: [
-          SvgPicture.asset(
-            ThemeIcon.shareGradient,
-            color: ThemeColor.darkBlue,
-          ),
+          if (id.isNotEmpty)
+            InkWell(
+              onTap: () async {
+                await Share.share(
+                  'https://lines-test-link.s3.amazonaws.com/articles/$id',
+                );
+              },
+              child: SvgPicture.asset(
+                ThemeIcon.shareGradient,
+                color: ThemeColor.darkBlue,
+              ),
+            ),
           ThemeSizedBox.width24,
           InkWell(
             onTap: () {

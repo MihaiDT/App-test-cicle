@@ -1,7 +1,9 @@
+import 'package:lines/data/models/phase_counters.dart';
+
 class PeriodsStats {
   final String startingDate;
   final String? endingDate;
-  final int periodDays;
+  final PhasesCounter? phasesCounter;
   final int periodDuration;
   final List<int> menstruationDays;
   final List<int> ovulationDays;
@@ -9,7 +11,7 @@ class PeriodsStats {
   PeriodsStats({
     required this.startingDate,
     this.endingDate,
-    required this.periodDays,
+    this.phasesCounter,
     required this.periodDuration,
     required this.menstruationDays,
     required this.ovulationDays,
@@ -19,8 +21,8 @@ class PeriodsStats {
     return PeriodsStats(
       startingDate: json['from'],
       endingDate: json['to'],
-      periodDays: json['period_days'],
       periodDuration: json['period_duration'],
+      phasesCounter: PhasesCounter.fromJson(json["phase_counters"]),
       menstruationDays:
           (json['period_phases']['menstruation_days'] as List<dynamic>)
               .map((item) => item as int)
@@ -35,7 +37,6 @@ class PeriodsStats {
     return {
       'starting_date': startingDate,
       'ending_date': endingDate,
-      'period_days': periodDays,
       'period_duration': periodDuration,
       'menstruation_days': menstruationDays,
       'ovulation_days': ovulationDays,
@@ -44,6 +45,6 @@ class PeriodsStats {
 
   @override
   String toString() {
-    return 'PeriodsStats{startingDate: $startingDate, endingDate: $endingDate, periodDays: $periodDays, periodDuration: $periodDuration, menstruationDays: $menstruationDays, ovulationDays: $ovulationDays}';
+    return 'PeriodsStats{startingDate: $startingDate, endingDate: $endingDate, periodDuration: $periodDuration, menstruationDays: $menstruationDays, ovulationDays: $ovulationDays}';
   }
 }

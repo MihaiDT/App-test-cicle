@@ -58,7 +58,7 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                 ),
                 ThemeSizedBox.height36,
                 const DisplayMedium(
-                  'Ci siamo quasi,conferma il tuo indirizzo email!',
+                  'Ci siamo quasi, conferma il tuo indirizzo email!',
                   textAlign: TextAlign.center,
                 ),
                 ThemeSizedBox.height16,

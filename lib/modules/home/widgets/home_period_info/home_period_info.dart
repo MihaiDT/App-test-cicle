@@ -5,16 +5,18 @@ import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/home/home_controller.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_menstruation_card.dart';
 import 'package:lines/modules/home/widgets/home_period_info/home_period_ovulation_card.dart';
-
-import 'package:lines/modules/home/home_controller.dart';
 
 class HomePeriodInfo extends GetView<HomeController> {
   const HomePeriodInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
+    if (!controller.hasSavedPeriodInfo) {
+      return const SizedBox.shrink();
+    }
     initializeDateFormatting();
 
     return Padding(
@@ -39,7 +41,6 @@ class HomePeriodInfo extends GetView<HomeController> {
           ),
           ThemeSizedBox.height8,
           Row(
-            mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
                 child: HomePeriodMenstruationCard(

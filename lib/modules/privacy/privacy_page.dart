@@ -43,16 +43,18 @@ class PrivacyPage extends GetView<PrivacyController> {
                     },
                     value: controller.firstAccepted.value,
                   ),
-                  ThemeSizedBox.height24,
-                  PrivacyDetailWidget(
-                    title: "Contenuti e missioni personalizzate per te!",
-                    description:
-                        "Per noi è importante conoscere i tuoi interessi! Permettici di offrirti un'esperienza personalizzata inviandoti contenuti, comunicazioni e promozioni non generiche su Lines, e se lo vorrai, sugli altri marchi della famiglia Fater e sui nostri partner terzi, e di individuare nuovi contatti simili al tuo profilo, come da informativa privacy.",
-                    onChanged: (value) {
-                      controller.secondAccepted.value = value;
-                    },
-                    value: controller.secondAccepted.value,
-                  ),
+                  if (controller.arguments?.userIsAdult == true) ...[
+                    ThemeSizedBox.height24,
+                    PrivacyDetailWidget(
+                      title: "Contenuti e missioni personalizzate per te!",
+                      description:
+                          "Per noi è importante conoscere i tuoi interessi! Permettici di offrirti un'esperienza personalizzata inviandoti contenuti, comunicazioni e promozioni non generiche su Lines, e se lo vorrai, sugli altri marchi della famiglia Fater e sui nostri partner terzi, e di individuare nuovi contatti simili al tuo profilo, come da informativa privacy.",
+                      onChanged: (value) {
+                        controller.secondAccepted.value = value;
+                      },
+                      value: controller.secondAccepted.value,
+                    ),
+                  ],
                   ThemeSizedBox.height24,
                   PrivacyDetailWidget(
                     title: "Non perdere le novità su altri prodotti",

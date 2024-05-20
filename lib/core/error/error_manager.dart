@@ -12,7 +12,9 @@ class ErrorManager {
 
   static ErrorType checkError(Object? error) {
     String errorType = "";
-    if (error is DioException) {
+    if (error is DioException &&
+        error.response != null &&
+        error.response?.data is Map<String, dynamic>) {
       errorType = error.response?.data["error"] ?? "";
     }
     return ErrorTypeExtension.fromString(errorType);

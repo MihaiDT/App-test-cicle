@@ -5,21 +5,71 @@ import 'package:lines/data/models/symptom.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/filter_symptoms_bottomsheet.dart';
 
 class ChartsAndStatisticsController extends GetxController {
-  List<MensesStatistics> get mensesStatistics =>
-      appController.mensesStatistics.value ?? [];
+  RxList<MensesStatistics> mensesStatistics = <MensesStatistics>[].obs;
+  Rx<Symptom?>? selectedSymptom;
 
-  List<Symptom> get symptoms =>
-      appController.symptomCategory.value?.elementAt(2).symptoms ?? [];
+  @override
+  void onInit() {
+    selectedSymptom = Rx<Symptom?>(null);
+
+    List<MensesStatistics> savedMensesStatistics =
+        appController.mensesStatistics.value ?? [];
+    mensesStatistics = savedMensesStatistics.obs;
+    super.onInit();
+  }
 
   /// If null means that all symptoms are selected
-  Symptom? selectedSymptom;
+  List<Symptom> get filterSymptom {
+    List<Symptom> symptoms = [];
+    for (int i = 0; i < mensesStatistics.length; i++) {
+      for (int j = 0;
+          j < mensesStatistics[i].symptomPeriodStatistics.length;
+          j++) {
+        symptoms.add(mensesStatistics()[i].symptomPeriodStatistics[j].symptom);
+      }
+    }
 
-  Future<void> onFilterSectionTapped() async {
-    selectedSymptom = await Get.bottomSheet(
+    return symptoms.toSet().toList();
+  }
+
+  Future<void> onFilterSectionTapped({
+    required List<Symptom> filterSymptoms,
+  }) async {
+    final Symptom? symptom = await Get.bottomSheet(
       FilterSymptomsBottomSheet(
-        symptoms: symptoms,
-        selectedSymptom: selectedSymptom,
+        symptoms: filterSymptoms,
+        selectedSymptom: selectedSymptom?.value,
       ),
-    );
+    ).then((value) {
+      return value;
+    });
+    selectedSymptom?.value = symptom;
+
+    mensesStatistics.clear();
+    mensesStatistics.value = updateMensesStatistics(selectedSymptom?.value);
+  }
+
+  List<MensesStatistics> updateMensesStatistics(Symptom? selectedSymptom) {
+    List<MensesStatistics> savedMensesStatistics = [];
+    savedMensesStatistics.addAll(appController.mensesStatistics.value ?? []);
+    if (selectedSymptom == null) {
+      return savedMensesStatistics;
+    } else {
+      final resultList = savedMensesStatistics
+          .where(
+            (element) => element.symptomPeriodStatistics
+                .any((element) => element.symptom == selectedSymptom),
+          )
+          .toList();
+
+      for (var element in resultList) {
+        element.symptomPeriodStatistics.removeWhere(
+          (element) => element.symptom != selectedSymptom,
+        );
+      }
+
+      mensesStatistics.value = resultList;
+      return resultList;
+    }
   }
 }

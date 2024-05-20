@@ -19,12 +19,12 @@ class CategorySymptomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8,
-      ),
-      child: GestureDetector(
-        onTap: canBePressed ? onTap : null,
+    return InkWell(
+      onTap: canBePressed ? onTap : null,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 8,
+        ),
         child: Row(
           children: [
             Opacity(

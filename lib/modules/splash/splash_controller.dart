@@ -44,6 +44,10 @@ class SplashPageController extends GetxController {
           } else*/
           if (appController.user.value?.routeAfterLogin == "main") {
             Get.offAndToNamed(Routes.main);
+          } else if (appController.user.value?.routeAfterLogin ==
+              "complete_profile") {
+            Get.offAndToNamed(Routes.welcome);
+            Get.toNamed(Routes.lastMensesPage);
           } else {
             Get.offAndToNamed(Routes.login);
           }
@@ -60,6 +64,7 @@ class SplashPageController extends GetxController {
     await SettingsService.fetchSettings();
     await AdvicesService.fetchArticles();
     await AdvicesService.fetchSuggestedArticles();
+    await AdvicesService.fetchSingleArticle("");
     await CalendarService.symptomCategories;
     await CalendarService.homePageSymptomCategories;
     await BadgesService.fetchBadges();
@@ -67,6 +72,7 @@ class SplashPageController extends GetxController {
     await MensesService.mensesStatistics;
     await ProductService.products;
     await ProductService.mission;
+    await BadgesService.wallet;
     await AuthenticationService.fetchUser();
   }
 

@@ -119,7 +119,12 @@ class _FlushBarState extends State<FlushBar> with TickerProviderStateMixin {
                 left: ThemeSize.paddingLarge,
                 right: ThemeSize.paddingLarge,
               ),
-              child: widget.child,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: widget.child,
+                ),
+              ),
             ),
           ),
         );

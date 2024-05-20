@@ -12,6 +12,7 @@ import 'package:lines/data/models/period_map.dart';
 import 'package:lines/data/models/periods_stats.dart';
 import 'package:lines/data/models/product_category.dart';
 import 'package:lines/data/models/question.dart';
+import 'package:lines/data/models/send_confirm_email.dart';
 import 'package:lines/data/models/settings.dart';
 import 'package:lines/data/models/specific_date_period_stats.dart';
 import 'package:lines/data/models/survey.dart';
@@ -79,6 +80,9 @@ class AppController extends GetxController {
   final EasyGetter<SymptomCategoryStats> symptomCategoryStats;
   final EasyGetter<List<Mission>> missions;
   final EasyGetter<List<MensesStatistics>> mensesStatistics;
+  final EasyGetter<SendConfirmEmail> sendConfirmEmail;
+
+  final EasyGetter<AdvicesArticle> singleArticle;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
@@ -109,9 +113,11 @@ class AppController extends GetxController {
     required this.specificDatePeriodsStats,
     required this.productCategory,
     required this.symptomCategoryStats,
+    required this.singleArticle,
     required this.missions,
     required this.mensesStatistics,
     required this.symptomsDiaries,
+    required this.sendConfirmEmail,
     required this.badges,
     required this.hasUsedDeepLink,
   });
@@ -141,6 +147,8 @@ class AppController extends GetxController {
       symptomCategoryStats: EasyGetter<SymptomCategoryStats>(),
       missions: EasyGetter<List<Mission>>(),
       mensesStatistics: EasyGetter<List<MensesStatistics>>(),
+      sendConfirmEmail: EasyGetter<SendConfirmEmail>(),
+      singleArticle: EasyGetter<AdvicesArticle>(),
       isLoginFlow: false.obs,
       showLockPage: false.obs,
       hasUsedDeepLink: false.obs,

@@ -7,6 +7,7 @@ import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:share_plus/share_plus.dart';
 
 class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
   const AdvicesTextArticleDetails({
@@ -132,11 +133,18 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.white,
-                    child: SvgPicture.asset(
-                      ThemeIcon.shareGradient,
+                  InkWell(
+                    onTap: () async {
+                      await Share.share(
+                        'https://lines-test-link.s3.amazonaws.com/articles/${controller.article?.id}',
+                      );
+                    },
+                    child: CircleAvatar(
+                      radius: 16,
+                      backgroundColor: Colors.white,
+                      child: SvgPicture.asset(
+                        ThemeIcon.shareGradient,
+                      ),
                     ),
                   ),
                   ThemeSizedBox.width8,

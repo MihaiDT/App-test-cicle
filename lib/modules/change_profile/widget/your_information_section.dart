@@ -49,7 +49,9 @@ class YourInformationSection extends GetView<YourInformationSectionController> {
               ThemeSizedBox.height8,
               InformationTile(
                 title: "Nickname",
-                value: controller.user?.nickname ?? 'Nessuno',
+                value: controller.user?.nickname?.isNotEmpty == true
+                    ? controller.user?.nickname ?? 'Nessuno'
+                    : 'Nessuno',
                 onTap: () => controller.updateNickname(
                   title: "Modifica Nickname",
                   onConfirm: (nickname) {
@@ -59,7 +61,7 @@ class YourInformationSection extends GetView<YourInformationSectionController> {
                       ),
                     );
                   },
-                  initialText: controller.user?.nickname ?? '',
+                  initialText: controller.user?.nickname ?? 'Nessuno',
                 ),
               ),
               ThemeSizedBox.height8,
@@ -81,7 +83,7 @@ class YourInformationSection extends GetView<YourInformationSectionController> {
               ThemeSizedBox.height8,
               InformationTile(
                 title: "Data di nascita",
-                value: controller.user?.birthdate ?? '',
+                value: controller.user?.formattedDateWithPipes ?? '',
               ),
               ThemeSizedBox.height8,
               InformationTile(
