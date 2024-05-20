@@ -31,6 +31,8 @@ class LastMensesController extends GetxController {
       } else {
         Get.offAndToNamed(Routes.main);
       }
+    } else {
+      appController.updateUserParameters.calendarConsent = true;
     }
     super.onReady();
   }
