@@ -10,6 +10,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/firebase_options.dart';
 import 'package:lines/flavors.dart';
 import 'package:lines/repository/interceptor/dio_interceptor.dart';
+import 'package:lines/repository/interceptor/dio_log_intercpetor.dart';
 
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,7 @@ _initNetwork() {
       DioInterceptor(
         dio: dio,
       ),
+      DioLogInterceptor(),
     ],
   );
 

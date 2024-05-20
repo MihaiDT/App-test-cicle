@@ -29,7 +29,7 @@ class CustomLogger extends Logger {
     Object? error,
     StackTrace? stackTrace,
   }) {
-    String loggedMessage = message.toString();
+    /*  String loggedMessage = message.toString();
     if (exception != null) {
       loggedMessage =
           " $message | ERROR WITH ${exception.response?.statusCode} ${exception.response?.statusMessage}";
@@ -38,7 +38,7 @@ class CustomLogger extends Logger {
       loggedMessage,
       error: error,
       stackTrace: stackTrace,
-    );
+    );*/
   }
 
   void logApiException(
