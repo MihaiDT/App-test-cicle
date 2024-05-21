@@ -22,6 +22,8 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
   final int currentSlide;
   final String id;
 
+  final List<AdvicesArticle> allSuggestedArticles;
+
   const AdvicesSliderArticleDetail({
     required this.category,
     required this.article,
@@ -31,6 +33,7 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
     required this.onFavChanged,
     required this.onSlideChanged,
     required this.id,
+    required this.allSuggestedArticles,
     super.key,
   });
 
@@ -152,7 +155,9 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
               ThemeSizedBox.height60,
             ],
           ),
-          const SuggestedArticleSection(),
+          SuggestedArticleSection(
+            allSuggestedArticles: allSuggestedArticles,
+          ),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
@@ -19,7 +20,6 @@ class AdvicesDetailController extends GetxController {
 
   late AdvicesCategory? category;
 
-  RxDouble proportion = 0.0.obs;
   RxInt currentSlide = 0.obs;
   Rx<Duration> duration = Rx<Duration>(Duration.zero);
   RxBool hasStarted = false.obs;
@@ -31,22 +31,10 @@ class AdvicesDetailController extends GetxController {
     super.onInit();
     article = articleDetail?.article;
     category = articleDetail?.category;
-    if (article?.typology == ArticleType.text) {
-      _initTextDetail();
-    }
     if (article?.typology == ArticleType.video) {
       _initVideoDetail();
     }
     isArticleFav.value = article?.isFavorite == true;
-  }
-
-  void _initTextDetail() {
-    scrollController.addListener(
-      () {
-        proportion.value = scrollController.offset /
-            scrollController.position.viewportDimension;
-      },
-    );
   }
 
   void _initVideoDetail() {
@@ -123,5 +111,9 @@ class AdvicesDetailController extends GetxController {
 
   void removeArticleFromFav() {
     _updateArticleFavStatus(false);
+  }
+
+  List<AdvicesArticle> get allSuggestedArticles {
+    return appController.suggestedAdvicesArticle.value ?? [];
   }
 }

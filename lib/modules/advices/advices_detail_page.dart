@@ -16,7 +16,14 @@ class AdvicesDetailPage extends GetView<AdvicesDetailController> {
     if (controller.articleDetail != null) {
       switch (controller.articleDetail!.article.typology) {
         case (ArticleType.text):
-          return const AdvicesTextArticleDetails();
+          return AdvicesTextArticleDetails(
+            category: controller.category,
+            article: controller.article,
+            isArticleFav: controller.isArticleFav.value,
+            onFavChanged: (isFav) => controller.updateArticleFavStatus(isFav),
+            id: controller.article?.id ?? "",
+            allSuggestedArticles: controller.allSuggestedArticles,
+          );
         case (ArticleType.slider):
           return Obx(
             () {
@@ -30,11 +37,14 @@ class AdvicesDetailPage extends GetView<AdvicesDetailController> {
                 onFavChanged: (isFav) =>
                     controller.updateArticleFavStatus(isFav),
                 onSlideChanged: (value) => controller.onSlideChanged(value),
+                allSuggestedArticles: controller.allSuggestedArticles,
               );
             },
           );
         case (ArticleType.video):
-          return const AdvicesVideoArticleDetail();
+          return AdvicesVideoArticleDetail(
+            allSuggestedArticles: controller.allSuggestedArticles,
+          );
       }
     } else {
       return const SizedBox.shrink();

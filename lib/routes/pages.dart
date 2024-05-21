@@ -7,7 +7,6 @@ import 'package:lines/badges/pages/badges_page.dart';
 import 'package:lines/modules/access_wrapper/wrapper_access_widget.dart';
 import 'package:lines/modules/advices/advices_detail_page.dart';
 import 'package:lines/modules/advices/binding/advices_detail_binding.dart';
-import 'package:lines/modules/advices/binding/suggested_article_section_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_binding.dart';
 import 'package:lines/modules/birth_date/birth_date_page.dart';
 import 'package:lines/modules/calendar/calendar_app_bar_binding.dart';
@@ -363,7 +362,6 @@ class Pages {
       name: Routes.articleDetailPage,
       bindings: [
         AdvicesDetailBinding(),
-        SuggestedArticleSectionBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const AdvicesDetailPage(),

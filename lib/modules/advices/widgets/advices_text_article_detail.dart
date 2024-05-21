@@ -3,14 +3,31 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_category.dart';
-import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:share_plus/share_plus.dart';
 
-class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
+class AdvicesTextArticleDetails extends StatelessWidget {
+  final AdvicesCategory? category;
+
+  final AdvicesArticle? article;
+
+  final bool isArticleFav;
+
+  final Function(bool isFav) onFavChanged;
+
+  final String id;
+  final List<AdvicesArticle> allSuggestedArticles;
+
   const AdvicesTextArticleDetails({
+    required this.category,
+    required this.article,
+    required this.isArticleFav,
+    required this.onFavChanged,
+    required this.id,
+    required this.allSuggestedArticles,
     super.key,
   });
 
@@ -19,13 +36,15 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    AdvicesCategory? category = controller.category;
+    RxDouble proportion = 0.0.obs;
+    final ScrollController scrollController = ScrollController();
+    _initTextDetail(scrollController, proportion);
     return AppScaffoldPage(
       backgroundColor: Colors.white,
       body: CustomScrollView(
-        controller: controller.scrollController,
+        controller: scrollController,
         slivers: [
-          _appBar(context),
+          _appBar(context, proportion),
           SliverList(
             delegate: SliverChildListDelegate(
               [
@@ -52,12 +71,12 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                       ),
                       ThemeSizedBox.height4,
                       DisplayMedium(
-                        controller.article?.title ?? "",
+                        article?.title ?? "",
                         textAlign: TextAlign.center,
                       ).applyShaders(context),
                       ThemeSizedBox.height16,
                       BodyLarge(
-                        controller.article?.shortDescription ?? "",
+                        article?.shortDescription ?? "",
                         color: ThemeColor.darkBlue,
                         textAlign: TextAlign.center,
                         fontWeight: FontWeight.w500,
@@ -68,11 +87,11 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                       ),
                       ThemeSizedBox.height48,
                       Html(
-                        data: controller.article?.text,
+                        data: article?.text,
                       ),
                       ThemeSizedBox.height48,
                       LabelLarge(
-                        controller.article?.disclaimer ?? "",
+                        article?.disclaimer ?? "",
                         color: _disclaimerColor,
                         fontWeight: FontWeight.w500,
                       ),
@@ -80,7 +99,9 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                     ],
                   ),
                 ),
-                const SuggestedArticleSection(),
+                SuggestedArticleSection(
+                  allSuggestedArticles: allSuggestedArticles,
+                ),
               ],
             ),
           ),
@@ -89,9 +110,12 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
     );
   }
 
-  Widget _appBar(BuildContext context) {
+  Widget _appBar(
+    BuildContext context,
+    RxDouble proportion,
+  ) {
     return SliverAppBar(
-      backgroundColor: controller.category?.categoryColor,
+      backgroundColor: category?.categoryColor,
       elevation: 0,
       leading: InkWell(
         onTap: () {
@@ -112,14 +136,14 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
         children: [
           Obx(
             () => Visibility(
-              visible: controller.article?.thumbImageUrl?.isNotEmpty == true,
+              visible: article?.thumbImageUrl?.isNotEmpty == true,
               child: AnimatedOpacity(
                 duration: const Duration(
                   milliseconds: 500,
                 ),
-                opacity: controller.proportion.value <= 0.40 ? 1.0 : 0.0,
+                opacity: proportion.value <= 0.40 ? 1.0 : 0.0,
                 child: Image.network(
-                  controller.article!.thumbImageUrl!,
+                  article!.thumbImageUrl!,
                   fit: BoxFit.cover,
                   width: double.maxFinite,
                 ),
@@ -136,7 +160,7 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                   InkWell(
                     onTap: () async {
                       await Share.share(
-                        'https://lines-test-link.s3.amazonaws.com/articles/${controller.article?.id}',
+                        'https://lines-test-link.s3.amazonaws.com/articles/${article?.id}',
                       );
                     },
                     child: CircleAvatar(
@@ -150,18 +174,14 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
                   ThemeSizedBox.width8,
                   InkWell(
                     onTap: () {
-                      if (controller.isArticleFav.value) {
-                        controller.removeArticleFromFav();
-                      } else {
-                        controller.addArticleToFav();
-                      }
+                      onFavChanged(!isArticleFav);
                     },
                     child: CircleAvatar(
                       radius: 16,
                       backgroundColor: Colors.white,
                       child: Obx(
                         () {
-                          if (controller.isArticleFav.value) {
+                          if (isArticleFav) {
                             return SvgPicture.asset(
                               ThemeIcon.savedFilled,
                               color: ThemeColor.darkBlue,
@@ -181,6 +201,15 @@ class AdvicesTextArticleDetails extends GetView<AdvicesDetailController> {
           ),
         ],
       ),
+    );
+  }
+
+  void _initTextDetail(ScrollController scrollController, RxDouble proportion) {
+    scrollController.addListener(
+      () {
+        proportion.value = scrollController.offset /
+            scrollController.position.viewportDimension;
+      },
     );
   }
 }

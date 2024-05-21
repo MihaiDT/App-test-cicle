@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -10,7 +11,10 @@ import 'package:share_plus/share_plus.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
+  final List<AdvicesArticle> allSuggestedArticles;
+
   const AdvicesVideoArticleDetail({
+    required this.allSuggestedArticles,
     super.key,
   });
 
@@ -194,7 +198,9 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
                       ThemeSizedBox.height60,
                     ],
                   ),
-                  const SuggestedArticleSection(),
+                  SuggestedArticleSection(
+                    allSuggestedArticles: allSuggestedArticles,
+                  ),
                 ],
               )
             : const Center(
