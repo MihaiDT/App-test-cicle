@@ -66,8 +66,8 @@ class InformationTile extends StatelessWidget {
               SvgPicture.asset(
                 ThemeIcon.arrowRight,
                 color: const Color(0xffB438B2),
-                height: 24,
-                width: 24,
+                height: 20,
+                width: 20,
               ),
             ],
           ),
