@@ -41,13 +41,11 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
         padding: EdgeInsets.zero,
         children: [
           Stack(
+            fit: StackFit.passthrough,
             children: [
-              SizedBox(
-                height: 195,
-                child: Image.network(
-                  controller.selectedMission.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+              Image.network(
+                controller.selectedMission.imageUrl,
+                fit: BoxFit.fitWidth,
               ),
               Align(
                 alignment: Alignment.topRight,

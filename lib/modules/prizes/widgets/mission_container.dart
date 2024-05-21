@@ -61,6 +61,7 @@ class MissionContainer extends StatelessWidget {
   Widget get _mainContent => Stack(
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Flexible(
                 child: Image.network(
