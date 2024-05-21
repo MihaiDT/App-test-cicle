@@ -65,6 +65,7 @@ class MissionsProduct extends StatelessWidget {
           LabelMedium(
             product.name,
             color: ThemeColor.darkBlue,
+            overflow: TextOverflow.ellipsis,
           ),
           ThemeSizedBox.height4,
         ],
