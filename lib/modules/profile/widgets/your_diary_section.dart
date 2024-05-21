@@ -127,8 +127,11 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
             padding: const EdgeInsets.symmetric(
               horizontal: ThemeSize.paddingMedium,
             ),
-            child: ElevatedCard(
-              color: Colors.white,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(60),
+                color: Colors.white,
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(
                   ThemeSize.paddingSmall,

@@ -18,7 +18,7 @@ class MyBadgesSection extends GetView<MyBadgesController> {
       return const SizedBox.shrink();
     }
     return ElevatedCard(
-      color: Colors.white,
+      color: Colors.white.withOpacity(0.8),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: ThemeSize.paddingSmall,
@@ -28,15 +28,22 @@ class MyBadgesSection extends GetView<MyBadgesController> {
           children: [
             ThemeSizedBox.height24,
             const DisplayMedium(
-              "I miei badge",
+              "I tuoi badge",
               textAlign: TextAlign.center,
             ).applyShaders(context),
             ThemeSizedBox.height16,
-            ...List.generate(controller.badges.length, (index) {
-              return BadgeTile(
-                title: controller.badges[index].title,
-                description: controller.badges[index].description,
-                imagePath: controller.badges[index].iconUrl,
+            ...List.generate(3, (index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 4,
+                ),
+                child: BadgeTile(
+                  title: controller.badges[index].title,
+                  description: controller.badges[index].description,
+                  imagePath: controller.badges[index].iconUrl,
+                  backgroundColor: Colors.white.withOpacity(0.5),
+                  progressLabel: controller.badges[index].progressLabel,
+                ),
               );
             }),
             ThemeSizedBox.height8,
@@ -45,7 +52,10 @@ class MyBadgesSection extends GetView<MyBadgesController> {
                 Get.toNamed(Routes.badges);
               },
               child: Container(
-                color: Colors.white,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60),
+                  color: Colors.white,
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(
                     ThemeSize.paddingSmall,
@@ -53,7 +63,7 @@ class MyBadgesSection extends GetView<MyBadgesController> {
                   child: Row(
                     children: [
                       const TitleLarge(
-                        "TUTTI I BADGE",
+                        "VEDI TUTTI I BADGE",
                       ).applyShaders(context),
                       const Spacer(),
                       SvgPicture.asset(

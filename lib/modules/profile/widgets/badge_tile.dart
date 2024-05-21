@@ -56,6 +56,7 @@ class BadgeTile extends StatelessWidget {
                         color: ThemeColor.darkBlue,
                         textAlign: TextAlign.start,
                       ),
+                      ThemeSizedBox.height8,
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
