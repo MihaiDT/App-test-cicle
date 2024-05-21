@@ -46,7 +46,8 @@ class WelcomeWalkthroughPage extends StatelessWidget {
           ),
           WalkthroughData(
             title: "Più partecipi, più accumuli punti",
-            description: "Partecipa alle missioni e ottieni punti per accedere a premi e contenuti esclusivi.",
+            description:
+                "Partecipa alle missioni e ottieni punti per accedere a premi e contenuti esclusivi.",
             image: Image.asset(
               ThemeImage.walkthrough4,
             ),
