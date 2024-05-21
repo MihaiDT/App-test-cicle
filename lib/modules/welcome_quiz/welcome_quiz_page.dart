@@ -10,7 +10,9 @@ import 'package:lines/widgets/charts/animated_linear_progress_indicator.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class WelcomeQuizPage extends GetView<WelcomeQuizBodyController> {
-  const WelcomeQuizPage({super.key});
+  const WelcomeQuizPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -20,8 +20,6 @@ class QuizOutroPage extends GetView<WelcomeQuizOutroController> {
     super.key,
   });
 
-  static const int totalCoins = 250;
-
   @override
   Widget build(BuildContext context) {
     return AppScaffoldPage(
@@ -50,7 +48,9 @@ class QuizOutroPage extends GetView<WelcomeQuizOutroController> {
                   'Completando il Welcome Quiz\n hai guadagnato 150 Coins!',
             ),
             ThemeSizedBox.height24,
-            const QuizYourCoins(totalCoins: totalCoins),
+            QuizYourCoins(
+              totalCoins: controller.totalCoins,
+            ),
             ThemeSizedBox.height24,
             GestureDetector(
               onTap: () {

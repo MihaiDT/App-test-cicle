@@ -8,29 +8,35 @@ class InfoWhatAreCoinsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: ThemeSize.paddingSmall,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(32),
       ),
-      child: Column(
-        children: [
-          ThemeSizedBox.height32,
-          const DisplayMedium(
-            "Cosa sono i Coins?",
-            textAlign: TextAlign.center,
-          ).applyShaders(context),
-          ThemeSizedBox.height16,
-          const BodyLarge(
-            "I Coins sono la moneta virtuale dell'app My Lines che accumuli sia utilizzando l'app che caricando i codici dei tuoi prodotti.Puoi utilizzare i Coins per partecipare alle lotterie instantanee Lucky Lines",
-            color: ThemeColor.darkBlue,
-            textAlign: TextAlign.center,
-          ),
-          Image.asset(
-            ThemeImage.bigCoin,
-            width: 230,
-          ),
-          ThemeSizedBox.height32,
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: ThemeSize.paddingSmall,
+        ),
+        child: Column(
+          children: [
+            ThemeSizedBox.height32,
+            const DisplayMedium(
+              "Cosa sono i Coins?",
+              textAlign: TextAlign.center,
+            ).applyShaders(context),
+            ThemeSizedBox.height16,
+            const BodyLarge(
+              "I Coins sono la moneta virtuale dell'app My Lines che accumuli sia utilizzando l'app che caricando i codici dei tuoi prodotti.Puoi utilizzare i Coins per partecipare alle lotterie instantanee Lucky Lines",
+              color: ThemeColor.darkBlue,
+              textAlign: TextAlign.center,
+            ),
+            Image.asset(
+              ThemeImage.bigCoin,
+              width: 230,
+            ),
+            ThemeSizedBox.height32,
+          ],
+        ),
       ),
     );
   }
