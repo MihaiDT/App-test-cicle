@@ -53,4 +53,6 @@ class Badge {
   String toString() {
     return 'Badge{badgeType: $badgeType, title: $title, imageUrl: $iconUrl, progressValue: $progressValue, totalProgressValue: $totalProgressValue, progressLabel: $progressLabel, description: $description}';
   }
+
+  bool get isCompleted => progressValue == totalProgressValue;
 }
