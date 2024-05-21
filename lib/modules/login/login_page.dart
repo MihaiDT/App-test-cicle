@@ -122,18 +122,21 @@ class LoginPage extends GetView<LoginController> {
                   );
                 },
               ),
-              ThemeSizedBox.height16,
+              ThemeSizedBox.height8,
               GestureDetector(
                 onTap: () {
                   controller.onForgotPasswordTap(context);
                 },
-                child: const TitleMedium(
-                  "PASSWORD DIMENTICATA?",
-                  textAlign: TextAlign.center,
-                  underline: true,
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: TitleMedium(
+                    "PASSWORD DIMENTICATA?",
+                    textAlign: TextAlign.center,
+                    underline: true,
+                  ),
                 ),
               ),
-              ThemeSizedBox.height32,
+              ThemeSizedBox.height24,
               SecondaryLoadingButton(
                 isLoading: controller.isButtonPending.value,
                 onPressed: controller.canProceed.value
