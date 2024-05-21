@@ -3,5 +3,10 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/badge.dart';
 
 class CompletedBadgesController extends GetxController {
-  List<Badge> get badges => appController.badges.value ?? [];
+  /// Returns all completed badges
+  List<Badge> get badges =>
+      appController.badges.value
+          ?.where((element) => element.isCompleted)
+          .toList() ??
+      [];
 }
