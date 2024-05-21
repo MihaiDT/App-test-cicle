@@ -5,6 +5,8 @@ import 'package:lines/core/utils/singletons.dart';
 class InviteFriendController extends GetxController {
   String get referralCode => appController.user.value?.mgmCode ?? '';
 
+  int get coinsCollected => appController.user.value?.coinsCollected ?? 0;
+
   Future<void> shareCode() async {
     await FlutterShare.share(
       title: 'Condividi il codice amico',

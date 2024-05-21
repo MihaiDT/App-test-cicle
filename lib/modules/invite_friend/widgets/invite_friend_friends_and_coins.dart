@@ -5,11 +5,11 @@ import 'package:lines/core/app_theme.dart';
 
 class InviteFriendFriendsAndCoins extends StatelessWidget {
   final int friendsAmount;
-  final int coinsAmount;
+  final int coinsCollected;
 
   const InviteFriendFriendsAndCoins({
     required this.friendsAmount,
-    required this.coinsAmount,
+    required this.coinsCollected,
     super.key,
   });
 

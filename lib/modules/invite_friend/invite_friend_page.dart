@@ -61,7 +61,7 @@ class InviteFriendPage extends GetView<InviteFriendController> {
                   horizontal: ThemeSize.paddingLarge,
                 ),
                 child: BodyMedium(
-                  "Condividi il tuo codice di invito. Otterrete entrambi 50 Coins a seguito della registrazione in app.",
+                  "Condividi il tuo codice di invito. Otterrete entrambi 50 Coins a seguito della registrazione in app.",
                   textAlign: TextAlign.center,
                   color: ThemeColor.darkBlue,
                 ),
@@ -73,9 +73,9 @@ class InviteFriendPage extends GetView<InviteFriendController> {
               ThemeSizedBox.height32,
               SizedBox(
                 height: Get.height * 0.125,
-                child: const InviteFriendFriendsAndCoins(
+                child: InviteFriendFriendsAndCoins(
                   friendsAmount: 0,
-                  coinsAmount: 0,
+                  coinsCollected: controller.coinsCollected,
                 ),
               ),
               ThemeSizedBox.height8,
