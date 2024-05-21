@@ -163,6 +163,18 @@ flutter:
     - assets/icons/advices_categories/
     - assets/lottie/
     - assets/icons/symptoms/
+    - assets/personalizzazione_avatar/Build/
+    - assets/personalizzazione_avatar/StreamingAssets/aa/AddressablesLink/
+    - assets/personalizzazione_avatar/StreamingAssets/aa/WebGL/
+    - assets/personalizzazione_avatar/StreamingAssets/aa/
+    - assets/personalizzazione_avatar/TemplateData/
+    - assets/personalizzazione_avatar/
+    - assets/tamagotchi/Build/
+    - assets/tamagotchi/StreamingAssets/aa/AddressablesLink/
+    - assets/tamagotchi/StreamingAssets/aa/WebGL/
+    - assets/tamagotchi/StreamingAssets/aa/
+    - assets/tamagotchi/TemplateData/
+    - assets/tamagotchi/
 
   fonts:
     - family: Barlow

@@ -39,13 +39,13 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
         child: InAppWebView(
           shouldOverrideUrlLoading: (controller, navigationAction) async {
             final uri = navigationAction.request.url;
-            if (uri != null && uri.toString().endsWith("/Tamagotchi/")) {
+            if (uri != null && uri.toString().endsWith("/tamagotchi/")) {
               return NavigationActionPolicy.ALLOW;
             }
             return NavigationActionPolicy.ALLOW;
           },
           initialUrlRequest: URLRequest(
-            url: WebUri("https://tinybullstudios.com/Lines/Tamagotchi"),
+            url: WebUri("https://tinybullstudios.com/Lines/tamagotchi"),
           ),
           onWebViewCreated: (controller) {
             webViewController = controller;

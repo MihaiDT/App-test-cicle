@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>lines-tamagochi</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  </head>
+
+  <body class="dark">
+    <div id="unity-container" class="unity-desktop">
+      <canvas aria-hidden="true" id="unity-canvas"></canvas>
+    </div>
+
+    <div id="loading-cover" style="display:none;">
+      <p id="loading-header">Gioca con Cherry</p>
+
+      <div id="unity-loading-bar">
+        <div id="unity-logo">
+          <lottie-player id="loading-animation-player" src="TemplateData/loading-animation.json" background="transparent" speed="1" direction="1" mode="normal"></lottie-player>
+        </div>
+        <p id="loading-label"></p>
+      </div>
+
+      <p id="loading-footer">Ricorda: più ti prendi cura della tua Cherry, più sarà felice!</p>
+    </div>
+
+    <div id="unity-fullscreen-button" style="display: none;"></div>
+
+    <script src="TemplateData/unity.js"></script>
+  </body>
+</html>
