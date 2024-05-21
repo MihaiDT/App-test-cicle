@@ -72,6 +72,11 @@ class NameSurnamePage extends GetView<NameSurnameController> {
                 onChanged: (txt) {
                   controller.nameValue.value = txt;
                 },
+                focusNode: controller.nameFocusNode,
+                onSubmitted: (_) {
+                  FocusScope.of(context)
+                      .requestFocus(controller.surnameFocusNode);
+                },
               ),
               ThemeSizedBox.height24,
               InputTextField(
@@ -80,6 +85,11 @@ class NameSurnamePage extends GetView<NameSurnameController> {
                 textEditingController: controller.surnameController,
                 onChanged: (txt) {
                   controller.surnameValue.value = txt;
+                },
+                focusNode: controller.surnameFocusNode,
+                onSubmitted: (_) {
+                  FocusScope.of(context)
+                      .requestFocus(controller.nicknameFocusNode);
                 },
               ),
               ThemeSizedBox.height32,
@@ -91,6 +101,10 @@ class NameSurnamePage extends GetView<NameSurnameController> {
                 label: "Nickname (facoltativo)",
                 placeholder: "Scegli un nickname",
                 textEditingController: controller.nicknameController,
+                focusNode: controller.nicknameFocusNode,
+                onSubmitted: (_) {
+                  FocusScope.of(context).unfocus();
+                },
               ),
             ],
           ),

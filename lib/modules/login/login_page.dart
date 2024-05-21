@@ -115,6 +115,9 @@ class LoginPage extends GetView<LoginController> {
                       controller.hidePassword.value =
                           !controller.hidePassword.value;
                     },
+                    onSubmitted: (_) {
+                      FocusScope.of(context).unfocus();
+                    },
                     focusNode: controller.passwordFocusNode,
                   );
                 },

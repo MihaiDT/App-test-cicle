@@ -114,6 +114,9 @@ class RegisterPage extends GetView<RegisterController> {
                 onTapTogglePassword: () {
                   controller.hidePassword = !controller.hidePassword;
                 },
+                onSubmitted: (_) {
+                  FocusScope.of(context).unfocus();
+                },
                 focusNode: controller.passwordFocusNode,
               ),
               ThemeSizedBox.height32,

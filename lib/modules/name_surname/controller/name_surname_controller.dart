@@ -9,6 +9,10 @@ class NameSurnameController extends GetxController {
 
   final TextEditingController nicknameController = TextEditingController();
 
+  final FocusNode nameFocusNode = FocusNode();
+  final FocusNode surnameFocusNode = FocusNode();
+  final FocusNode nicknameFocusNode = FocusNode();
+
   @override
   void onReady() {
     super.onReady();
