@@ -301,7 +301,6 @@ class Pages {
         HomeBinding(),
         MainBinding(),
         WelcomeQuizCardBinding(),
-        AccountBinding(),
         YourDiarySectionBinding(),
         ProfileHeaderBinding(),
         MyMensesSectionBinding(),
@@ -352,6 +351,7 @@ class Pages {
     ///AccountPage
     GetPage(
       name: Routes.account,
+      binding: AccountBinding(),
       page: () => _mediaQueryWrapper(
         const AccountPage(),
       ),
