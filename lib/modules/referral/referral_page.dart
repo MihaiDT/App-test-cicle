@@ -48,17 +48,22 @@ class ReferralPage extends GetView<ReferralController> {
                     ).applyShaders(context),
                   ),
                 ),
-                ThemeSizedBox.height16,
+                ThemeSizedBox.height8,
                 GestureDetector(
                   onTap: () {
                     if (!controller.isLoading.value) {
                       controller.onSkipPressed(context);
                     }
                   },
-                  child: const TitleMedium(
-                    "CONTINUA SENZA",
-                    underline: true,
-                    textAlign: TextAlign.center,
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 8.0,
+                    ),
+                    child: TitleMedium(
+                      "CONTINUA SENZA",
+                      underline: true,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ],
