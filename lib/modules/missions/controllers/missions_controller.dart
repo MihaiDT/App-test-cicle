@@ -5,6 +5,8 @@ import 'package:lines/repository/product_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class MissionsController extends GetxController {
+  int get totalCoins => appController.user.value?.coinsCollected ?? 0;
+
   @override
   Future<void> onReady() async {
     await ProductService.mission;

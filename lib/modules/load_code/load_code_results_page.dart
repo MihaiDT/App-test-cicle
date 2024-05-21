@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/load_code/widgets/completed_mission_card.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -18,15 +19,15 @@ class LoadCodeResultsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       backgroundColor: Colors.white,
-      appBar: const TransparentAppBar(
+      appBar: TransparentAppBar(
         backButtonColor: ThemeColor.darkBlue,
-        title: TitleMedium(
+        title: const TitleMedium(
           "CARICA CODICE",
           color: ThemeColor.darkBlue,
         ),
         actions: [
           CoinTotal(
-            totalCoins: 250,
+            totalCoins: appController.user.value?.coinsCollected ?? 0,
           ),
         ],
       ),

@@ -18,14 +18,16 @@ class MissionsPage extends GetView<MissionsController> {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       backgroundColor: Colors.white,
-      appBar: const TransparentAppBar(
+      appBar: TransparentAppBar(
         backButtonColor: ThemeColor.darkBlue,
-        title: TitleMedium(
+        title: const TitleMedium(
           "MISSIONI",
           color: ThemeColor.darkBlue,
         ),
         actions: [
-          CoinTotal(totalCoins: 250),
+          CoinTotal(
+            totalCoins: controller.totalCoins,
+          ),
         ],
       ),
       body: ListView(

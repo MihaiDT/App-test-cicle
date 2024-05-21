@@ -53,10 +53,10 @@ class PrizesPage extends GetView<PrizesController> {
         Expanded(
           child: ListView(
             children: [
-              const Center(
+              Center(
                 child: CoinTotal(
                   showSuffix: true,
-                  totalCoins: 250,
+                  totalCoins: controller.totalCoins,
                 ),
               ),
               ThemeSizedBox.height16,

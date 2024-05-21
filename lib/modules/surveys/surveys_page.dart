@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/prizes/widgets/survey_card.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
@@ -14,15 +15,15 @@ class SurveysPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       backgroundColor: Colors.white,
-      appBar: const TransparentAppBar(
+      appBar: TransparentAppBar(
         backButtonColor: ThemeColor.darkBlue,
-        title: TitleMedium(
+        title: const TitleMedium(
           "SONDAGGI",
           color: ThemeColor.darkBlue,
         ),
         actions: [
           CoinTotal(
-            totalCoins: 250,
+            totalCoins: appController.user.value?.coinsCollected ?? 0,
           ),
         ],
       ),

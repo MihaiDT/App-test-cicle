@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
-
 import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
@@ -34,7 +33,9 @@ class QuizYourCoins extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
             ThemeSizedBox.width8,
-            CoinTotal(totalCoins: totalCoins),
+            CoinTotal(
+              totalCoins: totalCoins,
+            ),
             ThemeSizedBox.width4,
           ],
         ),

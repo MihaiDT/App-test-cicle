@@ -6,11 +6,11 @@ import 'package:lines/modules/info/widgets/info_how_do_missions_work_bottomsheet
 import 'package:lines/modules/info/widgets/info_how_does_lucky_lines_work_bottomsheet.dart';
 import 'package:lines/modules/info/widgets/info_how_to_get_coins_bottomsheet.dart';
 import 'package:lines/modules/info/widgets/info_how_to_spend_coins_bottomsheet.dart';
+import 'package:lines/modules/info/widgets/info_question.dart';
 import 'package:lines/modules/info/widgets/info_the_code_is_illegible_bottomsheet.dart';
 import 'package:lines/modules/info/widgets/info_what_are_coins_bottomsheet..dart';
 import 'package:lines/modules/info/widgets/info_what_if_i_upload_bottomsheet..dart';
 import 'package:lines/modules/info/widgets/info_where_to_find_the_code_bottomsheet..dart';
-import 'package:lines/modules/info/widgets/info_question.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
@@ -25,15 +25,15 @@ class InfoPage extends GetView<InfoController> {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       backgroundColor: Colors.white,
-      appBar: const TransparentAppBar(
+      appBar: TransparentAppBar(
         backButtonColor: ThemeColor.darkBlue,
-        title: TitleMedium(
+        title: const TitleMedium(
           'INFO',
           color: ThemeColor.darkBlue,
         ),
         actions: [
           CoinTotal(
-            totalCoins: 250,
+            totalCoins: controller.totalCoins,
           ),
         ],
       ),

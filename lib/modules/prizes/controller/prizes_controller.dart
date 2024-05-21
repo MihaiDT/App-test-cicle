@@ -4,6 +4,8 @@ import 'package:lines/data/models/mission.dart';
 import 'package:lines/routes/routes.dart';
 
 class PrizesController extends GetxController {
+  int get totalCoins => appController.user.value?.coinsCollected ?? 0;
+
   void navigateToMissionDetails(Mission mission) {
     Get.toNamed(
       Routes.missionsDetailsPage,

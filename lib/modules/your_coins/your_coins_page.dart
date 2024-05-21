@@ -57,23 +57,25 @@ class YourCoinsPage extends StatelessWidget {
             const Divider(
               color: _dividerColor,
             ),
-            ThemeSizedBox.height24,
-            const DisplayMedium(
-              "Le tue attività",
-              textAlign: TextAlign.center,
-            ).applyShaders(context),
-            ThemeSizedBox.height20,
-            ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index) => const ActivityCard(
-                date: "20/07/2023",
-                description: "Hai caricato un codice cofezione",
-                coinAmount: 25,
+            if (false) ...[
+              ThemeSizedBox.height24,
+              const DisplayMedium(
+                "Le tue attività",
+                textAlign: TextAlign.center,
+              ).applyShaders(context),
+              ThemeSizedBox.height20,
+              ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) => const ActivityCard(
+                  date: "20/07/2023",
+                  description: "Hai caricato un codice cofezione",
+                  coinAmount: 25,
+                ),
+                separatorBuilder: (context, index) => ThemeSizedBox.height16,
+                itemCount: 3,
               ),
-              separatorBuilder: (context, index) => ThemeSizedBox.height16,
-              itemCount: 3,
-            ),
+            ],
             ThemeSizedBox.height90,
           ],
         ),
