@@ -4,6 +4,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_controller.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_body_builder.dart';
+import 'package:lines/widgets/buttons/app_round_button.dart';
 import 'package:lines/widgets/buttons/primary_loading_button.dart';
 import 'package:lines/widgets/charts/animated_linear_progress_indicator.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -40,6 +41,22 @@ class WelcomeQuizPage extends GetView<WelcomeQuizBodyController> {
           ),
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 16,
+                  right: 16,
+                ),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: AppRoundButton(
+                    iconPath: ThemeIcon.close,
+                    value: true,
+                    onChanged: (_) {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ),
               ThemeSizedBox.height32,
               const DisplayMedium(
                 "Welcome Quiz",

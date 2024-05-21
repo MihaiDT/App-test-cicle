@@ -32,7 +32,7 @@ class QuizIntroPage extends GetView<WelcomeQuizIntroController> {
                 isLoading: appController.question.responseHandler.isPending,
                 onPressed: () async {
                   await SurveyService.fetchWelcomeQuiz();
-                  Get.toNamed(Routes.welcomeQuizPage);
+                  Get.offAndToNamed(Routes.welcomeQuizPage);
                 },
                 child: const TitleLarge(
                   'INIZIAMO',
