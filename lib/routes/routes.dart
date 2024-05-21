@@ -54,6 +54,7 @@ class Routes {
   static const String settings = '/settings';
   static const String specificMensesStats = '/specific_menses_stats';
   static const String tamagochiWebView = '/tamagochi_web_view';
+  static const String customizeCherryWebView = '/customize_cherry_web_view';
   static const String confirmTutorEmail = '/confirm_tutor_email';
   static const String changePassword = '/change_password';
 }

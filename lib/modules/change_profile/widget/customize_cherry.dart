@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/change_profile/controller/customize_cherry_controller.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/cards/elevated_card.dart';
 
 class CustomizeCherry extends GetView<CustomizeCherryController> {
@@ -12,6 +13,11 @@ class CustomizeCherry extends GetView<CustomizeCherryController> {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
+      onPressed: () {
+        Get.toNamed(
+          Routes.customizeCherryWebView,
+        );
+      },
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.only(

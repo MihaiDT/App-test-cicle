@@ -29,6 +29,7 @@ import 'package:lines/modules/content_library/content_library_category_page.dart
 import 'package:lines/modules/content_library/content_library_page.dart';
 import 'package:lines/modules/content_library/content_library_search_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
+import 'package:lines/modules/customize_cherry_web_view/customize_cherry_web_view.dart';
 import 'package:lines/modules/drawer/binding/account_binding.dart';
 import 'package:lines/modules/drawer/binding/change_password_binding.dart';
 import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
@@ -599,6 +600,15 @@ class Pages {
       name: Routes.tamagochiWebView,
       page: () => _mediaQueryWrapper(
         const TamagochiWebView(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// CustomizeCherryWebView
+    GetPage(
+      name: Routes.customizeCherryWebView,
+      page: () => _mediaQueryWrapper(
+        const CustomizeCherryWebView(),
       ),
       transition: Transition.rightToLeft,
     ),
