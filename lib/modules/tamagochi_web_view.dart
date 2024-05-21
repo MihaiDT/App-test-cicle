@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class TamagochiWebView extends StatefulWidget {
@@ -15,6 +16,22 @@ class TamagochiWebView extends StatefulWidget {
 
 class _TamagochiWebViewState extends State<TamagochiWebView> {
   InAppWebViewController? webViewController;
+  late final InAppLocalhostServer localhostServer;
+
+  @override
+  void initState() {
+    localhostServer = InAppLocalhostServer();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await localhostServer.start();
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    localhostServer.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +56,22 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
         child: InAppWebView(
           shouldOverrideUrlLoading: (controller, navigationAction) async {
             final uri = navigationAction.request.url;
-            if (uri != null && uri.toString().endsWith("/tamagotchi/")) {
+            if (uri != null && uri.toString().endsWith("/Tamagotchi/")) {
               return NavigationActionPolicy.ALLOW;
             }
             return NavigationActionPolicy.ALLOW;
           },
           initialUrlRequest: URLRequest(
-            url: WebUri("https://tinybullstudios.com/Lines/tamagotchi"),
+            url: WebUri(
+              "http://localhost:8080/assets/Tamagotchi/index.html?token=${HiveManager.userId}",
+            ),
           ),
           onWebViewCreated: (controller) {
             webViewController = controller;
           },
           initialUserScripts: UnmodifiableListView<UserScript>([
             UserScript(
-              source: "function showToast(message) { alert(message) }",
+              source: "function showToast(message) {  }",
               injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
             ),
           ]),

@@ -1,4 +1,10 @@
 PODS:
+  - Adjust (4.38.2):
+    - Adjust/Core (= 4.38.2)
+  - Adjust/Core (4.38.2)
+  - adjust_sdk (4.38.1):
+    - Adjust (= 4.38.2)
+    - Flutter
   - app_links (0.0.1):
     - Flutter
   - AppAuth (1.7.5):
@@ -141,6 +147,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - adjust_sdk (from `.symlinks/plugins/adjust_sdk/ios`)
   - app_links (from `.symlinks/plugins/app_links/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -166,6 +173,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Adjust
     - AppAuth
     - FBAEMKit
     - FBSDKCoreKit
@@ -190,6 +198,8 @@ SPEC REPOS:
     - ReachabilitySwift
 
 EXTERNAL SOURCES:
+  adjust_sdk:
+    :path: ".symlinks/plugins/adjust_sdk/ios"
   app_links:
     :path: ".symlinks/plugins/app_links/ios"
   connectivity_plus:
@@ -236,6 +246,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  Adjust: 5a0f813fe079212bed61404d1f635cc330068b4a
+  adjust_sdk: e2b8a3f4115b4bb61594a2941dea942c51afa0d6
   app_links: e70ca16b4b0f88253b3b3660200d4a10b4ea9795
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
