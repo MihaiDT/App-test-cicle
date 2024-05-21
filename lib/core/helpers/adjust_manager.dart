@@ -6,6 +6,10 @@ class AdjustManager {
   factory AdjustManager() {
     return _instance;
   }
+
+  void trackEvent(EventType eventType) {
+    print("Tracking event: ${eventType.tokenName}");
+  }
 }
 
 enum EventType {
@@ -26,4 +30,45 @@ enum EventType {
   loadProductCode,
   productCodeLoaded,
   missionCompleted;
+
+  String get tokenName {
+    switch (this) {
+      case EventType.registration:
+        return "o3av1l";
+      case EventType.nameSurname:
+        return "5b7rxl";
+      case EventType.birthDate:
+        return "wt4ni6";
+      case EventType.setTutorEmail:
+        return "2uxjw2";
+      case EventType.privacyPolicy:
+        return "21k3a9";
+      case EventType.confirmEmail:
+        return "92a2f0";
+      case EventType.tutorConfirmEmail:
+        return "qswswq";
+      case EventType.login:
+        return "tnkzv6";
+      case EventType.lastMensesConfirmed:
+        return "44pxw4";
+      case EventType.lastMensesDenied:
+        return "qnuman";
+      case EventType.mensesDurationConfirmed:
+        return "9q9ejx";
+      case EventType.mensesDurationDenied:
+        return "8xwgeo";
+      case EventType.referralCodeConfirmed:
+        return "4ilwsf";
+      case EventType.referralCodeDenied:
+        return "4x3mto";
+      case EventType.loadProductCode:
+        return "e4tcxx";
+      case EventType.productCodeLoaded:
+        return "b7v0bz";
+      case EventType.missionCompleted:
+        return "hrv4f6";
+      default:
+        return "";
+    }
+  }
 }
