@@ -5,6 +5,7 @@ import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_icon.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/modules/info/widgets/info_what_are_coins_bottomsheet..dart';
 import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_outro_controller.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_body_text.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_your_coins.dart';
@@ -52,7 +53,11 @@ class QuizOutroPage extends GetView<WelcomeQuizOutroController> {
             const QuizYourCoins(totalCoins: totalCoins),
             ThemeSizedBox.height24,
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Get.bottomSheet(
+                  const InfoWhatAreCoinsBottomSheet(),
+                );
+              },
               child: const TitleMedium(
                 'COSA SONO I COINS?',
                 underline: true,
