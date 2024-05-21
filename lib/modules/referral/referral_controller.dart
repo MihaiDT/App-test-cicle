@@ -6,6 +6,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/referral/widget/confirm_referral_dialog.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class ReferralController extends GetxController {
   final RxBool isLoading = false.obs;
@@ -40,6 +41,34 @@ class ReferralController extends GetxController {
         }
       },
     );
+
+    ever(
+      condition: () => Get.currentRoute == Routes.referral,
+      appController.validateReferralCode.rxValue,
+      (callback) async {
+        if (callback.isPending) {
+          isLoading.value = true;
+        }
+        if (callback.isFailed) {
+          FlushBar(
+            child: const Text('Impossibile utilizzare il codice'),
+          ).show(Get.context!);
+        }
+
+        if (callback.isSuccessful) {
+          isLoading.value = false;
+          if (callback.content?.isValid == true) {
+            await AuthenticationService.completeUserRegistration(
+              appController.updateUserParameters,
+            );
+          } else {
+            FlushBar(
+              child: const Text('Codice non valido'),
+            ).show(Get.context!);
+          }
+        }
+      },
+    );
   }
 
   @override
@@ -56,16 +85,16 @@ class ReferralController extends GetxController {
     if (referralCodeController.text.isNotEmpty) {
       appController.updateUserParameters.referralCode =
           referralCodeController.text;
+
+      await AuthenticationService.validateInvitationCode(
+        referralCodeController.text,
+      );
     } else {
       await showErrorDialog(
         context: context,
         builder: (_) => const ConfirmReferralDialog(),
       );
     }
-
-    /*await AuthenticationService.completeUserRegistration(
-      appController.updateUserParameters,
-    );*/
   }
 
   Future<void> onSkipPressed(BuildContext context) async {

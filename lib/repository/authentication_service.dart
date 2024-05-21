@@ -7,6 +7,7 @@ import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/check_email.dart';
 import 'package:lines/data/models/user.dart';
+import 'package:lines/data/models/validate_referral_code.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
@@ -248,6 +249,26 @@ class AuthenticationService {
         },
       );
     } catch (e) {
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> validateInvitationCode(String invitationCode) async {
+    try {
+      appController.validateReferralCode.responseHandler =
+          ResponseHandler.pending();
+      final response = await dio.get(
+        "/users/validate_invitation_code?invitation_code=$invitationCode",
+      );
+      appController.validateReferralCode.responseHandler =
+          ResponseHandler.successful(
+        content: ValidateReferralCode.fromJson(
+          response.data,
+        ),
+      );
+    } catch (e) {
+      appController.validateReferralCode.responseHandler =
+          ResponseHandler.failed();
       log.logApiException(e);
     }
   }
