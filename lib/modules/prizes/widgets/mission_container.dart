@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/modules/prizes/widgets/mission_progress_indicator.dart';
 import 'package:lines/widgets/cards/elevated_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MissionContainer extends StatelessWidget {
   final Mission mission;
@@ -70,33 +72,51 @@ class MissionContainer extends StatelessWidget {
                 ),
               ),
               Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ThemeSizedBox.height16,
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
-                      child: TitleMedium(
-                        // TODO add until date
-                        "FINO AL ",
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                    ThemeSize.paddingSmall,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TitleMedium(
+                        "CARICA ENTRO IL ${mission.endAt}",
                         color: ThemeColor.brightPink,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
-                      child: HeadlineSmall(
+                      HeadlineSmall(
                         mission.description,
                         color: ThemeColor.darkBlue,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                       ),
-                    ),
-                    ThemeSizedBox.height16,
-                  ],
+                      if (mission.regolamento?.isNotEmpty == true)
+                        GestureDetector(
+                          onTap: () async {
+                            await launchUrl(
+                              Uri.parse(mission.regolamento ?? ''),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 2,
+                            ),
+                            child: Row(
+                              children: [
+                                const HeadlineSmall(
+                                  "Scopri come:",
+                                  color: ThemeColor.darkBlue,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                ),
+                                const HeadlineSmall(
+                                  "Regolamento",
+                                ).applyShaders(Get.context!),
+                              ],
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ],
