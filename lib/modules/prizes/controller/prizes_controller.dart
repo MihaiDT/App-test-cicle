@@ -14,4 +14,6 @@ class PrizesController extends GetxController {
   List<Mission> get missions => appController.missions.value ?? [];
 
   int get numberOfMissions => missions.length;
+
+  bool get showSurveySection => false;
 }

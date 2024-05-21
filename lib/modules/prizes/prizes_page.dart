@@ -125,38 +125,39 @@ class PrizesPage extends GetView<PrizesController> {
                 ),
               ),
               ThemeSizedBox.height40,
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: ThemeSize.paddingSmall,
-                ),
-                child: const DisplayMedium(
-                  "Sondaggi",
-                ).applyShaders(context),
-              ),
-              ThemeSizedBox.height12,
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ThemeSize.paddingSmall,
-                ),
-                child: SurveyCard(
-                  title: "WELCOME QUIZ",
-                  description: "Raccontaci qualcosa su di te",
-                  coinAmount: 25,
-                ),
-              ),
-              ThemeSizedBox.height8,
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: ThemeSize.paddingSmall,
-                ),
-                child: PrizesNavigateToWidget(
-                  onTap: () => Get.toNamed(
-                    Routes.surveysPage,
+              if (controller.showSurveySection)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: ThemeSize.paddingSmall,
                   ),
-                  text: "TUTTI I SONDAGGI",
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const DisplayMedium(
+                        "Sondaggi",
+                      ).applyShaders(context),
+                      ThemeSizedBox.height12,
+                      const SurveyCard(
+                        title: "WELCOME QUIZ",
+                        description: "Raccontaci qualcosa su di te",
+                        coinAmount: 25,
+                      ),
+                      ThemeSizedBox.height8,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: ThemeSize.paddingSmall,
+                        ),
+                        child: PrizesNavigateToWidget(
+                          onTap: () => Get.toNamed(
+                            Routes.surveysPage,
+                          ),
+                          text: "TUTTI I SONDAGGI",
+                        ),
+                      ),
+                      ThemeSizedBox.height40,
+                    ],
+                  ),
                 ),
-              ),
-              ThemeSizedBox.height40,
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: ThemeSize.paddingSmall,
