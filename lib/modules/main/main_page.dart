@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/advices_page.dart';
 import 'package:lines/modules/drawer/pages/drawer_main_page.dart';
 import 'package:lines/modules/home/home_page.dart';
@@ -81,6 +82,9 @@ class MainPage extends GetView<MainController> {
       body: SafeArea(
         child: Obx(
           () {
+            print(appController.suggestedAdvicesArticle.value ?? []);
+            print(appController.suggestedAdvicesArticle.value ?? []);
+            print(appController.suggestedAdvicesArticle.value ?? []);
             switch (controller.tabIndex) {
               case 0:
                 return const HomePage();

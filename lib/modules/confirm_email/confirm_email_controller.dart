@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/routes/routes.dart';
@@ -28,6 +29,7 @@ class ConfirmEmailController extends GetxController {
   }
 
   void logIn() {
+    AdjustManager.trackEvent(EventType.confirmEmail);
     if (appController.isLoginFlow.value == true) {
       Get.back();
     } else {

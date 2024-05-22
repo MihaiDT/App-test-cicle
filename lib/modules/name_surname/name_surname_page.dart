@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/name_surname/controller/name_surname_controller.dart';
 import 'package:lines/routes/routes.dart';
@@ -47,6 +48,7 @@ class NameSurnamePage extends GetView<NameSurnameController> {
                               controller.surnameController.text;
                           appController.registerParameter.nickname =
                               controller.nicknameController.text;
+                          AdjustManager.trackEvent(EventType.nameSurname);
                           Get.toNamed(Routes.birthDate);
                         }
                       : null,

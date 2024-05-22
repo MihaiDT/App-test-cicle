@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/birth_date/widget/too_young_error_dialog.dart';
@@ -112,6 +113,7 @@ class BirthDateController extends GetxController {
   ) {
     _closeKeyboard;
     _saveBirthDate(day, month, year);
+    AdjustManager.trackEvent(EventType.birthDate);
     if (_isLessThan14Years(day, month, year)) {
       _showError(context);
     } else if (_isAgeBetween13And18(day, month, year)) {

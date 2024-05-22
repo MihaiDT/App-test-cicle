@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -52,6 +53,9 @@ class RegisterController extends GetxController {
             /// Save in the state email and password values
             appController.registerParameter.email = emailController.text;
             appController.registerParameter.password = password;
+
+            AdjustManager.trackEvent(EventType.registration);
+
             Get.offAndToNamed(Routes.nameSurname);
           } else if (callback.content?.emailExists == true &&
               callback.content?.emailIsActive == false) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/modules/confirm_tutor_email/confirm_tutor_email_controller.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
@@ -25,6 +26,8 @@ class ConfirmTutorEmailPage extends GetView<ConfirmTutorEmailController> {
             ),
             child: SecondaryButton(
               onPressed: () {
+                AdjustManager.trackEvent(EventType.tutorConfirmEmail);
+
                 Get.offNamedUntil(
                   Routes.login,
                   (route) => false,

@@ -58,31 +58,38 @@ class HomePage extends GetView<HomeController> {
                 ThemeSizedBox.height32,
                 const MissionRowSection(),
               ],
-              if (controller.showSuggestedArticlesSection) ...[
-                ThemeSizedBox.height32,
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 16,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: TitleMedium(
-                      'CONTENUTI PER TE',
-                      color: ThemeColor.darkBlue,
-                    ),
-                  ),
-                ),
-                ThemeSizedBox.height16,
-                SizedBox(
-                  height: 220,
-                  child: AdvicesCardsRow(
-                    onCardTapped: (article, category) =>
-                        controller.showArticleDetails(article, category),
-                    withBorder: true,
-                    articles: controller.allSuggestedArticles,
-                  ),
-                ),
-              ],
+              Obx(() {
+                if (controller.showSuggestedArticlesSection.value) {
+                  return Column(
+                    children: [
+                      ThemeSizedBox.height32,
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          left: 16,
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: TitleMedium(
+                            'CONTENUTI PER TE',
+                            color: ThemeColor.darkBlue,
+                          ),
+                        ),
+                      ),
+                      ThemeSizedBox.height16,
+                      SizedBox(
+                        height: 220,
+                        child: AdvicesCardsRow(
+                          onCardTapped: (article, category) =>
+                              controller.showArticleDetails(article, category),
+                          withBorder: true,
+                          articles: controller.allSuggestedArticles,
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
+              }),
               ThemeSizedBox.height90,
             ],
           ),

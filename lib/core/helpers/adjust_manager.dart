@@ -1,3 +1,7 @@
+import 'package:adjust_sdk/adjust.dart';
+import 'package:adjust_sdk/adjust_event.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
+
 class AdjustManager {
   AdjustManager._privateConstructor();
 
@@ -7,8 +11,23 @@ class AdjustManager {
     return _instance;
   }
 
-  void trackEvent(EventType eventType) {
-    print("Tracking event: ${eventType.tokenName}");
+  static void trackEvent(
+    EventType eventType, [
+    Map<String, String>? parameters,
+  ]) {
+    if (HiveManager.hasAcceptedCookie) {
+      final adjustEvent = AdjustEvent(
+        eventType.tokenName,
+      );
+      if (parameters != null) {
+        for (final key in parameters.keys) {
+          adjustEvent.addCallbackParameter(key, parameters[key]!);
+        }
+      }
+      Adjust.trackEvent(
+        adjustEvent,
+      );
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/last_menses/controller/last_menses_controller.dart';
 import 'package:lines/modules/last_menses/widget/horizontal_range_calendar.dart';
@@ -50,6 +51,11 @@ class LastMensesPage extends GetView<LastMensesController> {
 
                               appController.updateUserParameters
                                   .lastMenstruationDateEnd = value.end;
+
+                              AdjustManager.trackEvent(
+                                EventType.lastMensesConfirmed,
+                              );
+
                               Get.toNamed(Routes.howLongMensesPage);
                             },
                       child: const TitleLarge(
@@ -58,15 +64,21 @@ class LastMensesPage extends GetView<LastMensesController> {
                     );
                   },
                 ),
-                ThemeSizedBox.height16,
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(Routes.howLongMensesPage);
-                  },
-                  child: const TitleMedium(
-                    "NON ME LO RICORDO",
-                    underline: true,
-                    textAlign: TextAlign.center,
+                ThemeSizedBox.height8,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: GestureDetector(
+                    onTap: () {
+                      AdjustManager.trackEvent(
+                        EventType.lastMensesDenied,
+                      );
+                      Get.toNamed(Routes.howLongMensesPage);
+                    },
+                    child: const TitleMedium(
+                      "NON ME LO RICORDO",
+                      underline: true,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -56,6 +57,8 @@ class ReferralController extends GetxController {
         }
 
         if (callback.isSuccessful) {
+          AdjustManager.trackEvent(EventType.referralCodeConfirmed);
+
           isLoading.value = false;
           if (callback.content?.isValid == true) {
             await AuthenticationService.completeUserRegistration(
@@ -103,6 +106,8 @@ class ReferralController extends GetxController {
       builder: (_) => const ConfirmReferralDialog(),
     );
     if (continueWithoutCode) {
+      AdjustManager.trackEvent(EventType.referralCodeDenied);
+
       await AuthenticationService.completeUserRegistration(
         appController.updateUserParameters,
       );

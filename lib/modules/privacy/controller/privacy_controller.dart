@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/privacy_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
@@ -37,6 +38,8 @@ class PrivacyController extends GetxController {
     appController.registerParameter.privacyBrandMarketing = firstAccepted.value;
     appController.registerParameter.privacyMarketing = secondAccepted.value;
     appController.registerParameter.privacyProfiling = thirdAccepted.value;
+    AdjustManager.trackEvent(EventType.privacyPolicy);
+
     await AuthenticationService.registration(
       appController.registerParameter,
     );

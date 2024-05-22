@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/modules/how_long_menses/controller/how_long_menses_controller.dart';
 import 'package:lines/modules/how_long_menses/widget/how_often_menses_widget.dart';
 import 'package:lines/modules/how_long_menses/widget/menses_duration_counter_widget.dart';
@@ -47,6 +48,10 @@ class HowLongMensesPage extends GetView<HowLongMensesController> {
                 ThemeSizedBox.height16,
                 GestureDetector(
                   onTap: () {
+                    AdjustManager.trackEvent(
+                      EventType.mensesDurationConfirmed,
+                    );
+
                     Get.toNamed(Routes.referral);
                   },
                   child: const TitleMedium(

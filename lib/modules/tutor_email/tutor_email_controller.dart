@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/tutor_email/tutor_email_arguments.dart';
@@ -27,6 +28,7 @@ class TutorEmailController extends GetxController {
   void onContinue() {
     appController.registerParameter.legalGuardianEmail = emailController.text;
     if (arguments?.onContinue != null) {
+      AdjustManager.trackEvent(EventType.setTutorEmail);
       arguments!.onContinue(emailController.text);
     }
   }

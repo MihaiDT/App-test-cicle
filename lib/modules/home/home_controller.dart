@@ -63,7 +63,7 @@ class HomeController extends AppScaffoldController {
       await ProductService.mission;
     }
     if (!appController.advicesCategories.responseHandler.isSuccessful) {
-      await AdvicesService.fetchArticles();
+      await AdvicesService.fetchSuggestedArticles();
     }
     _initCalendars();
 
@@ -309,7 +309,8 @@ class HomeController extends AppScaffoldController {
   List<AdvicesArticle> get allSuggestedArticles =>
       appController.suggestedAdvicesArticle.value ?? [];
 
-  bool get showSuggestedArticlesSection => allSuggestedArticles.isNotEmpty;
+  RxBool get showSuggestedArticlesSection =>
+      allSuggestedArticles.isNotEmpty.obs;
 
   bool get showMissionSection =>
       appController.missions.value?.isNotEmpty == true;

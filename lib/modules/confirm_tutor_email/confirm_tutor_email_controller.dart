@@ -19,12 +19,6 @@ class ConfirmTutorEmailController extends GetxController {
     super.onReady();
   }
 
-  @override
-  void onInit() {
-    print("Tutor Email: $tutorEmail");
-    super.onInit();
-  }
-
   void sendEmail() async {
     await AuthenticationService.sendConsentsEmail(tutorEmail);
   }
