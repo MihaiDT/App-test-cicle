@@ -89,14 +89,16 @@ class InfoPage extends GetView<InfoController> {
               const InfoHowDoMissionsWorkBottomSheet(),
             ),
           ),
-          ThemeSizedBox.height16,
-          InfoQuestion(
-            text: "Come funzionano i Lucky lines?",
-            onTap: () => controller.showBottomSheet(
-              context,
-              const InfoHowDoesLuckyLinesWorkBottomSheet(),
+          if (false) ...[
+            ThemeSizedBox.height16,
+            InfoQuestion(
+              text: "Come funzionano i Lucky lines?",
+              onTap: () => controller.showBottomSheet(
+                context,
+                const InfoHowDoesLuckyLinesWorkBottomSheet(),
+              ),
             ),
-          ),
+          ],
           ThemeSizedBox.height16,
           InfoQuestion(
             text: "E se carico un codice prodotto di una missione?",

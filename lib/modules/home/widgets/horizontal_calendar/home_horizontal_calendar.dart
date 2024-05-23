@@ -13,7 +13,7 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
   });
 
   String get _selectedDateFormatYMD => controller.currentPeriodDatesMap.keys
-      .toList()[controller.periodSelectedDateIndex];
+      .toList()[controller.periodSelectedDateIndex.value];
 
   double get _cellWidth => Get.width / 7;
 
@@ -39,7 +39,7 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
                   itemSize: Get.width / 7,
                   // Dimensione singolo giorno del calendario
                   onItemFocus: (index) =>
-                      controller.periodSelectedDateIndex = index,
+                      controller.periodSelectedDateIndex.value = index,
                   updateOnScroll: false,
                   shrinkWrap: true,
                 )

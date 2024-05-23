@@ -87,7 +87,7 @@ class MissionContainer extends StatelessWidget {
                         mission.description,
                         color: ThemeColor.darkBlue,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
+                        maxLines: 2,
                       ),
                       if (mission.regolamento?.isNotEmpty == true)
                         GestureDetector(
@@ -98,7 +98,7 @@ class MissionContainer extends StatelessWidget {
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(
-                              top: 2,
+                              top: 8,
                             ),
                             child: Row(
                               children: [

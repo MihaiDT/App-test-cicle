@@ -215,6 +215,7 @@ class AuthenticationService {
       await dio.delete(
         "/auth/logout",
       );
+      appController.initializeState();
     } catch (e) {
       log.logApiException(e);
     }

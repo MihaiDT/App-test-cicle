@@ -158,4 +158,8 @@ class AppController extends GetxController {
       hasUsedDeepLink: false.obs,
     );
   }
+
+  void initializeState() {
+    AppController.initial();
+  }
 }

@@ -2,7 +2,7 @@ name: lines
 version: 0.0.22+22
 
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -17,7 +17,7 @@ dependencies:
   circular_motion: ^0.0.3
 
   # This plugin allows Flutter apps to discover network connectivity and configure themselves accordingly. It can distinguish between cellular vs WiFi connection.
-  connectivity_plus: ^5.0.1
+  connectivity_plus: ^6.0.3
 
   # A powerful HTTP networking package for Dart/Flutter, supports Global configuration, Interceptors, FormData, Request cancellation, File uploading/downloading, Timeout, Custom adapters, Transformers, etc.
   dio: ^5.4.0
@@ -70,7 +70,7 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   
   # Provides internationalization and localization facilities, including message translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
-  intl: ^0.18.1
+  intl: ^0.19.0
   
   # This Flutter plugin provides means to perform local, on-device authentication of the user.
   # On supported devices, this includes authentication with biometrics such as fingerprint or facial recognition.
@@ -80,7 +80,7 @@ dependencies:
   lottie: ^3.0.0
   
   # This Flutter plugin provides an API for querying information about an application package.
-  package_info_plus: ^5.0.1
+  package_info_plus: ^8.0.0
   
   # A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS, Linux, macOS and Windows. Not all methods are supported on all platforms.
   path_provider: ^2.1.1

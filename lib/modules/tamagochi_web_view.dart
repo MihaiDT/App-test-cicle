@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class TamagochiWebView extends StatefulWidget {
@@ -16,22 +17,6 @@ class TamagochiWebView extends StatefulWidget {
 
 class _TamagochiWebViewState extends State<TamagochiWebView> {
   InAppWebViewController? webViewController;
-  late final InAppLocalhostServer localhostServer;
-
-  @override
-  void initState() {
-    localhostServer = InAppLocalhostServer();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await localhostServer.start();
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    localhostServer.close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +26,15 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () async {
-            bool canGoBack = webViewController != null &&
-                await webViewController!.canGoBack();
+            bool canGoBack = webViewController != null;
+
             if (canGoBack) {
-              webViewController?.goBack();
+              await webViewController?.evaluateJavascript(
+                source: "dispatchBackEvent()",
+              );
+              /*webViewController?.goBack();*/
             } else {
-              Navigator.of(context).pop();
+              /*Navigator.of(context).pop();*/
             }
           },
         ),
@@ -56,14 +44,20 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
         child: InAppWebView(
           shouldOverrideUrlLoading: (controller, navigationAction) async {
             final uri = navigationAction.request.url;
-            if (uri != null && uri.toString().endsWith("/Tamagotchi/")) {
+            final isFirstUrl = uri != null &&
+                uri.toString().startsWith(
+                      "https://tinybullstudios.com/Lines/Tamagotchi/index.html",
+                    );
+            if (uri != null && isFirstUrl) {
               return NavigationActionPolicy.ALLOW;
             }
-            return NavigationActionPolicy.ALLOW;
+            print("uri");
+            print(uri);
+            return NavigationActionPolicy.CANCEL;
           },
           initialUrlRequest: URLRequest(
             url: WebUri(
-              "http://localhost:8080/assets/Tamagotchi/index.html?token=${HiveManager.userId}",
+              "https://tinybullstudios.com/Lines/Tamagotchi/index.html?token=${HiveManager.userId}&user_id=${SecureStorageManager().getToken()}",
             ),
           ),
           onWebViewCreated: (controller) {
@@ -71,15 +65,12 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
           },
           initialUserScripts: UnmodifiableListView<UserScript>([
             UserScript(
-              source: "function showToast(message) {  }",
+              source: "function dispatchBackEvent() {"
+                  "document.dispatchEvent(new Event('back'));"
+                  "}",
               injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
             ),
           ]),
-          onLoadStop: (controller, url) async {
-            await controller.evaluateJavascript(
-              source: "showToast('Hello from Dart!');",
-            );
-          },
         ),
       ),
     );

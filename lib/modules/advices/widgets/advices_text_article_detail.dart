@@ -179,20 +179,14 @@ class AdvicesTextArticleDetails extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 16,
                       backgroundColor: Colors.white,
-                      child: Obx(
-                        () {
-                          if (isArticleFav) {
-                            return SvgPicture.asset(
+                      child: isArticleFav
+                          ? SvgPicture.asset(
                               ThemeIcon.savedFilled,
                               color: ThemeColor.darkBlue,
-                            );
-                          } else {
-                            return SvgPicture.asset(
+                            )
+                          : SvgPicture.asset(
                               ThemeIcon.savedEmptyGradient,
-                            );
-                          }
-                        },
-                      ),
+                            ),
                     ),
                   ),
                 ],

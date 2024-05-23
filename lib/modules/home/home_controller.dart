@@ -42,12 +42,7 @@ class HomeController extends AppScaffoldController {
 
   set playButtonVisible(bool newValue) => rxPlayButtonVisible.value = newValue;
 
-  RxInt rxPeriodSelectedDateIndex = 0.obs;
-
-  int get periodSelectedDateIndex => rxPeriodSelectedDateIndex.value;
-
-  set periodSelectedDateIndex(int newValue) =>
-      rxPeriodSelectedDateIndex.value = newValue;
+  RxInt periodSelectedDateIndex = 0.obs;
 
   Map<String, PeriodDate> get currentPeriodDatesMap =>
       appController.currentPeriod.value?.dates ?? {};
@@ -65,7 +60,7 @@ class HomeController extends AppScaffoldController {
     if (!appController.advicesCategories.responseHandler.isSuccessful) {
       await AdvicesService.fetchSuggestedArticles();
     }
-    _initCalendars();
+    periodSelectedDateIndex.value = await _initCalendars();
 
     ever(
       appController.currentPeriod.rxValue,
@@ -290,17 +285,18 @@ class HomeController extends AppScaffoldController {
     return DateTime.now().obs;
   }
 
-  void _initCalendars() async {
+  Future<int> _initCalendars() async {
     await CalendarService.fetchCurrentPeriod();
     await CalendarService.fetchCalendarData();
 
     final formattedTodayDate = dateFormatYMD.format(DateTime.now());
 
-    periodSelectedDateIndex =
+    int result =
         currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
-    periodSelectedDateIndex = periodSelectedDateIndex < 0
-        ? currentPeriodDatesMap.keys.toList().length
-        : periodSelectedDateIndex;
+    if (result <= 0) {
+      return currentPeriodDatesMap.keys.toList().length;
+    }
+    return result;
   }
 
   bool get showWelcomeQuizSection =>

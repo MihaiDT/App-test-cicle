@@ -54,7 +54,7 @@ class ActivateEmailDialog extends StatelessWidget {
                 Get.back();
               },
               child: const TitleMedium(
-                "Invia di nuovo",
+                "INVIA DI NUOVO",
                 color: ThemeColor.darkBlue,
                 textAlign: TextAlign.center,
                 underline: true,

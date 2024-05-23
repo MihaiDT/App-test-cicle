@@ -16,13 +16,18 @@ class AdvicesDetailPage extends GetView<AdvicesDetailController> {
     if (controller.articleDetail != null) {
       switch (controller.articleDetail!.article.typology) {
         case (ArticleType.text):
-          return AdvicesTextArticleDetails(
-            category: controller.category,
-            article: controller.article,
-            isArticleFav: controller.isArticleFav.value,
-            onFavChanged: (isFav) => controller.updateArticleFavStatus(isFav),
-            id: controller.article?.id ?? "",
-            allSuggestedArticles: controller.allSuggestedArticles,
+          return Obx(
+            () {
+              return AdvicesTextArticleDetails(
+                category: controller.category,
+                article: controller.article,
+                isArticleFav: controller.isArticleFav.value,
+                onFavChanged: (isFav) =>
+                    controller.updateArticleFavStatus(isFav),
+                id: controller.article?.id ?? "",
+                allSuggestedArticles: controller.allSuggestedArticles,
+              );
+            },
           );
         case (ArticleType.slider):
           return Obx(

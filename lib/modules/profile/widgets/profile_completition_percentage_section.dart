@@ -14,74 +14,78 @@ class ProfileCompletionPercentageSection
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: !controller.profileIsCompleted,
-      child: ElevatedCard.withBorder(
-        onPressed: () {
-          Get.toNamed(Routes.changeProfilePage);
-        },
-        color: Colors.white,
-        borderColor: Colors.white.withOpacity(0.3),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 15,
-          ),
-          child: LayoutBuilder(
-            builder: (context, constrains) {
-              return Row(
-                children: [
-                  ThemeSizedBox.height24,
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: constrains.maxWidth * 0.6,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        DisplayMedium(
-                          "Profilo al ${controller.completionPercentage}%",
-                        ).applyShaders(context),
-                        ThemeSizedBox.height4,
-                        const TitleMedium(
-                          "Completalo per ottenere il badge: Completa profilo",
-                          color: ThemeColor.darkBlue,
-                        ),
-                        ThemeSizedBox.height4,
-                        const TitleMedium(
-                          "COMPLETA",
-                          underline: true,
-                        ).applyShaders(context),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: constrains.maxWidth * 0.1,
-                  ),
-                  SizedBox(
-                    width: constrains.maxWidth * 0.3,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Image.asset(
-                          ThemeImage.badge,
-                        ),
-                        ThemeSizedBox.height8,
-                        GlowingLinearProgressIndicator(
-                          value: controller.completionPercentage / 100,
-                        ),
-                      ],
-                    ),
-                  ),
-                  ThemeSizedBox.height24,
-                ],
-              );
+    return Obx(
+      () {
+        return Visibility(
+          visible: !controller.profileIsCompleted.value,
+          child: ElevatedCard.withBorder(
+            onPressed: () {
+              Get.toNamed(Routes.changeProfilePage);
             },
+            color: Colors.white,
+            borderColor: Colors.white.withOpacity(0.3),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 15,
+              ),
+              child: LayoutBuilder(
+                builder: (context, constrains) {
+                  return Row(
+                    children: [
+                      ThemeSizedBox.height24,
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: constrains.maxWidth * 0.6,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            DisplayMedium(
+                              "Profilo al ${controller.completionPercentage}%",
+                            ).applyShaders(context),
+                            ThemeSizedBox.height4,
+                            const TitleMedium(
+                              "Completalo per ottenere il badge: Completa profilo",
+                              color: ThemeColor.darkBlue,
+                            ),
+                            ThemeSizedBox.height4,
+                            const TitleMedium(
+                              "COMPLETA",
+                              underline: true,
+                            ).applyShaders(context),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: constrains.maxWidth * 0.1,
+                      ),
+                      SizedBox(
+                        width: constrains.maxWidth * 0.3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Image.asset(
+                              ThemeImage.badge,
+                            ),
+                            ThemeSizedBox.height8,
+                            GlowingLinearProgressIndicator(
+                              value: controller.completionPercentage / 100,
+                            ),
+                          ],
+                        ),
+                      ),
+                      ThemeSizedBox.height24,
+                    ],
+                  );
+                },
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

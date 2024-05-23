@@ -17,31 +17,44 @@ class SecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all(
-          Size(0, buttonSize.toDouble),
-        ),
-        textStyle: MaterialStateProperty.resolveWith(
-          (Set<MaterialState> states) {
-            return buttonSize.textStyle(
-              Theme.of(context),
-            );
-          },
-        ),
-        backgroundColor: MaterialStateProperty.resolveWith(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return Colors.white.withOpacity(0.6);
-            }
-
-            return Colors.white;
-          },
-        ),
-        padding: MaterialStateProperty.all(buttonSize.buttonPadding),
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            offset: Offset(0, 10),
+            blurRadius: 30,
+            spreadRadius: 0,
+          ),
+        ],
       ),
-      child: child,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all(
+            Size(0, buttonSize.toDouble),
+          ),
+          textStyle: MaterialStateProperty.resolveWith(
+            (Set<MaterialState> states) {
+              return buttonSize.textStyle(
+                Theme.of(context),
+              );
+            },
+          ),
+          backgroundColor: MaterialStateProperty.resolveWith(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return Colors.white.withOpacity(0.6);
+              }
+
+              return Colors.white;
+            },
+          ),
+          elevation: MaterialStateProperty.all(0),
+          padding: MaterialStateProperty.all(buttonSize.buttonPadding),
+        ),
+        child: child,
+      ),
     );
   }
 }

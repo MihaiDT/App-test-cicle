@@ -5,10 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/helpers.dart';
+import 'package:lines/modules/home/home_controller.dart';
 import 'package:lines/modules/home/widgets/circular_period/circular_calendar_dot.dart';
 import 'package:lines/modules/home/widgets/circular_period/circular_path_painter.dart';
-
-import 'package:lines/modules/home/home_controller.dart';
 
 class CircularCalendar extends GetView<HomeController> {
   static const follicolareColor = Color(0xff70B873);
@@ -197,7 +196,7 @@ class CircularCalendar extends GetView<HomeController> {
           await wait(milliseconds: 100);
           _resetUpdating();
           controller.scrollSnapListKey.currentState
-              ?.focusToItem(controller.periodSelectedDateIndex -= 1);
+              ?.focusToItem(controller.periodSelectedDateIndex.value -= 1);
         }
       } else if (rotationalChange < -0.3) {
         if (controller.periodSelectedDateIndex <
@@ -207,7 +206,7 @@ class CircularCalendar extends GetView<HomeController> {
           await wait(milliseconds: 100);
           _resetUpdating();
           controller.scrollSnapListKey.currentState
-              ?.focusToItem(controller.periodSelectedDateIndex += 1);
+              ?.focusToItem(controller.periodSelectedDateIndex.value += 1);
         }
       }
     }

@@ -35,12 +35,14 @@ class YourInformationSection extends GetView<YourInformationSectionController> {
                 onTap: () {
                   controller.updateName(
                     title: "Modifica Nome",
-                    onConfirm: (name) {
-                      AuthenticationService.updateUser(
+                    onConfirm: (name) async {
+                      await AuthenticationService.updateUser(
                         UpdateUserParameters(
                           firstName: name,
                         ),
-                      );
+                      ).then((value) {
+                        Navigator.pop(context);
+                      });
                     },
                     initialText: controller.user?.firstName ?? '',
                   );
@@ -54,12 +56,14 @@ class YourInformationSection extends GetView<YourInformationSectionController> {
                     : 'Nessuno',
                 onTap: () => controller.updateNickname(
                   title: "Modifica Nickname",
-                  onConfirm: (nickname) {
-                    AuthenticationService.updateUser(
+                  onConfirm: (nickname) async {
+                    await AuthenticationService.updateUser(
                       UpdateUserParameters(
                         nickname: nickname,
                       ),
-                    );
+                    ).then((value) {
+                      Navigator.pop(context);
+                    });
                   },
                   initialText: controller.user?.nickname ?? 'Nessuno',
                 ),
@@ -70,12 +74,14 @@ class YourInformationSection extends GetView<YourInformationSectionController> {
                 value: controller.user?.lastName ?? '',
                 onTap: () => controller.updateLastName(
                   title: "Modifica Cognome",
-                  onConfirm: (lastName) {
-                    AuthenticationService.updateUser(
+                  onConfirm: (lastName) async {
+                    await AuthenticationService.updateUser(
                       UpdateUserParameters(
                         lastName: lastName,
                       ),
-                    );
+                    ).then((value) {
+                      Navigator.pop(context);
+                    });
                   },
                   initialText: controller.user?.lastName ?? '',
                 ),
@@ -92,12 +98,14 @@ class YourInformationSection extends GetView<YourInformationSectionController> {
                 percentageValue: controller.isZipCodeCompleted ? null : '10%',
                 onTap: () => controller.updateZipCode(
                   title: "Modifica CAP",
-                  onConfirm: (zipCode) {
-                    AuthenticationService.updateUser(
+                  onConfirm: (zipCode) async {
+                    await AuthenticationService.updateUser(
                       UpdateUserParameters(
                         zipCode: zipCode,
                       ),
-                    );
+                    ).then((value) {
+                      Navigator.pop(context);
+                    });
                   },
                   initialText: controller.user?.zipCode ?? '',
                 ),

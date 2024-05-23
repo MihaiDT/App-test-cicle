@@ -7,8 +7,10 @@ import 'package:lines/routes/routes.dart';
 class YourDiaryController extends GetxController {
   @override
   Future<void> onReady() async {
+    if (!appController.symptomCategoryStats.responseHandler.isSuccessful) {
+      await MensesService.mensesStatistics;
+    }
     super.onReady();
-    await MensesService.mensesStatistics;
   }
 
   SymptomCategoryStats? get symptomCategoryStats =>

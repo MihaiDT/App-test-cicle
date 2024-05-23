@@ -17,37 +17,51 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        minimumSize: Size(0, buttonSize.toDouble),
-        padding: EdgeInsets.zero,
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0x339160D7).withOpacity(0.2),
+            offset: const Offset(10, 10),
+            blurRadius: 21,
+            spreadRadius: 4,
+          ),
+        ],
+        borderRadius: BorderRadius.all(
+          Radius.circular(small ? 20 : 61),
+        ),
       ),
-      child: Ink(
-        padding: buttonSize.buttonPadding,
-        height: buttonSize.toDouble,
-        width: double.infinity,
-        decoration: onPressed != null
-            ? BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(small ? 20 : 61),
-                ),
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFFB63AB4),
-                    Color(0xFF513B9F),
-                  ],
-                ),
-              )
-            : BoxDecoration(
-                borderRadius: BorderRadius.circular(small ? 20 : 60),
-                color: ThemeColor.buttonDisableBackGround,
-              ),
-        child: Center(
-          child: child,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          minimumSize: Size(0, buttonSize.toDouble),
+          padding: EdgeInsets.zero,
+        ),
+        child: Ink(
+          padding: buttonSize.buttonPadding,
+          height: buttonSize.toDouble,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(small ? 20 : 61),
+            ),
+            gradient: onPressed != null
+                ? const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFFB63AB4),
+                      Color(0xFF513B9F),
+                    ],
+                  )
+                : null,
+            color:
+                onPressed == null ? ThemeColor.buttonDisableBackGround : null,
+          ),
+          child: Center(
+            child: child,
+          ),
         ),
       ),
     );
