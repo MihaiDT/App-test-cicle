@@ -113,7 +113,11 @@ class BirthDateController extends GetxController {
   ) {
     _closeKeyboard;
     _saveBirthDate(day, month, year);
-    AdjustManager.trackEvent(EventType.birthDate);
+
+    AdjustManager.trackEvent(EventType.birthDate, {
+      "birthdate": "$year-$month-$day",
+    });
+
     if (_isLessThan14Years(day, month, year)) {
       _showError(context);
     } else if (_isAgeBetween13And18(day, month, year)) {

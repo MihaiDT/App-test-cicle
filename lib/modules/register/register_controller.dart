@@ -54,7 +54,11 @@ class RegisterController extends GetxController {
             appController.registerParameter.email = emailController.text;
             appController.registerParameter.password = password;
 
-            AdjustManager.trackEvent(EventType.registration);
+            AdjustManager.trackEvent(EventType.registration, {
+              "createdBy":
+                  appController.registerParameter.registrationProvider?.name ??
+                      "email",
+            });
 
             Get.offAndToNamed(Routes.nameSurname);
           } else if (callback.content?.emailExists == true &&

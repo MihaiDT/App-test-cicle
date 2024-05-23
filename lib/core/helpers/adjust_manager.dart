@@ -2,6 +2,7 @@ import 'package:adjust_sdk/adjust.dart';
 import 'package:adjust_sdk/adjust_event.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 
+/// Send events to Adjust
 class AdjustManager {
   AdjustManager._privateConstructor();
 
@@ -11,6 +12,9 @@ class AdjustManager {
     return _instance;
   }
 
+  /// Method that sends an event to Adjust,
+  /// the EventType is an enum that contains all the events code that we want to track,
+  /// the parameters are optional and are used to send additional data to Adjust
   static void trackEvent(
     EventType eventType, [
     Map<String, String>? parameters,
