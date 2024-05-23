@@ -61,6 +61,7 @@ class HomeController extends AppScaffoldController {
       await AdvicesService.fetchSuggestedArticles();
     }
     periodSelectedDateIndex.value = await _initCalendars();
+    scrollSnapListKey.currentState?.focusToItem(periodSelectedDateIndex.value);
 
     ever(
       appController.currentPeriod.rxValue,
