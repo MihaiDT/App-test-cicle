@@ -13,14 +13,27 @@ class ProfileHeader extends GetView<ProfileHeaderController> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 60,
-          backgroundColor: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Image.asset(
-              ThemeImage.mockAvatar,
-              fit: BoxFit.cover,
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xff9160D7).withOpacity(0.2),
+                offset: const Offset(10, 10), // Updated shadow position
+                blurRadius: 21, // Updated shadow blur
+                spreadRadius: 4, // Updated shadow spread
+              ),
+            ],
+          ),
+          child: CircleAvatar(
+            radius: 70,
+            backgroundColor: Colors.white.withOpacity(0.7),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Image.asset(
+                ThemeImage.mockAvatar,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -33,7 +46,7 @@ class ProfileHeader extends GetView<ProfileHeaderController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DisplayMedium(
-                controller.userName,
+                "Ciao ${controller.userName}",
                 color: ThemeColor.primary,
               ),
               ThemeSizedBox.height4,

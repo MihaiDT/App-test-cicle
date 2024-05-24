@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/info/widgets/info_what_are_coins_bottomsheet..dart';
 import 'package:lines/modules/your_coins/widgets/activity_card.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
@@ -27,7 +29,7 @@ class YourCoinsPage extends StatelessWidget {
         actions: [
           InkWell(
             onTap: () {
-              //TODO: add onTap
+              Get.bottomSheet(const InfoWhatAreCoinsBottomSheet());
             },
             child: SvgPicture.asset(
               ThemeIcon.info,

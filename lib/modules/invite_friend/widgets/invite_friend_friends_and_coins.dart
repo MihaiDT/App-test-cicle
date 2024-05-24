@@ -56,7 +56,7 @@ class InviteFriendFriendsAndCoins extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 DisplaySmall(
-                  "$friendsAmount",
+                  "$coinsCollected",
                   color: ThemeColor.brightPink,
                 ),
                 ThemeSizedBox.width8,

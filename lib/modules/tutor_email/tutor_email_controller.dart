@@ -32,4 +32,10 @@ class TutorEmailController extends GetxController {
       arguments!.onContinue(emailController.text);
     }
   }
+
+  @override
+  void onClose() {
+    emailController.dispose();
+    super.onClose();
+  }
 }

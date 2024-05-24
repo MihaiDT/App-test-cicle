@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/modules/load_code/load_code_controller.dart';
-import 'package:lines/routes/routes.dart';
+import 'package:lines/modules/load_code/controllers/load_code_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/buttons/primary_button.dart';
+import 'package:lines/widgets/buttons/primary_loading_button.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
 import 'package:lines/widgets/forms/code_textfield.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -44,12 +43,10 @@ class LoadCodePage extends GetView<LoadCodeController> {
             ),
             child: Obx(
               () {
-                return PrimaryButton(
-                  onPressed: controller.canProceed
-                      ? () {
-                          Get.offAndToNamed(Routes.loadCodeResultsPage);
-                        }
-                      : null,
+                return PrimaryLoadingButton(
+                  isLoading: controller.isPending.value,
+                  onPressed:
+                      controller.canProceed ? controller.onConfirm : null,
                   child: const TitleMedium(
                     "CONFERMA",
                   ),

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/models/uploaded_product.dart';
 import 'package:lines/modules/load_code/widgets/load_code_earned_coins.dart';
+import 'package:lines/routes/routes.dart';
 
 class CompletedMissionCard extends StatelessWidget {
-  final Function()? onTap;
-  final int earnedCoinsAmount;
+  final UploadedProduct uploadedProduct;
 
   const CompletedMissionCard({
-    this.onTap,
-    required this.earnedCoinsAmount,
+    required this.uploadedProduct,
     super.key,
   });
 
@@ -21,12 +22,17 @@ class CompletedMissionCard extends StatelessWidget {
         ).applyShaders(context),
         ThemeSizedBox.height32,
         LoadCodeEarnedCoins(
-          title: "LINES E",
-          earnedCoinsAmount: earnedCoinsAmount,
+          title: uploadedProduct.product.category,
+          earnedCoinsAmount: uploadedProduct.product.points,
+          imageUrl: uploadedProduct.product.imageUrl,
         ),
         ThemeSizedBox.height16,
         InkWell(
-          onTap: onTap,
+          onTap: () {
+            Get.toNamed(
+              Routes.infoDropdownResultsPage,
+            );
+          },
           child: const TitleMedium(
             "QUANTI COINS VALGONO I PRODOTTI?",
             underline: true,

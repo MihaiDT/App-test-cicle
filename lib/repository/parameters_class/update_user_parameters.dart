@@ -9,8 +9,8 @@ class UpdateUserParameters {
   String? nickname;
   int? periodDays;
   int? periodDuration;
-  bool privacyProfiling;
-  bool privacyMarketingEmail;
+  bool? privacyProfiling;
+  bool? privacyMarketingEmail;
   String? referralCode;
   String? zipCode;
   bool? hasConsentCookie;
@@ -27,8 +27,8 @@ class UpdateUserParameters {
     this.nickname,
     this.periodDays,
     this.periodDuration,
-    this.privacyProfiling = false,
-    this.privacyMarketingEmail = false,
+    this.privacyProfiling,
+    this.privacyMarketingEmail,
     this.referralCode,
     this.zipCode,
     this.hasConsentCookie,

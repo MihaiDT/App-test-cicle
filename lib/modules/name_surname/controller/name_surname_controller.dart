@@ -28,10 +28,13 @@ class NameSurnameController extends GetxController {
       nameValue.value.isNotEmpty && surnameValue.value.isNotEmpty;
 
   @override
-  void dispose() {
+  void onClose() {
     nameController.dispose();
     surnameController.dispose();
     nicknameController.dispose();
-    super.dispose();
+    nameFocusNode.dispose();
+    surnameFocusNode.dispose();
+    nicknameFocusNode.dispose();
+    super.onClose();
   }
 }

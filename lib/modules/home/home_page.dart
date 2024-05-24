@@ -54,10 +54,19 @@ class HomePage extends GetView<HomeController> {
                 ThemeSizedBox.height32,
                 const WelcomeQuizSection(),
               ],
-              if (controller.showMissionSection) ...[
-                ThemeSizedBox.height32,
-                const MissionRowSection(),
-              ],
+              Obx(
+                () {
+                  if (controller.showMissionSection) {
+                    return Column(
+                      children: [
+                        ThemeSizedBox.height32,
+                        const MissionRowSection(),
+                      ],
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
               Obx(() {
                 if (controller.showSuggestedArticlesSection.value) {
                   return Column(

@@ -75,10 +75,12 @@ class RegisterController extends GetxController {
   }
 
   @override
-  void dispose() {
+  void onClose() {
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
     emailController.dispose();
     passwordController.dispose();
-    super.dispose();
+    super.onClose();
   }
 
   Future<void> setRegistrationProvider(

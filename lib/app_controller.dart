@@ -19,6 +19,7 @@ import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
 import 'package:lines/data/models/symtpom_category_stats.dart';
+import 'package:lines/data/models/uploaded_product.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/data/models/validate_referral_code.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
@@ -85,6 +86,7 @@ class AppController extends GetxController {
 
   final EasyGetter<AdvicesArticle> singleArticle;
   final EasyGetter<ValidateReferralCode> validateReferralCode;
+  final EasyGetter<UploadedProduct> uploadedProduct;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
@@ -120,6 +122,7 @@ class AppController extends GetxController {
     required this.mensesStatistics,
     required this.symptomsDiaries,
     required this.sendConfirmEmail,
+    required this.uploadedProduct,
     required this.badges,
     required this.hasUsedDeepLink,
     required this.validateReferralCode,
@@ -153,6 +156,7 @@ class AppController extends GetxController {
       sendConfirmEmail: EasyGetter<SendConfirmEmail>(),
       singleArticle: EasyGetter<AdvicesArticle>(),
       validateReferralCode: EasyGetter<ValidateReferralCode>(),
+      uploadedProduct: EasyGetter<UploadedProduct>(),
       isLoginFlow: false.obs,
       showLockPage: false.obs,
       hasUsedDeepLink: false.obs,

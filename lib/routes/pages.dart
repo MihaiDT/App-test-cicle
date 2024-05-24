@@ -52,7 +52,8 @@ import 'package:lines/modules/invite_friend/invite_friend_binding.dart';
 import 'package:lines/modules/invite_friend/invite_friend_page.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
-import 'package:lines/modules/load_code/load_code_binding.dart';
+import 'package:lines/modules/load_code/binding/load_code_binding.dart';
+import 'package:lines/modules/load_code/binding/load_code_result_binding.dart';
 import 'package:lines/modules/load_code/load_code_page.dart';
 import 'package:lines/modules/load_code/load_code_results_page.dart';
 import 'package:lines/modules/login/login_binding.dart';
@@ -487,6 +488,7 @@ class Pages {
     /// LoadCodeResultsPage
     GetPage(
       name: Routes.loadCodeResultsPage,
+      binding: LoadCodeResultBinding(),
       page: () => _mediaQueryWrapper(
         const LoadCodeResultsPage(),
       ),

@@ -44,7 +44,11 @@ enum RequestStatus {
 enum ErrorType {
   generic,
   wrongPassword,
-  userAlreadyActive;
+  userAlreadyActive,
+  productCodeNotValid,
+  productCodeExternal,
+  productCodeUploadFailed,
+  productCodeAlreadyUsed;
 
   String get errorText {
     switch (this) {
@@ -54,6 +58,14 @@ enum ErrorType {
         return "Password errata";
       case ErrorType.userAlreadyActive:
         return "L'utente è già attivo";
+      case ErrorType.productCodeNotValid:
+        return "Il codice prodotto non è stato riconoscuto";
+      case ErrorType.productCodeExternal:
+        return "Il codice prodotto non è corretto.\nCarica il codice prodotto che trovi stampato all’interno della confezione.";
+      case ErrorType.productCodeUploadFailed:
+        return "Il caricamento del codice non è andato a buon fine";
+      case ErrorType.productCodeAlreadyUsed:
+        return "Il codice risulta già caricato, carica un altro codice.";
     }
   }
 }
@@ -65,6 +77,14 @@ extension ErrorTypeExtension on ErrorType {
         return ErrorType.wrongPassword;
       case "user_already_active":
         return ErrorType.userAlreadyActive;
+      case "product_code_not_valid":
+        return ErrorType.productCodeNotValid;
+      case "product_code_external":
+        return ErrorType.productCodeExternal;
+      case "product_code_upload_failed":
+        return ErrorType.productCodeUploadFailed;
+      case "product_code_already_uploaded":
+        return ErrorType.productCodeAlreadyUsed;
       default:
         return ErrorType.generic;
     }

@@ -2,7 +2,7 @@ import 'package:lines/data/models/advices_category.dart';
 
 class AdvicesArticle {
   final String? categoryName;
-  final String subCategoryName;
+  final String? subCategoryName;
   final String id;
   final ArticleType typology;
   final String title;
@@ -20,7 +20,7 @@ class AdvicesArticle {
 
   AdvicesArticle.textType({
     this.categoryName,
-    required this.subCategoryName,
+    this.subCategoryName,
     required this.id,
     required this.isFavorite,
     required this.isNew,
@@ -40,7 +40,7 @@ class AdvicesArticle {
 
   AdvicesArticle.sliderType({
     this.categoryName,
-    required this.subCategoryName,
+    this.subCategoryName,
     required this.id,
     required this.isFavorite,
     required this.isNew,
@@ -60,7 +60,7 @@ class AdvicesArticle {
 
   AdvicesArticle.videoType({
     this.categoryName,
-    required this.subCategoryName,
+    this.subCategoryName,
     required this.id,
     required this.isFavorite,
     required this.isNew,
@@ -80,6 +80,7 @@ class AdvicesArticle {
 
   factory AdvicesArticle.fromJson(Map<String, dynamic> data) {
     ArticleType articleType = ArticleType.fromString(data['typology']);
+
     switch (articleType) {
       case ArticleType.text:
         return AdvicesArticle.textType(
@@ -91,7 +92,7 @@ class AdvicesArticle {
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'] ?? '',
-          iconName: data['icon_name'],
+          iconName: data['icon_name'] ?? '',
           coverImageUrl: data['cover_image_ur'],
           shortDescription: data['short_description'],
           text: data['text'],
@@ -107,7 +108,7 @@ class AdvicesArticle {
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'] ?? '',
-          iconName: data['icon_name'],
+          iconName: data['icon_name'] ?? '',
           coverImageUrl: data['cover_image_ur'],
           thumbImageUrl: data['thumb_image_url'],
           slideshowImageUrls: List<String>.from(data['slideshow_image_urls']),
@@ -122,7 +123,7 @@ class AdvicesArticle {
           typology: articleType,
           title: data['title'],
           disclaimer: data['disclaimer'] ?? '',
-          iconName: data['icon_name'],
+          iconName: data['icon_name'] ?? '',
           thumbImageUrl: data['thumb_image_url'],
           videoImagePreviewUrl: data['video_image_preview_url'],
           videoUrl: data['video_url'],

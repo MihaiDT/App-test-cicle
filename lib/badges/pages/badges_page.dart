@@ -19,7 +19,7 @@ class BadgesPage extends GetView<BadgesController> {
       backgroundColor: Colors.white,
       appBar: const TransparentAppBar(
         title: TitleSmall(
-          "MODIFICA PROFILO",
+          "BADGE",
           color: ThemeColor.darkBlue,
         ),
         backButtonColor: ThemeColor.darkBlue,

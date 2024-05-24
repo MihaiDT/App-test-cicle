@@ -12,10 +12,10 @@ class AdvicesService {
         "/articles",
       );
       _saveAdvicesCategories(response);
-    } catch (e) {
+    } catch (e, s) {
       appController.advicesCategories.responseHandler =
           ResponseHandler.failed();
-      log.logError(e);
+      log.logApiException(e, s);
     }
   }
 

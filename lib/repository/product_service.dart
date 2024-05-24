@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:lines/core/error/error_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/data/models/product_category.dart';
+import 'package:lines/data/models/uploaded_product.dart';
 
 class ProductService {
   static Future<void> get products async {
@@ -31,6 +33,24 @@ class ProductService {
     }
   }
 
+  static Future<void> loadCode(String code) async {
+    appController.uploadedProduct.responseHandler = ResponseHandler.pending();
+    try {
+      final response = await dio.post(
+        "/missions/upload_code",
+        data: {
+          "code": code,
+        },
+      );
+      _saveUploadedProduct(response);
+    } catch (e, s) {
+      appController.uploadedProduct.responseHandler = ResponseHandler.failed(
+        errorType: ErrorManager.checkError(e),
+      );
+      log.logApiException(e, s);
+    }
+  }
+
   static void _saveProducts(Response response) {
     List<dynamic> periodsData = response.data["products"];
     List<ProductCategory> periodsStats = periodsData
@@ -49,6 +69,12 @@ class ProductService {
 
     appController.missions.responseHandler = ResponseHandler.successful(
       content: missions,
+    );
+  }
+
+  static void _saveUploadedProduct(Response response) {
+    appController.uploadedProduct.responseHandler = ResponseHandler.successful(
+      content: UploadedProduct.fromJson(response.data),
     );
   }
 }

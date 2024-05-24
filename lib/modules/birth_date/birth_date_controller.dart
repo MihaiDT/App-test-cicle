@@ -58,14 +58,9 @@ class BirthDateController extends GetxController {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     clearAll();
-
-    dayFocus.dispose();
-    monthFocus.dispose();
-    yearFocus.dispose();
-
-    super.dispose();
+    super.onClose();
   }
 
   void clearAll() {
@@ -74,6 +69,9 @@ class BirthDateController extends GetxController {
     dayController.value.clear();
     monthController.value.clear();
     yearController.value.clear();
+    dayFocus.dispose();
+    monthFocus.dispose();
+    yearFocus.dispose();
   }
 
   void validateDay() {

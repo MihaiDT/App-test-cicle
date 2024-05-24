@@ -19,13 +19,10 @@ class BirthDatePage extends GetView<BirthDateController> {
     return AppScaffoldPage(
       backgroundImage: ThemeDecoration.images.bgDark,
       extendBodyBehindAppBar: true,
-      appBar: TransparentAppBar(
-        title: const TitleSmall(
+      appBar: const TransparentAppBar(
+        title: TitleSmall(
           "CONOSCIAMOCI",
         ),
-        onBackPressed: () {
-          controller.clearAll();
-        },
       ),
       body: SafeArea(
         child: BottomWidgetLayout(

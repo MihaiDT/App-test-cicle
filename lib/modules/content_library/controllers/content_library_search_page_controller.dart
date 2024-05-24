@@ -42,9 +42,10 @@ class ContentLibrarySearchPageController extends GetxController {
   ///the string textToFilter, also if the article is of type text check inside the text property , false otherwise
   bool _articleContainsText(AdvicesArticle article, String textToFilter) {
     String categoryName = article.categoryName ?? "";
+    String subCategoryName = article.subCategoryName ?? "";
     bool condition =
         article.title.toLowerCase().contains(textToFilter.toLowerCase()) ||
-            article.subCategoryName.toLowerCase().contains(textToFilter) ||
+            subCategoryName.toLowerCase().contains(textToFilter) ||
             categoryName.toLowerCase().contains(textToFilter);
     //if the article is of type text che inside the text property
     if (article.typology == ArticleType.text) {

@@ -21,35 +21,39 @@ class MyMensesSection extends GetView<MyMensesSectionController> {
           children: [
             ThemeSizedBox.height24,
             const DisplayMedium(
-              "Le mie mestruazioni",
+              "Il tuo ciclo",
             ).applyShaders(context),
             ThemeSizedBox.height4,
-            const BodyMedium(
-              "Dati medi basati su ultimi 4 cicli",
-              color: ThemeColor.darkBlue,
-            ),
+            controller.hasSavedMensesInfo
+                ? const BodyMedium(
+                    "Dati basati sulle tue informazioni",
+                    color: ThemeColor.darkBlue,
+                  )
+                : const BodyMedium(
+                    "Aggiungi mestruazioni per visualizzare i report",
+                    color: ThemeColor.darkBlue,
+                  ),
             ThemeSizedBox.height16,
-            Row(
-              children: [
-                if (controller.periodDuration != null)
+            if (controller.hasSavedMensesInfo)
+              Row(
+                children: [
                   _infoCard(
                     value: controller.periodDays.toString(),
                     description: "Durata media flusso",
                     imagePath: ThemeIcon.dropRoundedIcon,
                   ),
-                ThemeSizedBox.width8,
-                if (controller.periodDays != null)
+                  ThemeSizedBox.width8,
                   _infoCard(
                     value: controller.periodDuration.toString(),
                     description: "Durata media ciclo",
                     imagePath: ThemeIcon.circleRoundedIcon,
                   ),
-              ],
-            ),
+                ],
+              ),
             ThemeSizedBox.height8,
             InkWell(
               onTap: () {
-                Get.toNamed(Routes.yourDiaryPage);
+                Get.toNamed(Routes.yourMensesStatsPage);
               },
               child: Container(
                 decoration: const BoxDecoration(
@@ -105,7 +109,7 @@ class MyMensesSection extends GetView<MyMensesSectionController> {
                 ),
               ),
               DisplaySmall(
-                "$value Giorni",
+                "$value GIORNI",
                 color: ThemeColor.primary,
               ),
               ThemeSizedBox.height4,

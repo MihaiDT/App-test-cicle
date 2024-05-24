@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:lines/modules/load_code/load_code_controller.dart';
+import 'package:lines/modules/load_code/controllers/load_code_controller.dart';
 
 class LoadCodeBinding extends Bindings {
   @override

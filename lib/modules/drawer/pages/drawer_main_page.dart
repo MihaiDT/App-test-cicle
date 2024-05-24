@@ -5,6 +5,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/drawer/controller/drawer_main_page_controller.dart';
 import 'package:lines/modules/drawer/sections/main_drawer_tile_section.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/coin/coin_total.dart';
 
 class DrawerMainPage extends GetView<DrawerMainPageController> {
   const DrawerMainPage({
@@ -30,6 +31,27 @@ class DrawerMainPage extends GetView<DrawerMainPageController> {
             DisplayMedium(
               "Ciao ${controller.name}",
             ).applyShaders(context),
+            ThemeSizedBox.height4,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: CoinTotal(
+                totalCoins: controller.coinTotal,
+                showSuffix: true,
+              ),
+            ),
+            ThemeSizedBox.height32,
+            const Divider(
+              color: ThemeColor.buttonDisableBackGround,
+            ),
+            MainDrawerTileSection(
+              title: "Account",
+              leadingIcon: SvgPicture.asset(
+                ThemeIcon.user,
+              ),
+              onTap: () {
+                Get.offAndToNamed(Routes.account);
+              },
+            ),
             const Divider(
               color: ThemeColor.buttonDisableBackGround,
             ),
@@ -52,18 +74,6 @@ class DrawerMainPage extends GetView<DrawerMainPageController> {
               ),
               onTap: () {
                 Get.offAndToNamed(Routes.faq);
-              },
-            ),
-            const Divider(
-              color: ThemeColor.buttonDisableBackGround,
-            ),
-            MainDrawerTileSection(
-              title: "Account",
-              leadingIcon: SvgPicture.asset(
-                ThemeIcon.user,
-              ),
-              onTap: () {
-                Get.offAndToNamed(Routes.account);
               },
             ),
             const Divider(

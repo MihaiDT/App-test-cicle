@@ -36,7 +36,7 @@ class _CodeTextfieldState extends State<CodeTextfield> {
                   if (controller.writtenCode[index].isNotEmpty) {
                     writtenText = controller.writtenCode[index];
                   }
-                  return _buildSingleCell(writtenText);
+                  return _buildSingleCell(writtenText.toUpperCase());
                 },
               ),
             ),
