@@ -14,4 +14,11 @@ extension ThemeShadow on BoxShadow {
         blurRadius: 20,
         offset: const Offset(0, 0),
       );
+
+  static BoxShadow get flushShadow => BoxShadow(
+        color: const Color(0xff9160D7).withOpacity(0.3),
+        spreadRadius: 1,
+        blurRadius: 10,
+        offset: const Offset(0, 0),
+      );
 }

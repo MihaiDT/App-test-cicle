@@ -3,6 +3,7 @@ import 'package:lines/data/models/product.dart';
 class Mission {
   final String code;
   final int completeCounter;
+  final String? disclaimer;
   final String title;
   final String description;
   final String? description2;
@@ -23,6 +24,7 @@ class Mission {
     required this.code,
     required this.completeCounter,
     required this.title,
+    this.disclaimer = '',
     required this.description,
     this.description2 = "",
     this.regolamento,
@@ -44,6 +46,7 @@ class Mission {
       title: json['title'],
       description: json['description'],
       description2: json['description_2'],
+      disclaimer: json['concorso_description'],
       regolamento: json['regolamento'],
       prizeImage: json['prize_image'],
       prizeDescription: json['prize_description'],
@@ -72,6 +75,7 @@ class Mission {
       'title': title,
       'description': description,
       'description_2': description2,
+      'disclaimber': disclaimer,
       'id': id,
       'image_url': imageUrl,
       'is_completed': isCompleted,

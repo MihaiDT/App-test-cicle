@@ -88,10 +88,13 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                   onTap: () {
                     controller.sendNewEmail();
                   },
-                  child: const TitleMedium(
-                    "INVIA DI NUOVO",
-                    underline: true,
-                    textAlign: TextAlign.center,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TitleMedium(
+                      "INVIA DI NUOVO",
+                      underline: true,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ],

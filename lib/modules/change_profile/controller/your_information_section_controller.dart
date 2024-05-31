@@ -18,9 +18,7 @@ class YourInformationSectionController extends GetxController {
 
   RxBool isBottomsheetButtonLoading = false.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
+  YourInformationSectionController(){
     ever(
       appController.user.rxValue,
       condition: () => Get.currentRoute == Routes.changeProfilePage,

@@ -14,7 +14,7 @@ class InfoWhatIfIUploadBottomSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ThemeSizedBox.height32,
+          ThemeSizedBox.height8,
           const DisplayMedium(
             "E se carico un codice prodotto di una missione?",
             textAlign: TextAlign.center,

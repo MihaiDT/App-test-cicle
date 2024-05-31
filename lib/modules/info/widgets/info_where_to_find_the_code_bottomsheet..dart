@@ -14,13 +14,13 @@ class InfoWhereToFindTheCodeBottomSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ThemeSizedBox.height32,
+          ThemeSizedBox.height8,
           const DisplayMedium(
-            "Come si ottengono i\nCoins?",
+            "Dove trovo il codice?",
             textAlign: TextAlign.center,
           ).applyShaders(context),
           ThemeSizedBox.height24,
-          const BodyLarge(
+          const BodyMedium(
             "Apri la confezione dei tuoi Lines: al suo interno troverai stampato il codice univoco da inserire per ottenere i Coins!",
             color: ThemeColor.darkBlue,
             textAlign: TextAlign.center,
@@ -28,14 +28,15 @@ class InfoWhereToFindTheCodeBottomSheet extends StatelessWidget {
           ThemeSizedBox.height32,
           Image.asset(
             ThemeImage.findingCode,
+            height: 250,
           ),
           ThemeSizedBox.height32,
-          const BodyLarge(
+          const BodyMedium(
             "Sei hai acquistato una confezione multipla o un pacco Formato Scorta, puoi trovare il codice all'interno di ogni singolo pack.",
             color: ThemeColor.darkBlue,
             textAlign: TextAlign.center,
           ),
-          ThemeSizedBox.height32,
+          ThemeSizedBox.height48,
         ],
       ),
     );

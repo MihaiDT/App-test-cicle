@@ -26,76 +26,79 @@ class InviteFriendPage extends GetView<InviteFriendController> {
           color: ThemeColor.darkBlue,
         ),
       ),
-      body: BottomWidgetLayout(
-        bottomWidget: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ThemeSize.paddingSmall,
-          ),
-          child: PrimaryButton(
-            onPressed: () async {
-              await controller.shareCode();
-            },
-            child: const TitleLarge(
-              "CONDIVIDI CODICE",
+      body: SafeArea(
+        child: BottomWidgetLayout(
+          bottomWidget: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: ThemeSize.paddingSmall,
+            ),
+            child: PrimaryButton(
+              onPressed: () async {
+                await controller.shareCode();
+              },
+              child: const TitleLarge(
+                "CONDIVIDI CODICE",
+              ),
             ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ThemeSize.paddingSmall,
-          ),
-          child: Column(
-            children: [
-              ThemeSizedBox.height32,
-              Image.asset(
-                ThemeImage.friendship,
-                height: 206,
-              ),
-              ThemeSizedBox.height36,
-              InviteFriendCode(
-                code: controller.referralCode,
-              ),
-              ThemeSizedBox.height16,
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ThemeSize.paddingLarge,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: ThemeSize.paddingSmall,
+            ),
+            child: Column(
+              children: [
+                ThemeSizedBox.height32,
+                Image.asset(
+                  ThemeImage.friendship,
+                  height: 206,
                 ),
-                child: BodyMedium(
-                  "Condividi il tuo codice di invito. Otterrete entrambi 50 Coins a seguito della registrazione in app.",
-                  textAlign: TextAlign.center,
-                  color: ThemeColor.darkBlue,
+                ThemeSizedBox.height36,
+                InviteFriendCode(
+                  code: controller.referralCode,
                 ),
-              ),
-              ThemeSizedBox.height16,
-              const AppCoin(
-                coinAmount: 50,
-              ),
-              ThemeSizedBox.height32,
-              SizedBox(
-                height: Get.height * 0.125,
-                child: InviteFriendFriendsAndCoins(
-                  friendsAmount: 0,
-                  coinsCollected: controller.coinsCollected,
-                ),
-              ),
-              ThemeSizedBox.height8,
-              const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  BodySmall(
-                    "Puoi guadagnare Coins per un massimo di",
+                ThemeSizedBox.height16,
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ThemeSize.paddingLarge,
+                  ),
+                  child: BodyMedium(
+                    "Condividi il tuo codice di invito. Otterrete entrambi 50 Coins a seguito della registrazione in app.",
+                    textAlign: TextAlign.center,
                     color: ThemeColor.darkBlue,
                   ),
-                  SizedBox(
-                    width: 2,
+                ),
+                ThemeSizedBox.height16,
+                const AppCoin(
+                  coinAmount: 50,
+                ),
+                ThemeSizedBox.height32,
+                SizedBox(
+                  height: Get.height * 0.125,
+                  child: InviteFriendFriendsAndCoins(
+                    friendsAmount: 0,
+                    coinsCollected: controller.coinsCollected,
                   ),
-                  TitleMedium(
-                    "5 amici",
-                    color: ThemeColor.darkBlue,
-                  ),
-                ],
-              ),
-            ],
+                ),
+                ThemeSizedBox.height8,
+                const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    BodySmall(
+                      "Puoi guadagnare Coins per un massimo di",
+                      color: ThemeColor.darkBlue,
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    TitleMedium(
+                      "5 amici",
+                      color: ThemeColor.darkBlue,
+                    ),
+                  ],
+                ),
+                ThemeSizedBox.height32,
+              ],
+            ),
           ),
         ),
       ),

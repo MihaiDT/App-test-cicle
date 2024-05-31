@@ -18,6 +18,7 @@ mixin ThemeShaderTextWrapper on TextWrapper {
           decorationColor: decorationColor,
           fontWeight: fontWeight,
           height: height,
+          letterSpacing: letterSpacing,
           leadingDistribution:
               height != null ? null : TextLeadingDistribution.even,
         ),

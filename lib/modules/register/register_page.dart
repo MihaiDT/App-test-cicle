@@ -26,7 +26,9 @@ class RegisterPage extends GetView<RegisterController> {
         return AppScaffoldPage(
           extendBodyBehindAppBar: true,
           backgroundImage: ThemeDecoration.images.bgDark,
-          appBar: const TransparentAppBar(),
+          appBar: const TransparentAppBar(
+            showBackButton: false,
+          ),
           body: ListView(
             padding: EdgeInsets.only(
               left: ThemeSize.paddingLarge,

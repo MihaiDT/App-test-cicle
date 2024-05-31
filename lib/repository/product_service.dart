@@ -33,13 +33,14 @@ class ProductService {
     }
   }
 
-  static Future<void> loadCode(String code) async {
+  static Future<void> loadCode(String code, int? missionId) async {
     appController.uploadedProduct.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
         "/missions/upload_code",
         data: {
           "code": code,
+          "mission_id": missionId,
         },
       );
       _saveUploadedProduct(response);
@@ -53,9 +54,7 @@ class ProductService {
 
   static void _saveProducts(Response response) {
     List<dynamic> periodsData = response.data["products"];
-    List<ProductCategory> periodsStats = periodsData
-        .map((category) => ProductCategory.fromJson(category))
-        .toList();
+    List<ProductCategory> periodsStats = periodsData.map((category) => ProductCategory.fromJson(category)).toList();
 
     appController.productCategory.responseHandler = ResponseHandler.successful(
       content: periodsStats,
@@ -64,8 +63,7 @@ class ProductService {
 
   static void _saveMissions(Response response) {
     List<dynamic> responseData = response.data["missions"];
-    List<Mission> missions =
-        responseData.map((category) => Mission.fromJson(category)).toList();
+    List<Mission> missions = responseData.map((category) => Mission.fromJson(category)).toList();
 
     appController.missions.responseHandler = ResponseHandler.successful(
       content: missions,

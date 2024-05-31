@@ -47,7 +47,7 @@ class InfoPage extends GetView<InfoController> {
             text: "Cosa sono i coins?",
             onTap: () => controller.showBottomSheet(
               context,
-              const InfoWhatAreCoinsBottomSheet(),
+               const InfoWhatAreCoinsBottomSheet(color: Colors.transparent),
             ),
           ),
           ThemeSizedBox.height16,
@@ -115,7 +115,7 @@ class InfoPage extends GetView<InfoController> {
               const InfoTheCodeIsIllegibleBottomSheet(),
             ),
           ),
-          ThemeSizedBox.height16,
+          ThemeSizedBox.height48,
         ],
       ),
     );

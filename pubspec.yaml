@@ -1,5 +1,5 @@
 name: lines
-version: 0.0.22+22
+version: 0.0.27+27
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -50,9 +50,9 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
-  isar: ^3.1.0+1
-  # Flutter binaries for the Isar Database
-  isar_flutter_libs:
+  # isar: ^3.1.0+1
+  # # Flutter binaries for the Isar Database
+  # isar_flutter_libs:
 
   # Draw SVG files using Flutter.
   flutter_svg: ^2.0.9
@@ -147,11 +147,11 @@ dev_dependencies:
   envied_generator: ^0.5.2
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.1
-  isar_generator:  # Code generator for the Isar Database
+  #isar_generator:  # Code generator for the Isar Database
 
-dependency_overrides:
-  analyzer: ^6.4.1
-  meta: ^1.11.0
+#dependency_overrides:
+  #analyzer: ^6.4.1
+  #meta: ^1.11.0
 
 flutter:
   uses-material-design: true
@@ -169,13 +169,13 @@ flutter:
     - assets/Personalizzazione Avatar/StreamingAssets/aa/
     - assets/Personalizzazione Avatar/TemplateData/
     - assets/Personalizzazione Avatar/
-    - assets/Tamagotchi/index.html
-    - assets/Tamagotchi/
-    - assets/Tamagotchi/StreamingAssets/aa/AddressablesLink/
-    - assets/Tamagotchi/StreamingAssets/aa/WebGL/
-    - assets/Tamagotchi/StreamingAssets/aa/
-    - assets/Tamagotchi/TemplateData/
-    - assets/Tamagotchi/
+    # - assets/Tamagotchi/index.html
+    # - assets/Tamagotchi/
+    # - assets/Tamagotchi/StreamingAssets/aa/AddressablesLink/
+    # - assets/Tamagotchi/StreamingAssets/aa/WebGL/
+    # - assets/Tamagotchi/StreamingAssets/aa/
+    # - assets/Tamagotchi/TemplateData/
+    # - assets/Tamagotchi/
 
   fonts:
     - family: Barlow

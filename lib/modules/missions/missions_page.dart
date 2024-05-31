@@ -53,9 +53,7 @@ class MissionsPage extends GetView<MissionsController> {
               return SizedBox(
                 height: _containerHeight,
                 child: MissionContainer(
-                  onTap: () => controller.navigateToMissionDetails(
-                    controller.missions[index],
-                  ),
+                  onTap: () => controller.navigateToMissionDetails(index),
                   mission: controller.missions[index],
                 ),
               );

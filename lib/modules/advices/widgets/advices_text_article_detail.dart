@@ -50,14 +50,13 @@ class AdvicesTextArticleDetails extends StatelessWidget {
               [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: ThemeSize.paddingSmall,
+                    horizontal: ThemeSize.paddingMedium,
                   ),
                   child: Column(
                     children: [
                       ThemeSizedBox.height32,
                       CircleAvatar(
-                        backgroundColor:
-                            category?.categoryColor ?? Colors.transparent,
+                        backgroundColor: category?.categoryColor ?? Colors.transparent,
                         child: SvgPicture.asset(
                           category?.iconPath ?? "",
                           color: Colors.white,
@@ -88,11 +87,28 @@ class AdvicesTextArticleDetails extends StatelessWidget {
                       ThemeSizedBox.height48,
                       Html(
                         data: article?.text,
+                        style: {
+                          "span": Style(
+                            color: ThemeColor.darkBlue,
+                            fontSize: FontSize(16),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          "body": Style(
+                            color: ThemeColor.darkBlue,
+                            fontSize: FontSize(14),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          "a": Style(
+                            color: ThemeColor.darkBlue,
+                            fontSize: FontSize(14),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        },
                       ),
-                      ThemeSizedBox.height48,
+                      ThemeSizedBox.height32,
                       LabelLarge(
-                        article?.disclaimer ?? "",
-                        color: _disclaimerColor,
+                        "Questo contenuto è stato scritto da esperti del settore e fornisce solo informazioni di carattere generale. Per ogni dubbio, chiarimento o approfondimento consulta sempre il tuo medico.",
+                        color: _disclaimerColor.withOpacity(0.5),
                         fontWeight: FontWeight.w500,
                       ),
                       ThemeSizedBox.height60,
@@ -201,8 +217,7 @@ class AdvicesTextArticleDetails extends StatelessWidget {
   void _initTextDetail(ScrollController scrollController, RxDouble proportion) {
     scrollController.addListener(
       () {
-        proportion.value = scrollController.offset /
-            scrollController.position.viewportDimension;
+        proportion.value = scrollController.offset / scrollController.position.viewportDimension;
       },
     );
   }

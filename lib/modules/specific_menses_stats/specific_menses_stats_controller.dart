@@ -7,17 +7,13 @@ import 'package:lines/repository/menses_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class SpecificMensesStatsController extends GetxController {
-  SpecificDatePeriodsStats? get specificDatePeriodsStats =>
-      appController.specificDatePeriodsStats.value;
+  SpecificDatePeriodsStats? get specificDatePeriodsStats => appController.specificDatePeriodsStats.value;
   final PeriodsStats arguments = Get.arguments;
   RxBool isPageLoading = true.obs;
 
   final List<FlSpot> chartSpots = [];
 
-  @override
-  void onInit() {
-    super.onInit();
-
+  SpecificMensesStatsController() {
     ever(
       appController.specificDatePeriodsStats.rxValue,
       condition: () => Get.currentRoute == Routes.specificMensesStats,

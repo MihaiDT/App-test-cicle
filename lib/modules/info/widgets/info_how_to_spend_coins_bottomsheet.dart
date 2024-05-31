@@ -13,7 +13,7 @@ class InfoHowToSpendCoinsBottomSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ThemeSizedBox.height32,
+          ThemeSizedBox.height8,
           const DisplayMedium(
             "Come posso\nspendere i Coins?",
             textAlign: TextAlign.center,
@@ -21,11 +21,10 @@ class InfoHowToSpendCoinsBottomSheet extends StatelessWidget {
           ThemeSizedBox.height24,
           InfoCard(
             title: "Lucky Lines",
-            description:
-                "Puoi usare i tuoi Coins per tentare la fortuna e provare a vincere i tuoi premi preferiti.",
+            description: "Puoi usare i tuoi Coins per tentare la fortuna e provare a vincere i tuoi premi preferiti.",
             imagePath: ThemeImage.luckyLines,
           ),
-          ThemeSizedBox.height32,
+          ThemeSizedBox.height48,
         ],
       ),
     );

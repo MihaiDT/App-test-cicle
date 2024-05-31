@@ -26,7 +26,9 @@ class LoginPage extends GetView<LoginController> {
         return AppScaffoldPage(
           extendBodyBehindAppBar: true,
           backgroundImage: ThemeDecoration.images.bgDark,
-          appBar: const TransparentAppBar(),
+          appBar: const TransparentAppBar(
+            showBackButton: false,
+          ),
           body: ListView(
             padding: EdgeInsets.only(
               left: ThemeSize.paddingLarge,
@@ -96,8 +98,7 @@ class LoginPage extends GetView<LoginController> {
                 },
                 onEditingComplete: controller.isEmailValid,
                 onSubmitted: (text) {
-                  FocusScope.of(context)
-                      .requestFocus(controller.passwordFocusNode);
+                  FocusScope.of(context).requestFocus(controller.passwordFocusNode);
                 },
                 focusNode: controller.emailFocusNode,
               ),
@@ -112,8 +113,7 @@ class LoginPage extends GetView<LoginController> {
                     isPassword: true,
                     obscureText: controller.hidePassword.value,
                     onTapTogglePassword: () {
-                      controller.hidePassword.value =
-                          !controller.hidePassword.value;
+                      controller.hidePassword.value = !controller.hidePassword.value;
                     },
                     onSubmitted: (_) {
                       FocusScope.of(context).unfocus();
@@ -139,9 +139,7 @@ class LoginPage extends GetView<LoginController> {
               ThemeSizedBox.height24,
               SecondaryLoadingButton(
                 isLoading: controller.isButtonPending.value,
-                onPressed: controller.canProceed.value
-                    ? controller.onButtonPressed
-                    : null,
+                onPressed: controller.canProceed.value ? controller.onButtonPressed : null,
                 child: const TitleLarge(
                   "AVANTI",
                 ).applyShaders(context),

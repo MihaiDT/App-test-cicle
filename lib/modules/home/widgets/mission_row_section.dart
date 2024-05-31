@@ -36,10 +36,9 @@ class MissionRowSection extends GetView<MissionRowSectionController> {
             itemBuilder: (context, index) {
               return SizedBox(
                 width: controller.missionContainerSize,
-                child: MissionContainer(
-                  onTap: () => controller.navigateToMissionDetails(
-                    controller.missions[index],
-                  ),
+                child: MissionContainer.withBorder(
+                  borderColor: const Color(0xffd7c3e8),
+                  onTap: () => controller.navigateToMissionDetails(index),
                   mission: controller.missions[index],
                 ),
               );

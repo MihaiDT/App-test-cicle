@@ -7,8 +7,7 @@ import 'package:lines/widgets/texts/notification_overlay.dart';
 class ConfirmTutorEmailController extends GetxController {
   final String? tutorEmail = Get.arguments;
 
-  @override
-  void onReady() {
+  ConfirmTutorEmailController() {
     ever(appController.sendConfirmEmail.rxValue, (sendConfirmEmailStatus) {
       if (sendConfirmEmailStatus.isFailed) {
         FlushBar(
@@ -16,7 +15,6 @@ class ConfirmTutorEmailController extends GetxController {
         ).show(Get.context!);
       }
     });
-    super.onReady();
   }
 
   void sendEmail() async {

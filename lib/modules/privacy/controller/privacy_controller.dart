@@ -13,8 +13,7 @@ class PrivacyController extends GetxController {
   final RxBool isAcceptedAll = false.obs;
   RxBool buttonIsPending = false.obs;
 
-  @override
-  void onInit() {
+  PrivacyController() {
     ever(
       appController.user.rxValue,
       condition: () => Get.currentRoute == Routes.privacy,
@@ -30,7 +29,6 @@ class PrivacyController extends GetxController {
         }
       },
     );
-    super.onInit();
   }
 
   /// This method takes the registerParameter and pass this data to the registration method

@@ -13,10 +13,7 @@ class ReferralController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxBool canProceed = false.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-
+  ReferralController() {
     referralCodeController.addListener(() {
       if (referralCodeController.text.isNotEmpty) {
         canProceed.value = true;
@@ -86,8 +83,7 @@ class ReferralController extends GetxController {
 
   void onUseCodePressed(BuildContext context) async {
     if (referralCodeController.text.isNotEmpty) {
-      appController.updateUserParameters.referralCode =
-          referralCodeController.text;
+      appController.updateUserParameters.referralCode = referralCodeController.text;
 
       await AuthenticationService.validateInvitationCode(
         referralCodeController.text,

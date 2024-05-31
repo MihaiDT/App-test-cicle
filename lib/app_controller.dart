@@ -95,6 +95,11 @@ class AppController extends GetxController {
 
   final RxBool hasUsedDeepLink;
 
+  /// Missions
+  RxInt rxSelectedMissionIndex = RxInt(-1);
+  int get selectedMissionIndex => rxSelectedMissionIndex.value;
+  set selectedMissionIndex(int newValue) => rxSelectedMissionIndex.value = newValue;
+
   AppController._({
     required this.periodMap,
     required this.calendarData,

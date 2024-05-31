@@ -63,6 +63,8 @@ class LoadCodeWidget extends StatelessWidget {
                       ),
                       child: Image.asset(
                         ThemeImage.loadCode,
+                        fit: BoxFit.scaleDown,
+                        width: 74,
                       ),
                     ),
                     ThemeSizedBox.width16,

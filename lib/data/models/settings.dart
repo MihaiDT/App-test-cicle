@@ -8,6 +8,7 @@ class Settings {
   int? iosMinBuildNumber;
   String? iosStoreUrl;
   List<Interest> interests;
+  String? helpdeskUrl;
 
   /// Returns true if the feature "Symptoms in home" is active
   final bool symptomsInHomeActive;
@@ -21,6 +22,7 @@ class Settings {
     this.iosStoreUrl,
     required this.symptomsInHomeActive,
     this.interests = const [],
+    this.helpdeskUrl,
   });
 
   factory Settings.fromJson(Map<String, dynamic> json) {
@@ -32,9 +34,8 @@ class Settings {
       iosMinBuildNumber: json['ios_min_build_number'],
       iosStoreUrl: json['ios_store_url'],
       symptomsInHomeActive: json['show_sections']['symptoms_in_home'],
-      interests: (json['interests'] as List)
-          .map((interest) => Interest.fromJson(interest))
-          .toList(),
+      interests: (json['interests'] as List).map((interest) => Interest.fromJson(interest)).toList(),
+      helpdeskUrl: json['helpdesk_url'],
     );
   }
 
@@ -48,6 +49,7 @@ class Settings {
       iosStoreUrl: settings.iosStoreUrl,
       symptomsInHomeActive: settings.symptomsInHomeActive,
       interests: settings.interests,
+      helpdeskUrl: settings.helpdeskUrl,
     );
   }
 }

@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/modules/info/widgets/info_bottom_sheet.dart';
 
 class CodeTextFieldController extends GetxController {
   final TextEditingController codeController = TextEditingController();
   final FocusNode codeFocusNode = FocusNode();
   final RxList writtenCode = List<String>.filled(10, "").obs;
-
-  @override
-  void onReady() {
-    super.onReady();
-    openKeyboard();
-  }
 
   @override
   void dispose() {
@@ -37,5 +32,16 @@ class CodeTextFieldController extends GetxController {
         writtenCode[i] = values[i];
       }
     }
+  }
+
+  void showBottomSheet(BuildContext context, Widget child) {
+    showModalBottomSheet(
+      constraints: BoxConstraints(maxHeight: Get.height * 0.85),
+      context: context,
+      isScrollControlled: true,
+      builder: (_) => InfoBottomSheet(
+        child: child,
+      ),
+    );
   }
 }

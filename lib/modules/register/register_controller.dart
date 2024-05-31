@@ -32,14 +32,15 @@ class RegisterController extends GetxController {
     _hidePassword.value = value;
   }
 
-  @override
-  void onInit() {
+  RegisterController() {
     emailController.addListener(() {
       canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
     });
+
     passwordController.addListener(() {
       canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
     });
+
     ever(
       appController.checkEmail.rxValue,
       condition: () => Get.currentRoute == Routes.register,
@@ -55,14 +56,11 @@ class RegisterController extends GetxController {
             appController.registerParameter.password = password;
 
             AdjustManager.trackEvent(EventType.registration, {
-              "createdBy":
-                  appController.registerParameter.registrationProvider?.name ??
-                      "email",
+              "createdBy": appController.registerParameter.registrationProvider?.name ?? "email",
             });
 
             Get.offAndToNamed(Routes.nameSurname);
-          } else if (callback.content?.emailExists == true &&
-              callback.content?.emailIsActive == false) {
+          } else if (callback.content?.emailExists == true && callback.content?.emailIsActive == false) {
             _showValidateEmailDialog();
           } else {
             appController.isLoginFlow.value = true;
@@ -71,7 +69,6 @@ class RegisterController extends GetxController {
         }
       },
     );
-    super.onInit();
   }
 
   @override
@@ -127,11 +124,9 @@ class RegisterController extends GetxController {
     );
   }
 
-  String? get password =>
-      passwordController.text.isEmpty ? null : passwordController.text;
+  String? get password => passwordController.text.isEmpty ? null : passwordController.text;
 
-  String get email =>
-      appController.socialLoginParameter.email ?? emailController.text;
+  String get email => appController.socialLoginParameter.email ?? emailController.text;
 
   /// Check if the email is valid using a regex
   bool isEmailValid() {

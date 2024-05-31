@@ -6,19 +6,21 @@ import 'package:lines/routes/routes.dart';
 
 class MissionsController extends GetxController {
   int get totalCoins => appController.user.value?.coinsCollected ?? 0;
+  List<Mission> get missions => appController.missions.value ?? [];
 
   @override
   Future<void> onReady() async {
     await ProductService.mission;
+    appController.selectedMissionIndex = -1;
+
     super.onReady();
   }
 
-  List<Mission> get missions => appController.missions.value ?? [];
+  void navigateToMissionDetails(int missionIndex) {
+    appController.selectedMissionIndex = missionIndex;
 
-  void navigateToMissionDetails(Mission mission) {
     Get.toNamed(
       Routes.missionsDetailsPage,
-      arguments: mission,
     );
   }
 }

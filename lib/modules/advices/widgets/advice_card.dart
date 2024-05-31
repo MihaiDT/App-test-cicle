@@ -49,9 +49,7 @@ class AdviceCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: article.thumbImageUrl == null
-              ? ThemeColor.primary
-              : Colors.transparent,
+          color: article.thumbImageUrl == null ? ThemeColor.primary : Colors.transparent,
           image: article.thumbImageUrl?.isNotEmpty == true
               ? DecorationImage(
                   image: NetworkImage(
@@ -74,30 +72,54 @@ class AdviceCard extends StatelessWidget {
                 )
               : null,
         ),
-        padding: const EdgeInsets.only(
-          top: 8,
-          bottom: 16,
-          left: 8,
-          right: 8,
-        ),
         child: Stack(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _categoryIcon,
-                    _topCenterWidget,
-                    AdviceCardSaveButton(
-                      isSaved: article.isFavorite,
-                      onTap: onSaveTap,
-                    ),
-                  ],
+            Container(
+              clipBehavior: Clip.hardEdge,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
                 ),
-                _bottomSection(context),
-              ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Opacity(
+                    opacity: 0.7,
+                    child: Image.asset(
+                      ThemeImage.articleShadow,
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 8,
+                bottom: 16,
+                left: 8,
+                right: 8,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _categoryIcon,
+                      _topCenterWidget,
+                      AdviceCardSaveButton(
+                        isSaved: article.isFavorite,
+                        onTap: onSaveTap,
+                      ),
+                    ],
+                  ),
+                  _bottomSection(context),
+                ],
+              ),
             ),
           ],
         ),
@@ -133,10 +155,14 @@ class AdviceCard extends StatelessWidget {
           child: _newBox(context),
         ),
         ThemeSizedBox.height4,
-        TitleSmall(
-          article.title,
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: TitleSmall(
+            article.title,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.left,
+          ),
         ),
       ],
     );

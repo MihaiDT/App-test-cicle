@@ -77,7 +77,7 @@ class _FlushBarState extends State<FlushBar> with TickerProviderStateMixin {
 
     _animationController!.forward().whenCompleteOrCancel(() {
       Future.delayed(
-        const Duration(seconds: 2, milliseconds: 500),
+        const Duration(seconds: 4, milliseconds: 500),
         (() {
           if (mounted) {
             _animationController?.reverse().whenCompleteOrCancel(() {
@@ -101,11 +101,10 @@ class _FlushBarState extends State<FlushBar> with TickerProviderStateMixin {
       animation: _animationController!,
       builder: (ctx, child) {
         return Positioned(
-          top: _notificationHeight == null
-              ? _animation!.value * 400
-              : (_animation!.value * (_notificationHeight!)) + 24,
-          left: 16,
-          right: 16,
+          top:
+              _notificationHeight == null ? _animation!.value * 400 : (_animation!.value * (_notificationHeight!)) + 24,
+          left: 8,
+          right: 8,
           child: Material(
             key: _key,
             color: Colors.transparent,
@@ -113,15 +112,19 @@ class _FlushBarState extends State<FlushBar> with TickerProviderStateMixin {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
+                boxShadow: [ThemeShadow.flushShadow],
               ),
               margin: const EdgeInsets.only(
                 top: ThemeSize.paddingLarge,
-                left: ThemeSize.paddingLarge,
-                right: ThemeSize.paddingLarge,
+                left: ThemeSize.paddingMedium,
+                right: ThemeSize.paddingMedium,
               ),
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
                   child: widget.child,
                 ),
               ),

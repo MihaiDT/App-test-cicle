@@ -82,7 +82,7 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(
-              horizontal: 16,
+              horizontal: ThemeSize.paddingMedium,
             ),
             children: [
               CircleAvatar(
@@ -138,18 +138,16 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: currentSlide == entry.key
-                            ? Colors.black
-                            : _unselectedDotColor,
+                        color: currentSlide == entry.key ? Colors.black : _unselectedDotColor,
                       ),
                     );
                   },
                 ).toList(),
               ),
-              ThemeSizedBox.height40,
+              ThemeSizedBox.height32,
               LabelLarge(
-                article?.disclaimer ?? "",
-                color: _disclaimerColor,
+                "Questo contenuto è stato scritto da esperti del settore e fornisce solo informazioni di carattere generale. Per ogni dubbio, chiarimento o approfondimento consulta sempre il tuo medico.",
+                color: _disclaimerColor.withOpacity(0.5),
                 fontWeight: FontWeight.w500,
               ),
               ThemeSizedBox.height60,

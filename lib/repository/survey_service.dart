@@ -24,6 +24,23 @@ class SurveyService {
     }
   }
 
+  /// Fetch the first [Question] and the [Survey] for the change pad quiz
+  static Future<void> fetchChangePadQuiz() async {
+    try {
+      appController.question.responseHandler = ResponseHandler.pending();
+      final response = await dio.get(
+        "/surveys/game_quiz",
+      );
+
+      _saveSurvey(response);
+      _saveQuestion(response);
+    } catch (e) {
+      appController.question.responseHandler = ResponseHandler.failed();
+      appController.survey.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
   /// Fetch the next [Question] for the current [Survey]
   static Future<void> fetchNextQuestion(
     Survey survey,

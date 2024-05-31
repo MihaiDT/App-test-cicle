@@ -27,7 +27,9 @@ class HomePeriodOvulationCard extends GetView<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _label(),
+          ThemeSizedBox.height4,
           _firstTextRow(),
+          ThemeSizedBox.height4,
           _secondTextRow(),
           _thirdTextRow(),
         ],
@@ -39,20 +41,25 @@ class HomePeriodOvulationCard extends GetView<HomeController> {
     return BodyMedium(
       textRow1 ?? 'In corso',
       color: ThemeColor.darkBlue,
+      fontWeight: FontWeight.w500,
     );
   }
 
   Widget _secondTextRow() {
+    if (textRow2 == null || textRow2!.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     return DisplayLarge(
-      textRow2 != null ? " $textRow2" : ' ',
-      color: ThemeColor.darkBlue,
+      textRow2 ?? ' ',
+      color: ThemeColor.background,
     );
   }
 
   Widget _thirdTextRow() {
     return LabelSmall(
-      textRow2 ?? 'GIORNO',
-      color: ThemeColor.darkBlue,
+      (textRow3 ?? 'GIORNO').toUpperCase(),
+      color: ThemeColor.background,
     );
   }
 
@@ -68,7 +75,10 @@ class HomePeriodOvulationCard extends GetView<HomeController> {
         right: 6,
         top: 2,
       ),
-      child: const LabelLarge("OVULAZIONE"),
+      child: const TitleMedium(
+        "OVULAZIONE",
+        color: Colors.white,
+      ),
     );
   }
 }

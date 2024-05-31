@@ -36,6 +36,8 @@ import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
 import 'package:lines/modules/drawer/pages/account_page.dart';
 import 'package:lines/modules/drawer/pages/change_password_page.dart';
 import 'package:lines/modules/drawer/pages/faq_page.dart';
+import 'package:lines/modules/game_quiz/game_quiz_binding.dart';
+import 'package:lines/modules/game_quiz/game_quiz_page.dart';
 import 'package:lines/modules/history/history_binding.dart';
 import 'package:lines/modules/history/history_page.dart';
 import 'package:lines/modules/home/bindings/mission_row_section_binding.dart';
@@ -60,6 +62,8 @@ import 'package:lines/modules/login/login_binding.dart';
 import 'package:lines/modules/login/login_page.dart';
 import 'package:lines/modules/main/main_binding.dart';
 import 'package:lines/modules/main/main_page.dart';
+import 'package:lines/modules/mission_completed/mission_completed_binding.dart';
+import 'package:lines/modules/mission_completed/mission_completed_page.dart';
 import 'package:lines/modules/missions/bindings/missions_binding.dart';
 import 'package:lines/modules/missions/bindings/missions_details_binding.dart';
 import 'package:lines/modules/missions/missions_details_page.dart';
@@ -268,6 +272,18 @@ class Pages {
         const WelcomeQuizPage(),
       ),
       transition: Transition.rightToLeft,
+    ),
+
+    /// GameQuizPage
+    GetPage(
+      name: Routes.gameQuiz,
+      bindings: [
+        GameQuizBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        const GameQuizPage(),
+      ),
+      transition: Transition.downToUp,
     ),
 
     /// ReferralPage
@@ -507,6 +523,16 @@ class Pages {
       transition: Transition.rightToLeft,
     ),
 
+    /// Mission completed
+    GetPage(
+      name: Routes.missionCompleted,
+      binding: MissionCompletedBinding(),
+      page: () => _mediaQueryWrapper(
+        const MissionCompletedPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
     /// MissionsPage
     GetPage(
       name: Routes.yourCoinsPage,
@@ -600,9 +626,15 @@ class Pages {
     /// TamagochiWebView
     GetPage(
       name: Routes.tamagochiWebView,
-      page: () => _mediaQueryWrapper(
-        const TamagochiWebView(),
-      ),
+      page: () {
+        final String sessionToken = Get.arguments['sessionToken'];
+
+        return _mediaQueryWrapper(
+          TamagochiWebView(
+            sessionToken: sessionToken,
+          ),
+        );
+      },
       transition: Transition.rightToLeft,
     ),
 

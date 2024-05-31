@@ -28,28 +28,25 @@ class _ExpandableState extends State<Expandable> {
         borderRadius: BorderRadius.circular(20),
       ),
       width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 14,
-          horizontal: 16,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            LayoutBuilder(
-              builder: (context, constrains) {
-                return InkWell(
-                  onTap: () {
-                    setState(() {
-                      _isExpanded = !_isExpanded;
-                    });
-                  },
-                  child: Row(
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            _isExpanded = !_isExpanded;
+          });
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              LayoutBuilder(
+                builder: (context, constrains) {
+                  return Row(
                     children: [
                       ConstrainedBox(
                         constraints: BoxConstraints(
-                          maxWidth: constrains.maxWidth * 0.6,
+                          maxWidth: constrains.maxWidth * 0.9,
                         ),
                         child: HeadlineSmall(
                           widget.title,
@@ -69,22 +66,22 @@ class _ExpandableState extends State<Expandable> {
                         ),
                       ),
                     ],
-                  ),
-                );
-              },
-            ),
-            if (widget.child != null)
-              AnimatedSize(
-                duration: const Duration(
-                  milliseconds: 300,
-                ),
-                curve: Curves.easeInOut,
-                child: Visibility(
-                  visible: _isExpanded,
-                  child: widget.child!,
-                ),
+                  );
+                },
               ),
-          ],
+              if (widget.child != null)
+                AnimatedSize(
+                  duration: const Duration(
+                    milliseconds: 300,
+                  ),
+                  curve: Curves.easeInOut,
+                  child: Visibility(
+                    visible: _isExpanded,
+                    child: widget.child!,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

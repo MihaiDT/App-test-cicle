@@ -10,5 +10,8 @@ class StagingEnv extends Environment {
   bool get enableProxyman => false;
 
   @override
+  String get gameEndpoint => 'https://tinybullstudios.com/Lines/Tamagotchi';
+
+  @override
   String get proxy => '192.168.2.61';
 }

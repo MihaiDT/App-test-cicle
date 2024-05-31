@@ -13,7 +13,7 @@ class InfoHowToGetCoinsBottomSheet extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: ThemeSize.paddingSmall),
       child: Column(
         children: [
-          ThemeSizedBox.height32,
+          ThemeSizedBox.height8,
           const DisplayMedium(
             "Come si ottengono i\nCoins?",
             textAlign: TextAlign.center,
@@ -28,18 +28,16 @@ class InfoHowToGetCoinsBottomSheet extends StatelessWidget {
           ThemeSizedBox.height16,
           InfoCard(
             title: "Questionari",
-            description:
-                "Raccontaci di più su di te e rispondi alle domande dei questionari.",
+            description: "Raccontaci di più su di te e rispondi alle domande dei questionari.",
             imagePath: ThemeImage.quizIntroImage,
           ),
           ThemeSizedBox.height16,
           InfoCard(
             title: "Invita un amico",
-            description:
-                "Invita un'amica a iscriversi a My Lines e sarai ricompensata!",
+            description: "Invita un'amica a iscriversi a My Lines e sarai ricompensata!",
             imagePath: ThemeImage.inviteAFriend,
           ),
-          ThemeSizedBox.height24,
+          ThemeSizedBox.height32
         ],
       ),
     );

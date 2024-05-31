@@ -85,9 +85,12 @@ class PrizesPage extends GetView<PrizesController> {
                       "Missioni in corso",
                     ).applyShaders(context),
                     ThemeSizedBox.width8,
-                    TitleLarge(
-                      "(${controller.numberOfMissions})",
-                      color: ThemeColor.darkBlue,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 2.5),
+                      child: TitleLarge(
+                        "(${controller.numberOfMissions})",
+                        color: ThemeColor.darkBlue,
+                      ),
                     ),
                   ],
                 ),
@@ -104,9 +107,7 @@ class PrizesPage extends GetView<PrizesController> {
                     return SizedBox(
                       width: _missionContainerSize,
                       child: MissionContainer(
-                        onTap: () => controller.navigateToMissionDetails(
-                          controller.missions[index],
-                        ),
+                        onTap: () => controller.navigateToMissionDetails(index),
                         mission: controller.missions[index],
                       ),
                     );
@@ -172,8 +173,7 @@ class PrizesPage extends GetView<PrizesController> {
                   ),
                   backgroundColor: Colors.white,
                   coinAmount: 50,
-                  description:
-                      "Ottieni 50 Coins per ogni amico che si registra all’app My Lines",
+                  description: "Ottieni 50 Coins per ogni amico che si registra all’app My Lines",
                   title: "Invita un amico",
                   iconPath: ThemeImage.inviteAFriend,
                 ),

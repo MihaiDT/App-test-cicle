@@ -2,13 +2,20 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:get/get.dart';
+import 'package:lines/core/helpers/api.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class TamagochiWebView extends StatefulWidget {
-  const TamagochiWebView({
+  final String sessionToken;
+
+  TamagochiWebView({
     super.key,
+    required this.sessionToken,
   });
 
   @override
@@ -45,31 +52,42 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
         canPop: false,
         child: InAppWebView(
           shouldOverrideUrlLoading: (controller, navigationAction) async {
-            const String loadingPageUrl =
-                "https://tinybullstudios.com/Lines/Tamagotchi/index.html";
+            final String loadingPageUrl = "${environment.gameEndpoint}/index.html";
 
-            const String firstPageUrl =
-                "https://tinybullstudios.com/Lines/Tamagotchi/HomePage";
+            final String firstPageUrl = "${environment.gameEndpoint}/HomePage";
+
             final uri = navigationAction.request.url;
-            final isFirstUrl =
-                uri != null && uri.toString().startsWith(loadingPageUrl);
+
+            final isFirstUrl = uri != null && uri.toString().startsWith(loadingPageUrl);
 
             // If the first page is loaded, allow the navigation
             if (uri != null && isFirstUrl) {
               isFirstPage = false;
               return NavigationActionPolicy.ALLOW;
             }
-            // Set the first page to true if the first page is loaded in order to permit the back navigation
-            if (uri != null && uri.toString().startsWith(firstPageUrl)) {
-              isFirstPage = true;
+
+            if (uri != null && uri.toString().contains('/pad_change')) {
+              // Vado al questionario di cambio assorbente
+              Get.toNamed(Routes.gameQuiz);
+              
+              // Cambio assorbente
+              webViewController?.evaluateJavascript(
+                source: "dispatchResetPadEvent()",
+              );
             } else {
-              isFirstPage = false;
+              // Set the first page to true if the first page is loaded in order to permit the back navigation
+              if (uri != null && uri.toString().startsWith(firstPageUrl)) {
+                isFirstPage = true;
+              } else {
+                isFirstPage = false;
+              }
             }
+
             return NavigationActionPolicy.CANCEL;
           },
           initialUrlRequest: URLRequest(
             url: WebUri(
-              "https://tinybullstudios.com/Lines/Tamagotchi/index.html?token=${HiveManager.userId}&user_id=${SecureStorageManager().getToken()}",
+              "${environment.gameEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}",
             ),
           ),
           onWebViewCreated: (controller) {
@@ -79,7 +97,10 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
             UserScript(
               source: "function dispatchBackEvent() {"
                   "document.dispatchEvent(new Event('back'));"
-                  "}",
+                  "};"
+                  "function dispatchResetPadEvent() {"
+                  "document.dispatchEvent(new Event('reset_pad'));"
+                  "};",
               injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
             ),
           ]),

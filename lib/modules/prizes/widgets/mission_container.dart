@@ -100,18 +100,27 @@ class MissionContainer extends StatelessWidget {
                             padding: const EdgeInsets.only(
                               top: 8,
                             ),
-                            child: Row(
-                              children: [
-                                const HeadlineSmall(
-                                  "Scopri come:",
-                                  color: ThemeColor.darkBlue,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
-                                ),
-                                const HeadlineSmall(
-                                  "Regolamento",
-                                ).applyShaders(Get.context!),
-                              ],
+                            child: InkWell(
+                              onTap: () async {
+                                await launchUrl(
+                                  Uri.parse(mission.regolamento ?? ''),
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  const HeadlineSmall(
+                                    "Scopri come: ",
+                                    color: ThemeColor.darkBlue,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                  ),
+                                  const HeadlineSmall(
+                                    "REGOLAMENTO",
+                                    underline: true,
+                                  ).applyShaders(Get.context!),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -126,7 +135,8 @@ class MissionContainer extends StatelessWidget {
             child: Align(
               alignment: Alignment.topRight,
               child: MissionProgressIndicator(
-                loadedProducts: mission.totalCounter,
+                loadedCodes: mission.loadedProducts.length,
+                totalCodes: mission.totalCounter,
               ),
             ),
           ),

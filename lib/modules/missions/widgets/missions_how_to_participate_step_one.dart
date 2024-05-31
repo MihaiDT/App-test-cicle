@@ -30,10 +30,14 @@ class MissionsHowToParticipateStepOne extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ThemeSizedBox.height20,
-          const MissionsHowToParticipateHeader(
-            stepNumber: 1,
-            description:
-                "Acquista 3 prodotti Lines, di cui almeno uno per la notte.",
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+            ),
+            child: MissionsHowToParticipateHeader(
+              stepNumber: 1,
+              description: mission.description,
+            ),
           ),
           ThemeSizedBox.height24,
           const TitleMedium(

@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 
 class InfoWhatAreCoinsBottomSheet extends StatelessWidget {
+  final Color? color;
   const InfoWhatAreCoinsBottomSheet({
     super.key,
+    this.color,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color ?? Colors.white,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Padding(
@@ -19,7 +21,7 @@ class InfoWhatAreCoinsBottomSheet extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ThemeSizedBox.height32,
+            ThemeSizedBox.height8,
             const DisplayMedium(
               "Cosa sono i Coins?",
               textAlign: TextAlign.center,
@@ -34,7 +36,7 @@ class InfoWhatAreCoinsBottomSheet extends StatelessWidget {
               ThemeImage.bigCoin,
               width: 230,
             ),
-            ThemeSizedBox.height32,
+            ThemeSizedBox.height48,
           ],
         ),
       ),

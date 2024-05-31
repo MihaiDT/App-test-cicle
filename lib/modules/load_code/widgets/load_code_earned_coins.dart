@@ -39,7 +39,7 @@ class LoadCodeEarnedCoins extends StatelessWidget {
                 child: imageUrl?.isNotEmpty == true
                     ? Image.network(
                         imageUrl!,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.scaleDown,
                       )
                     : const Placeholder(),
               ),

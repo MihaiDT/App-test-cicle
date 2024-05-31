@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,10 +12,7 @@ class WrapperAccessController extends GetxController {
   RxBool rxAppNeedsUpdate = false.obs;
   RxBool lockApp = false.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-
+  WrapperAccessController() {
     ever(
       rxAppNeedsUpdate,
       (appNeedsUpdate) {
@@ -45,29 +44,34 @@ class WrapperAccessController extends GetxController {
     if (appController.settings.value?.androidMinBuildNumber == null) {
       rxAppNeedsUpdate.value = false;
     } else {
-      rxAppNeedsUpdate.value = int.parse(packageInfo.buildNumber) <
-          appController.settings.value!.androidMinBuildNumber!;
+      rxAppNeedsUpdate.value =
+          int.parse(packageInfo.buildNumber) < appController.settings.value!.androidMinBuildNumber!;
     }
   }
 
   Future<void> checkInternetConnection() async {
     final connectivityResult = await (Connectivity().checkConnectivity());
-    final ConnectivityResult? hasNotConnection =
-        connectivityResult.firstWhereOrNull(
+    final ConnectivityResult? hasNotConnection = connectivityResult.firstWhereOrNull(
       (element) => element == ConnectivityResult.none,
     );
     if (hasNotConnection != null) {
       lockApp.value = true;
 
-      Overlay.of(Get.context!).insert(
-        OverlayEntry(
-          builder: (_) {
-            return const NoInternetConnectionDialog();
-          },
-          maintainState: false,
-          opaque: false,
-        ),
+      final overlayEntry = OverlayEntry(
+        builder: (_) {
+          return const NoInternetConnectionDialog();
+        },
+        maintainState: false,
+        opaque: false,
       );
+
+      Overlay.of(Get.context!).insert(overlayEntry);
+
+      // Rimuove l'OverlayEntry dopo 4 secondi
+      Timer(const Duration(seconds: 4), () {
+        overlayEntry.remove();
+        lockApp.value = false;
+      });
     }
   }
 }

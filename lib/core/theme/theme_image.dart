@@ -5,15 +5,13 @@ class ThemeImage {
   static String bgDark = '$folderPath/bg_dark.webp';
   static String bgLight = '$folderPath/bg_light.webp';
   static String bgLightLarge = '$folderPath/bg_light_large.webp';
-  static String bgMainBottomNavigationBar =
-      '$folderPath/bg_main_bottom_navigation_bar.webp';
+  static String bgMainBottomNavigationBar = '$folderPath/bg_main_bottom_navigation_bar.webp';
 
   static String facebook = '$folderPath/facebook.webp';
 
   static String google = '$folderPath/google.webp';
   static String bgWalkthrough = '$folderPath/bg_walkthrough.png';
-  static String homeAvatarContainerBg =
-      '$folderPath/home_avatar_container_bg.webp';
+  static String homeAvatarContainerBg = '$folderPath/home_avatar_container_bg.webp';
   static String mockAvatar = '$folderPath/mock_avatar.webp';
   static String walkthrough1 = '$folderPath/walkthrough_1.webp';
   static String walkthrough2 = '$folderPath/walkthrough_2.webp';
@@ -24,8 +22,7 @@ class ThemeImage {
   static String quizBackgroundQuestionmark = '$folderPath/bg_quiz.webp';
   static String quizIntroImage = '$folderPath/quiz_intro_image.webp';
   static String bgCalendar = '$folderPath/bg_calendar.webp';
-  static String bgCalendarBottomSheet =
-      '$folderPath/bg_calendar_bottom_sheet.webp';
+  static String bgCalendarBottomSheet = '$folderPath/bg_calendar_bottom_sheet.webp';
   static String talkingDroppy = '$folderPath/talking_droppy.webp';
   static String friendship = '$folderPath/friendship.webp';
   static String moneyPile = '$folderPath/money_pile.webp';
@@ -46,4 +43,7 @@ class ThemeImage {
   static String luckyLines = '$folderPath/lucky_lines.webp';
   static String bigCoin = '$folderPath/big_coin.webp';
   static String coinsColumns = '$folderPath/coins_columns.webp';
+
+  static String articleShadow = '$folderPath/article_shadow.png';
+  static String podium = '$folderPath/podium.webp';
 }

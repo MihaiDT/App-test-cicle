@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/home/home_controller.dart';
@@ -38,10 +39,38 @@ class HomePage extends GetView<HomeController> {
                 () => appController.currentPeriod.responseHandler.isPending
                     ? const HomeCircularPeriodCalendarShimmer()
                     : GestureDetector(
-                        onTap: () {
-                          Get.toNamed(Routes.tamagochiWebView);
+                        onTap: () async {
+                          final sessionToken = await SecureStorageManager().getToken();
+                          Get.toNamed(
+                            Routes.tamagochiWebView,
+                            arguments: {
+                              'sessionToken': sessionToken,
+                            },
+                          );
                         },
-                        child: const HomeCircularPeriodCalendar(),
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white, // Colore del bordo
+                                    width: 3, // Larghezza del bordo
+                                  ),
+                                  borderRadius: BorderRadius.circular(24.0),
+                                  color: Colors.transparent,
+                                ),
+                                height: 25,
+                                width: 25,
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 4.5),
+                              child: HomeCircularPeriodCalendar(),
+                            ),
+                          ],
+                        ),
                       ),
               ),
               ThemeSizedBox.height32,
@@ -88,8 +117,7 @@ class HomePage extends GetView<HomeController> {
                       SizedBox(
                         height: 220,
                         child: AdvicesCardsRow(
-                          onCardTapped: (article, category) =>
-                              controller.showArticleDetails(article, category),
+                          onCardTapped: (article, category) => controller.showArticleDetails(article, category),
                           withBorder: true,
                           articles: controller.allSuggestedArticles,
                         ),

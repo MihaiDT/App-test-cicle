@@ -14,7 +14,7 @@ class InfoTheCodeIsIllegibleBottomSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ThemeSizedBox.height32,
+          ThemeSizedBox.height8,
           const DisplayMedium(
             "Il codice sulla confezione è illeggibile",
             textAlign: TextAlign.center,
@@ -25,7 +25,7 @@ class InfoTheCodeIsIllegibleBottomSheet extends StatelessWidget {
             color: ThemeColor.darkBlue,
             textAlign: TextAlign.center,
           ),
-          ThemeSizedBox.height32,
+          ThemeSizedBox.height48,
         ],
       ),
     );

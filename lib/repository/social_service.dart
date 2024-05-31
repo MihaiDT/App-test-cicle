@@ -52,19 +52,17 @@ class SocialService {
     GoogleSignIn googleSignIn = Platform.isIOS
         ? GoogleSignIn(
             scopes: ['email'],
-            clientId:
-                '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
+            clientId: '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
           )
         : GoogleSignIn(scopes: ['email']);
 
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
     if (googleSignIn.currentUser != null) {
       final auth = await googleSignInAccount?.authentication;
 
       await _validateEmail(
         googleSignIn.currentUser!.email,
-        auth!.accessToken!,
+        auth!.idToken!,
         RegistrationProvider.google,
       );
     }
@@ -81,8 +79,7 @@ class SocialService {
     LoginResult loginResult = await FacebookAuth.instance.login();
 
     if (loginResult.status == LoginStatus.success) {
-      final userData = await FacebookAuth.instance
-          .getUserData(fields: "first_name, last_name, email");
+      final userData = await FacebookAuth.instance.getUserData(fields: "first_name, last_name, email");
 
       _validateEmail(
         userData['email'],
@@ -111,8 +108,8 @@ class SocialService {
     RegistrationProvider registrationProvider,
   ) {
     appController.socialLoginParameter.email = email;
-    appController.socialLoginParameter.registrationProvider =
-        registrationProvider;
+    appController.socialLoginParameter.registrationProvider = registrationProvider;
+    appController.socialLoginParameter.token = socialToken;
   }
 
   static Future<void> _saveUserData(

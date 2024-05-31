@@ -43,19 +43,25 @@ class _CodeTextfieldState extends State<CodeTextfield> {
           );
         }),
         ThemeSizedBox.height8,
-        const TitleMedium(
-          "HAI BISOGNO DI AIUTO?",
-          underline: true,
-        ).applyShaders(context),
+        InkWell(
+          onTap: () => {},
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: const TitleMedium(
+              "HAI BISOGNO DI AIUTO?",
+              underline: true,
+            ).applyShaders(context),
+          ),
+        ),
         Visibility.maintain(
           visible: false,
           child: IgnorePointer(
             child: TextField(
-              autofocus: true,
+              autofocus: false,
               maxLength: 10,
               controller: controller.codeController,
               focusNode: controller.codeFocusNode,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
               onChanged: (text) {
                 controller.updateWrittenCode(text);
                 widget.onChanged(text);

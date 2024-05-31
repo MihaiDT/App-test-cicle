@@ -18,7 +18,7 @@ class AccountPage extends GetView<AccountPageController> {
     return Scaffold(
       appBar: const TransparentAppBar(
         title: TitleSmall(
-          "ASSISTENZA",
+          "ACCOUNT",
           color: ThemeColor.primary,
         ),
         backButtonColor: ThemeColor.darkBlue,
@@ -28,6 +28,7 @@ class AccountPage extends GetView<AccountPageController> {
           horizontal: ThemeSize.paddingSmall,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const DisplayMedium(
               "Il tuo account My Lines",
@@ -83,6 +84,7 @@ class AccountPage extends GetView<AccountPageController> {
               ),
               const Divider(),
             ],
+            ThemeSizedBox.height32,
             Align(
               alignment: Alignment.centerLeft,
               child: IntrinsicWidth(
@@ -93,11 +95,12 @@ class AccountPage extends GetView<AccountPageController> {
                   },
                   child: const TitleLarge(
                     "LOG OUT",
+                    letterSpacing: 0,
                   ),
                 ),
               ),
             ),
-            ThemeSizedBox.height24,
+            ThemeSizedBox.height48,
             const RemoveAccountSection(),
           ],
         ),

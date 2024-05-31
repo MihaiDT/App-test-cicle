@@ -1,43 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/widgets/blurred_filter.dart';
 
 class MissionProgressIndicator extends StatelessWidget {
-  final int loadedProducts;
+  final int loadedCodes;
+  final int totalCodes;
 
   const MissionProgressIndicator({
     super.key,
-    required this.loadedProducts,
+    required this.loadedCodes,
+    required this.totalCodes,
   });
 
-  static const Color _inProgressBgColor = Color(0x1e2d4f33);
-  static const int _totalCodes = 3;
+  static final _inProgressBgColor = ThemeColor.darkBlue.withOpacity(0.2);
+  static const _completedProgressBgColor = Color(0xff70B873);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 4,
-        horizontal: 8,
-      ),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(90),
+    return BlurredFilter(
+      borderRadiusDegrees: 90,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 4,
+          horizontal: 10,
         ),
-        color: _inProgressBgColor,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(90),
+          ),
+          color: loadedCodes == totalCodes ? _completedProgressBgColor : _inProgressBgColor,
+        ),
+        child: _text,
       ),
-      child: _text,
     );
   }
 
   Widget get _text {
-    if (loadedProducts == 0) {
-      return const BodyMedium(
-        "Inizia",
+    if (loadedCodes == 0) {
+      return const BodySmall(
+        'Inizia',
+        color: Colors.white,
       );
     }
-    if (loadedProducts == _totalCodes) {
-      return BodyMedium("Richiedi premio $loadedProducts/$_totalCodes");
+    if (loadedCodes == totalCodes) {
+      return const BodySmall(
+        "Conclusa",
+        color: Colors.white,
+      );
     }
-    return BodyMedium("In corso $loadedProducts/$_totalCodes");
+    return BodySmall(
+      "In corso $loadedCodes/$totalCodes",
+      color: Colors.white,
+    );
   }
 }

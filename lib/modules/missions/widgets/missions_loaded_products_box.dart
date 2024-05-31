@@ -13,7 +13,7 @@ class MissionsLoadedProductsBox extends StatelessWidget {
   });
 
   static const Color _bgColor = Color(0xffe5e1ef);
-  double get _dimension => Get.width * 0.2;
+  double get _dimension => 90;
   static const double _strokeWidth = 3.0;
 
   @override
@@ -21,7 +21,7 @@ class MissionsLoadedProductsBox extends StatelessWidget {
     if (product != null) {
       return MissionsProduct(
         product: product!,
-        dimension: _dimension + _strokeWidth * 2,
+        dimension: _dimension,
         backGroundColor: _bgColor,
       );
     } else {

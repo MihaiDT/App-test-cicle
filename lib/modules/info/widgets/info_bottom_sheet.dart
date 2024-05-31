@@ -4,8 +4,7 @@ import 'package:lines/core/app_theme.dart';
 class InfoBottomSheet extends StatelessWidget {
   final Widget? child;
 
-  DraggableScrollableController get draggableScrollableController =>
-      DraggableScrollableController();
+  DraggableScrollableController get draggableScrollableController => DraggableScrollableController();
 
   const InfoBottomSheet({
     this.child,
@@ -26,7 +25,7 @@ class InfoBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: Container(
               height: 4,
               width: 64,

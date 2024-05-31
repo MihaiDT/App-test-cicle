@@ -8,10 +8,11 @@ class MissionRowSectionController extends GetxController {
 
   double get missionContainerSize => Get.height * 0.3;
 
-  void navigateToMissionDetails(Mission mission) {
+  void navigateToMissionDetails(int missionIndex) {
+    appController.selectedMissionIndex = missionIndex;
+
     Get.toNamed(
       Routes.missionsDetailsPage,
-      arguments: mission,
     );
   }
 }

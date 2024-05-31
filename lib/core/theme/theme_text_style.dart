@@ -76,6 +76,7 @@ class NewThemeTextStyle {
     fontSize: 14,
     fontWeight: weightBold,
     height: 1.2,
+    letterSpacing: 2.0,
   );
 
   static const titleMedium = TextStyle(
@@ -122,8 +123,7 @@ class NewThemeTextStyle {
     height: 1.4,
   );
 
-  static TextStyle horizontalCalendarWDayToday =
-      horizontalCalendarWDay.copyWith(
+  static TextStyle horizontalCalendarWDayToday = horizontalCalendarWDay.copyWith(
     fontWeight: weightExtraBold,
   );
 
@@ -134,8 +134,7 @@ class NewThemeTextStyle {
     height: 1.4,
   );
 
-  static TextStyle horizontalCalendarDateToday =
-      horizontalCalendarDate.copyWith(
+  static TextStyle horizontalCalendarDateToday = horizontalCalendarDate.copyWith(
     fontSize: 20,
     fontWeight: weightExtraBold,
   );

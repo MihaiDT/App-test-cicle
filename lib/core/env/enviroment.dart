@@ -4,4 +4,6 @@ abstract class Environment {
   bool get enableProxyman;
 
   String get proxy;
+
+  String get gameEndpoint;
 }

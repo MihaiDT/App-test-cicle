@@ -129,12 +129,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   RxString notesInitialValue = ''.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-
-    initMonthCalendar();
-
+  CalendarController() {
     ever(
       rxSelectedDate,
       condition: () => Get.currentRoute == Routes.calendar,
@@ -168,6 +163,15 @@ class CalendarController extends GetxController with MonthCalendarMixin {
         }
       },
     );
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    initMonthCalendar();
+
+   
 
     _initCalendarYearController();
   }

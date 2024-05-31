@@ -36,12 +36,17 @@ class MissionsProduct extends StatelessWidget {
           Visibility.maintain(
             visible: product.isNight,
             child: Container(
-              padding: const EdgeInsets.all(2),
               decoration: const BoxDecoration(
                 color: ThemeColor.primary,
                 borderRadius: BorderRadius.all(
                   Radius.circular(4),
                 ),
+              ),
+              padding: const EdgeInsets.only(
+                top: 1,
+                left: 3,
+                right: 3,
+                bottom: 2,
               ),
               child: const LabelLarge(
                 "NOTTE",
@@ -62,10 +67,16 @@ class MissionsProduct extends StatelessWidget {
                   : const Placeholder(),
             ),
           ),
-          LabelMedium(
-            product.name,
-            color: ThemeColor.darkBlue,
-            overflow: TextOverflow.ellipsis,
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 4,
+              vertical: 4,
+            ),
+            child: LabelMedium(
+              product.name,
+              color: ThemeColor.darkBlue,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           ThemeSizedBox.height4,
         ],

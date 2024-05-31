@@ -8,15 +8,20 @@ class SocialLoginParameter {
   /// The email of the user
   String? email;
 
+  /// The social token
+  String? token;
+
   SocialLoginParameter({
     required this.registrationProvider,
     required this.email,
+    required this.token,
   });
 
   factory SocialLoginParameter.fromJson(Map<String, dynamic> json) {
     return SocialLoginParameter(
       registrationProvider: json['provider'],
       email: json['email'],
+      token: json['token'],
     );
   }
 
@@ -24,6 +29,7 @@ class SocialLoginParameter {
     return {
       "provider": registrationProvider?.name,
       "email": email,
+      "token": token,
     };
   }
 
@@ -31,6 +37,7 @@ class SocialLoginParameter {
     return SocialLoginParameter(
       registrationProvider: null,
       email: null,
+      token: null,
     );
   }
 }

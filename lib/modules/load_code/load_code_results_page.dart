@@ -35,6 +35,7 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
         bottomWidget: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: ThemeSize.paddingLarge,
+            vertical: ThemeSize.paddingSmall,
           ),
           child: PrimaryButton(
             onPressed: () {
@@ -42,6 +43,7 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
             },
             child: const TitleLarge(
               "CHIUDI",
+              letterSpacing: 2.0,
             ),
           ),
         ),

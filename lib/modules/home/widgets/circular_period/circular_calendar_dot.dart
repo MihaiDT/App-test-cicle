@@ -15,14 +15,13 @@ class CircularCalendarDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     EdgeInsets padding = const EdgeInsets.all(5);
-    double size = 4;
+    double size = 5;
 
     if (index == 0) {
       padding = const EdgeInsets.all(1);
       size = 14;
-    } else if (periodDate.periodPhase == PeriodPhase.menstruation ||
-        periodDate.isOvulationDay) {
-      padding = const EdgeInsets.all(2);
+    } else if (periodDate.periodPhase == PeriodPhase.menstruation || periodDate.isOvulationDay) {
+      padding = const EdgeInsets.all(3);
       size = 10;
     }
 
