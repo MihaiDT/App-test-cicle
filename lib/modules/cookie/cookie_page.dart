@@ -19,6 +19,7 @@ class CookiePage extends StatelessWidget {
     return AppScaffoldPage(
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(
+        showBackButton: false,
         actions: [
           IconButton(
             onPressed: () {
@@ -52,15 +53,15 @@ class CookiePage extends StatelessWidget {
                     "ACCONSENTO",
                   ).applyShaders(context),
                 ),
-                ThemeSizedBox.height16,
-                GestureDetector(
-                  onTap: () => _onKnowMoreAboutCookies(),
-                  child: const TitleMedium(
-                    "PIÙ OPZIONI",
-                    underline: true,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                // ThemeSizedBox.height16,
+                // GestureDetector(
+                //   onTap: () => _onKnowMoreAboutCookies(),
+                //   child: const TitleMedium(
+                //     "PIÙ OPZIONI",
+                //     underline: true,
+                //     textAlign: TextAlign.center,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -81,6 +82,7 @@ class CookiePage extends StatelessWidget {
                 " per offrirti contenuti, servizi e pubblicità interessanti per te sulla base delle tue attività.",
                 textAlign: TextAlign.center,
               ),
+              ThemeSizedBox.height16,
               GestureDetector(
                 onTap: () => _onKnowMoreAboutCookies(),
                 child: const BodyMedium(
@@ -89,10 +91,13 @@ class CookiePage extends StatelessWidget {
                   underline: true,
                 ),
               ),
+              ThemeSizedBox.height16,
               const BodyMedium(
-                "Clicca \"acconsento\" per accettare, clicca \"più opzioni\""
-                " per accettare selettivamente tutti o alcuni cookie/fingerprinting."
-                " Clicca sulla X per chiudere senza prestare consenso.",
+                "Clicca \"acconsento\" per accettare."
+                "Clicca sulla X per chiudere senza prestare consenso.",
+                // "Clicca \"acconsento\" per accettare, clicca \"più opzioni\""
+                // " per accettare selettivamente tutti o alcuni cookie/fingerprinting."
+                // " Clicca sulla X per chiudere senza prestare consenso.",
                 textAlign: TextAlign.center,
               ),
             ],
@@ -102,7 +107,9 @@ class CookiePage extends StatelessWidget {
     );
   }
 
-  void _onKnowMoreAboutCookies() {}
+  void _onKnowMoreAboutCookies() {
+    Get.toNamed(Routes.cookiesFingerprinting);
+  }
 
   void navigateToNextPage() {
     HiveManager.hasAcceptedCookie = true;

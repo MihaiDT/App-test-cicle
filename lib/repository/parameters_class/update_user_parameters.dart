@@ -11,10 +11,12 @@ class UpdateUserParameters {
   int? periodDuration;
   bool? privacyProfiling;
   bool? privacyMarketingEmail;
+  bool? privacyBrandMarketing;
   String? referralCode;
   String? zipCode;
   bool? hasConsentCookie;
   bool? calendarConsent;
+  bool? diaryConsent;
 
   UpdateUserParameters({
     this.birthdate,
@@ -29,10 +31,12 @@ class UpdateUserParameters {
     this.periodDuration,
     this.privacyProfiling,
     this.privacyMarketingEmail,
+    this.privacyBrandMarketing,
     this.referralCode,
     this.zipCode,
     this.hasConsentCookie,
     this.calendarConsent,
+    this.diaryConsent,
   });
 
   String? get formattedLastMenstruationDateStart {
@@ -70,10 +74,12 @@ class UpdateUserParameters {
       "period_duration": periodDuration,
       "privacy_profiling": privacyProfiling,
       "privacy_marketing_email": privacyMarketingEmail,
+      "privacy_brand_marketing": privacyBrandMarketing,
       "invitation_code": referralCode,
       "zip_code": zipCode,
       "cookie_consent": hasConsentCookie,
       "calendar_consent": calendarConsent,
+      "diary_consent": diaryConsent,
     };
   }
 }

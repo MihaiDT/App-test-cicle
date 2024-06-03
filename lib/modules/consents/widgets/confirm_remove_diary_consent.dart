@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 
-class ConfirmReferralDialog extends StatelessWidget {
-  const ConfirmReferralDialog({
+class ConfirmRemoveDiaryConsentDialog extends StatelessWidget {
+  const ConfirmRemoveDiaryConsentDialog({
     super.key,
   });
 
@@ -32,7 +32,8 @@ class ConfirmReferralDialog extends StatelessWidget {
             ).applyShaders(context),
             ThemeSizedBox.height16,
             const BodyLarge(
-              "Non potrai inserire il codice amico in un secondo momento.",
+              "Questa azione comporterà la perdita irreversibile di tutto lo storico del tuo Diario Personale salvato nella nostra app.",
+              
               color: ThemeColor.darkBlue,
               textAlign: TextAlign.center,
             ),
@@ -71,7 +72,7 @@ class ConfirmReferralDialog extends StatelessWidget {
                         horizontal: 22,
                       ),
                       child: TitleLarge(
-                        "AVANTI",
+                        "CONTINUA",
                       ),
                     ),
                   ),

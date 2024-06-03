@@ -6,4 +6,6 @@ abstract class Environment {
   String get proxy;
 
   String get gameEndpoint;
+
+  String get cherryCustomizationEndpoint;
 }

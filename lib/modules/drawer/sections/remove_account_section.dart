@@ -4,8 +4,11 @@ import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RemoveAccountSection extends StatelessWidget {
+  final String? prefixText;
+
   const RemoveAccountSection({
     super.key,
+    this.prefixText,
   });
 
   @override
@@ -25,6 +28,11 @@ class RemoveAccountSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            if (prefixText != null)
+              BodyMedium(
+                prefixText!,
+                color: ThemeColor.darkBlue,
+              ),
             const BodyMedium(
               "Per cancellare l'account accedi al ",
               color: ThemeColor.darkBlue,
@@ -42,8 +50,7 @@ class RemoveAccountSection extends StatelessWidget {
               child: PrimaryButton(
                 buttonSize: ButtonSize.h31,
                 onPressed: () async {
-                  final Uri url =
-                      Uri.parse('https://www.fatergroup.com/it/privacy');
+                  final Uri url = Uri.parse('https://www.fatergroup.com/it/privacy');
                   if (!await launchUrl(url)) {
                     throw Exception('Could not launch $url');
                   }

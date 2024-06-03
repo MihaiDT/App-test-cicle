@@ -9,6 +9,8 @@ class Settings {
   String? iosStoreUrl;
   List<Interest> interests;
   String? helpdeskUrl;
+  String? cookieFingerprintingContent;
+  String? privacyContent;
 
   /// Returns true if the feature "Symptoms in home" is active
   final bool symptomsInHomeActive;
@@ -23,6 +25,8 @@ class Settings {
     required this.symptomsInHomeActive,
     this.interests = const [],
     this.helpdeskUrl,
+    this.privacyContent,
+    this.cookieFingerprintingContent,
   });
 
   factory Settings.fromJson(Map<String, dynamic> json) {
@@ -36,6 +40,8 @@ class Settings {
       symptomsInHomeActive: json['show_sections']['symptoms_in_home'],
       interests: (json['interests'] as List).map((interest) => Interest.fromJson(interest)).toList(),
       helpdeskUrl: json['helpdesk_url'],
+      privacyContent: json['privacy_content'],
+      cookieFingerprintingContent: json['cookie_fingerprinting_content'],
     );
   }
 
@@ -50,6 +56,8 @@ class Settings {
       symptomsInHomeActive: settings.symptomsInHomeActive,
       interests: settings.interests,
       helpdeskUrl: settings.helpdeskUrl,
+      privacyContent: settings.privacyContent,
+      cookieFingerprintingContent: settings.cookieFingerprintingContent,
     );
   }
 }

@@ -23,13 +23,19 @@ import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
 import 'package:lines/modules/confirm_tutor_email/confirm_tutor_email.dart';
 import 'package:lines/modules/confirm_tutor_email/confirm_tutor_email_binding.dart';
+import 'package:lines/modules/consents/consents_binding.dart';
+import 'package:lines/modules/consents/consents_page.dart';
 import 'package:lines/modules/content_library/bindings/content_library_binding.dart';
 import 'package:lines/modules/content_library/bindings/content_library_search_page_binding.dart';
 import 'package:lines/modules/content_library/content_library_category_page.dart';
 import 'package:lines/modules/content_library/content_library_page.dart';
 import 'package:lines/modules/content_library/content_library_search_page.dart';
 import 'package:lines/modules/cookie/cookie_page.dart';
+import 'package:lines/modules/cookies_fingerprinting/cookies_fingerprinting_binding.dart';
+import 'package:lines/modules/cookies_fingerprinting/cookies_fingerprinting_page.dart';
 import 'package:lines/modules/customize_cherry_web_view/customize_cherry_web_view.dart';
+import 'package:lines/modules/diary_data_details/diary_data_details_binding.dart';
+import 'package:lines/modules/diary_data_details/diary_data_details_page.dart';
 import 'package:lines/modules/drawer/binding/account_binding.dart';
 import 'package:lines/modules/drawer/binding/change_password_binding.dart';
 import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
@@ -72,6 +78,8 @@ import 'package:lines/modules/name_surname/bindings/name_surname_binding.dart';
 import 'package:lines/modules/name_surname/name_surname_page.dart';
 import 'package:lines/modules/privacy/privacy_binding.dart';
 import 'package:lines/modules/privacy/privacy_page.dart';
+import 'package:lines/modules/privacy_details/privacy_details_binding.dart';
+import 'package:lines/modules/privacy_details/privacy_details_page.dart';
 import 'package:lines/modules/prizes_onboarding/prizes_onboarding_page.dart';
 import 'package:lines/modules/profile/bindings/my_badges_binding.dart';
 import 'package:lines/modules/profile/bindings/my_menses_section_binding.dart';
@@ -641,9 +649,14 @@ class Pages {
     /// CustomizeCherryWebView
     GetPage(
       name: Routes.customizeCherryWebView,
-      page: () => _mediaQueryWrapper(
-        const CustomizeCherryWebView(),
-      ),
+      page: () {
+        final String sessionToken = Get.arguments['sessionToken'];
+        return _mediaQueryWrapper(
+          CustomizeCherryWebView(
+            sessionToken: sessionToken,
+          ),
+        );
+      },
       transition: Transition.rightToLeft,
     ),
 
@@ -665,6 +678,50 @@ class Pages {
       page: () => _mediaQueryWrapper(
         authNeeded: false,
         const ChangePasswordPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// Privacy details
+    GetPage(
+      name: Routes.privacyDetails,
+      binding: PrivacyDetailsBinding(),
+      page: () => _mediaQueryWrapper(
+        authNeeded: false,
+        const PrivacyDetailsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// Consents
+    GetPage(
+      name: Routes.consents,
+      binding: ConsentsBinding(),
+      page: () => _mediaQueryWrapper(
+        authNeeded: false,
+        const ConsentsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// Cookies/Fingerprinting
+    GetPage(
+      name: Routes.cookiesFingerprinting,
+      binding: CookiesFingerprintingBinding(),
+      page: () => _mediaQueryWrapper(
+        authNeeded: false,
+        const CookiesFingerprintingPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    /// Dettaglo dati diario
+    GetPage(
+      name: Routes.diaryDataDetails,
+      binding: DiaryDataDetailsBinding(),
+      page: () => _mediaQueryWrapper(
+        authNeeded: false,
+        const DiaryDataDetailsPage(),
       ),
       transition: Transition.rightToLeft,
     ),

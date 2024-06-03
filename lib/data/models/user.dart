@@ -22,6 +22,7 @@ class User {
   int? periodDuration;
   bool? privacyProfiling;
   bool? privacyMarketingEmail;
+  bool? privacyBrandMarketing;
   RegistrationProvider? provider;
   String? sessionToken;
   List<Interest>? interests;
@@ -33,12 +34,16 @@ class User {
   String? routeAfterLogin;
 
   bool? hasConsentCookie;
+  bool? calendarConsent;
+  bool? diaryConsent;
 
   User({
     this.active = false,
     this.appConsents = false,
     this.birthdate,
     this.coinsCollected = 0,
+    this.calendarConsent = false,
+    this.diaryConsent = false,
     this.email,
     this.firstName,
     this.isConfirmed = false,
@@ -53,6 +58,7 @@ class User {
     required this.periodDuration,
     this.privacyProfiling,
     this.privacyMarketingEmail,
+    this.privacyBrandMarketing,
     this.provider,
     this.sessionToken,
     this.interests,
@@ -69,6 +75,8 @@ class User {
       active: json['user']['active'],
       appConsents: json['user']['app_consents'],
       birthdate: json['user']['birthdate'],
+      calendarConsent: json['user']['calendar_consent'],
+      diaryConsent: json['user']['diary_consent'],
       coinsCollected: json['user']['coins'],
       email: json['user']['email'],
       firstName: json['user']['first_name'],
@@ -81,6 +89,7 @@ class User {
       periodDuration: json['user']['period_duration'],
       privacyProfiling: json['user']['privacy_profiling'],
       privacyMarketingEmail: json['user']['privacy_marketing_email'],
+      privacyBrandMarketing: json['user']['privacy_brand_marketing'],
       provider: RegistrationProvider.fromJson(json['user']['provider']),
       sessionToken: json['user']['session_token'],
       interests: (json['user']['interests'] as List)
@@ -107,6 +116,8 @@ class User {
       "birthdate": birthdate,
       "app_consents": appConsents,
       "coins": coinsCollected,
+      "calendar_consent": calendarConsent,
+      "diary_consent": diaryConsent,
       "email": email,
       "first_name": firstName,
       "is_confirmed": isConfirmed,
@@ -119,6 +130,7 @@ class User {
       "period_days": periodDays,
       "period_duration": periodDuration,
       "privacy_profiling": privacyProfiling,
+      "privacy_brand_marketing": privacyProfiling,
       "privacy_marketing_email": privacyMarketingEmail,
       "session_token": sessionToken,
       "interests": interests!
@@ -171,8 +183,7 @@ class User {
     DateTime currentDate = DateTime.now();
     int age = currentDate.year - birthDate.year;
     if (currentDate.month < birthDate.month ||
-        (currentDate.month == birthDate.month &&
-            currentDate.day < birthDate.day)) {
+        (currentDate.month == birthDate.month && currentDate.day < birthDate.day)) {
       age--;
     }
     return age;

@@ -79,6 +79,33 @@ class AuthenticationService {
     }
   }
 
+  static Future<void> updatePrivacy(
+    UpdateUserParameters user,
+  ) async {
+    final userID = userIDFromDB;
+
+    /// Takes the email from the user saved into state
+    final email = appController.user.value?.email ?? '';
+    user.email = email;
+
+    user.hasConsentCookie = HiveManager.hasAcceptedCookie;
+    appController.user.responseHandler = ResponseHandler.pending(
+      content: appController.user.value,
+    );
+    try {
+      final response = await dio.post(
+        "/users/$userID/update_privacy",
+        data: {
+          "user": user.toJson(),
+        },
+      );
+      _saveUserInfo(response);
+    } catch (e) {
+      appController.user.responseHandler = ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
   static Future<void> updateUser(
     UpdateUserParameters user,
   ) async {

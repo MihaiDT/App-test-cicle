@@ -6,14 +6,13 @@ import 'package:get/get.dart';
 import 'package:lines/core/helpers/api.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/logger/log.dart';
-import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class TamagochiWebView extends StatefulWidget {
   final String sessionToken;
 
-  TamagochiWebView({
+  const TamagochiWebView({
     super.key,
     required this.sessionToken,
   });
@@ -82,6 +81,8 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
                 isFirstPage = false;
               }
             }
+
+            logDebug("${environment.gameEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}");
 
             return NavigationActionPolicy.CANCEL;
           },
