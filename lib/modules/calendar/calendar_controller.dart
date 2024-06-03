@@ -21,6 +21,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   /// Current date selected by the user.
   final Rx<DateTime> rxSelectedDate = Rx(DateTime.now());
 
+  final pageViewController = PageController();
+
   RxList<String> symptomIds = <String>[].obs;
   RxList<String> savedCategoryIds = <String>[].obs;
   RxList<String> addedMensesDates = <String>[].obs;
@@ -139,20 +141,6 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     );
 
     ever(
-      selectedTab,
-      condition: () => Get.currentRoute == Routes.calendar,
-      (newTab) {
-        if (newTab == CalendarTabs.yearTab) {
-          collapseBottomSheet();
-        } else {
-          jumpToMonth(date: rxSelectedDate.value);
-          rxShowBottomMenu.value = true;
-          expandBottomSheetTorxSheetVSize();
-        }
-      },
-    );
-
-    ever(
       appController.symptomsDiaries.rxValue,
       (callback) {
         if (callback.isSuccessful) {
@@ -177,14 +165,39 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   @override
   void onReady() async {
     super.onReady();
+
+    ever(
+      selectedTab,
+      condition: () => Get.currentRoute == Routes.calendar,
+      (newTab) {
+        print("Selected tab: $newTab");
+        print("Selected tab: $newTab");
+        print("Selected tab: $newTab");
+        print("Selected tab: $newTab");
+        print("Selected tab: $newTab");
+        if (newTab == CalendarTabs.yearTab) {
+          collapseBottomSheet();
+        } else {
+          jumpToMonth(date: DateTime.now());
+          rxShowBottomMenu.value = true;
+          expandBottomSheetTorxSheetVSize();
+        }
+      },
+    );
     draggableScrollableController.addListener(() {
       draggableScrollableController.size == bottomSheetMaxHeight
           ? showTopButton.value = false
           : showTopButton.value = true;
     });
-    await CalendarService.symptomCategories;
-    await CalendarService.fetchSymptomsForSpecificDate(rxSelectedDate.value);
-    await CalendarService.homePageSymptomCategories;
+    if (!appController.symptomCategory.responseHandler.isSuccessful) {
+      await CalendarService.symptomCategories;
+    }
+    if (!appController.symptomsDiaries.responseHandler.isSuccessful) {
+      await CalendarService.fetchSymptomsForSpecificDate(rxSelectedDate.value);
+    }
+    if (!appController.categoriesSavedInHome.responseHandler.isSuccessful) {
+      await CalendarService.homePageSymptomCategories;
+    }
 
     _initSavedCategory();
 
@@ -267,6 +280,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   void saveSymptoms() async {
+    draggableScrollableController.reset();
     final dateString = dateFormatYMD.format(rxSelectedDate.value);
     if (savedCategoryHasChanged) {
       await CalendarService.setHomePageSymptomCategories(savedCategoryIds);
@@ -284,8 +298,6 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     );
 
     await CalendarService.fetchCalendarData();
-
-    draggableScrollableController.reset();
   }
 
   void _initCalendarYearController() {
@@ -316,6 +328,11 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   /// Change to year or month calendar view
   void changeTab(CalendarTabs newTab) {
     selectedTab.value = newTab;
+    if (newTab == CalendarTabs.yearTab) {
+      pageViewController.jumpToPage(1);
+    } else {
+      pageViewController.jumpToPage(0);
+    }
   }
 
   /// Method called when a month is tapped inside the year calendar

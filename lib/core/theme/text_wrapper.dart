@@ -372,7 +372,7 @@ abstract class TextWrapper extends StatelessWidget {
     this.decorationColor = Colors.white,
     required this.fontWeight,
     required this.height,
-    required this.letterSpacing,
+    this.letterSpacing = 0,
     required this.maxLines,
     required this.overflow,
     required this.textAlign,

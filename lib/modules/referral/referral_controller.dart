@@ -49,7 +49,7 @@ class ReferralController extends GetxController {
         }
         if (callback.isFailed) {
           FlushBar(
-            child: Text('Impossibile utilizzare il codice'),
+            child: const Text('Impossibile utilizzare il codice'),
           ).show(Get.context!);
         }
 
@@ -63,7 +63,7 @@ class ReferralController extends GetxController {
             );
           } else {
             FlushBar(
-              child: Text('Codice non valido'),
+              child: const Text('Codice non valido'),
             ).show(Get.context!);
           }
         }

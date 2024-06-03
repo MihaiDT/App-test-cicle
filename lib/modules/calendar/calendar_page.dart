@@ -23,6 +23,7 @@ class CalendarPage extends GetView<CalendarController> {
       backgroundImage: ThemeDecoration.images.bgCalendar,
       extendBodyBehindAppBar: true,
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Column(
             children: [
@@ -37,54 +38,39 @@ class CalendarPage extends GetView<CalendarController> {
                 ),
               ),
               ThemeSizedBox.height24,
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
-                child: Obx(
-                  () => Visibility(
-                    visible:
-                        controller.selectedTab.value == CalendarTabs.monthTab,
-                    child: CalendarWeekRow(controller: controller),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Stack(
-                  children: [
-                    Obx(
-                      () => Offstage(
-                        offstage: !(controller.selectedTab.value ==
-                                CalendarTabs.monthTab &&
-                            controller.pageShouldRefresh),
-                        child: const ScrollableCalendar(
-                          spaceBetweenCalendars: 70.0,
-                        ),
+              Obx(
+                () {
+                  if (!controller.pageShouldRefresh) {
+                    return Align(
+                      alignment: Alignment.topCenter,
+                      child: SizedBox(
+                        height: Get.width * 0.4,
+                        width: Get.width * 0.4,
+                        child: const DarkLoader(),
                       ),
-                    ),
-                    Obx(
-                      () => Offstage(
-                        offstage: !(controller.selectedTab.value ==
-                                CalendarTabs.yearTab &&
-                            controller.pageShouldRefresh),
-                        child: const CalendarYearBody(),
-                      ),
-                    ),
-                    Obx(
-                      () => Visibility(
-                        visible: !controller.pageShouldRefresh,
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: SizedBox(
-                            height: Get.width * 0.4,
-                            width: Get.width * 0.4,
-                            child: const DarkLoader(),
+                    );
+                  } else {
+                    return Expanded(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: Obx(
+                              () => Visibility(
+                                visible: controller.selectedTab.value ==
+                                    CalendarTabs.monthTab,
+                                child: CalendarWeekRow(controller: controller),
+                              ),
+                            ),
                           ),
-                        ),
+                          pageView,
+                        ],
                       ),
-                    ),
-                  ],
-                ),
+                    );
+                  }
+                },
               ),
             ],
           ),
@@ -116,6 +102,33 @@ class CalendarPage extends GetView<CalendarController> {
                   ),
                 ),
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget get pageView {
+    return Expanded(
+      child: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: controller.pageViewController,
+        children: [
+          Obx(
+            () => Visibility(
+              visible: controller.selectedTab.value == CalendarTabs.monthTab &&
+                  controller.pageShouldRefresh,
+              child: const ScrollableCalendar(
+                spaceBetweenCalendars: 70.0,
+              ),
+            ),
+          ),
+          Obx(
+            () => Visibility(
+              visible: controller.selectedTab.value == CalendarTabs.yearTab &&
+                  controller.pageShouldRefresh,
+              child: const CalendarYearBody(),
             ),
           ),
         ],

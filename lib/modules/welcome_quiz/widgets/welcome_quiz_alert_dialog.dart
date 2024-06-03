@@ -78,7 +78,7 @@ class WelcomeQuizAlertDialog extends StatelessWidget {
                   Expanded(
                     child: PrimaryButton(
                       child: const TitleLarge(
-                        "VAI AL QUIZ",
+                        "QUIZ",
                       ),
                       onPressed: () {
                         controller.onContinueButtonPressed();
