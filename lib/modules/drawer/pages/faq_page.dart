@@ -39,8 +39,10 @@ class _FaqPageState extends State<FaqPage> {
             child: PrimaryButton(
               onPressed: () async {
                 await launchUrl(
-                  Uri.parse(appController.settings.value?.helpdeskUrl ??
-                      'https://linesit.digimetrica.com/contatti-servizio-consumatori?from=app'), // FIXME: lasciare solo hepdeskurl
+                  Uri.parse(
+                    appController.settings.value?.helpdeskUrl ??
+                        'https://linesit.digimetrica.com/contatti-servizio-consumatori?from=app',
+                  ), // FIXME: lasciare solo hepdeskurl
                   mode: LaunchMode.externalApplication,
                 );
               },

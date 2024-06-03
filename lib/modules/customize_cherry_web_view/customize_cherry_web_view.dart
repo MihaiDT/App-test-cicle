@@ -2,11 +2,9 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:get/get.dart';
 import 'package:lines/core/helpers/api.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/logger/log.dart';
-import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class CustomizeCherryWebView extends StatefulWidget {
@@ -86,7 +84,8 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
             // }
 
             logDebug(
-                "${environment.cherryCustomizationEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}");
+              "${environment.cherryCustomizationEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}",
+            );
 
             return NavigationActionPolicy.ALLOW;
             return NavigationActionPolicy.CANCEL;

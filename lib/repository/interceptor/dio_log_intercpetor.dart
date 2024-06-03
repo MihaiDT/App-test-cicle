@@ -27,7 +27,7 @@ class DioLogInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     CustomLogger().log(
       Level.error,
       'ERROR ${err.response?.statusCode}\n'

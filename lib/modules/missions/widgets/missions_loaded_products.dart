@@ -24,8 +24,6 @@ class MissionsLoadedProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _loadedProducts = loadedProducts();
-
     return Container(
       decoration: const BoxDecoration(
         color: _bgColor,
@@ -49,10 +47,10 @@ class MissionsLoadedProducts extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(
-                _loadedProducts.length,
+                loadedProducts.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: _loadedProducts[index],
+                  child: loadedProducts[index],
                 ),
               ),
             ),
@@ -86,7 +84,7 @@ class MissionsLoadedProducts extends StatelessWidget {
     );
   }
 
-  List<Widget> loadedProducts() {
+  List<Widget> get loadedProducts {
     List<Widget> widgets = [];
 
     for (int i = 0; i < totalCodes; i++) {

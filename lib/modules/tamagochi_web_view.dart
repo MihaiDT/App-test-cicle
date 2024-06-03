@@ -85,7 +85,8 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
             }
 
             logDebug(
-                "${environment.gameEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}");
+              "${environment.gameEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}",
+            );
 
             return NavigationActionPolicy.CANCEL;
           },

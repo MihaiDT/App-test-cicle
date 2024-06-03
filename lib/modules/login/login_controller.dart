@@ -83,7 +83,7 @@ class LoginController extends GetxController {
         if (userStatus.isFailed) {
           if (userStatus.errorType == ErrorType.wrongPassword) {
             FlushBar(
-              child: const Text(
+              child: Text(
                 "Password errata",
               ),
             ).show(Get.context!);

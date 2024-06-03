@@ -39,7 +39,7 @@ class InfoHowToGetCoinsBottomSheet extends StatelessWidget {
                 "Invita un'amica a iscriversi a My Lines e sarai ricompensata!",
             imagePath: ThemeImage.inviteAFriend,
           ),
-          ThemeSizedBox.height32
+          ThemeSizedBox.height32,
         ],
       ),
     );

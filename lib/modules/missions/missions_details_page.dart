@@ -208,12 +208,14 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                         InkWell(
                           onTap: () async {
                             await launchUrl(
-                              Uri.parse(appController
-                                      .missions
-                                      .value![
-                                          appController.selectedMissionIndex]
-                                      .regolamento ??
-                                  ''),
+                              Uri.parse(
+                                appController
+                                        .missions
+                                        .value![
+                                            appController.selectedMissionIndex]
+                                        .regolamento ??
+                                    '',
+                              ),
                               mode: LaunchMode.externalApplication,
                             );
                           },

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
-import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/modules/cookies_fingerprinting/cookies_fingerprinting_controller.dart';
 import 'package:lines/modules/diary_data_details/diary_data_details_controller.dart';
 
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class DiaryDataDetailsPage extends GetView<DiaryDataDetailsController> {
   const DiaryDataDetailsPage({

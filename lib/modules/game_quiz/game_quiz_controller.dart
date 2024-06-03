@@ -2,9 +2,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/answer.dart';
-import 'package:lines/data/models/question.dart';
 import 'package:lines/repository/survey_service.dart';
-import 'package:lines/routes/routes.dart';
 
 class GameQuizController extends GetxController {
   List<Answers> answers = [];

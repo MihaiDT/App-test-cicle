@@ -23,22 +23,24 @@ class MissionCompletedController extends GetxController {
     await wait(milliseconds: 1500);
 
     FlushBar(
-        child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
-          child: HeadlineSmall(
-            "Codice prodotto caricato",
-            color: Color(0xff1F2D4F),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: HeadlineSmall(
+              "Codice prodotto caricato",
+              color: Color(0xff1F2D4F),
+            ),
           ),
-        ),
-        AppCoin(
-          coinAmount: appController.missions.value!.first.products.first.points,
-        ),
-      ],
-    )).show(Get.context!);
+          AppCoin(
+            coinAmount:
+                appController.missions.value!.first.products.first.points,
+          ),
+        ],
+      ),
+    ).show(Get.context!);
   }
 }

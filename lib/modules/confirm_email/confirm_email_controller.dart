@@ -18,7 +18,7 @@ class ConfirmEmailController extends GetxController {
       }
       if (sendConfirmEmailStatus.isSuccessful) {
         FlushBar(
-          child: const Text('Email inviata con successo!'),
+          child: Text('Email inviata con successo!'),
         ).show(
           Get.context!,
         );

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/modules/info/widgets/info_where_to_find_the_code_bottomsheet..dart';
 import 'package:lines/modules/load_code/controllers/load_code_controller.dart';
 import 'package:lines/modules/missions/widgets/missions_loaded_products.dart';
-import 'package:lines/modules/missions/widgets/missions_loaded_products_box.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_loading_button.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
