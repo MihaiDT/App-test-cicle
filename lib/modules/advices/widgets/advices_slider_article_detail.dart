@@ -138,7 +138,9 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: currentSlide == entry.key ? Colors.black : _unselectedDotColor,
+                        color: currentSlide == entry.key
+                            ? Colors.black
+                            : _unselectedDotColor,
                       ),
                     );
                   },

@@ -54,7 +54,9 @@ class ProductService {
 
   static void _saveProducts(Response response) {
     List<dynamic> periodsData = response.data["products"];
-    List<ProductCategory> periodsStats = periodsData.map((category) => ProductCategory.fromJson(category)).toList();
+    List<ProductCategory> periodsStats = periodsData
+        .map((category) => ProductCategory.fromJson(category))
+        .toList();
 
     appController.productCategory.responseHandler = ResponseHandler.successful(
       content: periodsStats,
@@ -63,7 +65,8 @@ class ProductService {
 
   static void _saveMissions(Response response) {
     List<dynamic> responseData = response.data["missions"];
-    List<Mission> missions = responseData.map((category) => Mission.fromJson(category)).toList();
+    List<Mission> missions =
+        responseData.map((category) => Mission.fromJson(category)).toList();
 
     appController.missions.responseHandler = ResponseHandler.successful(
       content: missions,

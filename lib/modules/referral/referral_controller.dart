@@ -83,7 +83,8 @@ class ReferralController extends GetxController {
 
   void onUseCodePressed(BuildContext context) async {
     if (referralCodeController.text.isNotEmpty) {
-      appController.updateUserParameters.referralCode = referralCodeController.text;
+      appController.updateUserParameters.referralCode =
+          referralCodeController.text;
 
       await AuthenticationService.validateInvitationCode(
         referralCodeController.text,

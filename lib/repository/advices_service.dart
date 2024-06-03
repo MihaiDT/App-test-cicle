@@ -13,20 +13,23 @@ class AdvicesService {
       );
       _saveAdvicesCategories(response);
     } catch (e, s) {
-      appController.advicesCategories.responseHandler = ResponseHandler.failed();
+      appController.advicesCategories.responseHandler =
+          ResponseHandler.failed();
       log.logApiException(e, s);
     }
   }
 
   static Future<void> fetchSuggestedArticles() async {
     try {
-      appController.suggestedAdvicesArticle.responseHandler = ResponseHandler.pending();
+      appController.suggestedAdvicesArticle.responseHandler =
+          ResponseHandler.pending();
       final response = await dio.get(
         "/articles/suggested",
       );
       _saveSuggestedArticle(response);
     } catch (e) {
-      appController.suggestedAdvicesArticle.responseHandler = ResponseHandler.failed();
+      appController.suggestedAdvicesArticle.responseHandler =
+          ResponseHandler.failed();
       log.logError(e);
     }
   }
@@ -66,7 +69,8 @@ class AdvicesService {
   }
 
   static void _saveAdvicesCategories(Response response) {
-    appController.advicesCategories.responseHandler = ResponseHandler.successful(
+    appController.advicesCategories.responseHandler =
+        ResponseHandler.successful(
       content: AdvicesGroupedByCategory.fromJson(
         response.data,
       ),
@@ -74,7 +78,8 @@ class AdvicesService {
   }
 
   static void _saveSuggestedArticle(Response response) {
-    appController.suggestedAdvicesArticle.responseHandler = ResponseHandler.successful(
+    appController.suggestedAdvicesArticle.responseHandler =
+        ResponseHandler.successful(
       content: response.data["suggested"]
           .map<AdvicesArticle>(
             (article) => AdvicesArticle.fromJson(article),

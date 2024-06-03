@@ -4,7 +4,8 @@ import 'package:lines/core/app_theme.dart';
 class InfoBottomSheet extends StatelessWidget {
   final Widget? child;
 
-  DraggableScrollableController get draggableScrollableController => DraggableScrollableController();
+  DraggableScrollableController get draggableScrollableController =>
+      DraggableScrollableController();
 
   const InfoBottomSheet({
     this.child,

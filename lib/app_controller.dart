@@ -98,7 +98,8 @@ class AppController extends GetxController {
   /// Missions
   RxInt rxSelectedMissionIndex = RxInt(-1);
   int get selectedMissionIndex => rxSelectedMissionIndex.value;
-  set selectedMissionIndex(int newValue) => rxSelectedMissionIndex.value = newValue;
+  set selectedMissionIndex(int newValue) =>
+      rxSelectedMissionIndex.value = newValue;
 
   AppController._({
     required this.periodMap,

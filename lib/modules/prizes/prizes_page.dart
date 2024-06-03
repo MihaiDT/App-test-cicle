@@ -173,7 +173,8 @@ class PrizesPage extends GetView<PrizesController> {
                   ),
                   backgroundColor: Colors.white,
                   coinAmount: 50,
-                  description: "Ottieni 50 Coins per ogni amico che si registra all’app My Lines",
+                  description:
+                      "Ottieni 50 Coins per ogni amico che si registra all’app My Lines",
                   title: "Invita un amico",
                   iconPath: ThemeImage.inviteAFriend,
                 ),

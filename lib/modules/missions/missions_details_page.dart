@@ -55,7 +55,10 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                     fit: StackFit.passthrough,
                     children: [
                       Image.network(
-                        appController.missions.value![appController.selectedMissionIndex].imageUrl,
+                        appController
+                            .missions
+                            .value![appController.selectedMissionIndex]
+                            .imageUrl,
                         fit: BoxFit.fitWidth,
                       ),
                       Align(
@@ -63,9 +66,15 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                         child: Padding(
                           padding: const EdgeInsets.all(8),
                           child: MissionProgressIndicator(
-                            loadedCodes:
-                                appController.missions.value![appController.selectedMissionIndex].loadedProducts.length,
-                            totalCodes: appController.missions.value![appController.selectedMissionIndex].totalCounter,
+                            loadedCodes: appController
+                                .missions
+                                .value![appController.selectedMissionIndex]
+                                .loadedProducts
+                                .length,
+                            totalCodes: appController
+                                .missions
+                                .value![appController.selectedMissionIndex]
+                                .totalCounter,
                           ),
                         ),
                       ),
@@ -83,7 +92,10 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                       horizontal: ThemeSize.paddingMedium,
                     ),
                     child: HeadlineLarge(
-                      appController.missions.value![appController.selectedMissionIndex].description,
+                      appController
+                          .missions
+                          .value![appController.selectedMissionIndex]
+                          .description,
                       color: ThemeColor.darkBlue,
                       textAlign: TextAlign.center,
                     ),
@@ -119,8 +131,14 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                       horizontal: ThemeSize.paddingSmall,
                     ),
                     child: MissionsLoadedProducts(
-                      products: appController.missions.value![appController.selectedMissionIndex].loadedProducts,
-                      totalCodes: appController.missions.value![appController.selectedMissionIndex].totalCounter,
+                      products: appController
+                          .missions
+                          .value![appController.selectedMissionIndex]
+                          .loadedProducts,
+                      totalCodes: appController
+                          .missions
+                          .value![appController.selectedMissionIndex]
+                          .totalCounter,
                     ),
                   ),
                   ThemeSizedBox.height32,
@@ -143,15 +161,21 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                         ).applyShaders(context),
                         ThemeSizedBox.height16,
                         MissionsHowToParticipateStepOne(
-                          mission: appController.missions.value![appController.selectedMissionIndex],
+                          mission: appController.missions
+                              .value![appController.selectedMissionIndex],
                         ),
                         ThemeSizedBox.height16,
                         const MissionsHowToParticipateStepTwo(),
                         ThemeSizedBox.height16,
                         MissionsHowToParticipateStepThree(
-                          prizeDescription:
-                              appController.missions.value![appController.selectedMissionIndex].prizeDescription,
-                          prizeImage: appController.missions.value![appController.selectedMissionIndex].prizeImage,
+                          prizeDescription: appController
+                              .missions
+                              .value![appController.selectedMissionIndex]
+                              .prizeDescription,
+                          prizeImage: appController
+                              .missions
+                              .value![appController.selectedMissionIndex]
+                              .prizeImage,
                         ),
                         ThemeSizedBox.height32,
                         Html(
@@ -184,8 +208,12 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                         InkWell(
                           onTap: () async {
                             await launchUrl(
-                              Uri.parse(
-                                  appController.missions.value![appController.selectedMissionIndex].regolamento ?? ''),
+                              Uri.parse(appController
+                                      .missions
+                                      .value![
+                                          appController.selectedMissionIndex]
+                                      .regolamento ??
+                                  ''),
                               mode: LaunchMode.externalApplication,
                             );
                           },
@@ -202,7 +230,8 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                   ),
                 ],
               ),
-              if (!appController.missions.value![appController.selectedMissionIndex].isCompleted)
+              if (!appController.missions
+                  .value![appController.selectedMissionIndex].isCompleted)
                 SafeArea(
                   child: Align(
                     alignment: Alignment.bottomCenter,
@@ -215,7 +244,8 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                         onPressed: () => Get.toNamed(
                           Routes.loadCode,
                           arguments: {
-                            'mission': appController.missions.value![appController.selectedMissionIndex],
+                            'mission': appController.missions
+                                .value![appController.selectedMissionIndex],
                           },
                         ),
                         child: const TitleLarge(

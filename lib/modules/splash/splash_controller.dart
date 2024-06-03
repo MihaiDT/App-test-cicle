@@ -46,7 +46,8 @@ class SplashPageController extends GetxController {
           } else*/
           if (appController.user.value?.routeAfterLogin == "main") {
             Get.offAndToNamed(Routes.main);
-          } else if (appController.user.value?.routeAfterLogin == "complete_profile") {
+          } else if (appController.user.value?.routeAfterLogin ==
+              "complete_profile") {
             Get.offAndToNamed(Routes.welcome);
             Get.toNamed(Routes.lastMensesPage);
           } else {

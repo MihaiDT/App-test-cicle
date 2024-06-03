@@ -10,7 +10,8 @@ import 'package:lines/modules/cookies_fingerprinting/cookies_fingerprinting_cont
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController> {
+class CookiesFingerprintingPage
+    extends GetView<CookiesFingerprintingController> {
   const CookiesFingerprintingPage({
     super.key,
   });
@@ -36,7 +37,8 @@ class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController>
               horizontal: ThemeSize.paddingSmall,
             ),
             child: Html(
-              data: appController.settings.value?.cookieFingerprintingContent ?? '',
+              data: appController.settings.value?.cookieFingerprintingContent ??
+                  '',
               style: {
                 "a": Style(
                   color: ThemeColor.darkBlue,

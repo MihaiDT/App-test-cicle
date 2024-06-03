@@ -63,7 +63,9 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
                   children: [
                     ThemeSizedBox.height90,
                     Transform.rotate(
-                      angle: -3 * (3.141592653589793 / 180), // Converti i gradi in radianti
+                      angle: -3 *
+                          (3.141592653589793 /
+                              180), // Converti i gradi in radianti
                       child: _prizeImage != null
                           ? Image.network(
                               _prizeImage!,
@@ -89,14 +91,21 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: 'Abbiamo appena inviato un’email al tuo indirizzo: ',
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            text:
+                                'Abbiamo appena inviato un’email al tuo indirizzo: ',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
                                   color: ThemeColor.darkBlue,
                                 ),
                           ),
                           TextSpan(
                             text: appController.user.value!.email,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
                                   color: ThemeColor.darkBlue,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -104,7 +113,10 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
                           TextSpan(
                             text:
                                 ' con tutte le informazioni relative alla disponibilità e all’utilizzo del tuo premio. Se non la ricevi, controlla nella posta indesiderata.',
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
                                   color: ThemeColor.darkBlue,
                                 ),
                           ),
@@ -121,7 +133,9 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
     );
   }
 
-  String? get _prizeImage => (appController.missions.value?[appController.selectedMissionIndex])?.prizeImage;
+  String? get _prizeImage =>
+      (appController.missions.value?[appController.selectedMissionIndex])
+          ?.prizeImage;
 
   Widget get _animation => Lottie.asset('assets/lottie/mission_completed.json');
 }

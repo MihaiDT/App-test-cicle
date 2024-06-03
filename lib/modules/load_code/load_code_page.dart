@@ -54,7 +54,8 @@ class LoadCodePage extends GetView<LoadCodeController> {
                   Obx(
                     () => PrimaryLoadingButton(
                       isLoading: controller.isPending.value,
-                      onPressed: controller.canProceed ? controller.onConfirm : null,
+                      onPressed:
+                          controller.canProceed ? controller.onConfirm : null,
                       child: const TitleLarge(
                         "CONFERMA",
                       ),
@@ -141,7 +142,8 @@ class LoadCodePage extends GetView<LoadCodeController> {
     );
   }
 
-  String get _title => appController.selectedMissionIndex != -1 ? "MISSIONI" : "CARICA CODICE";
+  String get _title =>
+      appController.selectedMissionIndex != -1 ? "MISSIONI" : "CARICA CODICE";
 
   Mission? get _mission => (appController.selectedMissionIndex != -1)
       ? appController.missions.value![appController.selectedMissionIndex]

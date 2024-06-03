@@ -7,7 +7,8 @@ import 'package:lines/repository/menses_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class SpecificMensesStatsController extends GetxController {
-  SpecificDatePeriodsStats? get specificDatePeriodsStats => appController.specificDatePeriodsStats.value;
+  SpecificDatePeriodsStats? get specificDatePeriodsStats =>
+      appController.specificDatePeriodsStats.value;
   final PeriodsStats arguments = Get.arguments;
   RxBool isPageLoading = true.obs;
 

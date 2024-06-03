@@ -40,7 +40,8 @@ class HomePage extends GetView<HomeController> {
                     ? const HomeCircularPeriodCalendarShimmer()
                     : GestureDetector(
                         onTap: () async {
-                          final sessionToken = await SecureStorageManager().getToken();
+                          final sessionToken =
+                              await SecureStorageManager().getToken();
                           Get.toNamed(
                             Routes.tamagochiWebView,
                             arguments: {
@@ -117,7 +118,8 @@ class HomePage extends GetView<HomeController> {
                       SizedBox(
                         height: 220,
                         child: AdvicesCardsRow(
-                          onCardTapped: (article, category) => controller.showArticleDetails(article, category),
+                          onCardTapped: (article, category) =>
+                              controller.showArticleDetails(article, category),
                           withBorder: true,
                           articles: controller.allSuggestedArticles,
                         ),

@@ -50,7 +50,8 @@ class RemoveAccountSection extends StatelessWidget {
               child: PrimaryButton(
                 buttonSize: ButtonSize.h31,
                 onPressed: () async {
-                  final Uri url = Uri.parse('https://www.fatergroup.com/it/privacy');
+                  final Uri url =
+                      Uri.parse('https://www.fatergroup.com/it/privacy');
                   if (!await launchUrl(url)) {
                     throw Exception('Could not launch $url');
                   }

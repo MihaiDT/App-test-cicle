@@ -29,7 +29,6 @@ class PrivacyAndConditionsPage extends GetView<PrivacyAndConditionsController> {
         ),
         children: [
           const Divider(),
-         
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: ThemeSize.paddingSmall,
@@ -55,9 +54,7 @@ class PrivacyAndConditionsPage extends GetView<PrivacyAndConditionsController> {
               ),
             ),
           ),
-
           const Divider(),
-         
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: ThemeSize.paddingSmall,
@@ -83,7 +80,6 @@ class PrivacyAndConditionsPage extends GetView<PrivacyAndConditionsController> {
               ),
             ),
           ),
-
           const Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(

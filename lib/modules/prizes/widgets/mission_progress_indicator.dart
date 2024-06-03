@@ -28,7 +28,9 @@ class MissionProgressIndicator extends StatelessWidget {
           borderRadius: const BorderRadius.all(
             Radius.circular(90),
           ),
-          color: loadedCodes == totalCodes ? _completedProgressBgColor : _inProgressBgColor,
+          color: loadedCodes == totalCodes
+              ? _completedProgressBgColor
+              : _inProgressBgColor,
         ),
         child: _text,
       ),

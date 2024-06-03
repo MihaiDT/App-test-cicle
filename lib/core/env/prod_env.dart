@@ -11,7 +11,8 @@ class ProdEnv extends Environment {
   String get gameEndpoint => 'https://tinybullstudios.com/Lines/Tamagotchi';
 
   @override
-  String get cherryCustomizationEndpoint => 'https://tinybullstudios.com/Lines/Customization';
+  String get cherryCustomizationEndpoint =>
+      'https://tinybullstudios.com/Lines/Customization';
 
   @override
   String get proxy => "192.168.1.4";

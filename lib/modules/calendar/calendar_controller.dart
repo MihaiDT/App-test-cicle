@@ -171,8 +171,6 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
     initMonthCalendar();
 
-   
-
     _initCalendarYearController();
   }
 

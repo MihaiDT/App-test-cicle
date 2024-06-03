@@ -18,7 +18,8 @@ class GameQuizController extends GetxController {
   Future<void> _initSurvey() async {
     await SurveyService.fetchChangePadQuiz();
 
-    if (appController.question.responseHandler.isSuccessful && appController.question.value != null) {
+    if (appController.question.responseHandler.isSuccessful &&
+        appController.question.value != null) {
       answers = appController.question.value?.answers ?? [];
     }
   }

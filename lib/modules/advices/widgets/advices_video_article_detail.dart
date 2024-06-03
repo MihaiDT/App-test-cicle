@@ -130,7 +130,8 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
                                       Obx(
                                         () {
                                           return Visibility(
-                                            visible: !controller.hasStarted.value,
+                                            visible:
+                                                !controller.hasStarted.value,
                                             child: Align(
                                               alignment: Alignment.topLeft,
                                               child: Padding(
@@ -138,10 +139,13 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
                                                   10,
                                                 ),
                                                 child: Container(
-                                                  padding: const EdgeInsets.all(4),
-                                                  decoration: const BoxDecoration(
+                                                  padding:
+                                                      const EdgeInsets.all(4),
+                                                  decoration:
+                                                      const BoxDecoration(
                                                     color: _timerBgColor,
-                                                    borderRadius: BorderRadius.all(
+                                                    borderRadius:
+                                                        BorderRadius.all(
                                                       Radius.circular(90),
                                                     ),
                                                   ),
@@ -163,10 +167,12 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
                                           return Align(
                                             alignment: Alignment.center,
                                             child: Visibility(
-                                              visible: !controller.hasStarted.value,
+                                              visible:
+                                                  !controller.hasStarted.value,
                                               child: CircleAvatar(
                                                 radius: 28,
-                                                backgroundColor: playButtonColor,
+                                                backgroundColor:
+                                                    playButtonColor,
                                                 child: SvgPicture.asset(
                                                   ThemeIcon.play,
                                                 ),

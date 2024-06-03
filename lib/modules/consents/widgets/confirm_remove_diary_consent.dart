@@ -33,7 +33,6 @@ class ConfirmRemoveDiaryConsentDialog extends StatelessWidget {
             ThemeSizedBox.height16,
             const BodyLarge(
               "Questa azione comporterà la perdita irreversibile di tutto lo storico del tuo Diario Personale salvato nella nostra app.",
-              
               color: ThemeColor.darkBlue,
               textAlign: TextAlign.center,
             ),

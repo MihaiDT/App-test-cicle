@@ -56,7 +56,8 @@ class AdvicesTextArticleDetails extends StatelessWidget {
                     children: [
                       ThemeSizedBox.height32,
                       CircleAvatar(
-                        backgroundColor: category?.categoryColor ?? Colors.transparent,
+                        backgroundColor:
+                            category?.categoryColor ?? Colors.transparent,
                         child: SvgPicture.asset(
                           category?.iconPath ?? "",
                           color: Colors.white,
@@ -217,7 +218,8 @@ class AdvicesTextArticleDetails extends StatelessWidget {
   void _initTextDetail(ScrollController scrollController, RxDouble proportion) {
     scrollController.addListener(
       () {
-        proportion.value = scrollController.offset / scrollController.position.viewportDimension;
+        proportion.value = scrollController.offset /
+            scrollController.position.viewportDimension;
       },
     );
   }

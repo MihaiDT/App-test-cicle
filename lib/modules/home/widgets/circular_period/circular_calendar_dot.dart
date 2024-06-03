@@ -20,7 +20,8 @@ class CircularCalendarDot extends StatelessWidget {
     if (index == 0) {
       padding = const EdgeInsets.all(1);
       size = 14;
-    } else if (periodDate.periodPhase == PeriodPhase.menstruation || periodDate.isOvulationDay) {
+    } else if (periodDate.periodPhase == PeriodPhase.menstruation ||
+        periodDate.isOvulationDay) {
       padding = const EdgeInsets.all(3);
       size = 10;
     }

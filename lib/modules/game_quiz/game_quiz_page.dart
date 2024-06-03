@@ -53,15 +53,18 @@ class GameQuizPage extends GetView<GameQuizController> {
                     ? Column(
                         children: controller.answers.asMap().entries.map(
                           (entry) {
-                            final productName = entry.value.answer.split(' *** ').first;
-                            final productDescription = entry.value.answer.split(' *** ').last;
+                            final productName =
+                                entry.value.answer.split(' *** ').first;
+                            final productDescription =
+                                entry.value.answer.split(' *** ').last;
 
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 InkWell(
-                                  onTap: () => controller.onAnswerTap(entry.value),
+                                  onTap: () =>
+                                      controller.onAnswerTap(entry.value),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       border: Border.all(
@@ -69,39 +72,49 @@ class GameQuizPage extends GetView<GameQuizController> {
                                         width: 1,
                                       ),
                                       borderRadius: BorderRadius.circular(30),
-                                      color: ThemeColor.whiteDark.withOpacity(0.3),
+                                      color:
+                                          ThemeColor.whiteDark.withOpacity(0.3),
                                     ),
                                     padding: const EdgeInsets.all(24),
                                     width: double.infinity,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           width: Get.width - (16 * 2),
                                           child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Flexible(
                                                 flex: 7,
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     LabelLarge(
                                                       productName,
                                                       maxLines: 5,
-                                                      color: ThemeColor.brightPink,
+                                                      color:
+                                                          ThemeColor.brightPink,
                                                       letterSpacing: 2,
                                                     ),
                                                     ThemeSizedBox.height4,
                                                     HeadlineSmall(
                                                       productDescription,
                                                       maxLines: 5,
-                                                      color: ThemeColor.darkBlue,
+                                                      color:
+                                                          ThemeColor.darkBlue,
                                                     ),
                                                     ThemeSizedBox.height8,
                                                   ],
@@ -110,7 +123,8 @@ class GameQuizPage extends GetView<GameQuizController> {
                                               ThemeSizedBox.width24,
                                               Flexible(
                                                 flex: 3,
-                                                child: (entry.value.imageUrl != null)
+                                                child: (entry.value.imageUrl !=
+                                                        null)
                                                     ? Image.network(
                                                         entry.value.imageUrl!,
                                                         fit: BoxFit.scaleDown,

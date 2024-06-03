@@ -44,7 +44,8 @@ class HomeController extends AppScaffoldController {
 
   RxInt periodSelectedDateIndex = 0.obs;
 
-  Map<String, PeriodDate> get currentPeriodDatesMap => appController.currentPeriod.value?.dates ?? {};
+  Map<String, PeriodDate> get currentPeriodDatesMap =>
+      appController.currentPeriod.value?.dates ?? {};
 
   /// Returns true if the user has saved some info about his period
   bool get hasSavedPeriodInfo => currentPeriodDatesMap.isNotEmpty;
@@ -53,7 +54,9 @@ class HomeController extends AppScaffoldController {
   HomeController() {
     ever(
       appController.currentPeriod.rxValue,
-      condition: () => Get.currentRoute == Routes.main && !HiveManager.isFirstTutorialWatched,
+      condition: () =>
+          Get.currentRoute == Routes.main &&
+          !HiveManager.isFirstTutorialWatched,
       (callback) {
         HiveManager.isFirstTutorialWatched = true;
 
@@ -143,7 +146,8 @@ class HomeController extends AppScaffoldController {
                             return Obx(
                               () {
                                 return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topRight,
@@ -254,7 +258,9 @@ class HomeController extends AppScaffoldController {
     periodSelectedDateIndex.value = await _initCalendars();
     scrollSnapListKey.currentState?.focusToItem(periodSelectedDateIndex.value);
 
-    if (HiveManager.numberOfAccess >= 2 && HiveManager.numberOfAccess <= 4 && !showWelcomeQuizSection) {
+    if (HiveManager.numberOfAccess >= 2 &&
+        HiveManager.numberOfAccess <= 4 &&
+        !showWelcomeQuizSection) {
       showErrorDialog(
         context: Get.context!,
         builder: (_) {
@@ -288,20 +294,25 @@ class HomeController extends AppScaffoldController {
 
     final formattedTodayDate = dateFormatYMD.format(DateTime.now());
 
-    int result = currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
+    int result =
+        currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
     if (result <= 0) {
       return currentPeriodDatesMap.keys.toList().length;
     }
     return result;
   }
 
-  bool get showWelcomeQuizSection => appController.user.value?.isWelcomeQuizCompleted == false;
+  bool get showWelcomeQuizSection =>
+      appController.user.value?.isWelcomeQuizCompleted == false;
 
-  List<AdvicesArticle> get allSuggestedArticles => appController.suggestedAdvicesArticle.value ?? [];
+  List<AdvicesArticle> get allSuggestedArticles =>
+      appController.suggestedAdvicesArticle.value ?? [];
 
-  RxBool get showSuggestedArticlesSection => allSuggestedArticles.isNotEmpty.obs;
+  RxBool get showSuggestedArticlesSection =>
+      allSuggestedArticles.isNotEmpty.obs;
 
-  bool get showMissionSection => appController.missions.value?.isNotEmpty == true;
+  bool get showMissionSection =>
+      appController.missions.value?.isNotEmpty == true;
 
   void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {
     Get.toNamed(

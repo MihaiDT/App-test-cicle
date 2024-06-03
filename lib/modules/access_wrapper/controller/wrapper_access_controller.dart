@@ -44,14 +44,15 @@ class WrapperAccessController extends GetxController {
     if (appController.settings.value?.androidMinBuildNumber == null) {
       rxAppNeedsUpdate.value = false;
     } else {
-      rxAppNeedsUpdate.value =
-          int.parse(packageInfo.buildNumber) < appController.settings.value!.androidMinBuildNumber!;
+      rxAppNeedsUpdate.value = int.parse(packageInfo.buildNumber) <
+          appController.settings.value!.androidMinBuildNumber!;
     }
   }
 
   Future<void> checkInternetConnection() async {
     final connectivityResult = await (Connectivity().checkConnectivity());
-    final ConnectivityResult? hasNotConnection = connectivityResult.firstWhereOrNull(
+    final ConnectivityResult? hasNotConnection =
+        connectivityResult.firstWhereOrNull(
       (element) => element == ConnectivityResult.none,
     );
     if (hasNotConnection != null) {

@@ -87,7 +87,8 @@ class _FaqPageState extends State<FaqPage> {
 
               ThemeSizedBox.height8,
               _expandableFaq(
-                question: "Come viene realizzata la previsione delle prossime mestruazioni?",
+                question:
+                    "Come viene realizzata la previsione delle prossime mestruazioni?",
                 answer:
                     "Se in fase di registrazione o dal profilo hai inserito la durata media del ciclo e delle mestruazioni, per i primi mesi quei dati vengono utilizzati per prevedere le future mestruazioni. Per renderlo ancora più preciso, dal 6° mese di utilizzo dell’app la previsione viene realizzata considerando la durata media del ciclo e delle mestruazioni dei 6 mesi precedenti, escludendo i due estremi. Se in fase di registrazione non ci hai fornito questi dati sarà utilizzata la durata media del ciclo di 28 giorni e delle mestruazioni di 5 giorni.",
               ),
@@ -135,14 +136,16 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Posso recuperare i dati del ciclo conservati in altre app?",
+                question:
+                    "Posso recuperare i dati del ciclo conservati in altre app?",
                 answer:
                     "Certo e My Lines ti aiuta! Inserendo la durata del tuo ciclo e delle tue mestruazioni in fase di registrazione, My Lines proverà a prevedere i tuoi cicli mestruali degli ultimi mesi. Dal calendario puoi visualizzare i mesi passati per confermare o modificare le previsioni. Questa operazione aiuterà la previsione delle stime future ed arricchirà da subito la tua sezione report.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Perché non visualizzo la sezione “Diario” se clicco su un giorno qualsiasi del calendario?",
+                question:
+                    "Perché non visualizzo la sezione “Diario” se clicco su un giorno qualsiasi del calendario?",
                 answer:
                     "Data la particolare sensibilità delle informazioni contenute, il servizio Diario è riservato alle sole utenti maggiorenni. Non preoccuparti! Potrai iniziare ad utilizzare il servizio Diario e ad inserire sintomi e attività al compimento della maggiore età.",
               ),
@@ -156,27 +159,32 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Ho sbagliato ad inserire le mestruazioni, posso modificarle?",
-                answer: "Certo, entra nell’area “calendario” e clicca sul tasto “Modifica mestruazioni”.",
+                question:
+                    "Ho sbagliato ad inserire le mestruazioni, posso modificarle?",
+                answer:
+                    "Certo, entra nell’area “calendario” e clicca sul tasto “Modifica mestruazioni”.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Perché le informazioni inserite nel mio Diario non sono state salvate?",
+                question:
+                    "Perché le informazioni inserite nel mio Diario non sono state salvate?",
                 answer:
                     "Quando utilizzi per la prima volta il Diario, inserisci dei dati e clicchi su “Procedi” ti verrà richiesto un consenso, devi fornirlo per poter utilizzare il servizio Diario e salvare i dati inseriti.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Che succede se tolgo il consenso al servizio Calendario Mestruale?",
+                question:
+                    "Che succede se tolgo il consenso al servizio Calendario Mestruale?",
                 answer:
                     "Per garantire l’esercizio dei tuoi diritti, se togli il consenso per il servizio Calendario Mestruale dovremo cancellare tutti i dati del ciclo che ci hai fornito. Ricorda che potrai fornire nuovamente il consenso nella pagina di gestione consensi ma non ritroverai i dati inseriti in precedenza, dovrai inserirli di nuovo.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Che succede se tolgo il consenso al servizio Diario?",
+                question:
+                    "Che succede se tolgo il consenso al servizio Diario?",
                 answer:
                     "Per garantire l’esercizio dei tuoi diritti, se togli il consenso per il servizio Diario dovremo cancellare tutti i dati di sintomi e attività che ci hai fornito. Ricorda che potrai fornire nuovamente il consenso nella pagina di gestione consensi ma on ritroverai i dati inseriti in precedenza, dovrai inserirli di nuovo.",
               ),
@@ -254,14 +262,16 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Quanti amici posso invitare?·	Quanti amici posso invitare?",
+                question:
+                    "Quanti amici posso invitare?·	Quanti amici posso invitare?",
                 answer:
                     "Puoi invitare tutti gli amici che vuoi, ma soltanto per i primi 5 riceverai 50 coins per ogni amico che completa la registrazione all’app My Lines inserendo il tuo codice amico.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Ho invitato un amico ma non ho ottenuto i Coins, come mai?",
+                question:
+                    "Ho invitato un amico ma non ho ottenuto i Coins, come mai?",
                 answer:
                     "Per ricevere i Coins è necessario che l’amico invitato si registri ed inserisca il codice amico ricevuto durante il flusso di registrazione. Se non lo inserisce durante il flusso di registrazione non può più inserirlo. Puoi ricevere coins per un massimo di 5 amici che si registrano in app utilizzando il tuo codice amico.",
               ),
@@ -302,7 +312,8 @@ class _FaqPageState extends State<FaqPage> {
 
               _expandableFaq(
                 question: "Quante volte posso caricare un codice prodotto?",
-                answer: "Puoi caricare ogni codice Lines soltanto una volta all’interno dell’app My Lines.",
+                answer:
+                    "Puoi caricare ogni codice Lines soltanto una volta all’interno dell’app My Lines.",
               ),
               ThemeSizedBox.height8,
 
@@ -314,7 +325,8 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Valgono anche i codici sulle confezioni dei pacchi multipli o pacco scorta?",
+                question:
+                    "Valgono anche i codici sulle confezioni dei pacchi multipli o pacco scorta?",
                 answer:
                     "No, se c’è un codice sul pacco esterno della confezione multipla puoi ignorarlo in quanto non è valido per l'inserimento nell'app My Lines. Se hai acquistato una confezione multipla o un pacco formato scorta, i codici da inserire in app si trovano all’interno delle singole confezioni contenute nel pacco.",
               ),
@@ -339,7 +351,8 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Posso usare lo stesso codice per partecipare a più missioni?",
+                question:
+                    "Posso usare lo stesso codice per partecipare a più missioni?",
                 answer:
                     "Ogni codice può essere caricato in app solo una volta ed eventualmente partecipare a massimo una missione.",
               ),
@@ -357,7 +370,8 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Come viene realizzata la previsione delle prossime mestruazioni?",
+                question:
+                    "Come viene realizzata la previsione delle prossime mestruazioni?",
                 answer:
                     "Se in fase di registrazione o dal profilo hai inserito la durata media del ciclo e delle mestruazioni, per i primi mesi quei dati vengono utilizzati per prevedere le future mestruazioni. Per renderlo ancora più preciso, dal 6° mese di utilizzo dell’app la previsione viene realizzata considerando la durata media del ciclo e delle mestruazioni dei 6 mesi precedenti, escludendo i due estremi. Se in fase di registrazione non ci hai fornito questi dati sarà utilizzata la durata media del ciclo di 28 giorni e delle mestruazioni di 5 giorni.",
               ),
@@ -403,8 +417,10 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Posso personalizzare tutte le varie fasi del ciclo mestruale?",
-                answer: "Le personalizzazioni che scegli si adatteranno a Cherry in tutte le fasi del ciclo mestruale.",
+                question:
+                    "Posso personalizzare tutte le varie fasi del ciclo mestruale?",
+                answer:
+                    "Le personalizzazioni che scegli si adatteranno a Cherry in tutte le fasi del ciclo mestruale.",
               ),
               ThemeSizedBox.height8,
 
@@ -427,14 +443,17 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "È possibile modificare l’email di registrazione all’app My Lines?",
-                answer: "No, non è possibile modificare l’email di registrazione all’app My Lines.",
+                question:
+                    "È possibile modificare l’email di registrazione all’app My Lines?",
+                answer:
+                    "No, non è possibile modificare l’email di registrazione all’app My Lines.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
                 question: "Posso cambiare la password?",
-                answer: "Si, puoi modificare la password cliccando sul menù in alto a sinistra e poi su “Account”",
+                answer:
+                    "Si, puoi modificare la password cliccando sul menù in alto a sinistra e poi su “Account”",
               ),
               ThemeSizedBox.height8,
 
@@ -450,7 +469,8 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Perché devo fare l’aggiornamento che l’app mi propone?",
+                question:
+                    "Perché devo fare l’aggiornamento che l’app mi propone?",
                 answer:
                     "Gli aggiornamenti ci servono per aggiungere o migliorare le funzionalità dell’app o a risolvere qualche bug tecnico. Aggiornare quindi significa avere la versione di My Lines migliore possibile ed in cui tutto funziona correttamente.",
               ),
@@ -471,14 +491,16 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Che succede se tolgo il consenso al servizio Calendario Mestruale?",
+                question:
+                    "Che succede se tolgo il consenso al servizio Calendario Mestruale?",
                 answer:
                     "Per garantire l’esercizio dei tuoi diritti, se togli il consenso per il servizio Calendario Mestruale dovremo cancellare tutti i dati del ciclo che ci hai fornito. Ricorda che potrai fornire nuovamente il consenso nella pagina di gestione consensi ma non ritroverai i dati inseriti in precedenza, dovrai inserirli di nuovo.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Che succede se tolgo il consenso al servizio Diario?",
+                question:
+                    "Che succede se tolgo il consenso al servizio Diario?",
                 answer:
                     "Per garantire l’esercizio dei tuoi diritti, se togli il consenso per il servizio Diario dovremo cancellare tutti i dati di sintomi e attività che ci hai fornito. Ricorda che potrai fornire nuovamente il consenso nella pagina di gestione consensi ma on ritroverai i dati inseriti in precedenza, dovrai inserirli di nuovo.",
               ),

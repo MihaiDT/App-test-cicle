@@ -28,13 +28,15 @@ class InfoHowToGetCoinsBottomSheet extends StatelessWidget {
           ThemeSizedBox.height16,
           InfoCard(
             title: "Questionari",
-            description: "Raccontaci di più su di te e rispondi alle domande dei questionari.",
+            description:
+                "Raccontaci di più su di te e rispondi alle domande dei questionari.",
             imagePath: ThemeImage.quizIntroImage,
           ),
           ThemeSizedBox.height16,
           InfoCard(
             title: "Invita un amico",
-            description: "Invita un'amica a iscriversi a My Lines e sarai ricompensata!",
+            description:
+                "Invita un'amica a iscriversi a My Lines e sarai ricompensata!",
             imagePath: ThemeImage.inviteAFriend,
           ),
           ThemeSizedBox.height32

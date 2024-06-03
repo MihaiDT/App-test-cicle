@@ -33,7 +33,8 @@ class Routes {
   static const String changeProfilePage = '/change_profile_page';
   static const String faq = '/faq';
   static const String account = '/account';
-  static const String contentLibraryCategoryPage = '/content_library/category_page';
+  static const String contentLibraryCategoryPage =
+      '/content_library/category_page';
   static const String badges = '/badges';
   static const String prizesOnboardingPage = '/prizes_onboarding_page';
   static const String infoPage = '/info_page';

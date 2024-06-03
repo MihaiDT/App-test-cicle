@@ -51,13 +51,16 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
         canPop: false,
         child: InAppWebView(
           shouldOverrideUrlLoading: (controller, navigationAction) async {
-            final String loadingPageUrl = "${environment.cherryCustomizationEndpoint}/index.html";
+            final String loadingPageUrl =
+                "${environment.cherryCustomizationEndpoint}/index.html";
 
-            final String firstPageUrl = "${environment.cherryCustomizationEndpoint}/HomePage";
+            final String firstPageUrl =
+                "${environment.cherryCustomizationEndpoint}/HomePage";
 
             final uri = navigationAction.request.url;
 
-            final isFirstUrl = uri != null && uri.toString().startsWith(loadingPageUrl);
+            final isFirstUrl =
+                uri != null && uri.toString().startsWith(loadingPageUrl);
 
             // // If the first page is loaded, allow the navigation
             // if (uri != null && isFirstUrl) {

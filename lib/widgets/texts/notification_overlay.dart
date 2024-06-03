@@ -101,8 +101,9 @@ class _FlushBarState extends State<FlushBar> with TickerProviderStateMixin {
       animation: _animationController!,
       builder: (ctx, child) {
         return Positioned(
-          top:
-              _notificationHeight == null ? _animation!.value * 400 : (_animation!.value * (_notificationHeight!)) + 24,
+          top: _notificationHeight == null
+              ? _animation!.value * 400
+              : (_animation!.value * (_notificationHeight!)) + 24,
           left: 8,
           right: 8,
           child: Material(

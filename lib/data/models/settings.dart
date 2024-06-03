@@ -38,7 +38,9 @@ class Settings {
       iosMinBuildNumber: json['ios_min_build_number'],
       iosStoreUrl: json['ios_store_url'],
       symptomsInHomeActive: json['show_sections']['symptoms_in_home'],
-      interests: (json['interests'] as List).map((interest) => Interest.fromJson(interest)).toList(),
+      interests: (json['interests'] as List)
+          .map((interest) => Interest.fromJson(interest))
+          .toList(),
       helpdeskUrl: json['helpdesk_url'],
       privacyContent: json['privacy_content'],
       cookieFingerprintingContent: json['cookie_fingerprinting_content'],

@@ -390,7 +390,8 @@ abstract class TextWrapper extends StatelessWidget {
         height: height,
         fontWeight: fontWeight,
         letterSpacing: letterSpacing,
-        leadingDistribution: height != null ? null : TextLeadingDistribution.even,
+        leadingDistribution:
+            height != null ? null : TextLeadingDistribution.even,
         decoration: underline ? TextDecoration.underline : null,
       ),
       maxLines: maxLines,

@@ -51,13 +51,15 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
         canPop: false,
         child: InAppWebView(
           shouldOverrideUrlLoading: (controller, navigationAction) async {
-            final String loadingPageUrl = "${environment.gameEndpoint}/index.html";
+            final String loadingPageUrl =
+                "${environment.gameEndpoint}/index.html";
 
             final String firstPageUrl = "${environment.gameEndpoint}/HomePage";
 
             final uri = navigationAction.request.url;
 
-            final isFirstUrl = uri != null && uri.toString().startsWith(loadingPageUrl);
+            final isFirstUrl =
+                uri != null && uri.toString().startsWith(loadingPageUrl);
 
             // If the first page is loaded, allow the navigation
             if (uri != null && isFirstUrl) {
@@ -68,7 +70,7 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
             if (uri != null && uri.toString().contains('/pad_change')) {
               // Vado al questionario di cambio assorbente
               Get.toNamed(Routes.gameQuiz);
-              
+
               // Cambio assorbente
               webViewController?.evaluateJavascript(
                 source: "dispatchResetPadEvent()",
@@ -82,7 +84,8 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
               }
             }
 
-            logDebug("${environment.gameEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}");
+            logDebug(
+                "${environment.gameEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}");
 
             return NavigationActionPolicy.CANCEL;
           },
