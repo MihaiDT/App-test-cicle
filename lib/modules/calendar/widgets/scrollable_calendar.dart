@@ -19,6 +19,7 @@ class ScrollableCalendar extends GetView<CalendarController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ScrollablePositionedList.separated(
+        shrinkWrap: true,
         itemScrollController: controller.monthCalendarItemScrollController,
         separatorBuilder: (_, __) => SizedBox(height: spaceBetweenCalendars),
         itemCount: controller.months.length,

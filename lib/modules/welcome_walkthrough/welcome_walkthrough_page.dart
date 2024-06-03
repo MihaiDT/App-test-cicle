@@ -45,17 +45,17 @@ class WelcomeWalkthroughPage extends StatelessWidget {
             ),
           ),
           WalkthroughData(
-            title: "Più partecipi, più accumuli punti",
+            title: "Scopri i fantastici premi che ti aspettano!",
             description:
-                "Partecipa alle missioni e ottieni punti per accedere a premi e contenuti esclusivi.",
+                "Carica i codici dei prodotti Lines per completare le missioni, accumulare coins e partecipare a concorsi .",
             image: Image.asset(
               ThemeImage.walkthrough4,
             ),
           ),
           WalkthroughData(
-            title: "Attiva il tuo calendario",
+            title: "Attiva le notifiche!",
             description:
-                "Consenti a My Lines di inviarti notifiche: ti aiuterà a monitorare il tuo ciclo e il tuo benessere inviandoti consigli e promemoria.",
+                "Ti aiuteremo a non farti cogliere di sorpresa dall’arrivo delle mestruazioni!",
             image: Image.asset(
               ThemeImage.walkthrough5,
             ),

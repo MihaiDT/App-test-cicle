@@ -74,7 +74,7 @@ class LoadCodeWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TitleMedium(
-                          "CARICA IL CODICE",
+                          "CARICA CODICE",
                           color: ThemeColor.brightPink,
                         ),
                         BodySmall(
