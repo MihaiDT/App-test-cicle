@@ -18,8 +18,7 @@ class HiveManager {
   }
 
   static bool get firstAccess {
-    return Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ??
-        true;
+    return Hive.box("linesApp").get(HiveReferenceKeys.isFirstAccess.name) ?? true;
   }
 
   static set firstAccess(bool symbol) {
@@ -43,14 +42,11 @@ class HiveManager {
   }
 
   static set numberOfAccess(int numberOfAccess) {
-    Hive.box("linesApp")
-        .put(HiveReferenceKeys.numberOfAccess.name, numberOfAccess);
+    Hive.box("linesApp").put(HiveReferenceKeys.numberOfAccess.name, numberOfAccess);
   }
 
   static bool get isFirstTutorialWatched {
-    return Hive.box("linesApp")
-            .get(HiveReferenceKeys.isFirstTutorialWatched.name) ??
-        false;
+    return Hive.box("linesApp").get(HiveReferenceKeys.isFirstTutorialWatched.name) ?? false;
   }
 
   static set isFirstTutorialWatched(bool isFirstTutorialWatched) {
@@ -60,14 +56,31 @@ class HiveManager {
     );
   }
 
-  static bool get hasAcceptedCookie {
-    return Hive.box("linesApp").get(HiveReferenceKeys.hasAcceptedCookie.name) ??
-        false;
+  static bool get hasAcceptedCookieProfiling {
+    return Hive.box("linesApp").get(HiveReferenceKeys.hasAcceptedCookieProfiling.name) ?? false;
   }
 
-  static set hasAcceptedCookie(bool hasAcceptedCookie) {
-    Hive.box("linesApp")
-        .put(HiveReferenceKeys.hasAcceptedCookie.name, hasAcceptedCookie);
+  static bool get hasAcceptedCookieStats {
+    return Hive.box("linesApp").get(HiveReferenceKeys.hasAcceptedCookieStats.name) ?? false;
+  }
+
+  static set hasAcceptedCookieStats(bool hasAcceptedCookie) {
+    Hive.box("linesApp").put(HiveReferenceKeys.hasAcceptedCookieStats.name, hasAcceptedCookie);
+  }
+
+  static set hasAcceptedCookieProfiling(bool hasAcceptedCookie) {
+    Hive.box("linesApp").put(HiveReferenceKeys.hasAcceptedCookieProfiling.name, hasAcceptedCookie);
+  }
+
+  static bool get hasAcceptedCookie {
+    return false; // FIXME:
+    return Hive.box("linesApp").get(HiveReferenceKeys.hasAcceptedCookieProfiling.name) != null &&
+        Hive.box("linesApp").get(HiveReferenceKeys.hasAcceptedCookieStats.name) != null;
+  }
+
+  static void removeAcceptedCookie() {
+    Hive.box("linesApp").delete(HiveReferenceKeys.hasAcceptedCookieProfiling.name);
+    Hive.box("linesApp").delete(HiveReferenceKeys.hasAcceptedCookieStats.name);
   }
 }
 
@@ -77,6 +90,7 @@ enum HiveReferenceKeys {
   userId,
   savedSymptoms,
   isFirstTutorialWatched,
-  hasAcceptedCookie,
+  hasAcceptedCookieProfiling,
+  hasAcceptedCookieStats,
   numberOfAccess;
 }

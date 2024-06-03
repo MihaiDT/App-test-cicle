@@ -81,4 +81,5 @@ class ThemeIcon {
   static const String checkMarkGradient = '$folderPath/checkmark_gradient.svg';
 
   static const String orangeWarning = '$folderPath/orange_warning.svg';
+  static const String check = '$folderPath/check.svg';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/response_handler.dart';
@@ -55,9 +56,7 @@ class LoginController extends GetxController {
           /// If the email exists and is active login the user
           else if (appController.checkEmail.value?.emailIsValid == true) {
             // FIXME: test this
-            if (appController.socialLoginParameter.registrationProvider
-                    ?.isSocialProvider ==
-                true) {
+            if (appController.socialLoginParameter.registrationProvider?.isSocialProvider == true) {
               await AuthenticationService.socialLoginUser(
                 appController.socialLoginParameter,
               );
@@ -73,9 +72,7 @@ class LoginController extends GetxController {
     );
     ever(
       appController.user.rxValue,
-      condition: () =>
-          Get.currentRoute == Routes.login &&
-          appController.checkEmail.responseHandler.isSuccessful,
+      condition: () => Get.currentRoute == Routes.login && appController.checkEmail.responseHandler.isSuccessful,
       (userStatus) async {
         if (userStatus.isPending) {
           isButtonPending.value = true;
@@ -120,8 +117,7 @@ class LoginController extends GetxController {
               await AuthenticationService.sendConsentsEmail();
               Get.toNamed(Routes.confirmEmailPage);
             }
-          } else if (appController.user.value?.routeAfterLogin ==
-              "complete_profile") {
+          } else if (appController.user.value?.routeAfterLogin == "complete_profile") {
             Get.offAndToNamed(Routes.lastMensesPage);
           } else {
             Get.offAndToNamed(Routes.main);
@@ -168,6 +164,8 @@ class LoginController extends GetxController {
       LoginParameters(
         email: email,
         password: password,
+        cookieProfiling: HiveManager.hasAcceptedCookieProfiling,
+        cookieStats: HiveManager.hasAcceptedCookieStats,
       ),
     );
   }
@@ -194,8 +192,7 @@ class LoginController extends GetxController {
     );
   }
 
-  String get email =>
-      appController.socialLoginParameter.email ?? emailController.text;
+  String get email => appController.socialLoginParameter.email ?? emailController.text;
 
   /// Open the bottomsheet to recover the password
   void onForgotPasswordTap(BuildContext context) async {

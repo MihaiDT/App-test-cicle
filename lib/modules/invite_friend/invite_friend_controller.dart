@@ -11,7 +11,8 @@ class InviteFriendController extends GetxController {
     await FlutterShare.share(
       title: 'Condividi il codice amico',
       text:
-          'Ciao! Usa il mio codice amico per registrarti in app: $referralCode',
+          "Ciao! Non hai ancora scaricato l’app My Lines? E' molto più di un calendario mestruale! Inserisci il mio codice amico in fase di registrazione per ottenere già 50 coins!\n"
+          "CODICE AMICO: $referralCode",
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_grouped_by_category.dart';
@@ -171,5 +172,6 @@ class AppController extends GetxController {
 
   void initializeState() {
     AppController.initial();
+    HiveManager.removeAcceptedCookie();
   }
 }

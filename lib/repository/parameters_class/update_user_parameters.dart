@@ -14,7 +14,8 @@ class UpdateUserParameters {
   bool? privacyBrandMarketing;
   String? referralCode;
   String? zipCode;
-  bool? hasConsentCookie;
+  bool? hasConsentCookieStats;
+  bool? hasConsentCookieProfiling;
   bool? calendarConsent;
   bool? diaryConsent;
 
@@ -34,7 +35,8 @@ class UpdateUserParameters {
     this.privacyBrandMarketing,
     this.referralCode,
     this.zipCode,
-    this.hasConsentCookie,
+    this.hasConsentCookieStats,
+    this.hasConsentCookieProfiling,
     this.calendarConsent,
     this.diaryConsent,
   });
@@ -77,7 +79,8 @@ class UpdateUserParameters {
       "privacy_brand_marketing": privacyBrandMarketing,
       "invitation_code": referralCode,
       "zip_code": zipCode,
-      "cookie_consent": hasConsentCookie,
+      "cookie_consent_stats": hasConsentCookieStats,
+      "cookie_consent_profiling": hasConsentCookieProfiling,
       "calendar_consent": calendarConsent,
       "diary_consent": diaryConsent,
     };

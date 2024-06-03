@@ -12,7 +12,7 @@ class MissionsLoadedProducts extends StatelessWidget {
   final bool showBottomLink;
   final String? text;
 
-  MissionsLoadedProducts({
+  const MissionsLoadedProducts({
     this.text,
     required this.products,
     required this.totalCodes,

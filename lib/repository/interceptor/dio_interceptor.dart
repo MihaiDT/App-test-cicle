@@ -58,6 +58,7 @@ class DioInterceptor extends Interceptor {
       AuthenticationService.logout();
       Get.find<SecureStorageManager>().clearToken();
       HiveManager.removeUserId();
+      HiveManager.removeAcceptedCookie();
       Get.offAllNamed(Routes.welcome);
     }
     super.onError(err, handler);
