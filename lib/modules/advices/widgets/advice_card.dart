@@ -49,9 +49,7 @@ class AdviceCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: article.thumbImageUrl == null
-              ? ThemeColor.primary
-              : Colors.transparent,
+          color: article.thumbImageUrl == null ? ThemeColor.primary : Colors.transparent,
           image: article.thumbImageUrl?.isNotEmpty == true
               ? DecorationImage(
                   image: NetworkImage(
@@ -89,7 +87,7 @@ class AdviceCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Opacity(
-                    opacity: 0.7,
+                    opacity: 0.45,
                     child: Image.asset(
                       ThemeImage.articleShadow,
                       fit: BoxFit.fitWidth,

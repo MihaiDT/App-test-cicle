@@ -33,14 +33,12 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                         controller.rxSelectedDate.refresh();
                       } else {
                         controller.collapseBottomSheet();
+                        controller.jumpToToday();
                       }
-                      controller.modifyPeriodMode.value =
-                          !controller.modifyPeriodMode.value;
+                      controller.modifyPeriodMode.value = !controller.modifyPeriodMode.value;
                     },
                     child: TitleLarge(
-                      controller.modifyPeriodMode.value
-                          ? 'Salva mestruazione'
-                          : 'Modifica mestruazioni',
+                      controller.modifyPeriodMode.value ? 'Salva mestruazione' : 'Modifica mestruazioni',
                     ),
                   ),
                 ),

@@ -17,7 +17,7 @@ class SettingsPage extends GetView<SettingsController> {
     return Scaffold(
       appBar: const TransparentAppBar(
         title: TitleSmall(
-          "ASSISTENZA",
+          "IMPOSTAZIONI",
           color: ThemeColor.primary,
         ),
         backButtonColor: ThemeColor.darkBlue,

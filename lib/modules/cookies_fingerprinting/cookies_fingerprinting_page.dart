@@ -9,14 +9,15 @@ import 'package:lines/core/theme/theme_sized_box.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/cookies_fingerprinting/cookies_fingerprinting_controller.dart';
 import 'package:lines/modules/cookies_fingerprinting/widgets/agree_check_buttons.dart';
+import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 import 'package:lines/routes/routes.dart';
 
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class CookiesFingerprintingPage
-    extends GetView<CookiesFingerprintingController> {
+class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController> {
   const CookiesFingerprintingPage({
     super.key,
   });
@@ -319,8 +320,23 @@ class CookiesFingerprintingPage
 
   void navigateToNextPage() {
     Get.back();
-    Get.offAndToNamed(
-      appController.isLoginFlow.value == true ? Routes.login : Routes.register,
+
+    if (controller.isEditing) {
+      Get.back();
+      _updateConsents();
+    } else {
+      Get.offAndToNamed(
+        appController.isLoginFlow.value == true ? Routes.login : Routes.register,
+      );
+    }
+  }
+
+  Future<void> _updateConsents() async {
+    await AuthenticationService.updatePrivacy(
+      UpdateUserParameters(
+        hasConsentCookieProfiling: HiveManager.hasAcceptedCookieProfiling,
+        hasConsentCookieStats: HiveManager.hasAcceptedCookieStats,
+      ),
     );
   }
 }

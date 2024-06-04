@@ -42,6 +42,7 @@ import 'package:lines/modules/drawer/binding/drawer_main_page_binding.dart';
 import 'package:lines/modules/drawer/pages/account_page.dart';
 import 'package:lines/modules/drawer/pages/change_password_page.dart';
 import 'package:lines/modules/drawer/pages/faq_page.dart';
+import 'package:lines/modules/edit_cookies/edit_cookies_page.dart';
 import 'package:lines/modules/game_quiz/game_quiz_binding.dart';
 import 'package:lines/modules/game_quiz/game_quiz_page.dart';
 import 'package:lines/modules/history/history_binding.dart';
@@ -722,6 +723,16 @@ class Pages {
       page: () => _mediaQueryWrapper(
         authNeeded: false,
         const DiaryDataDetailsPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    // Edit cookie
+    GetPage(
+      name: Routes.editCookies,
+      page: () => _mediaQueryWrapper(
+        const EditCookiesPage(),
+        authNeeded: false,
       ),
       transition: Transition.rightToLeft,
     ),

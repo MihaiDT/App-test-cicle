@@ -111,16 +111,12 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
                                   children: [
                                     ThemeSizedBox.height12,
                                     SvgPicture.asset(
-                                      controller.symptomCategories?[index]
-                                              .iconPath ??
-                                          '',
+                                      controller.symptomCategories?[index].iconPath ?? '',
                                       width: 30,
                                     ),
                                     ThemeSizedBox.height4,
                                     LabelLarge(
-                                      controller.symptomCategories?[index].name
-                                              .toUpperCase() ??
-                                          '',
+                                      controller.symptomCategories?[index].name.toUpperCase() ?? '',
                                       textAlign: TextAlign.center,
                                       color: ThemeColor.brightPink,
                                     ),

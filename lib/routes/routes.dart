@@ -33,8 +33,7 @@ class Routes {
   static const String changeProfilePage = '/change_profile_page';
   static const String faq = '/faq';
   static const String account = '/account';
-  static const String contentLibraryCategoryPage =
-      '/content_library/category_page';
+  static const String contentLibraryCategoryPage = '/content_library/category_page';
   static const String badges = '/badges';
   static const String prizesOnboardingPage = '/prizes_onboarding_page';
   static const String infoPage = '/info_page';
@@ -66,4 +65,6 @@ class Routes {
   static const String consents = '/consents';
   static const String diaryDataDetails = '/diary_data_details';
   static const String cookiesFingerprinting = '/cookies_fingerprinting';
+
+  static const String editCookies = '/edit_cookies';
 }

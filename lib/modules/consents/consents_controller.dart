@@ -14,16 +14,11 @@ class ConsentsController extends GetxController {
   final isDiaryConsentEnabled = false.obs;
 
   ConsentsController() {
-    isMarketingEnabled.value =
-        appController.user.value?.privacyMarketingEmail ?? false;
-    isProfilingEnabled.value =
-        appController.user.value?.privacyProfiling ?? false;
-    isBrandMarketingEnabled.value =
-        appController.user.value?.privacyBrandMarketing ?? false;
-    isCalendarConsentEnabled.value =
-        appController.user.value?.calendarConsent ?? false;
-    isDiaryConsentEnabled.value =
-        appController.user.value?.diaryConsent ?? false;
+    isMarketingEnabled.value = appController.user.value?.privacyMarketingEmail ?? false;
+    isProfilingEnabled.value = appController.user.value?.privacyProfiling ?? false;
+    isBrandMarketingEnabled.value = appController.user.value?.privacyBrandMarketing ?? false;
+    isCalendarConsentEnabled.value = appController.user.value?.calendarConsent ?? false;
+    isDiaryConsentEnabled.value = appController.user.value?.diaryConsent ?? false;
   }
 
   void toggleMarketingEnabled(bool value) {
@@ -50,6 +45,7 @@ class ConsentsController extends GetxController {
       updateCalendar = await showErrorDialog(
         context: Get.context!,
         builder: (_) => const ConfirmRemoveCalendarConsentDialog(),
+        dismissible: false,
       );
     }
 
@@ -68,6 +64,7 @@ class ConsentsController extends GetxController {
       updateDiary = await showErrorDialog(
         context: Get.context!,
         builder: (_) => const ConfirmRemoveDiaryConsentDialog(),
+        dismissible: false,
       );
     }
 

@@ -17,72 +17,75 @@ class MyMensesSection extends GetView<MyMensesSectionController> {
       color: Colors.white.withOpacity(0.8),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            ThemeSizedBox.height24,
-            const DisplayMedium(
-              "Il tuo ciclo",
-            ).applyShaders(context),
-            ThemeSizedBox.height4,
-            controller.hasSavedMensesInfo
-                ? const BodyMedium(
-                    "Dati basati sulle tue informazioni",
-                    color: ThemeColor.darkBlue,
-                  )
-                : const BodyMedium(
-                    "Aggiungi mestruazioni per visualizzare i report",
-                    color: ThemeColor.darkBlue,
-                  ),
-            ThemeSizedBox.height16,
-            if (controller.hasSavedMensesInfo)
-              Row(
-                children: [
-                  _infoCard(
-                    value: controller.periodDays.toString(),
-                    description: "Durata media flusso",
-                    imagePath: ThemeIcon.dropRoundedIcon,
-                  ),
-                  ThemeSizedBox.width8,
-                  _infoCard(
-                    value: controller.periodDuration.toString(),
-                    description: "Durata media ciclo",
-                    imagePath: ThemeIcon.circleRoundedIcon,
-                  ),
-                ],
-              ),
-            ThemeSizedBox.height8,
-            InkWell(
-              onTap: () {
-                Get.toNamed(Routes.yourMensesStatsPage);
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(60),
-                  ),
-                  color: Colors.white,
+        child: Obx(
+          () => Column(
+            children: [
+              ThemeSizedBox.height24,
+              const DisplayMedium(
+                "Il tuo ciclo",
+              ).applyShaders(context),
+              ThemeSizedBox.height4,
+              controller.hasSavedMensesInfo
+                  ? const BodyMedium(
+                      "Dati basati sulle tue informazioni",
+                      color: ThemeColor.darkBlue,
+                    )
+                  : const BodyMedium(
+                      "Aggiungi mestruazioni per visualizzare i report",
+                      color: ThemeColor.darkBlue,
+                    ),
+              ThemeSizedBox.height16,
+              if (controller.hasSavedMensesInfo) ...[
+                Row(
+                  children: [
+                    _infoCard(
+                      value: controller.periodDays.toString(),
+                      description: "Durata media flusso",
+                      imagePath: ThemeIcon.dropRoundedIcon,
+                    ),
+                    ThemeSizedBox.width8,
+                    _infoCard(
+                      value: controller.periodDuration.toString(),
+                      description: "Durata media ciclo",
+                      imagePath: ThemeIcon.circleRoundedIcon,
+                    ),
+                  ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(
-                    16,
-                  ),
-                  child: Row(
-                    children: [
-                      const TitleLarge(
-                        "GRAFICI E STATISTICHE",
-                      ).applyShaders(context),
-                      const Spacer(),
-                      SvgPicture.asset(
-                        ThemeIcon.arrowRight,
-                        color: ThemeGradient.colorPrimaryGradientLight,
+                ThemeSizedBox.height8,
+                InkWell(
+                  onTap: () {
+                    Get.toNamed(Routes.yourMensesStatsPage);
+                  },
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(60),
                       ),
-                    ],
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(
+                        16,
+                      ),
+                      child: Row(
+                        children: [
+                          const TitleLarge(
+                            "GRAFICI E STATISTICHE",
+                          ).applyShaders(context),
+                          const Spacer(),
+                          SvgPicture.asset(
+                            ThemeIcon.arrowRight,
+                            color: ThemeGradient.colorPrimaryGradientLight,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            ThemeSizedBox.height24,
-          ],
+                ThemeSizedBox.height24,
+              ],
+            ],
+          ),
         ),
       ),
     );

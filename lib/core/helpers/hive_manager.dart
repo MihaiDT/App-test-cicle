@@ -73,7 +73,6 @@ class HiveManager {
   }
 
   static bool get hasAcceptedCookie {
-    return false; // FIXME:
     return Hive.box("linesApp").get(HiveReferenceKeys.hasAcceptedCookieProfiling.name) != null &&
         Hive.box("linesApp").get(HiveReferenceKeys.hasAcceptedCookieStats.name) != null;
   }

@@ -79,8 +79,8 @@ class UpdateUserParameters {
       "privacy_brand_marketing": privacyBrandMarketing,
       "invitation_code": referralCode,
       "zip_code": zipCode,
-      "cookie_consent_stats": hasConsentCookieStats,
-      "cookie_consent_profiling": hasConsentCookieProfiling,
+      "cookie_stats": hasConsentCookieStats,
+      "cookie_profiling": hasConsentCookieProfiling,
       "calendar_consent": calendarConsent,
       "diary_consent": diaryConsent,
     };

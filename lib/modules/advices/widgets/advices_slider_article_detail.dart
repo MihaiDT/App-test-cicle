@@ -151,6 +151,7 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
                 "Questo contenuto è stato scritto da esperti del settore e fornisce solo informazioni di carattere generale. Per ogni dubbio, chiarimento o approfondimento consulta sempre il tuo medico.",
                 color: _disclaimerColor.withOpacity(0.5),
                 fontWeight: FontWeight.w500,
+                textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height60,
             ],

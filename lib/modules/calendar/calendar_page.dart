@@ -28,8 +28,7 @@ class CalendarPage extends GetView<CalendarController> {
           Column(
             children: [
               SizedBox(
-                height:
-                    ThemeSize.heightSafeAreaTop + AppBar().preferredSize.height,
+                height: ThemeSize.heightSafeAreaTop + AppBar().preferredSize.height,
               ),
               Obx(
                 () => CalendarMonthYearSwitch(
@@ -41,11 +40,13 @@ class CalendarPage extends GetView<CalendarController> {
               Obx(
                 () {
                   if (!controller.pageShouldRefresh) {
-                    return Align(
-                      alignment: Alignment.topCenter,
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        top: (Get.height * 0.1),
+                      ),
                       child: SizedBox(
-                        height: Get.width * 0.4,
-                        width: Get.width * 0.4,
+                        height: Get.width * 0.15,
+                        width: Get.width * 0.15,
                         child: const DarkLoader(),
                       ),
                     );
@@ -59,8 +60,7 @@ class CalendarPage extends GetView<CalendarController> {
                             ),
                             child: Obx(
                               () => Visibility(
-                                visible: controller.selectedTab.value ==
-                                    CalendarTabs.monthTab,
+                                visible: controller.selectedTab.value == CalendarTabs.monthTab,
                                 child: CalendarWeekRow(controller: controller),
                               ),
                             ),
@@ -117,8 +117,7 @@ class CalendarPage extends GetView<CalendarController> {
         children: [
           Obx(
             () => Visibility(
-              visible: controller.selectedTab.value == CalendarTabs.monthTab &&
-                  controller.pageShouldRefresh,
+              visible: controller.selectedTab.value == CalendarTabs.monthTab && controller.pageShouldRefresh,
               child: const ScrollableCalendar(
                 spaceBetweenCalendars: 70.0,
               ),
@@ -126,8 +125,7 @@ class CalendarPage extends GetView<CalendarController> {
           ),
           Obx(
             () => Visibility(
-              visible: controller.selectedTab.value == CalendarTabs.yearTab &&
-                  controller.pageShouldRefresh,
+              visible: controller.selectedTab.value == CalendarTabs.yearTab && controller.pageShouldRefresh,
               child: const CalendarYearBody(),
             ),
           ),

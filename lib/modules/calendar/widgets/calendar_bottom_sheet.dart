@@ -86,7 +86,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                         },
                       ),
                       const DisplayMedium(
-                        'Aggiungi sintomi e attività',
+                        'Il tuo diario',
                         textAlign: TextAlign.center,
                       ).applyShaders(context),
                       ThemeSizedBox.height24,
@@ -110,9 +110,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
 
   /// Return the text for day inside the bottom sheet , add OGGI label if the date selected is today
   String get _bottomSheetDayText {
-    String text = DateFormat('dd MMMM', 'it')
-        .format(controller.rxSelectedDate.value)
-        .toUpperCase();
+    String text = DateFormat('dd MMMM', 'it').format(controller.rxSelectedDate.value).toUpperCase();
     if (controller.rxSelectedDate.value.isToday) {
       return 'OGGI - $text';
     } else {
@@ -139,11 +137,9 @@ class CalendarBottomSheet extends GetView<CalendarController> {
       ),
       itemCount: controller.symptomCategories.length,
       itemBuilder: (context, index) {
-        if (controller.isMensesDay &&
-            controller.symptomCategories[index].code == "perdite") {
+        if (controller.isMensesDay && controller.symptomCategories[index].code == "perdite") {
           return const SizedBox();
-        } else if (!controller.isMensesDay &&
-            controller.symptomCategories[index].code == "flusso_mestruale") {
+        } else if (!controller.isMensesDay && controller.symptomCategories[index].code == "flusso_mestruale") {
           return const SizedBox();
         }
         return Column(
@@ -162,8 +158,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                 const Spacer(),
                 // perdite and flusso_mestruale categories should not have the "Aggiungi in home" button because they are always in home
                 if (controller.symptomCategories[index].code != "perdite" &&
-                    controller.symptomCategories[index].code !=
-                        "flusso_mestruale" &&
+                    controller.symptomCategories[index].code != "flusso_mestruale" &&
                     controller.isSymptomInHomeActive) ...[
                   const BodySmall(
                     "Aggiungi in home",
@@ -184,9 +179,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                           );
                         },
                         child: SvgPicture.asset(
-                          isSaved
-                              ? ThemeIcon.checkboxFilled
-                              : ThemeIcon.checkboxOutline,
+                          isSaved ? ThemeIcon.checkboxFilled : ThemeIcon.checkboxOutline,
                           height: 12,
                           width: 12,
                         ),

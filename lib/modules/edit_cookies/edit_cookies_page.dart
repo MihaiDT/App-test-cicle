@@ -3,14 +3,17 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/buttons/secondary_button.dart';
+import 'package:lines/widgets/buttons/primary_button.dart';
+import 'package:lines/widgets/buttons/primary_loading_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class CookiePage extends StatelessWidget {
-  const CookiePage({
+class EditCookiesPage extends StatelessWidget {
+  const EditCookiesPage({
     super.key,
   });
 
@@ -19,21 +22,21 @@ class CookiePage extends StatelessWidget {
     return AppScaffoldPage(
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(
-        showBackButton: false,
+        backButtonColor: ThemeColor.darkBlue,
         actions: [
           IconButton(
             onPressed: () {
-              rejectAllCookies();
-              navigateToNextPage();
+              _rejectAllCookies();
+              Get.back();
             },
             icon: const Icon(
               Icons.close,
-              color: Colors.white,
+              color: ThemeColor.darkBlue,
             ),
           ),
         ],
       ),
-      backgroundImage: ThemeDecoration.images.bgDark,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: BottomWidgetLayout(
           scrollableAreaPadding: const EdgeInsets.symmetric(
@@ -46,14 +49,14 @@ class CookiePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SecondaryButton(
+                PrimaryButton(
                   onPressed: () {
-                    acceptAllCookies();
-                    navigateToNextPage();
+                    _acceptAllCookies();
+                    Get.back();
                   },
                   child: const TitleLarge(
                     "ACCONSENTO",
-                  ).applyShaders(context),
+                  ),
                 ),
                 ThemeSizedBox.height16,
                 GestureDetector(
@@ -62,7 +65,7 @@ class CookiePage extends StatelessWidget {
                     "PIÙ OPZIONI",
                     underline: true,
                     textAlign: TextAlign.center,
-                  ),
+                  ).applyShaders(context),
                 ),
               ],
             ),
@@ -77,12 +80,13 @@ class CookiePage extends StatelessWidget {
               const DisplayMedium(
                 "Personalizza la tua\n esperienza",
                 textAlign: TextAlign.center,
-              ),
+              ).applyShaders(context),
               ThemeSizedBox.height16,
               const BodyMedium(
                 "Quest'app utilizza cookie tecnici/fingerprinting di profilazione, anche di terze parti,"
                 " per offrirti contenuti, servizi e pubblicità interessanti per te sulla base delle tue attività.",
                 textAlign: TextAlign.center,
+                color: ThemeColor.darkBlue,
               ),
               ThemeSizedBox.height16,
               GestureDetector(
@@ -90,6 +94,7 @@ class CookiePage extends StatelessWidget {
                 child: const BodyMedium(
                   "Clicca qui per saperne di più.",
                   textAlign: TextAlign.center,
+                  color: ThemeColor.darkBlue,
                   underline: true,
                 ),
               ),
@@ -99,6 +104,7 @@ class CookiePage extends StatelessWidget {
                 " per accettare selettivamente tutti o alcuni cookie/fingerprinting."
                 " Clicca sulla X per chiudere senza prestare consenso.",
                 textAlign: TextAlign.center,
+                color: ThemeColor.darkBlue,
               ),
             ],
           ),
@@ -108,17 +114,28 @@ class CookiePage extends StatelessWidget {
   }
 
   void _onKnowMoreAboutCookies() {
-    Get.toNamed(Routes.cookiesFingerprinting, arguments: false);
+    Get.toNamed(Routes.cookiesFingerprinting, arguments: true);
   }
 
-  void rejectAllCookies() {
+  Future<void> _rejectAllCookies() async {
     HiveManager.hasAcceptedCookieStats = false;
     HiveManager.hasAcceptedCookieProfiling = false;
+    await _updateConsents();
   }
 
-  void acceptAllCookies() {
+  Future<void> _acceptAllCookies() async {
     HiveManager.hasAcceptedCookieStats = true;
     HiveManager.hasAcceptedCookieProfiling = true;
+    await _updateConsents();
+  }
+
+  Future<void> _updateConsents() async {
+    await AuthenticationService.updatePrivacy(
+      UpdateUserParameters(
+        hasConsentCookieProfiling: HiveManager.hasAcceptedCookieProfiling,
+        hasConsentCookieStats: HiveManager.hasAcceptedCookieStats,
+      ),
+    );
   }
 
   void navigateToNextPage() {

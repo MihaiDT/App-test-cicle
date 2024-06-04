@@ -33,7 +33,8 @@ class User {
   int? profileCompletionPercentage;
   String? routeAfterLogin;
 
-  bool? hasConsentCookie;
+  bool? hasConsentCookieProfiling;
+  bool? hasConsentCookieStats;
   bool? calendarConsent;
   bool? diaryConsent;
 
@@ -67,7 +68,8 @@ class User {
     this.isWelcomeQuizCompleted,
     this.profileCompletionPercentage,
     this.routeAfterLogin,
-    this.hasConsentCookie,
+    this.hasConsentCookieProfiling,
+    this.hasConsentCookieStats,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -107,7 +109,8 @@ class User {
       isWelcomeQuizCompleted: json['user']['is_welcome_quiz_completed'],
       profileCompletionPercentage: json['user']['profile_percentage'],
       routeAfterLogin: json['user']['route_after_login'],
-      hasConsentCookie: json['user']['cookie_consent'],
+      hasConsentCookieProfiling: json['user']['cookie_profiling'],
+      hasConsentCookieStats: json['user']['cookie_stats'],
     );
   }
 
@@ -145,7 +148,8 @@ class User {
       "is_welcome_quiz_completed": isWelcomeQuizCompleted,
       "profile_percentage": profileCompletionPercentage,
       "route_after_login": routeAfterLogin,
-      "cookie_consent": hasConsentCookie,
+      "cookie_profiling": hasConsentCookieProfiling,
+      "cookie_stats": hasConsentCookieStats,
     };
   }
 
@@ -163,7 +167,8 @@ class User {
         ' isWelcomeQuizCompleted: $isWelcomeQuizCompleted,'
         ' profileCompletionPercentage: $profileCompletionPercentage,'
         ' routeAfterLogin: $routeAfterLogin,'
-        ' hasConsentCookie: $hasConsentCookie, }';
+        ' hasConsentCookieProfiling: $hasConsentCookieProfiling,'
+        ' hasConsentCookieStats: $hasConsentCookieStats, }';
   }
 
   bool get hasCompletedInterests {
@@ -183,8 +188,7 @@ class User {
     DateTime currentDate = DateTime.now();
     int age = currentDate.year - birthDate.year;
     if (currentDate.month < birthDate.month ||
-        (currentDate.month == birthDate.month &&
-            currentDate.day < birthDate.day)) {
+        (currentDate.month == birthDate.month && currentDate.day < birthDate.day)) {
       age--;
     }
     return age;

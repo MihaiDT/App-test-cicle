@@ -3,10 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/consents/consents_controller.dart';
 import 'package:lines/modules/drawer/sections/remove_account_section.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ConsentsPage extends GetView<ConsentsController> {
   const ConsentsPage({
@@ -51,8 +53,7 @@ class ConsentsPage extends GetView<ConsentsController> {
                       () {
                         return CupertinoSwitch(
                           value: controller.isMarketingEnabled.value,
-                          onChanged: (value) =>
-                              controller.toggleMarketingEnabled(value),
+                          onChanged: (value) => controller.toggleMarketingEnabled(value),
                         );
                       },
                     ),
@@ -85,8 +86,7 @@ class ConsentsPage extends GetView<ConsentsController> {
                       () {
                         return CupertinoSwitch(
                           value: controller.isProfilingEnabled.value,
-                          onChanged: (value) =>
-                              controller.toggleProfilingEnabled(value),
+                          onChanged: (value) => controller.toggleProfilingEnabled(value),
                         );
                       },
                     ),
@@ -120,8 +120,7 @@ class ConsentsPage extends GetView<ConsentsController> {
                       () {
                         return CupertinoSwitch(
                           value: controller.isBrandMarketingEnabled.value,
-                          onChanged: (value) =>
-                              controller.toggleBrandMarketingEnabled(value),
+                          onChanged: (value) => controller.toggleBrandMarketingEnabled(value),
                         );
                       },
                     ),
@@ -155,8 +154,7 @@ class ConsentsPage extends GetView<ConsentsController> {
                       () {
                         return CupertinoSwitch(
                           value: controller.isCalendarConsentEnabled.value,
-                          onChanged: (value) =>
-                              controller.toggleCalendarConsentEnabled(value),
+                          onChanged: (value) => controller.toggleCalendarConsentEnabled(value),
                         );
                       },
                     ),
@@ -167,41 +165,42 @@ class ConsentsPage extends GetView<ConsentsController> {
             ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: Get.width * 0.7,
-                      child: const HeadlineLarge(
-                        "Consenso servizio Diario",
-                        color: ThemeColor.darkBlue,
-                        maxLines: 3,
+          if (appController.user.value!.hasMoreThan18Years) ...[
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: Get.width * 0.7,
+                        child: const HeadlineLarge(
+                          "Consenso servizio Diario",
+                          color: ThemeColor.darkBlue,
+                          maxLines: 3,
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    Obx(
-                      () {
-                        return CupertinoSwitch(
-                          value: controller.isDiaryConsentEnabled.value,
-                          onChanged: (value) =>
-                              controller.toggleDiaryConsentEnabled(value),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                ..._diaryConsentDescription(context),
-              ],
+                      const Spacer(),
+                      Obx(
+                        () {
+                          return CupertinoSwitch(
+                            value: controller.isDiaryConsentEnabled.value,
+                            onChanged: (value) => controller.toggleDiaryConsentEnabled(value),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  ..._diaryConsentDescription(context),
+                ],
+              ),
             ),
-          ),
-          const Divider(),
+            const Divider(),
+          ],
           ThemeSizedBox.height40,
           const RemoveAccountSection(
             prefixText:
@@ -221,16 +220,14 @@ class ConsentsPage extends GetView<ConsentsController> {
         text: TextSpan(
           children: [
             TextSpan(
-              text:
-                  "Per utilizzare il servizio Diario acconsenti al trattamento dei ",
+              text: "Per utilizzare il servizio Diario acconsenti al trattamento dei ",
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.darkBlue.withOpacity(0.5),
                     height: 1.2,
                   ),
             ),
             TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap = () => Get.toNamed(Routes.diaryDataDetails),
+              recognizer: TapGestureRecognizer()..onTap = () => Get.toNamed(Routes.diaryDataDetails),
               text: '"dati sulla tua salute e sulla tua sessualità"',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.brightPink,
@@ -248,9 +245,12 @@ class ConsentsPage extends GetView<ConsentsController> {
             ),
             TextSpan(
               recognizer: TapGestureRecognizer()
-                ..onTap = () => {
-                      // TODO: privacy
-                    },
+                ..onTap = () async {
+                  await launchUrl(
+                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
               text: 'informativa privacy',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.brightPink,
@@ -290,9 +290,12 @@ class ConsentsPage extends GetView<ConsentsController> {
             ),
             TextSpan(
               recognizer: TapGestureRecognizer()
-                ..onTap = () => {
-                      // TODO: privacy
-                    },
+                ..onTap = () async {
+                  await launchUrl(
+                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
               text: 'informativa privacy',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.brightPink,
@@ -302,8 +305,7 @@ class ConsentsPage extends GetView<ConsentsController> {
                   ),
             ),
             TextSpan(
-              text:
-                  '. Il consenso è necessario per utilizzare il servizio Calendario Mestruale.',
+              text: '. Il consenso è necessario per utilizzare il servizio Calendario Mestruale.',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.darkBlue.withOpacity(0.5),
                     height: 1.2,
@@ -337,9 +339,12 @@ class ConsentsPage extends GetView<ConsentsController> {
             ),
             TextSpan(
               recognizer: TapGestureRecognizer()
-                ..onTap = () => {
-                      // TODO: privacy
-                    },
+                ..onTap = () async {
+                  await launchUrl(
+                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
               text: 'informativa privacy',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.brightPink,
@@ -383,9 +388,12 @@ class ConsentsPage extends GetView<ConsentsController> {
             ),
             TextSpan(
               recognizer: TapGestureRecognizer()
-                ..onTap = () => {
-                      // TODO: privacy
-                    },
+                ..onTap = () async {
+                  await launchUrl(
+                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
               text: 'informativa privacy',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.brightPink,
@@ -429,9 +437,12 @@ class ConsentsPage extends GetView<ConsentsController> {
             ),
             TextSpan(
               recognizer: TapGestureRecognizer()
-                ..onTap = () => {
-                      // TODO: privacy
-                    },
+                ..onTap = () async {
+                  await launchUrl(
+                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
               text: 'informativa privacy',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.brightPink,
