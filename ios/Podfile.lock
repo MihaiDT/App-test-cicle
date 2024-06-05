@@ -29,10 +29,10 @@ PODS:
   - Firebase/Crashlytics (10.25.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 10.25.0)
-  - firebase_core (2.31.1):
+  - firebase_core (2.32.0):
     - Firebase/CoreOnly (= 10.25.0)
     - Flutter
-  - firebase_crashlytics (3.5.6):
+  - firebase_crashlytics (3.5.7):
     - Firebase/Crashlytics (= 10.25.0)
     - firebase_core
     - Flutter
@@ -258,8 +258,8 @@ SPEC CHECKSUMS:
   FBSDKCoreKit_Basics: d35c775aaf243a2d731dfae7be3a74b1987285ab
   FBSDKLoginKit: f8ca5f7ab7c4e5b93e729d94975b0db7fcc511ed
   Firebase: 0312a2352584f782ea56f66d91606891d4607f06
-  firebase_core: 22e117a2e0dec3cb318c8f53f2dd01c140375617
-  firebase_crashlytics: bd50e4bbd2ac62cb6d5efd73449f414a2619e55b
+  firebase_core: a626d00494efa398e7c54f25f1454a64c8abf197
+  firebase_crashlytics: 17e856fabec68d993662abaf2f6fe2413f0abece
   FirebaseCore: 7ec4d0484817f12c3373955bc87762d96842d483
   FirebaseCoreExtension: 4ec89dd0c6de93d6becde32122d68b7c35f6bf5d
   FirebaseCoreInternal: 4b297a2d56063dbea2c1d0d04222d44a8d058862
@@ -296,4 +296,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 223362fec8615426fc713540d420c4b33b51c9e6
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.13.0

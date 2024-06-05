@@ -25,16 +25,16 @@ class ContentLibrarySearchPageController extends GetxController {
 
   ///if block will handle results that are shown when user taps on a category,
   ///else block will handle results when user types something inside the textfield
-  List<AdvicesArticle> get resultsArticles {
-    if (forceResults.value) {
-      return rxResultsArticles;
-    } else {
+  void filterResultsArticles() {
+    if (!forceResults.value) {
       String textToFilter = textEditingController.text.toLowerCase();
       rxResultsArticles.clear();
-      rxResultsArticles.addAll(getAllArticles);
-      return rxResultsArticles.where((article) {
-        return _articleContainsText(article, textToFilter);
-      }).toList();
+      rxResultsArticles.addAll(
+        getAllArticles.where((article) {
+          return _articleContainsText(article, textToFilter);
+        }).toList(),
+      );
+      rxResultsArticles.refresh();
     }
   }
 
@@ -77,13 +77,14 @@ class ContentLibrarySearchPageController extends GetxController {
   ///listener for textfield , if the text as more then 4 character show the results
   void _listenForTyping() {
     if (!forceResults.value) {
-      if (textEditingController.text.length > 4) {
+      if (textEditingController.text.length > 2) {
         showResults = true;
       } else {
         showResults = false;
       }
     }
     text.value = textEditingController.text;
+    filterResultsArticles();
   }
 
   void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {
@@ -149,8 +150,8 @@ class ContentLibrarySearchPageController extends GetxController {
   void onSubCategoryTapped(AdvicesSubCategory subCategory) {
     forceResults.value = true;
     textEditingController.text = subCategory.subCategoryName;
-    resultsArticles.clear();
-    resultsArticles.addAll(subCategory.articles);
+    rxResultsArticles.value.clear();
+    rxResultsArticles.value.addAll(subCategory.articles);
     showResults = true;
   }
 

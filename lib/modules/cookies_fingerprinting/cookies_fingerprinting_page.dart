@@ -17,7 +17,8 @@ import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController> {
+class CookiesFingerprintingPage
+    extends GetView<CookiesFingerprintingController> {
   const CookiesFingerprintingPage({
     super.key,
   });
@@ -326,7 +327,9 @@ class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController>
       _updateConsents();
     } else {
       Get.offAndToNamed(
-        appController.isLoginFlow.value == true ? Routes.login : Routes.register,
+        appController.isLoginFlow.value == true
+            ? Routes.login
+            : Routes.register,
       );
     }
   }

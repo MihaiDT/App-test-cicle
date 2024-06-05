@@ -50,12 +50,10 @@ class WrapperAccessController extends GetxController {
   }
 
   Future<void> checkInternetConnection() async {
-    final connectivityResult = await (Connectivity().checkConnectivity());
-    final ConnectivityResult? hasNotConnection =
-        connectivityResult.firstWhereOrNull(
-      (element) => element == ConnectivityResult.none,
-    );
-    if (hasNotConnection != null) {
+    final connectivityResults = await (Connectivity().checkConnectivity());
+    final noInternet = connectivityResults.contains(ConnectivityResult.none);
+
+    if (noInternet) {
       lockApp.value = true;
 
       final overlayEntry = OverlayEntry(

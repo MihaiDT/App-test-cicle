@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -30,28 +29,53 @@ class SettingsPage extends GetView<SettingsController> {
           const Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: 8,
+              vertical: ThemeSize.paddingSmall,
             ),
-            child: Row(
-              children: [
-                const HeadlineSmall(
-                  "Notifiche",
-                  color: ThemeColor.darkBlue,
-                ),
-                const Spacer(),
-                Obx(
-                  () {
-                    return CupertinoSwitch(
-                      value: controller.isNotificationEnabled.value,
-                      onChanged: (value) {
-                        controller.isNotificationEnabled.value = value;
-                      },
-                    );
-                  },
-                ),
-              ],
+            child: InkWell(
+              onTap: () => controller.openSettings(),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const HeadlineSmall(
+                        "Notifiche",
+                        color: ThemeColor.darkBlue,
+                      ),
+                      const Spacer(),
+                      SvgPicture.asset(
+                        ThemeIcon.arrowRight,
+                        color: ThemeColor.primary,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(
+          //     vertical: 8,
+          //   ),
+          //   child: Row(
+          //     children: [
+          //       const HeadlineSmall(
+          //         "Notifiche",
+          //         color: ThemeColor.darkBlue,
+          //       ),
+          //       const Spacer(),
+          //       Obx(
+          //         () {
+          //           return CupertinoSwitch(
+          //             value: controller.isNotificationEnabled.value,
+          //             onChanged: (value) {
+          //               controller.isNotificationEnabled.value = value;
+          //             },
+          //           );
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
           const Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(

@@ -53,7 +53,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                       () {
                         return CupertinoSwitch(
                           value: controller.isMarketingEnabled.value,
-                          onChanged: (value) => controller.toggleMarketingEnabled(value),
+                          onChanged: (value) =>
+                              controller.toggleMarketingEnabled(value),
                         );
                       },
                     ),
@@ -86,7 +87,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                       () {
                         return CupertinoSwitch(
                           value: controller.isProfilingEnabled.value,
-                          onChanged: (value) => controller.toggleProfilingEnabled(value),
+                          onChanged: (value) =>
+                              controller.toggleProfilingEnabled(value),
                         );
                       },
                     ),
@@ -120,7 +122,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                       () {
                         return CupertinoSwitch(
                           value: controller.isBrandMarketingEnabled.value,
-                          onChanged: (value) => controller.toggleBrandMarketingEnabled(value),
+                          onChanged: (value) =>
+                              controller.toggleBrandMarketingEnabled(value),
                         );
                       },
                     ),
@@ -154,7 +157,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                       () {
                         return CupertinoSwitch(
                           value: controller.isCalendarConsentEnabled.value,
-                          onChanged: (value) => controller.toggleCalendarConsentEnabled(value),
+                          onChanged: (value) =>
+                              controller.toggleCalendarConsentEnabled(value),
                         );
                       },
                     ),
@@ -189,7 +193,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                         () {
                           return CupertinoSwitch(
                             value: controller.isDiaryConsentEnabled.value,
-                            onChanged: (value) => controller.toggleDiaryConsentEnabled(value),
+                            onChanged: (value) =>
+                                controller.toggleDiaryConsentEnabled(value),
                           );
                         },
                       ),
@@ -220,14 +225,16 @@ class ConsentsPage extends GetView<ConsentsController> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: "Per utilizzare il servizio Diario acconsenti al trattamento dei ",
+              text:
+                  "Per utilizzare il servizio Diario acconsenti al trattamento dei ",
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.darkBlue.withOpacity(0.5),
                     height: 1.2,
                   ),
             ),
             TextSpan(
-              recognizer: TapGestureRecognizer()..onTap = () => Get.toNamed(Routes.diaryDataDetails),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () => Get.toNamed(Routes.diaryDataDetails),
               text: '"dati sulla tua salute e sulla tua sessualità"',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.brightPink,
@@ -305,7 +312,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                   ),
             ),
             TextSpan(
-              text: '. Il consenso è necessario per utilizzare il servizio Calendario Mestruale.',
+              text:
+                  '. Il consenso è necessario per utilizzare il servizio Calendario Mestruale.',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: ThemeColor.darkBlue.withOpacity(0.5),
                     height: 1.2,

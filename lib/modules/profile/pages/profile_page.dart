@@ -40,7 +40,9 @@ class ProfilePage extends StatelessWidget {
                 ThemeSizedBox.height16,
                 Obx(() {
                   return (appController.user.responseHandler.isSuccessful &&
-                          (appController.user.value!.hasConsentCookieProfiling ?? false))
+                          (appController
+                                  .user.value!.hasConsentCookieProfiling ??
+                              false))
                       ? const MyBadgesSection()
                       : _disabledBadgeSection();
                 }),

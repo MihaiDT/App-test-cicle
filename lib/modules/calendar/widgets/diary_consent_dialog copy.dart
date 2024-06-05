@@ -39,13 +39,15 @@ class DiaryConsentDialog extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: 'Per utilizzare il servizio Diario acconsenti al trattamento dei ',
+                    text:
+                        'Per utilizzare il servizio Diario acconsenti al trattamento dei ',
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: ThemeColor.darkBlue,
                         ),
                   ),
                   TextSpan(
-                    recognizer: TapGestureRecognizer()..onTap = () => Get.toNamed(Routes.diaryDataDetails),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Get.toNamed(Routes.diaryDataDetails),
                     text: 'dati sulla tua salute e sulla tua sessualità',
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: ThemeColor.brightPink,
@@ -56,7 +58,10 @@ class DiaryConsentDialog extends StatelessWidget {
                   ),
                   TextSpan(
                     text: ' da te inseriti, come da ',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: ThemeColor.darkBlue),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: ThemeColor.darkBlue),
                   ),
                   TextSpan(
                     recognizer: TapGestureRecognizer()

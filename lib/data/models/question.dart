@@ -67,6 +67,11 @@ class Question {
   }
 
   String get questionDescription {
+    if (typology == 'tag') {
+      // TODO: fare meglio...
+      return "Scegli almeno tre argomenti che vorresti approfondire con My Lines";
+    }
+
     if (minAnswers < maxAnswers) {
       return "Seleziona una o più opzioni";
     }

@@ -67,7 +67,9 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
             child: InkWell(
               onTap: () async {
                 await launchUrl(
-                  Uri.parse(appController.settings.value?.termsAndConditionsUrl ?? ''),
+                  Uri.parse(
+                      appController.settings.value?.termsAndConditionsUrl ??
+                          ''),
                   mode: LaunchMode.externalApplication,
                 );
               },
@@ -96,7 +98,8 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
               vertical: ThemeSize.paddingSmall,
             ),
             child: InkWell(
-              onTap: () => Get.toNamed(Routes.cookiesFingerprinting, arguments: false),
+              onTap: () =>
+                  Get.toNamed(Routes.cookiesFingerprinting, arguments: false),
               child: Column(
                 children: [
                   Row(

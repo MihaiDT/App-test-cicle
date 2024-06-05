@@ -4,6 +4,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/core/utils/helpers.dart';
@@ -21,6 +23,7 @@ import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/calendar_service.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class CalendarController extends GetxController with MonthCalendarMixin {
   /// Current date selected by the user.
@@ -36,15 +39,20 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   RxBool diaryConsentsUpdated = true.obs;
 
   /// DraggableScrollableController for calendarBottomSheet
-  final DraggableScrollableController draggableScrollableController = DraggableScrollableController();
+  final DraggableScrollableController draggableScrollableController =
+      DraggableScrollableController();
 
   bool get showSaveButtonSymptoms {
     if (pageShouldRefresh &&
         selectedTab.value == CalendarTabs.monthTab &&
-        (symptomsHasChanged.value || textInputHasChanged.value || savedCategoryHasChanged)) {}
+        (symptomsHasChanged.value ||
+            textInputHasChanged.value ||
+            savedCategoryHasChanged)) {}
     return pageShouldRefresh &&
         selectedTab.value == CalendarTabs.monthTab &&
-        (symptomsHasChanged.value || textInputHasChanged.value || savedCategoryHasChanged);
+        (symptomsHasChanged.value ||
+            textInputHasChanged.value ||
+            savedCategoryHasChanged);
   }
 
   bool get showBottomSheet {
@@ -57,7 +65,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   RxBool get symptomsHasChanged {
     final symptomsIDsSet = symptomIds.toSet();
-    final symptomsIDsSetFromDiaries = appController.symptomsDiaries.value?.symptomsIDs?.toSet();
+    final symptomsIDsSetFromDiaries =
+        appController.symptomsDiaries.value?.symptomsIDs?.toSet();
     if (appController.symptomsDiaries.value?.symptomsIDs == null) {
       return RxBool(false);
     }
@@ -97,7 +106,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   /// The mode for the calendar grid
   final RxBool modifyPeriodMode = false.obs;
 
-  List<SymptomCategory> get symptomCategories => appController.symptomCategory.value ?? [];
+  List<SymptomCategory> get symptomCategories =>
+      appController.symptomCategory.value ?? [];
 
   RxBool get showRecapMenu => symptomIds.isNotEmpty.obs;
 
@@ -123,10 +133,12 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   RxString quantitaAcquaValue = "".obs;
 
-  RxList<String> quantitaAcquaValues = List.generate(10, (index) => '${(index + 1) * 0.5} litri').obs;
+  RxList<String> quantitaAcquaValues =
+      List.generate(10, (index) => '${(index + 1) * 0.5} litri').obs;
 
   RxString pesoValue = "".obs;
-  RxList<String> pesoValues = List.generate(291, (index) => '${index + 40} kg').obs;
+  RxList<String> pesoValues =
+      List.generate(291, (index) => '${index + 40} kg').obs;
 
   RxString notesInitialValue = ''.obs;
 
@@ -157,7 +169,6 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     super.onInit();
 
     initMonthCalendar();
-
     _initCalendarYearController();
   }
 
@@ -196,7 +207,9 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     _initSavedCategory();
 
     addedMensesDates.addAll(
-      appController.calendarData.value!.calendarDays.where((element) => element.isMensesDay).map((e) => e.date),
+      appController.calendarData.value!.calendarDays
+          .where((element) => element.isMensesDay)
+          .map((e) => e.date),
     );
     jumpToMonth(date: DateTime.now());
 
@@ -211,7 +224,9 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       );
     }
 
-    if (calendarConsent && !diaryConsent && appController.user.value!.hasMoreThan18Years) {
+    if (calendarConsent &&
+        !diaryConsent &&
+        appController.user.value!.hasMoreThan18Years) {
       diaryConsent = await showErrorDialog(
         context: Get.context!,
         builder: (_) => const DiaryConsentDialog(),
@@ -229,6 +244,29 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
     if (!calendarConsent) {
       Get.back();
+    }
+
+    // Se è la prima volta che accedo al calendario
+    if (!HiveManager.isPastDateCalculated &&
+        appController.calendarData.value!.calendarDays.isNotEmpty) {
+      HiveManager.isPastDateCalculated = true;
+
+      await wait(milliseconds: 600);
+
+      FlushBar(
+        child: const Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 8,
+          ),
+          child: HeadlineSmall(
+            "Abbiamo fatto una stima dei tuoi cicli precedenti. Conferma o modifica questi dati per includerli nel report del tuo ciclo.",
+            color: ThemeColor.darkBlue,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ).show(
+        Get.context!,
+      );
     }
   }
 
@@ -251,13 +289,18 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   void initSymptomForDate() {
-    if (appController.symptomsDiaries.value?.date == dateFormatYMD.format(rxSelectedDate.value)) {
+    if (appController.symptomsDiaries.value?.date ==
+        dateFormatYMD.format(rxSelectedDate.value)) {
       symptomIds.value.clear();
-      symptomIds.value.addAll(appController.symptomsDiaries.value?.symptomsIDs ?? []);
-      oreDiSonnoValue.value = appController.symptomsDiaries.value?.hoursOfSleep ?? "";
-      quantitaAcquaValue.value = appController.symptomsDiaries.value?.waterLiters ?? "";
+      symptomIds.value
+          .addAll(appController.symptomsDiaries.value?.symptomsIDs ?? []);
+      oreDiSonnoValue.value =
+          appController.symptomsDiaries.value?.hoursOfSleep ?? "";
+      quantitaAcquaValue.value =
+          appController.symptomsDiaries.value?.waterLiters ?? "";
       pesoValue.value = appController.symptomsDiaries.value?.weight ?? "";
-      notesInitialValue.value = appController.symptomsDiaries.value?.notes ?? "";
+      notesInitialValue.value =
+          appController.symptomsDiaries.value?.notes ?? "";
     } else {
       symptomIds.value = [];
       oreDiSonnoValue.value = "";
@@ -299,16 +342,19 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   /// Managed exception for the symptoms of the "Perdite" and "Flusso mestruale" categories that can select only one symptom at a time.
   void _updateFlowMensesSymptomList(String symptomId) {
-    final perditeCategory = appController.symptomCategory.value?.firstWhere((element) => element.name == "Perdite");
-    final flowMensesCategory =
-        appController.symptomCategory.value?.firstWhere((element) => element.name == "Flusso mestruale");
+    final perditeCategory = appController.symptomCategory.value
+        ?.firstWhere((element) => element.name == "Perdite");
+    final flowMensesCategory = appController.symptomCategory.value
+        ?.firstWhere((element) => element.name == "Flusso mestruale");
 
-    bool isSymptomInList =
-        _isSymptomInCategory(perditeCategory, symptomId) || _isSymptomInCategory(flowMensesCategory, symptomId);
+    bool isSymptomInList = _isSymptomInCategory(perditeCategory, symptomId) ||
+        _isSymptomInCategory(flowMensesCategory, symptomId);
 
     if (isSymptomInList) {
-      perditeCategory?.symptoms.forEach((element) => symptomIds.remove(element.id));
-      flowMensesCategory?.symptoms.forEach((element) => symptomIds.remove(element.id));
+      perditeCategory?.symptoms
+          .forEach((element) => symptomIds.remove(element.id));
+      flowMensesCategory?.symptoms
+          .forEach((element) => symptomIds.remove(element.id));
     }
   }
 
@@ -472,7 +518,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
         // Calculate the starting index for the current row
         int startIndex = i * numberOfMonthsPerRow;
         // Calculate the ending index for the current row, ensuring it stays within the bounds of the months list
-        int endIndex = min(i * numberOfMonthsPerRow + numberOfMonthsPerRow, months.length);
+        int endIndex =
+            min(i * numberOfMonthsPerRow + numberOfMonthsPerRow, months.length);
         // Extract a sublist of months for the current row from the original months list
         return months.sublist(startIndex, endIndex);
       },
@@ -481,22 +528,28 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   Symptom getSymptomFromId(String id) {
-    return symptomCategories.expand((category) => category.symptoms).firstWhere((symptom) => symptom.id == id);
+    return symptomCategories
+        .expand((category) => category.symptoms)
+        .firstWhere((symptom) => symptom.id == id);
   }
 
   RxBool get textInputHasChanged {
     if (appController.symptomsDiaries.value == null) {
       return false.obs;
     }
-    return (oreDiSonnoValue.value != appController.symptomsDiaries.value?.hoursOfSleep ||
-            quantitaAcquaValue.value != appController.symptomsDiaries.value?.waterLiters ||
+    return (oreDiSonnoValue.value !=
+                appController.symptomsDiaries.value?.hoursOfSleep ||
+            quantitaAcquaValue.value !=
+                appController.symptomsDiaries.value?.waterLiters ||
             pesoValue.value != appController.symptomsDiaries.value?.weight ||
-            notesInitialValue.value != appController.symptomsDiaries.value?.notes)
+            notesInitialValue.value !=
+                appController.symptomsDiaries.value?.notes)
         .obs;
   }
 
   bool get isMensesDay {
-    return appController.calendarData.value?.calendarDays.firstWhereOrNull((element) {
+    return appController.calendarData.value?.calendarDays
+            .firstWhereOrNull((element) {
           return element.date == dateFormatYMD.format(rxSelectedDate.value);
         })?.isMensesDay ??
         false;
@@ -520,7 +573,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       initialList.add(category.id);
 
       if (initialList.length > 3) {
-        final filteredCategories = await _showTooMuchCategoriesDialog(initialList);
+        final filteredCategories =
+            await _showTooMuchCategoriesDialog(initialList);
         categoryIds.clear();
         categoryIds.addAll(filteredCategories.map((e) => e.id).toList());
       } else {
@@ -562,11 +616,13 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   /// Returns true if the list of saved categories has changed after the last save
   bool get savedCategoryHasChanged {
-    if (savedCategoryIds.length != appController.categoriesSavedInHome.value?.length) {
+    if (savedCategoryIds.length !=
+        appController.categoriesSavedInHome.value?.length) {
       return true;
     } else {
       for (final categoryId in savedCategoryIds) {
-        if (!appController.categoriesSavedInHome.value!.any((element) => element.id == categoryId)) {
+        if (!appController.categoriesSavedInHome.value!
+            .any((element) => element.id == categoryId)) {
           return true;
         }
       }

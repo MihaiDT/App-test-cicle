@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/modules/change_profile/controller/customize_cherry_controller.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/cards/elevated_card.dart';
@@ -13,9 +14,14 @@ class CustomizeCherry extends GetView<CustomizeCherryController> {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      onPressed: () {
+      onPressed: () async {
+        final sessionToken = await SecureStorageManager().getToken();
+
         Get.toNamed(
           Routes.customizeCherryWebView,
+          arguments: {
+            'sessionToken': sessionToken,
+          },
         );
       },
       color: Colors.white,

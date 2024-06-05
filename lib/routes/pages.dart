@@ -651,10 +651,11 @@ class Pages {
     GetPage(
       name: Routes.customizeCherryWebView,
       page: () {
-        final String sessionToken = Get.arguments['sessionToken'];
+        final String? sessionToken = Get.arguments['sessionToken'];
+
         return _mediaQueryWrapper(
           CustomizeCherryWebView(
-            sessionToken: sessionToken,
+            sessionToken: sessionToken ?? '',
           ),
         );
       },

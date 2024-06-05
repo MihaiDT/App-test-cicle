@@ -37,7 +37,8 @@ class SuggestedArticleSection extends StatelessWidget {
             SizedBox(
               height: 220,
               child: AdvicesCardsRow(
-                onCardTapped: (article, category) => showSuggestedArticleDetails(article, category),
+                onCardTapped: (article, category) =>
+                    showSuggestedArticleDetails(article, category),
                 withBorder: true,
                 articles: allSuggestedArticles,
               ),
