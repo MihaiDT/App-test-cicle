@@ -47,9 +47,22 @@ class ProfileCompletionPercentageSection
                               "Profilo al ${controller.completionPercentage}%",
                             ).applyShaders(context),
                             ThemeSizedBox.height4,
-                            const TitleMedium(
-                              "Completalo per ottenere il badge: Completa profilo",
-                              color: ThemeColor.darkBlue,
+                            RichText(
+                              text: TextSpan(
+                                text: "Completalo per ottenere il badge: ",
+                                style: NewThemeTextStyle.bodySmall.copyWith(
+                                  color: ThemeColor.darkBlue,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "Completa profilo",
+                                    style:
+                                        NewThemeTextStyle.titleMedium.copyWith(
+                                      color: ThemeColor.darkBlue,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             ThemeSizedBox.height4,
                             const TitleMedium(
