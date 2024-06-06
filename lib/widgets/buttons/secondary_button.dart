@@ -6,12 +6,14 @@ class SecondaryButton extends StatelessWidget {
   final Widget child;
   final VoidCallback? onPressed;
   final bool? small;
+  final bool? boxShadowVisible;
 
   const SecondaryButton({
     this.buttonSize = ButtonSize.h56,
     required this.child,
     required this.onPressed,
     this.small,
+    this.boxShadowVisible,
     super.key,
   });
 
@@ -19,14 +21,16 @@ class SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            offset: const Offset(0, 10),
-            blurRadius: 30,
-            spreadRadius: 0,
-          ),
-        ],
+        boxShadow: (boxShadowVisible ?? true)
+            ? [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  offset: const Offset(0, 10),
+                  blurRadius: 30,
+                  spreadRadius: 0,
+                ),
+              ]
+            : null,
       ),
       child: ElevatedButton(
         onPressed: onPressed,

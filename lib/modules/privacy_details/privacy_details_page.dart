@@ -68,8 +68,8 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
               onTap: () async {
                 await launchUrl(
                   Uri.parse(
-                      appController.settings.value?.termsAndConditionsUrl ??
-                          ''),
+                    appController.settings.value?.termsAndConditionsUrl ?? '',
+                  ),
                   mode: LaunchMode.externalApplication,
                 );
               },

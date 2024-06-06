@@ -45,14 +45,14 @@ class CustomizeCherry extends GetView<CustomizeCherryController> {
                         "Personalizza Cherry",
                       ).applyShaders(context),
                       ThemeSizedBox.height16,
-                      const BodySmall(
-                        "oggetti selezionati:",
-                        color: ThemeColor.darkBlue,
-                      ),
-                      ThemeSizedBox.height8,
-                      Row(
-                        children: controller.selectedObjects,
-                      ),
+                      // const BodySmall(
+                      //   "oggetti selezionati:",
+                      //   color: ThemeColor.darkBlue,
+                      // ),
+                      // ThemeSizedBox.height8,
+                      // Row(
+                      //   children: controller.selectedObjects,
+                      // ),
                       const TitleMedium(
                         "PERSONALIZZA",
                         underline: true,

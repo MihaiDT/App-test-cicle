@@ -8,6 +8,19 @@ enum PeriodPhase {
   ovulation,
   noPhase;
 
+  String get phaseLabel {
+    switch (this) {
+      case PeriodPhase.menstruation:
+        return 'Mestruazioni';
+      case PeriodPhase.ovulation:
+        return 'Ovulazione';
+      case PeriodPhase.follicular:
+        return 'Folliculare';
+      default:
+        return 'Luteale';
+    }
+  }
+
   static PeriodPhase fromString(String value) {
     switch (value.toLowerCase()) {
       case 'menstruation':

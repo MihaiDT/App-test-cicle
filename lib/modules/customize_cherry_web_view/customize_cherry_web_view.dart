@@ -110,10 +110,7 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
           },
           initialUserScripts: UnmodifiableListView<UserScript>([
             UserScript(
-              source: "function dispatchBackEvent() {"
-                  "document.dispatchEvent(new Event('back'));"
-                  "};"
-                  "function save() "
+              source: "function save(){"
                   "document.dispatchEvent(new Event('save'));"
                   "};",
               injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,

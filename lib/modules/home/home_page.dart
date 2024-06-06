@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/home/home_controller.dart';
@@ -15,6 +14,7 @@ import 'package:lines/modules/home/widgets/horizontal_calendar/home_horizontal_c
 import 'package:lines/modules/home/widgets/mission_row_section.dart';
 import 'package:lines/modules/home/widgets/welcome_quiz_section/welcome_quiz_section.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/buttons/primary_button.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({
@@ -38,43 +38,46 @@ class HomePage extends GetView<HomeController> {
               Obx(
                 () => appController.currentPeriod.responseHandler.isPending
                     ? const HomeCircularPeriodCalendarShimmer()
-                    : GestureDetector(
-                        onTap: () async {
-                          final sessionToken =
-                              await SecureStorageManager().getToken();
-                          Get.toNamed(
-                            Routes.tamagochiWebView,
-                            arguments: {
-                              'sessionToken': sessionToken,
-                            },
-                          );
-                        },
-                        child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.white, // Colore del bordo
-                                    width: 3, // Larghezza del bordo
-                                  ),
-                                  borderRadius: BorderRadius.circular(24.0),
-                                  color: Colors.transparent,
+                    : Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white, // Colore del bordo
+                                  width: 3, // Larghezza del bordo
                                 ),
-                                height: 25,
-                                width: 25,
+                                borderRadius: BorderRadius.circular(24.0),
+                                color: Colors.transparent,
                               ),
+                              height: 25,
+                              width: 25,
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 4.5),
-                              child: HomeCircularPeriodCalendar(),
-                            ),
-                          ],
-                        ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 4.5),
+                            child: HomeCircularPeriodCalendar(),
+                          ),
+                        ],
                       ),
               ),
-              ThemeSizedBox.height32,
+              ThemeSizedBox.height4,
+              Obx(
+                () => controller.isSelectedMestruationDay
+                    ? Align(
+                        alignment: Alignment.center,
+                        child: IntrinsicWidth(
+                          child: PrimaryButton(
+                            onPressed: () => Get.toNamed(Routes.calendar),
+                            buttonSize: ButtonSize.h31,
+                            child: const TitleLarge("Modifica mestruazioni"),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+              ThemeSizedBox.height16,
               Obx(
                 () => appController.currentPeriod.responseHandler.isPending
                     ? const HomePeriodInfoShimmer()
@@ -111,6 +114,7 @@ class HomePage extends GetView<HomeController> {
                           child: TitleMedium(
                             'CONTENUTI PER TE',
                             color: ThemeColor.darkBlue,
+                            letterSpacing: 2,
                           ),
                         ),
                       ),

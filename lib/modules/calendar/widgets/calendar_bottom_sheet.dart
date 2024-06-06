@@ -122,7 +122,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
 
   Widget _selectedDateLabel() {
     return Obx(
-      () => LabelLarge(
+      () => TitleMedium(
         _bottomSheetDayText,
         color: ThemeColor.primary,
         textAlign: TextAlign.center,

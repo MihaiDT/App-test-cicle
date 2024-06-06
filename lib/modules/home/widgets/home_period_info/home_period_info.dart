@@ -35,6 +35,7 @@ class HomePeriodInfo extends GetView<HomeController> {
                 () => TitleMedium(
                   _label(controller.selectedDate.value),
                   color: ThemeColor.darkBlue,
+                  letterSpacing: 2,
                 ),
               ),
             ],

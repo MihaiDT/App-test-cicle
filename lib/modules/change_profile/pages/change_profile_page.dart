@@ -16,7 +16,7 @@ class ChangeProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.white,
+      backgroundImage: ThemeDecoration.images.bgLightLarge,
       appBar: const TransparentAppBar(
         title: TitleSmall(
           "MODIFICA PROFILO",

@@ -30,6 +30,7 @@ class WelcomeQuizSection extends GetView<WelcomeQuizSectionController> {
             const TitleMedium(
               "PREMIO DI BENVENUTO",
               color: ThemeColor.darkBlue,
+              letterSpacing: 2,
             ),
             ThemeSizedBox.height12,
             CoinCard(
