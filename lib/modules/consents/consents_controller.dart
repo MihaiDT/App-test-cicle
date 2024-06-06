@@ -7,6 +7,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/consents/widgets/confirm_remove_calendar_consent.dart';
 import 'package:lines/modules/consents/widgets/confirm_remove_diary_consent.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/calendar_service.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 import 'package:lottie/lottie.dart';
 
@@ -20,16 +21,11 @@ class ConsentsController extends GetxController {
   bool isChanged = false;
 
   ConsentsController() {
-    isMarketingEnabled.value =
-        appController.user.value?.privacyMarketingEmail ?? false;
-    isProfilingEnabled.value =
-        appController.user.value?.privacyProfiling ?? false;
-    isBrandMarketingEnabled.value =
-        appController.user.value?.privacyBrandMarketing ?? false;
-    isCalendarConsentEnabled.value =
-        appController.user.value?.calendarConsent ?? false;
-    isDiaryConsentEnabled.value =
-        appController.user.value?.diaryConsent ?? false;
+    isMarketingEnabled.value = appController.user.value?.privacyMarketingEmail ?? false;
+    isProfilingEnabled.value = appController.user.value?.privacyProfiling ?? false;
+    isBrandMarketingEnabled.value = appController.user.value?.privacyBrandMarketing ?? false;
+    isCalendarConsentEnabled.value = appController.user.value?.calendarConsent ?? false;
+    isDiaryConsentEnabled.value = appController.user.value?.diaryConsent ?? false;
 
     isChanged = false;
   }
@@ -98,21 +94,23 @@ class ConsentsController extends GetxController {
         diaryConsent: isDiaryConsentEnabled.value,
       ),
     );
+
+    CalendarService.fetchCurrentPeriod();
   }
 
   void _loading() {
     final overlayEntry = OverlayEntry(
       builder: (_) {
-        return Expanded(
-          child: Container(
-            color: Colors.black.withOpacity(0.7),
-            child: Center(
-              child: SizedBox(
-                height: 40,
-                width: 40,
-                child: LottieBuilder.asset(
-                  "assets/lottie/light_loader.json",
-                ),
+        return Container(
+          color: Colors.black.withOpacity(0.7),
+          height: Get.height,
+          width: Get.width,
+          child: Center(
+            child: SizedBox(
+              height: 40,
+              width: 40,
+              child: LottieBuilder.asset(
+                "assets/lottie/light_loader.json",
               ),
             ),
           ),
@@ -125,7 +123,7 @@ class ConsentsController extends GetxController {
     Overlay.of(Get.context!).insert(overlayEntry);
 
     // Rimuove l'OverlayEntry dopo 5 secondi
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 6), () {
       overlayEntry.remove();
     });
   }

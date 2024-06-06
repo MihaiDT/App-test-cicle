@@ -31,12 +31,14 @@ class HomePage extends GetView<HomeController> {
             padding: EdgeInsets.zero,
             children: [
               Obx(
-                () => appController.currentPeriod.responseHandler.isPending
+                () => appController.currentPeriod.responseHandler.isPending ||
+                        appController.user.responseHandler.isPending
                     ? const HomeHorizontalCalendarShimmer()
                     : const HomeHorizontalCalendar(),
               ),
               Obx(
-                () => appController.currentPeriod.responseHandler.isPending
+                () => appController.currentPeriod.responseHandler.isPending ||
+                        appController.user.responseHandler.isPending
                     ? const HomeCircularPeriodCalendarShimmer()
                     : const Padding(
                         padding: EdgeInsets.only(top: 4.5),
@@ -60,7 +62,8 @@ class HomePage extends GetView<HomeController> {
               ),
               ThemeSizedBox.height16,
               Obx(
-                () => appController.currentPeriod.responseHandler.isPending
+                () => appController.currentPeriod.responseHandler.isPending ||
+                        appController.user.responseHandler.isPending
                     ? const HomePeriodInfoShimmer()
                     : const HomePeriodInfo(),
               ),
@@ -103,8 +106,7 @@ class HomePage extends GetView<HomeController> {
                       SizedBox(
                         height: 220,
                         child: AdvicesCardsRow(
-                          onCardTapped: (article, category) =>
-                              controller.showArticleDetails(article, category),
+                          onCardTapped: (article, category) => controller.showArticleDetails(article, category),
                           withBorder: true,
                           articles: controller.allSuggestedArticles,
                         ),

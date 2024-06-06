@@ -130,16 +130,16 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
   _loading(BuildContext context) {
     final overlayEntry = OverlayEntry(
       builder: (_) {
-        return Expanded(
-          child: Container(
-            color: Colors.black.withOpacity(0.7),
-            child: Center(
-              child: SizedBox(
-                height: 40,
-                width: 40,
-                child: LottieBuilder.asset(
-                  "assets/lottie/light_loader.json",
-                ),
+        return Container(
+          color: Colors.black.withOpacity(0.7),
+          height: Get.height,
+          width: Get.width,
+          child: Center(
+            child: SizedBox(
+              height: 40,
+              width: 40,
+              child: LottieBuilder.asset(
+                "assets/lottie/light_loader.json",
               ),
             ),
           ),

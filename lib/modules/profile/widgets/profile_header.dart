@@ -42,9 +42,7 @@ class ProfileHeader extends GetView<ProfileHeaderController> {
               backgroundColor: Colors.white.withOpacity(0.7),
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Obx(
-                  () => _avatar(),
-                ),
+                child: _avatar(),
               ),
             ),
           ),
@@ -75,20 +73,22 @@ class ProfileHeader extends GetView<ProfileHeaderController> {
   }
 
   Widget _avatar() {
-    final avatarImgUrl = appController.user.value!.avatarPhase0ImgUrl ?? '';
-
-    return SizedBox(
-      width: 160,
-      height: 160,
-      child: appController.user.value!.isAvatarConfigured
-          ? Image.network(
-              avatarImgUrl,
-              fit: BoxFit.scaleDown,
+    return Obx(
+      () => appController.user.responseHandler.isSuccessful
+          ? SizedBox(
+              width: 160,
+              height: 160,
+              child: appController.user.value!.isAvatarConfigured
+                  ? Image.network(
+                      appController.user.value!.avatarPhase0ImgUrl ?? '',
+                      fit: BoxFit.scaleDown,
+                    )
+                  : Image.asset(
+                      ThemeImage.mockAvatar,
+                      fit: BoxFit.scaleDown,
+                    ),
             )
-          : Image.asset(
-              ThemeImage.mockAvatar,
-              fit: BoxFit.scaleDown,
-            ),
+          : const SizedBox.shrink(),
     );
   }
 }

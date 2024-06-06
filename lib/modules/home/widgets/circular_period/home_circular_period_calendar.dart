@@ -50,9 +50,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
             height: size - 60,
             width: size - 60,
             child: Obx(
-              () => controller.hasSavedPeriodInfo
-                  ? _avatarBody
-                  : missingDataContainer,
+              () => controller.hasSavedPeriodInfo ? _avatarBody : missingDataContainer,
             ),
           ),
         ),
@@ -100,8 +98,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
   }
 
   Widget get _avatarBody {
-    final periodDate = controller.currentPeriodDatesMap.values
-        .toList()[controller.periodSelectedDateIndex.value];
+    final periodDate = controller.currentPeriodDatesMap.values.toList()[controller.periodSelectedDateIndex.value];
 
     return SizedBox(
       height: size,
@@ -122,10 +119,11 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(top: 40.0),
-                child: getAvatar(
-                  controller.homeCircularPeriodCalendarKey,
-                  periodDate.periodPhase,
-                ),
+                child:  getAvatar(
+                        controller.homeCircularPeriodCalendarKey,
+                        periodDate.periodPhase,
+                      ),
+                    
               ),
             ),
             Align(
@@ -163,8 +161,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
                       buttonSize: ButtonSize.h31,
                       boxShadowVisible: false,
                       onPressed: () async {
-                        final sessionToken =
-                            await SecureStorageManager().getToken();
+                        final sessionToken = await SecureStorageManager().getToken();
                         Get.toNamed(
                           Routes.tamagochiWebView,
                           arguments: {
