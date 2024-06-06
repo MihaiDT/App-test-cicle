@@ -140,9 +140,13 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
           ),
           GestureDetector(
             onTap: () {
-              Get.toNamed(
-                Routes.yourDiaryPage,
-              );
+              controller.hasSavedSymptoms
+                  ? Get.toNamed(
+                      Routes.yourDiaryPage,
+                    )
+                  : Get.toNamed(
+                      Routes.calendar,
+                    );
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -159,9 +163,13 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
                   ),
                   child: Row(
                     children: [
-                      const TitleLarge(
-                        "GRAFICI E STATISTICHE",
-                      ).applyShaders(context),
+                      controller.hasSavedSymptoms
+                          ? const TitleLarge(
+                              "GRAFICI E STATISTICHE",
+                            ).applyShaders(context)
+                          : const TitleLarge(
+                              "AGGIUNGI",
+                            ).applyShaders(context),
                       const Spacer(),
                       SvgPicture.asset(
                         "assets/icons/arrow_right.svg",
