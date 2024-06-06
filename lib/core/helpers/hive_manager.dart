@@ -79,7 +79,9 @@ class HiveManager {
 
   static set hasAcceptedCookieProfiling(bool hasAcceptedCookie) {
     Hive.box("linesApp").put(
-        HiveReferenceKeys.hasAcceptedCookieProfiling.name, hasAcceptedCookie);
+      HiveReferenceKeys.hasAcceptedCookieProfiling.name,
+      hasAcceptedCookie,
+    );
   }
 
   static bool get hasAcceptedCookie {
