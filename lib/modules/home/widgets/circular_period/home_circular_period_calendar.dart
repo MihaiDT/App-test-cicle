@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/enums/period_phase.dart';
 import 'package:lines/modules/home/home_controller.dart';
 import 'package:lines/modules/home/widgets/circular_period/circular_calendar.dart';
 import 'package:lines/routes/routes.dart';
@@ -119,23 +121,36 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
           children: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 0.0),
-                child: getAvatar(controller.homeCircularPeriodCalendarKey),
+                padding: const EdgeInsets.only(top: 40.0),
+                child: getAvatar(
+                  controller.homeCircularPeriodCalendarKey,
+                  periodDate.periodPhase,
+                ),
               ),
             ),
             Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: TitleSmall(
-                  "FASE\n${periodDate.periodPhase.phaseLabel.toUpperCase()}",
-                  color: const Color(0xffB438B2),
-                  fontWeight: NewThemeTextStyle.weightBold,
-                  textAlign: TextAlign.center,
+                padding: const EdgeInsets.only(top: 12.0),
+                child: Column(
+                  children: [
+                    TitleMedium(
+                      periodDate.periodPhase.phaseLabel.toUpperCase(),
+                      color: const Color(0xffB438B2),
+                      fontWeight: NewThemeTextStyle.weightBold,
+                      textAlign: TextAlign.center,
+                      letterSpacing: 2,
+                    ),
+                    BodySmall(
+                      subtitlePhase(periodDate.periodPhase),
+                      color: ThemeColor.darkBlue,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
             ),
-            if (controller.playButtonVisible || true)
+            if (controller.playButtonVisible)
               Positioned(
                 bottom: 8,
                 left: 0,
@@ -176,15 +191,58 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
     );
   }
 
-  Widget getAvatar(Key key) {
+  Widget getAvatar(
+    Key key,
+    PeriodPhase phase,
+  ) {
+    String avatarImgUrl = '';
+
+    switch (phase.name) {
+      case 'menstruation':
+        avatarImgUrl = appController.user.value!.avatarPhase0ImgUrl ?? '';
+      case 'follicular':
+        avatarImgUrl = appController.user.value!.avatarPhase1ImgUrl ?? '';
+      case 'ovulation':
+        avatarImgUrl = appController.user.value!.avatarPhase2ImgUrl ?? '';
+      case 'luteal':
+        avatarImgUrl = appController.user.value!.avatarPhase3ImgUrl ?? '';
+      case 'noPhase':
+        avatarImgUrl = appController.user.value!.avatarPhase3ImgUrl ?? '';
+      default:
+        avatarImgUrl = '';
+    }
+
     return SizedBox(
+      // decoration: BoxDecoration(
+      //   border: Border.all(
+      //     color: Colors.red,
+      //     width: 3,
+      //   ),
+      // ),
       key: key,
-      width: 110,
+      width: 140,
       height: 140,
-      child: Image.asset(
-        ThemeImage.mockAvatar,
-        fit: BoxFit.scaleDown,
-      ),
+      child: appController.user.value!.isAvatarConfigured
+          ? Image.network(
+              avatarImgUrl,
+              fit: BoxFit.scaleDown,
+            )
+          : Image.asset(
+              ThemeImage.mockAvatar,
+              fit: BoxFit.scaleDown,
+            ),
     );
+  }
+
+  String subtitlePhase(PeriodPhase phase) {
+    if (phase.name == 'ovulation') {
+      return 'Alta fertilità';
+    }
+    if (phase.name == 'noPhase') {
+      // Ritardo
+      return "${appController.currentPeriod.value?.menstruationInfo[1]} ${appController.currentPeriod.value?.menstruationInfo[2].toLowerCase()}";
+    }
+
+    return '';
   }
 }

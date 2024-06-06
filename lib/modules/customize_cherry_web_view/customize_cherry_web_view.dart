@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
@@ -6,7 +7,9 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/api.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lottie/lottie.dart';
 
 class CustomizeCherryWebView extends StatefulWidget {
   final String sessionToken;
@@ -32,16 +35,19 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
       appBar: TransparentAppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () async {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => Get.back(),
         ),
         actions: [
           InkWell(
             onTap: () async {
+              _loading(context);
+
               await webViewController?.evaluateJavascript(
                 source: "save()",
               );
+
+              await AuthenticationService.fetchUser();
+              Get.back();
             },
             child: Container(
               color: Colors.transparent,
@@ -119,5 +125,35 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
         ),
       ),
     );
+  }
+
+  _loading(BuildContext context) {
+    final overlayEntry = OverlayEntry(
+      builder: (_) {
+        return Expanded(
+          child: Container(
+            color: Colors.black.withOpacity(0.7),
+            child: Center(
+              child: SizedBox(
+                height: 40,
+                width: 40,
+                child: LottieBuilder.asset(
+                  "assets/lottie/light_loader.json",
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      maintainState: false,
+      opaque: false,
+    );
+
+    Overlay.of(context).insert(overlayEntry);
+
+    // Rimuove l'OverlayEntry dopo 5 secondi
+    Timer(const Duration(seconds: 5), () {
+      overlayEntry.remove();
+    });
   }
 }

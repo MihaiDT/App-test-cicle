@@ -40,6 +40,8 @@ class CustomizeCherry extends GetView<CustomizeCherryController> {
                   width: constrains.maxWidth * 0.7,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       const DisplayMedium(
                         "Personalizza Cherry",
@@ -56,6 +58,7 @@ class CustomizeCherry extends GetView<CustomizeCherryController> {
                       const TitleMedium(
                         "PERSONALIZZA",
                         underline: true,
+                        letterSpacing: 1.5,
                       ).applyShaders(context),
                     ],
                   ),

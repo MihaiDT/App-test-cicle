@@ -37,6 +37,10 @@ class User {
   bool? hasConsentCookieStats;
   bool? calendarConsent;
   bool? diaryConsent;
+  String? avatarPhase0ImgUrl;
+  String? avatarPhase1ImgUrl;
+  String? avatarPhase2ImgUrl;
+  String? avatarPhase3ImgUrl;
 
   User({
     this.active = false,
@@ -70,6 +74,10 @@ class User {
     this.routeAfterLogin,
     this.hasConsentCookieProfiling,
     this.hasConsentCookieStats,
+    this.avatarPhase0ImgUrl,
+    this.avatarPhase1ImgUrl,
+    this.avatarPhase2ImgUrl,
+    this.avatarPhase3ImgUrl,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -111,6 +119,10 @@ class User {
       routeAfterLogin: json['user']['route_after_login'],
       hasConsentCookieProfiling: json['user']['cookie_profiling'],
       hasConsentCookieStats: json['user']['cookie_stats'],
+      avatarPhase0ImgUrl: json['user']['phase_0_img_url'],
+      avatarPhase1ImgUrl: json['user']['phase_1_img_url'],
+      avatarPhase2ImgUrl: json['user']['phase_2_img_url'],
+      avatarPhase3ImgUrl: json['user']['phase_3_img_url'],
     );
   }
 
@@ -150,6 +162,10 @@ class User {
       "route_after_login": routeAfterLogin,
       "cookie_profiling": hasConsentCookieProfiling,
       "cookie_stats": hasConsentCookieStats,
+      'phase_0_img_url': avatarPhase0ImgUrl,
+      'phase_1_img_url': avatarPhase1ImgUrl,
+      'phase_2_img_url': avatarPhase2ImgUrl,
+      'phase_3_img_url': avatarPhase3ImgUrl,
     };
   }
 
@@ -206,4 +222,10 @@ class User {
   String get formattedDateWithPipes {
     return birthdate?.split("-").reversed.join(" | ") ?? "";
   }
+
+  bool get isAvatarConfigured =>
+      avatarPhase0ImgUrl != null ||
+      avatarPhase1ImgUrl != null ||
+      avatarPhase2ImgUrl != null ||
+      avatarPhase3ImgUrl != null;
 }

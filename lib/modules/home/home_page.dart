@@ -38,28 +38,9 @@ class HomePage extends GetView<HomeController> {
               Obx(
                 () => appController.currentPeriod.responseHandler.isPending
                     ? const HomeCircularPeriodCalendarShimmer()
-                    : Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.white, // Colore del bordo
-                                  width: 3, // Larghezza del bordo
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                                color: Colors.transparent,
-                              ),
-                              height: 25,
-                              width: 25,
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 4.5),
-                            child: HomeCircularPeriodCalendar(),
-                          ),
-                        ],
+                    : const Padding(
+                        padding: EdgeInsets.only(top: 4.5),
+                        child: HomeCircularPeriodCalendar(),
                       ),
               ),
               ThemeSizedBox.height4,

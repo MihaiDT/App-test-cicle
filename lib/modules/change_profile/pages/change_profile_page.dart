@@ -16,7 +16,7 @@ class ChangeProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffoldPage(
       extendBodyBehindAppBar: true,
-      backgroundImage: ThemeDecoration.images.bgLightLarge,
+      backgroundColor: Colors.white,
       appBar: const TransparentAppBar(
         title: TitleSmall(
           "MODIFICA PROFILO",
@@ -27,7 +27,7 @@ class ChangeProfilePage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            ThemeSizedBox.height48,
+            ThemeSizedBox.height12,
             const Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: ThemeSize.paddingSmall,
@@ -35,15 +35,30 @@ class ChangeProfilePage extends StatelessWidget {
               child: CustomizeCherry(),
             ),
             ThemeSizedBox.height36,
-            const YourInformationSection(),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: ThemeSize.paddingSmall,
+              ),
+              child: YourInformationSection(),
+            ),
             ThemeSizedBox.height32,
             _divider,
             ThemeSizedBox.height32,
-            const YourMensesSection(),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: ThemeSize.paddingSmall,
+              ),
+              child: YourMensesSection(),
+            ),
             ThemeSizedBox.height32,
             _divider,
             ThemeSizedBox.height32,
-            const YourInterestSection(),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: ThemeSize.paddingSmall,
+              ),
+              child: YourInterestSection(),
+            ),
             ThemeSizedBox.height32,
           ],
         ),
@@ -54,7 +69,7 @@ class ChangeProfilePage extends StatelessWidget {
   Widget get _divider => Divider(
         color: ThemeColor.lightGrey,
         thickness: 1,
-        indent: ThemeSize.paddingSmall,
-        endIndent: ThemeSize.paddingSmall,
+        indent: ThemeSize.paddingMedium,
+        endIndent: ThemeSize.paddingMedium,
       );
 }

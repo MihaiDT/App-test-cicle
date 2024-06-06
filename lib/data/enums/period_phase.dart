@@ -11,13 +11,15 @@ enum PeriodPhase {
   String get phaseLabel {
     switch (this) {
       case PeriodPhase.menstruation:
-        return 'Mestruazioni';
+        return 'FASE\nMESTRUALE';
       case PeriodPhase.ovulation:
-        return 'Ovulazione';
+        return 'FASE\nOVULATORIA';
       case PeriodPhase.follicular:
-        return 'Folliculare';
+        return 'FASE\nFOLLICOLARE';
+      case PeriodPhase.luteal:
+        return 'FASE\nLUTEALE';
       default:
-        return 'Luteale';
+        return '\nRITADO DI';
     }
   }
 
@@ -48,6 +50,21 @@ enum PeriodPhase {
         return ThemeColor.lutealColor;
       default:
         return ThemeColor.defaultPeriodColor;
+    }
+  }
+
+  int get periodIndex {
+    switch (this) {
+      case PeriodPhase.menstruation:
+        return 0;
+      case PeriodPhase.ovulation:
+        return 1;
+      case PeriodPhase.follicular:
+        return 2;
+      case PeriodPhase.luteal:
+        return 3;
+      default:
+        return -1;
     }
   }
 }

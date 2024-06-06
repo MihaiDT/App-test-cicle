@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -5,6 +8,7 @@ import 'package:lines/modules/consents/widgets/confirm_remove_calendar_consent.d
 import 'package:lines/modules/consents/widgets/confirm_remove_diary_consent.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
+import 'package:lottie/lottie.dart';
 
 class ConsentsController extends GetxController {
   final isMarketingEnabled = false.obs;
@@ -12,6 +16,8 @@ class ConsentsController extends GetxController {
   final isBrandMarketingEnabled = false.obs;
   final isCalendarConsentEnabled = false.obs;
   final isDiaryConsentEnabled = false.obs;
+
+  bool isChanged = false;
 
   ConsentsController() {
     isMarketingEnabled.value =
@@ -24,21 +30,23 @@ class ConsentsController extends GetxController {
         appController.user.value?.calendarConsent ?? false;
     isDiaryConsentEnabled.value =
         appController.user.value?.diaryConsent ?? false;
+
+    isChanged = false;
   }
 
   void toggleMarketingEnabled(bool value) {
     isMarketingEnabled.value = value;
-    _updateConsents();
+    isChanged = true;
   }
 
   void toggleProfilingEnabled(bool value) {
     isProfilingEnabled.value = value;
-    _updateConsents();
+    isChanged = true;
   }
 
   void toggleBrandMarketingEnabled(bool value) {
     isBrandMarketingEnabled.value = value;
-    _updateConsents();
+    isChanged = true;
   }
 
   void toggleCalendarConsentEnabled(bool value) async {
@@ -56,7 +64,7 @@ class ConsentsController extends GetxController {
 
     if (updateCalendar) {
       isCalendarConsentEnabled.value = value;
-      _updateConsents();
+      isChanged = true;
     }
   }
 
@@ -75,11 +83,12 @@ class ConsentsController extends GetxController {
 
     if (updateDiary) {
       isDiaryConsentEnabled.value = value;
-      _updateConsents();
+      isChanged = true;
     }
   }
 
-  void _updateConsents() {
+  void updateConsents() {
+    _loading();
     AuthenticationService.updatePrivacy(
       UpdateUserParameters(
         privacyMarketingEmail: isMarketingEnabled.value,
@@ -89,5 +98,35 @@ class ConsentsController extends GetxController {
         diaryConsent: isDiaryConsentEnabled.value,
       ),
     );
+  }
+
+  void _loading() {
+    final overlayEntry = OverlayEntry(
+      builder: (_) {
+        return Expanded(
+          child: Container(
+            color: Colors.black.withOpacity(0.7),
+            child: Center(
+              child: SizedBox(
+                height: 40,
+                width: 40,
+                child: LottieBuilder.asset(
+                  "assets/lottie/light_loader.json",
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      maintainState: false,
+      opaque: false,
+    );
+
+    Overlay.of(Get.context!).insert(overlayEntry);
+
+    // Rimuove l'OverlayEntry dopo 5 secondi
+    Timer(const Duration(seconds: 5), () {
+      overlayEntry.remove();
+    });
   }
 }
