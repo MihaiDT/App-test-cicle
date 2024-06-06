@@ -101,8 +101,8 @@ class CalendarDayWidget extends StatelessWidget {
     return BodyLarge(
       text,
       fontWeight: isToday
-          ? NewThemeTextStyle.weightExtraBold
-          : NewThemeTextStyle.weightMedium,
+          ? ThemeTextStyle.weightExtraBold
+          : ThemeTextStyle.weightMedium,
       textAlign: TextAlign.center,
       color: textColor,
     );

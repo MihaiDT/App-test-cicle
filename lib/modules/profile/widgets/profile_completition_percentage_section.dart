@@ -50,14 +50,13 @@ class ProfileCompletionPercentageSection
                             RichText(
                               text: TextSpan(
                                 text: "Completalo per ottenere il badge: ",
-                                style: NewThemeTextStyle.bodySmall.copyWith(
+                                style: ThemeTextStyle.bodySmall.copyWith(
                                   color: ThemeColor.darkBlue,
                                 ),
                                 children: [
                                   TextSpan(
                                     text: "Completa profilo",
-                                    style:
-                                        NewThemeTextStyle.titleMedium.copyWith(
+                                    style: ThemeTextStyle.titleMedium.copyWith(
                                       color: ThemeColor.darkBlue,
                                     ),
                                   ),

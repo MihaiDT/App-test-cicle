@@ -102,7 +102,7 @@ class HeadlineExtraLarge extends TextWrapper with ThemeShaderTextWrapper {
 
   @override
   TextStyle? getBaseTextStyle(BuildContext context) {
-    return NewThemeTextStyle.headlineExtraLarge;
+    return ThemeTextStyle.headlineExtraLarge;
   }
 }
 

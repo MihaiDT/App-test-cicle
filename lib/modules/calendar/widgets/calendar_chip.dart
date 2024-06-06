@@ -51,7 +51,7 @@ class CalendarChip extends StatelessWidget {
           BodySmall(
             label,
             color: ThemeColor.darkBlue,
-            fontWeight: NewThemeTextStyle.weightMedium,
+            fontWeight: ThemeTextStyle.weightMedium,
           ),
           const SizedBox(
             width: 4,

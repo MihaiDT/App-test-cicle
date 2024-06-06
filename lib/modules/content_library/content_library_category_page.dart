@@ -33,7 +33,7 @@ class ContentLibraryCategoryPage extends GetView<ContentLibraryController> {
         title: TitleMedium(
           selectedCategory?.categoryTitle?.toUpperCase() ?? "",
           color: ThemeColor.darkBlue,
-          fontWeight: NewThemeTextStyle.weightSemibold,
+          fontWeight: ThemeTextStyle.weightSemibold,
         ),
       ),
       body: selectedCategory != null

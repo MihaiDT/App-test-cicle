@@ -80,12 +80,12 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
                   generateDateList()[index].isToday
                       ? 'OGGI'
                       : _weekDayFromDate(generateDateList()[index]),
-                  style: NewThemeTextStyle.horizontalCalendarWDayToday,
+                  style: ThemeTextStyle.horizontalCalendarWDayToday,
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   generateDateList()[index].day.toString(),
-                  style: NewThemeTextStyle.horizontalCalendarDate,
+                  style: ThemeTextStyle.horizontalCalendarDate,
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -139,12 +139,12 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
             formattedNowYMD == formattedDateYMD
                 ? 'OGGI'
                 : _weekDayFromDate(date),
-            style: NewThemeTextStyle.horizontalCalendarWDayToday,
+            style: ThemeTextStyle.horizontalCalendarWDayToday,
             textAlign: TextAlign.center,
           ),
           Text(
             "${date.day}",
-            style: NewThemeTextStyle.horizontalCalendarDateToday,
+            style: ThemeTextStyle.horizontalCalendarDateToday,
             textAlign: TextAlign.center,
           ),
         ],
@@ -156,12 +156,12 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
             formattedNowYMD == formattedDateYMD
                 ? 'OGGI'
                 : _weekDayFromDate(date),
-            style: NewThemeTextStyle.horizontalCalendarWDay,
+            style: ThemeTextStyle.horizontalCalendarWDay,
             textAlign: TextAlign.center,
           ),
           Text(
             "${date.day}",
-            style: NewThemeTextStyle.horizontalCalendarDate,
+            style: ThemeTextStyle.horizontalCalendarDate,
             textAlign: TextAlign.center,
           ),
         ],

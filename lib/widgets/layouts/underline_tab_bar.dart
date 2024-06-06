@@ -21,7 +21,7 @@ class UnderlinedTabBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TabBar(
-          labelStyle: NewThemeTextStyle.headlineMedium,
+          labelStyle: ThemeTextStyle.headlineMedium,
           unselectedLabelColor: ThemeColor.darkBlue,
           labelColor: ThemeColor.brightPink,
           controller: tabController,

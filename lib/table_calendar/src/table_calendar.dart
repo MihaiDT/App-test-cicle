@@ -826,7 +826,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
       texts.add(
         Text(
           element,
-          style: NewThemeTextStyle.calendarWeekDay,
+          style: ThemeTextStyle.calendarWeekDay,
         ),
       );
     }

@@ -102,7 +102,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
         const TitleSmall(
           "FASE\nMESTRUAZIONI",
           color: Color(0xffB438B2),
-          fontWeight: NewThemeTextStyle.weightBold,
+          fontWeight: ThemeTextStyle.weightBold,
           textAlign: TextAlign.center,
         ),
         Obx(

@@ -21,7 +21,7 @@ class QuizSelectedMultipleTitle extends StatelessWidget {
         height: 1.4,
         fontSize: 14,
         color: selected ? Colors.white : ThemeColor.brightPink,
-        fontWeight: NewThemeTextStyle.weightMedium,
+        fontWeight: ThemeTextStyle.weightMedium,
       ),
     );
   }

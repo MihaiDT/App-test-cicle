@@ -60,7 +60,7 @@ InputDecoration textFieldDefaultDecoration(
     focusedErrorBorder: errorOutlineInputBorder,
     focusColor: ThemeColor.whiteDark,
     hintMaxLines: 1,
-    hintStyle: NewThemeTextStyle.bodyMedium.copyWith(
+    hintStyle: ThemeTextStyle.bodyMedium.copyWith(
       color: ThemeColor.whiteDark,
       letterSpacing: 0,
     ),

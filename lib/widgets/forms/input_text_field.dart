@@ -77,7 +77,7 @@ class InputTextField extends StatelessWidget {
                   placeholder: placeholder,
                   paddingLeft: contentPaddingLeft,
                 ),
-          style: NewThemeTextStyle.bodyMedium.copyWith(
+          style: ThemeTextStyle.bodyMedium.copyWith(
             color: ThemeColor.whiteDark,
           ),
           keyboardType: keyboardType,

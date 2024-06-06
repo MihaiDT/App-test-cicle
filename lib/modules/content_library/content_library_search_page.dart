@@ -47,7 +47,7 @@ class ContentLibrarySearchPage
                               readOnly: controller.forceResults.value,
                               controller: controller.textEditingController,
                               enableSuggestions: false,
-                              style: NewThemeTextStyle.bodyMedium.copyWith(
+                              style: ThemeTextStyle.bodyMedium.copyWith(
                                 color: ThemeColor.darkBlue,
                               ),
                               cursorColor: ThemeColor.darkBlue,
@@ -78,8 +78,7 @@ class ContentLibrarySearchPage
                                 filled: true,
                                 fillColor: textFieldFillColor,
                                 hintText: 'Cerca tra i contenuti',
-                                hintStyle:
-                                    NewThemeTextStyle.bodyMedium.copyWith(
+                                hintStyle: ThemeTextStyle.bodyMedium.copyWith(
                                   color: placeHolderColor,
                                 ),
                                 prefixIcon: Padding(

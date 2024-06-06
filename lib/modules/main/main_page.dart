@@ -40,10 +40,10 @@ class MainPage extends GetView<MainController> {
             },
             selectedItemColor: ThemeColor.primary,
             unselectedItemColor: Colors.white,
-            unselectedLabelStyle: NewThemeTextStyle.bodySmall.copyWith(
+            unselectedLabelStyle: ThemeTextStyle.bodySmall.copyWith(
               fontWeight: FontWeight.w600,
             ),
-            selectedLabelStyle: NewThemeTextStyle.bodySmall.copyWith(
+            selectedLabelStyle: ThemeTextStyle.bodySmall.copyWith(
               fontWeight: FontWeight.w600,
             ),
             elevation: 0,

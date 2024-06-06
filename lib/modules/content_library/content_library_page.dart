@@ -45,7 +45,7 @@ class ContentLibraryPage extends GetView<ContentLibraryController> {
         title: const TitleMedium(
           'LIBRERIA CONTENUTI',
           color: ThemeColor.darkBlue,
-          fontWeight: NewThemeTextStyle.weightSemibold,
+          fontWeight: ThemeTextStyle.weightSemibold,
         ),
         actions: [
           InkWell(
@@ -60,7 +60,7 @@ class ContentLibraryPage extends GetView<ContentLibraryController> {
         child: Column(
           children: [
             TabBar(
-              labelStyle: NewThemeTextStyle.headlineMedium,
+              labelStyle: ThemeTextStyle.headlineMedium,
               unselectedLabelColor: ThemeColor.darkBlue,
               labelColor: ThemeColor.brightPink,
               controller: controller.tabController,

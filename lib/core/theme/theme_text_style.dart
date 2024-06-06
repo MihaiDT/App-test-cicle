@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/theme/theme_color.dart';
 
-class NewThemeTextStyle {
+class ThemeTextStyle {
   static const weightRegular = FontWeight.w400;
   static const weightMedium = FontWeight.w500;
   static const weightSemibold = FontWeight.w600;

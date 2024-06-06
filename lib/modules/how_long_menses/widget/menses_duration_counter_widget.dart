@@ -32,7 +32,7 @@ class MensesDurationCounterWidget
             ),
             HeadlineMedium(
               "${controller.counter.value} giorni",
-              fontWeight: NewThemeTextStyle.weightMedium,
+              fontWeight: ThemeTextStyle.weightMedium,
             ),
             SecondaryButton(
               onPressed: () {
