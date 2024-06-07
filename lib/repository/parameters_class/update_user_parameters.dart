@@ -10,7 +10,7 @@ class UpdateUserParameters {
   int? periodDays;
   int? periodDuration;
   bool? privacyProfiling;
-  bool? privacyMarketingEmail;
+  bool? privacyMarketing;
   bool? privacyBrandMarketing;
   String? referralCode;
   String? zipCode;
@@ -31,7 +31,7 @@ class UpdateUserParameters {
     this.periodDays,
     this.periodDuration,
     this.privacyProfiling,
-    this.privacyMarketingEmail,
+    this.privacyMarketing,
     this.privacyBrandMarketing,
     this.referralCode,
     this.zipCode,
@@ -75,7 +75,7 @@ class UpdateUserParameters {
       "period_days": periodDays,
       "period_duration": periodDuration,
       "privacy_profiling": privacyProfiling,
-      "privacy_marketing_email": privacyMarketingEmail,
+      "privacy_marketing": privacyMarketing,
       "privacy_brand_marketing": privacyBrandMarketing,
       "invitation_code": referralCode,
       "zip_code": zipCode,

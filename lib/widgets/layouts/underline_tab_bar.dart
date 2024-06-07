@@ -20,16 +20,29 @@ class UnderlinedTabBar extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TabBar(
-          labelStyle: ThemeTextStyle.headlineMedium,
-          unselectedLabelColor: ThemeColor.darkBlue,
-          labelColor: ThemeColor.brightPink,
-          controller: tabController,
-          tabs: tabs,
-          indicator: TabIndicator(
-            color: ThemeColor.brightPink,
-            radius: 5,
-          ),
+        Stack(
+          children: [
+            Positioned(
+              bottom: 6,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 2,
+                color: ThemeColor.normalGrey.withOpacity(0.3),
+              ),
+            ),
+            TabBar(
+              labelStyle: ThemeTextStyle.headlineMedium,
+              labelColor: ThemeColor.brightPink,
+              controller: tabController,
+              tabs: tabs,
+              dividerColor: Colors.transparent,
+              indicator: TabIndicator(
+                color: ThemeColor.brightPink,
+                radius: 5,
+              ),
+            ),
+          ],
         ),
         Expanded(
           child: TabBarView(

@@ -34,11 +34,10 @@ class BadgeTile extends StatelessWidget {
           builder: (context, constrains) {
             return Row(
               children: [
-                SizedBox.square(
-                  dimension: constrains.maxWidth * 0.2,
-                  child: SvgPicture.network(
-                    imagePath ?? "",
-                  ),
+                SvgPicture.network(
+                  imagePath ?? "",
+                  width: 90,
+                  height: 90,
                 ),
                 ThemeSizedBox.width16,
                 Expanded(
@@ -61,7 +60,7 @@ class BadgeTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: constrains.maxWidth * 0.6,
+                            width: constrains.maxWidth * 0.55,
                             child: GlowingLinearProgressIndicator(
                               value: progressPercentage ?? 0,
                             ),

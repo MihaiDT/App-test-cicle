@@ -59,6 +59,8 @@ import 'package:lines/modules/info/info_dropdown_results_page.dart';
 import 'package:lines/modules/info/info_page.dart';
 import 'package:lines/modules/invite_friend/invite_friend_binding.dart';
 import 'package:lines/modules/invite_friend/invite_friend_page.dart';
+import 'package:lines/modules/last_menses/accept_consent_page.dart';
+import 'package:lines/modules/last_menses/binding/accept_consent_binding.dart';
 import 'package:lines/modules/last_menses/binding/last_menses_binding.dart';
 import 'package:lines/modules/last_menses/last_menses_page.dart';
 import 'package:lines/modules/load_code/binding/load_code_binding.dart';
@@ -735,6 +737,17 @@ class Pages {
       name: Routes.editCookies,
       page: () => _mediaQueryWrapper(
         const EditCookiesPage(),
+        authNeeded: false,
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    // Accept consent
+    GetPage(
+      name: Routes.acceptConsent,
+      binding: AcceptConsentBinding(),
+      page: () => _mediaQueryWrapper(
+        const AcceptConsentPage(),
         authNeeded: false,
       ),
       transition: Transition.rightToLeft,

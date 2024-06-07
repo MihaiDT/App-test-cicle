@@ -68,4 +68,5 @@ class Routes {
   static const String cookiesFingerprinting = '/cookies_fingerprinting';
 
   static const String editCookies = '/edit_cookies';
+  static const String acceptConsent = '/accept_consent';
 }

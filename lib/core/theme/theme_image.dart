@@ -5,6 +5,7 @@ class ThemeImage {
   static String bgDark = '$folderPath/bg_dark.webp';
   static String bgLight = '$folderPath/bg_light.webp';
   static String bgLightLarge = '$folderPath/bg_light_large.webp';
+  static String bgGradientGray = '$folderPath/bg_gradient_gray.webp';
   static String bgMainBottomNavigationBar =
       '$folderPath/bg_main_bottom_navigation_bar.webp';
 
@@ -51,4 +52,5 @@ class ThemeImage {
   static String articleShadow = '$folderPath/article_shadow.png';
   static String blurredBadges = '$folderPath/blurred_badges.png';
   static String podium = '$folderPath/podium.webp';
+  static String areYouSure = '$folderPath/are_you_sure.webp';
 }

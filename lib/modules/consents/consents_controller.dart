@@ -22,7 +22,7 @@ class ConsentsController extends GetxController {
 
   ConsentsController() {
     isMarketingEnabled.value =
-        appController.user.value?.privacyMarketingEmail ?? false;
+        appController.user.value?.privacyMarketing ?? false;
     isProfilingEnabled.value =
         appController.user.value?.privacyProfiling ?? false;
     isBrandMarketingEnabled.value =
@@ -92,7 +92,7 @@ class ConsentsController extends GetxController {
     _loading();
     AuthenticationService.updatePrivacy(
       UpdateUserParameters(
-        privacyMarketingEmail: isMarketingEnabled.value,
+        privacyMarketing: isMarketingEnabled.value,
         privacyProfiling: isProfilingEnabled.value,
         privacyBrandMarketing: isBrandMarketingEnabled.value,
         calendarConsent: isCalendarConsentEnabled.value,

@@ -21,7 +21,7 @@ class User {
   int? periodDays;
   int? periodDuration;
   bool? privacyProfiling;
-  bool? privacyMarketingEmail;
+  bool? privacyMarketing;
   bool? privacyBrandMarketing;
   RegistrationProvider? provider;
   String? sessionToken;
@@ -62,7 +62,7 @@ class User {
     required this.periodDays,
     required this.periodDuration,
     this.privacyProfiling,
-    this.privacyMarketingEmail,
+    this.privacyMarketing,
     this.privacyBrandMarketing,
     this.provider,
     this.sessionToken,
@@ -98,7 +98,7 @@ class User {
       periodDays: json['user']['period_days'],
       periodDuration: json['user']['period_duration'],
       privacyProfiling: json['user']['privacy_profiling'],
-      privacyMarketingEmail: json['user']['privacy_marketing_email'],
+      privacyMarketing: json['user']['privacy_marketing'],
       privacyBrandMarketing: json['user']['privacy_brand_marketing'],
       provider: RegistrationProvider.fromJson(json['user']['provider']),
       sessionToken: json['user']['session_token'],
@@ -146,7 +146,7 @@ class User {
       "period_duration": periodDuration,
       "privacy_profiling": privacyProfiling,
       "privacy_brand_marketing": privacyProfiling,
-      "privacy_marketing_email": privacyMarketingEmail,
+      "privacy_marketing": privacyMarketing,
       "session_token": sessionToken,
       "interests": interests!
           .map(
@@ -176,7 +176,7 @@ class User {
         ' lastName: $lastName, legalGuardianEmail: $legalGuardianEmail,'
         ' mgmCode: $mgmCode, nickname: $nickname, password: $password,'
         ' periodDays: $periodDays, periodDuration: $periodDuration,'
-        ' privacyProfiling: $privacyProfiling, privacyMarketingEmail: $privacyMarketingEmail,'
+        ' privacyProfiling: $privacyProfiling, privacyMarketingEmail: $privacyMarketing,'
         ' provider: $provider, sessionToken: $sessionToken, interests: $interests,'
         ' zipCode: $zipCode, active: $active, coinsCollected: $coinsCollected, userId: $userId,'
         ' profileCompletedAreas: ${profileCompletedAreas.toString()},'

@@ -129,6 +129,11 @@ class PrizesPage extends GetView<PrizesController> {
                   text: "TUTTE LE MISSIONI",
                 ),
               ),
+
+              /// LUCKY LINES
+              Image.asset(
+                "assets/images/lotteria.png",
+              ),
               ThemeSizedBox.height40,
               const SurveySection(),
               Padding(

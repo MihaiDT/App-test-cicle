@@ -78,6 +78,7 @@ class HomeController extends AppScaffoldController {
           const Duration(milliseconds: 300),
           () {
             if (callback.isSuccessful) {
+              /// Tutorial without Droppy
               if (!hasSavedPeriodInfo) {
                 targets.add(
                   TargetFocus(
@@ -143,6 +144,8 @@ class HomeController extends AppScaffoldController {
                   ),
                 );
               }
+
+              /// Tutorial with red Droppy
               if (hasSavedPeriodInfo) {
                 targets.addAll(
                   [

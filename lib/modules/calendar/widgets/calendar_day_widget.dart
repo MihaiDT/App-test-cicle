@@ -98,13 +98,18 @@ class CalendarDayWidget extends StatelessWidget {
   Widget _dayNumberText(
     BuildContext context,
   ) {
-    return BodyLarge(
+    return Text(
       text,
-      fontWeight: isToday
-          ? ThemeTextStyle.weightExtraBold
-          : ThemeTextStyle.weightMedium,
+      style: isToday
+          ? ThemeTextStyle.horizontalCalendarDate.copyWith(
+              fontWeight: FontWeight.w900,
+              fontSize: 18,
+              color: textColor,
+            )
+          : ThemeTextStyle.horizontalCalendarDate.copyWith(
+              color: textColor,
+            ),
       textAlign: TextAlign.center,
-      color: textColor,
     );
   }
 
@@ -135,8 +140,12 @@ class CalendarDayWidget extends StatelessWidget {
       ? ThemeColor.primary
       : Colors.white;
 
-  String get text =>
-      singleDayData?.date.split('-').last ??
-      formattedDate?.split('-').last ??
-      '';
+  String get text {
+    String? day;
+
+    if (formattedDate != null) {
+      day = int.parse(formattedDate!.split('-').last).toString();
+    }
+    return singleDayData?.date.split('-').last ?? day ?? '';
+  }
 }

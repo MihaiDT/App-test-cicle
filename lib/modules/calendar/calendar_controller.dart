@@ -94,10 +94,12 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   /// Size of the bottom sheet
   RxDouble get rxSheetVSize {
+    /// The bottomsheet should be 0.1 of the screen height if the user is not an adult+
+    /// because the bottom sheet is not shown in this case but only the top buttons
     if (!(appController.user.value!.diaryConsent ?? false) || !userIsAdult) {
       return 0.1.obs;
     }
-    return 0.21.obs;
+    return 0.25.obs;
   }
 
   /// Currently selected tab , by default the monthly calendar is shown

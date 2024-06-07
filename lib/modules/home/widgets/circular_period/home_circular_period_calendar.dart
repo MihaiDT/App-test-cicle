@@ -70,7 +70,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
           children: [
             ThemeSizedBox.height4,
             const HeadlineMedium(
-              "Inserisci le tue ultime mestruazioni per iniziare",
+              "Inserisci le tue\n ultime mestruazioni\n per iniziare",
               color: ThemeColor.darkBlue,
               textAlign: TextAlign.center,
             ),
@@ -126,7 +126,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
                     TitleMedium(
                       periodDate.periodPhase.phaseLabel.toUpperCase(),
                       color: const Color(0xffB438B2),
-                      fontWeight: NewThemeTextStyle.weightBold,
+                      fontWeight: ThemeTextStyle.weightBold,
                       textAlign: TextAlign.center,
                       letterSpacing: 2,
                     ),

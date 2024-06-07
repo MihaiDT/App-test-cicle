@@ -26,6 +26,13 @@ class ConfirmEmailController extends GetxController {
     });
   }
 
+  @override
+  Future<void> onReady() async {
+    await AuthenticationService.sendActivationLink(email);
+
+    super.onReady();
+  }
+
   void logIn() {
     AdjustManager.trackEvent(EventType.confirmEmail);
     if (appController.isLoginFlow.value == true) {

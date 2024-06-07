@@ -75,14 +75,12 @@ class HowOftenMensesWidget extends StatelessWidget {
         .toList();
   }
 
-  List<int> get _rangeMenses => [
-        26,
-        27,
-        28,
-        29,
-        30,
-        31,
-      ];
+  /// Generate a list of int from 10 to 35 that are the range of the menses
+  List<int> get _rangeMenses {
+    int start = 10;
+    int end = 35;
+    return List<int>.generate(end - start + 1, (i) => i + start);
+  }
 
   /// This is the showed widget, it's fake because is not tappable
   Widget get _fakeCounter {
@@ -117,7 +115,7 @@ class HowOftenMensesWidget extends StatelessWidget {
         children: [
           ThemeSizedBox.height8,
           const HeadlineLarge(
-            "Seleziona giorno",
+            "Seleziona giorni",
             color: Colors.black,
           ),
           Expanded(

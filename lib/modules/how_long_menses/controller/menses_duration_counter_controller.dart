@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
 class MensesDurationCounterController extends GetxController {
-  Rx<int> counter = 3.obs;
+  Rx<int> counter = 1.obs;
 
   void decrementCounter() {
-    if (counter.value > 3) {
+    if (counter.value > 1) {
       counter.value--;
     }
 
