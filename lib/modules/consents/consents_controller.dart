@@ -21,11 +21,16 @@ class ConsentsController extends GetxController {
   bool isChanged = false;
 
   ConsentsController() {
-    isMarketingEnabled.value = appController.user.value?.privacyMarketingEmail ?? false;
-    isProfilingEnabled.value = appController.user.value?.privacyProfiling ?? false;
-    isBrandMarketingEnabled.value = appController.user.value?.privacyBrandMarketing ?? false;
-    isCalendarConsentEnabled.value = appController.user.value?.calendarConsent ?? false;
-    isDiaryConsentEnabled.value = appController.user.value?.diaryConsent ?? false;
+    isMarketingEnabled.value =
+        appController.user.value?.privacyMarketingEmail ?? false;
+    isProfilingEnabled.value =
+        appController.user.value?.privacyProfiling ?? false;
+    isBrandMarketingEnabled.value =
+        appController.user.value?.privacyBrandMarketing ?? false;
+    isCalendarConsentEnabled.value =
+        appController.user.value?.calendarConsent ?? false;
+    isDiaryConsentEnabled.value =
+        appController.user.value?.diaryConsent ?? false;
 
     isChanged = false;
   }

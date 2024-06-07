@@ -106,7 +106,8 @@ class HomePage extends GetView<HomeController> {
                       SizedBox(
                         height: 220,
                         child: AdvicesCardsRow(
-                          onCardTapped: (article, category) => controller.showArticleDetails(article, category),
+                          onCardTapped: (article, category) =>
+                              controller.showArticleDetails(article, category),
                           withBorder: true,
                           articles: controller.allSuggestedArticles,
                         ),
