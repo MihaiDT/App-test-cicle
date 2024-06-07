@@ -96,13 +96,13 @@ class CircularPeriodCalendar extends GetView<HomeController> {
   }
 
   Widget get _avatar {
-    return SizedBox(
+    return const SizedBox(
       width: 100,
       height: 140,
-      child: Image.asset(
-        ThemeImage.mockAvatar,
-        fit: BoxFit.scaleDown,
-      ),
+      // child: Image.asset(
+      //   ThemeImage.mockAvatar,
+      //   fit: BoxFit.scaleDown,
+      // ),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/enums/period_phase.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
@@ -36,11 +37,22 @@ class HomeController extends AppScaffoldController {
   bool updating = false;
   final scrollSnapListKey = GlobalKey<ScrollSnapListState>();
 
-  RxBool rxPlayButtonVisible = false.obs;
+  bool get isSelectedMestruationDay {
+    if (currentPeriodDatesMap.values.toList().isEmpty) {
+      return false;
+    }
 
-  bool get playButtonVisible => rxPlayButtonVisible.value;
+    final periodDate =
+        currentPeriodDatesMap.values.toList()[periodSelectedDateIndex.value];
+    return periodDate.periodPhase == PeriodPhase.menstruation;
+  }
 
-  set playButtonVisible(bool newValue) => rxPlayButtonVisible.value = newValue;
+  bool get playButtonVisible {
+    final periodDate =
+        currentPeriodDatesMap.values.toList()[periodSelectedDateIndex.value];
+    return periodDate.periodPhase == PeriodPhase.menstruation &&
+        periodDate.date == formattedTodayDate;
+  }
 
   RxInt periodSelectedDateIndex = 0.obs;
 
@@ -288,11 +300,11 @@ class HomeController extends AppScaffoldController {
     return DateTime.now().obs;
   }
 
+  String get formattedTodayDate => dateFormatYMD.format(DateTime.now());
+
   Future<int> _initCalendars() async {
     await CalendarService.fetchCurrentPeriod();
     await CalendarService.fetchCalendarData();
-
-    final formattedTodayDate = dateFormatYMD.format(DateTime.now());
 
     int result =
         currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);

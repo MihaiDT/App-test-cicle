@@ -18,8 +18,9 @@ class ConsentsPage extends GetView<ConsentsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TransparentAppBar(
-        title: TitleSmall(
+      appBar: TransparentAppBar(
+        onBackPressed: () => controller.updateConsents(),
+        title: const TitleSmall(
           "GESTIONE CONSENSI",
           color: ThemeColor.primary,
         ),

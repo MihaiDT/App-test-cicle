@@ -21,6 +21,7 @@ class MissionRowSection extends GetView<MissionRowSectionController> {
           child: TitleMedium(
             "MISSIONI IN CORSO",
             color: ThemeColor.darkBlue,
+            letterSpacing: 2,
           ),
         ),
         ThemeSizedBox.height8,
