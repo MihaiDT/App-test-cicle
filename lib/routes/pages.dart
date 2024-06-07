@@ -97,6 +97,7 @@ import 'package:lines/modules/specific_menses_stats/specific_menses_stats_bindin
 import 'package:lines/modules/specific_menses_stats/specific_menses_stats_page.dart';
 import 'package:lines/modules/splash/splash_binding.dart';
 import 'package:lines/modules/splash/splash_page.dart';
+import 'package:lines/modules/surveys/survey_binding.dart';
 import 'package:lines/modules/surveys/surveys_page.dart';
 import 'package:lines/modules/tamagochi_web_view.dart';
 import 'package:lines/modules/tutor_email/tutor_email_binding.dart';
@@ -576,6 +577,7 @@ class Pages {
     /// SurveysPage
     GetPage(
       name: Routes.surveysPage,
+      binding: SurveyBinding(),
       page: () => _mediaQueryWrapper(
         const SurveysPage(),
       ),

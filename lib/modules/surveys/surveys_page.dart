@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/prizes/widgets/survey_card.dart';
+import 'package:lines/modules/surveys/survey_controller.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-class SurveysPage extends StatelessWidget {
+class SurveysPage extends GetView<SurveyController> {
   const SurveysPage({
     super.key,
   });
@@ -31,15 +34,16 @@ class SurveysPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           horizontal: ThemeSize.paddingSmall,
         ),
-        child: ListView.separated(
-          itemCount: 2,
-          itemBuilder: (context, index) => const SurveyCard(
-            title: "WELCOME QUIZ",
-            description: "Raccontaci qualcosa su di te",
-            coinAmount: 25,
-            isCompleted: true,
-          ),
-          separatorBuilder: (context, index) => ThemeSizedBox.height16,
+        child: SurveyCard(
+          onTap: () {
+            if (!controller.isWelcomeQuizCompleted) {
+              Get.toNamed(Routes.welcomeQuizPage);
+            }
+          },
+          title: "WELCOME QUIZ",
+          description: "Raccontaci qualcosa su di te",
+          coinAmount: controller.welcomeQuizTotalCoins,
+          isCompleted: controller.isWelcomeQuizCompleted,
         ),
       ),
     );
