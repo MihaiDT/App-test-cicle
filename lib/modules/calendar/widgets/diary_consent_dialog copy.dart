@@ -70,7 +70,8 @@ class DiaryConsentDialog extends StatelessWidget {
                       ..onTap = () async {
                         await launchUrl(
                           Uri.parse(
-                              appController.settings.value?.privacyUrl ?? ''),
+                            appController.settings.value?.privacyUrl ?? '',
+                          ),
                           mode: LaunchMode.externalApplication,
                         );
                       },

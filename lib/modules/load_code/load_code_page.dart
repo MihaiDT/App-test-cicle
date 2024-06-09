@@ -147,8 +147,6 @@ class LoadCodePage extends GetView<LoadCodeController> {
       ? appController.missions.value![appController.selectedMissionIndex]
       : null;
 
-  static const Color _bgColor = Color(0xfff3eef4);
-
   String _missionLoadedProductsText() {
     if (_mission!.totalCounter > 1) {
       return "Inserisci i ${_mission!.totalCounter} codici per completare la missione";
