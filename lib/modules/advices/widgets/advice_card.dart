@@ -11,7 +11,6 @@ class AdviceCard extends StatelessWidget {
   final Function(bool)? onSaveTap;
   final Function(AdvicesArticle, AdvicesCategory)? onCardTap;
 
-  late final String? timer;
   late final bool gallery;
 
   AdviceCard({
@@ -23,14 +22,11 @@ class AdviceCard extends StatelessWidget {
   }) {
     switch (article.typology) {
       case ArticleType.text:
-        timer = null;
         gallery = false;
       case ArticleType.slider:
-        timer = null;
         gallery = true;
       case ArticleType.video:
         gallery = false;
-        timer = "";
     }
   }
 
@@ -183,7 +179,7 @@ class AdviceCard extends StatelessWidget {
   }
 
   Widget get _topCenterWidget {
-    if (timer != null) {
+    if (article.videoDuration != null) {
       return Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 10,
@@ -195,7 +191,7 @@ class AdviceCard extends StatelessWidget {
             Radius.circular(90),
           ),
         ),
-        child: BodySmall(timer ?? ''),
+        child: BodySmall(article.videoDuration!),
       );
     }
     if (gallery == true) {

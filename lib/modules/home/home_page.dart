@@ -4,6 +4,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/home/home_controller.dart';
+import 'package:lines/modules/home/widgets/cherry_home_box.dart';
 import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar.dart';
 import 'package:lines/modules/home/widgets/circular_period/home_circular_period_calendar_shimmer.dart';
 import 'package:lines/modules/home/widgets/header_section.dart';
@@ -67,6 +68,8 @@ class HomePage extends GetView<HomeController> {
                     ? const HomePeriodInfoShimmer()
                     : const HomePeriodInfo(),
               ),
+              ThemeSizedBox.height16,
+              const CherryHomeBox(),
               if (controller.showWelcomeQuizSection) ...[
                 ThemeSizedBox.height32,
                 const WelcomeQuizSection(),

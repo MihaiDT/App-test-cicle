@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/your_menses_stats/widgets/info_card_section.dart';
@@ -21,6 +22,7 @@ class YourMensesStatsPage extends GetView<YourMensesStatsController> {
           color: ThemeColor.darkBlue,
         ),
         backButtonColor: ThemeColor.darkBlue,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: Padding(
         padding: ThemeSize.paddingS,

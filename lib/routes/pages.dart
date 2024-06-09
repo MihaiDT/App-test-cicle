@@ -750,7 +750,7 @@ class Pages {
         const AcceptConsentPage(),
         authNeeded: false,
       ),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
   ];
 

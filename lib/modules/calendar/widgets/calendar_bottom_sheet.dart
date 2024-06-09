@@ -55,7 +55,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                     ),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       image: AssetImage(
                         ThemeImage.bgCalendarBottomSheet,
                       ),

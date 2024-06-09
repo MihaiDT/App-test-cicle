@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -19,6 +20,7 @@ class ConsentsPage extends GetView<ConsentsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TransparentAppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         onBackPressed: () => controller.updateConsents(),
         title: const TitleSmall(
           "GESTIONE CONSENSI",

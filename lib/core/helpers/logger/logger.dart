@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/widgets/texts/notification_overlay.dart';
 import 'package:logger/logger.dart';
 
 class CustomLogger extends Logger {
@@ -59,6 +61,14 @@ class CustomLogger extends Logger {
         loggedMessage,
         error: exception,
       );
+
+      if (exception.response?.statusCode == 422) {
+        FlushBar(
+          child: Text(loggedMessage),
+        ).show(
+          Get.context!,
+        );
+      }
     } else {
       e(
         exception,

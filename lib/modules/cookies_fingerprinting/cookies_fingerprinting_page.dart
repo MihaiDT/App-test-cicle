@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
@@ -32,6 +33,7 @@ class CookiesFingerprintingPage
           color: ThemeColor.darkBlue,
         ),
         backButtonColor: ThemeColor.darkBlue,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: SafeArea(
         child: BottomWidgetLayout(

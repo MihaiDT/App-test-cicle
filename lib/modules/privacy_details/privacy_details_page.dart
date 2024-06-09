@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
@@ -22,6 +23,7 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
           color: ThemeColor.primary,
         ),
         backButtonColor: ThemeColor.darkBlue,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -29,17 +31,17 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
         ),
         children: [
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: ThemeSize.paddingSmall,
-            ),
-            child: InkWell(
-              onTap: () async {
-                await launchUrl(
-                  Uri.parse(appController.settings.value?.privacyUrl ?? ''),
-                  mode: LaunchMode.externalApplication,
-                );
-              },
+          InkWell(
+            onTap: () async {
+              await launchUrl(
+                Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                mode: LaunchMode.externalApplication,
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: ThemeSize.paddingSmall,
+              ),
               child: Column(
                 children: [
                   Row(
@@ -60,19 +62,19 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
             ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: ThemeSize.paddingSmall,
-            ),
-            child: InkWell(
-              onTap: () async {
-                await launchUrl(
-                  Uri.parse(
-                    appController.settings.value?.termsAndConditionsUrl ?? '',
-                  ),
-                  mode: LaunchMode.externalApplication,
-                );
-              },
+          InkWell(
+            onTap: () async {
+              await launchUrl(
+                Uri.parse(
+                  appController.settings.value?.termsAndConditionsUrl ?? '',
+                ),
+                mode: LaunchMode.externalApplication,
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: ThemeSize.paddingSmall,
+              ),
               child: Column(
                 children: [
                   Row(
@@ -93,13 +95,13 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
             ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: ThemeSize.paddingSmall,
-            ),
-            child: InkWell(
-              onTap: () =>
-                  Get.toNamed(Routes.cookiesFingerprinting, arguments: false),
+          InkWell(
+            onTap: () =>
+                Get.toNamed(Routes.cookiesFingerprinting, arguments: false),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: ThemeSize.paddingSmall,
+              ),
               child: Column(
                 children: [
                   Row(

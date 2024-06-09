@@ -26,9 +26,8 @@ class InProgressBadgePage extends GetView<InProgressBadgesController> {
           backgroundColor: ThemeColor.normalGrey.withOpacity(0.3),
           title: controller.badges[index].title,
           description: controller.badges[index].description,
-          progressPercentage: controller.badges[index].progressValue != null
-              ? controller.badges[index].progressValue! / 10
-              : 0,
+          progressPercentage:
+              (controller.badges[index].progressValue ?? 0).toDouble(),
           progressLabel: controller.badges[index].progressLabel,
         );
       },

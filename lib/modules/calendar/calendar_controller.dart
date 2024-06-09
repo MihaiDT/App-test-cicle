@@ -96,7 +96,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   RxDouble get rxSheetVSize {
     /// The bottomsheet should be 0.1 of the screen height if the user is not an adult+
     /// because the bottom sheet is not shown in this case but only the top buttons
-    if (!(appController.user.value!.diaryConsent ?? false) || !userIsAdult) {
+    if (!userIsAdult) {
       return 0.1.obs;
     }
     return 0.25.obs;
@@ -222,17 +222,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       calendarConsent = await showErrorDialog(
         context: Get.context!,
         builder: (_) => const CalendarConsentDialog(),
-        dismissible: false,
-      );
-    }
-
-    if (calendarConsent &&
-        !diaryConsent &&
-        appController.user.value!.hasMoreThan18Years) {
-      diaryConsent = await showErrorDialog(
-        context: Get.context!,
-        builder: (_) => const DiaryConsentDialog(),
-        dismissible: false,
+        dismissible: true,
       );
     }
 
@@ -270,9 +260,13 @@ class CalendarController extends GetxController with MonthCalendarMixin {
         Get.context!,
       );
     }
+
+    jumpToToday();
   }
 
   void _updateConsents(bool diaryConsent, bool calendarConsent) async {
+    onDayTapped(rxSelectedDate.value); // Force
+
     diaryConsentsUpdated.value = false;
     diaryConsentsUpdated.refresh();
 
@@ -288,6 +282,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
     // Force the view refreshing
     selectedTab.refresh();
+    jumpToToday();
   }
 
   void initSymptomForDate() {
@@ -361,24 +356,44 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   void saveSymptoms() async {
-    draggableScrollableController.reset();
-    final dateString = dateFormatYMD.format(rxSelectedDate.value);
-    if (savedCategoryHasChanged) {
-      await CalendarService.setHomePageSymptomCategories(savedCategoryIds);
+    bool calendarConsent = appController.user.value!.calendarConsent ?? false;
+    bool diaryConsent = appController.user.value!.diaryConsent ?? false;
+
+    if (calendarConsent &&
+        !diaryConsent &&
+        appController.user.value!.hasMoreThan18Years) {
+      diaryConsent = await showErrorDialog(
+        context: Get.context!,
+        builder: (_) => const DiaryConsentDialog(),
+        dismissible: false,
+      );
+
+      if (diaryConsent) {
+        _updateConsents(true, true);
+      }
+    } else {
+      draggableScrollableController.reset();
+      final dateString = dateFormatYMD.format(rxSelectedDate.value);
+      if (savedCategoryHasChanged) {
+        await CalendarService.setHomePageSymptomCategories(savedCategoryIds);
+      }
+
+      await CalendarService.saveSymptomsForSpecificDate(
+        SymptomDiaries(
+          date: dateString,
+          symptomsIDs: symptomIds,
+          hoursOfSleep: oreDiSonnoValue.value,
+          waterLiters: quantitaAcquaValue.value,
+          weight: pesoValue.value,
+          notes: notesInitialValue.value,
+        ),
+      );
+
+      await CalendarService.fetchCalendarData();
+
+      await wait(milliseconds: 800);
+      jumpToToday();
     }
-
-    await CalendarService.saveSymptomsForSpecificDate(
-      SymptomDiaries(
-        date: dateString,
-        symptomsIDs: symptomIds,
-        hoursOfSleep: oreDiSonnoValue.value,
-        waterLiters: quantitaAcquaValue.value,
-        weight: pesoValue.value,
-        notes: notesInitialValue.value,
-      ),
-    );
-
-    await CalendarService.fetchCalendarData();
   }
 
   void _initCalendarYearController() {

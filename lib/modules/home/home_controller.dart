@@ -48,6 +48,9 @@ class HomeController extends AppScaffoldController {
   }
 
   bool get playButtonVisible {
+    if (currentPeriodDatesMap.values.toList().isEmpty) {
+      return false;
+    }
     final periodDate =
         currentPeriodDatesMap.values.toList()[periodSelectedDateIndex.value];
     return periodDate.periodPhase == PeriodPhase.menstruation &&

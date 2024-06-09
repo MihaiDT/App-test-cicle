@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:app_settings/app_settings.dart';
 
 class SettingsController extends GetxController {
   final isNotificationEnabled = false.obs;
@@ -9,7 +9,10 @@ class SettingsController extends GetxController {
   }
 
   void openSettings() async {
-    const String url = 'app-settings:';
-    await launchUrl(Uri.parse(url));
+    await AppSettings.openAppSettings(
+      type: AppSettingsType.notification,
+      asAnotherTask:
+          true, // Android If asAnotherTask is set to true, the settings page is opened in a different Activity.
+    );
   }
 }

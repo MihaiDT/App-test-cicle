@@ -17,23 +17,41 @@ class HomePeriodMenstruationCard extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white.withOpacity(0.4),
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _label(),
-          ThemeSizedBox.height4,
-          _firstTextRow(),
-          ThemeSizedBox.height4,
-          _secondTextRow(),
-          _thirdTextRow(),
-        ],
-      ),
+    return Stack(
+      children: [
+        Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white.withOpacity(0.4),
+          ),
+          padding: const EdgeInsets.all(16),
+          width: double.maxFinite,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _label(),
+              ThemeSizedBox.height4,
+              _firstTextRow(),
+              ThemeSizedBox.height4,
+              _secondTextRow(),
+              _thirdTextRow(),
+            ],
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          child: SizedBox(
+            width: 56,
+            height: 56,
+            child: Image.asset(
+              ThemeImage.homeBoxMenstruationIcon,
+              fit: BoxFit.scaleDown,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

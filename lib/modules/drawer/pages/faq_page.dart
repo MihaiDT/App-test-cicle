@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -26,6 +27,7 @@ class _FaqPageState extends State<FaqPage> {
           color: ThemeColor.primary,
         ),
         backButtonColor: ThemeColor.darkBlue,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: SafeArea(
         child: BottomWidgetLayout(

@@ -76,17 +76,17 @@ class AdvicesDetailController extends GetxController {
     youtubePlayerController.dispose();
   }
 
-  String durationToString(Duration duration) {
-    int minutes = duration.inMinutes.remainder(60);
-    int seconds = duration.inSeconds.remainder(60);
+  // String durationToString(Duration duration) {
+  //   int minutes = duration.inMinutes.remainder(60);
+  //   int seconds = duration.inSeconds.remainder(60);
 
-    return "$minutes:${twoDigits(seconds)}";
-  }
+  //   return "$minutes:${twoDigits(seconds)}";
+  // }
 
-  String twoDigits(int n) {
-    if (n >= 10) return "$n";
-    return "0$n";
-  }
+  // String twoDigits(int n) {
+  //   if (n >= 10) return "$n";
+  //   return "0$n";
+  // }
 
   void _updateArticleFavStatus(bool isFav) async {
     AdvicesArticle? articleToSave = article;

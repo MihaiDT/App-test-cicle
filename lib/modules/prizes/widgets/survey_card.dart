@@ -33,7 +33,7 @@ class SurveyCard extends StatelessWidget {
                 borderColor: _borderColor,
                 onPressed: onTap,
                 color: _bgColor,
-                backgroundImage: DecorationImage(
+                backgroundImage: const DecorationImage(
                   image: AssetImage(
                     ThemeImage.questionMarksGroup,
                   ),
@@ -43,7 +43,7 @@ class SurveyCard extends StatelessWidget {
             : ElevatedCard(
                 onPressed: onTap,
                 color: _bgColor,
-                backgroundImage: DecorationImage(
+                backgroundImage: const DecorationImage(
                   image: AssetImage(
                     ThemeImage.questionMarksGroup,
                   ),

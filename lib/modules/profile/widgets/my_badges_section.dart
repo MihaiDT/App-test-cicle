@@ -43,6 +43,8 @@ class MyBadgesSection extends GetView<MyBadgesController> {
                   imagePath: controller.badges[index].iconUrl,
                   backgroundColor: Colors.white.withOpacity(0.5),
                   progressLabel: controller.badges[index].progressLabel,
+                  progressPercentage:
+                      (controller.badges[index].progressValue ?? 0).toDouble(),
                 ),
               );
             }),

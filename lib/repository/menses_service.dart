@@ -67,9 +67,16 @@ class MensesService {
   }
 
   static void _saveStatisticPeriod(Response response) {
-    List<dynamic> periodsData = response.data["period_stats"];
-    List<PeriodsStats> periodsStats =
-        periodsData.map((period) => PeriodsStats.fromJson(period)).toList();
+    List<Map<String, dynamic>> periodsData =
+        List<Map<String, dynamic>>.from(response.data["period_stats"]);
+    final periodsStats = List<PeriodsStats>.empty(growable: true);
+    periodsStats.addAll(
+      periodsData.asMap().entries.map(
+        (periodEntry) {
+          return PeriodsStats.fromJson(periodEntry.value);
+        },
+      ).toList(),
+    );
 
     appController.periodsStats.responseHandler = ResponseHandler.successful(
       content: periodsStats,

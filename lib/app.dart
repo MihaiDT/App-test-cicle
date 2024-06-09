@@ -20,7 +20,6 @@ class App extends StatelessWidget {
       },
       darkTheme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
-
       fallbackLocale: const Locale('it', 'IT'),
       getPages: Pages.pages,
       locale: Get.deviceLocale,

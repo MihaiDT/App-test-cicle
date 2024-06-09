@@ -54,7 +54,7 @@ class WelcomeQuizAlertDialog extends StatelessWidget {
                 coinAmount: controller.coinAmount,
               ),
               ThemeSizedBox.height40,
-              Image(
+              const Image(
                 image: AssetImage(
                   ThemeImage.quizIntroImage,
                 ),

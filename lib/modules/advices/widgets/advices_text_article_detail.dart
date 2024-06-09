@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -133,6 +134,7 @@ class AdvicesTextArticleDetails extends StatelessWidget {
     RxDouble proportion,
   ) {
     return SliverAppBar(
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
       backgroundColor: category?.categoryColor,
       elevation: 0,
       leading: InkWell(

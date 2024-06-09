@@ -19,21 +19,21 @@ class InfoHowToGetCoinsBottomSheet extends StatelessWidget {
             textAlign: TextAlign.center,
           ).applyShaders(context),
           ThemeSizedBox.height24,
-          InfoCard(
+          const InfoCard(
             title: "Carica codici",
             description:
                 "Acquista i tuoi prodotti Lines e carica, nell'apposita area,  i codici che trovi nelle confezioni.",
             imagePath: ThemeImage.loadProduct,
           ),
           ThemeSizedBox.height16,
-          InfoCard(
+          const InfoCard(
             title: "Questionari",
             description:
                 "Raccontaci di più su di te e rispondi alle domande dei questionari.",
             imagePath: ThemeImage.quizIntroImage,
           ),
           ThemeSizedBox.height16,
-          InfoCard(
+          const InfoCard(
             title: "Invita un amico",
             description:
                 "Invita un'amica a iscriversi a My Lines e sarai ricompensata!",

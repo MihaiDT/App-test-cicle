@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -55,6 +56,7 @@ class ContentLibraryPage extends GetView<ContentLibraryController> {
             child: SvgPicture.asset(ThemeIcon.search),
           ),
         ],
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: SafeArea(
         child: Column(

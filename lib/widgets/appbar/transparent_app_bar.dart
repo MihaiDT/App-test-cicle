@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
@@ -10,6 +11,8 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backButtonColor;
   final bool showBackButton;
 
+  final SystemUiOverlayStyle? systemOverlayStyle;
+
   final GestureTapCallback? onBackPressed;
 
   const TransparentAppBar({
@@ -19,12 +22,14 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.onBackPressed,
     this.showBackButton = true,
+    this.systemOverlayStyle,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      systemOverlayStyle: systemOverlayStyle,
       surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       leading: showBackButton ? (leading ?? _leading) : const SizedBox.shrink(),

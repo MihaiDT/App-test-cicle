@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
@@ -20,6 +21,7 @@ class SettingsPage extends GetView<SettingsController> {
           color: ThemeColor.primary,
         ),
         backButtonColor: ThemeColor.darkBlue,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -27,12 +29,12 @@ class SettingsPage extends GetView<SettingsController> {
         ),
         children: [
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: ThemeSize.paddingSmall,
-            ),
-            child: InkWell(
-              onTap: () => controller.openSettings(),
+          InkWell(
+            onTap: () => controller.openSettings(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: ThemeSize.paddingSmall,
+              ),
               child: Column(
                 children: [
                   Row(
@@ -77,12 +79,12 @@ class SettingsPage extends GetView<SettingsController> {
           //   ),
           // ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: ThemeSize.paddingSmall,
-            ),
-            child: InkWell(
-              onTap: () => Get.toNamed(Routes.consents),
+          InkWell(
+            onTap: () => Get.toNamed(Routes.consents),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: ThemeSize.paddingSmall,
+              ),
               child: Column(
                 children: [
                   Row(
@@ -103,12 +105,12 @@ class SettingsPage extends GetView<SettingsController> {
             ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: ThemeSize.paddingSmall,
-            ),
-            child: InkWell(
-              onTap: () => Get.toNamed(Routes.privacyDetails),
+          InkWell(
+            onTap: () => Get.toNamed(Routes.privacyDetails),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: ThemeSize.paddingSmall,
+              ),
               child: Column(
                 children: [
                   Row(

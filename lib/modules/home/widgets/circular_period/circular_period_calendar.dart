@@ -18,17 +18,12 @@ class CircularPeriodCalendar extends GetView<HomeController> {
     return AppScaffoldPadding(
       bottom: 0,
       top: 0,
-      child: Stack(
-        children: [
-          Center(
-            child: SizedBox(
-              height: size,
-              width: size,
-              child: const CircularCalendar(),
-            ),
-          ),
-          _avatarContainer,
-        ],
+      child: Center(
+        child: SizedBox(
+          height: size,
+          width: size,
+          child: const CircularCalendar(),
+        ),
       ),
     );
   }

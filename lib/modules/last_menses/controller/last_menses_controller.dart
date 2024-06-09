@@ -8,10 +8,31 @@ class LastMensesController extends GetxController {
   @override
   Future<void> onReady() async {
     await Get.bottomSheet(
-      const ConsentBottomSheet(),
-      enableDrag: false,
-      isDismissible: false,
-      backgroundColor: ThemeColor.darkGrey,
+      Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          image: DecorationImage(
+            image: AssetImage(
+              ThemeImage.consentsBottomSheetBg,
+            ),
+            fit: BoxFit.fitWidth,
+          ),
+        ),
+        // child:
+        // const BlurredFilter(
+        //   borderRadiusDegrees: 20,
+        child: Container(
+          color: Colors.black26,
+          child: const ConsentBottomSheet(),
+        ),
+        // ),
+      ),
+      enableDrag: true,
+      isDismissible: true,
+      backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),

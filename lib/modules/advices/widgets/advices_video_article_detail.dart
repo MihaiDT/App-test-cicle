@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
@@ -24,8 +25,12 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    final videoPlaceholderWidth = Get.width - (ThemeSize.paddingMedium * 2);
+    final videoPlaceholderHeight = videoPlaceholderWidth * 9 / 16; // 16:9;
+
     return AppScaffoldPage(
       appBar: TransparentAppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         actions: [
           if (controller.article?.id.isNotEmpty == true)
             InkWell(
@@ -125,6 +130,28 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
                                 fit: StackFit.passthrough,
                                 children: [
                                   player,
+                                  if (controller
+                                          .article!.videoImagePreviewUrl !=
+                                      null)
+                                    Obx(
+                                      () => Visibility(
+                                        visible: !controller.hasStarted.value,
+                                        child: Positioned(
+                                          top: 0,
+                                          left: 0,
+                                          right: 0,
+                                          child: SizedBox(
+                                            height: videoPlaceholderHeight,
+                                            width: videoPlaceholderWidth,
+                                            child: Image.network(
+                                              controller.article!
+                                                  .videoImagePreviewUrl!,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   Column(
                                     children: [
                                       Obx(
@@ -150,9 +177,10 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
                                                     ),
                                                   ),
                                                   child: BodySmall(
-                                                    controller.durationToString(
-                                                      controller.duration.value,
-                                                    ),
+                                                    controller.article!
+                                                            .videoDuration ??
+                                                        controller.article!
+                                                            .typology.name,
                                                     color: Colors.white,
                                                   ),
                                                 ),

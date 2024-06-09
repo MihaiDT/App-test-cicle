@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
@@ -6,10 +5,10 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/api.dart';
+import 'package:lines/core/helpers/fullscreen_loader.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lottie/lottie.dart';
 
 class CustomizeCherryWebView extends StatefulWidget {
   final String sessionToken;
@@ -40,7 +39,9 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
         actions: [
           InkWell(
             onTap: () async {
-              _loading(context);
+              showFullScreenLoader(
+                dismissAfter: const Duration(seconds: 5),
+              );
 
               await webViewController?.evaluateJavascript(
                 source: "save()",
@@ -125,35 +126,5 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
         ),
       ),
     );
-  }
-
-  _loading(BuildContext context) {
-    final overlayEntry = OverlayEntry(
-      builder: (_) {
-        return Container(
-          color: Colors.black.withOpacity(0.7),
-          height: Get.height,
-          width: Get.width,
-          child: Center(
-            child: SizedBox(
-              height: 40,
-              width: 40,
-              child: LottieBuilder.asset(
-                "assets/lottie/light_loader.json",
-              ),
-            ),
-          ),
-        );
-      },
-      maintainState: false,
-      opaque: false,
-    );
-
-    Overlay.of(context).insert(overlayEntry);
-
-    // Rimuove l'OverlayEntry dopo 5 secondi
-    Timer(const Duration(seconds: 5), () {
-      overlayEntry.remove();
-    });
   }
 }

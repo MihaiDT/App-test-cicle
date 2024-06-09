@@ -14,7 +14,7 @@ class AcceptConsentPage extends GetView<AcceptConsentController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ThemeImage.bgGradientGray),
             fit: BoxFit.cover,
@@ -64,7 +64,7 @@ class AcceptConsentPage extends GetView<AcceptConsentController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                ThemeSizedBox.height24,
+                ThemeSizedBox.height60,
                 Image.asset(
                   ThemeImage.areYouSure,
                 ),

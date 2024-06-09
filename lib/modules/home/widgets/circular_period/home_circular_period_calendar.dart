@@ -185,32 +185,48 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
 
     switch (phase.name) {
       case 'menstruation':
-        avatarImgUrl = appController.user.value!.avatarPhase0ImgUrl ?? '';
+        avatarImgUrl =
+            appController.user.value!.avatarPhase0ImgUrl ?? ThemeImage.avatar0;
       case 'follicular':
-        avatarImgUrl = appController.user.value!.avatarPhase1ImgUrl ?? '';
+        avatarImgUrl =
+            appController.user.value!.avatarPhase1ImgUrl ?? ThemeImage.avatar1;
       case 'ovulation':
-        avatarImgUrl = appController.user.value!.avatarPhase2ImgUrl ?? '';
+        avatarImgUrl =
+            appController.user.value!.avatarPhase2ImgUrl ?? ThemeImage.avatar2;
       case 'luteal':
-        avatarImgUrl = appController.user.value!.avatarPhase3ImgUrl ?? '';
+        avatarImgUrl =
+            appController.user.value!.avatarPhase3ImgUrl ?? ThemeImage.avatar3;
       case 'noPhase':
-        avatarImgUrl = appController.user.value!.avatarPhase3ImgUrl ?? '';
+        avatarImgUrl =
+            appController.user.value!.avatarPhase3ImgUrl ?? ThemeImage.avatar3;
       default:
         avatarImgUrl = '';
     }
 
-    return SizedBox(
-      key: key,
-      width: 140,
-      height: 140,
-      child: appController.user.value!.isAvatarConfigured
-          ? Image.network(
-              avatarImgUrl,
-              fit: BoxFit.scaleDown,
-            )
-          : Image.asset(
-              ThemeImage.mockAvatar,
-              fit: BoxFit.scaleDown,
-            ),
+    return InkWell(
+      onTap: () async {
+        final sessionToken = await SecureStorageManager().getToken();
+        Get.toNamed(
+          Routes.customizeCherryWebView,
+          arguments: {
+            'sessionToken': sessionToken,
+          },
+        );
+      },
+      child: SizedBox(
+        key: key,
+        width: 140,
+        height: 140,
+        child: appController.user.value!.isAvatarConfigured
+            ? Image.network(
+                avatarImgUrl,
+                fit: BoxFit.scaleDown,
+              )
+            : Image.asset(
+                avatarImgUrl,
+                fit: BoxFit.scaleDown,
+              ),
+      ),
     );
   }
 
@@ -220,7 +236,8 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
     }
     if (phase.name == 'noPhase') {
       // Ritardo
-      return "${appController.currentPeriod.value?.menstruationInfo[1]} ${appController.currentPeriod.value?.menstruationInfo[2].toLowerCase()}";
+      return '';
+      // "${appController.currentPeriod.value?.menstruationInfo[1]} ${appController.currentPeriod.value?.menstruationInfo[2].toLowerCase()}";
     }
 
     return '';

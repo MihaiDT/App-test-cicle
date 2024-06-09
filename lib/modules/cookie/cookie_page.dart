@@ -108,7 +108,10 @@ class CookiePage extends StatelessWidget {
   }
 
   void _onKnowMoreAboutCookies() {
-    Get.toNamed(Routes.cookiesFingerprinting, arguments: false);
+    Get.toNamed(
+      Routes.cookiesFingerprinting,
+      arguments: false,
+    );
   }
 
   void rejectAllCookies() {

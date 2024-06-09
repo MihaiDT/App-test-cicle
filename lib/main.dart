@@ -11,12 +11,25 @@ import 'package:lines/firebase_options.dart';
 import 'package:lines/flavors.dart';
 import 'package:lines/repository/interceptor/dio_interceptor.dart';
 import 'package:lines/repository/interceptor/dio_log_intercpetor.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initApp();
 
-  runApp(const App());
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://fbfb4368c454bd92922315966f6e9e0c@o4506676620099584.ingest.us.sentry.io/4507391102484480';
+      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+      // We recommend adjusting this value in production.
+      options.tracesSampleRate = F.appFlavor == Flavor.dev ? 1.0 : 0.2;
+      // The sampling rate for profiling is relative to tracesSampleRate
+      // Setting to 1.0 will profile 100% of sampled transactions:
+      options.profilesSampleRate = 1.0;
+    },
+    appRunner: () => runApp(const App()),
+  );
 }
 
 _initApp() async {

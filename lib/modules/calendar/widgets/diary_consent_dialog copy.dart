@@ -2,7 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DiaryConsentDialog extends StatelessWidget {
   const DiaryConsentDialog({
@@ -65,9 +67,13 @@ class DiaryConsentDialog extends StatelessWidget {
                   ),
                   TextSpan(
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => {
-                            // TODO: privacy
-                          },
+                      ..onTap = () async {
+                        await launchUrl(
+                          Uri.parse(
+                              appController.settings.value?.privacyUrl ?? ''),
+                          mode: LaunchMode.externalApplication,
+                        );
+                      },
                     text: 'informativa privacy',
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: ThemeColor.brightPink,

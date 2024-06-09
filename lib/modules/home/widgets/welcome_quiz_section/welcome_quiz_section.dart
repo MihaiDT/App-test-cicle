@@ -39,7 +39,7 @@ class WelcomeQuizSection extends GetView<WelcomeQuizSectionController> {
               description:
                   "Raccontaci qualcosa su di te e ricevi subito ${controller.coinAmount} Coins",
               title: "Welcome Quiz",
-              backgroundImage: DecorationImage(
+              backgroundImage: const DecorationImage(
                 image: AssetImage(
                   ThemeImage.questionMarksGroup,
                 ),

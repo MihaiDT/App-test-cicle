@@ -17,6 +17,7 @@ class AdvicesArticle {
   late final String? thumbImageUrl;
   late final String? videoImagePreviewUrl;
   late final String? videoUrl;
+  late final String? videoDuration;
 
   AdvicesArticle.textType({
     this.categoryName,
@@ -35,6 +36,7 @@ class AdvicesArticle {
   }) {
     videoUrl = null;
     videoImagePreviewUrl = null;
+    videoDuration = null;
     slideshowImageUrls = null;
   }
 
@@ -54,6 +56,7 @@ class AdvicesArticle {
   }) {
     videoUrl = null;
     videoImagePreviewUrl = null;
+    videoDuration = null;
     text = null;
     shortDescription = null;
   }
@@ -71,6 +74,7 @@ class AdvicesArticle {
     required this.thumbImageUrl,
     required this.videoImagePreviewUrl,
     required this.videoUrl,
+    required this.videoDuration,
   }) {
     text = null;
     shortDescription = null;
@@ -127,6 +131,7 @@ class AdvicesArticle {
           thumbImageUrl: data['thumb_image_url'],
           videoImagePreviewUrl: data['video_image_preview_url'],
           videoUrl: data['video_url'],
+          videoDuration: data['video_duration'] ?? '00:00',
         );
     }
   }
@@ -169,13 +174,16 @@ class AdvicesArticle {
     if (videoUrl != null) {
       json['videoUrl'] = videoUrl;
     }
+    if (videoDuration != null) {
+      json['videoDuration'] = videoDuration;
+    }
 
     return json;
   }
 
   @override
   String toString() {
-    return 'AdvicesArticle{categoryName: $categoryName, subCategoryName: $subCategoryName, id: $id, typology: $typology, title: $title, disclaimer: $disclaimer, isFavorite: $isFavorite, isNew: $isNew, iconName: $iconName, coverImageUrl: $coverImageUrl, slideshowImageUrls: $slideshowImageUrls, shortDescription: $shortDescription, text: $text, thumbImageUrl: $thumbImageUrl, videoImagePreviewUrl: $videoImagePreviewUrl, videoUrl: $videoUrl}';
+    return 'AdvicesArticle{categoryName: $categoryName, subCategoryName: $subCategoryName, id: $id, typology: $typology, title: $title, disclaimer: $disclaimer, isFavorite: $isFavorite, isNew: $isNew, iconName: $iconName, coverImageUrl: $coverImageUrl, slideshowImageUrls: $slideshowImageUrls, shortDescription: $shortDescription, text: $text, thumbImageUrl: $thumbImageUrl, videoImagePreviewUrl: $videoImagePreviewUrl, videoUrl: $videoUrl, videoDuration: $videoDuration}';
   }
 }
 

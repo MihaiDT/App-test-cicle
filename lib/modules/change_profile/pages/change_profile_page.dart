@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/change_profile/widget/customize_cherry.dart';
 import 'package:lines/modules/change_profile/widget/your_information_section.dart';
@@ -23,6 +24,7 @@ class ChangeProfilePage extends StatelessWidget {
           color: ThemeColor.darkBlue,
         ),
         backButtonColor: ThemeColor.darkBlue,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: SafeArea(
         child: ListView(

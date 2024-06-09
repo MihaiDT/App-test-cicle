@@ -18,18 +18,29 @@ class PeriodsStats {
   });
 
   factory PeriodsStats.fromJson(Map<String, dynamic> json) {
+    final menstruationDaysList = List<int>.empty(growable: true);
+    menstruationDaysList.addAll(
+      List.from(
+        json['period_phases']['menstruation_days'],
+      ).asMap().entries.map((entry) => entry.value as int).toList(),
+    );
+
+    final ovulationDaysList = List<int>.empty(growable: true);
+    ovulationDaysList.addAll(
+      List.from(
+        json['period_phases']['ovulation_days'],
+      ).asMap().entries.map((entry) => entry.value as int).toList(),
+    );
+
     return PeriodsStats(
       startingDate: json['from'],
       endingDate: json['to'],
       periodDuration: json['period_duration'],
-      phasesCounter: PhasesCounter.fromJson(json["phase_counters"]),
-      menstruationDays:
-          (json['period_phases']['menstruation_days'] as List<dynamic>)
-              .map((item) => item as int)
-              .toList(),
-      ovulationDays: (json['period_phases']['ovulation_days'] as List<dynamic>)
-          .map((item) => item as int)
-          .toList(),
+      phasesCounter: json["phase_counters"] != null
+          ? PhasesCounter.fromJson(json["phase_counters"])
+          : null,
+      menstruationDays: menstruationDaysList,
+      ovulationDays: ovulationDaysList,
     );
   }
 

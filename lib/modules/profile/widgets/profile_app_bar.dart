@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -16,6 +17,7 @@ class ProfileAppBar extends StatelessWidget {
         "Profilo",
         color: ThemeColor.primary,
       ),
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
   }
 

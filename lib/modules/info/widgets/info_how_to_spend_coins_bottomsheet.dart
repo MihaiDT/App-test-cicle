@@ -19,7 +19,7 @@ class InfoHowToSpendCoinsBottomSheet extends StatelessWidget {
             textAlign: TextAlign.center,
           ).applyShaders(context),
           ThemeSizedBox.height24,
-          InfoCard(
+          const InfoCard(
             title: "Lucky Lines",
             description:
                 "Puoi usare i tuoi Coins per tentare la fortuna e provare a vincere i tuoi premi preferiti.",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/badges/controllers/badges_controller.dart';
 import 'package:lines/badges/pages/completed_badges_page.dart';
@@ -23,6 +24,7 @@ class BadgesPage extends GetView<BadgesController> {
           color: ThemeColor.darkBlue,
         ),
         backButtonColor: ThemeColor.darkBlue,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: UnderlinedTabBar(
         tabController: controller.tabController,

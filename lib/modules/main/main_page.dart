@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
@@ -18,86 +19,89 @@ class MainPage extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldPage(
-      drawer: const DrawerMainPage(),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              ThemeImage.bgLight,
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark,
+      child: AppScaffoldPage(
+        drawer: const DrawerMainPage(),
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                ThemeImage.bgLight,
+              ),
+              fit: BoxFit.cover,
+              alignment: Alignment.bottomCenter,
             ),
-            fit: BoxFit.cover,
-            alignment: Alignment.bottomCenter,
+          ),
+          child: Obx(
+            () => BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              onTap: (value) {
+                controller.onTapBottomNavigationBarMenu(
+                  selectedTab: value,
+                );
+              },
+              selectedItemColor: ThemeColor.primary,
+              unselectedItemColor: Colors.white,
+              unselectedLabelStyle: ThemeTextStyle.bodySmall.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+              selectedLabelStyle: ThemeTextStyle.bodySmall.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+              elevation: 0,
+              currentIndex: controller.tabIndex,
+              items: [
+                _navItem(
+                  label: 'Oggi',
+                  context: context,
+                  unselectedIcon: ThemeIcon.homeTabUnselected,
+                  selectedIcon: ThemeIcon.homeTabSelected,
+                ),
+                _navItem(
+                  label: 'Consigli',
+                  context: context,
+                  unselectedIcon: ThemeIcon.advicesTabUnselected,
+                  selectedIcon: ThemeIcon.advicesTabSelected,
+                ),
+                _navItem(
+                  label: 'Premi',
+                  context: context,
+                  unselectedIcon: ThemeIcon.prizesTabUnselected,
+                  selectedIcon: ThemeIcon.prizesTabSelected,
+                ),
+                _navItem(
+                  label: 'Profilo',
+                  context: context,
+                  unselectedIcon: ThemeIcon.profileTabUnselected,
+                  selectedIcon: ThemeIcon.profileTabSelected,
+                ),
+              ],
+              backgroundColor: Colors.transparent,
+            ),
           ),
         ),
-        child: Obx(
-          () => BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            onTap: (value) {
-              controller.onTapBottomNavigationBarMenu(
-                selectedTab: value,
-              );
+        backgroundImage: ThemeDecoration.images.bgLight,
+        body: SafeArea(
+          child: Obx(
+            () {
+              print(appController.suggestedAdvicesArticle.value ?? []);
+              print(appController.suggestedAdvicesArticle.value ?? []);
+              print(appController.suggestedAdvicesArticle.value ?? []);
+              switch (controller.tabIndex) {
+                case 0:
+                  return const HomePage();
+                case 1:
+                  return const AdvicesPage();
+                case 2:
+                  return const PrizesPage();
+                case 3:
+                  return const ProfilePage();
+                default:
+                  return const HomePage();
+              }
             },
-            selectedItemColor: ThemeColor.primary,
-            unselectedItemColor: Colors.white,
-            unselectedLabelStyle: ThemeTextStyle.bodySmall.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-            selectedLabelStyle: ThemeTextStyle.bodySmall.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-            elevation: 0,
-            currentIndex: controller.tabIndex,
-            items: [
-              _navItem(
-                label: 'Oggi',
-                context: context,
-                unselectedIcon: ThemeIcon.homeTabUnselected,
-                selectedIcon: ThemeIcon.homeTabSelected,
-              ),
-              _navItem(
-                label: 'Consigli',
-                context: context,
-                unselectedIcon: ThemeIcon.advicesTabUnselected,
-                selectedIcon: ThemeIcon.advicesTabSelected,
-              ),
-              _navItem(
-                label: 'Premi',
-                context: context,
-                unselectedIcon: ThemeIcon.prizesTabUnselected,
-                selectedIcon: ThemeIcon.prizesTabSelected,
-              ),
-              _navItem(
-                label: 'Profilo',
-                context: context,
-                unselectedIcon: ThemeIcon.profileTabUnselected,
-                selectedIcon: ThemeIcon.profileTabSelected,
-              ),
-            ],
-            backgroundColor: Colors.transparent,
           ),
-        ),
-      ),
-      backgroundImage: ThemeDecoration.images.bgLight,
-      body: SafeArea(
-        child: Obx(
-          () {
-            print(appController.suggestedAdvicesArticle.value ?? []);
-            print(appController.suggestedAdvicesArticle.value ?? []);
-            print(appController.suggestedAdvicesArticle.value ?? []);
-            switch (controller.tabIndex) {
-              case 0:
-                return const HomePage();
-              case 1:
-                return const AdvicesPage();
-              case 2:
-                return const PrizesPage();
-              case 3:
-                return const ProfilePage();
-              default:
-                return const HomePage();
-            }
-          },
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -19,67 +20,70 @@ class QuizIntroPage extends GetView<WelcomeQuizIntroController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldPage(
-      backgroundImage: ThemeDecoration.images.bgQuestionMark,
-      body: SafeArea(
-        child: BottomWidgetLayout(
-          bottomWidget: Obx(
-            () => Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              child: PrimaryLoadingButton(
-                isLoading: appController.question.responseHandler.isPending,
-                onPressed: () async {
-                  await SurveyService.fetchWelcomeQuiz();
-                  Get.offAndToNamed(Routes.welcomeQuizPage);
-                },
-                child: const TitleLarge(
-                  'INIZIAMO',
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark,
+      child: AppScaffoldPage(
+        backgroundImage: ThemeDecoration.images.bgQuestionMark,
+        body: SafeArea(
+          child: BottomWidgetLayout(
+            bottomWidget: Obx(
+              () => Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
                 ),
-              ),
-            ),
-          ),
-          scrollableAreaPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 16,
-                ),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: AppRoundButton(
-                    iconPath: ThemeIcon.close,
-                    value: true,
-                    onChanged: (_) {
-                      Navigator.pop(context);
-                    },
+                child: PrimaryLoadingButton(
+                  isLoading: appController.question.responseHandler.isPending,
+                  onPressed: () async {
+                    await SurveyService.fetchWelcomeQuiz();
+                    Get.offAndToNamed(Routes.welcomeQuizPage);
+                  },
+                  child: const TitleLarge(
+                    'INIZIAMO',
                   ),
                 ),
               ),
-              const DisplayMedium(
-                'Welcome Quiz',
-              ).applyShaders(context),
-              ThemeSizedBox.height60,
-              Image(
-                image: AssetImage(
-                  ThemeImage.quizIntroImage,
+            ),
+            scrollableAreaPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 16,
+                  ),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: AppRoundButton(
+                      iconPath: ThemeIcon.close,
+                      value: true,
+                      onChanged: (_) {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
                 ),
-              ),
-              ThemeSizedBox.height32,
-              const QuizBodyText(
-                title: 'Conosciamoci meglio!',
-                subTitle:
-                    'Raccontaci qualcosa in più su di te:\nriceverai subito 150 Coins',
-              ),
-              ThemeSizedBox.height32,
-              AppCoin(
-                coinAmount: controller.coinAmount,
-              ),
-            ],
+                const DisplayMedium(
+                  'Welcome Quiz',
+                ).applyShaders(context),
+                ThemeSizedBox.height60,
+                const Image(
+                  image: AssetImage(
+                    ThemeImage.quizIntroImage,
+                  ),
+                ),
+                ThemeSizedBox.height32,
+                const QuizBodyText(
+                  title: 'Conosciamoci meglio!',
+                  subTitle:
+                      'Raccontaci qualcosa in più su di te:\nriceverai subito 150 Coins',
+                ),
+                ThemeSizedBox.height32,
+                AppCoin(
+                  coinAmount: controller.coinAmount,
+                ),
+              ],
+            ),
           ),
         ),
       ),

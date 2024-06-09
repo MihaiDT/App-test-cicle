@@ -73,5 +73,10 @@
 	<string>329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com</string>
 	<key>FlutterDeepLinkingEnabled</key>
 	<true/>
+
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+<false/>
 </dict>
 </plist>

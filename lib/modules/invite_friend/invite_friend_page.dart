@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/invite_friend/invite_friend_controller.dart';
@@ -25,6 +26,7 @@ class InviteFriendPage extends GetView<InviteFriendController> {
           'INVITA UN AMICO',
           color: ThemeColor.darkBlue,
         ),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: SafeArea(
         child: BottomWidgetLayout(

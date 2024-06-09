@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/info/controller/info_controller.dart';
@@ -36,6 +37,7 @@ class InfoPage extends GetView<InfoController> {
             totalCoins: controller.totalCoins,
           ),
         ],
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
