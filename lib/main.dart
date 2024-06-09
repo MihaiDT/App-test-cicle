@@ -19,8 +19,7 @@ FutureOr<void> main() async {
 
   await SentryFlutter.init(
     (options) {
-      options.dsn =
-          'https://fbfb4368c454bd92922315966f6e9e0c@o4506676620099584.ingest.us.sentry.io/4507391102484480';
+      options.dsn = 'https://fbfb4368c454bd92922315966f6e9e0c@o4506676620099584.ingest.us.sentry.io/4507391102484480';
       // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
       // We recommend adjusting this value in production.
       options.tracesSampleRate = F.appFlavor == Flavor.dev ? 1.0 : 0.2;
@@ -64,7 +63,7 @@ _initNetwork() {
 /// Manage deep linking
 void _initDeepLinking() {
   final appLinks = AppLinks();
-  appLinks.allUriLinkStream.listen((uri) async {
+  appLinks.uriLinkStream.listen((uri) async {
     /* logDebug('Deep link: $uri', tag: 'DeepLinkDeepLinkDeepLinkDeepLink');
     appController.hasUsedDeepLink.value = true;
     if (uri.pathSegments.isNotEmpty) {
