@@ -26,6 +26,7 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
   InAppWebViewController? webViewController;
 
   bool isFirstPage = true;
+  final rxShowSaveButton = RxBool(false);
 
   @override
   Widget build(BuildContext context) {
@@ -37,42 +38,53 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
           onPressed: () => Get.back(),
         ),
         actions: [
-          InkWell(
-            onTap: () async {
-              showFullScreenLoader(
-                dismissAfter: const Duration(seconds: 5),
-              );
+          Obx(
+            () => rxShowSaveButton.value
+                ? InkWell(
+                    onTap: () async {
+                      showFullScreenLoader(
+                        dismissAfter: const Duration(seconds: 5),
+                      );
 
-              await webViewController?.evaluateJavascript(
-                source: "save()",
-              );
+                      await webViewController?.evaluateJavascript(
+                        source: "save()",
+                      );
 
-              await AuthenticationService.fetchUser();
-              Get.back();
-            },
-            child: Container(
-              color: Colors.transparent,
-              height: 40,
-              child: Center(
-                child: const TitleLarge(
-                  "SALVA",
-                ).applyShaders(Get.context!),
-              ),
-            ),
+                      await AuthenticationService.fetchUser();
+                      Get.back();
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      height: 40,
+                      child: Center(
+                        child: const TitleLarge(
+                          "SALVA",
+                        ).applyShaders(Get.context!),
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
           ),
         ],
       ),
       body: PopScope(
         canPop: false,
         child: InAppWebView(
-          // shouldOverrideUrlLoading: (controller, navigationAction) async {
-          //   // final String loadingPageUrl = "${environment.cherryCustomizationEndpoint}/index.html";
+          shouldOverrideUrlLoading: (controller, navigationAction) async {
+            // final String loadingPageUrl = "${environment.cherryCustomizationEndpoint}/index.html";
 
-          //   //   // final String firstPageUrl =
-          //   //   //     "${environment.cherryCustomizationEndpoint}/HomePage";
+            //   // final String firstPageUrl =
+            //   //     "${environment.cherryCustomizationEndpoint}/HomePage";
 
-          //   final uri = navigationAction.request.url;
-          //   print("$uri");
+            final uri = navigationAction.request.url;
+            if (uri?.toString().contains('/ready') ?? false) {
+              // I have to show the save button
+              rxShowSaveButton.value = true;
+              return NavigationActionPolicy.CANCEL;
+            }
+
+            return NavigationActionPolicy.ALLOW;
+          },
 
           //   //   // final isFirstUrl =
           //   //   //     uri != null && uri.toString().startsWith(loadingPageUrl);
