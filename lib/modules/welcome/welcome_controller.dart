@@ -26,7 +26,7 @@ class WelcomeController extends AppScaffoldController {
     appController.isLoginFlow.value = false;
     if (HiveManager.hasAcceptedCookie) {
       Get.toNamed(
-        Routes.howLongMensesPage,
+        Routes.register,
       );
     } else {
       Get.toNamed(
