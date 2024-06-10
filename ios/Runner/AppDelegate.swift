@@ -12,8 +12,10 @@ import braze_plugin
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
 
+#if targetEnvironment(simulator)
+#else
     // Setup Braze
-      let configuration = Braze.Configuration(
+    let configuration = Braze.Configuration(
       apiKey: "b543a929-5eb9-41f1-952d-fb2d13470d0c",
       endpoint: "sdk.fra-02.braze.eu"
     )
@@ -22,6 +24,7 @@ import braze_plugin
 
     let braze = BrazePlugin.initBraze(configuration)
     AppDelegate.braze = braze
+#endif
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
