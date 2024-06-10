@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/drawer/controller/change_password_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/buttons/primary_button.dart';
+import 'package:lines/widgets/buttons/primary_loading_button.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class ChangePasswordPage extends GetView<ChangePasswordController> {
@@ -29,9 +29,18 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
           padding: const EdgeInsets.symmetric(
             horizontal: ThemeSize.paddingSmall,
           ),
-          child: PrimaryButton(
-            child: const TitleLarge("SALVA"),
-            onPressed: () {},
+          child: Obx(
+            () {
+              return PrimaryLoadingButton(
+                isLoading: controller.pageIsPending.value,
+                onPressed: controller.canProceed.value
+                    ? () {
+                        controller.savePassword();
+                      }
+                    : null,
+                child: const TitleLarge("SALVA"),
+              );
+            },
           ),
         ),
         child: Padding(

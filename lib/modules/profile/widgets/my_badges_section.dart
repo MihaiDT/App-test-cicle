@@ -18,7 +18,7 @@ class MyBadgesSection extends GetView<MyBadgesController> {
       return const SizedBox.shrink();
     }
     return ElevatedCard(
-      color: Colors.white.withOpacity(0.8),
+      color: Colors.white.withOpacity(0.6),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: ThemeSize.paddingSmall,
@@ -65,7 +65,8 @@ class MyBadgesSection extends GetView<MyBadgesController> {
                   child: Row(
                     children: [
                       const TitleLarge(
-                        "VEDI TUTTI I BADGE",
+                        "TUTTI I BADGE",
+                        letterSpacing: 2,
                       ).applyShaders(context),
                       const Spacer(),
                       SvgPicture.asset(

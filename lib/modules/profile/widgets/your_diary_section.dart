@@ -17,7 +17,7 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
       return const SizedBox.shrink();
     }
     return ElevatedCard(
-      color: Colors.white.withOpacity(0.9),
+      color: Colors.white.withOpacity(0.6),
       child: Column(
         children: [
           ThemeSizedBox.height24,
@@ -166,9 +166,11 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
                       controller.hasSavedSymptoms
                           ? const TitleLarge(
                               "GRAFICI E STATISTICHE",
+                              letterSpacing: 2,
                             ).applyShaders(context)
                           : const TitleLarge(
                               "AGGIUNGI",
+                              letterSpacing: 2,
                             ).applyShaders(context),
                       const Spacer(),
                       SvgPicture.asset(

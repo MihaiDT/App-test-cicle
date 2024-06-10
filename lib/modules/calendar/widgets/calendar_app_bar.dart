@@ -20,7 +20,6 @@ class CalendarAppBar extends GetView<CalendarAppBarController>
         SuperTooltip(
           arrowLength: 0,
           arrowBaseWidth: 0,
-          arrowTipDistance: 20,
           showBarrier: false,
           popupDirection: TooltipDirection.left,
           minimumOutsideMargin: 0,
@@ -75,9 +74,17 @@ class CalendarAppBar extends GetView<CalendarAppBarController>
               ],
             ),
           ),
-          child: SvgPicture.asset(
-            ThemeIcon.threeDots,
-            color: ThemeColor.darkBlue,
+          child: GestureDetector(
+            onTap: controller.tooltipController.showTooltip,
+            behavior: HitTestBehavior.translucent,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: SvgPicture.asset(
+                ThemeIcon.threeDots,
+                color: ThemeColor.darkBlue,
+                height: 20,
+              ),
+            ),
           ),
         ),
       ],
