@@ -35,7 +35,7 @@ dependencies:
   firebase_core_platform_interface: ^5.0.0
 
   # A Flutter plugin to use the Firebase Crashlytics API.
-  firebase_crashlytics: ^4.0.0
+  #firebase_crashlytics: ^4.0.0
 
   # A Flutter plugin to use the Firebase Cloud Messaging API
   firebase_messaging: ^15.0.0

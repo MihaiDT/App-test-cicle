@@ -6,6 +6,9 @@ import braze_plugin
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
+    
+  static var braze: Braze? = nil
+    
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
