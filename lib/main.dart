@@ -19,7 +19,8 @@ FutureOr<void> main() async {
 
   await SentryFlutter.init(
     (options) {
-      options.dsn = 'https://fbfb4368c454bd92922315966f6e9e0c@o4506676620099584.ingest.us.sentry.io/4507391102484480';
+      options.dsn =
+          'https://fbfb4368c454bd92922315966f6e9e0c@o4506676620099584.ingest.us.sentry.io/4507391102484480';
       // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
       // We recommend adjusting this value in production.
       options.tracesSampleRate = F.appFlavor == Flavor.dev ? 1.0 : 0.2;
@@ -31,22 +32,23 @@ FutureOr<void> main() async {
   );
 }
 
-_initApp() async {
+Future<void> _initApp() async {
   await dependencyRegister(
     flavor: F.appFlavor ?? Flavor.dev,
   );
-  await _initNetwork();
+  _initNetwork();
   _initDeepLinking();
-  //await _initFirebase();
+  await _initFirebase();
 }
 
-_initFirebase() async {
+Future<void> _initFirebase() async {
   await Firebase.initializeApp(
+    // name: Platform.isIOS ? 'lines-fed32' : null,
     options: DefaultFirebaseOptions.currentPlatform,
   );
 }
 
-_initNetwork() {
+void _initNetwork() {
   dio.interceptors.addAll(
     [
       DioErrorInterceptor(),

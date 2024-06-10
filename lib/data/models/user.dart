@@ -8,6 +8,7 @@ class User {
   bool? appConsents;
   String? birthdate;
   int coinsCollected;
+  String? deepcubeId;
   String? email;
   String? firstName;
   bool? isConfirmed;
@@ -49,6 +50,7 @@ class User {
     this.coinsCollected = 0,
     this.calendarConsent = false,
     this.diaryConsent = false,
+    this.deepcubeId,
     this.email,
     this.firstName,
     this.isConfirmed = false,
@@ -88,6 +90,7 @@ class User {
       calendarConsent: json['user']['calendar_consent'],
       diaryConsent: json['user']['diary_consent'],
       coinsCollected: json['user']['coins'],
+      deepcubeId: json['user']['deepcube_id'],
       email: json['user']['email'],
       firstName: json['user']['first_name'],
       isConfirmed: json['user']['is_confirmed'],
@@ -133,6 +136,7 @@ class User {
       "coins": coinsCollected,
       "calendar_consent": calendarConsent,
       "diary_consent": diaryConsent,
+      "deepcube_id": deepcubeId,
       "email": email,
       "first_name": firstName,
       "is_confirmed": isConfirmed,

@@ -29,6 +29,13 @@
             {
               "client_id": "329390092342-5ua99685eb8fsojpmo6ahvqfhs5dqkbu.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "329390092342-0qrf134m44ouft9q1p70nubt1t1hdo8u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it.fater.lines"
+              }
             }
           ]
         }

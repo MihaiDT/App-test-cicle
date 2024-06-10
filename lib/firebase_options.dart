@@ -59,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAc5Jg6b2nnLM84IOnkMOMBtUmKqUSo6KE',
-    appId: '1:329390092342:ios:5614c63d5bc6573996e897',
+    appId: '1:329390092342:ios:df325d93fa4541d296e897',
     messagingSenderId: '329390092342',
     projectId: 'lines-fed32',
     storageBucket: 'lines-fed32.appspot.com',
     iosClientId:
-        '329390092342-0qrf134m44ouft9q1p70nubt1t1hdo8u.apps.googleusercontent.com',
-    iosBundleId: 'it.fater.lines',
+        '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
+    iosBundleId: 'it.tandu.lines',
   );
 }

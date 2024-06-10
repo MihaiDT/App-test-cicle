@@ -42,7 +42,8 @@ class MainBottomNavigationBar extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () => mainController.onTapBottomNavigationBarMenu(
-                      selectedTab: 0),
+                    selectedTab: 0,
+                  ),
                   child: _navItem(
                     label: 'Oggi',
                     context: context,
@@ -54,7 +55,8 @@ class MainBottomNavigationBar extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () => mainController.onTapBottomNavigationBarMenu(
-                      selectedTab: 1),
+                    selectedTab: 1,
+                  ),
                   child: _navItem(
                     label: 'Consigli',
                     context: context,
@@ -66,7 +68,8 @@ class MainBottomNavigationBar extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () => mainController.onTapBottomNavigationBarMenu(
-                      selectedTab: 2),
+                    selectedTab: 2,
+                  ),
                   child: _navItem(
                     label: 'Premi',
                     context: context,
@@ -78,7 +81,8 @@ class MainBottomNavigationBar extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () => mainController.onTapBottomNavigationBarMenu(
-                      selectedTab: 3),
+                    selectedTab: 3,
+                  ),
                   child: _navItem(
                     label: 'Profilo',
                     context: context,

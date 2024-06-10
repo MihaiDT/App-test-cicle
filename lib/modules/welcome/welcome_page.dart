@@ -33,9 +33,7 @@ class WelcomePage extends GetView<WelcomeController> {
                   ),
                   ThemeSizedBox.height8,
                   GestureDetector(
-                    onTap: () {
-                      controller.onTapLogin();
-                    },
+                    onTap: () => controller.onTapLogin(),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 8,

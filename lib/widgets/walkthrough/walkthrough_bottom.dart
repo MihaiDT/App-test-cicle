@@ -74,6 +74,7 @@ class WalkthroughBottom extends GetView<WalkthroughController> {
                       ).applyShaders(context),
                     ),
                   ),
+                  ThemeSizedBox.height12,
                 ],
               ),
             );
