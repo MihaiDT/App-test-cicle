@@ -85,10 +85,10 @@ class ConsentsController extends GetxController {
     }
   }
 
-  void updateConsents() {
+  Future<void> updateConsents() async {
     showFullScreenLoader();
 
-    AuthenticationService.updatePrivacy(
+    await AuthenticationService.updatePrivacy(
       UpdateUserParameters(
         privacyMarketing: isMarketingEnabled.value,
         privacyProfiling: isProfilingEnabled.value,
@@ -98,7 +98,7 @@ class ConsentsController extends GetxController {
       ),
     );
 
-    CalendarService.fetchCurrentPeriod();
-    CalendarService.fetchCalendarData();
+    await CalendarService.fetchCurrentPeriod();
+    await CalendarService.fetchCalendarData();
   }
 }

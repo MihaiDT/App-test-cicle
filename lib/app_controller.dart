@@ -20,6 +20,7 @@ import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
 import 'package:lines/data/models/symtpom_category_stats.dart';
+import 'package:lines/data/models/update_password.dart';
 import 'package:lines/data/models/uploaded_product.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/data/models/validate_referral_code.dart';
@@ -84,7 +85,7 @@ class AppController extends GetxController {
   final EasyGetter<List<Mission>> missions;
   final EasyGetter<List<MensesStatistics>> mensesStatistics;
   final EasyGetter<SendConfirmEmail> sendConfirmEmail;
-
+  final EasyGetter<UpdatePassword> updatePassword;
   final EasyGetter<AdvicesArticle> singleArticle;
   final EasyGetter<ValidateReferralCode> validateReferralCode;
   final EasyGetter<UploadedProduct> uploadedProduct;
@@ -98,7 +99,9 @@ class AppController extends GetxController {
 
   /// Missions
   RxInt rxSelectedMissionIndex = RxInt(-1);
+
   int get selectedMissionIndex => rxSelectedMissionIndex.value;
+
   set selectedMissionIndex(int newValue) =>
       rxSelectedMissionIndex.value = newValue;
 
@@ -129,6 +132,7 @@ class AppController extends GetxController {
     required this.mensesStatistics,
     required this.symptomsDiaries,
     required this.sendConfirmEmail,
+    required this.updatePassword,
     required this.uploadedProduct,
     required this.badges,
     required this.hasUsedDeepLink,
@@ -161,6 +165,7 @@ class AppController extends GetxController {
       missions: EasyGetter<List<Mission>>(),
       mensesStatistics: EasyGetter<List<MensesStatistics>>(),
       sendConfirmEmail: EasyGetter<SendConfirmEmail>(),
+      updatePassword: EasyGetter<UpdatePassword>(),
       singleArticle: EasyGetter<AdvicesArticle>(),
       validateReferralCode: EasyGetter<ValidateReferralCode>(),
       uploadedProduct: EasyGetter<UploadedProduct>(),

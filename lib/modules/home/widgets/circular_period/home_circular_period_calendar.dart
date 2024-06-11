@@ -65,35 +65,38 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
       child: SizedBox(
         height: size,
         width: size,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ThemeSizedBox.height4,
-            const HeadlineMedium(
-              "Inserisci le tue\n ultime mestruazioni\n per iniziare",
-              color: ThemeColor.darkBlue,
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height20,
-            IntrinsicWidth(
-              child: PrimaryButton(
-                buttonSize: ButtonSize.h31,
-                onPressed: () {
-                  Get.toNamed(Routes.calendar);
-                },
-                child: const TitleMedium(
-                  "Aggiungi mestruazioni",
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ThemeSizedBox.height4,
+              const HeadlineMedium(
+                "Inserisci le tue\n ultime mestruazioni\n per iniziare",
+                color: ThemeColor.darkBlue,
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height20,
+              IntrinsicWidth(
+                child: PrimaryButton(
+                  buttonSize: ButtonSize.h31,
+                  onPressed: () {
+                    Get.toNamed(Routes.calendar);
+                  },
+                  child: const TitleMedium(
+                    "Aggiungi mestruazioni",
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 1000),
-              child: SizedBox.shrink(
-                key: controller.missingMensesPrimaryButtonKey,
+              Padding(
+                padding: const EdgeInsets.only(left: 1000),
+                child: SizedBox.shrink(
+                  key: controller.missingMensesPrimaryButtonKey,
+                ),
               ),
-            ),
-            ThemeSizedBox.height4,
-          ],
+              ThemeSizedBox.height4,
+            ],
+          ),
         ),
       ),
     );

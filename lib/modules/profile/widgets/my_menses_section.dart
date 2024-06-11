@@ -14,7 +14,7 @@ class MyMensesSection extends GetView<MyMensesSectionController> {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      color: Colors.white.withOpacity(0.8),
+      color: Colors.white.withOpacity(0.6),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Obx(
@@ -71,6 +71,7 @@ class MyMensesSection extends GetView<MyMensesSectionController> {
                         children: [
                           const TitleLarge(
                             "GRAFICI E STATISTICHE",
+                            letterSpacing: 2,
                           ).applyShaders(context),
                           const Spacer(),
                           SvgPicture.asset(

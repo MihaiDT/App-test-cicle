@@ -6,6 +6,7 @@ import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/check_email.dart';
+import 'package:lines/data/models/update_password.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/data/models/validate_referral_code.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
@@ -304,6 +305,32 @@ class AuthenticationService {
     } catch (e) {
       appController.validateReferralCode.responseHandler =
           ResponseHandler.failed();
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> changePassword(
+    String email,
+    String newPasswordText,
+  ) async {
+    try {
+      appController.updatePassword.responseHandler = ResponseHandler.pending();
+
+      await dio.post(
+        "/auth/password_recovery",
+        data: {
+          "email": email,
+          "new_password": newPasswordText,
+        },
+      );
+
+      appController.updatePassword.responseHandler = ResponseHandler.successful(
+        content: UpdatePassword(
+          passwordUpdated: true,
+        ),
+      );
+    } catch (e) {
+      appController.updatePassword.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
     }
   }

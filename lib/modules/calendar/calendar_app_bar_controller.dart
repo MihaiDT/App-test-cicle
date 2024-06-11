@@ -13,4 +13,10 @@ class CalendarAppBarController extends GetxController {
       return true;
     }
   }
+
+  @override
+  void dispose() {
+    tooltipController.dispose();
+    super.dispose();
+  }
 }

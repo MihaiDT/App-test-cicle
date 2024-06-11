@@ -15,6 +15,9 @@ class ProfileHeader extends GetView<ProfileHeaderController> {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        const SizedBox(
+          width: 4,
+        ),
         InkWell(
           onTap: () async {
             final sessionToken = await SecureStorageManager().getToken();

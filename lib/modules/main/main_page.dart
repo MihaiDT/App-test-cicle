@@ -20,37 +20,40 @@ class MainPage extends GetView<MainController> {
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.dark,
-      child: AppScaffoldPage(
-        drawer: const DrawerMainPage(),
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                ThemeImage.bgLight,
+      child: PopScope(
+        canPop: false,
+        child: AppScaffoldPage(
+          drawer: const DrawerMainPage(),
+          bottomNavigationBar: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  ThemeImage.bgLight,
+                ),
+                fit: BoxFit.cover,
+                alignment: Alignment.bottomCenter,
               ),
-              fit: BoxFit.cover,
-              alignment: Alignment.bottomCenter,
             ),
+            child: const MainBottomNavigationBar(),
           ),
-          child: const MainBottomNavigationBar(),
-        ),
-        backgroundImage: ThemeDecoration.images.bgLight,
-        body: SafeArea(
-          child: Obx(
-            () {
-              switch (controller.tabIndex) {
-                case 0:
-                  return const HomePage();
-                case 1:
-                  return const AdvicesPage();
-                case 2:
-                  return const PrizesPage();
-                case 3:
-                  return const ProfilePage();
-                default:
-                  return const HomePage();
-              }
-            },
+          backgroundImage: ThemeDecoration.images.bgLight,
+          body: SafeArea(
+            child: Obx(
+              () {
+                switch (controller.tabIndex) {
+                  case 0:
+                    return const HomePage();
+                  case 1:
+                    return const AdvicesPage();
+                  case 2:
+                    return const PrizesPage();
+                  case 3:
+                    return const ProfilePage();
+                  default:
+                    return const HomePage();
+                }
+              },
+            ),
           ),
         ),
       ),
