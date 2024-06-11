@@ -1,5 +1,5 @@
 name: lines
-version: 0.0.35+35
+version: 0.0.36+36
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -56,6 +56,9 @@ dependencies:
   # With V5.0.0 we can use EncryptedSharedPreferences on Android by enabling it in the Android Options like so:
   flutter_secure_storage: ^9.0.0
 
+
+  flutter_piwikpro: ^1.1.0
+  
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 

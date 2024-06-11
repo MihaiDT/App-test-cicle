@@ -28,7 +28,7 @@ class TutorEmailController extends GetxController {
   void onContinue() {
     appController.registerParameter.legalGuardianEmail = emailController.text;
     if (arguments?.onContinue != null) {
-      AdjustManager.trackEvent(EventType.setTutorEmail);
+      AdjustManager.trackEvent(AjustEventType.setTutorEmail);
       arguments!.onContinue(emailController.text);
     }
   }

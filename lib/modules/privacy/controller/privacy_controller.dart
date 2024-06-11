@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/privacy_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
@@ -33,10 +34,20 @@ class PrivacyController extends GetxController {
 
   /// This method takes the registerParameter and pass this data to the registration method
   Future<void> registerUser() async {
-    appController.registerParameter.privacyBrandMarketing = firstAccepted.value;
-    appController.registerParameter.privacyMarketing = secondAccepted.value;
-    appController.registerParameter.privacyProfiling = thirdAccepted.value;
-    AdjustManager.trackEvent(EventType.privacyPolicy);
+    appController.registerParameter.privacyMarketing = firstAccepted.value;
+    appController.registerParameter.privacyProfiling = secondAccepted.value;
+    appController.registerParameter.privacyBrandMarketing = thirdAccepted.value;
+    AdjustManager.trackEvent(AjustEventType.privacyPolicy);
+
+    PiwikManager.trackEvent(
+      PiwikEventType.registration,
+      action: 'step 5 - registration completed',
+      privacyData: {
+        'privacyMarketing': firstAccepted.value,
+        'privacyProfiling': secondAccepted.value,
+        'privacyBrandMarketing': thirdAccepted.value,
+      },
+    );
 
     await AuthenticationService.registration(
       appController.registerParameter,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/last_menses/controller/last_menses_controller.dart';
 import 'package:lines/modules/last_menses/widget/horizontal_range_calendar.dart';
@@ -43,21 +44,26 @@ class LastMensesPage extends GetView<LastMensesController> {
                   valueListenable: controller.datetimeRange,
                   builder: (_, DateTimeRange? value, __) {
                     return SecondaryButton(
-                      onPressed: value == null
-                          ? null
-                          : () {
-                              appController.updateUserParameters
-                                  .lastMenstruationDateStart = value.start;
+                      onPressed: () {
+                        PiwikManager.trackEvent(
+                          PiwikEventType.registration,
+                          action: 'step 7 optional - period calendar',
+                        );
 
-                              appController.updateUserParameters
-                                  .lastMenstruationDateEnd = value.end;
+                        if (value != null) {
+                          appController.updateUserParameters
+                              .lastMenstruationDateStart = value.start;
 
-                              AdjustManager.trackEvent(
-                                EventType.lastMensesConfirmed,
-                              );
+                          appController.updateUserParameters
+                              .lastMenstruationDateEnd = value.end;
 
-                              Get.toNamed(Routes.howLongMensesPage);
-                            },
+                          AdjustManager.trackEvent(
+                            AjustEventType.lastMensesConfirmed,
+                          );
+
+                          Get.toNamed(Routes.howLongMensesPage);
+                        }
+                      },
                       child: const TitleLarge(
                         "AVANTI",
                       ).applyShaders(context),
@@ -70,7 +76,11 @@ class LastMensesPage extends GetView<LastMensesController> {
                   child: GestureDetector(
                     onTap: () {
                       AdjustManager.trackEvent(
-                        EventType.lastMensesDenied,
+                        AjustEventType.lastMensesDenied,
+                      );
+                      PiwikManager.trackEvent(
+                        PiwikEventType.registration,
+                        action: 'step 7 optional - period calendar',
                       );
                       Get.toNamed(Routes.howLongMensesPage);
                     },

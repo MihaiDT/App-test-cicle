@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/mission_completed/mission_completed_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -46,7 +47,14 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
               children: [
                 PrimaryLoadingButton(
                   isLoading: false,
-                  onPressed: () => Get.back(),
+                  onPressed: () {
+                    // FIXME:
+                    PiwikManager.trackEvent(
+                      PiwikEventType.mission,
+                      action: 'mission complete',
+                    );
+                    Get.back();
+                  },
                   child: const TitleLarge(
                     "HO CAPITO",
                     letterSpacing: 2.0,

@@ -7,6 +7,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/api.dart';
 import 'package:lines/core/helpers/fullscreen_loader.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
@@ -46,6 +47,11 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
                         dismissAfter: const Duration(seconds: 5),
                       );
 
+                      PiwikManager.trackEvent(
+                        PiwikEventType.avatar,
+                        action: 'configure',
+                      );
+
                       await webViewController?.evaluateJavascript(
                         source: "save()",
                       );
@@ -78,6 +84,11 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
 
             final uri = navigationAction.request.url;
             if (uri?.toString().contains('/ready') ?? false) {
+              PiwikManager.trackEvent(
+                PiwikEventType.avatar,
+                action: 'view',
+              );
+
               // I have to show the save button
               rxShowSaveButton.value = true;
               return NavigationActionPolicy.CANCEL;

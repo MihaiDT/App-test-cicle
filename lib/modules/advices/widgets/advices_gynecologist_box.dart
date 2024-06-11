@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AdvicesGynecologistBox extends StatelessWidget {
@@ -10,6 +11,10 @@ class AdvicesGynecologistBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
+        PiwikManager.trackEvent(
+          PiwikEventType.gynecologist,
+        );
+
         await launchUrl(
           Uri.parse("https://lines.it/ginecologia/domande-risposte-ginecologa"),
           mode: LaunchMode.externalApplication,

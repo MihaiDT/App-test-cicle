@@ -16,7 +16,7 @@ class AdjustManager {
   /// the EventType is an enum that contains all the events code that we want to track,
   /// the parameters are optional and are used to send additional data to Adjust
   static void trackEvent(
-    EventType eventType, [
+    AjustEventType eventType, [
     Map<String, String>? parameters,
   ]) {
     if (HiveManager.hasAcceptedCookieProfiling) {
@@ -35,7 +35,7 @@ class AdjustManager {
   }
 }
 
-enum EventType {
+enum AjustEventType {
   registration,
   nameSurname,
   birthDate,
@@ -56,39 +56,39 @@ enum EventType {
 
   String get tokenName {
     switch (this) {
-      case EventType.registration:
+      case AjustEventType.registration:
         return "o3av1l";
-      case EventType.nameSurname:
+      case AjustEventType.nameSurname:
         return "5b7rxl";
-      case EventType.birthDate:
+      case AjustEventType.birthDate:
         return "wt4ni6";
-      case EventType.setTutorEmail:
+      case AjustEventType.setTutorEmail:
         return "2uxjw2";
-      case EventType.privacyPolicy:
+      case AjustEventType.privacyPolicy:
         return "21k3a9";
-      case EventType.confirmEmail:
+      case AjustEventType.confirmEmail:
         return "92a2f0";
-      case EventType.tutorConfirmEmail:
+      case AjustEventType.tutorConfirmEmail:
         return "qswswq";
-      case EventType.login:
+      case AjustEventType.login:
         return "tnkzv6";
-      case EventType.lastMensesConfirmed:
+      case AjustEventType.lastMensesConfirmed:
         return "44pxw4";
-      case EventType.lastMensesDenied:
+      case AjustEventType.lastMensesDenied:
         return "qnuman";
-      case EventType.mensesDurationConfirmed:
+      case AjustEventType.mensesDurationConfirmed:
         return "9q9ejx";
-      case EventType.mensesDurationDenied:
+      case AjustEventType.mensesDurationDenied:
         return "8xwgeo";
-      case EventType.referralCodeConfirmed:
+      case AjustEventType.referralCodeConfirmed:
         return "4ilwsf";
-      case EventType.referralCodeDenied:
+      case AjustEventType.referralCodeDenied:
         return "4x3mto";
-      case EventType.loadProductCode:
+      case AjustEventType.loadProductCode:
         return "e4tcxx";
-      case EventType.productCodeLoaded:
+      case AjustEventType.productCodeLoaded:
         return "b7v0bz";
-      case EventType.missionCompleted:
+      case AjustEventType.missionCompleted:
         return "hrv4f6";
       default:
         return "";

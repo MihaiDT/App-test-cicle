@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -103,7 +104,14 @@ class DiaryConsentDialog extends StatelessWidget {
             ),
             ThemeSizedBox.height32,
             GestureDetector(
-              onTap: () => Navigator.pop(context, true),
+              onTap: () {
+                PiwikManager.trackEvent(
+                  PiwikEventType.registration,
+                  action: 'step 7 - period consent',
+                  name: 'consent granted',
+                );
+                Navigator.pop(context, true);
+              },
               child: Container(
                 decoration: BoxDecoration(
                   gradient: ThemeGradient.primary,
@@ -126,6 +134,11 @@ class DiaryConsentDialog extends StatelessWidget {
             ThemeSizedBox.height16,
             GestureDetector(
               onTap: () {
+                PiwikManager.trackEvent(
+                  PiwikEventType.registration,
+                  action: 'step 7 - period consent',
+                  name: 'consent denied',
+                );
                 Navigator.pop(context, false);
               },
               child: const TitleLarge(

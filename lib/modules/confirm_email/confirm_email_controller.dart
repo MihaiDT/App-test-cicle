@@ -34,7 +34,7 @@ class ConfirmEmailController extends GetxController {
   }
 
   void logIn() {
-    AdjustManager.trackEvent(EventType.confirmEmail);
+    AdjustManager.trackEvent(AjustEventType.confirmEmail);
     if (appController.isLoginFlow.value == true) {
       Get.back();
     } else {

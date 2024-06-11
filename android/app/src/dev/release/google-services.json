@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "329390092342",
+    "project_id": "lines-fed32",
+    "storage_bucket": "lines-fed32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329390092342:android:edc3ac1fd7948aec96e897",
+        "android_client_info": {
+          "package_name": "it.tandu.lines"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329390092342-5ua99685eb8fsojpmo6ahvqfhs5dqkbu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqU8ho60aiwom-pRG5xNDsL3oSyweDi-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329390092342-5ua99685eb8fsojpmo6ahvqfhs5dqkbu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "329390092342-0qrf134m44ouft9q1p70nubt1t1hdo8u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it.fater.lines"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

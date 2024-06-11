@@ -8,4 +8,6 @@ abstract class Environment {
   String get gameEndpoint;
 
   String get cherryCustomizationEndpoint;
+
+  Map<String, String> get piwik;
 }

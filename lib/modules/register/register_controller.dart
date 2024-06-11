@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -55,11 +56,18 @@ class RegisterController extends GetxController {
             appController.registerParameter.email = emailController.text;
             appController.registerParameter.password = password;
 
-            AdjustManager.trackEvent(EventType.registration, {
+            AdjustManager.trackEvent(AjustEventType.registration, {
               "createdBy":
                   appController.registerParameter.registrationProvider?.name ??
                       "email",
             });
+            PiwikManager.trackEvent(
+              PiwikEventType.registration,
+              action: 'step 2 - registration method',
+              name:
+                  appController.registerParameter.registrationProvider?.name ??
+                      "email",
+            );
 
             Get.offAndToNamed(Routes.nameSurname);
           } else if (callback.content?.emailExists == true &&

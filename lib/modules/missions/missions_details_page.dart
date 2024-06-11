@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/missions/controllers/missions_details_controller.dart';
 import 'package:lines/modules/missions/widgets/missions_how_to_participate_step_one.dart';
@@ -245,13 +246,24 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                       ),
                       child: PrimaryLoadingButton(
                         isLoading: false,
-                        onPressed: () => Get.toNamed(
-                          Routes.loadCode,
-                          arguments: {
-                            'mission': appController.missions
-                                .value![appController.selectedMissionIndex],
-                          },
-                        ),
+                        onPressed: () {
+                          PiwikManager.trackEvent(
+                            PiwikEventType.mission,
+                            action: 'load code',
+                            name: appController
+                                .missions
+                                .value![appController.selectedMissionIndex]
+                                .title,
+                          );
+
+                          Get.toNamed(
+                            Routes.loadCode,
+                            arguments: {
+                              'mission': appController.missions
+                                  .value![appController.selectedMissionIndex],
+                            },
+                          );
+                        },
                         child: const TitleLarge(
                           "CARICA CODICI",
                           letterSpacing: 2,

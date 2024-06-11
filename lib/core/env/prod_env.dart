@@ -16,4 +16,10 @@ class ProdEnv extends Environment {
 
   @override
   String get proxy => "192.168.1.4";
+
+  @override
+  Map<String, String> get piwik => {
+        'baseUrl': '172e3eb8-e25f-4a2e-ad55-004c93e3026d',
+        'siteId': 'https://fater.piwik.pro',
+      };
 }

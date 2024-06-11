@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/response_handler.dart';
@@ -92,7 +93,14 @@ class LoginController extends GetxController {
           isButtonPending.value = false;
         }
         if (userStatus.isSuccessful) {
-          AdjustManager.trackEvent(EventType.login);
+          AdjustManager.trackEvent(AjustEventType.login);
+
+          PiwikManager.trackEvent(
+            PiwikEventType.login,
+            action:
+                appController.registerParameter.registrationProvider?.name ??
+                    "email",
+          );
 
           isButtonPending.value = false;
 

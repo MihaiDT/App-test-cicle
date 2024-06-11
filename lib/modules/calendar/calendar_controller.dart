@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/core/utils/helpers.dart';
@@ -359,6 +360,11 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     bool calendarConsent = appController.user.value!.calendarConsent ?? false;
     bool diaryConsent = appController.user.value!.diaryConsent ?? false;
 
+    PiwikManager.trackEvent(
+      PiwikEventType.profile,
+      action: 'update daily status',
+    );
+
     if (calendarConsent &&
         !diaryConsent &&
         appController.user.value!.hasMoreThan18Years) {
@@ -406,6 +412,11 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   void onDayTapped(DateTime day) {
+    PiwikManager.trackEvent(
+      PiwikEventType.profile,
+      action: 'select date',
+    );
+
     rxSelectedDate.value = day;
     rxSelectedDate.refresh();
   }

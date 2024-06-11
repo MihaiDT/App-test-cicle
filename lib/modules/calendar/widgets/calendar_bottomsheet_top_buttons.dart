@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
@@ -37,6 +38,11 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                       }
                       controller.modifyPeriodMode.value =
                           !controller.modifyPeriodMode.value;
+
+                      PiwikManager.trackEvent(
+                        PiwikEventType.profile,
+                        action: 'update period report',
+                      );
                     },
                     child: TitleLarge(
                       controller.modifyPeriodMode.value

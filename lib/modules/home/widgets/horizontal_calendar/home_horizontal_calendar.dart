@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/modules/home/home_controller.dart';
@@ -38,8 +39,13 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
                   // 7 days * 7 weeks
                   itemSize: Get.width / 7,
                   // Dimensione singolo giorno del calendario
-                  onItemFocus: (index) =>
-                      controller.periodSelectedDateIndex.value = index,
+                  onItemFocus: (index) {
+                    PiwikManager.trackEvent(
+                      PiwikEventType.profile,
+                      action: 'select date',
+                    );
+                    controller.periodSelectedDateIndex.value = index;
+                  },
                   updateOnScroll: false,
                   shrinkWrap: true,
                 )

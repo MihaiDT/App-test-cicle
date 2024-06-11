@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
@@ -30,6 +31,11 @@ class HeaderSection extends StatelessWidget {
       actions: [
         GestureDetector(
           onTap: () {
+            PiwikManager.trackEvent(
+              PiwikEventType.profile,
+              action: 'view calendar',
+            );
+
             Get.toNamed(Routes.calendar);
           },
           child: Row(

@@ -26,7 +26,7 @@ class ConfirmTutorEmailPage extends GetView<ConfirmTutorEmailController> {
             ),
             child: SecondaryButton(
               onPressed: () {
-                AdjustManager.trackEvent(EventType.tutorConfirmEmail);
+                AdjustManager.trackEvent(AjustEventType.tutorConfirmEmail);
 
                 Get.offNamedUntil(
                   Routes.login,

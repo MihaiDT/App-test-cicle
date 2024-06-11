@@ -18,4 +18,10 @@ class StagingEnv extends Environment {
 
   @override
   String get proxy => '192.168.2.61';
+
+  @override
+  Map<String, String> get piwik => {
+        'baseUrl': '8e6de72e-4541-41ea-b092-66de3e3aaf2b',
+        'siteId': 'https://fater.piwik.pro',
+      };
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -117,11 +118,23 @@ class CookiePage extends StatelessWidget {
   void rejectAllCookies() {
     HiveManager.hasAcceptedCookieStats = false;
     HiveManager.hasAcceptedCookieProfiling = false;
+
+    PiwikManager.trackEvent(
+      PiwikEventType.registration,
+      action: 'step 3 - cookie consent',
+      name: 'no consent',
+    );
   }
 
   void acceptAllCookies() {
     HiveManager.hasAcceptedCookieStats = true;
     HiveManager.hasAcceptedCookieProfiling = true;
+
+    PiwikManager.trackEvent(
+      PiwikEventType.registration,
+      action: 'step 3 - cookie consent',
+      name: 'profiling',
+    );
   }
 
   void navigateToNextPage() {

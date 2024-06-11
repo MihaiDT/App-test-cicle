@@ -54,7 +54,7 @@ class ReferralController extends GetxController {
         }
 
         if (callback.isSuccessful) {
-          AdjustManager.trackEvent(EventType.referralCodeConfirmed);
+          AdjustManager.trackEvent(AjustEventType.referralCodeConfirmed);
 
           isLoading.value = false;
           if (callback.content?.isValid == true) {
@@ -103,7 +103,7 @@ class ReferralController extends GetxController {
       builder: (_) => const ConfirmReferralDialog(),
     );
     if (continueWithoutCode) {
-      AdjustManager.trackEvent(EventType.referralCodeDenied);
+      AdjustManager.trackEvent(AjustEventType.referralCodeDenied);
 
       await AuthenticationService.completeUserRegistration(
         appController.updateUserParameters,

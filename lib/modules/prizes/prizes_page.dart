@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
+import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
 import 'package:lines/modules/prizes/widgets/load_code_widget.dart';
 import 'package:lines/modules/prizes/widgets/mission_container.dart';
@@ -67,7 +68,10 @@ class PrizesPage extends GetView<PrizesController> {
                 ),
                 child: LoadCodeWidget(
                   onTap: () {
-                    AdjustManager.trackEvent(EventType.loadProductCode);
+                    AdjustManager.trackEvent(AjustEventType.loadProductCode);
+                    PiwikManager.trackEvent(
+                      PiwikEventType.loadCode,
+                    );
                     Get.toNamed(Routes.loadCode);
                   },
                 ),
