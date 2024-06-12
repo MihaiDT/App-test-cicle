@@ -31,20 +31,24 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
     controller = Get.put(
       WrapperAccessController(),
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      /// The listener will be added only if the page need an authentication
+      if (widget.authNeeded) {
+        AppLifecycleListener(
+          onResume: () {
+            if (mounted) {
+              setState(() {});
+            }
+          },
+          onPause: () {
+            print("App is in onPause");
+            HiveManager.showLockPage = true;
+            appController.showLockPage.value = true;
+          },
+        );
+      }
+    });
 
-    /// The listener will be added only if the page need an authentication
-    if (widget.authNeeded) {
-      AppLifecycleListener(
-        onResume: () {
-          setState(() {});
-        },
-        onPause: () {
-          print("App is in onPause");
-          HiveManager.showLockPage = true;
-          appController.showLockPage.value = true;
-        },
-      );
-    }
     super.initState();
   }
 
