@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/widgets/forms/controllers/code_textfield_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CodeTextfield extends StatefulWidget {
   final Function(String text) onChanged;
@@ -44,7 +46,12 @@ class _CodeTextfieldState extends State<CodeTextfield> {
         }),
         ThemeSizedBox.height8,
         InkWell(
-          onTap: () => {},
+          onTap: () async {
+            await launchUrl(
+              Uri.parse(appController.settings.value?.helpdeskUrl ?? ''),
+              mode: LaunchMode.externalApplication,
+            );
+          },
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: const TitleMedium(

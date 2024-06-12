@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CalendarConsentDialog extends StatelessWidget {
   const CalendarConsentDialog({
@@ -37,13 +39,23 @@ class CalendarConsentDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height8,
-            const BodyMedium(
-              "informativa privacy.",
-              color: ThemeColor.brightPink,
-              height: 1.2,
-              decorationColor: ThemeColor.brightPink,
-              underline: true,
-              textAlign: TextAlign.center,
+            InkWell(
+              onTap: () async {
+                await launchUrl(
+                  Uri.parse(
+                      appController.settings.value?.termsAndConditionsUrl ??
+                          ''),
+                  mode: LaunchMode.externalApplication,
+                );
+              },
+              child: const BodyMedium(
+                "informativa privacy.",
+                color: ThemeColor.brightPink,
+                height: 1.2,
+                decorationColor: ThemeColor.brightPink,
+                underline: true,
+                textAlign: TextAlign.center,
+              ),
             ),
             ThemeSizedBox.height8,
             const BodyMedium(
