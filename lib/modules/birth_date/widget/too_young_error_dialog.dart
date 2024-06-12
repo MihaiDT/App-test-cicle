@@ -49,7 +49,7 @@ class TooYoungErrorDialog extends StatelessWidget {
             ),
             ThemeSizedBox.height32,
             Center(
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () => Navigator.pop(context),
                 child: Container(
                   decoration: BoxDecoration(

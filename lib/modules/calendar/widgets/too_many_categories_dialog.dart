@@ -59,7 +59,7 @@ class _TooManyCategoriesDialogState extends State<TooManyCategoriesDialog> {
               itemBuilder: (context, index) {
                 return Row(
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         setState(() {
                           updateFilteredList(widget.initialList[index]);
@@ -88,7 +88,7 @@ class _TooManyCategoriesDialogState extends State<TooManyCategoriesDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       Navigator.pop(context);
                     },

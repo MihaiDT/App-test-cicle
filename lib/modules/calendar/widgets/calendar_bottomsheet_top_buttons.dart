@@ -66,7 +66,7 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
   }
 
   Widget _jumpToMonthButton(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         controller.jumpToToday();
       },

@@ -45,7 +45,7 @@ class CalendarGridWidget extends GetView<CalendarController> {
         );
         return Visibility(
           visible: index >= startDayOfWeek,
-          child: GestureDetector(
+          child: InkWell(
             onTap: () {
               onDayTapped(dayOfMonth);
             },

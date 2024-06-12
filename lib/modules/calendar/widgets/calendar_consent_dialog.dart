@@ -60,7 +60,7 @@ class CalendarConsentDialog extends StatelessWidget {
               ThemeImage.happyDroppy,
             ),
             ThemeSizedBox.height32,
-            GestureDetector(
+            InkWell(
               onTap: () => Navigator.pop(context, true),
               child: Container(
                 decoration: BoxDecoration(
@@ -82,7 +82,7 @@ class CalendarConsentDialog extends StatelessWidget {
               ),
             ),
             ThemeSizedBox.height16,
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Navigator.pop(context, false);
               },

@@ -18,7 +18,7 @@ class CalendarSymptomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         saveSymptom(symptom.id);
       },

@@ -47,7 +47,7 @@ class CalendarMonthYearSwitch extends StatelessWidget {
   }
 
   Widget _innerContainer(String text, CalendarTabs tab, bool highlighted) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onTabChanged(tab);
       },

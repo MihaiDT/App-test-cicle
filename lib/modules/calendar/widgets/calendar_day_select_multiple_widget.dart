@@ -20,14 +20,16 @@ class CalendarDaySelectMultipleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onDayTapped,
       child: Column(
         children: [
           BodyLarge(
             text,
             textAlign: TextAlign.center,
-            fontWeight: isToday ? ThemeTextStyle.weightExtraBold : ThemeTextStyle.weightMedium,
+            fontWeight: isToday
+                ? ThemeTextStyle.weightExtraBold
+                : ThemeTextStyle.weightMedium,
           ).applyShaders(context),
           isSelected
               ? CircleAvatar(

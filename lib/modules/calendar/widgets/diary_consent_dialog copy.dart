@@ -103,7 +103,7 @@ class DiaryConsentDialog extends StatelessWidget {
               ThemeImage.happyDroppy,
             ),
             ThemeSizedBox.height32,
-            GestureDetector(
+            InkWell(
               onTap: () {
                 PiwikManager.trackEvent(
                   PiwikEventType.registration,
@@ -132,7 +132,7 @@ class DiaryConsentDialog extends StatelessWidget {
               ),
             ),
             ThemeSizedBox.height16,
-            GestureDetector(
+            InkWell(
               onTap: () {
                 PiwikManager.trackEvent(
                   PiwikEventType.registration,
