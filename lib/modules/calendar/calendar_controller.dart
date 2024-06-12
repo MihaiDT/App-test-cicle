@@ -178,7 +178,16 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   @override
   void onReady() async {
     super.onReady();
-
+    AppLifecycleListener(
+      onResume: () {
+        selectedTab.value = CalendarTabs.monthTab;
+        wait(milliseconds: 100).then(
+          (_) {
+            jumpToToday();
+          },
+        );
+      },
+    );
     ever(
       selectedTab,
       condition: () => Get.currentRoute == Routes.calendar,
@@ -186,7 +195,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
         if (newTab == CalendarTabs.yearTab) {
           collapseBottomSheet();
         } else {
-          jumpToMonth(date: DateTime.now());
+          jumpToToday();
           rxShowBottomMenu.value = true;
           expandBottomSheetTorxSheetVSize();
         }
@@ -214,7 +223,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
           .where((element) => element.isMensesDay)
           .map((e) => e.date),
     );
-    jumpToMonth(date: DateTime.now());
+    jumpToToday();
 
     bool calendarConsent = appController.user.value!.calendarConsent ?? false;
     bool diaryConsent = appController.user.value!.diaryConsent ?? false;
