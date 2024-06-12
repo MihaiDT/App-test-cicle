@@ -69,7 +69,7 @@ class SplashPageController extends GetxController {
     await AdvicesService.fetchSingleArticle("");
     await CalendarService.symptomCategories;
     await CalendarService.homePageSymptomCategories;
-    await BadgesService.fetchBadges();
+
     await MensesService.statisticPeriod;
     await MensesService.mensesStatistics;
     await ProductService.products;

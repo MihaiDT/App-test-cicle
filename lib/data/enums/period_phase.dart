@@ -19,7 +19,7 @@ enum PeriodPhase {
       case PeriodPhase.luteal:
         return 'FASE\nLUTEALE';
       default:
-        return '\nRITADO DI';
+        return '\nRITARDO';
     }
   }
 

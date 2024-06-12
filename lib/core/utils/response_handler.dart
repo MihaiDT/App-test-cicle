@@ -44,7 +44,11 @@ enum RequestStatus {
 enum ErrorType {
   generic,
   wrongPassword,
+  emailRequired,
   userAlreadyActive,
+  userAlreadyRegistered,
+  userNotFound,
+  invitationCodeNotValid,
   productCodeNotValid,
   productCodeExternal,
   productCodeUploadFailed,
@@ -53,11 +57,19 @@ enum ErrorType {
   String get errorText {
     switch (this) {
       case ErrorType.generic:
-        return "C'è stato un errore";
+        return "Si è verificato un errore";
       case ErrorType.wrongPassword:
         return "Password errata";
+      case ErrorType.emailRequired:
+        return "E-mail obbligatoria";
+      case ErrorType.invitationCodeNotValid:
+        return "Codice invito non valido";
       case ErrorType.userAlreadyActive:
         return "L'utente è già attivo";
+      case ErrorType.userAlreadyRegistered:
+        return "Utente già registrato";
+      case ErrorType.userNotFound:
+        return "Utente non trovato";
       case ErrorType.productCodeNotValid:
         return "Il codice prodotto non è stato riconoscuto";
       case ErrorType.productCodeExternal:
@@ -73,6 +85,12 @@ enum ErrorType {
 extension ErrorTypeExtension on ErrorType {
   static ErrorType fromString(String errorType) {
     switch (errorType.toLowerCase()) {
+      case "email_required":
+        return ErrorType.emailRequired;
+      case "user_not_found":
+        return ErrorType.emailRequired;
+      case "invitation_code_not_valid":
+        return ErrorType.invitationCodeNotValid;
       case "wrong_password":
         return ErrorType.wrongPassword;
       case "user_already_active":
@@ -85,6 +103,8 @@ extension ErrorTypeExtension on ErrorType {
         return ErrorType.productCodeUploadFailed;
       case "product_code_already_uploaded":
         return ErrorType.productCodeAlreadyUsed;
+      case "user_already_registered":
+        return ErrorType.userAlreadyRegistered;
       default:
         return ErrorType.generic;
     }

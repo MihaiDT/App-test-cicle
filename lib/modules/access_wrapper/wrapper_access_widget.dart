@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/delay.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/access_wrapper/controller/wrapper_access_controller.dart';
@@ -51,7 +52,9 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
   Widget build(BuildContext context) {
     if (widget.authNeeded &&
         (HiveManager.showLockPage || appController.showLockPage.value)) {
-      authenticate().then((value) {
+      authenticate().then((value) async {
+        await wait(milliseconds: 500);
+
         if (value == false) {
           /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
           /// TODO: CHECK HOW TO MANAGE THIS SCENARIO
@@ -89,13 +92,17 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
     if (await hasBiometrics) {
       try {
         return await _auth.authenticate(
-          localizedReason: 'Touch your finger on the sensor to login',
+          localizedReason: 'Touch ID o inserisci codice',
+          options: const AuthenticationOptions(
+            stickyAuth: true,
+            biometricOnly: false,
+          ),
         );
       } catch (e) {
         return false;
       }
     }
-    return false;
+    return true;
   }
 
   /// Checks if the device has biometric capabilities and is supported.

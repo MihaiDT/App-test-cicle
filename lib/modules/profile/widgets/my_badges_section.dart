@@ -14,76 +14,78 @@ class MyBadgesSection extends GetView<MyBadgesController> {
 
   @override
   Widget build(BuildContext context) {
-    if (controller.badges.isEmpty) {
-      return const SizedBox.shrink();
-    }
-    return ElevatedCard(
-      color: Colors.white.withOpacity(0.6),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: ThemeSize.paddingSmall,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ThemeSizedBox.height24,
-            const DisplayMedium(
-              "I tuoi badge",
-              textAlign: TextAlign.center,
-            ).applyShaders(context),
-            ThemeSizedBox.height16,
-            ...List.generate(3, (index) {
-              return Padding(
+    return Obx(
+      () => controller.badges.isEmpty
+          ? const SizedBox.shrink()
+          : ElevatedCard(
+              color: Colors.white.withOpacity(0.6),
+              child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  vertical: 4,
+                  horizontal: ThemeSize.paddingSmall,
                 ),
-                child: BadgeTile(
-                  title: controller.badges[index].title,
-                  description: controller.badges[index].description,
-                  imagePath: controller.badges[index].iconUrl,
-                  backgroundColor: Colors.white.withOpacity(0.5),
-                  progressLabel: controller.badges[index].progressLabel,
-                  progressPercentage:
-                      (controller.badges[index].progressValue ?? 0).toDouble(),
-                ),
-              );
-            }),
-            ThemeSizedBox.height8,
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(Routes.badges);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(60),
-                  color: Colors.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(
-                    ThemeSize.paddingSmall,
-                  ),
-                  child: Row(
-                    children: [
-                      const TitleLarge(
-                        "TUTTI I BADGE",
-                        letterSpacing: 2,
-                      ).applyShaders(context),
-                      const Spacer(),
-                      SvgPicture.asset(
-                        ThemeIcon.arrowRight,
-                        color: ThemeColor.darkBlue,
-                        height: 24,
-                        width: 24,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ThemeSizedBox.height24,
+                    const DisplayMedium(
+                      "I tuoi badge",
+                      textAlign: TextAlign.center,
+                    ).applyShaders(context),
+                    ThemeSizedBox.height16,
+                    ...List.generate(3, (index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                        ),
+                        child: BadgeTile(
+                          title: controller.badges[index].title,
+                          description: controller.badges[index].description,
+                          imagePath: controller.badges[index].iconUrl,
+                          backgroundColor: Colors.white.withOpacity(0.5),
+                          progressLabel: controller.badges[index].progressLabel,
+                          progressPercentage:
+                              (controller.badges[index].progressValue ?? 0)
+                                  .toDouble(),
+                        ),
+                      );
+                    }),
+                    ThemeSizedBox.height8,
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.badges);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(60),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            ThemeSize.paddingSmall,
+                          ),
+                          child: Row(
+                            children: [
+                              const TitleLarge(
+                                "TUTTI I BADGE",
+                                letterSpacing: 2,
+                              ).applyShaders(context),
+                              const Spacer(),
+                              SvgPicture.asset(
+                                ThemeIcon.arrowRight,
+                                color: ThemeColor.darkBlue,
+                                height: 24,
+                                width: 24,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    ThemeSizedBox.height20,
+                  ],
                 ),
               ),
             ),
-            ThemeSizedBox.height20,
-          ],
-        ),
-      ),
     );
   }
 }

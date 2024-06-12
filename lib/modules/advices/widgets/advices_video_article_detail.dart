@@ -6,6 +6,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
+import 'package:lines/repository/badges_service.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:share_plus/share_plus.dart';
@@ -38,6 +39,7 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
                 await Share.share(
                   'https://lines-test-link.s3.amazonaws.com/articles/${controller.article?.id}',
                 );
+                BadgesService.triggerEvent(BadgeEvent.share);
               },
               child: SvgPicture.asset(
                 ThemeIcon.shareGradient,

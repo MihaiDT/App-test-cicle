@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/repository/advices_service.dart';
+import 'package:lines/repository/badges_service.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AdvicesDetailController extends GetxController {
@@ -35,6 +37,8 @@ class AdvicesDetailController extends GetxController {
       _initVideoDetail();
     }
     isArticleFav.value = article?.isFavorite == true;
+
+    BadgesService.triggerEvent(BadgeEvent.consiglio);
   }
 
   void _initVideoDetail() {
@@ -91,6 +95,8 @@ class AdvicesDetailController extends GetxController {
   void _updateArticleFavStatus(bool isFav) async {
     AdvicesArticle? articleToSave = article;
     if (articleToSave != null) {
+      HapticFeedback.heavyImpact();
+
       if (isFav) {
         await AdvicesService.addArticleToFav(articleToSave);
       } else {

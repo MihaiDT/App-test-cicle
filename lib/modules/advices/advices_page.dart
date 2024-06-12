@@ -8,6 +8,7 @@ import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/advices/widgets/advices_content_library_button.dart';
 import 'package:lines/modules/advices/widgets/advices_gynecologist_box.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lines/widgets/loaders/dark_loader.dart';
 
 class AdvicesPage extends GetView<AdvicesController> {
   const AdvicesPage({
@@ -89,8 +90,12 @@ class AdvicesPage extends GetView<AdvicesController> {
             ],
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: SizedBox(
+              height: Get.width * 0.15,
+              width: Get.width * 0.15,
+              child: const DarkLoader(),
+            ),
           );
         }
       },

@@ -60,7 +60,7 @@ class BadgeTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: constrains.maxWidth * 0.55,
+                            width: constrains.maxWidth * 0.54,
                             child: GlowingLinearProgressIndicator(
                               value: progressPercentage ?? 0,
                             ),

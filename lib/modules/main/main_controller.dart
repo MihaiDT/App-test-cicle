@@ -5,6 +5,7 @@ import 'package:lines/modules/advices/controllers/advices_controller.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
 
 import 'package:lines/modules/home/home_controller.dart';
+import 'package:lines/repository/badges_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class MainController extends GetxController {
@@ -17,6 +18,10 @@ class MainController extends GetxController {
   void onTapBottomNavigationBarMenu({required int selectedTab}) async {
     tabIndex = selectedTab;
     _lazyInit(tabIndex);
+
+    if (tabIndex == 3) {
+      await BadgesService.fetchBadges();
+    }
   }
 
   void _lazyInit(int selectedTab) {

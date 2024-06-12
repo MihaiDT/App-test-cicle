@@ -85,9 +85,6 @@ PODS:
     - Flutter
   - flutter_native_splash (0.0.1):
     - Flutter
-  - flutter_piwikpro (1.1.0):
-    - Flutter
-    - PiwikPROSDK (= 1.2.1)
   - flutter_secure_storage (6.0.0):
     - Flutter
   - flutter_share (0.0.1):
@@ -154,7 +151,6 @@ PODS:
     - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
-  - PiwikPROSDK (1.2.1)
   - PromisesObjC (2.4.0)
   - Sentry/HybridSDK (8.25.2)
   - sentry_flutter (8.2.0):
@@ -185,7 +181,6 @@ DEPENDENCIES:
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
-  - flutter_piwikpro (from `.symlinks/plugins/flutter_piwikpro/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
@@ -222,7 +217,6 @@ SPEC REPOS:
     - GTMSessionFetcher
     - nanopb
     - OrderedSet
-    - PiwikPROSDK
     - PromisesObjC
     - Sentry
 
@@ -253,8 +247,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
-  flutter_piwikpro:
-    :path: ".symlinks/plugins/flutter_piwikpro/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   flutter_share:
@@ -308,7 +300,6 @@ SPEC CHECKSUMS:
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
-  flutter_piwikpro: cfdd2802f7c9dd3ea387a5653aa29cb1b9a261ec
   flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
   google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
@@ -323,7 +314,6 @@ SPEC CHECKSUMS:
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
-  PiwikPROSDK: f8261f12839d723c913d6ed973f3e66b737d58e9
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   Sentry: 51b056d96914a741f63eca774d118678b1eb05a1
   sentry_flutter: e8397d13e297a5d4b6be8a752e33140b21c5cc97
@@ -334,4 +324,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 223362fec8615426fc713540d420c4b33b51c9e6
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/modules/info/widgets/info_bottom_sheet.dart';
@@ -24,8 +25,14 @@ class LoadCodeController extends GetxController {
         if (uploadedProductResponse.isFailed) {
           isPending.value = false;
           FlushBar(
-            child: Text(
-              uploadedProductResponse.errorType?.errorText ?? "",
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+              ),
+              child: HeadlineSmall(
+                uploadedProductResponse.errorType?.errorText ?? "".toString(),
+                color: ThemeColor.darkBlue,
+              ),
             ),
           ).show(Get.context!);
         }

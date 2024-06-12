@@ -35,4 +35,42 @@ class BadgesService {
           .toList(),
     );
   }
+
+  static Future<void> triggerEvent(BadgeEvent badgeEvent) async {
+    try {
+      await dio.get(
+        "/gamification_events/trigger_event?event=${badgeEvent.code}",
+      );
+    } catch (e) {
+      log.logApiException(e);
+    }
+  }
+}
+
+enum BadgeEvent {
+  avatar,
+  consiglio,
+  gioco,
+  login,
+  periodTracker,
+  share;
+
+  String get code {
+    switch (this) {
+      case BadgeEvent.avatar:
+        return 'AVATAR';
+      case BadgeEvent.consiglio:
+        return 'CONSIGLIO';
+      case BadgeEvent.gioco:
+        return 'GIOCO';
+      case BadgeEvent.login:
+        return 'LOGIN';
+      case BadgeEvent.periodTracker:
+        return 'PERIOD_TRACKER';
+      case BadgeEvent.share:
+        return 'SHARE';
+      default:
+        return "";
+    }
+  }
 }

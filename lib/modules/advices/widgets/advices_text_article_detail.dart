@@ -7,6 +7,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
+import 'package:lines/repository/badges_service.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -179,9 +180,11 @@ class AdvicesTextArticleDetails extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () async {
+                      HapticFeedback.heavyImpact();
                       await Share.share(
                         'https://lines-test-link.s3.amazonaws.com/articles/${article?.id}',
                       );
+                      BadgesService.triggerEvent(BadgeEvent.share);
                     },
                     child: CircleAvatar(
                       radius: 16,

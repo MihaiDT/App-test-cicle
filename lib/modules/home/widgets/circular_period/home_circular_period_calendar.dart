@@ -4,6 +4,7 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/period_phase.dart';
+import 'package:lines/data/models/period_date.dart';
 import 'package:lines/modules/home/home_controller.dart';
 import 'package:lines/modules/home/widgets/circular_period/circular_calendar.dart';
 import 'package:lines/routes/routes.dart';
@@ -72,7 +73,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
             children: [
               ThemeSizedBox.height4,
               const HeadlineMedium(
-                "Inserisci le tue\n ultime mestruazioni\n per iniziare",
+                "Inserisci le tue\nultime mestruazioni\nper iniziare",
                 color: ThemeColor.darkBlue,
                 textAlign: TextAlign.center,
               ),
@@ -134,7 +135,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
                       letterSpacing: 2,
                     ),
                     BodySmall(
-                      subtitlePhase(periodDate.periodPhase),
+                      subtitlePhase(periodDate),
                       color: ThemeColor.darkBlue,
                       textAlign: TextAlign.center,
                     ),
@@ -233,11 +234,15 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
     );
   }
 
-  String subtitlePhase(PeriodPhase phase) {
-    if (phase.name == 'ovulation') {
-      return 'Alta fertilità';
+  String subtitlePhase(PeriodDate periodDate) {
+    if (periodDate.periodPhase.name == PeriodPhase.ovulation.name) {
+      return periodDate.isOvulationDay ? 'Massima fertilità' : 'Alta fertilità';
     }
-    if (phase.name == 'noPhase') {
+    if (periodDate.periodPhase.name == PeriodPhase.follicular.name ||
+        periodDate.periodPhase.name == PeriodPhase.luteal.name) {
+      return 'Bassa fertilità';
+    }
+    if (periodDate.periodPhase.name == 'noPhase') {
       // Ritardo
       return '';
       // "${appController.currentPeriod.value?.menstruationInfo[1]} ${appController.currentPeriod.value?.menstruationInfo[2].toLowerCase()}";

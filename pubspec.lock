@@ -643,14 +643,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
-  flutter_piwikpro:
-    dependency: "direct main"
-    description:
-      name: flutter_piwikpro
-      sha256: "32365de4a7116f92eed8c0537a8fc5659ca4ade1bfadc2fedc7fe72554c4d7fc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

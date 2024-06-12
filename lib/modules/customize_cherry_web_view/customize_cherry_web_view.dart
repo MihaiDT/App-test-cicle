@@ -9,6 +9,7 @@ import 'package:lines/core/helpers/fullscreen_loader.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/badges_service.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
 class CustomizeCherryWebView extends StatefulWidget {
@@ -35,7 +36,10 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () => Get.back(),
         ),
         actions: [
@@ -55,6 +59,8 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
                       await webViewController?.evaluateJavascript(
                         source: "save()",
                       );
+
+                      BadgesService.triggerEvent(BadgeEvent.avatar);
 
                       await AuthenticationService.fetchUser();
                       Get.back();

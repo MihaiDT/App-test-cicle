@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/helpers/api.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/logger/log.dart';
+import 'package:lines/repository/badges_service.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 
@@ -28,6 +29,8 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
 
   @override
   Widget build(BuildContext context) {
+    BadgesService.triggerEvent(BadgeEvent.gioco);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(
