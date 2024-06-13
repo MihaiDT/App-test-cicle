@@ -27,82 +27,82 @@ class CalendarBottomSheet extends GetView<CalendarController> {
       minChildSize: 0.1,
       shouldCloseOnMinExtent: true,
       builder: (context, scrollController) {
-        return Column(
-          children: [
-            Obx(
-              () {
-                return AnimatedOpacity(
+        return Obx(
+          () {
+            return Column(
+              children: [
+                AnimatedOpacity(
                   opacity: controller.showTopButton.value ? 1 : 0,
                   duration: const Duration(milliseconds: 300),
                   child: const CalendarBottomsheetTopButtons(),
-                );
-              },
-            ),
-            if (controller.userIsAdult)
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 40),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 50,
-                        color: Colors.black.withOpacity(0.2),
-                        offset: const Offset(0, -10),
-                        spreadRadius: 10,
-                      ),
-                    ],
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        ThemeImage.bgCalendarBottomSheet,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: ListView(
-                    shrinkWrap: true,
-                    controller: scrollController,
-                    padding: EdgeInsets.zero,
-                    children: [
-                      ThemeSizedBox.height8,
-                      const BottomSheetDragger(),
-                      ThemeSizedBox.height12,
-                      _selectedDateLabel(),
-                      ThemeSizedBox.height16,
-                      Obx(
-                        () {
-                          return Visibility(
-                            visible: controller.showRecapMenu.value,
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: ThemeSize.paddingSmall,
-                              ),
-                              child: CalendarBottomSheetRecap(),
-                            ),
-                          );
-                        },
-                      ),
-                      const DisplayMedium(
-                        'Il tuo diario',
-                        textAlign: TextAlign.center,
-                      ).applyShaders(context),
-                      ThemeSizedBox.height24,
-                      Obx(
-                        () {
-                          return controller.bottomSheetIsPending.value
-                              ? calendarBottomsheetBody(context)
-                              : const SizedBox();
-                        },
-                      ),
-                      ThemeSizedBox.height48,
-                    ],
-                  ),
                 ),
-              ),
-          ],
+                if (controller.showBottomPanel.value)
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 40),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 50,
+                            color: Colors.black.withOpacity(0.2),
+                            offset: const Offset(0, -10),
+                            spreadRadius: 10,
+                          ),
+                        ],
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                        image: const DecorationImage(
+                          image: AssetImage(
+                            ThemeImage.bgCalendarBottomSheet,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: ListView(
+                        shrinkWrap: true,
+                        controller: scrollController,
+                        padding: EdgeInsets.zero,
+                        children: [
+                          ThemeSizedBox.height8,
+                          const BottomSheetDragger(),
+                          ThemeSizedBox.height12,
+                          _selectedDateLabel(),
+                          ThemeSizedBox.height16,
+                          Obx(
+                            () {
+                              return Visibility(
+                                visible: controller.showRecapMenu.value,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: ThemeSize.paddingSmall,
+                                  ),
+                                  child: CalendarBottomSheetRecap(),
+                                ),
+                              );
+                            },
+                          ),
+                          const DisplayMedium(
+                            'Il tuo diario',
+                            textAlign: TextAlign.center,
+                          ).applyShaders(context),
+                          ThemeSizedBox.height24,
+                          Obx(
+                            () {
+                              return controller.bottomSheetIsPending.value
+                                  ? calendarBottomsheetBody(context)
+                                  : const SizedBox();
+                            },
+                          ),
+                          ThemeSizedBox.height48,
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
+            );
+          },
         );
       },
     );

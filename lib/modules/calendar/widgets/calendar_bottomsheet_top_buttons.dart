@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/delay.dart';
 import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
@@ -34,10 +35,16 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                         controller.rxSelectedDate.refresh();
                       } else {
                         controller.collapseBottomSheet();
-                        controller.jumpToToday();
                       }
                       controller.modifyPeriodMode.value =
                           !controller.modifyPeriodMode.value;
+
+                      /// Await some time and then scroll the page to today
+                      await wait(milliseconds: 100).then(
+                        (value) {
+                          controller.jumpToToday();
+                        },
+                      );
 
                       PiwikManager.trackEvent(
                         PiwikEventType.profile,

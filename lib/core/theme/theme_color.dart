@@ -14,7 +14,7 @@ class ThemeColor {
 
   static Color primaryOpaque = primary.withOpacity(0.1);
   static Color opaqueWhite = Colors.white.withOpacity(0.3);
-  static Color lightGrey = const Color(0xFFCDD2DE);
+  static const Color lightGrey = Color(0xFFCDD2DE);
 
   static Color normalGrey = const Color(0xFFE4D8E7);
   static Color darkGrey = const Color(0xFF75797F);

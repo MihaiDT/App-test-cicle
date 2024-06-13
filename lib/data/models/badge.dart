@@ -54,5 +54,6 @@ class Badge {
     return 'Badge{badgeType: $badgeType, title: $title, imageUrl: $iconUrl, progressValue: $progressValue, totalProgressValue: $totalProgressValue, progressLabel: $progressLabel, description: $description}';
   }
 
-  bool get isCompleted => (progressValue ?? 0).toInt() == 100;
+  bool get isCompleted =>
+      (progressValue == totalProgressValue) || (progressValue == 100);
 }

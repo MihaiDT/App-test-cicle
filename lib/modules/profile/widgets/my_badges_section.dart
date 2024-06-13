@@ -15,7 +15,7 @@ class MyBadgesSection extends GetView<MyBadgesController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => controller.badges.isEmpty
+      () => !controller.showBadgesSection.value
           ? const SizedBox.shrink()
           : ElevatedCard(
               color: Colors.white.withOpacity(0.6),

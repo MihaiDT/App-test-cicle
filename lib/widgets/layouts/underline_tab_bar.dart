@@ -8,10 +8,13 @@ class UnderlinedTabBar extends StatelessWidget {
   final List<Tab> tabs;
   final List<Widget> pages;
 
+  final Function(int) onTap;
+
   const UnderlinedTabBar({
     required this.tabController,
     required this.tabs,
     required this.pages,
+    required this.onTap,
     super.key,
   });
 
@@ -32,6 +35,7 @@ class UnderlinedTabBar extends StatelessWidget {
               ),
             ),
             TabBar(
+              onTap: onTap,
               labelStyle: ThemeTextStyle.headlineMedium,
               labelColor: ThemeColor.brightPink,
               controller: tabController,
