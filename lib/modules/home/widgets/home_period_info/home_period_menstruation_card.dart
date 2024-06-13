@@ -24,6 +24,15 @@ class HomePeriodMenstruationCard extends GetView<HomeController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Colors.white.withOpacity(0.4),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF9160D7).withOpacity(0.2),
+                // Hex color with 20% opacity
+                spreadRadius: 4,
+                blurRadius: 21,
+                offset: const Offset(10, 10), // changes position of shadow
+              ),
+            ],
           ),
           padding: const EdgeInsets.all(16),
           width: double.maxFinite,

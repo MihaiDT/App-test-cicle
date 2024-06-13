@@ -60,6 +60,13 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     return selectedTab.value == CalendarTabs.monthTab;
   }
 
+  RxBool get showBottomPanel {
+    if (!modifyPeriodMode.value && userIsAdult) {
+      return RxBool(true);
+    }
+    return RxBool(false);
+  }
+
   bool get userIsAdult {
     return appController.user.value?.hasMoreThan18Years == true;
   }
@@ -191,11 +198,15 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     ever(
       selectedTab,
       condition: () => Get.currentRoute == Routes.calendar,
-      (newTab) {
+      (newTab) async {
         if (newTab == CalendarTabs.yearTab) {
           collapseBottomSheet();
         } else {
-          jumpToToday();
+          await wait(milliseconds: 100).then(
+            (value) {
+              jumpToToday();
+            },
+          );
           rxShowBottomMenu.value = true;
           expandBottomSheetTorxSheetVSize();
         }
@@ -490,18 +501,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   void collapseBottomSheet() {
     if (draggableScrollableController.isAttached) {
-      WidgetsBinding.instance.addPostFrameCallback(
-        (_) async {
-          await draggableScrollableController.animateTo(
-            0.1,
-            duration: const Duration(
-              milliseconds: 200,
-            ),
-            curve: Curves.linear,
-          );
-          rxShowBottomMenu.value = false;
-        },
-      );
+      draggableScrollableController.jumpTo(0.01);
     }
   }
 

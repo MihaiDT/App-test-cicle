@@ -27,6 +27,7 @@ class BadgesPage extends GetView<BadgesController> {
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: UnderlinedTabBar(
+        onTap: (_) {},
         tabController: controller.tabController,
         tabs: controller.tabs,
         pages: const [
