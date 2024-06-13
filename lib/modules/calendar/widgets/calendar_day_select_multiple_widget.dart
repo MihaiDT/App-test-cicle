@@ -20,7 +20,7 @@ class CalendarDaySelectMultipleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onDayTapped,
       child: Column(
         children: [

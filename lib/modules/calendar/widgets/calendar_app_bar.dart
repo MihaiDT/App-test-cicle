@@ -29,7 +29,7 @@ class CalendarAppBar extends GetView<CalendarAppBarController>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     controller.onActionTap();
                     Get.toNamed(Routes.historyPage);
@@ -50,7 +50,7 @@ class CalendarAppBar extends GetView<CalendarAppBarController>
                   ),
                 ),
                 const Divider(),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     controller.onActionTap();
                     Get.toNamed(Routes.yourDiaryPage);

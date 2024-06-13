@@ -31,7 +31,7 @@ class CalendarYearColumn extends StatelessWidget {
               ).formattedMonth.toUpperCase(),
             ).applyShaders(context),
             ThemeSizedBox.height12,
-            GestureDetector(
+            InkWell(
               onTap: () => onMonthTapped?.call(month),
               child: IgnorePointer(
                 child: CalendarGridWidget(

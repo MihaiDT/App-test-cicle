@@ -176,7 +176,7 @@ class CalendarBottomSheet extends GetView<CalendarController> {
                         controller.symptomCategories[index],
                         controller.savedCategoryIds,
                       );
-                      return GestureDetector(
+                      return InkWell(
                         onTap: () {
                           controller.saveCategoryInHome(
                             controller.symptomCategories[index],

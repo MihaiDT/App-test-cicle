@@ -50,7 +50,7 @@ class MyBadgesSection extends GetView<MyBadgesController> {
                       );
                     }),
                     ThemeSizedBox.height8,
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.toNamed(Routes.badges);
                       },
