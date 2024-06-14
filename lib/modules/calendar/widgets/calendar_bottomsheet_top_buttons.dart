@@ -39,7 +39,8 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                       } else {
                         controller.collapseBottomSheet();
                       }
-                      controller.modifyPeriodMode.value = !controller.modifyPeriodMode.value;
+                      controller.modifyPeriodMode.value =
+                          !controller.modifyPeriodMode.value;
 
                       // await wait(milliseconds: 800);
                       // controller.jumpToMonth(date: DateTime.now());

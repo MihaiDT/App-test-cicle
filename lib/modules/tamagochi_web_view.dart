@@ -37,7 +37,9 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
       appBar: TransparentAppBar(
         leading: IconButton(
           icon: Obx(
-            () => rxShowBackButton.value ? const Icon(Icons.arrow_back) : const SizedBox.shrink(),
+            () => rxShowBackButton.value
+                ? const Icon(Icons.arrow_back)
+                : const SizedBox.shrink(),
           ),
           onPressed: () async {
             bool canGoBack = webViewController != null;
@@ -60,13 +62,15 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
             return PermissionResponse(action: PermissionResponseAction.GRANT);
           },
           shouldOverrideUrlLoading: (controller, navigationAction) async {
-            final String loadingPageUrl = "${environment.gameEndpoint}/index.html";
+            final String loadingPageUrl =
+                "${environment.gameEndpoint}/index.html";
 
             final String firstPageUrl = "${environment.gameEndpoint}/HomePage";
 
             final uri = navigationAction.request.url;
 
-            final isFirstUrl = uri != null && uri.toString().startsWith(loadingPageUrl);
+            final isFirstUrl =
+                uri != null && uri.toString().startsWith(loadingPageUrl);
 
             // If the first page is loaded, allow the navigation
             if (uri != null && isFirstUrl) {
