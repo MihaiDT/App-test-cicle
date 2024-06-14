@@ -270,8 +270,6 @@ class HomeController extends AppScaffoldController {
     if (!appController.advicesCategories.responseHandler.isSuccessful) {
       await AdvicesService.fetchSuggestedArticles();
     }
-    periodSelectedDateIndex.value = await _initCalendars();
-    scrollSnapListKey.currentState?.focusToItem(periodSelectedDateIndex.value);
 
     if (HiveManager.numberOfAccess >= 2 &&
         HiveManager.numberOfAccess <= 4 &&
@@ -285,6 +283,11 @@ class HomeController extends AppScaffoldController {
     }
 
     HiveManager.numberOfAccess++;
+  }
+
+  void scrollCalendarToToday() async {
+    periodSelectedDateIndex.value = await _initCalendars();
+    scrollSnapListKey.currentState?.focusToItem(periodSelectedDateIndex.value);
   }
 
   void showTutorial() {

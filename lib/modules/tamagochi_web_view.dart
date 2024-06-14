@@ -26,6 +26,7 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
   InAppWebViewController? webViewController;
 
   bool isFirstPage = true;
+  final rxShowBackButton = RxBool(false);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,9 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Obx(
+            () => rxShowBackButton.value ? const Icon(Icons.arrow_back) : const SizedBox.shrink(),
+          ),
           onPressed: () async {
             bool canGoBack = webViewController != null;
 
@@ -53,16 +56,17 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
       body: PopScope(
         canPop: false,
         child: InAppWebView(
+          onPermissionRequest: (controller, permissionRequest) async {
+            return PermissionResponse(action: PermissionResponseAction.GRANT);
+          },
           shouldOverrideUrlLoading: (controller, navigationAction) async {
-            final String loadingPageUrl =
-                "${environment.gameEndpoint}/index.html";
+            final String loadingPageUrl = "${environment.gameEndpoint}/index.html";
 
             final String firstPageUrl = "${environment.gameEndpoint}/HomePage";
 
             final uri = navigationAction.request.url;
 
-            final isFirstUrl =
-                uri != null && uri.toString().startsWith(loadingPageUrl);
+            final isFirstUrl = uri != null && uri.toString().startsWith(loadingPageUrl);
 
             // If the first page is loaded, allow the navigation
             if (uri != null && isFirstUrl) {
@@ -70,14 +74,27 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
               return NavigationActionPolicy.ALLOW;
             }
 
-            if (uri != null && uri.toString().contains('/pad_change')) {
-              // Vado al questionario di cambio assorbente
-              Get.toNamed(Routes.gameQuiz);
+            // FIXME: ruttino, ruota, relax
 
+            logDebug(uri.toString());
+
+            if (uri != null &&
+                (uri.toString().contains('BurpActivity') ||
+                    uri.toString().contains('RelaxActivity') ||
+                    uri.toString().contains('CartwheelActivity'))) {
+              rxShowBackButton.value = false;
+            } else {
+              rxShowBackButton.value = true;
+            }
+
+            if (uri != null && uri.toString().contains('/pad_change')) {
               // Cambio assorbente
               webViewController?.evaluateJavascript(
                 source: "dispatchResetPadEvent()",
               );
+
+              // Vado al questionario di cambio assorbente
+              Get.toNamed(Routes.gameQuiz);
             } else {
               // Set the first page to true if the first page is loaded in order to permit the back navigation
               if (uri != null && uri.toString().startsWith(firstPageUrl)) {
@@ -100,12 +117,18 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
           ),
           onWebViewCreated: (controller) {
             webViewController = controller;
+            webViewController?.evaluateJavascript(
+              source: "dispatchSensors()",
+            );
           },
           initialUserScripts: UnmodifiableListView<UserScript>([
             UserScript(
               source: "function dispatchBackEvent() {"
                   "document.dispatchEvent(new Event('back'));"
                   "};"
+                  "function dispatchSensors() {"
+                  "DeviceMotionEvent.requestPermission();"
+                  "}"
                   "function dispatchResetPadEvent() {"
                   "document.dispatchEvent(new Event('reset_pad'));"
                   "};",

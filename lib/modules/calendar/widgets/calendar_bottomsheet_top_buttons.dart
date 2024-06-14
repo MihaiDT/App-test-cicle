@@ -6,6 +6,8 @@ import 'package:lines/core/helpers/delay.dart';
 import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
+import 'package:lines/modules/home/home_controller.dart';
+import 'package:lines/repository/calendar_service.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 
 class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
@@ -31,13 +33,18 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                     onPressed: () async {
                       if (controller.modifyPeriodMode.value) {
                         await controller.newSaveDates();
+
                         controller.expandBottomSheetTorxSheetVSize();
                         controller.rxSelectedDate.refresh();
                       } else {
                         controller.collapseBottomSheet();
                       }
-                      controller.modifyPeriodMode.value =
-                          !controller.modifyPeriodMode.value;
+                      controller.modifyPeriodMode.value = !controller.modifyPeriodMode.value;
+
+                      // await wait(milliseconds: 800);
+                      // controller.jumpToMonth(date: DateTime.now());
+
+                      _updateHomeCalendar();
 
                       /// Await some time and then scroll the page to today
                       await wait(milliseconds: 100).then(
@@ -70,6 +77,12 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
         ],
       ),
     );
+  }
+
+  void _updateHomeCalendar() async {
+    await CalendarService.fetchCurrentPeriod();
+    final homeController = Get.find<HomeController>();
+    homeController.scrollCalendarToToday();
   }
 
   Widget _jumpToMonthButton(BuildContext context) {
