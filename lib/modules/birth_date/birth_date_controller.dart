@@ -59,9 +59,9 @@ class BirthDateController extends GetxController {
   }
 
   @override
-  void onClose() {
+  void dispose() {
     clearAll();
-    super.onClose();
+    super.dispose();
   }
 
   void clearAll() {
