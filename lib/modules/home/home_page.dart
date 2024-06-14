@@ -70,10 +70,16 @@ class HomePage extends GetView<HomeController> {
               ),
               ThemeSizedBox.height16,
               const CherryHomeBox(),
-              if (controller.showWelcomeQuizSection) ...[
-                ThemeSizedBox.height32,
-                const WelcomeQuizSection(),
-              ],
+              Obx(
+                () => (controller.showWelcomeQuizSection)
+                    ? Column(
+                        children: [
+                          ThemeSizedBox.height32,
+                          const WelcomeQuizSection(),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+              ),
               Obx(
                 () {
                   if (controller.showMissionSection) {
@@ -109,8 +115,7 @@ class HomePage extends GetView<HomeController> {
                       SizedBox(
                         height: 220,
                         child: AdvicesCardsRow(
-                          onCardTapped: (article, category) =>
-                              controller.showArticleDetails(article, category),
+                          onCardTapped: (article, category) => controller.showArticleDetails(article, category),
                           withBorder: true,
                           articles: controller.allSuggestedArticles,
                         ),

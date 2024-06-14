@@ -38,13 +38,12 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                       } else {
                         controller.collapseBottomSheet();
                       }
-                      controller.modifyPeriodMode.value =
-                          !controller.modifyPeriodMode.value;
+                      controller.modifyPeriodMode.value = !controller.modifyPeriodMode.value;
 
                       _updateHomeCalendar();
 
                       /// Await some time and then scroll the page to today
-                      await wait(milliseconds: 100).then(
+                      wait(milliseconds: 600).then(
                         (value) {
                           controller.jumpToToday();
                         },
@@ -56,9 +55,7 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                       );
                     },
                     child: TitleLarge(
-                      controller.modifyPeriodMode.value
-                          ? 'Salva mestruazione'
-                          : 'Modifica mestruazioni',
+                      controller.modifyPeriodMode.value ? 'Salva mestruazione' : 'Modifica mestruazioni',
                       letterSpacing: 2,
                     ),
                   ),
