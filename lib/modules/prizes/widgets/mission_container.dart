@@ -83,7 +83,7 @@ class MissionContainer extends StatelessWidget {
                         color: ThemeColor.brightPink,
                       ),
                       HeadlineSmall(
-                        mission.description,
+                        mission.shortDescription ?? mission.description,
                         color: ThemeColor.darkBlue,
                       ),
                       if (mission.regolamento?.isNotEmpty == true)
