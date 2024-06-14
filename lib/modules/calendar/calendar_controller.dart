@@ -417,7 +417,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
       await CalendarService.fetchCalendarData();
 
-      await wait(milliseconds: 800);
+      await wait(milliseconds: 600);
       jumpToToday();
     }
   }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lines/app_controller.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
@@ -12,6 +13,8 @@ class AccountPageController extends GetxController {
     await AuthenticationService.logout();
     HiveManager.removeIsPastDateCalculated();
     Get.offAllNamed(Routes.welcome);
+
+    AppController.initial();
   }
 
   bool get showPasswordSection =>

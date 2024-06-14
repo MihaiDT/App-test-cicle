@@ -279,9 +279,12 @@ class HomeController extends AppScaffoldController {
       await AdvicesService.fetchSuggestedArticles();
     }
 
+    await CalendarService.fetchCalendarData();
     scrollCalendarToToday();
 
-    if (HiveManager.numberOfAccess >= 2 && HiveManager.numberOfAccess <= 4 && !showWelcomeQuizSection) {
+    if (HiveManager.numberOfAccess >= 2 &&
+        HiveManager.numberOfAccess <= 4 &&
+        !showWelcomeQuizSection) {
       showErrorDialog(
         context: Get.context!,
         builder: (_) {
@@ -313,7 +316,6 @@ class HomeController extends AppScaffoldController {
 
   Future<int> _initCalendars() async {
     await CalendarService.fetchCurrentPeriod();
-    await CalendarService.fetchCalendarData();
 
     int result =
         currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);

@@ -3,11 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/settings/settings_controller.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends GetView<SettingsController> {
   const SettingsPage({
@@ -108,13 +106,7 @@ class SettingsPage extends GetView<SettingsController> {
           ),
           const Divider(),
           InkWell(
-            onTap: () async {
-              await launchUrl(
-                Uri.parse(
-                    appController.settings.value?.termsAndConditionsUrl ?? ''),
-                mode: LaunchMode.externalApplication,
-              );
-            },
+            onTap: () => Get.toNamed(Routes.privacyDetails),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: ThemeSize.paddingSmall,

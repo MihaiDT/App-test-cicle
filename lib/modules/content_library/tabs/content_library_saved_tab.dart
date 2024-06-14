@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/advices/widgets/advice_card.dart';
 import 'package:lines/modules/content_library/controllers/content_library_controller.dart';
+import 'package:lines/widgets/loaders/dark_loader.dart';
 
 class ContentLibrarySavedArticleTab extends GetView<ContentLibraryController> {
   const ContentLibrarySavedArticleTab({
@@ -50,8 +51,12 @@ class ContentLibrarySavedArticleTab extends GetView<ContentLibraryController> {
               );
             }
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: SizedBox(
+                height: Get.width * 0.15,
+                width: Get.width * 0.15,
+                child: const DarkLoader(),
+              ),
             );
           }
         },

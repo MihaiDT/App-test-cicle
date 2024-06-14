@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:lines/core/helpers/api.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/logger/log.dart';
+import 'package:lines/core/helpers/show_error_dialog.dart';
+import 'package:lines/modules/tamagotchi/widgets/game_completed_dialog.dart';
 import 'package:lines/repository/badges_service.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -74,10 +76,6 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
               return NavigationActionPolicy.ALLOW;
             }
 
-            // FIXME: ruttino, ruota, relax
-
-            logDebug(uri.toString());
-
             if (uri != null &&
                 (uri.toString().contains('BurpActivity') ||
                     uri.toString().contains('RelaxActivity') ||
@@ -87,7 +85,14 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
               rxShowBackButton.value = true;
             }
 
-            if (uri != null && uri.toString().contains('/pad_change')) {
+            if (uri != null && uri.toString().contains('popup')) {
+              // Fine gioco
+              await showErrorDialog(
+                context: Get.context!,
+                builder: (_) => const GameCompletedDialog(),
+                dismissible: false,
+              );
+            } else if (uri != null && uri.toString().contains('/pad_change')) {
               // Cambio assorbente
               webViewController?.evaluateJavascript(
                 source: "dispatchResetPadEvent()",

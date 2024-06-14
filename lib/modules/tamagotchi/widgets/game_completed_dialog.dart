@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:lines/modules/main/main_controller.dart';
 
-class CalendarConsentDialog extends StatelessWidget {
-  const CalendarConsentDialog({
+class GameCompletedDialog extends StatelessWidget {
+  const GameCompletedDialog({
     super.key,
   });
 
@@ -29,37 +29,12 @@ class CalendarConsentDialog extends StatelessWidget {
           children: [
             ThemeSizedBox.height40,
             const DisplayMedium(
-              "Inizia a monitorare le mestruazioni.",
+              "Grazie! Ora si che\nsono felice!",
               textAlign: TextAlign.center,
             ).applyShaders(context),
             ThemeSizedBox.height16,
-            const BodyMedium(
-              "Per utilizzare il servizio Calendario Mestruale acconsenti al trattamento dei dati relativi al ciclo, come da",
-              color: ThemeColor.darkBlue,
-              textAlign: TextAlign.center,
-            ),
-            ThemeSizedBox.height8,
-            InkWell(
-              onTap: () async {
-                await launchUrl(
-                  Uri.parse(
-                    appController.settings.value?.termsAndConditionsUrl ?? '',
-                  ),
-                  mode: LaunchMode.externalApplication,
-                );
-              },
-              child: const BodyMedium(
-                "informativa privacy.",
-                color: ThemeColor.brightPink,
-                height: 1.2,
-                decorationColor: ThemeColor.brightPink,
-                underline: true,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            ThemeSizedBox.height8,
-            const BodyMedium(
-              "Il consenso è necessario per utilizzare il servizio Calendario Mestruale.",
+            const BodyLarge(
+              "È tempo di rilassarti e di scoprire i tanti contenuti e consigli pensati per te!",
               color: ThemeColor.darkBlue,
               textAlign: TextAlign.center,
             ),
@@ -69,11 +44,19 @@ class CalendarConsentDialog extends StatelessWidget {
             ),
             Image.asset(
               height: 100,
-              ThemeImage.happyDroppy,
+              ThemeImage.talkingDroppy,
             ),
             ThemeSizedBox.height32,
             InkWell(
-              onTap: () => Navigator.pop(context, true),
+              onTap: () {
+                // Close the dialog
+                Get.back();
+                // Close the game
+                Get.back();
+                // Go to advices
+                final mainController = Get.find<MainController>();
+                mainController.onTapBottomNavigationBarMenu(selectedTab: 1);
+              },
               child: Container(
                 decoration: BoxDecoration(
                   gradient: ThemeGradient.primary,
@@ -87,23 +70,14 @@ class CalendarConsentDialog extends StatelessWidget {
                     horizontal: 22,
                   ),
                   child: TitleLarge(
-                    "ACCONSENTO",
+                    "SCOPRI LA LIBRERIA",
+                    letterSpacing: 2,
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
             ),
-            ThemeSizedBox.height16,
-            InkWell(
-              onTap: () {
-                Navigator.pop(context, false);
-              },
-              child: const TitleLarge(
-                "NON ACCONSENTO",
-                textAlign: TextAlign.center,
-              ).applyShaders(context),
-            ),
-            ThemeSizedBox.height32,
+            ThemeSizedBox.height20,
           ],
         ),
       ),

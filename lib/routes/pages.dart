@@ -101,7 +101,7 @@ import 'package:lines/modules/splash/splash_binding.dart';
 import 'package:lines/modules/splash/splash_page.dart';
 import 'package:lines/modules/surveys/survey_binding.dart';
 import 'package:lines/modules/surveys/surveys_page.dart';
-import 'package:lines/modules/tamagochi_web_view.dart';
+import 'package:lines/modules/tamagotchi/tamagochi_web_view.dart';
 import 'package:lines/modules/tutor_email/tutor_email_binding.dart';
 import 'package:lines/modules/tutor_email/tutor_email_page.dart';
 import 'package:lines/modules/welcome/welcome_binding.dart';

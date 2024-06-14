@@ -62,7 +62,7 @@ class Routes {
   static const String gameQuiz = '/game_quiz';
   static const String privacyDetails = '/privacy_details';
 
-  static const String privacyAndConditions = '/privacy_and_contitions';
+  // static const String privacyAndConditions = '/privacy_and_contitions';
   static const String consents = '/consents';
   static const String diaryDataDetails = '/diary_data_details';
   static const String cookiesFingerprinting = '/cookies_fingerprinting';

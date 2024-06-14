@@ -96,8 +96,10 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
           ),
           const Divider(),
           InkWell(
-            onTap: () =>
-                Get.toNamed(Routes.cookiesFingerprinting, arguments: false),
+            onTap: () => Get.toNamed(
+              Routes.cookiesFingerprinting,
+              arguments: true,
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: ThemeSize.paddingSmall,

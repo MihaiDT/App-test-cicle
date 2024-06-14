@@ -42,6 +42,10 @@ class ContentLibraryController extends GetxController
     );
   }
 
+  List<AdvicesArticle> get articles {
+    return [];
+  }
+
   void showCategoryPage(AdvicesCategory category) {
     selectedCategory.value = category;
     Get.toNamed(Routes.contentLibraryCategoryPage);
@@ -59,7 +63,7 @@ class ContentLibraryController extends GetxController
         [];
   }
 
-  /// Retrieve all categories
+  // /// Retrieve all categories
   List<AdvicesCategory> get getAllCategories {
     return appController.advicesCategories.value?.categories.entries
             .map((entry) => entry.value.advicesCategory)

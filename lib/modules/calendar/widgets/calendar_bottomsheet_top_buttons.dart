@@ -35,14 +35,11 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                         await controller.newSaveDates();
 
                         controller.expandBottomSheetTorxSheetVSize();
-                        controller.rxSelectedDate.refresh();
                       } else {
                         controller.collapseBottomSheet();
                       }
-                      controller.modifyPeriodMode.value = !controller.modifyPeriodMode.value;
-
-                      // await wait(milliseconds: 800);
-                      // controller.jumpToMonth(date: DateTime.now());
+                      controller.modifyPeriodMode.value =
+                          !controller.modifyPeriodMode.value;
 
                       _updateHomeCalendar();
 
@@ -62,6 +59,7 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                       controller.modifyPeriodMode.value
                           ? 'Salva mestruazione'
                           : 'Modifica mestruazioni',
+                      letterSpacing: 2,
                     ),
                   ),
                 ),
