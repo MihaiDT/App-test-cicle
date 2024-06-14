@@ -62,17 +62,16 @@ class MissionContainer extends StatelessWidget {
 
   Widget get _mainContent => Stack(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Flexible(
-                child: Image.network(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Image.network(
                   mission.imageUrl,
                   fit: BoxFit.cover,
+                  height: 130,
                 ),
-              ),
-              Flexible(
-                child: Padding(
+                Padding(
                   padding: const EdgeInsets.all(
                     ThemeSize.paddingSmall,
                   ),
@@ -86,8 +85,6 @@ class MissionContainer extends StatelessWidget {
                       HeadlineSmall(
                         mission.description,
                         color: ThemeColor.darkBlue,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
                       ),
                       if (mission.regolamento?.isNotEmpty == true)
                         GestureDetector(
@@ -127,8 +124,8 @@ class MissionContainer extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

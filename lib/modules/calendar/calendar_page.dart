@@ -92,17 +92,15 @@ class CalendarPage extends GetView<CalendarController> {
               visible: controller.showSaveButtonSymptoms,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: SafeArea(
-                  child: Padding(
-                    padding: ThemeSize.paddingM,
-                    child: PrimaryButton(
-                      child: const TitleLarge(
-                        'SALVA',
-                      ),
-                      onPressed: () {
-                        controller.saveSymptoms();
-                      },
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: PrimaryButton(
+                    child: const TitleLarge(
+                      'SALVA',
                     ),
+                    onPressed: () {
+                      controller.saveSymptoms();
+                    },
                   ),
                 ),
               ),

@@ -69,7 +69,7 @@ class YourDiaryPage extends GetView<YourDiaryController> {
     );
   }
 
-  Widget get _divider => Divider(
+  Widget get _divider => const Divider(
         color: ThemeColor.lightGrey,
         thickness: 1,
       );

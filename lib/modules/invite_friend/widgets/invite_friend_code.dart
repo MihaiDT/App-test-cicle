@@ -1,6 +1,8 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class InviteFriendCode extends StatelessWidget {
   final String code;
@@ -17,38 +19,51 @@ class InviteFriendCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(
-        _borderPadding,
-      ),
-      decoration: const BoxDecoration(
-        color: _bgColor,
-        borderRadius: BorderRadius.all(
-          Radius.circular(
-            _borderRadius,
+    return InkWell(
+      onTap: () async {
+        await Clipboard.setData(
+          ClipboardData(text: code),
+        );
+        FlushBar(
+          child: const HeadlineMedium(
+            "Testo copiato correttamente!",
+            color: ThemeColor.darkBlue,
+          ),
+        ).show(context);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(
+          _borderPadding,
+        ),
+        decoration: const BoxDecoration(
+          color: _bgColor,
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              _borderRadius,
+            ),
           ),
         ),
-      ),
-      child: DottedBorder(
-        strokeWidth: 1.5,
-        dashPattern: const [6, 6],
-        borderType: BorderType.RRect,
-        radius: const Radius.circular(
-          _borderRadius - _borderPadding,
-        ),
-        color: _borderColor,
-        padding: const EdgeInsets.symmetric(
-          horizontal: ThemeSize.paddingMedium,
-          vertical: ThemeSize.paddingSmall,
-        ),
-        child: Center(
-          child: Text(
-            code,
-            style: const TextStyle(
-              color: ThemeColor.primary,
-              fontSize: 30,
-              letterSpacing: 4,
-              fontWeight: FontWeight.w500,
+        child: DottedBorder(
+          strokeWidth: 1.5,
+          dashPattern: const [6, 6],
+          borderType: BorderType.RRect,
+          radius: const Radius.circular(
+            _borderRadius - _borderPadding,
+          ),
+          color: _borderColor,
+          padding: const EdgeInsets.symmetric(
+            horizontal: ThemeSize.paddingMedium,
+            vertical: ThemeSize.paddingSmall,
+          ),
+          child: Center(
+            child: Text(
+              code,
+              style: const TextStyle(
+                color: ThemeColor.primary,
+                fontSize: 30,
+                letterSpacing: 4,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),

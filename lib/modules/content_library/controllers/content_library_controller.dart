@@ -13,6 +13,7 @@ class ContentLibraryController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController tabController;
   Rxn<AdvicesCategory> selectedCategory = Rxn<AdvicesCategory>();
+  final RxInt selectedIndex = RxInt(0);
 
   @override
   void onInit() {

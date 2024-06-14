@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/widgets/buttons/secondary_button.dart';
 
 class InfoCard extends StatelessWidget {
   final String title;
   final String description;
   final String? imagePath;
+  final String buttonText;
+  final VoidCallback? onPressed;
 
   const InfoCard({
     required this.title,
     required this.description,
     this.imagePath,
+    required this.buttonText,
+    required this.onPressed,
     super.key,
   });
 
@@ -31,7 +36,6 @@ class InfoCard extends StatelessWidget {
       child: Row(
         children: [
           Flexible(
-            flex: 4,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,12 +50,18 @@ class InfoCard extends StatelessWidget {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
+                ThemeSizedBox.height16,
+                SecondaryButton(
+                  buttonSize: ButtonSize.h31,
+                  onPressed: onPressed,
+                  child: TitleMedium(
+                    buttonText,
+                  ).applyShaders(context),
+                ),
               ],
             ),
           ),
-          const Spacer(
-            flex: 1,
-          ),
+          ThemeSizedBox.width8,
           imagePath?.isNotEmpty == true
               ? Image.asset(
                   imagePath!,

@@ -38,7 +38,6 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                         controller.rxSelectedDate.refresh();
                       } else {
                         controller.collapseBottomSheet();
-                        controller.jumpToToday();
                       }
                       controller.modifyPeriodMode.value = !controller.modifyPeriodMode.value;
 
@@ -46,6 +45,13 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                       // controller.jumpToMonth(date: DateTime.now());
 
                       _updateHomeCalendar();
+
+                      /// Await some time and then scroll the page to today
+                      await wait(milliseconds: 100).then(
+                        (value) {
+                          controller.jumpToToday();
+                        },
+                      );
 
                       PiwikManager.trackEvent(
                         PiwikEventType.profile,
