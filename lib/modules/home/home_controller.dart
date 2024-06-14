@@ -66,21 +66,23 @@ class HomeController extends AppScaffoldController {
   bool get hasSavedPeriodInfo => currentPeriodDatesMap.isNotEmpty;
   List<TargetFocus> targets = <TargetFocus>[];
 
-  HomeController() {
+  @override
+  Future<void> onReady() async {
+    super.onReady();
     ever(
       appController.currentPeriod.rxValue,
       condition: () =>
           Get.currentRoute == Routes.main &&
           !HiveManager.isFirstTutorialWatched,
       (callback) {
-        HiveManager.isFirstTutorialWatched = true;
+        if (callback.isSuccessful) {
+          // The Future.delayed is a workaround to ensure that
+          // the homeCircularPeriodCalendarKey is in the correct position
+          Future.delayed(
+            const Duration(milliseconds: 300),
+            () {
+              HiveManager.isFirstTutorialWatched = true;
 
-        // The Future.delayed is a workaround to ensure that
-        // the homeCircularPeriodCalendarKey is in the correct position
-        Future.delayed(
-          const Duration(milliseconds: 300),
-          () {
-            if (callback.isSuccessful) {
               /// Tutorial without Droppy
               if (!hasSavedPeriodInfo) {
                 targets.add(
@@ -257,16 +259,11 @@ class HomeController extends AppScaffoldController {
               }
 
               showTutorial();
-            }
-          },
-        );
+            },
+          );
+        }
       },
     );
-  }
-
-  @override
-  Future<void> onReady() async {
-    super.onReady();
     if (!appController.missions.responseHandler.isSuccessful) {
       await ProductService.mission;
     }
@@ -309,7 +306,9 @@ class HomeController extends AppScaffoldController {
   String get formattedTodayDate => dateFormatYMD.format(DateTime.now());
 
   Future<int> _initCalendars() async {
-    await CalendarService.fetchCurrentPeriod();
+    if (!appController.currentPeriod.responseHandler.isSuccessful) {
+      await CalendarService.fetchCurrentPeriod();
+    }
     await CalendarService.fetchCalendarData();
 
     int result =

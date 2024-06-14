@@ -8,6 +8,7 @@ import 'package:lines/core/env/enviroment.dart';
 import 'package:lines/core/env/prod_env.dart';
 import 'package:lines/core/env/staging_env.dart';
 import 'package:lines/core/helpers/api.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/logger/logger.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/data/models/auth_headers.dart';
@@ -54,5 +55,5 @@ Future<void> dependencyRegister({
 /// Register alla the Hive  boxes andadapters
 Future<void> _registerHive() async {
   await Hive.initFlutter();
-  await Hive.openBox("linesApp");
+  await Hive.openBox(hiveBoxName);
 }
