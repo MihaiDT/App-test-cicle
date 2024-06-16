@@ -42,7 +42,8 @@ class HomeController extends AppScaffoldController {
       return false;
     }
 
-    final periodDate = currentPeriodDatesMap.values.toList()[periodSelectedDateIndex.value];
+    final periodDate =
+        currentPeriodDatesMap.values.toList()[periodSelectedDateIndex.value];
     return periodDate.periodPhase == PeriodPhase.menstruation;
   }
 
@@ -50,13 +51,16 @@ class HomeController extends AppScaffoldController {
     if (currentPeriodDatesMap.values.toList().isEmpty) {
       return false;
     }
-    final periodDate = currentPeriodDatesMap.values.toList()[periodSelectedDateIndex.value];
-    return periodDate.periodPhase == PeriodPhase.menstruation && periodDate.date == formattedTodayDate;
+    final periodDate =
+        currentPeriodDatesMap.values.toList()[periodSelectedDateIndex.value];
+    return periodDate.periodPhase == PeriodPhase.menstruation &&
+        periodDate.date == formattedTodayDate;
   }
 
   RxInt periodSelectedDateIndex = 0.obs;
 
-  Map<String, PeriodDate> get currentPeriodDatesMap => appController.currentPeriod.value?.dates ?? {};
+  Map<String, PeriodDate> get currentPeriodDatesMap =>
+      appController.currentPeriod.value?.dates ?? {};
 
   /// Returns true if the user has saved some info about his period
   bool get hasSavedPeriodInfo => currentPeriodDatesMap.isNotEmpty;
@@ -67,7 +71,9 @@ class HomeController extends AppScaffoldController {
     super.onReady();
     ever(
       appController.currentPeriod.rxValue,
-      condition: () => Get.currentRoute == Routes.main && !HiveManager.isFirstTutorialWatched,
+      condition: () =>
+          Get.currentRoute == Routes.main &&
+          !HiveManager.isFirstTutorialWatched,
       (callback) {
         if (callback.isSuccessful) {
           // The Future.delayed is a workaround to ensure that
@@ -98,7 +104,7 @@ class HomeController extends AppScaffoldController {
                                   padding: const EdgeInsets.only(
                                     right: 12,
                                   ),
-                                  child: GestureDetector(
+                                  child: InkWell(
                                     onTap: () {
                                       hideTutorial();
                                     },
@@ -160,7 +166,8 @@ class HomeController extends AppScaffoldController {
                             return Obx(
                               () {
                                 return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topRight,
@@ -168,7 +175,7 @@ class HomeController extends AppScaffoldController {
                                         padding: const EdgeInsets.only(
                                           right: 12,
                                         ),
-                                        child: GestureDetector(
+                                        child: InkWell(
                                           onTap: () {
                                             hideTutorial();
                                           },
@@ -267,7 +274,9 @@ class HomeController extends AppScaffoldController {
     await CalendarService.fetchCalendarData();
     scrollCalendarToToday();
 
-    if (HiveManager.numberOfAccess >= 2 && HiveManager.numberOfAccess <= 4 && !showWelcomeQuizSection) {
+    if (HiveManager.numberOfAccess >= 2 &&
+        HiveManager.numberOfAccess <= 4 &&
+        !showWelcomeQuizSection) {
       showErrorDialog(
         context: Get.context!,
         builder: (_) {
@@ -308,20 +317,25 @@ class HomeController extends AppScaffoldController {
     }
     await CalendarService.fetchCalendarData();
 
-    int result = currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
+    int result =
+        currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
     if (result <= 0) {
       return currentPeriodDatesMap.keys.toList().length;
     }
     return result;
   }
 
-  bool get showWelcomeQuizSection => appController.user.value?.isWelcomeQuizCompleted == false;
+  bool get showWelcomeQuizSection =>
+      appController.user.value?.isWelcomeQuizCompleted == false;
 
-  List<AdvicesArticle> get allSuggestedArticles => appController.suggestedAdvicesArticle.value ?? [];
+  List<AdvicesArticle> get allSuggestedArticles =>
+      appController.suggestedAdvicesArticle.value ?? [];
 
-  RxBool get showSuggestedArticlesSection => allSuggestedArticles.isNotEmpty.obs;
+  RxBool get showSuggestedArticlesSection =>
+      allSuggestedArticles.isNotEmpty.obs;
 
-  bool get showMissionSection => appController.missions.value?.isNotEmpty == true;
+  bool get showMissionSection =>
+      appController.missions.value?.isNotEmpty == true;
 
   void showArticleDetails(AdvicesArticle article, AdvicesCategory category) {
     Get.toNamed(

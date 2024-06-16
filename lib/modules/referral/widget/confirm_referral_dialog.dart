@@ -48,7 +48,7 @@ class ConfirmReferralDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     Navigator.pop(context, false);
                   },
@@ -56,7 +56,7 @@ class ConfirmReferralDialog extends StatelessWidget {
                     "INDIETRO",
                   ).applyShaders(context),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () => Navigator.pop(context, true),
                   child: Container(
                     decoration: BoxDecoration(

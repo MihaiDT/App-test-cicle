@@ -43,7 +43,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget get _leading {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onBackPressed?.call();
         Navigator.pop(Get.context!);

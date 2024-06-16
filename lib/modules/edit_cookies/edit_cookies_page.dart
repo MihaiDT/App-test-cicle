@@ -58,7 +58,7 @@ class EditCookiesPage extends StatelessWidget {
                   ),
                 ),
                 ThemeSizedBox.height16,
-                GestureDetector(
+                InkWell(
                   onTap: () => _onKnowMoreAboutCookies(),
                   child: const TitleMedium(
                     "PIÙ OPZIONI",
@@ -88,7 +88,7 @@ class EditCookiesPage extends StatelessWidget {
                 color: ThemeColor.darkBlue,
               ),
               ThemeSizedBox.height16,
-              GestureDetector(
+              InkWell(
                 onTap: () => _onKnowMoreAboutCookies(),
                 child: const BodyMedium(
                   "Clicca qui per saperne di più.",

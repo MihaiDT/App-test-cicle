@@ -34,7 +34,7 @@ class LoadCodePage extends GetView<LoadCodeController> {
         ],
       ),
       body: SafeArea(
-        child: GestureDetector(
+        child: InkWell(
           onTap: () {
             FocusScope.of(context).unfocus();
           },

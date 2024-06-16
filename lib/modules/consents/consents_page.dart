@@ -257,7 +257,8 @@ class ConsentsPage extends GetView<ConsentsController> {
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   await launchUrl(
-                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    Uri.parse(
+                        "https://lines.it/informativa-privacy/app-my-lines"),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -302,7 +303,8 @@ class ConsentsPage extends GetView<ConsentsController> {
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   await launchUrl(
-                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    Uri.parse(
+                        "https://lines.it/informativa-privacy/app-my-lines"),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -352,7 +354,8 @@ class ConsentsPage extends GetView<ConsentsController> {
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   await launchUrl(
-                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    Uri.parse(
+                        "https://lines.it/informativa-privacy/app-my-lines"),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -401,7 +404,8 @@ class ConsentsPage extends GetView<ConsentsController> {
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   await launchUrl(
-                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    Uri.parse(
+                        "https://lines.it/informativa-privacy/app-my-lines"),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -450,7 +454,8 @@ class ConsentsPage extends GetView<ConsentsController> {
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   await launchUrl(
-                    Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                    Uri.parse(
+                        "https://lines.it/informativa-privacy/app-my-lines"),
                     mode: LaunchMode.externalApplication,
                   );
                 },

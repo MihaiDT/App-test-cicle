@@ -87,7 +87,7 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
                   ...List.generate(
                     controller.symptomCategories?.length ?? 0,
                     (index) {
-                      return GestureDetector(
+                      return InkWell(
                         onTap: () {
                           controller.onSymptomCategoryPressed(
                             controller.symptomCategories?[index],
@@ -138,7 +138,7 @@ class YourDiarySection extends GetView<YourDiarySectionController> {
               ),
             ),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               controller.hasSavedSymptoms
                   ? Get.toNamed(

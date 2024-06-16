@@ -64,7 +64,7 @@ class WelcomeQuizAlertDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: () {
                         Get.back();
                       },

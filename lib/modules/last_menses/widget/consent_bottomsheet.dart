@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,7 +40,7 @@ class ConsentBottomSheet extends StatelessWidget {
                       ..onTap = () async {
                         await launchUrl(
                           Uri.parse(
-                            appController.settings.value?.privacyUrl ?? '',
+                            "https://lines.it/informativa-privacy/app-my-lines",
                           ),
                           mode: LaunchMode.externalApplication,
                         );
@@ -74,7 +73,7 @@ class ConsentBottomSheet extends StatelessWidget {
               ).applyShaders(context),
             ),
             ThemeSizedBox.height24,
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Get.toNamed(Routes.acceptConsent);
               },

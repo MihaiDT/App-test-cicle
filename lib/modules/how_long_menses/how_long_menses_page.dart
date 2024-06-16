@@ -47,7 +47,7 @@ class HowLongMensesPage extends GetView<HowLongMensesController> {
                   ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     AdjustManager.trackEvent(
                       AjustEventType.mensesDurationConfirmed,

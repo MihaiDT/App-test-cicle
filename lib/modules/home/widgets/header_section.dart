@@ -29,7 +29,7 @@ class HeaderSection extends StatelessWidget {
         ),
       ),
       actions: [
-        GestureDetector(
+        InkWell(
           onTap: () {
             PiwikManager.trackEvent(
               PiwikEventType.profile,

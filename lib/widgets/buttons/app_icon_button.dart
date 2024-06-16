@@ -27,7 +27,7 @@ class AppIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       child: Container(
         color:
             showBg ? backgroundColor ?? ThemeColor.primary : Colors.transparent,

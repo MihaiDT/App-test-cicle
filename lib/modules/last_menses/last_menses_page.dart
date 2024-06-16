@@ -73,7 +73,7 @@ class LastMensesPage extends GetView<LastMensesController> {
                 ThemeSizedBox.height8,
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       AdjustManager.trackEvent(
                         AjustEventType.lastMensesDenied,

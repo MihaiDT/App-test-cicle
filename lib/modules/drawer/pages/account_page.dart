@@ -92,9 +92,7 @@ class AccountPage extends GetView<AccountPageController> {
               child: IntrinsicWidth(
                 child: PrimaryButton(
                   buttonSize: ButtonSize.h31,
-                  onPressed: () {
-                    controller.performLogout();
-                  },
+                  onPressed: () => controller.performLogout(),
                   child: const TitleLarge(
                     "LOG OUT",
                     letterSpacing: 0,

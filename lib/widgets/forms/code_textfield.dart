@@ -25,7 +25,7 @@ class _CodeTextfieldState extends State<CodeTextfield> {
     return Column(
       children: [
         Obx(() {
-          return GestureDetector(
+          return InkWell(
             onTap: () {
               controller.openKeyboard();
             },

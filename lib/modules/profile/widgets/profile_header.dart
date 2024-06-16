@@ -51,7 +51,7 @@ class ProfileHeader extends GetView<ProfileHeaderController> {
           ),
         ),
         ThemeSizedBox.width32,
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.toNamed(Routes.changeProfilePage);
           },

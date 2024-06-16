@@ -52,7 +52,7 @@ class QuizOutroPage extends GetView<WelcomeQuizOutroController> {
               totalCoins: controller.totalCoins,
             ),
             ThemeSizedBox.height24,
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Get.bottomSheet(
                   const InfoWhatAreCoinsBottomSheet(),

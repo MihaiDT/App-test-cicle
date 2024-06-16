@@ -14,7 +14,7 @@ class WelcomeQuizSection extends GetView<WelcomeQuizSectionController> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         Get.toNamed(
           Routes.welcomeQuizIntroPage,

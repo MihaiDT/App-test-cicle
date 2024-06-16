@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/confirm_email/confirm_email_controller.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ConfirmEmailPage extends GetView<ConfirmEmailController> {
   const ConfirmEmailPage({
@@ -33,9 +35,15 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                   ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,
-                GestureDetector(
-                  onTap: () {
-                    // TODO : implement _onNeedHelp
+                InkWell(
+                  onTap: () async {
+                    await launchUrl(
+                      Uri.parse(
+                        appController.settings.value?.helpdeskUrl ??
+                            'https://linesit.digimetrica.com/contatti-servizio-consumatori?from=app',
+                      ),
+                      mode: LaunchMode.externalApplication,
+                    );
                   },
                   child: const TitleMedium(
                     "HAI BISOGNO DI AIUTO?",
@@ -84,7 +92,7 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                   textAlign: TextAlign.center,
                 ),
                 ThemeSizedBox.height8,
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     controller.sendNewEmail();
                   },

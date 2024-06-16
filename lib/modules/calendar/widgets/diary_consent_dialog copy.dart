@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/piwik_manager.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -71,7 +70,7 @@ class DiaryConsentDialog extends StatelessWidget {
                       ..onTap = () async {
                         await launchUrl(
                           Uri.parse(
-                            appController.settings.value?.privacyUrl ?? '',
+                            "https://lines.it/informativa-privacy/app-my-lines",
                           ),
                           mode: LaunchMode.externalApplication,
                         );

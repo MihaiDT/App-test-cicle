@@ -57,7 +57,7 @@ class CookiePage extends StatelessWidget {
                   ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,
-                GestureDetector(
+                InkWell(
                   onTap: () => _onKnowMoreAboutCookies(),
                   child: const TitleMedium(
                     "PIÙ OPZIONI",
@@ -86,7 +86,7 @@ class CookiePage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height16,
-              GestureDetector(
+              InkWell(
                 onTap: () => _onKnowMoreAboutCookies(),
                 child: const BodyMedium(
                   "Clicca qui per saperne di più.",

@@ -132,7 +132,7 @@ class RegisterPage extends GetView<RegisterController> {
                 ).applyShaders(context),
               ),
               ThemeSizedBox.height8,
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Get.offAndToNamed(
                     Routes.login,

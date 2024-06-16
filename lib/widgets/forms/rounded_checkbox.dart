@@ -20,7 +20,7 @@ class RoundedCheckbox extends StatefulWidget {
 class _RoundedCheckboxState extends State<RoundedCheckbox> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         widget.onChanged(!widget.value);
       },

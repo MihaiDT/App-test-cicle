@@ -46,7 +46,7 @@ class ActivateEmailDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height8,
-            GestureDetector(
+            InkWell(
               onTap: () async {
                 await AuthenticationService.sendActivationLink(email);
                 appController.isLoginFlow.value = true;

@@ -468,7 +468,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           _onLeftChevronTap();
                         },
@@ -481,7 +481,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
                       TitleLarge(
                         getItalianMonth(value),
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           _onRightChevronTap();
                         },

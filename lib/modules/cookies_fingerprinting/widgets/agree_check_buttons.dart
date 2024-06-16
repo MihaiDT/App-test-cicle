@@ -53,7 +53,7 @@ class _AgreeCheckButtonsState extends State<AgreeCheckButtons> {
           )
         : null;
 
-    return GestureDetector(
+    return InkWell(
       onTap: () => setState(() {
         widget.agree = true;
         widget.onChanged(true);
@@ -133,7 +133,7 @@ class _AgreeCheckButtonsState extends State<AgreeCheckButtons> {
           )
         : null;
 
-    return GestureDetector(
+    return InkWell(
       onTap: () => setState(() {
         widget.agree = false;
         widget.onChanged(false);

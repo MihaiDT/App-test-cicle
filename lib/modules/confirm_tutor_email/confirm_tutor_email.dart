@@ -67,7 +67,7 @@ class ConfirmTutorEmailPage extends GetView<ConfirmTutorEmailController> {
                   textAlign: TextAlign.center,
                 ),
                 ThemeSizedBox.height8,
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     controller.sendEmail();
                   },

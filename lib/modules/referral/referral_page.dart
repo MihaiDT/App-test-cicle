@@ -49,7 +49,7 @@ class ReferralPage extends GetView<ReferralController> {
                   ),
                 ),
                 ThemeSizedBox.height8,
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     if (!controller.isLoading.value) {
                       controller.onSkipPressed(context);

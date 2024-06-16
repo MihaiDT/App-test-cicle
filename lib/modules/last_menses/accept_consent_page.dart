@@ -47,7 +47,7 @@ class AcceptConsentPage extends GetView<AcceptConsentController> {
                     },
                   ),
                   ThemeSizedBox.height8,
-                  GestureDetector(
+                  InkWell(
                     onTap: controller.onContinue,
                     child: const Padding(
                       padding: EdgeInsets.only(top: 8.0),

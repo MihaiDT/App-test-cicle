@@ -33,7 +33,7 @@ class AppScaffoldPage extends StatelessWidget {
       drawer: drawer,
       bottomNavigationBar: bottomNavigationBar,
       backgroundColor: backgroundColor ?? ThemeColor.background,
-      body: GestureDetector(
+      body: InkWell(
         onTap: () {
           FocusScopeNode currentFocus = FocusScope.of(context);
           if (!currentFocus.hasPrimaryFocus) {

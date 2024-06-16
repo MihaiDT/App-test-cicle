@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy_and_conditions/privacy_and_contitions_controller.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -38,7 +37,7 @@ class PrivacyAndConditionsPage extends GetView<PrivacyAndConditionsController> {
               onTap: () async {
                 await launchUrl(
                   Uri.parse(
-                    appController.settings.value?.termsAndConditionsUrl ?? '',
+                    "https://lines.it/termini-e-condizioni/app-my-lines",
                   ),
                   mode: LaunchMode.externalApplication,
                 );

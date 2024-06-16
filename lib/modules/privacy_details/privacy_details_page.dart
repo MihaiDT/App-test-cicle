@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy_details/privacy_details_controller.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -34,7 +33,7 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
           InkWell(
             onTap: () async {
               await launchUrl(
-                Uri.parse(appController.settings.value?.privacyUrl ?? ''),
+                Uri.parse("https://lines.it/informativa-privacy/app-my-lines"),
                 mode: LaunchMode.externalApplication,
               );
             },
@@ -66,7 +65,7 @@ class PrivacyDetailsPage extends GetView<PrivacyDetailsController> {
             onTap: () async {
               await launchUrl(
                 Uri.parse(
-                  appController.settings.value?.termsAndConditionsUrl ?? '',
+                  "https://lines.it/termini-e-condizioni/app-my-lines",
                 ),
                 mode: LaunchMode.externalApplication,
               );
