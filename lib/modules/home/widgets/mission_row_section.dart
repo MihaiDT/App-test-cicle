@@ -25,26 +25,24 @@ class MissionRowSection extends GetView<MissionRowSectionController> {
           ),
         ),
         ThemeSizedBox.height8,
-        SizedBox(
-          height: controller.missionContainerSize,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
+        SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(
+              controller.missions.length,
+              (index) {
+                return SizedBox(
+                  width: controller.missionContainerSize,
+                  child: MissionContainer.withBorder(
+                    onTap: () => controller.navigateToMissionDetails(index),
+                    mission: controller.missions[index],
+                    borderColor: const Color(0xffd7c3e8),
+                  ),
+                );
+              },
             ),
-            itemCount: controller.missions.length,
-            itemBuilder: (context, index) {
-              return SizedBox(
-                width: controller.missionContainerSize,
-                child: MissionContainer.withBorder(
-                  borderColor: const Color(0xffd7c3e8),
-                  onTap: () => controller.navigateToMissionDetails(index),
-                  mission: controller.missions[index],
-                ),
-              );
-            },
-            separatorBuilder: (context, index) => ThemeSizedBox.width8,
           ),
         ),
       ],

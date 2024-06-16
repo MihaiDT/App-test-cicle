@@ -31,7 +31,19 @@ class LoginController extends GetxController {
 
   RxBool canProceed = false.obs;
 
-  LoginController() {
+  @override
+  void onInit() {
+    super.onInit();
+
+    emailController.addListener(() {
+      emailValue.value = emailController.text;
+      canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
+    });
+
+    passwordController.addListener(() {
+      canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
+    });
+
     /// Check if email exists and if it's active
     ever(
       appController.checkEmail.rxValue,
@@ -141,25 +153,12 @@ class LoginController extends GetxController {
   }
 
   @override
-  void onInit() {
-    super.onInit();
-    emailController.addListener(() {
-      emailValue.value = emailController.text;
-      canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
-    });
-
-    passwordController.addListener(() {
-      canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
-    });
-  }
-
-  @override
-  void onClose() {
+  void dispose() {
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     emailController.dispose();
     passwordController.dispose();
-    super.onClose();
+    super.dispose();
   }
 
   Future<void> onButtonPressed() async {

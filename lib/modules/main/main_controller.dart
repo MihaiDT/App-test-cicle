@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/braze.dart';
+import 'package:lines/core/helpers/keyboard.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/controllers/advices_controller.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
@@ -44,6 +45,7 @@ class MainController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     _lazyInit(tabIndex);
 
     sendBrazeData();
@@ -52,6 +54,9 @@ class MainController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+
+    dismissKeyboard(Get.context!);
+
     if (appController.hasUsedDeepLink.value) {
       Get.toNamed(Routes.cookie);
     }

@@ -101,46 +101,29 @@ class PrizesPage extends GetView<PrizesController> {
               ),
               ThemeSizedBox.height12,
               SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 scrollDirection: Axis.horizontal,
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(
                     controller.missions.length,
                     (index) {
-                      return SizedBox(
-                        width: _missionContainerSize,
-                        child: MissionContainer.withBorder(
-                          onTap: () =>
-                              controller.navigateToMissionDetails(index),
-                          mission: controller.missions[index],
-                          borderColor: const Color(0xffd7c3e8),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: SizedBox(
+                          width: _missionContainerSize,
+                          child: MissionContainer.withBorder(
+                            onTap: () =>
+                                controller.navigateToMissionDetails(index),
+                            mission: controller.missions[index],
+                            borderColor: const Color(0xffd7c3e8),
+                          ),
                         ),
                       );
                     },
                   ),
                 ),
               ),
-              /*SizedBox(
-                height: _missionContainerSize,
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  itemCount: controller.missions.length,
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: _missionContainerSize,
-                      child: MissionContainer.withBorder(
-                        onTap: () => controller.navigateToMissionDetails(index),
-                        mission: controller.missions[index],
-                        borderColor: const Color(0xffd7c3e8),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => ThemeSizedBox.width8,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                ),
-              ),*/
               ThemeSizedBox.height12,
               Padding(
                 padding: const EdgeInsets.symmetric(

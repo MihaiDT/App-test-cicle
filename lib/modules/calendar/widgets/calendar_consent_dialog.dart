@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CalendarConsentDialog extends StatelessWidget {
@@ -43,7 +42,7 @@ class CalendarConsentDialog extends StatelessWidget {
               onTap: () async {
                 await launchUrl(
                   Uri.parse(
-                    appController.settings.value?.termsAndConditionsUrl ?? '',
+                    "https://lines.it/termini-e-condizioni/app-my-lines",
                   ),
                   mode: LaunchMode.externalApplication,
                 );

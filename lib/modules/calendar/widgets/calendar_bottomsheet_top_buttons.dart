@@ -38,7 +38,8 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                       } else {
                         controller.collapseBottomSheet();
                       }
-                      controller.modifyPeriodMode.value = !controller.modifyPeriodMode.value;
+                      controller.modifyPeriodMode.value =
+                          !controller.modifyPeriodMode.value;
 
                       _updateHomeCalendar();
 
@@ -55,7 +56,9 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                       );
                     },
                     child: TitleLarge(
-                      controller.modifyPeriodMode.value ? 'Salva mestruazione' : 'Modifica mestruazioni',
+                      controller.modifyPeriodMode.value
+                          ? 'Salva mestruazione'
+                          : 'Modifica mestruazioni',
                       letterSpacing: 2,
                     ),
                   ),

@@ -62,70 +62,68 @@ class MissionContainer extends StatelessWidget {
 
   Widget get _mainContent => Stack(
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Image.network(
-                  mission.imageUrl,
-                  fit: BoxFit.cover,
-                  height: 130,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.network(
+                mission.imageUrl,
+                fit: BoxFit.cover,
+                height: 130,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(
+                  ThemeSize.paddingSmall,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(
-                    ThemeSize.paddingSmall,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TitleMedium(
-                        "CARICA ENTRO IL ${mission.endAt}",
-                        color: ThemeColor.brightPink,
-                      ),
-                      HeadlineSmall(
-                        mission.description,
-                        color: ThemeColor.darkBlue,
-                      ),
-                      if (mission.regolamento?.isNotEmpty == true)
-                        GestureDetector(
-                          onTap: () async {
-                            await launchUrl(
-                              Uri.parse(mission.regolamento ?? ''),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 8,
-                            ),
-                            child: InkWell(
-                              onTap: () async {
-                                await launchUrl(
-                                  Uri.parse(mission.regolamento ?? ''),
-                                  mode: LaunchMode.externalApplication,
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  const HeadlineSmall(
-                                    "Scopri come: ",
-                                    color: ThemeColor.darkBlue,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                  ),
-                                  const HeadlineSmall(
-                                    "REGOLAMENTO",
-                                    underline: true,
-                                  ).applyShaders(Get.context!),
-                                ],
-                              ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TitleMedium(
+                      "CARICA ENTRO IL ${mission.endAt}",
+                      color: ThemeColor.brightPink,
+                    ),
+                    HeadlineSmall(
+                      mission.shortDescription ?? mission.description,
+                      color: ThemeColor.darkBlue,
+                    ),
+                    if (mission.regolamento?.isNotEmpty == true)
+                      InkWell(
+                        onTap: () async {
+                          await launchUrl(
+                            Uri.parse(mission.regolamento ?? ''),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 8,
+                          ),
+                          child: InkWell(
+                            onTap: () async {
+                              await launchUrl(
+                                Uri.parse(mission.regolamento ?? ''),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                const HeadlineSmall(
+                                  "Scopri come: ",
+                                  color: ThemeColor.darkBlue,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                ),
+                                const HeadlineSmall(
+                                  "REGOLAMENTO",
+                                  underline: true,
+                                ).applyShaders(Get.context!),
+                              ],
                             ),
                           ),
                         ),
-                    ],
-                  ),
+                      ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

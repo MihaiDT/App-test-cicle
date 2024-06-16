@@ -5,8 +5,13 @@ class Mission {
   final int completeCounter;
   final String? disclaimer;
   final String title;
+
+  /// Description of the mission used in the detail page
   final String description;
   final String? description2;
+
+  /// Description of the mission used in the card
+  final String? shortDescription;
   final String? regolamento;
   final String? prizeImage;
   final String? prizeDescription;
@@ -27,6 +32,7 @@ class Mission {
     this.disclaimer = '',
     required this.description,
     this.description2 = "",
+    this.shortDescription = "",
     this.regolamento,
     this.prizeImage,
     this.prizeDescription,
@@ -46,6 +52,7 @@ class Mission {
       title: json['title'],
       description: json['description'],
       description2: json['description_2'],
+      shortDescription: json['short_description'],
       disclaimer: json['concorso_description'],
       regolamento: json['regolamento'],
       prizeImage: json['prize_image'],
@@ -75,6 +82,7 @@ class Mission {
       'title': title,
       'description': description,
       'description_2': description2,
+      'short_description': shortDescription,
       'disclaimber': disclaimer,
       'id': id,
       'image_url': imageUrl,
@@ -86,5 +94,5 @@ class Mission {
 
   @override
   String toString() =>
-      'Mission(code: $code, completed_counter: $completeCounter, title: $title, description: $description,description2: $description2,id: $id, image_url: $imageUrl, is_completed: $isCompleted, total_counter: $totalCounter, products: $products)';
+      'Mission(code: $code, completed_counter: $completeCounter, title: $title, description: $description,description2: $description2,shortDescription: $shortDescription, id: $id, image_url: $imageUrl, is_completed: $isCompleted, total_counter: $totalCounter, products: $products)';
 }

@@ -34,8 +34,8 @@ class TutorEmailController extends GetxController {
   }
 
   @override
-  void onClose() {
+  void dispose() {
     emailController.dispose();
-    super.onClose();
+    super.dispose();
   }
 }

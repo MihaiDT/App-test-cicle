@@ -32,7 +32,10 @@ class MyBadgesSection extends GetView<MyBadgesController> {
                       textAlign: TextAlign.center,
                     ).applyShaders(context),
                     ThemeSizedBox.height16,
-                    ...List.generate(3, (index) {
+                    ...List.generate(
+                        controller.badges.length > 3
+                            ? 3
+                            : controller.badges.length, (index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 4,
