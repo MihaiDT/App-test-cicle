@@ -11,7 +11,6 @@ import 'package:lines/modules/prizes/widgets/prizes_navigate_to_widget.dart';
 import 'package:lines/modules/prizes/widgets/survey_section.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/blurred_filter.dart';
 import 'package:lines/widgets/cards/coin_card.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
 
@@ -139,13 +138,10 @@ class PrizesPage extends GetView<PrizesController> {
               ),
 
               /// LUCKY LINES
-              BlurredFilter(
-                borderRadiusDegrees: 20,
-                child: Container(
-                  color: Colors.white.withOpacity(0.5),
-                  child: Image.asset(
-                    "assets/images/lotteria.png",
-                  ),
+              Container(
+                color: Colors.white.withOpacity(0.5),
+                child: Image.asset(
+                  "assets/images/lotteria.png",
                 ),
               ),
               ThemeSizedBox.height40,
@@ -166,7 +162,7 @@ class PrizesPage extends GetView<PrizesController> {
                   iconPath: ThemeImage.inviteAFriend,
                 ),
               ),
-              ThemeSizedBox.height90,
+              ThemeSizedBox.height40,
             ],
           ),
         ),

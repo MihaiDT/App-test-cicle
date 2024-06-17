@@ -34,7 +34,7 @@ class _SurveySectionState extends State<SurveySection> {
           if (controller.showWelcomeQuizCard)
             SurveyCard(
               onTap: () {
-                Get.toNamed(Routes.welcomeQuizPage);
+                Get.toNamed(Routes.welcomeQuizIntroPage);
               },
               title: "WELCOME QUIZ",
               description: "Raccontaci qualcosa su di te",

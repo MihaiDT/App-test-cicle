@@ -46,7 +46,7 @@ class ProfilePage extends StatelessWidget {
                       ? const MyBadgesSection()
                       : _disabledBadgeSection();
                 }),
-                ThemeSizedBox.height90,
+                ThemeSizedBox.height40,
               ],
             ),
           ),

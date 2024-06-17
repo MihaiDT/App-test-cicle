@@ -260,7 +260,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                 ..onTap = () async {
                   await launchUrl(
                     Uri.parse(
-                        "https://lines.it/informativa-privacy/app-my-lines"),
+                      "https://lines.it/informativa-privacy/app-my-lines",
+                    ),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -306,7 +307,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                 ..onTap = () async {
                   await launchUrl(
                     Uri.parse(
-                        "https://lines.it/informativa-privacy/app-my-lines"),
+                      "https://lines.it/informativa-privacy/app-my-lines",
+                    ),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -357,7 +359,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                 ..onTap = () async {
                   await launchUrl(
                     Uri.parse(
-                        "https://lines.it/informativa-privacy/app-my-lines"),
+                      "https://lines.it/informativa-privacy/app-my-lines",
+                    ),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -407,7 +410,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                 ..onTap = () async {
                   await launchUrl(
                     Uri.parse(
-                        "https://lines.it/informativa-privacy/app-my-lines"),
+                      "https://lines.it/informativa-privacy/app-my-lines",
+                    ),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -457,7 +461,8 @@ class ConsentsPage extends GetView<ConsentsController> {
                 ..onTap = () async {
                   await launchUrl(
                     Uri.parse(
-                        "https://lines.it/informativa-privacy/app-my-lines"),
+                      "https://lines.it/informativa-privacy/app-my-lines",
+                    ),
                     mode: LaunchMode.externalApplication,
                   );
                 },

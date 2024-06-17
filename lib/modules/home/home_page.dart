@@ -126,7 +126,7 @@ class HomePage extends GetView<HomeController> {
                 }
                 return const SizedBox.shrink();
               }),
-              ThemeSizedBox.height90,
+              ThemeSizedBox.height40,
             ],
           ),
         ),
