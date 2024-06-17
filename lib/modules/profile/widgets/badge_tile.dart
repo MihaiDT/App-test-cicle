@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/charts/glowing_linear_progress_indicator.dart';
 
@@ -34,7 +33,7 @@ class BadgeTile extends StatelessWidget {
           builder: (context, constrains) {
             return Row(
               children: [
-                SvgPicture.network(
+                Image.network(
                   imagePath ?? "",
                   width: 90,
                   height: 90,

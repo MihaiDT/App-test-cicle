@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 
 class CompletedBadgeWidget extends StatelessWidget {
@@ -31,9 +32,11 @@ class CompletedBadgeWidget extends StatelessWidget {
         child: Column(
           children: [
             ThemeSizedBox.height8,
-            SvgPicture.network(
+            Image.network(
               imageUrl,
               fit: BoxFit.cover,
+              height: Get.width * 0.27,
+              width: Get.width * 0.27,
             ),
             const Spacer(),
             HeadlineSmall(
