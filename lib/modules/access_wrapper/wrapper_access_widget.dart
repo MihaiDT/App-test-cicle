@@ -66,7 +66,7 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
           appController.showLockPage.value = false;
         }
 
-        await wait(milliseconds: 500);
+        await wait(milliseconds: 800);
       });
     }
     return Obx(
@@ -96,7 +96,7 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
     if (await hasBiometrics) {
       try {
         return await _auth.authenticate(
-          localizedReason: 'Touch ID o inserisci codice',
+          localizedReason: 'Touch/Face ID o inserisci codice',
           options: const AuthenticationOptions(
             stickyAuth: true,
             biometricOnly: false,
