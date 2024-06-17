@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/fullscreen_loader.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
@@ -21,12 +22,14 @@ class EditCookiesPage extends StatelessWidget {
     return AppScaffoldPage(
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(
+        showBackButton: false,
         backButtonColor: ThemeColor.darkBlue,
         actions: [
           IconButton(
             onPressed: () {
               _rejectAllCookies();
               Get.back();
+              showFullScreenLoader();
             },
             icon: const Icon(
               Icons.close,
@@ -52,6 +55,7 @@ class EditCookiesPage extends StatelessWidget {
                   onPressed: () {
                     _acceptAllCookies();
                     Get.back();
+                    showFullScreenLoader();
                   },
                   child: const TitleLarge(
                     "ACCONSENTO",
@@ -63,6 +67,7 @@ class EditCookiesPage extends StatelessWidget {
                   child: const TitleMedium(
                     "PIÙ OPZIONI",
                     underline: true,
+                    letterSpacing: 1.5,
                     textAlign: TextAlign.center,
                   ).applyShaders(context),
                 ),

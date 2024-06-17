@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-void showFullScreenLoader({
+OverlayEntry showFullScreenLoader({
   Duration dismissAfter = const Duration(seconds: 6),
 }) {
   final overlayEntry = OverlayEntry(
@@ -34,4 +34,6 @@ void showFullScreenLoader({
   Timer(dismissAfter, () {
     overlayEntry.remove();
   });
+
+  return overlayEntry;
 }

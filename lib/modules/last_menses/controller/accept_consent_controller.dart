@@ -21,7 +21,7 @@ class AcceptConsentController extends GetxController {
     if (HiveManager.isFirstTutorialWatched) {
       Get.offAndToNamed(Routes.welcomeWalkthrough);
     } else {
-      Get.offAndToNamed(Routes.main);
+      Get.offAllNamed(Routes.main);
     }
     pageIsPending.value = false;
   }

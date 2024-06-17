@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/helpers.dart';
 
 class PrimaryButton extends StatelessWidget {
   final ButtonSize buttonSize;
@@ -32,7 +33,10 @@ class PrimaryButton extends StatelessWidget {
         ),
       ),
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: () {
+          dismissKeyboard(context);
+          onPressed != null ? onPressed!() : () => {};
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           minimumSize: Size(0, buttonSize.toDouble),

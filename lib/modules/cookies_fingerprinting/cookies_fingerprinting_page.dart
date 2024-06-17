@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/fullscreen_loader.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_color.dart';
@@ -200,8 +201,9 @@ class CookiesFingerprintingPage
                 ),
                 ThemeSizedBox.height16,
                 AgreeCheckButtons(
+                  agree: HiveManager.hasAcceptedCookieStats,
                   onChanged: (value) {
-                    HiveManager.hasAcceptedCookieProfiling = value;
+                    HiveManager.hasAcceptedCookieStats = value;
                   },
                 ),
                 ThemeSizedBox.height32,
@@ -302,8 +304,9 @@ class CookiesFingerprintingPage
                 ),
                 ThemeSizedBox.height16,
                 AgreeCheckButtons(
+                  agree: HiveManager.hasAcceptedCookieProfiling,
                   onChanged: (value) {
-                    HiveManager.hasAcceptedCookieStats = value;
+                    HiveManager.hasAcceptedCookieProfiling = value;
                   },
                 ),
                 ThemeSizedBox.height40,
@@ -325,8 +328,9 @@ class CookiesFingerprintingPage
     Get.back();
 
     if (controller.isEditing) {
-      Get.back();
       _updateConsents();
+      Get.back();
+      showFullScreenLoader();
     } else {
       Get.offAndToNamed(
         appController.isLoginFlow.value == true

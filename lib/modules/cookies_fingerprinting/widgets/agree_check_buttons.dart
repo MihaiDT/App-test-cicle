@@ -6,11 +6,12 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lines/core/app_theme.dart';
 
 class AgreeCheckButtons extends StatefulWidget {
-  bool agree = false;
+  bool agree;
   final void Function(bool) onChanged;
 
   AgreeCheckButtons({
     super.key,
+    this.agree = false,
     required this.onChanged,
   });
 

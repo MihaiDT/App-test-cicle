@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/braze.dart';
-import 'package:lines/core/helpers/keyboard.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/controllers/advices_controller.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
 
 import 'package:lines/modules/home/home_controller.dart';
+import 'package:lines/modules/profile/controllers/my_badges_controller.dart';
 import 'package:lines/repository/badges_service.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -39,6 +39,10 @@ class MainController extends GetxController {
         Get.put(
           PrizesController(),
         );
+      case 3:
+        Get.put(
+          MyBadgesController(),
+        );
     }
   }
 
@@ -54,8 +58,6 @@ class MainController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-
-    dismissKeyboard(Get.context!);
 
     if (appController.hasUsedDeepLink.value) {
       Get.toNamed(Routes.cookie);

@@ -124,9 +124,7 @@ class RegisterPage extends GetView<RegisterController> {
               ThemeSizedBox.height32,
               SecondaryLoadingButton(
                 isLoading: controller.isButtonPending.value,
-                onPressed: controller.canProceed.value
-                    ? controller.onButtonPressed
-                    : null,
+                onPressed: () async => await controller.onButtonPressed(),
                 child: const TitleLarge(
                   "AVANTI",
                 ).applyShaders(context),
@@ -151,6 +149,7 @@ class RegisterPage extends GetView<RegisterController> {
                       ThemeSizedBox.width4,
                       const TitleMedium(
                         "ACCEDI",
+                        letterSpacing: 1.5,
                         underline: true,
                       ),
                     ],

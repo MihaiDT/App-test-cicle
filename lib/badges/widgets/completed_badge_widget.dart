@@ -43,6 +43,7 @@ class CompletedBadgeWidget extends StatelessWidget {
             BodySmall(
               description,
               color: ThemeColor.darkBlue,
+              textAlign: TextAlign.center,
             ),
             ThemeSizedBox.height16,
           ],

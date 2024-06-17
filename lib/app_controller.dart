@@ -46,49 +46,49 @@ class EasyGetter<T> {
 /// The app state
 class AppController extends GetxController {
   /// The response of log in and register api
-  final EasyGetter<User> user;
-  final EasyGetter<Question> question;
-  final EasyGetter<Settings> settings;
-  final EasyGetter<Survey> survey;
-  final EasyGetter<CheckEmail> checkEmail;
+  EasyGetter<User> user;
+  EasyGetter<Question> question;
+  EasyGetter<Settings> settings;
+  EasyGetter<Survey> survey;
+  EasyGetter<CheckEmail> checkEmail;
 
   /// The parameter used to register the user
-  final RegistrationParameters registerParameter;
+  RegistrationParameters registerParameter;
 
-  final UpdateUserParameters updateUserParameters;
+  UpdateUserParameters updateUserParameters;
 
-  final SocialLoginParameter socialLoginParameter;
+  SocialLoginParameter socialLoginParameter;
 
-  final EasyGetter<CurrentPeriod> currentPeriod;
-  final EasyGetter<PeriodMap> periodMap;
+  EasyGetter<CurrentPeriod> currentPeriod;
+  EasyGetter<PeriodMap> periodMap;
 
-  final EasyGetter<NewCalendarData> calendarData;
+  EasyGetter<NewCalendarData> calendarData;
 
-  final EasyGetter<AdvicesGroupedByCategory> advicesCategories;
+  EasyGetter<AdvicesGroupedByCategory> advicesCategories;
 
-  final EasyGetter<List<AdvicesArticle>> suggestedAdvicesArticle;
+  EasyGetter<List<AdvicesArticle>> suggestedAdvicesArticle;
 
-  final EasyGetter<List<SymptomCategory>> symptomCategory;
+  EasyGetter<List<SymptomCategory>> symptomCategory;
 
-  final EasyGetter<List<SymptomCategory>> categoriesSavedInHome;
+  EasyGetter<List<SymptomCategory>> categoriesSavedInHome;
 
-  final EasyGetter<SymptomDiaries> symptomsDiaries;
+  EasyGetter<SymptomDiaries> symptomsDiaries;
 
-  final EasyGetter<List<Badge>> badges;
+  EasyGetter<List<Badge>> badges;
 
-  final EasyGetter<List<PeriodsStats>> periodsStats;
+  EasyGetter<List<PeriodsStats>> periodsStats;
 
-  final EasyGetter<SpecificDatePeriodsStats> specificDatePeriodsStats;
+  EasyGetter<SpecificDatePeriodsStats> specificDatePeriodsStats;
 
-  final EasyGetter<List<ProductCategory>> productCategory;
-  final EasyGetter<SymptomCategoryStats> symptomCategoryStats;
-  final EasyGetter<List<Mission>> missions;
-  final EasyGetter<List<MensesStatistics>> mensesStatistics;
-  final EasyGetter<SendConfirmEmail> sendConfirmEmail;
-  final EasyGetter<UpdatePassword> updatePassword;
-  final EasyGetter<AdvicesArticle> singleArticle;
-  final EasyGetter<ValidateReferralCode> validateReferralCode;
-  final EasyGetter<UploadedProduct> uploadedProduct;
+  EasyGetter<List<ProductCategory>> productCategory;
+  EasyGetter<SymptomCategoryStats> symptomCategoryStats;
+  EasyGetter<List<Mission>> missions;
+  EasyGetter<List<MensesStatistics>> mensesStatistics;
+  EasyGetter<SendConfirmEmail> sendConfirmEmail;
+  EasyGetter<UpdatePassword> updatePassword;
+  EasyGetter<AdvicesArticle> singleArticle;
+  EasyGetter<ValidateReferralCode> validateReferralCode;
+  EasyGetter<UploadedProduct> uploadedProduct;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
@@ -176,7 +176,38 @@ class AppController extends GetxController {
   }
 
   void initializeState() {
-    AppController.initial();
+    periodMap = EasyGetter<PeriodMap>();
+    calendarData = EasyGetter<NewCalendarData>();
+    user = EasyGetter<User>();
+    question = EasyGetter<Question>();
+    settings = EasyGetter<Settings>();
+    survey = EasyGetter<Survey>();
+    checkEmail = EasyGetter<CheckEmail>();
+    currentPeriod = EasyGetter<CurrentPeriod>();
+    registerParameter = RegistrationParameters.initial();
+    updateUserParameters = UpdateUserParameters.initial();
+    socialLoginParameter = SocialLoginParameter.initial();
+    advicesCategories = EasyGetter<AdvicesGroupedByCategory>();
+    suggestedAdvicesArticle = EasyGetter<List<AdvicesArticle>>();
+    symptomCategory = EasyGetter<List<SymptomCategory>>();
+    categoriesSavedInHome = EasyGetter<List<SymptomCategory>>();
+    symptomsDiaries = EasyGetter<SymptomDiaries>();
+    badges = EasyGetter<List<Badge>>();
+    periodsStats = EasyGetter<List<PeriodsStats>>();
+    specificDatePeriodsStats = EasyGetter<SpecificDatePeriodsStats>();
+    productCategory = EasyGetter<List<ProductCategory>>();
+    symptomCategoryStats = EasyGetter<SymptomCategoryStats>();
+    missions = EasyGetter<List<Mission>>();
+    mensesStatistics = EasyGetter<List<MensesStatistics>>();
+    sendConfirmEmail = EasyGetter<SendConfirmEmail>();
+    updatePassword = EasyGetter<UpdatePassword>();
+    singleArticle = EasyGetter<AdvicesArticle>();
+    validateReferralCode = EasyGetter<ValidateReferralCode>();
+    uploadedProduct = EasyGetter<UploadedProduct>();
+    isLoginFlow.value = false;
+    showLockPage.value = false;
+    hasUsedDeepLink.value = false;
+
     HiveManager.removeAcceptedCookie();
   }
 }

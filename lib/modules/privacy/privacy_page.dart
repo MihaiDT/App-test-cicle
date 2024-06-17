@@ -4,6 +4,7 @@ import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/controller/privacy_controller.dart';
 import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
 import 'package:lines/widgets/buttons/secondary_loading_button.dart';
@@ -59,7 +60,8 @@ class PrivacyPage extends GetView<PrivacyController> {
                       },
                       value: controller.firstAccepted.value,
                     ),
-                    if (controller.arguments?.userIsAdult == true) ...[
+                    if (controller.arguments?.userIsAdult == true ||
+                        (appController.user.value?.age ?? 0) > 17) ...[
                       ThemeSizedBox.height24,
                       PrivacyDetailWidget(
                         title: "Contenuti e missioni personalizzate per te!",

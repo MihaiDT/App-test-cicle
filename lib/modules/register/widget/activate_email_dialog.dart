@@ -59,6 +59,7 @@ class ActivateEmailDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
                 underline: true,
                 decorationColor: ThemeColor.darkBlue,
+                letterSpacing: 2,
               ),
             ),
           ],

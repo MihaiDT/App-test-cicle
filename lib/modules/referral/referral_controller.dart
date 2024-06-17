@@ -32,9 +32,9 @@ class ReferralController extends GetxController {
         if (callback.isSuccessful) {
           isLoading.value = false;
           if (!HiveManager.isFirstTutorialWatched) {
-            Get.offAndToNamed(Routes.welcomeWalkthrough);
+            Get.offAllNamed(Routes.welcomeWalkthrough);
           } else {
-            Get.offAndToNamed(Routes.main);
+            Get.offAllNamed(Routes.main);
           }
         }
       },

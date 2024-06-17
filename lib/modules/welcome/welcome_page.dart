@@ -52,6 +52,7 @@ class WelcomePage extends GetView<WelcomeController> {
                             ThemeSizedBox.width4,
                             const TitleMedium(
                               "ACCEDI",
+                              letterSpacing: 1.5,
                               underline: true,
                             ),
                           ],

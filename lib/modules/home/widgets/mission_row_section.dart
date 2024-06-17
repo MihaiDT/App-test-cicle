@@ -26,19 +26,22 @@ class MissionRowSection extends GetView<MissionRowSectionController> {
         ),
         ThemeSizedBox.height8,
         SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           scrollDirection: Axis.horizontal,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(
               controller.missions.length,
               (index) {
-                return SizedBox(
-                  width: controller.missionContainerSize,
-                  child: MissionContainer.withBorder(
-                    onTap: () => controller.navigateToMissionDetails(index),
-                    mission: controller.missions[index],
-                    borderColor: const Color(0xffd7c3e8),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: SizedBox(
+                    width: controller.missionContainerSize,
+                    child: MissionContainer.withBorder(
+                      onTap: () => controller.navigateToMissionDetails(index),
+                      mission: controller.missions[index],
+                      borderColor: const Color(0xffd7c3e8),
+                    ),
                   ),
                 );
               },

@@ -57,16 +57,16 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
     if (widget.authNeeded &&
         (HiveManager.showLockPage || appController.showLockPage.value)) {
       authenticate().then((value) async {
-        await wait(milliseconds: 500);
-
         if (value == false) {
           /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
           /// TODO: CHECK HOW TO MANAGE THIS SCENARIO
           return value;
         } else {
-          appController.showLockPage.value = false;
           HiveManager.showLockPage = false;
+          appController.showLockPage.value = false;
         }
+
+        await wait(milliseconds: 500);
       });
     }
     return Obx(
@@ -106,6 +106,7 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
         return false;
       }
     }
+
     return true;
   }
 

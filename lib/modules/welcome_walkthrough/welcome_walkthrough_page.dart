@@ -23,7 +23,7 @@ class WelcomeWalkthroughPage extends StatelessWidget {
           onTapLetsStart: () async {
             await PushNotification.requestPushPermission();
 
-            Get.offAndToNamed(Routes.main);
+            Get.offAllNamed(Routes.main);
           },
           pagesData: [
             WalkthroughData(

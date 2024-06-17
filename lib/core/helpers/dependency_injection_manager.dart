@@ -48,7 +48,6 @@ Future<void> dependencyRegister({
 
   Get.put(
     AppController.initial(),
-    permanent: true,
   );
 }
 

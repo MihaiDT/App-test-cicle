@@ -35,15 +35,11 @@ class ConfirmEmailController extends GetxController {
 
   void logIn() {
     AdjustManager.trackEvent(AjustEventType.confirmEmail);
-    if (appController.isLoginFlow.value == true) {
-      Get.back();
-    } else {
-      appController.isLoginFlow.value = true;
-      Get.offNamedUntil(
-        Routes.login,
-        (route) => false,
-      );
-    }
+
+    appController.isLoginFlow.value = true;
+    Get.offAndToNamed(
+      Routes.login,
+    );
   }
 
   Future<void> sendNewEmail() async {

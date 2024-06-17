@@ -33,7 +33,12 @@ class RegisterController extends GetxController {
     _hidePassword.value = value;
   }
 
-  RegisterController() {
+  late final Worker checkEmailEver;
+
+  @override
+  void onInit() {
+    super.onInit();
+
     emailController.addListener(() {
       canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
     });
@@ -42,14 +47,13 @@ class RegisterController extends GetxController {
       canProceed.value = isEmailValid() && passwordController.text.isNotEmpty;
     });
 
-    ever(
+    checkEmailEver = ever(
       appController.checkEmail.rxValue,
       condition: () => Get.currentRoute == Routes.register,
       (callback) {
         if (callback.isPending) {
           isButtonPending.value = true;
-        }
-        if (callback.isSuccessful) {
+        } else if (callback.isSuccessful) {
           isButtonPending.value = false;
           if (callback.content?.emailExists == false) {
             /// Save in the state email and password values
@@ -75,6 +79,10 @@ class RegisterController extends GetxController {
             _showValidateEmailDialog();
           } else {
             appController.isLoginFlow.value = true;
+
+            emailController.text = '';
+            passwordController.text = '';
+
             Get.offAndToNamed(Routes.login);
           }
         }
@@ -84,11 +92,14 @@ class RegisterController extends GetxController {
 
   @override
   void onClose() {
+    super.onClose();
+
+    checkEmailEver.dispose();
+
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     emailController.dispose();
     passwordController.dispose();
-    super.onClose();
   }
 
   Future<void> setRegistrationProvider(
@@ -110,8 +121,10 @@ class RegisterController extends GetxController {
   }
 
   Future<void> onButtonPressed() async {
-    /// Check if email exists and if it's active
-    await AuthenticationService.checkEmail(emailController.text);
+    if (canProceed.value) {
+      /// Check if email exists and if it's active
+      await AuthenticationService.checkEmail(emailController.text);
+    }
   }
 
   void setSocialLoginParameters(

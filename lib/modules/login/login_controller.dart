@@ -24,6 +24,10 @@ class LoginController extends GetxController {
   final FocusNode passwordFocusNode = FocusNode();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  late final Worker checkEmailEver;
+  late final Worker userEver;
+
   RxString emailValue = "".obs;
   RxBool isButtonPending = false.obs;
   RxBool isSocialLogin = false.obs;
@@ -45,7 +49,7 @@ class LoginController extends GetxController {
     });
 
     /// Check if email exists and if it's active
-    ever(
+    checkEmailEver = ever(
       appController.checkEmail.rxValue,
       condition: () => Get.currentRoute == Routes.login,
       (callback) async {
@@ -85,7 +89,7 @@ class LoginController extends GetxController {
         }
       },
     );
-    ever(
+    userEver = ever(
       appController.user.rxValue,
       condition: () =>
           Get.currentRoute == Routes.login &&
@@ -143,9 +147,9 @@ class LoginController extends GetxController {
             }
           } else if (appController.user.value?.routeAfterLogin ==
               "complete_profile") {
-            Get.offAndToNamed(Routes.lastMensesPage);
+            Get.offAllNamed(Routes.lastMensesPage);
           } else {
-            Get.offAndToNamed(Routes.main);
+            Get.offAllNamed(Routes.main);
           }
         }
       },
@@ -153,12 +157,15 @@ class LoginController extends GetxController {
   }
 
   @override
-  void dispose() {
+  void onClose() {
+    super.onClose();
+
+    userEver.dispose();
+    checkEmailEver.dispose();
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     emailController.dispose();
     passwordController.dispose();
-    super.dispose();
   }
 
   Future<void> onButtonPressed() async {

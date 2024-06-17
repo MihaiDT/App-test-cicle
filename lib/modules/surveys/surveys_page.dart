@@ -35,9 +35,9 @@ class SurveysPage extends GetView<SurveyController> {
           horizontal: ThemeSize.paddingSmall,
         ),
         child: SurveyCard(
-          onTap: () {
+          onTap: () async {
             if (!controller.isWelcomeQuizCompleted) {
-              Get.toNamed(Routes.welcomeQuizPage);
+              Get.toNamed(Routes.welcomeQuizIntroPage);
             }
           },
           title: "WELCOME QUIZ",

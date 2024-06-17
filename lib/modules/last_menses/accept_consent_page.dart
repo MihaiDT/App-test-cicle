@@ -55,6 +55,7 @@ class AcceptConsentPage extends GetView<AcceptConsentController> {
                         "NON ACCONSENTO",
                         underline: true,
                         textAlign: TextAlign.center,
+                        letterSpacing: 2,
                       ),
                     ),
                   ),

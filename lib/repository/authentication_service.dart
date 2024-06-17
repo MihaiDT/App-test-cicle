@@ -93,6 +93,11 @@ class AuthenticationService {
 
     user.hasConsentCookieStats = HiveManager.hasAcceptedCookieStats;
     user.hasConsentCookieProfiling = HiveManager.hasAcceptedCookieProfiling;
+    user.diaryConsent =
+        user.diaryConsent ?? appController.user.value?.diaryConsent ?? false;
+    user.calendarConsent = user.calendarConsent ??
+        appController.user.value?.calendarConsent ??
+        false;
 
     appController.user.responseHandler = ResponseHandler.pending(
       content: appController.user.value,
@@ -250,7 +255,6 @@ class AuthenticationService {
       await dio.delete(
         "/auth/logout",
       );
-      appController.initializeState();
     } catch (e) {
       log.logApiException(e);
     }

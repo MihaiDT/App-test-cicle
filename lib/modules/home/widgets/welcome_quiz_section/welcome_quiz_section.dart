@@ -15,11 +15,9 @@ class WelcomeQuizSection extends GetView<WelcomeQuizSectionController> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.toNamed(
-          Routes.welcomeQuizIntroPage,
-        );
-      },
+      onTap: () => Get.toNamed(
+        Routes.welcomeQuizIntroPage,
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: ThemeSize.paddingSmall,

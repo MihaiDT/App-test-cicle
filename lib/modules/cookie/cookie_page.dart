@@ -62,6 +62,7 @@ class CookiePage extends StatelessWidget {
                   child: const TitleMedium(
                     "PIÙ OPZIONI",
                     underline: true,
+                    letterSpacing: 1.5,
                     textAlign: TextAlign.center,
                   ),
                 ),

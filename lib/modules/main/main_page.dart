@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/modules/advices/advices_page.dart';
 import 'package:lines/modules/drawer/pages/drawer_main_page.dart';
 import 'package:lines/modules/home/home_page.dart';
@@ -20,8 +21,11 @@ class MainPage extends GetView<MainController> {
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.dark,
-      child: PopScope(
-        canPop: false,
+      child: NavigatorPopHandler(
+        enabled: true,
+        onPop: () {
+          logDebug("POP");
+        },
         child: AppScaffoldPage(
           drawer: const DrawerMainPage(),
           bottomNavigationBar: Container(

@@ -143,6 +143,7 @@ class DiaryConsentDialog extends StatelessWidget {
               child: const TitleLarge(
                 "NON ACCONSENTO",
                 textAlign: TextAlign.center,
+                letterSpacing: 2,
               ).applyShaders(context),
             ),
             ThemeSizedBox.height32,

@@ -28,12 +28,14 @@ class ConfirmTutorEmailPage extends GetView<ConfirmTutorEmailController> {
               onPressed: () {
                 AdjustManager.trackEvent(AjustEventType.tutorConfirmEmail);
 
-                Get.offNamedUntil(
+                Get.offAndToNamed(
                   Routes.login,
-                  (route) => false,
                 );
               },
-              child: const TitleLarge("PROCEDI").applyShaders(context),
+              child: const TitleLarge(
+                "PROCEDI",
+                letterSpacing: 2,
+              ).applyShaders(context),
             ),
           ),
           child: Padding(
@@ -75,6 +77,7 @@ class ConfirmTutorEmailPage extends GetView<ConfirmTutorEmailController> {
                     "INVIA DI NUOVO",
                     underline: true,
                     textAlign: TextAlign.center,
+                    letterSpacing: 2,
                   ),
                 ),
               ],

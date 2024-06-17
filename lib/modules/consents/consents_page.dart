@@ -68,40 +68,42 @@ class ConsentsPage extends GetView<ConsentsController> {
             ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: Get.width * 0.7,
-                      child: const HeadlineLarge(
-                        "Consenso Profilazione",
-                        color: ThemeColor.darkBlue,
+          if ((appController.user.value?.age ?? 0) > 17) ...[
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: Get.width * 0.7,
+                        child: const HeadlineLarge(
+                          "Consenso Profilazione",
+                          color: ThemeColor.darkBlue,
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    Obx(
-                      () {
-                        return CupertinoSwitch(
-                          value: controller.isProfilingEnabled.value,
-                          onChanged: (value) =>
-                              controller.toggleProfilingEnabled(value),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                ..._profilingDescription(context),
-              ],
+                      const Spacer(),
+                      Obx(
+                        () {
+                          return CupertinoSwitch(
+                            value: controller.isProfilingEnabled.value,
+                            onChanged: (value) =>
+                                controller.toggleProfilingEnabled(value),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  ..._profilingDescription(context),
+                ],
+              ),
             ),
-          ),
-          const Divider(),
+            const Divider(),
+          ],
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 8,

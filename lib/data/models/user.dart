@@ -1,5 +1,10 @@
+import 'package:get/get.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/interest.dart';
 import 'package:lines/data/models/profile_completed_areas.dart';
+import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
 
 class User {
@@ -232,4 +237,14 @@ class User {
       avatarPhase1ImgUrl != null ||
       avatarPhase2ImgUrl != null ||
       avatarPhase3ImgUrl != null;
+
+  Future<void> logout() async {
+    await AuthenticationService.logout();
+    HiveManager.removeIsPastDateCalculated();
+    await Get.find<SecureStorageManager>().clearToken();
+    HiveManager.removeUserId();
+    HiveManager.removeAcceptedCookie();
+
+    appController.initializeState();
+  }
 }
