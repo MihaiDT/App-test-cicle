@@ -18,7 +18,6 @@ class MensesPhaseCard extends StatelessWidget {
       margin: const EdgeInsets.only(
         left: 16,
         right: 16,
-        bottom: 25,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
