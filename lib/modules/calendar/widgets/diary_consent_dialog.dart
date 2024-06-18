@@ -125,6 +125,7 @@ class DiaryConsentDialog extends StatelessWidget {
                   ),
                   child: TitleLarge(
                     "ACCONSENTO",
+                    letterSpacing: 2,
                     textAlign: TextAlign.center,
                   ),
                 ),
