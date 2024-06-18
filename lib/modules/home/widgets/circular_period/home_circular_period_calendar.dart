@@ -62,6 +62,8 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
   }
 
   Widget get missingDataContainer {
+    final homeController = Get.find<HomeController>();
+
     return Center(
       child: SizedBox(
         height: size,
@@ -80,12 +82,14 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
               ThemeSizedBox.height20,
               IntrinsicWidth(
                 child: PrimaryButton(
+                  key: homeController.homeCircularPeriodAddButtonKey,
                   buttonSize: ButtonSize.h31,
                   onPressed: () {
                     Get.toNamed(Routes.calendar);
                   },
                   child: const TitleMedium(
                     "Aggiungi mestruazioni",
+                    letterSpacing: 1.5,
                   ),
                 ),
               ),

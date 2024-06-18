@@ -23,47 +23,50 @@ class HomePeriodInfo extends GetView<HomeController> {
       padding: const EdgeInsets.symmetric(
         horizontal: ThemeSize.paddingSmall,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Obx(
-                () => TitleMedium(
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TitleMedium(
                   _label(controller.selectedDate.value),
                   color: ThemeColor.darkBlue,
                   letterSpacing: 2,
                 ),
-              ),
-            ],
-          ),
-          ThemeSizedBox.height8,
-          Row(
-            children: [
-              Expanded(
-                child: HomePeriodMenstruationCard(
-                  textRow1:
-                      appController.currentPeriod.value?.menstruationInfo[0],
-                  textRow2:
-                      appController.currentPeriod.value?.menstruationInfo[1],
-                  textRow3:
-                      appController.currentPeriod.value?.menstruationInfo[2],
+              ],
+            ),
+            ThemeSizedBox.height8,
+            Row(
+              children: [
+                Expanded(
+                  child: HomePeriodMenstruationCard(
+                    textRow1:
+                        appController.currentPeriod.value?.menstruationInfo[0],
+                    textRow2:
+                        appController.currentPeriod.value?.menstruationInfo[1],
+                    textRow3:
+                        appController.currentPeriod.value?.menstruationInfo[2],
+                  ),
                 ),
-              ),
-              ThemeSizedBox.width8,
-              Expanded(
-                child: HomePeriodOvulationCard(
-                  textRow1: appController.currentPeriod.value?.ovulationInfo[0],
-                  textRow2: appController.currentPeriod.value?.ovulationInfo[1],
-                  textRow3: appController.currentPeriod.value?.ovulationInfo[2],
+                ThemeSizedBox.width8,
+                Expanded(
+                  child: HomePeriodOvulationCard(
+                    textRow1:
+                        appController.currentPeriod.value?.ovulationInfo[0],
+                    textRow2:
+                        appController.currentPeriod.value?.ovulationInfo[1],
+                    textRow3:
+                        appController.currentPeriod.value?.ovulationInfo[2],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -25,40 +25,24 @@ class ScrollableCalendar extends GetView<CalendarController> {
         itemCount: controller.months.length,
         itemBuilder: (context, index) {
           final DateTime month = controller.months[index];
-
-          if (index == 0) {
-            return Column(
-              children: [
-                ThemeSizedBox.height32,
-                _childColumn(month, context),
-              ],
-            );
-          }
-
-          //if you reached the end then add some space after the last month
-          if (index >= controller.months.length - 1) {
-            return Column(
-              children: [
-                _childColumn(month, context),
+          return Column(
+            children: [
+              if (index == 0) ThemeSizedBox.height32,
+              _childColumn(month, context),
+              if (index >= controller.months.length - 1)
                 SizedBox(height: Get.height * 0.3),
-              ],
-            );
-          }
-          return _childColumn(month, context);
+            ],
+          );
         },
       ),
     );
   }
 
-  Widget _childColumn(DateTime month, context) {
-    final String monthText = DateFormat('MMMM yyyy', 'it')
-        .format(
-          DateTime(
-            month.year,
-            month.month,
-          ),
-        )
-        .toUpperCase();
+  DateFormat get monthDateFormat => DateFormat('MMMM yyyy', 'it');
+
+  Widget _childColumn(DateTime month, BuildContext context) {
+    final monthText =
+        monthDateFormat.format(DateTime(month.year, month.month)).toUpperCase();
 
     return Column(
       children: [

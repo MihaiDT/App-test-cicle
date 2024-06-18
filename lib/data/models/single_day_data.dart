@@ -44,7 +44,8 @@ class SingleDayData {
     return 'NewSingleDayData{date: $date, isReal: $isReal, hasSex: $hasSex, hasSymptoms: $hasSymptoms, ovulationDay: $ovulationDay, periodPhase: $periodPhase}';
   }
 
-  bool get isMensesDay {
-    return periodPhase == PeriodPhase.menstruation && isReal;
-  }
+  bool get isMensesDay => periodPhase == PeriodPhase.menstruation && isReal;
+
+  bool get isTheoricalMensesDay =>
+      periodPhase == PeriodPhase.menstruation && !isReal;
 }

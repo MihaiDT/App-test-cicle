@@ -1,4 +1,5 @@
 import 'package:easy_sticky_header/easy_sticky_header.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -23,7 +24,8 @@ class CalendarYearController extends GetxController {
     required this.maxDate,
   });
 
-  final List<DateTime> years = [];
+  late final List<DateTime> years;
+  late final Map<int, int> yearIndexMap;
 
   @override
   void onInit() {
@@ -33,36 +35,32 @@ class CalendarYearController extends GetxController {
 
   /// Returns the index of the year in the list
   int indexOfYear(DateTime date) {
-    for (int i = 0; i < years.length; i++) {
-      if (years[i].year == date.year) {
-        return i;
-      }
-    }
-    return -1;
+    return yearIndexMap[date.year] ?? -1;
   }
 
   void _generateYears() {
-    DateTime currentYear = DateTime(minDate.year);
-    years.add(currentYear);
-    while (currentYear.year != maxDate.year) {
-      currentYear = DateTime(currentYear.year + 1);
-      years.add(currentYear);
-    }
+    years = List.generate(
+      maxDate.year - minDate.year + 1,
+      (index) => DateTime(minDate.year + index),
+    );
+    yearIndexMap = {
+      for (int i = 0; i < years.length; i++) years[i].year: i,
+    };
   }
 
   List<DateTime> getMonthsForYear(DateTime year) {
-    List<DateTime> months = [];
-    for (int i = 1; i <= 12; i++) {
-      months.add(DateTime(year.year, i));
-    }
-    return months;
+    return List.generate(12, (index) => DateTime(year.year, index + 1));
   }
 
   /// Jump to the DateTime.now() year
   void jumpToYear(DateTime date) async {
-    itemScrollController.jumpTo(
-      // the index is *2 because the listview has 2 items for each year
-      index: indexOfYear(date) * 2,
-    );
+    final index = indexOfYear(date);
+    if (index != -1) {
+      itemScrollController.scrollTo(
+        index: index * 2,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.fastOutSlowIn,
+      );
+    }
   }
 }

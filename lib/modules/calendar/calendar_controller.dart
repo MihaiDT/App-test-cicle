@@ -18,7 +18,7 @@ import 'package:lines/data/models/symptom_diaries.dart';
 import 'package:lines/modules/calendar/calendar_year_controller.dart';
 import 'package:lines/modules/calendar/month_calendar_mixin.dart';
 import 'package:lines/modules/calendar/widgets/calendar_consent_dialog.dart';
-import 'package:lines/modules/calendar/widgets/diary_consent_dialog%20copy.dart';
+import 'package:lines/modules/calendar/widgets/diary_consent_dialog.dart';
 import 'package:lines/modules/calendar/widgets/too_many_categories_dialog.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/calendar_service.dart';
@@ -188,25 +188,19 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     AppLifecycleListener(
       onResume: () {
         selectedTab.value = CalendarTabs.monthTab;
-        wait(milliseconds: 100).then(
-          (_) {
-            jumpToToday();
-          },
-        );
+
+        jumpToToday();
       },
     );
     ever(
       selectedTab,
       condition: () => Get.currentRoute == Routes.calendar,
-      (newTab) async {
+      (newTab) {
         if (newTab == CalendarTabs.yearTab) {
           collapseBottomSheet();
         } else {
-          await wait(milliseconds: 100).then(
-            (value) {
-              jumpToToday();
-            },
-          );
+          jumpToToday();
+
           rxShowBottomMenu.value = true;
           expandBottomSheetTorxSheetVSize();
         }
@@ -234,6 +228,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
           .where((element) => element.isMensesDay)
           .map((e) => e.date),
     );
+
     jumpToToday();
 
     bool calendarConsent = appController.user.value!.calendarConsent ?? false;
@@ -301,10 +296,13 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     diaryConsentsUpdated.value = true;
     diaryConsentsUpdated.refresh();
 
-    saveSymptoms();
+    if (diaryConsent) {
+      saveSymptoms();
+    }
 
     // Force the view refreshing
     selectedTab.refresh();
+
     jumpToToday();
   }
 
@@ -419,7 +417,6 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
       await CalendarService.fetchCalendarData();
 
-      await wait(milliseconds: 900);
       jumpToToday();
     }
   }
@@ -427,8 +424,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   void _initCalendarYearController() {
     Get.lazyPut<CalendarYearController>(
       () => CalendarYearController(
-        minDate: DateTime(2020),
-        maxDate: DateTime(2030),
+        minDate: DateTime(2022),
+        maxDate: DateTime(2025),
       ),
     );
   }
@@ -447,10 +444,23 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   void jumpToToday() {
     DateTime today = DateTime.now();
     rxSelectedDate.value = today;
+
     if (selectedTab.value == CalendarTabs.monthTab) {
-      jumpToMonth(date: today);
+      _waitForAttachmentAndJumpToMonth(today);
     } else {
       calendarYearController.jumpToYear(today);
+    }
+  }
+
+  void _waitForAttachmentAndJumpToMonth(DateTime date) {
+    if (monthCalendarItemScrollController.isAttached) {
+      Future.delayed(const Duration(milliseconds: 50), () {
+        jumpToMonth(date: date);
+      });
+    } else {
+      Future.delayed(const Duration(milliseconds: 50), () {
+        _waitForAttachmentAndJumpToMonth(date);
+      });
     }
   }
 

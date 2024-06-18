@@ -25,9 +25,11 @@ class CalendarGridWidget extends GetView<CalendarController> {
     this.isAnnualCalendar = false,
   });
 
+  int get startDayOfWeek =>
+      CustomDateUtils.calculateStartDayOfWeek(year, month);
+
   @override
   Widget build(BuildContext context) {
-    int startDayOfWeek = CustomDateUtils.calculateStartDayOfWeek(year, month);
     return GridView.builder(
       itemCount: DateTime(year, month + 1, 0).day + startDayOfWeek,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -43,32 +45,24 @@ class CalendarGridWidget extends GetView<CalendarController> {
           index,
           startDayOfWeek,
         );
-        return Visibility(
-          visible: index >= startDayOfWeek,
-          child: InkWell(
-            onTap: () {
-              onDayTapped(dayOfMonth);
-            },
-            child: Obx(
-              () {
-                return _dayWidget(dayOfMonth);
-              },
-            ),
-          ),
+        if (index < startDayOfWeek) return const SizedBox.shrink();
+        return InkWell(
+          onTap: () => onDayTapped(dayOfMonth),
+          child: Obx(() => _dayWidget(dayOfMonth)),
         );
       },
     );
   }
 
   Widget _dayWidget(DateTime dayOfMonth) {
-    String dayText = '${dayOfMonth.day}';
-    String formattedDate = dateFormatYMD.format(dayOfMonth);
+    final formattedDate = dateFormatYMD.format(dayOfMonth);
+
     if (controller.selectedTab.value == CalendarTabs.monthTab &&
         multipleSelectedMode) {
       final isSelected = controller.addedMensesDates.contains(formattedDate);
       return CalendarDaySelectMultipleWidget(
         isSelected: isSelected,
-        text: dayText,
+        text: dayOfMonth.day.toString(),
         isToday: dayOfMonth.isToday,
         onDayTapped: () {
           if (dayOfMonth.isSameDayOrBefore(DateTime.now())) {
@@ -76,16 +70,18 @@ class CalendarGridWidget extends GetView<CalendarController> {
           }
         },
       );
+    } else {
+      final singleDayData =
+          appController.calendarData.value?.calendarDays.firstWhereOrNull(
+        (element) => element.date == formattedDate,
+      );
+      final isSelected = controller.rxSelectedDate.value.isSameDay(dayOfMonth);
+      return CalendarDayWidget(
+        singleDayData: singleDayData,
+        formattedDate: formattedDate,
+        isAnnualCalendar: isAnnualCalendar,
+        isSelected: isSelected,
+      );
     }
-
-    return CalendarDayWidget(
-      singleDayData: appController.calendarData.value?.calendarDays
-          .firstWhereOrNull((element) {
-        return element.date == formattedDate;
-      }),
-      formattedDate: formattedDate,
-      isAnnualCalendar: isAnnualCalendar,
-      isSelected: controller.rxSelectedDate.value.isSameDay(dayOfMonth),
-    );
   }
 }

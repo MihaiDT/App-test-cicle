@@ -7,40 +7,36 @@ import 'package:lines/modules/calendar/widgets/calendar_year_title_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CalendarYearBody extends GetView<CalendarController> {
-  const CalendarYearBody({
-    super.key,
-  });
+  const CalendarYearBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final calendarYearController = controller.calendarYearController;
+    final years = calendarYearController.years;
+    final itemCount = years.length * 2;
+    final initialScrollIndex =
+        calendarYearController.indexOfYear(DateTime.now()) * 2;
+
     return Stack(
       children: [
         StickyHeader(
-          controller: controller.calendarYearController.stickyHeaderController,
+          controller: calendarYearController.stickyHeaderController,
           child: ScrollablePositionedList.builder(
-            initialScrollIndex:
-                controller.calendarYearController.indexOfYear(DateTime.now()) *
-                    2,
-            itemScrollController:
-                controller.calendarYearController.itemScrollController,
+            initialScrollIndex: initialScrollIndex,
+            itemScrollController: calendarYearController.itemScrollController,
             scrollOffsetController:
-                controller.calendarYearController.scrollOffsetController,
-            itemCount: controller.calendarYearController.years.length * 2,
-            padding: const EdgeInsets.only(
-              bottom: 100,
-            ),
+                calendarYearController.scrollOffsetController,
+            itemCount: itemCount,
+            padding: const EdgeInsets.only(bottom: 100),
             itemBuilder: (context, index) {
+              final yearIndex = index ~/ 2;
               if (index.isEven) {
-                final yearIndex = index ~/ 2;
                 return Padding(
-                  padding: const EdgeInsets.only(
-                    top: 16,
-                  ),
+                  padding: const EdgeInsets.only(top: 16),
                   child: StickyContainerBuilder(
                     builder: (context, stuckAmount) {
                       return CalendarYearTitleWidget(
-                        year: controller
-                            .calendarYearController.years[yearIndex].year,
+                        year: years[yearIndex].year,
                         isAttached: stuckAmount == 1,
                       );
                     },
@@ -48,16 +44,11 @@ class CalendarYearBody extends GetView<CalendarController> {
                   ),
                 );
               } else {
-                final yearIndex = (index - 1) ~/ 2;
-
                 return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: CalendarYearMonthsGrid(
-                    months: controller.getMonthsDataForYearCalendar(
-                      controller.calendarYearController.years[yearIndex],
-                    ),
+                    months: controller
+                        .getMonthsDataForYearCalendar(years[yearIndex]),
                     onMonthTapped: controller.goBackToMonthCalendar,
                   ),
                 );

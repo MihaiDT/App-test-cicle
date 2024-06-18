@@ -69,7 +69,8 @@ class CalendarDayWidget extends StatelessWidget {
       } else if (singleDayData!.isReal == false) {
         return DottedBorder(
           borderType: BorderType.Circle,
-          color: (!singleDayData!.isMensesDay && !singleDayData!.ovulationDay)
+          color: !singleDayData!.isTheoricalMensesDay &&
+                  !singleDayData!.ovulationDay
               ? Colors.transparent
               : singleDayData!.periodPhase.periodColor,
           dashPattern: const [4],

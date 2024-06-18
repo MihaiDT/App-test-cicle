@@ -88,6 +88,7 @@ class CalendarConsentDialog extends StatelessWidget {
                   child: TitleLarge(
                     "ACCONSENTO",
                     textAlign: TextAlign.center,
+                    letterSpacing: 2,
                   ),
                 ),
               ),

@@ -14,6 +14,7 @@ import 'package:lines/data/models/advices_article_detail_pair.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/data/models/period_date.dart';
 import 'package:lines/modules/tutorial/widgets/menses_phase_card.dart';
+import 'package:lines/modules/tutorial/widgets/tutorial_close_button.dart';
 import 'package:lines/modules/tutorial/widgets/tutorial_continue_button.dart';
 import 'package:lines/modules/welcome_quiz/widgets/welcome_quiz_alert_dialog.dart';
 import 'package:lines/repository/advices_service.dart';
@@ -35,6 +36,7 @@ class HomeController extends AppScaffoldController {
   final RxBool rxShowGameTutorial = false.obs;
 
   final GlobalKey homeCircularPeriodCalendarKey = GlobalKey();
+  final GlobalKey homeCircularPeriodAddButtonKey = GlobalKey();
   final GlobalKey missingMensesPrimaryButtonKey = GlobalKey();
 
   RxInt counter = 0.obs;
@@ -76,11 +78,12 @@ class HomeController extends AppScaffoldController {
 
     ever(
       rxShowGameTutorial,
+      condition: () => Get.currentRoute == Routes.main,
       (show) async {
         if (show) {
           rxShowGameTutorial.value = false;
 
-          await wait(seconds: 2);
+          await wait(milliseconds: 1500);
 
           // The Future.delayed is a workaround to ensure that
           // the homeCircularPeriodCalendarKey is in the correct position
@@ -108,27 +111,6 @@ class HomeController extends AppScaffoldController {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: 12,
-                                  ),
-                                  child: InkWell(
-                                    onTap: () {
-                                      hideTutorial();
-                                    },
-                                    child: const SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: Icon(
-                                        Icons.close,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
                               Column(
                                 children: [
                                   const Padding(
@@ -210,6 +192,9 @@ class HomeController extends AppScaffoldController {
                           ),
                         ),
                       ),
+                      TutorialCloseButton(
+                        onTap: () => hideTutorial(),
+                      ),
                     ],
                   ),
                 ),
@@ -230,7 +215,7 @@ class HomeController extends AppScaffoldController {
       appController.currentPeriod.rxValue,
       condition: () =>
           Get.currentRoute == Routes.main &&
-          !HiveManager.isFirstTutorialWatched,
+          (!HiveManager.isFirstTutorialWatched),
       (callback) {
         if (callback.isSuccessful) {
           // The Future.delayed is a workaround to ensure that
@@ -245,7 +230,7 @@ class HomeController extends AppScaffoldController {
               if (!hasSavedPeriodInfo) {
                 targets.add(
                   TargetFocus(
-                    radius: 0,
+                    radius: 1,
                     identify: "missingMensesPrimaryButtonKey",
                     keyTarget: missingMensesPrimaryButtonKey,
                     contents: [
@@ -256,23 +241,6 @@ class HomeController extends AppScaffoldController {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: 12,
-                                  ),
-                                  child: InkWell(
-                                    onTap: () {
-                                      hideTutorial();
-                                    },
-                                    child: const Icon(
-                                      Icons.close,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
                               Column(
                                 children: [
                                   const Padding(
@@ -285,18 +253,7 @@ class HomeController extends AppScaffoldController {
                                     ),
                                   ),
                                   ThemeSizedBox.height90,
-                                  IntrinsicWidth(
-                                    child: PrimaryButton(
-                                      buttonSize: ButtonSize.h31,
-                                      onPressed: () {
-                                        hideTutorial();
-                                        Get.toNamed(Routes.calendar);
-                                      },
-                                      child: const TitleMedium(
-                                        "Aggiungi mestruazioni",
-                                      ),
-                                    ),
-                                  ),
+                                  ThemeSizedBox.height32,
                                 ],
                               ),
                             ],
@@ -327,32 +284,6 @@ class HomeController extends AppScaffoldController {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: [
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: 12,
-                                        ),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            hideTutorial();
-
-                                            // final sessionToken = await SecureStorageManager().getToken();
-
-                                            // Get.toNamed(
-                                            //   Routes.customizeCherryWebView,
-                                            //   arguments: {
-                                            //     'sessionToken': sessionToken,
-                                            //   },
-                                            // );
-                                          },
-                                          child: const Icon(
-                                            Icons.close,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
                                     Visibility.maintain(
                                       visible: tutorialStep.value != 1,
                                       child: Column(
@@ -392,8 +323,40 @@ class HomeController extends AppScaffoldController {
                 );
               }
               if (!hasSavedPeriodInfo) {
+                final RenderBox renderBox = homeCircularPeriodAddButtonKey
+                    .currentContext
+                    ?.findRenderObject() as RenderBox;
+                final size = renderBox.size;
+                final position = renderBox.localToGlobal(Offset.zero);
+
                 tutorialCoachMark = TutorialCoachMark(
-                  skipWidget: const SizedBox.shrink(),
+                  skipWidget: Align(
+                    alignment: Alignment.topCenter,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          left: position.dx,
+                          top: position.dy,
+                          width: size.width,
+                          height: size.height,
+                          child: PrimaryButton(
+                            buttonSize: ButtonSize.h31,
+                            onPressed: () {
+                              hideTutorial();
+                              Get.toNamed(Routes.calendar);
+                            },
+                            child: const TitleMedium(
+                              "Aggiungi mestruazioni",
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                        ),
+                        TutorialCloseButton(
+                          onTap: () => hideTutorial(),
+                        ),
+                      ],
+                    ),
+                  ),
                   colorShadow: Colors.black,
                   targets: targets,
                   opacityShadow: 0.8,
@@ -402,19 +365,74 @@ class HomeController extends AppScaffoldController {
                 );
               }
               if (hasSavedPeriodInfo) {
+                final RenderBox renderBox = homeCircularPeriodCalendarKey
+                    .currentContext
+                    ?.findRenderObject() as RenderBox;
+                final size = renderBox.size;
+                final position = renderBox.localToGlobal(Offset.zero);
+
                 tutorialCoachMark = TutorialCoachMark(
                   skipWidget: Obx(
                     () {
                       if (tutorialStep.value == 0) {
-                        return TutorialContinueButton(
-                          goToNextTutorial: goToNextTutorial,
+                        return Stack(
+                          children: [
+                            SafeArea(
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: TutorialContinueButton(
+                                  goToNextTutorial: goToNextTutorial,
+                                ),
+                              ),
+                            ),
+                            TutorialCloseButton(
+                              onTap: () => hideTutorial(),
+                            ),
+                          ],
                         );
                       } else if (tutorialStep.value == 1) {
-                        return MensesPhaseCard(
-                          goToNextTutorial: goToNextTutorial,
+                        return Stack(
+                          children: [
+                            SafeArea(
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: MensesPhaseCard(
+                                  goToNextTutorial: goToNextTutorial,
+                                ),
+                              ),
+                            ),
+                            TutorialCloseButton(
+                              onTap: () => hideTutorial(),
+                            ),
+                          ],
                         );
                       }
-                      return const SizedBox.shrink();
+                      return Stack(
+                        children: [
+                          Positioned(
+                            left: position.dx,
+                            top: position.dy,
+                            child: InkWell(
+                              onTap: () async {
+                                hideTutorial();
+                                final sessionToken =
+                                    await SecureStorageManager().getToken();
+
+                                Get.toNamed(
+                                  Routes.customizeCherryWebView,
+                                  arguments: {
+                                    'sessionToken': sessionToken,
+                                  },
+                                );
+                              },
+                              child: SizedBox(
+                                height: size.width,
+                                width: size.width,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
                     },
                   ),
                   colorShadow: Colors.black,

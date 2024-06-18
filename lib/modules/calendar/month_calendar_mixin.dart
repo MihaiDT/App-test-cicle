@@ -1,4 +1,4 @@
-import 'package:lines/core/utils/helpers.dart';
+import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 mixin MonthCalendarMixin {
@@ -44,18 +44,21 @@ mixin MonthCalendarMixin {
   }
 
   void jumpToMonth({required DateTime date}) {
-    if (!(date.year >= minDate.year &&
-        (date.year > minDate.year || date.month >= minDate.month) &&
-        date.year <= maxDate.year &&
-        (date.year < maxDate.year || date.month <= maxDate.month))) {
-      return;
-    }
-    int month = ((date.year - minDate.year) * 12) - minDate.month + date.month;
+    int yearDifference = date.year - minDate.year;
+    int monthDifference = date.month - minDate.month;
+
+    int month = yearDifference * 12 + monthDifference;
 
     try {
-      monthCalendarItemScrollController.jumpTo(index: month);
+      if (monthCalendarItemScrollController.isAttached) {
+        monthCalendarItemScrollController.scrollTo(
+          index: month,
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.fastOutSlowIn,
+        );
+      }
     } catch (e) {
-      logError(error: e);
+      // logError(error: e);
     }
   }
 }
