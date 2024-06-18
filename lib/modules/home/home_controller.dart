@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/secure_storage_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -28,7 +29,10 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class HomeController extends AppScaffoldController {
   TutorialCoachMark? tutorialCoachMark;
+
   final RxInt tutorialStep = 0.obs;
+
+  final RxBool rxShowGameTutorial = false.obs;
 
   final GlobalKey homeCircularPeriodCalendarKey = GlobalKey();
   final GlobalKey missingMensesPrimaryButtonKey = GlobalKey();
@@ -69,6 +73,159 @@ class HomeController extends AppScaffoldController {
   @override
   Future<void> onReady() async {
     super.onReady();
+
+    ever(
+      rxShowGameTutorial,
+      (show) async {
+        if (show) {
+          rxShowGameTutorial.value = false;
+
+          await wait(seconds: 2);
+
+          // The Future.delayed is a workaround to ensure that
+          // the homeCircularPeriodCalendarKey is in the correct position
+          final RenderBox renderBox =
+              homeCircularPeriodCalendarKey.currentContext?.findRenderObject()
+                  as RenderBox;
+          final size = renderBox.size;
+          final position = renderBox.localToGlobal(Offset.zero);
+
+          Future.delayed(
+            const Duration(milliseconds: 300),
+            () {
+              List<TargetFocus> gameTargets = [];
+              gameTargets.addAll(
+                [
+                  TargetFocus(
+                    paddingFocus: 10,
+                    identify: "homeCircularPeriodCalendarKey",
+                    keyTarget: homeCircularPeriodCalendarKey,
+                    contents: [
+                      TargetContent(
+                        align: ContentAlign.top,
+                        padding: EdgeInsets.zero,
+                        builder: (context, controller) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 12,
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      hideTutorial();
+                                    },
+                                    child: const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: Icon(
+                                        Icons.close,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 50,
+                                    ),
+                                    child: DisplayMedium(
+                                      "Pronta a giocare?",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  ThemeSizedBox.height8,
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 50,
+                                    ),
+                                    child: DisplaySmall(
+                                      "Durante la fase mestruale puoi accedere all'ambiente di gioco e prenderti cura di me. ",
+                                      textAlign: TextAlign.center,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 35,
+                                    ),
+                                    child: Image.asset(
+                                      ThemeImage.speechBubble,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              );
+
+              tutorialCoachMark = TutorialCoachMark(
+                skipWidget: Align(
+                  alignment: Alignment.topCenter,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: position.dx + (size.width / 2) + 5,
+                        top: position.dy + size.width + 10,
+                        child: SizedBox(
+                          height: 60,
+                          width: 60,
+                          child: Image.asset(
+                            ThemeImage.tutorialTap,
+                            fit: BoxFit.scaleDown,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: position.dx,
+                        top: position.dy,
+                        child: InkWell(
+                          onTap: () async {
+                            hideTutorial();
+                            final sessionToken =
+                                await SecureStorageManager().getToken();
+
+                            Get.toNamed(
+                              Routes.tamagochiWebView,
+                              arguments: {
+                                'sessionToken': sessionToken,
+                              },
+                            );
+                          },
+                          child: SizedBox(
+                            height: size.width,
+                            width: size.width,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                colorShadow: Colors.black,
+                targets: gameTargets,
+                opacityShadow: 0.8,
+                paddingFocus: 10,
+                pulseEnable: false,
+              );
+              showTutorial();
+            },
+          );
+        }
+      },
+    );
+
     ever(
       appController.currentPeriod.rxValue,
       condition: () =>
@@ -82,6 +239,7 @@ class HomeController extends AppScaffoldController {
             const Duration(milliseconds: 300),
             () {
               HiveManager.isFirstTutorialWatched = true;
+              HiveManager.showSecondTutorialAccess = true;
 
               /// Tutorial without Droppy
               if (!hasSavedPeriodInfo) {
@@ -176,8 +334,17 @@ class HomeController extends AppScaffoldController {
                                           right: 12,
                                         ),
                                         child: InkWell(
-                                          onTap: () {
+                                          onTap: () async {
                                             hideTutorial();
+
+                                            // final sessionToken = await SecureStorageManager().getToken();
+
+                                            // Get.toNamed(
+                                            //   Routes.customizeCherryWebView,
+                                            //   arguments: {
+                                            //     'sessionToken': sessionToken,
+                                            //   },
+                                            // );
                                           },
                                           child: const Icon(
                                             Icons.close,
@@ -264,6 +431,7 @@ class HomeController extends AppScaffoldController {
         }
       },
     );
+
     if (!appController.missions.responseHandler.isSuccessful) {
       await ProductService.mission;
     }
@@ -274,9 +442,9 @@ class HomeController extends AppScaffoldController {
     await CalendarService.fetchCalendarData();
     scrollCalendarToToday();
 
-    if (HiveManager.numberOfAccess >= 2 &&
-        HiveManager.numberOfAccess <= 4 &&
-        !showWelcomeQuizSection) {
+    if (HiveManager.showSurveyTutorial) {
+      HiveManager.showSurveyTutorial = false;
+
       showErrorDialog(
         context: Get.context!,
         builder: (_) {
@@ -284,8 +452,6 @@ class HomeController extends AppScaffoldController {
         },
       );
     }
-
-    HiveManager.numberOfAccess++;
   }
 
   void scrollCalendarToToday() async {
@@ -319,7 +485,7 @@ class HomeController extends AppScaffoldController {
 
     int result =
         currentPeriodDatesMap.keys.toList().indexOf(formattedTodayDate);
-    if (result <= 0) {
+    if (result < 0) {
       return currentPeriodDatesMap.keys.toList().length;
     }
     return result;

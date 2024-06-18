@@ -91,7 +91,7 @@ class MensesChartWidget extends StatelessWidget {
                                     children: [
                                       ThemeSizedBox.height24,
                                       LabelSmall(
-                                        value.round().toString(),
+                                        (value.round() + 1).toString(),
                                         color: ThemeColor.darkBlue,
                                       ),
                                       const LabelSmall(

@@ -39,6 +39,7 @@ class QuizIntroPage extends GetView<WelcomeQuizIntroController> {
                   },
                   child: const TitleLarge(
                     'INIZIAMO',
+                    letterSpacing: 2,
                   ),
                 ),
               ),

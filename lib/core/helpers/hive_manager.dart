@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:lines/core/utils/helpers.dart';
 
 class HiveManager {
   HiveManager._();
@@ -39,13 +40,48 @@ class HiveManager {
   }
 
   static int get numberOfAccess {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.numberOfAccess.name) ??
-        1;
+    final todayString = dateFormatYMD.format(DateTime.now());
+    return Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.numberOfAccess.name)[todayString] ??
+        -1;
   }
 
   static set numberOfAccess(int numberOfAccess) {
+    final todayString = dateFormatYMD.format(DateTime.now());
+    final accessKeys =
+        Hive.box(hiveBoxName).get(HiveReferenceKeys.numberOfAccess.name);
+
+    accessKeys[todayString] = numberOfAccess;
+
+    Hive.box(hiveBoxName).put(
+      HiveReferenceKeys.numberOfAccess.name,
+      accessKeys,
+    );
+  }
+
+  static void initNumberOfAccess() {
+    final todayString = dateFormatYMD.format(
+      DateTime.now(),
+    );
+    final tomorrowString = dateFormatYMD.format(
+      DateTime.now().add(
+        const Duration(days: 1),
+      ),
+    );
+    final theDayAfterTomorrowString = dateFormatYMD.format(
+      DateTime.now().add(
+        const Duration(days: 2),
+      ),
+    );
+
+    final accessKeys = {
+      todayString: -1,
+      tomorrowString: 0,
+      theDayAfterTomorrowString: 0,
+    };
+
     Hive.box(hiveBoxName)
-        .put(HiveReferenceKeys.numberOfAccess.name, numberOfAccess);
+        .put(HiveReferenceKeys.numberOfAccess.name, accessKeys);
   }
 
   static bool get isFirstTutorialWatched {
@@ -58,6 +94,19 @@ class HiveManager {
     Hive.box(hiveBoxName).put(
       HiveReferenceKeys.isFirstTutorialWatched.name,
       isFirstTutorialWatched,
+    );
+  }
+
+  static bool get showSecondTutorialAccess {
+    return Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.showSecondTutorialAccess.name) ??
+        true;
+  }
+
+  static set showSecondTutorialAccess(bool showSecondTutorialAccess) {
+    Hive.box(hiveBoxName).put(
+      HiveReferenceKeys.showSecondTutorialAccess.name,
+      showSecondTutorialAccess,
     );
   }
 
@@ -92,6 +141,19 @@ class HiveManager {
         Hive.box(hiveBoxName)
                 .get(HiveReferenceKeys.hasAcceptedCookieStats.name) !=
             null;
+  }
+
+  static bool get showSurveyTutorial {
+    return Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.showSurveyTutorial.name) ??
+        false;
+  }
+
+  static set showSurveyTutorial(bool showSurveyTutorial) {
+    Hive.box(hiveBoxName).put(
+      HiveReferenceKeys.showSurveyTutorial.name,
+      showSurveyTutorial,
+    );
   }
 
   static void removeAcceptedCookie() {
@@ -129,5 +191,7 @@ enum HiveReferenceKeys {
   hasAcceptedCookieProfiling,
   hasAcceptedCookieStats,
   isPastDateCalculated,
-  numberOfAccess;
+  numberOfAccess,
+  showSecondTutorialAccess,
+  showSurveyTutorial;
 }

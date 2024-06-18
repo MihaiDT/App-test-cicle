@@ -38,7 +38,7 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: ThemeColor.darkBlue,
           ),
           onPressed: () => Get.back(),
         ),

@@ -40,7 +40,8 @@ class PrivacyPage extends GetView<PrivacyController> {
                     },
                     isLoading: controller.buttonIsPending.value,
                     child: const TitleLarge(
-                      "CONTINUA CON LA MIA SELEZIONE",
+                      "PROCEDI CON LA REGISTRAZIONE",
+                      letterSpacing: 2,
                     ).applyShaders(context),
                   ),
                 ),

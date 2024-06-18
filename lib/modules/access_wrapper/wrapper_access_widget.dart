@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/delay.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/access_wrapper/controller/wrapper_access_controller.dart';
@@ -55,20 +54,19 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
   @override
   Widget build(BuildContext context) {
     if (widget.authNeeded &&
-        (HiveManager.showLockPage || appController.showLockPage.value)) {
+        (appController.showLockPage.value || HiveManager.showLockPage)) {
       authenticate().then((value) async {
         if (value == false) {
           /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
           /// TODO: CHECK HOW TO MANAGE THIS SCENARIO
           return value;
         } else {
-          HiveManager.showLockPage = false;
           appController.showLockPage.value = false;
+          HiveManager.showLockPage = false;
         }
-
-        await wait(milliseconds: 800);
       });
     }
+
     return Obx(
       () {
         return Stack(

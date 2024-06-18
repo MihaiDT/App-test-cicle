@@ -54,6 +54,7 @@ class CookiePage extends StatelessWidget {
                   },
                   child: const TitleLarge(
                     "ACCONSENTO",
+                    letterSpacing: 2,
                   ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,

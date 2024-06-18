@@ -127,6 +127,7 @@ class RegisterPage extends GetView<RegisterController> {
                 onPressed: () async => await controller.onButtonPressed(),
                 child: const TitleLarge(
                   "AVANTI",
+                  letterSpacing: 2,
                 ).applyShaders(context),
               ),
               ThemeSizedBox.height8,

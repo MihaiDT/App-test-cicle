@@ -156,7 +156,7 @@ class CircularCalendar extends GetView<HomeController> {
     return (360 * 0.87 / count);
   }
 
-  _panHandler(DragUpdateDetails d) async {
+  void _panHandler(DragUpdateDetails d) async {
     if (!controller.updating) {
       /// Pan location on the wheel
       bool onTop = d.localPosition.dy <= size / 2;
@@ -216,7 +216,7 @@ class CircularCalendar extends GetView<HomeController> {
     return number * (pi / 180);
   }
 
-  _resetUpdating() async {
+  void _resetUpdating() async {
     controller.updating = false;
     await wait(milliseconds: 100);
   }

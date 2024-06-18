@@ -17,6 +17,7 @@ class WelcomeSigninButton extends StatelessWidget {
       onPressed: () => controller.onTapSignin(),
       child: const TitleLarge(
         "INIZIAMO!",
+        letterSpacing: 2,
       ).applyShaders(context),
     );
   }

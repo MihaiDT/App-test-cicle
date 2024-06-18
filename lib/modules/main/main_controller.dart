@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/braze.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/controllers/advices_controller.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
@@ -51,9 +52,30 @@ class MainController extends GetxController {
     super.onInit();
 
     _lazyInit(tabIndex);
+    _initSurveyTutorial();
 
     sendBrazeData();
   }
+
+  void _initSurveyTutorial() {
+    HiveManager.showSecondTutorialAccess = false;
+
+    if (!HiveManager.isFirstTutorialWatched) {
+      // First access
+      HiveManager.initNumberOfAccess();
+    }
+
+    HiveManager.numberOfAccess += 1;
+
+    /// Viene mostrata i primi 3 accessi in app, però SOLO 1 volta al giorno.
+    /// I primi 3 accessi partono dal 2' accesso in modo da non sovrapporsi al tutorial.
+    if (HiveManager.numberOfAccess == 1 && showWelcomeQuizSection) {
+      HiveManager.showSurveyTutorial = true;
+    }
+  }
+
+  bool get showWelcomeQuizSection =>
+      appController.user.value?.isWelcomeQuizCompleted == false;
 
   @override
   void onReady() {

@@ -68,4 +68,6 @@ class ThemeImage {
   static const String avatar3 = '$folderPath/avatar_3.webp';
 
   static const String cherryHomeBox = '$folderPath/cherry_home_box.webp';
+
+  static const String tutorialTap = '$folderPath/tutorial_tap.png';
 }

@@ -301,6 +301,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     diaryConsentsUpdated.value = true;
     diaryConsentsUpdated.refresh();
 
+    saveSymptoms();
+
     // Force the view refreshing
     selectedTab.refresh();
     jumpToToday();

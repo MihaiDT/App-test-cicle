@@ -90,17 +90,19 @@ class CalendarPage extends GetView<CalendarController> {
           Obx(
             () => Visibility(
               visible: controller.showSaveButtonSymptoms,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: PrimaryButton(
-                    child: const TitleLarge(
-                      'SALVA',
+              child: SafeArea(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: PrimaryButton(
+                      child: const TitleLarge(
+                        'SALVA',
+                      ),
+                      onPressed: () {
+                        controller.saveSymptoms();
+                      },
                     ),
-                    onPressed: () {
-                      controller.saveSymptoms();
-                    },
                   ),
                 ),
               ),
