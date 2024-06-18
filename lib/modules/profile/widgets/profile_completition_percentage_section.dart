@@ -23,7 +23,7 @@ class ProfileCompletionPercentageSection
               Get.toNamed(Routes.changeProfilePage);
             },
             color: Colors.white,
-            borderColor: Colors.white.withOpacity(0.3),
+            borderColor: Colors.white.withOpacity(0.6),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 24,

@@ -92,7 +92,7 @@ class PrizesPage extends GetView<PrizesController> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2.5),
                       child: TitleLarge(
-                        "(${controller.numberOfMissions})",
+                        "(${controller.missions.length})",
                         color: ThemeColor.darkBlue,
                       ),
                     ),
@@ -113,10 +113,12 @@ class PrizesPage extends GetView<PrizesController> {
                         child: SizedBox(
                           width: _missionContainerSize,
                           child: MissionContainer.withBorder(
-                            onTap: () =>
-                                controller.navigateToMissionDetails(index),
+                            onTap: () => controller.navigateToMissionDetails(
+                              controller.missions[index],
+                            ),
                             mission: controller.missions[index],
-                            borderColor: const Color(0xffd7c3e8),
+                            borderColor:
+                                const Color(0xffF5F5F5).withOpacity(0.6),
                           ),
                         ),
                       );
@@ -136,16 +138,16 @@ class PrizesPage extends GetView<PrizesController> {
                   text: "TUTTE LE MISSIONI",
                 ),
               ),
+              ThemeSizedBox.height40,
 
               /// LUCKY LINES
-              Container(
-                color: Colors.white.withOpacity(0.5),
-                child: Image.asset(
-                  "assets/images/lotteria.png",
-                ),
+              Image.asset(
+                "assets/images/lotteria.png",
               ),
               ThemeSizedBox.height40,
               const SurveySection(),
+              ThemeSizedBox.height40,
+
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: ThemeSize.paddingSmall,

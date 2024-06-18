@@ -12,8 +12,6 @@ class MissionsPage extends GetView<MissionsController> {
     super.key,
   });
 
-  static final double _containerHeight = Get.height * 0.35;
-
   @override
   Widget build(BuildContext context) {
     return AppScaffoldPage(
@@ -48,14 +46,13 @@ class MissionsPage extends GetView<MissionsController> {
             ),
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: controller.missions.length,
+            itemCount: controller.completedMission.length,
             itemBuilder: (context, index) {
-              return SizedBox(
-                height: _containerHeight,
-                child: MissionContainer(
-                  onTap: () => controller.navigateToMissionDetails(index),
-                  mission: controller.missions[index],
+              return MissionContainer(
+                onTap: () => controller.navigateToMissionDetails(
+                  controller.completedMission[index],
                 ),
+                mission: controller.completedMission[index],
               );
             },
             separatorBuilder: (context, index) => ThemeSizedBox.height16,

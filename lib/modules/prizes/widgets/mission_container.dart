@@ -27,9 +27,6 @@ class MissionContainer extends StatelessWidget {
     super.key,
   });
 
-  static const double _borderRadius = 20.0;
-  static const double _borderWidth = 4.0;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -38,24 +35,10 @@ class MissionContainer extends StatelessWidget {
           ? ElevatedCard.withBorder(
               gradientBorder: gradientBorder,
               borderColor: borderColor,
-              child: Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      _borderRadius - _borderWidth,
-                    ),
-                  ),
-                ),
-                child: _mainContent,
-              ),
+              child: _mainContent,
             )
           : ElevatedCard(
-              child: Container(
-                color: Colors.white,
-                child: _mainContent,
-              ),
+              child: _mainContent,
             ),
     );
   }
@@ -68,7 +51,6 @@ class MissionContainer extends StatelessWidget {
               Image.network(
                 mission.imageUrl,
                 fit: BoxFit.cover,
-                height: 130,
               ),
               Padding(
                 padding: const EdgeInsets.all(

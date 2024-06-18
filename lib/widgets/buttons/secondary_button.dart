@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/helpers/keyboard.dart';
 
 class SecondaryButton extends StatelessWidget {
   final ButtonSize buttonSize;
   final Widget child;
   final VoidCallback? onPressed;
   final bool? small;
-  final bool? boxShadowVisible;
+  final bool boxShadowVisible;
 
   const SecondaryButton({
     this.buttonSize = ButtonSize.h56,
     required this.child,
     required this.onPressed,
     this.small,
-    this.boxShadowVisible,
+    this.boxShadowVisible = true,
     super.key,
   });
 
@@ -22,7 +21,7 @@ class SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: (boxShadowVisible ?? true)
+        boxShadow: boxShadowVisible
             ? [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.2),
@@ -34,10 +33,7 @@ class SecondaryButton extends StatelessWidget {
             : null,
       ),
       child: ElevatedButton(
-        onPressed: () {
-          dismissKeyboard(context);
-          onPressed != null ? onPressed!() : () => {};
-        },
+        onPressed: onPressed,
         style: ButtonStyle(
           minimumSize: WidgetStateProperty.all(
             Size(0, buttonSize.toDouble),

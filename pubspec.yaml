@@ -47,14 +47,14 @@ dependencies:
   flutter_flavorizr: ^2.2.1
   
   # This package automatically generates iOS, Android, and Web-native code for customizing this native splash screen background color and splash image.
-  flutter_native_splash: ^2.3.5
+  flutter_native_splash: ^2.4.0
   share_plus: ^9.0.0
 
   # A Flutter plugin to store data in secure storage:
   # Keychain is used for iOS
   # AES encryption is used for Android. AES secret key is encrypted with RSA and RSA key is stored in KeyStore
   # With V5.0.0 we can use EncryptedSharedPreferences on Android by enabling it in the Android Options like so:
-  flutter_secure_storage: ^9.0.0
+  flutter_secure_storage: ^9.2.2
 
 
   # flutter_piwikpro: ^1.1.0
@@ -78,8 +78,6 @@ dependencies:
   
   # Various borders that use gradient instead of boring plain colors.
   gradient_borders: ^1.0.0
-  http_interceptor: ^2.0.0-beta.7
-  horizontal_blocked_scroll_physics: ^4.0.1
   flutter_inappwebview: ^6.0.0
   
   # Provides internationalization and localization facilities, including message translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
@@ -116,9 +114,6 @@ dependencies:
 
   #A container with a dotted border
   dotted_border: ^2.1.0
-  
-  # Create awesome and powerful modal bottom sheets.
-  modal_bottom_sheet: ^3.0.0-pre
 
   # Easy to use, reliable and lightweight gesture detector for Flutter apps. Exposes simple API to react to basic gestures.
   simple_gesture_detector: ^0.2.0
@@ -139,7 +134,7 @@ dependencies:
 
   # webview_flutter: ^4.4.2
 
-  
+
 
   flutter_share: ^2.0.0
   flutter_keyboard_visibility: ^6.0.0
@@ -167,7 +162,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   #isar_generator:  # Code generator for the Isar Database
 
-#dependency_overrides:
+  #dependency_overrides:
   #analyzer: ^6.4.1
   #meta: ^1.11.0
 

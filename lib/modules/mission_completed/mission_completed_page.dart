@@ -9,7 +9,6 @@ import 'package:lines/widgets/buttons/primary_loading_button.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
-import 'package:lottie/lottie.dart';
 
 class MissionCompletedPage extends GetView<MissionCompletedController> {
   const MissionCompletedPage({
@@ -141,9 +140,5 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
     );
   }
 
-  String? get _prizeImage =>
-      (appController.missions.value?[appController.selectedMissionIndex])
-          ?.prizeImage;
-
-  Widget get _animation => Lottie.asset('assets/lottie/mission_completed.json');
+  String? get _prizeImage => controller.mission?.prizeImage;
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-
 import 'package:lines/core/app_theme.dart';
 
 class ElevatedCard extends StatelessWidget {
@@ -16,7 +15,7 @@ class ElevatedCard extends StatelessWidget {
     super.key,
     required this.child,
     this.backgroundImage,
-    this.color,
+    this.color = Colors.white,
     this.margin,
     this.onPressed,
   })  : borderColor = null,
@@ -28,7 +27,7 @@ class ElevatedCard extends StatelessWidget {
     this.borderColor,
     this.gradientBorder,
     this.backgroundImage,
-    this.color,
+    this.color = Colors.white,
     this.margin,
     this.onPressed,
   }) : assert(
@@ -42,9 +41,7 @@ class ElevatedCard extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         margin: margin,
-        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: color,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -65,9 +62,15 @@ class ElevatedCard extends StatelessWidget {
                       width: 4,
                     )
                   : null,
-          image: backgroundImage,
         ),
-        child: child,
+        child: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: child,
+        ),
       ),
     );
   }

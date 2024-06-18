@@ -837,14 +837,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-  horizontal_blocked_scroll_physics:
-    dependency: "direct main"
-    description:
-      name: horizontal_blocked_scroll_physics
-      sha256: "0ad4bdefe1b78d83562eb1fea270153eb6e3693c9aff683451e3de65668c7bbd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1"
   html:
     dependency: transitive
     description:
@@ -861,14 +853,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
-  http_interceptor:
-    dependency: "direct main"
-    description:
-      name: http_interceptor
-      sha256: fc7eedc62433c17612bf65237a8aa2615553cc9130f1e4d75f7e5fa364d5232e
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0-beta.8"
   http_multi_server:
     dependency: transitive
     description:
@@ -1061,14 +1045,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  modal_bottom_sheet:
-    dependency: "direct main"
-    description:
-      name: modal_bottom_sheet
-      sha256: eac66ef8cb0461bf069a38c5eb0fa728cee525a531a8304bd3f7b2185407c67e
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   nm:
     dependency: transitive
     description:

@@ -9,17 +9,16 @@ class MissionRowSectionController extends GetxController {
 
   double get missionContainerSize => Get.height * 0.3;
 
-  void navigateToMissionDetails(int missionIndex) {
-    appController.selectedMissionIndex = missionIndex;
-
+  void navigateToMissionDetails(Mission currentMission) {
     PiwikManager.trackEvent(
       PiwikEventType.mission,
       action: 'select mission',
-      name: missions[missionIndex].title,
+      name: currentMission.title,
     );
 
     Get.toNamed(
       Routes.missionsDetailsPage,
+      arguments: currentMission,
     );
   }
 }

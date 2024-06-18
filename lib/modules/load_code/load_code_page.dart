@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/models/mission.dart';
 import 'package:lines/modules/info/widgets/info_where_to_find_the_code_bottomsheet..dart';
 import 'package:lines/modules/load_code/controllers/load_code_controller.dart';
 import 'package:lines/modules/missions/widgets/missions_loaded_products.dart';
@@ -64,10 +62,10 @@ class LoadCodePage extends GetView<LoadCodeController> {
             ),
             child: Column(
               children: [
-                if (_mission != null) ...[
+                if (controller.mission != null) ...[
                   ThemeSizedBox.height24,
                   TitleMedium(
-                    "FINO AL ${_mission!.endAt}",
+                    "FINO AL ${controller.mission!.endAt}",
                     color: ThemeColor.brightPink,
                     textAlign: TextAlign.center,
                   ),
@@ -77,7 +75,7 @@ class LoadCodePage extends GetView<LoadCodeController> {
                       horizontal: 0,
                     ),
                     child: HeadlineLarge(
-                      _mission!.description,
+                      controller.mission!.description,
                       color: ThemeColor.darkBlue,
                       textAlign: TextAlign.center,
                     ),
@@ -89,14 +87,14 @@ class LoadCodePage extends GetView<LoadCodeController> {
                       horizontal: 0,
                     ),
                     child: MissionsLoadedProducts(
-                      text: _missionLoadedProductsText(),
-                      products: _mission!.loadedProducts,
-                      totalCodes: _mission!.totalCounter,
+                      text: _missionLoadedProductsText,
+                      products: controller.mission!.loadedProducts,
+                      totalCodes: controller.mission!.totalCounter,
                       showBottomLink: true,
                     ),
                   ),
                 ],
-                if (_mission == null) ...[
+                if (controller.mission == null) ...[
                   const DisplayMedium(
                     "Ottieni i Coins",
                   ).applyShaders(context),
@@ -141,15 +139,11 @@ class LoadCodePage extends GetView<LoadCodeController> {
   }
 
   String get _title =>
-      appController.selectedMissionIndex != -1 ? "MISSIONI" : "CARICA CODICE";
+      controller.mission != null ? "MISSIONI" : "CARICA CODICE";
 
-  Mission? get _mission => (appController.selectedMissionIndex != -1)
-      ? appController.missions.value![appController.selectedMissionIndex]
-      : null;
-
-  String _missionLoadedProductsText() {
-    if (_mission!.totalCounter > 1) {
-      return "Inserisci i ${_mission!.totalCounter} codici per completare la missione";
+  String get _missionLoadedProductsText {
+    if (controller.mission != null && controller.mission!.totalCounter > 1) {
+      return "Inserisci i ${controller.mission!.totalCounter} codici per completare la missione";
     }
 
     return "Inserisci 1 codice per completare la missione";

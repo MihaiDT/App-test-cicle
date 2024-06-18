@@ -68,7 +68,7 @@ class ConsentsPage extends GetView<ConsentsController> {
             ),
           ),
           const Divider(),
-          if ((appController.user.value?.age ?? 0) > 17) ...[
+          if (appController.user.value?.hasMoreThan18Years == false) ...[
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 8,

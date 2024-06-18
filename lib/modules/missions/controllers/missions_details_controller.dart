@@ -1,8 +1,12 @@
 import 'package:get/get.dart';
+import 'package:lines/data/models/mission.dart';
 
 class MissionsDetailsController extends GetxController {
+  late final Mission selectedMission;
+
   @override
-  Future<void> onReady() async {
-    super.onReady();
+  void onInit() {
+    selectedMission = Get.arguments as Mission;
+    super.onInit();
   }
 }
