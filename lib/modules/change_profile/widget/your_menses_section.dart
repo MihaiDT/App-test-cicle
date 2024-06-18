@@ -41,7 +41,7 @@ class YourMensesSection extends GetView<YourMensesSectionController> {
             ),
             ThemeSizedBox.height8,
             InformationTile(
-              title: "Sintomi",
+              title: "Durata del ciclo",
               value: controller.periodDuration.toString(),
               onTap: () {
                 Get.toNamed(Routes.yourMensesStatsPage);
