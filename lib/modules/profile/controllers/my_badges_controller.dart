@@ -27,10 +27,6 @@ class MyBadgesController extends GetxController {
   }
 
   RxBool get showBadgesSection {
-    print("badges.isNotEmpty");
-    print(badges.isNotEmpty);
-    print("!isLoading.value");
-    print(!isLoading.value);
     return (badges.isNotEmpty && !isLoading.value).obs;
   }
 
