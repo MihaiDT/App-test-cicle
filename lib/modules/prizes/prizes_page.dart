@@ -100,31 +100,37 @@ class PrizesPage extends GetView<PrizesController> {
                 ),
               ),
               ThemeSizedBox.height12,
-              SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    controller.missions.length,
-                    (index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: SizedBox(
-                          width: _missionContainerSize,
-                          child: MissionContainer.withBorder(
-                            onTap: () => controller.navigateToMissionDetails(
-                              controller.missions[index],
+              Obx(
+                () {
+                  return SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        controller.missions.length,
+                        (index) {
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 4.0),
+                            child: SizedBox(
+                              width: _missionContainerSize,
+                              child: MissionContainer.withBorder(
+                                onTap: () =>
+                                    controller.navigateToMissionDetails(
+                                  controller.missions[index],
+                                ),
+                                mission: controller.missions[index],
+                                borderColor:
+                                    const Color(0xffF5F5F5).withOpacity(0.6),
+                              ),
                             ),
-                            mission: controller.missions[index],
-                            borderColor:
-                                const Color(0xffF5F5F5).withOpacity(0.6),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
               ),
               ThemeSizedBox.height12,
               Padding(
