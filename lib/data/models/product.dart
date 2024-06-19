@@ -36,4 +36,16 @@ class Product {
   String toString() {
     return 'Product(imageUrl: $imageUrl, isNight: $isNight, name: $name, points: $points, category: $category)';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Product &&
+        other.imageUrl == imageUrl &&
+        other.isNight == isNight &&
+        other.name == name &&
+        other.points == points &&
+        other.category == category;
+  }
 }
