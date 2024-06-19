@@ -29,7 +29,6 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: TransparentAppBar(
-        onBackPressed: () => appController.selectedMissionIndex = -1,
         backButtonColor: ThemeColor.darkBlue,
         title: const TitleMedium(
           "MISSIONI",
