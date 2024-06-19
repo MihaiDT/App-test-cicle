@@ -21,7 +21,9 @@ class ProductService {
   }
 
   static Future<void> get mission async {
-    appController.missions.responseHandler = ResponseHandler.pending();
+    appController.missions.responseHandler = ResponseHandler.pending(
+      content: appController.missions.value,
+    );
     try {
       final response = await dio.get(
         "/missions",
