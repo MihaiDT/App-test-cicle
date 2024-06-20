@@ -152,6 +152,9 @@ dependencies:
 
   sentry_flutter: ^8.2.0
 
+  flutter_markdown: ^0.7.2+1
+
+
 
 
 dev_dependencies:
