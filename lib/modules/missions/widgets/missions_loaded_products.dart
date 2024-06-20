@@ -47,11 +47,13 @@ class MissionsLoadedProducts extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(
-                loadedProducts.length,
-                (index) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: loadedProducts[index],
-                ),
+                totalCodes,
+                (index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: loadedProducts[index],
+                  );
+                },
               ),
             ),
           ),

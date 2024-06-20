@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/mission.dart';
+import 'package:lines/data/models/uploaded_product.dart';
 import 'package:lines/modules/info/widgets/info_bottom_sheet.dart';
 import 'package:lines/modules/mission_completed/arguments/mission_completed_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
@@ -11,11 +12,12 @@ import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class LoadCodeController extends GetxController {
-  late final int? missionId;
-  late final Mission? mission = Get.arguments as Mission?;
+  Rx<Mission?> selectedMission =
+      appController.missionCompletedArguments.value.mission.obs;
 
-  LoadCodeController() {
-    missionId = mission?.id;
+  @override
+  void onInit() {
+    super.onInit();
 
     ever(
       appController.uploadedProduct.rxValue,
@@ -45,22 +47,33 @@ class LoadCodeController extends GetxController {
 
           isPending.value = false;
 
+          /// Update the state of the app
+          updateState(
+            uploadedProductResponse.content,
+            selectedMission.value,
+          );
+
           if (uploadedProductResponse.content!.prizeOrderCreated) {
             Get.offNamed(
               Routes.missionCompleted,
-              arguments: MissionCompletedArguments(
-                uploadedProduct: uploadedProductResponse.content!,
-                mission: mission,
-              ),
             );
           } else {
             Get.offNamed(
               Routes.loadCodeResultsPage,
-              arguments: uploadedProductResponse.content,
             );
           }
         }
       },
+    );
+  }
+
+  void updateState(
+    UploadedProduct? uploadedProduct,
+    Mission? mission,
+  ) {
+    appController.missionCompletedArguments.value = MissionCompletedArguments(
+      uploadedProduct: uploadedProduct,
+      mission: mission,
     );
   }
 
@@ -83,7 +96,7 @@ class LoadCodeController extends GetxController {
       final String upperCaseCode = writtenCode.value.toUpperCase();
       await ProductService.loadCode(
         upperCaseCode,
-        mission?.id,
+        selectedMission.value!.id,
       );
     }
   }

@@ -10,18 +10,28 @@ import 'package:lines/widgets/coin/app_coin.dart';
 import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class MissionCompletedController extends GetxController {
-  late final UploadedProduct uploadedProduct;
-  late final Mission? mission;
+  final Rx<MissionCompletedArguments> args =
+      appController.missionCompletedArguments;
 
   @override
   void onInit() {
     super.onInit();
-    MissionCompletedArguments args = Get.arguments as MissionCompletedArguments;
 
-    uploadedProduct = args.uploadedProduct;
-    mission = args.mission;
+    final Mission? mission = appController.missions.value?.firstWhereOrNull(
+      (element) => element.id == args.value.mission?.id,
+    );
+    final UploadedProduct? uploadedProduct = args.value.uploadedProduct;
 
-    showNotification();
+    appController.missionCompletedArguments.value = MissionCompletedArguments(
+      uploadedProduct: uploadedProduct,
+      mission: mission,
+    );
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    print("MissionCompletedController onReady()");
   }
 
   Future<void> showNotification() async {

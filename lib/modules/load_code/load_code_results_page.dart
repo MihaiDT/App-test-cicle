@@ -52,7 +52,7 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
           ),
         ),
         child: CompletedMissionCard(
-          uploadedProduct: controller.argument,
+          uploadedProduct: controller.argument.uploadedProduct!,
         ),
       ),
     );
