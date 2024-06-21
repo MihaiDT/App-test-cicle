@@ -4,6 +4,8 @@ import 'package:lines/modules/mission_completed/mission_completed_controller.dar
 class MissionCompletedBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(MissionCompletedController());
+    Get.lazyPut(
+      () => MissionCompletedController(),
+    );
   }
 }

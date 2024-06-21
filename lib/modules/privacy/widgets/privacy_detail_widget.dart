@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/forms/rounded_checkbox.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PrivacyDetailWidget extends StatelessWidget {
   final String title;
@@ -40,8 +42,26 @@ class PrivacyDetailWidget extends StatelessWidget {
                   title,
                 ),
                 ThemeSizedBox.height8,
-                BodyMedium(
-                  description,
+                MarkdownBody(
+                  data: description,
+                  styleSheet: MarkdownStyleSheet(
+                    a: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Colors.white,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.white,
+                        ),
+                    p: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Colors.white),
+                  ),
+                  onTapLink: (text, href, title) {
+                    launchUrl(
+                      Uri.parse(
+                        "https://lines.it/informativa-privacy/app-my-lines",
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

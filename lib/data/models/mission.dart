@@ -18,8 +18,6 @@ class Mission {
   final String? endAt;
   final int id;
   final String imageUrl;
-  final bool isCompleted;
-
   final int totalCounter;
 
   final List<Product> products;
@@ -39,7 +37,6 @@ class Mission {
     this.endAt = "",
     required this.id,
     required this.imageUrl,
-    required this.isCompleted,
     required this.totalCounter,
     required this.products,
     required this.loadedProducts,
@@ -60,7 +57,6 @@ class Mission {
       endAt: json['end_at'],
       id: json['id'],
       imageUrl: json['image_url'],
-      isCompleted: json['is_completed'],
       totalCounter: json['total_counter'],
       products: List<Product>.from(
         json['products'].map(
@@ -95,4 +91,6 @@ class Mission {
   @override
   String toString() =>
       'Mission(code: $code, completed_counter: $completeCounter, title: $title, description: $description,description2: $description2,shortDescription: $shortDescription, id: $id, image_url: $imageUrl, is_completed: $isCompleted, total_counter: $totalCounter, products: $products)';
+
+  bool get isCompleted => loadedProducts.length >= totalCounter;
 }

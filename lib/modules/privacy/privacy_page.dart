@@ -55,7 +55,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                     PrivacyDetailWidget(
                       title: "Resta aggiornato sul mondo Lines",
                       description:
-                          "Vuoi conoscere tutte le novità che Lines sta pensando per te? Ricevi comunicazioni su Lines e permettici di svolgere ricerche di mercato, come da [informativa privacy].",
+                          "Vuoi conoscere tutte le novità che Lines sta pensando per te? Ricevi comunicazioni su Lines e permettici di svolgere ricerche di mercato, come da [informativa privacy]().",
                       onChanged: (value) {
                         controller.firstAccepted.value = value;
                       },
@@ -67,7 +67,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                       PrivacyDetailWidget(
                         title: "Contenuti e missioni personalizzate per te!",
                         description:
-                            "Per noi è importante conoscere i tuoi interessi! Permettici di offrirti un'esperienza personalizzata inviandoti contenuti, comunicazioni e promozioni non generiche su Lines, e se lo vorrai, sugli altri marchi della famiglia Fater e sui nostri partner terzi, e di individuare nuovi contatti simili al tuo profilo, come da informativa privacy.",
+                            "Per noi è importante conoscere i tuoi interessi! Permettici di offrirti un'esperienza personalizzata inviandoti contenuti, comunicazioni e promozioni non generiche su Lines, e se lo vorrai, sugli altri marchi della famiglia Fater e sui nostri partner terzi, e di individuare nuovi contatti simili al tuo profilo, come da [informativa privacy]().",
                         onChanged: (value) {
                           controller.secondAccepted.value = value;
                         },
@@ -78,7 +78,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                     PrivacyDetailWidget(
                       title: "Non perdere le novità su altri prodotti",
                       description:
-                          "Ricevi comunicazioni sugli altri brand della famiglia Fater e sui nostri partner terzi e permettici di svolgere ricerche di mercato, come da informativa privacy.",
+                          "Ricevi comunicazioni sugli altri brand della famiglia Fater e sui nostri partner terzi e permettici di svolgere ricerche di mercato, come da [informativa privacy]().",
                       onChanged: (value) {
                         controller.thirdAccepted.value = value;
                       },

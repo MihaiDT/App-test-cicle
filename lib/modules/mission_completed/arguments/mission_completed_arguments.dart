@@ -3,10 +3,17 @@ import 'package:lines/data/models/uploaded_product.dart';
 
 class MissionCompletedArguments {
   final Mission? mission;
-  final UploadedProduct uploadedProduct;
+  final UploadedProduct? uploadedProduct;
 
   MissionCompletedArguments({
     this.mission,
-    required this.uploadedProduct,
+    this.uploadedProduct,
   });
+
+  factory MissionCompletedArguments.initial() {
+    return MissionCompletedArguments(
+      mission: null,
+      uploadedProduct: null,
+    );
+  }
 }

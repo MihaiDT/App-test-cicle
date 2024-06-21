@@ -18,7 +18,7 @@ class AcceptConsentController extends GetxController {
     await AuthenticationService.completeUserRegistration(
       appController.updateUserParameters,
     );
-    if (HiveManager.isFirstTutorialWatched) {
+    if (!HiveManager.isFirstTutorialWatched) {
       Get.offAndToNamed(Routes.welcomeWalkthrough);
     } else {
       Get.offAllNamed(Routes.main);

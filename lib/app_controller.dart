@@ -24,6 +24,7 @@ import 'package:lines/data/models/update_password.dart';
 import 'package:lines/data/models/uploaded_product.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/data/models/validate_referral_code.dart';
+import 'package:lines/modules/mission_completed/arguments/mission_completed_arguments.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
@@ -88,6 +89,7 @@ class AppController extends GetxController {
   EasyGetter<UpdatePassword> updatePassword;
   EasyGetter<AdvicesArticle> singleArticle;
   EasyGetter<ValidateReferralCode> validateReferralCode;
+  Rx<MissionCompletedArguments> missionCompletedArguments;
   EasyGetter<UploadedProduct> uploadedProduct;
 
   /// Determine if the user is trying to log in or sign up
@@ -96,14 +98,6 @@ class AppController extends GetxController {
   final RxBool showLockPage;
 
   final RxBool hasUsedDeepLink;
-
-  /// Missions
-  RxInt rxSelectedMissionIndex = RxInt(-1);
-
-  int get selectedMissionIndex => rxSelectedMissionIndex.value;
-
-  set selectedMissionIndex(int newValue) =>
-      rxSelectedMissionIndex.value = newValue;
 
   AppController._({
     required this.periodMap,
@@ -133,6 +127,7 @@ class AppController extends GetxController {
     required this.symptomsDiaries,
     required this.sendConfirmEmail,
     required this.updatePassword,
+    required this.missionCompletedArguments,
     required this.uploadedProduct,
     required this.badges,
     required this.hasUsedDeepLink,
@@ -168,6 +163,7 @@ class AppController extends GetxController {
       updatePassword: EasyGetter<UpdatePassword>(),
       singleArticle: EasyGetter<AdvicesArticle>(),
       validateReferralCode: EasyGetter<ValidateReferralCode>(),
+      missionCompletedArguments: MissionCompletedArguments.initial().obs,
       uploadedProduct: EasyGetter<UploadedProduct>(),
       isLoginFlow: false.obs,
       showLockPage: false.obs,
@@ -203,6 +199,7 @@ class AppController extends GetxController {
     updatePassword = EasyGetter<UpdatePassword>();
     singleArticle = EasyGetter<AdvicesArticle>();
     validateReferralCode = EasyGetter<ValidateReferralCode>();
+    missionCompletedArguments = MissionCompletedArguments.initial().obs;
     uploadedProduct = EasyGetter<UploadedProduct>();
     isLoginFlow.value = false;
     showLockPage.value = false;

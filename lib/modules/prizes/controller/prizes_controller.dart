@@ -7,7 +7,7 @@ import 'package:lines/routes/routes.dart';
 class PrizesController extends GetxController {
   int get totalCoins => appController.user.value?.coinsCollected ?? 0;
 
-  List<Mission> get missions => appController.missions.value ?? [];
+  RxList<Mission> get missions => (appController.missions.value ?? []).obs;
 
   void navigateToMissionDetails(Mission currentMission) {
     PiwikManager.trackEvent(

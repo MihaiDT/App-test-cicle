@@ -73,9 +73,9 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
                       angle: -3 *
                           (3.141592653589793 /
                               180), // Converti i gradi in radianti
-                      child: _prizeImage != null
+                      child: controller.args.value.mission?.prizeImage != null
                           ? Image.network(
-                              _prizeImage!,
+                              controller.args.value.mission!.prizeImage!,
                               fit: BoxFit.scaleDown,
                               width: Get.width * 0.55,
                             )
@@ -139,6 +139,4 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
       ),
     );
   }
-
-  String? get _prizeImage => controller.mission?.prizeImage;
 }

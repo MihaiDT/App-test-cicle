@@ -33,7 +33,7 @@ class ThemeImage {
   static const String moneyPile = '$folderPath/money_pile.webp';
   static const String welcomeEmail = '$folderPath/welcome_email.webp';
   static const String ginecologa = '$folderPath/ginecologa.webp';
-  static const String badge = '$folderPath/badge.webp';
+  static const String badge = '$folderPath/badge.png';
   static const String questionMarksGroup =
       '$folderPath/question_marks_group.webp';
   static const String loadCode = '$folderPath/load_code.webp';

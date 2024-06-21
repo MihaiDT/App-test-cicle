@@ -48,6 +48,7 @@ class SurveyService {
     Question question,
   ) async {
     try {
+      appController.survey.responseHandler = ResponseHandler.pending();
       appController.question.responseHandler = ResponseHandler.pending();
 
       final String surveyId = survey.id;
@@ -67,6 +68,7 @@ class SurveyService {
       _saveQuestion(response);
     } catch (e) {
       appController.survey.responseHandler = ResponseHandler.failed();
+      appController.question.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
     }
   }

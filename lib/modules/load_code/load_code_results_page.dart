@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/navigator_extension.dart';
 import 'package:lines/modules/load_code/controllers/load_code_result_controller.dart';
 import 'package:lines/modules/load_code/widgets/completed_mission_card.dart';
 import 'package:lines/routes/routes.dart';
@@ -39,7 +40,10 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
           ),
           child: PrimaryButton(
             onPressed: () {
-              Get.until((route) => Get.currentRoute == Routes.main);
+              Navigator.of(context).pushNamedAndRemoveUntilSpecifiedRoute(
+                routeName: Routes.infoDropdownResultsPage,
+                routeNameToRemoveUntil: Routes.main,
+              );
             },
             child: const TitleLarge(
               "CHIUDI",
@@ -48,7 +52,7 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
           ),
         ),
         child: CompletedMissionCard(
-          uploadedProduct: controller.argument,
+          uploadedProduct: controller.argument.uploadedProduct!,
         ),
       ),
     );

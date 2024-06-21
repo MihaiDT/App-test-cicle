@@ -31,119 +31,127 @@ class LoadCodePage extends GetView<LoadCodeController> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: InkWell(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: BottomWidgetLayout(
-            scrollableAreaPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-            bottomWidget: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: ThemeSize.paddingLarge,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Obx(
-                    () => PrimaryLoadingButton(
-                      isLoading: controller.isPending.value,
-                      onPressed:
-                          controller.canProceed ? controller.onConfirm : null,
-                      child: const TitleLarge(
-                        "CONFERMA",
+      body: Obx(
+        () {
+          return SafeArea(
+            child: InkWell(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+              },
+              child: BottomWidgetLayout(
+                scrollableAreaPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
+                bottomWidget: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: ThemeSize.paddingLarge,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Obx(
+                        () => PrimaryLoadingButton(
+                          isLoading: controller.isPending.value,
+                          onPressed: controller.canProceed
+                              ? controller.onConfirm
+                              : null,
+                          child: const TitleLarge(
+                            "CONFERMA",
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
+                child: Column(
+                  children: [
+                    if (controller.selectedMission.value != null) ...[
+                      ThemeSizedBox.height24,
+                      TitleMedium(
+                        "FINO AL ${controller.selectedMission.value!.endAt}",
+                        color: ThemeColor.brightPink,
+                        textAlign: TextAlign.center,
+                      ),
+                      ThemeSizedBox.height8,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 0,
+                        ),
+                        child: HeadlineLarge(
+                          controller.selectedMission.value!.description,
+                          color: ThemeColor.darkBlue,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      ThemeSizedBox.height16,
+                      Container(
+                        width: Get.width,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 0,
+                        ),
+                        child: MissionsLoadedProducts(
+                          text: _missionLoadedProductsText,
+                          products:
+                              controller.selectedMission.value!.loadedProducts,
+                          totalCodes:
+                              controller.selectedMission.value!.totalCounter,
+                          showBottomLink: true,
+                        ),
+                      ),
+                    ],
+                    if (controller.selectedMission.value == null) ...[
+                      const DisplayMedium(
+                        "Ottieni i Coins",
+                      ).applyShaders(context),
+                      ThemeSizedBox.height16,
+                      const BodyMedium(
+                        "Inserisci  il codice per ottenere subito dei Coins spendibili nella tua area dedicata.",
+                        color: ThemeColor.darkBlue,
+                        textAlign: TextAlign.center,
+                      ),
+                      ThemeSizedBox.height16,
+                      InkWell(
+                        onTap: () => controller.showBottomSheet(
+                          context,
+                          const InfoWhereToFindTheCodeBottomSheet(),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: const TitleMedium(
+                            "DOVE TROVO IL CODICE?",
+                            underline: true,
+                          ).applyShaders(context),
+                        ),
+                      ),
+                    ],
+                    ThemeSizedBox.height48,
+                    const TitleMedium(
+                      "CARICA CODICE",
+                      color: ThemeColor.darkBlue,
+                    ),
+                    ThemeSizedBox.height8,
+                    CodeTextfield(
+                      onChanged: (text) {
+                        controller.updateWrittenCode(text);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-            child: Column(
-              children: [
-                if (controller.mission != null) ...[
-                  ThemeSizedBox.height24,
-                  TitleMedium(
-                    "FINO AL ${controller.mission!.endAt}",
-                    color: ThemeColor.brightPink,
-                    textAlign: TextAlign.center,
-                  ),
-                  ThemeSizedBox.height8,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 0,
-                    ),
-                    child: HeadlineLarge(
-                      controller.mission!.description,
-                      color: ThemeColor.darkBlue,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  ThemeSizedBox.height16,
-                  Container(
-                    width: Get.width,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 0,
-                    ),
-                    child: MissionsLoadedProducts(
-                      text: _missionLoadedProductsText,
-                      products: controller.mission!.loadedProducts,
-                      totalCodes: controller.mission!.totalCounter,
-                      showBottomLink: true,
-                    ),
-                  ),
-                ],
-                if (controller.mission == null) ...[
-                  const DisplayMedium(
-                    "Ottieni i Coins",
-                  ).applyShaders(context),
-                  ThemeSizedBox.height16,
-                  const BodyMedium(
-                    "Inserisci  il codice per ottenere subito dei Coins spendibili nella tua area dedicata.",
-                    color: ThemeColor.darkBlue,
-                    textAlign: TextAlign.center,
-                  ),
-                  ThemeSizedBox.height16,
-                  InkWell(
-                    onTap: () => controller.showBottomSheet(
-                      context,
-                      const InfoWhereToFindTheCodeBottomSheet(),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: const TitleMedium(
-                        "DOVE TROVO IL CODICE?",
-                        underline: true,
-                      ).applyShaders(context),
-                    ),
-                  ),
-                ],
-                ThemeSizedBox.height48,
-                const TitleMedium(
-                  "CARICA CODICE",
-                  color: ThemeColor.darkBlue,
-                ),
-                ThemeSizedBox.height8,
-                CodeTextfield(
-                  onChanged: (text) {
-                    controller.updateWrittenCode(text);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
 
   String get _title =>
-      controller.mission != null ? "MISSIONI" : "CARICA CODICE";
+      controller.selectedMission.value != null ? "MISSIONI" : "CARICA CODICE";
 
   String get _missionLoadedProductsText {
-    if (controller.mission != null && controller.mission!.totalCounter > 1) {
-      return "Inserisci i ${controller.mission!.totalCounter} codici per completare la missione";
+    if (controller.selectedMission.value != null &&
+        controller.selectedMission.value!.totalCounter > 1) {
+      return "Inserisci i ${controller.selectedMission.value!.totalCounter} codici per completare la missione";
     }
 
     return "Inserisci 1 codice per completare la missione";
