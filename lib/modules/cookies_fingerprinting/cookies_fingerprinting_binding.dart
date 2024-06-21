@@ -4,6 +4,6 @@ import 'package:lines/modules/cookies_fingerprinting/cookies_fingerprinting_cont
 class CookiesFingerprintingBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(CookiesFingerprintingController());
+    Get.lazyPut(() => CookiesFingerprintingController());
   }
 }

@@ -4,10 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/api.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/core/helpers/secure_storage_manager.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -56,10 +54,7 @@ class DioInterceptor extends Interceptor {
   ) async {
     String token = await Get.find<SecureStorageManager>().getToken();
     if (err.response?.statusCode == 401 && token.isNotEmpty) {
-      await appController.user.value?.logout();
-      AuthenticationService.logout();
-      Get.find<SecureStorageManager>().clearToken();
-      HiveManager.removeUserId();
+      await AuthenticationService.logout();
       Get.offAllNamed(Routes.welcome);
     }
     super.onError(err, handler);

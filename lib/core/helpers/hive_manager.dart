@@ -110,28 +110,26 @@ class HiveManager {
     );
   }
 
-  static bool get hasAcceptedCookieProfiling {
+  static bool? get hasAcceptedCookieProfiling {
     return Hive.box(hiveBoxName)
-            .get(HiveReferenceKeys.hasAcceptedCookieProfiling.name) ??
-        false;
+        .get(HiveReferenceKeys.hasAcceptedCookieProfiling.name);
   }
 
-  static bool get hasAcceptedCookieStats {
-    return Hive.box(hiveBoxName)
-            .get(HiveReferenceKeys.hasAcceptedCookieStats.name) ??
-        false;
-  }
-
-  static set hasAcceptedCookieStats(bool hasAcceptedCookie) {
-    Hive.box(hiveBoxName)
-        .put(HiveReferenceKeys.hasAcceptedCookieStats.name, hasAcceptedCookie);
-  }
-
-  static set hasAcceptedCookieProfiling(bool hasAcceptedCookie) {
+  static set hasAcceptedCookieProfiling(bool? hasAcceptedCookie) {
     Hive.box(hiveBoxName).put(
       HiveReferenceKeys.hasAcceptedCookieProfiling.name,
       hasAcceptedCookie,
     );
+  }
+
+  static bool? get hasAcceptedCookieStats {
+    return Hive.box(hiveBoxName)
+        .get(HiveReferenceKeys.hasAcceptedCookieStats.name);
+  }
+
+  static set hasAcceptedCookieStats(bool? hasAcceptedCookie) {
+    Hive.box(hiveBoxName)
+        .put(HiveReferenceKeys.hasAcceptedCookieStats.name, hasAcceptedCookie);
   }
 
   static bool get hasAcceptedCookie {

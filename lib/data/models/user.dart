@@ -1,10 +1,6 @@
-import 'package:get/get.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
-import 'package:lines/core/helpers/secure_storage_manager.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/interest.dart';
 import 'package:lines/data/models/profile_completed_areas.dart';
-import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
 
 class User {
@@ -125,8 +121,11 @@ class User {
       isWelcomeQuizCompleted: json['user']['is_welcome_quiz_completed'],
       profileCompletionPercentage: json['user']['profile_percentage'],
       routeAfterLogin: json['user']['route_after_login'],
-      hasConsentCookieProfiling: json['user']['cookie_profiling'],
-      hasConsentCookieStats: json['user']['cookie_stats'],
+
+      /// The value of hasConsentCookieProfiling and hasConsentCookieStats is saved in DB
+      /// because the value in api can be not updated
+      hasConsentCookieProfiling: HiveManager.hasAcceptedCookieProfiling,
+      hasConsentCookieStats: HiveManager.hasAcceptedCookieStats,
       avatarPhase0ImgUrl: json['user']['phase_0_img_url'],
       avatarPhase1ImgUrl: json['user']['phase_1_img_url'],
       avatarPhase2ImgUrl: json['user']['phase_2_img_url'],
@@ -237,14 +236,4 @@ class User {
       avatarPhase1ImgUrl != null ||
       avatarPhase2ImgUrl != null ||
       avatarPhase3ImgUrl != null;
-
-  Future<void> logout() async {
-    await AuthenticationService.logout();
-    HiveManager.removeIsPastDateCalculated();
-    await Get.find<SecureStorageManager>().clearToken();
-    HiveManager.removeUserId();
-    HiveManager.removeAcceptedCookie();
-
-    appController.initializeState();
-  }
 }

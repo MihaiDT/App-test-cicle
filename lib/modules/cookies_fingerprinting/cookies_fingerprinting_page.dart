@@ -2,19 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/fullscreen_loader.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_size.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/cookies_fingerprinting/cookies_fingerprinting_controller.dart';
 import 'package:lines/modules/cookies_fingerprinting/widgets/agree_check_buttons.dart';
-import 'package:lines/repository/authentication_service.dart';
-import 'package:lines/repository/parameters_class/update_user_parameters.dart';
-import 'package:lines/routes/routes.dart';
-
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
@@ -201,10 +194,29 @@ class CookiesFingerprintingPage
                   ),
                 ),
                 ThemeSizedBox.height16,
-                AgreeCheckButtons(
-                  agree: HiveManager.hasAcceptedCookieStats,
-                  onChanged: (value) {
-                    HiveManager.hasAcceptedCookieStats = value;
+                Obx(
+                  () {
+                    return Row(
+                      children: [
+                        AgreeCheckButtons(
+                          value: true,
+                          groupValue: controller.hasAcceptedCookieStats?.value,
+                          text: "Acconsento",
+                          onChanged: (value) {
+                            controller.hasAcceptedCookieStats?.value = value;
+                          },
+                        ),
+                        ThemeSizedBox.width16,
+                        AgreeCheckButtons(
+                          value: false,
+                          groupValue: controller.hasAcceptedCookieStats?.value,
+                          text: "Non acconsento",
+                          onChanged: (value) {
+                            controller.hasAcceptedCookieStats?.value = value;
+                          },
+                        ),
+                      ],
+                    );
                   },
                 ),
                 ThemeSizedBox.height32,
@@ -314,48 +326,52 @@ class CookiesFingerprintingPage
                   ),
                 ),
                 ThemeSizedBox.height16,
-                AgreeCheckButtons(
-                  agree: HiveManager.hasAcceptedCookieProfiling,
-                  onChanged: (value) {
-                    HiveManager.hasAcceptedCookieProfiling = value;
+                Obx(
+                  () {
+                    return Row(
+                      children: [
+                        AgreeCheckButtons(
+                          value: true,
+                          groupValue:
+                              controller.hasAcceptedCookieProfiling?.value,
+                          onChanged: (value) {
+                            controller.hasAcceptedCookieProfiling?.value =
+                                value;
+                          },
+                          text: 'Acconsento',
+                        ),
+                        ThemeSizedBox.width16,
+                        AgreeCheckButtons(
+                          value: false,
+                          groupValue:
+                              controller.hasAcceptedCookieProfiling?.value,
+                          text: "Non acconsento",
+                          onChanged: (value) {
+                            controller.hasAcceptedCookieProfiling?.value =
+                                value;
+                          },
+                        ),
+                      ],
+                    );
                   },
                 ),
                 ThemeSizedBox.height40,
-                PrimaryButton(
-                  onPressed: () => navigateToNextPage(),
-                  child: const TitleLarge(
-                    "CONFERMA",
-                  ),
+                Obx(
+                  () {
+                    return PrimaryButton(
+                      onPressed: controller.hasChanged
+                          ? controller.navigateToNextPage
+                          : null,
+                      child: const TitleLarge(
+                        "CONFERMA",
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  void navigateToNextPage() {
-    Get.back();
-
-    if (controller.isEditing) {
-      _updateConsents();
-      Get.back();
-      showFullScreenLoader();
-    } else {
-      Get.offAndToNamed(
-        appController.isLoginFlow.value == true
-            ? Routes.login
-            : Routes.register,
-      );
-    }
-  }
-
-  Future<void> _updateConsents() async {
-    await AuthenticationService.updatePrivacy(
-      UpdateUserParameters(
-        hasConsentCookieProfiling: HiveManager.hasAcceptedCookieProfiling,
-        hasConsentCookieStats: HiveManager.hasAcceptedCookieStats,
       ),
     );
   }

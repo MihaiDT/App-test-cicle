@@ -6,12 +6,16 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lines/core/app_theme.dart';
 
 class AgreeCheckButtons extends StatefulWidget {
-  bool agree;
-  final void Function(bool) onChanged;
+  final bool? value;
+  final bool? groupValue;
+  final String text;
+  final void Function(bool?) onChanged;
 
-  AgreeCheckButtons({
+  const AgreeCheckButtons({
     super.key,
-    this.agree = false,
+    this.value,
+    required this.groupValue,
+    required this.text,
     required this.onChanged,
   });
 
@@ -22,49 +26,20 @@ class AgreeCheckButtons extends StatefulWidget {
 class _AgreeCheckButtonsState extends State<AgreeCheckButtons> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        _agreeButton(),
-        ThemeSizedBox.width16,
-        _notAgreeButton(),
-      ],
-    );
-  }
-
-  Widget _agreeButton() {
-    final border = !widget.agree
-        ? GradientBoxBorder(
-            gradient: ThemeGradient.primary,
-            width: 2,
-          )
-        : Border.all(
-            color: Colors.transparent,
-            width: 2,
-          );
-
-    final gradient = widget.agree
-        ? const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xFFB63AB4),
-              Color(0xFF513B9F),
-            ],
-          )
-        : null;
-
     return InkWell(
-      onTap: () => setState(() {
-        widget.agree = true;
-        widget.onChanged(true);
-      }),
+      onTap: () {
+        if (widget.groupValue == null) {
+          widget.onChanged(true);
+        } else {
+          widget.onChanged(widget.value);
+        }
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(60),
-          border: border,
+          border: border(_isSelected),
           color: Colors.white,
-          gradient: gradient,
+          gradient: gradient(_isSelected),
         ),
         padding: const EdgeInsets.only(
           left: 6,
@@ -75,11 +50,11 @@ class _AgreeCheckButtonsState extends State<AgreeCheckButtons> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            widget.agree
+            _isSelected
                 ? Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
-                      border: border,
+                      border: border(_isSelected),
                       color: Colors.white,
                     ),
                     height: 24,
@@ -96,34 +71,24 @@ class _AgreeCheckButtonsState extends State<AgreeCheckButtons> {
                 : Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
-                      border: border,
+                      border: border(_isSelected),
                       color: Colors.white,
                     ),
                     height: 24,
                     width: 24,
                   ),
             ThemeSizedBox.width8,
-            widget.agree
-                ? const TitleMedium("Acconsento")
-                : const TitleMedium("Acconsento").applyShaders(context),
+            _isSelected
+                ? TitleMedium(widget.text)
+                : TitleMedium(widget.text).applyShaders(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _notAgreeButton() {
-    final border = widget.agree
-        ? GradientBoxBorder(
-            gradient: ThemeGradient.primary,
-            width: 2,
-          )
-        : Border.all(
-            color: Colors.transparent,
-            width: 2,
-          );
-
-    final gradient = !widget.agree
+  LinearGradient? gradient(bool? isSelected) {
+    return isSelected == true
         ? const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -133,62 +98,19 @@ class _AgreeCheckButtonsState extends State<AgreeCheckButtons> {
             ],
           )
         : null;
-
-    return InkWell(
-      onTap: () => setState(() {
-        widget.agree = false;
-        widget.onChanged(false);
-      }),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(60),
-          border: border,
-          color: Colors.white,
-          gradient: gradient,
-        ),
-        padding: const EdgeInsets.only(
-          left: 6,
-          top: 6,
-          bottom: 6,
-          right: 10,
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            !widget.agree
-                ? Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      border: border,
-                      color: Colors.white,
-                    ),
-                    height: 24,
-                    width: 24,
-                    child: Center(
-                      child: SvgPicture.asset(
-                        ThemeIcon.check,
-                        fit: BoxFit.scaleDown,
-                        height: 24,
-                        width: 10,
-                      ),
-                    ),
-                  )
-                : Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      border: border,
-                      color: Colors.white,
-                    ),
-                    height: 24,
-                    width: 24,
-                  ),
-            ThemeSizedBox.width8,
-            !widget.agree
-                ? const TitleMedium("Non acconsento")
-                : const TitleMedium("Non acconsento").applyShaders(context),
-          ],
-        ),
-      ),
-    );
   }
+
+  BoxBorder border(bool? isSelected) {
+    return isSelected == false
+        ? GradientBoxBorder(
+            gradient: ThemeGradient.primary,
+            width: 2,
+          )
+        : Border.all(
+            color: Colors.transparent,
+            width: 2,
+          );
+  }
+
+  bool get _isSelected => widget.groupValue == widget.value;
 }

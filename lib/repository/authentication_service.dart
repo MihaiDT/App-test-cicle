@@ -255,6 +255,14 @@ class AuthenticationService {
       await dio.delete(
         "/auth/logout",
       );
+
+      await AuthenticationService.logout();
+      HiveManager.removeIsPastDateCalculated();
+      await Get.find<SecureStorageManager>().clearToken();
+      HiveManager.removeUserId();
+      HiveManager.removeAcceptedCookie();
+
+      appController.initializeState();
     } catch (e) {
       log.logApiException(e);
     }

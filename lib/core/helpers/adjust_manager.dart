@@ -19,7 +19,7 @@ class AdjustManager {
     AjustEventType eventType, [
     Map<String, String>? parameters,
   ]) {
-    if (HiveManager.hasAcceptedCookieProfiling) {
+    if (HiveManager.hasAcceptedCookieProfiling ?? false) {
       final adjustEvent = AdjustEvent(
         eventType.tokenName,
       );
