@@ -44,7 +44,7 @@ class _FaqPageState extends State<FaqPage> {
                   Uri.parse(
                     appController.settings.value?.helpdeskUrl ??
                         'https://linesit.digimetrica.com/contatti-servizio-consumatori?from=app',
-                  ), // FIXME: lasciare solo hepdeskurl
+                  ),
                   mode: LaunchMode.externalApplication,
                 );
               },

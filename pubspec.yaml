@@ -57,7 +57,7 @@ dependencies:
   flutter_secure_storage: ^9.2.2
 
 
-  # flutter_piwikpro: ^1.1.0
+  #flutter_piwikpro: ^1.1.0
   #flutter_analytics_piwik: ^1.0.7
   
   hive: ^2.2.3
@@ -72,8 +72,6 @@ dependencies:
   
   # GetX is an extra-light and powerful solution for Flutter. It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
   get: ^4.6.6
-
-
 
   
   # Various borders that use gradient instead of boring plain colors.
@@ -217,25 +215,25 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: "MyLines"
+        name: "My Lines"
       android:
-        applicationId: "it.advice.mylines"
+        applicationId: "it.tandu.lines"
         firebase:
           config: "firebase/android/dev/google-services.json"
       ios:
-        bundleId: "it.advice.lines"
+        bundleId: "it.tandu.lines"
         firebase:
           config: "firebase/ios/dev/GoogleService-Info.plist"
 
     prod:
       app:
-        name: "MyLines"
+        name: "My Lines"
       android:
-        applicationId: "it.lines.lines" # FIXME:
+        applicationId: "com.fatergroup.mylines"
         firebase:
           config: "firebase/android/prod/google-services.json"
       ios:
-        bundleId: "it.lines.lines" # FIXME:
+        bundleId: "com.fatergroup.mylines"
         firebase:
           config: "firebase/ios/prod/GoogleService-Info.plist"
 

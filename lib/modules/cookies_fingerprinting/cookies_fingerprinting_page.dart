@@ -18,6 +18,7 @@ import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CookiesFingerprintingPage
     extends GetView<CookiesFingerprintingController> {
@@ -244,9 +245,14 @@ class CookiesFingerprintingPage
                       ),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => {
-                                // TODO: privacy
-                              },
+                          ..onTap = () async {
+                            await launchUrl(
+                              Uri.parse(
+                                'https://www.facebook.com/privacy/policy/',
+                              ),
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
                         text: 'https://www.facebook.com/privacy/policy/',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: ThemeColor.brightPink,
@@ -281,9 +287,14 @@ class CookiesFingerprintingPage
                       ),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => {
-                                // TODO: privacy
-                              },
+                          ..onTap = () async {
+                            await launchUrl(
+                              Uri.parse(
+                                "https://www.adjust.com/terms/privacy-policy/",
+                              ),
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
                         text: 'https://www.adjust.com/terms/privacy-policy/',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: ThemeColor.brightPink,

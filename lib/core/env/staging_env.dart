@@ -10,11 +10,12 @@ class StagingEnv extends Environment {
   bool get enableProxyman => false;
 
   @override
-  String get gameEndpoint => 'https://tinybullstudios.com/Lines/Tamagotchi';
+  String get gameEndpoint =>
+      'https://learnie-lines-test.s3.eu-south-1.amazonaws.com/game';
 
   @override
   String get cherryCustomizationEndpoint =>
-      'https://tinybullstudios.com/Lines/Customization';
+      'https://learnie-lines-test.s3.eu-south-1.amazonaws.com/conf_avatar';
 
   @override
   String get proxy => '192.168.2.61';

@@ -71,7 +71,7 @@ enum ErrorType {
       case ErrorType.userNotFound:
         return "Utente non trovato";
       case ErrorType.productCodeNotValid:
-        return "Il codice prodotto non è stato riconoscuto";
+        return "Il codice prodotto non è stato riconosciuto";
       case ErrorType.productCodeExternal:
         return "Il codice prodotto non è corretto.\nCarica il codice prodotto che trovi stampato all’interno della confezione.";
       case ErrorType.productCodeUploadFailed:
