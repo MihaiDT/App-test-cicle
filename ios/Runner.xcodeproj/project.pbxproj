@@ -21,6 +21,7 @@
 		E8114456A2E9417185C3762C /* devRelease.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F3221FF95165466F977DE025 /* devRelease.xcconfig */; };
 		F306BEDDEE0F18C69B4DE12C /* prodRelease.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EBF853E65226AC044A4AA3D5 /* prodRelease.xcconfig */; };
 		FA17A9572C207E00000A9577 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = FA17A9562C207E00000A9577 /* PrivacyInfo.xcprivacy */; };
+		FEB659A0D6414E5745B680F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8785C4DF39C99D167BB8D33 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,10 @@
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92A2A89E2B714B440015DC84 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
+		92C5C0352C26B2920001BC97 /* google-services.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "google-services.json"; sourceTree = "<group>"; };
+		92C5C0372C26B2920001BC97 /* google-services.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "google-services.json"; sourceTree = "<group>"; };
+		92C5C03A2C26B2920001BC97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		92C5C03C2C26B2920001BC97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97ACA636E41452841CAD1565 /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +66,7 @@
 		B59449044B027D47D8D694C1 /* prodDebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = prodDebug.xcconfig; path = Flutter/prodDebug.xcconfig; sourceTree = "<group>"; };
 		C29843E537F5EB50154BDDD5 /* Pods-Runner.debug-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-prod.xcconfig"; sourceTree = "<group>"; };
 		CA1B7E144AA2CF1784816995 /* Pods-Runner.release-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-prod.xcconfig"; sourceTree = "<group>"; };
+		E8785C4DF39C99D167BB8D33 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB967D09D631480666269D17 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBF853E65226AC044A4AA3D5 /* prodRelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = prodRelease.xcconfig; path = Flutter/prodRelease.xcconfig; sourceTree = "<group>"; };
 		F2469B705B61FA5E6DA26193 /* Pods-Runner.debug-dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-dev.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-dev.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +104,65 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		92C5C0362C26B2920001BC97 /* dev */ = {
+			isa = PBXGroup;
+			children = (
+				92C5C0352C26B2920001BC97 /* google-services.json */,
+			);
+			path = dev;
+			sourceTree = "<group>";
+		};
+		92C5C0382C26B2920001BC97 /* prod */ = {
+			isa = PBXGroup;
+			children = (
+				92C5C0372C26B2920001BC97 /* google-services.json */,
+			);
+			path = prod;
+			sourceTree = "<group>";
+		};
+		92C5C0392C26B2920001BC97 /* android */ = {
+			isa = PBXGroup;
+			children = (
+				92C5C0362C26B2920001BC97 /* dev */,
+				92C5C0382C26B2920001BC97 /* prod */,
+			);
+			path = android;
+			sourceTree = "<group>";
+		};
+		92C5C03B2C26B2920001BC97 /* dev */ = {
+			isa = PBXGroup;
+			children = (
+				92C5C03A2C26B2920001BC97 /* GoogleService-Info.plist */,
+			);
+			path = dev;
+			sourceTree = "<group>";
+		};
+		92C5C03D2C26B2920001BC97 /* prod */ = {
+			isa = PBXGroup;
+			children = (
+				92C5C03C2C26B2920001BC97 /* GoogleService-Info.plist */,
+			);
+			path = prod;
+			sourceTree = "<group>";
+		};
+		92C5C03E2C26B2920001BC97 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				92C5C03B2C26B2920001BC97 /* dev */,
+				92C5C03D2C26B2920001BC97 /* prod */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		92C5C03F2C26B2920001BC97 /* firebase */ = {
+			isa = PBXGroup;
+			children = (
+				92C5C0392C26B2920001BC97 /* android */,
+				92C5C03E2C26B2920001BC97 /* ios */,
+			);
+			path = firebase;
+			sourceTree = "<group>";
+		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				FA17A9562C207E00000A9577 /* PrivacyInfo.xcprivacy */,
+				92C5C03F2C26B2920001BC97 /* firebase */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
@@ -122,6 +188,7 @@
 				F5BB40CFEB54E6EB382F0CD1 /* Frameworks */,
 				97CE0D46DBC968CF9AFB2A61 /* devLaunchScreen.storyboard */,
 				5B7EB5200BD9642A7AD271F7 /* prodLaunchScreen.storyboard */,
+				E8785C4DF39C99D167BB8D33 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,7 +232,6 @@
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
 				D558C3267900CDB676249DC4 /* [CP] Check Pods Manifest.lock */,
-				0040FF225728B08BABA6B143 /* Firebase Setup */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
@@ -234,30 +300,13 @@
 				F306BEDDEE0F18C69B4DE12C /* prodRelease.xcconfig in Resources */,
 				015A9B5754DC36839C706225 /* devLaunchScreen.storyboard in Resources */,
 				85D1781C1822B24DAC983B60 /* prodLaunchScreen.storyboard in Resources */,
+				FEB659A0D6414E5745B680F7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0040FF225728B08BABA6B143 /* Firebase Setup */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Firebase Setup";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Debug-dev\" ] || [ \"$CONFIGURATION\" == \"Release-dev\" ]; then\n  cp Runner/dev/GoogleService-Info.plist Runner/GoogleService-Info.plist\nelif [ \"$CONFIGURATION\" == \"Debug-prod\" ] || [ \"$CONFIGURATION\" == \"Release-prod\" ]; then\n  cp Runner/prod/GoogleService-Info.plist Runner/GoogleService-Info.plist\nfi\n\n";
-		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -437,7 +486,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = it.fater.lines;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fatergroup.mylines;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -455,6 +504,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
+				BUNDLE_DISPLAY_NAME = "[DEV] My Lines";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -528,6 +578,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
+				BUNDLE_DISPLAY_NAME = "[DEV] My Lines";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -615,9 +666,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2BF53682DD09A124FBA44835 /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
+				BUNDLE_DISPLAY_NAME = "[DEV] My Lines";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				DEVELOPMENT_TEAM = KVLA9442DH;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = it.tandu.lines;
 				PRODUCT_NAME = Runner;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -631,6 +684,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C29843E537F5EB50154BDDD5 /* Pods-Runner.debug-prod.xcconfig */;
 			buildSettings = {
+				BUNDLE_DISPLAY_NAME = "My Lines";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				DEVELOPMENT_TEAM = 92W22AT9PZ;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -719,7 +773,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = it.tandu.lines;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fatergroup.mylines;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
