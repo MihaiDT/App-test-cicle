@@ -56,7 +56,7 @@ class Mission {
       prizeDescription: json['prize_description'],
       endAt: json['end_at'],
       id: json['id'],
-      imageUrl: json['image_url'],
+      imageUrl: json['image_url'] ?? '',
       totalCounter: json['total_counter'],
       products: List<Product>.from(
         json['products'].map(

@@ -30,7 +30,7 @@ class Settings {
   });
 
   factory Settings.fromJson(Map<String, dynamic> json) {
-    return Settings(
+    final sett = Settings(
       androidMinBuildNumber: json['android_min_build_number'],
       androidStoreUrl: json['android_store_url'],
       welcomeSurveyCoins: json['coins']['welcome_survey'],
@@ -45,6 +45,8 @@ class Settings {
       privacyUrl: json['privacy_url'],
       termsAndConditionsUrl: json['terms_and_conditions'],
     );
+
+    return sett;
   }
 
   factory Settings.toJson(Settings settings) {

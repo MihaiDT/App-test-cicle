@@ -10,7 +10,7 @@ extension NavigatorExtension on NavigatorState {
   }) {
     // Use the pushNamedAndRemoveUntil method to navigate to the new screen
     // and remove the previous screens based on the filter function.
-    return this.pushNamedAndRemoveUntil(
+    return pushNamedAndRemoveUntil(
       routeName,
       (route) {
         final String? routeName = route.settings.name;

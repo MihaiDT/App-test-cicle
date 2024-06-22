@@ -256,7 +256,6 @@ class AuthenticationService {
         "/auth/logout",
       );
 
-      await AuthenticationService.logout();
       HiveManager.removeIsPastDateCalculated();
       await Get.find<SecureStorageManager>().clearToken();
       HiveManager.removeUserId();

@@ -183,8 +183,8 @@ class LoginController extends GetxController {
       LoginParameters(
         email: email,
         password: password,
-        cookieProfiling: HiveManager.hasAcceptedCookieProfiling,
-        cookieStats: HiveManager.hasAcceptedCookieStats,
+        cookieProfiling: HiveManager.hasAcceptedCookieProfiling ?? false,
+        cookieStats: HiveManager.hasAcceptedCookieStats ?? false,
       ),
     );
   }

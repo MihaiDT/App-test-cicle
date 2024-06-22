@@ -19,7 +19,7 @@ import braze_plugin
 #else
     // Setup Braze
     let configuration = Braze.Configuration(
-      apiKey: "b543a929-5eb9-41f1-952d-fb2d13470d0c",
+      apiKey: "dd098a1b-2f31-4704-858b-54f7b8fd2457",
       endpoint: "sdk.fra-02.braze.eu"
     )
     // - Enable logging or customize configuration here

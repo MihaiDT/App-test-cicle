@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/access_wrapper/controller/wrapper_access_controller.dart';
 import 'package:lines/modules/access_wrapper/lock_page.dart';
 import 'package:local_auth/local_auth.dart';
@@ -42,7 +41,7 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
           onPause: () {
             print("App is in onPause");
             HiveManager.showLockPage = true;
-            appController.showLockPage.value = true;
+            // appController.showLockPage.value = true;
           },
         );
       }
@@ -53,16 +52,17 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.authNeeded &&
-        (appController.showLockPage.value || HiveManager.showLockPage)) {
+    if (widget.authNeeded && HiveManager.showLockPage) {
       authenticate().then((value) async {
+        HiveManager.showLockPage = false;
+
         if (value == false) {
           /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
           /// TODO: CHECK HOW TO MANAGE THIS SCENARIO
+
+          HiveManager.showLockPage = true;
+
           return value;
-        } else {
-          appController.showLockPage.value = false;
-          HiveManager.showLockPage = false;
         }
       });
     }
@@ -71,9 +71,7 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
       () {
         return Stack(
           children: [
-            widget.authNeeded &&
-                    (appController.showLockPage.value ||
-                        HiveManager.showLockPage)
+            widget.authNeeded && HiveManager.showLockPage
                 ? const LockPage()
                 : widget.child,
             if (controller.lockApp.value)

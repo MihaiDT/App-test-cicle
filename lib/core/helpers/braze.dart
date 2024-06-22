@@ -1,6 +1,7 @@
 import 'package:braze_plugin/braze_plugin.dart';
 import 'package:lines/core/helpers/push_notification.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/flavors.dart';
 
 Future<void> sendBrazeData() async {
   if (await PushNotification.isPushPermissionEnabled()) {
@@ -8,7 +9,9 @@ Future<void> sendBrazeData() async {
 
     final String? deepcubeId = appController.user.value?.deepcubeId;
 
-    if (token != null && deepcubeId != null) {
+    if ((F.appFlavor?.isProdFlavor ?? false) &&
+        token != null &&
+        deepcubeId != null) {
       BrazePlugin braze = BrazePlugin();
       braze.changeUser(deepcubeId);
       braze.registerPushToken(token);

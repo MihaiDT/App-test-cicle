@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="com_braze_api_key">c96e9db8-abc4-4eff-b614-f718e3f90dec</string>
+  <string translatable="false" name="com_braze_custom_endpoint">sdk.fra-02.braze.eu</string>
+  
+  <!-- FIXME: Braze -->
+  <bool translatable="false" name="com_braze_firebase_cloud_messaging_registration_enabled">true</bool>
+  <string translatable="false" name="com_braze_firebase_cloud_messaging_sender_id">329390092342</string>
+</resources>

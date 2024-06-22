@@ -16,7 +16,8 @@ class PushNotification {
   }
 
   static Future<String?> getToken() async {
-    final token = await FirebaseMessaging.instance.getToken();
+    const token = '';
+    // FIXME: PUSH await FirebaseMessaging.instance.getToken();
 
     logDebug(
       "Token: $token",
