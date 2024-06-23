@@ -39,49 +39,37 @@ class HiveManager {
     Hive.box(hiveBoxName).delete(HiveReferenceKeys.userId.name);
   }
 
-  static int get numberOfAccess {
-    final todayString = dateFormatYMD.format(DateTime.now());
-    return Hive.box(hiveBoxName)
-            .get(HiveReferenceKeys.numberOfAccess.name)[todayString] ??
-        -1;
+  static int get welcomeSurveyTotalAccess {
+    final accessKeys = Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ??
+        Map<String, int>.from({});
+
+    return accessKeys.keys.length;
   }
 
-  static set numberOfAccess(int numberOfAccess) {
-    final todayString = dateFormatYMD.format(DateTime.now());
-    final accessKeys =
-        Hive.box(hiveBoxName).get(HiveReferenceKeys.numberOfAccess.name);
+  static int get welcomeSurveyNumberOfAccess {
+    final accessKeys = Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ??
+        Map<String, int>.from({});
 
-    accessKeys[todayString] = numberOfAccess;
-
-    Hive.box(hiveBoxName).put(
-      HiveReferenceKeys.numberOfAccess.name,
-      accessKeys,
-    );
+    final todayKey = dateFormatYMD.format(DateTime.now());
+    return accessKeys[todayKey] ?? 0;
   }
 
-  static void initNumberOfAccess() {
-    final todayString = dateFormatYMD.format(
-      DateTime.now(),
-    );
-    final tomorrowString = dateFormatYMD.format(
-      DateTime.now().add(
-        const Duration(days: 1),
-      ),
-    );
-    final theDayAfterTomorrowString = dateFormatYMD.format(
-      DateTime.now().add(
-        const Duration(days: 2),
-      ),
-    );
+  static set welcomeSurveyNumberOfAccess(int numberOfAccess) {
+    final accessKeys = Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ??
+        Map<String, int>.from({});
 
-    final accessKeys = {
-      todayString: -1,
-      tomorrowString: 0,
-      theDayAfterTomorrowString: 0,
-    };
+    if (accessKeys.keys.length >= 3) {
+      return;
+    }
+
+    final todayKey = dateFormatYMD.format(DateTime.now());
+    accessKeys[todayKey] = numberOfAccess;
 
     Hive.box(hiveBoxName)
-        .put(HiveReferenceKeys.numberOfAccess.name, accessKeys);
+        .put(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name, accessKeys);
   }
 
   static bool get isFirstTutorialWatched {
@@ -189,7 +177,7 @@ enum HiveReferenceKeys {
   hasAcceptedCookieProfiling,
   hasAcceptedCookieStats,
   isPastDateCalculated,
-  numberOfAccess,
+  welcomeSurveyNumberOfAccess,
   showSecondTutorialAccess,
   showSurveyTutorial;
 }

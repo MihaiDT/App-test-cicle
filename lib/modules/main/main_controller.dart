@@ -60,16 +60,14 @@ class MainController extends GetxController {
   void _initSurveyTutorial() {
     HiveManager.showSecondTutorialAccess = false;
 
-    if (!HiveManager.isFirstTutorialWatched) {
-      // First access
-      HiveManager.initNumberOfAccess();
-    }
-
-    HiveManager.numberOfAccess += 1;
+    HiveManager.welcomeSurveyNumberOfAccess += 1;
 
     /// Viene mostrata i primi 3 accessi in app, però SOLO 1 volta al giorno.
     /// I primi 3 accessi partono dal 2' accesso in modo da non sovrapporsi al tutorial.
-    if (HiveManager.numberOfAccess == 1 && showWelcomeQuizSection) {
+    if (HiveManager.welcomeSurveyTotalAccess > 1 &&
+        HiveManager.welcomeSurveyTotalAccess < 5 &&
+        HiveManager.welcomeSurveyNumberOfAccess == 1 &&
+        showWelcomeQuizSection) {
       HiveManager.showSurveyTutorial = true;
     }
   }
