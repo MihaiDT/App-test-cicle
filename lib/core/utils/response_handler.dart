@@ -59,7 +59,7 @@ enum ErrorType {
       case ErrorType.generic:
         return "Si è verificato un errore";
       case ErrorType.wrongPassword:
-        return "Password errata";
+        return "Credenziali non valide";
       case ErrorType.emailRequired:
         return "E-mail obbligatoria";
       case ErrorType.invitationCodeNotValid:
@@ -69,7 +69,7 @@ enum ErrorType {
       case ErrorType.userAlreadyRegistered:
         return "Utente già registrato";
       case ErrorType.userNotFound:
-        return "Utente non trovato";
+        return "Credenziali non valide";
       case ErrorType.productCodeNotValid:
         return "Il codice prodotto non è stato riconosciuto";
       case ErrorType.productCodeExternal:

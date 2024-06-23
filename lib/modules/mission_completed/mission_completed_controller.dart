@@ -44,7 +44,9 @@ class MissionCompletedController extends GetxController {
         mainAxisSize: MainAxisSize.max,
         children: [
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
+            padding: EdgeInsets.symmetric(
+              vertical: 8.0,
+            ),
             child: HeadlineSmall(
               "Codice prodotto caricato",
               color: Color(0xff1F2D4F),

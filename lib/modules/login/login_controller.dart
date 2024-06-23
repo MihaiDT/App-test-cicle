@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/piwik_manager.dart';
@@ -99,13 +100,21 @@ class LoginController extends GetxController {
           isButtonPending.value = true;
         }
         if (userStatus.isFailed) {
-          if (userStatus.errorType == ErrorType.wrongPassword) {
+          if (userStatus.errorType == ErrorType.wrongPassword ||
+              userStatus.errorType == ErrorType.userNotFound) {
             FlushBar(
-              child: const Text(
-                "Password errata",
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 8,
+                ),
+                child: HeadlineSmall(
+                  "Password errata",
+                  color: ThemeColor.darkBlue,
+                ),
               ),
             ).show(Get.context!);
           }
+
           isButtonPending.value = false;
         }
         if (userStatus.isSuccessful) {

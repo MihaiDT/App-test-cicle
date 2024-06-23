@@ -96,7 +96,7 @@ class LoadCodeController extends GetxController {
       final String upperCaseCode = writtenCode.value.toUpperCase();
       await ProductService.loadCode(
         upperCaseCode,
-        selectedMission.value!.id,
+        selectedMission.value?.id,
       );
     }
   }

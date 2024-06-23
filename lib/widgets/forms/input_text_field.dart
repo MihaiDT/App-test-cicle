@@ -96,6 +96,7 @@ class InputTextField extends StatelessWidget {
               textCapitalization ?? TextCapitalization.sentences,
           textInputAction: textInputAction,
           textAlignVertical: TextAlignVertical.center,
+          autocorrect: false,
         ),
         if (hasError && errorMessage.isNotEmpty) _errorLabels(),
       ],

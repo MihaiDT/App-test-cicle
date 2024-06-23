@@ -24,10 +24,16 @@ class InviteFriendCode extends StatelessWidget {
         await Clipboard.setData(
           ClipboardData(text: code),
         );
+
         FlushBar(
-          child: const HeadlineMedium(
-            "Testo copiato correttamente!",
-            color: ThemeColor.darkBlue,
+          child: const Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 8,
+            ),
+            child: HeadlineSmall(
+              "Testo copiato correttamente!",
+              color: ThemeColor.darkBlue,
+            ),
           ),
         ).show(context);
       },

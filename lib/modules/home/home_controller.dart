@@ -337,7 +337,7 @@ class HomeController extends AppScaffoldController {
                         Positioned(
                           left: position.dx,
                           top: position.dy,
-                          width: size.width,
+                          width: size.width + 8,
                           height: size.height,
                           child: PrimaryButton(
                             buttonSize: ButtonSize.h31,
@@ -345,9 +345,9 @@ class HomeController extends AppScaffoldController {
                               hideTutorial();
                               Get.toNamed(Routes.calendar);
                             },
-                            child: const TitleMedium(
+                            child: const TitleSmall(
                               "Aggiungi mestruazioni",
-                              letterSpacing: 1.5,
+                              letterSpacing: 1.2,
                             ),
                           ),
                         ),

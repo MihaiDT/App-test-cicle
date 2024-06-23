@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
@@ -49,7 +50,15 @@ class ReferralController extends GetxController {
         }
         if (callback.isFailed) {
           FlushBar(
-            child: const Text('Impossibile utilizzare il codice'),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 8,
+              ),
+              child: HeadlineSmall(
+                'Impossibile utilizzare il codice',
+                color: ThemeColor.darkBlue,
+              ),
+            ),
           ).show(Get.context!);
         }
 
@@ -63,7 +72,15 @@ class ReferralController extends GetxController {
             );
           } else {
             FlushBar(
-              child: const Text('Codice non valido'),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 8,
+                ),
+                child: HeadlineSmall(
+                  'Codice non valido',
+                  color: ThemeColor.darkBlue,
+                ),
+              ),
             ).show(Get.context!);
           }
         }

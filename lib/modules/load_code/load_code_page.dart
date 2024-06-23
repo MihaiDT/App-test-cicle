@@ -52,9 +52,7 @@ class LoadCodePage extends GetView<LoadCodeController> {
                       Obx(
                         () => PrimaryLoadingButton(
                           isLoading: controller.isPending.value,
-                          onPressed: controller.canProceed
-                              ? controller.onConfirm
-                              : null,
+                          onPressed: controller.onConfirm,
                           child: const TitleLarge(
                             "CONFERMA",
                           ),
