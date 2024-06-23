@@ -1,3 +1,4 @@
+import 'package:lines/core/helpers/route_observer.dart';
 import 'package:lines/flavors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,6 +50,9 @@ class App extends StatelessWidget {
           ),
         );
       },
+      navigatorObservers: [
+        RoutingObserver(),
+      ],
     );
   }
 }

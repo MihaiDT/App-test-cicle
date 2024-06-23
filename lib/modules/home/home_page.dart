@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/widgets/advices_cards_row.dart';
 import 'package:lines/modules/home/home_controller.dart';
@@ -23,20 +22,9 @@ class HomePage extends GetView<HomeController> {
     super.key,
   });
 
-  void _checkSecondTutorial() async {
-    if (HiveManager.showSecondTutorialAccess) {
-      HiveManager.showSecondTutorialAccess = false;
-
-      if (controller.playButtonVisible) {
-        controller.rxShowGameTutorial.value = true;
-        controller.rxShowGameTutorial.refresh();
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    _checkSecondTutorial();
+    controller.shouldShowSecondTutorial();
 
     return Column(
       children: [

@@ -12,7 +12,7 @@ import 'package:lines/modules/prizes/prizes_page.dart';
 import 'package:lines/modules/profile/pages/profile_page.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
-class MainPage extends GetView<MainController> {
+class MainPage extends GetView<MainController> with RouteAware {
   const MainPage({
     super.key,
   });

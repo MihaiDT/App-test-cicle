@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/braze.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/core/helpers/route_observer.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/advices/controllers/advices_controller.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
@@ -52,14 +53,27 @@ class MainController extends GetxController {
     super.onInit();
 
     _lazyInit(tabIndex);
-    _initSurveyTutorial();
+
+    _initTutorials();
 
     sendBrazeData();
+
+    final homeController = Get.find<HomeController>();
+    ever(RoutingObserver.routeStack, (stack) {
+      if (stack.reversed.first.settings.name.toString() == '/') {
+        homeController.shouldShowSecondTutorial();
+      }
+    });
+  }
+
+  void _initTutorials() {
+    // Reset the second tutorial every time you log-in
+    HiveManager.showSecondTutorialAccess = false;
+
+    _initSurveyTutorial();
   }
 
   void _initSurveyTutorial() {
-    HiveManager.showSecondTutorialAccess = false;
-
     HiveManager.welcomeSurveyNumberOfAccess += 1;
 
     /// Viene mostrata i primi 3 accessi in app, però SOLO 1 volta al giorno.

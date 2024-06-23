@@ -43,6 +43,18 @@ class HomeController extends AppScaffoldController {
   bool updating = false;
   final scrollSnapListKey = GlobalKey<ScrollSnapListState>();
 
+  void shouldShowSecondTutorial() {
+    if (HiveManager.showSecondTutorialAccess) {
+      HiveManager.showSecondTutorialAccess = false;
+
+      // I show the tutorial if today is a menstruation day
+      if (playButtonVisible) {
+        rxShowGameTutorial.value = true;
+        rxShowGameTutorial.refresh();
+      }
+    }
+  }
+
   bool get isSelectedMestruationDay {
     if (currentPeriodDatesMap.values.toList().isEmpty) {
       return false;
@@ -78,7 +90,6 @@ class HomeController extends AppScaffoldController {
 
     ever(
       rxShowGameTutorial,
-      condition: () => Get.currentRoute == Routes.main,
       (show) async {
         if (show) {
           rxShowGameTutorial.value = false;
@@ -224,6 +235,8 @@ class HomeController extends AppScaffoldController {
             const Duration(milliseconds: 300),
             () {
               HiveManager.isFirstTutorialWatched = true;
+
+              // The first tutorial has been seen, next time I'll show the second tutorial
               HiveManager.showSecondTutorialAccess = true;
 
               /// Tutorial without Droppy
