@@ -60,14 +60,13 @@ class LoginPage extends GetView<LoginController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (Platform.isIOS)
-                    LinkAccountWidget(
-                      imagePath: ThemeImage.facebook,
-                      onTap: () => controller.socialLogin(
-                        RegistrationProvider.facebook,
-                      ),
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.facebook,
+                    onTap: () => controller.socialLogin(
+                      RegistrationProvider.facebook,
                     ),
-                  if (Platform.isIOS) ThemeSizedBox.width40,
+                  ),
+                  ThemeSizedBox.width40,
                   LinkAccountWidget(
                     imagePath: ThemeImage.google,
                     onTap: () => controller.socialLogin(

@@ -198,7 +198,9 @@ Aggiungi
 ### Apple Login
 **TODO**
 ### Facebook Login
-**TODO**
+```bash
+keytool -exportcert -alias LinesKey -keystore LinesKey.keystore | openssl sha1 -binary | openssl base64
+```
 
 ### Google Login
 - Installare il plugin [google_sign_in](https://pub.dev/packages/google_sign_in) e seguire le istruzioni riportate nel README del plugin.

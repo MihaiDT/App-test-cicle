@@ -60,14 +60,13 @@ class RegisterPage extends GetView<RegisterController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (Platform.isIOS)
-                    LinkAccountWidget(
-                      imagePath: ThemeImage.facebook,
-                      onTap: () => controller.setRegistrationProvider(
-                        RegistrationProvider.facebook,
-                      ),
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.facebook,
+                    onTap: () => controller.setRegistrationProvider(
+                      RegistrationProvider.facebook,
                     ),
-                  if (Platform.isIOS) ThemeSizedBox.width40,
+                  ),
+                  ThemeSizedBox.width40,
                   LinkAccountWidget(
                     imagePath: ThemeImage.google,
                     onTap: () => controller.setRegistrationProvider(
