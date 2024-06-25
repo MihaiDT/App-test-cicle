@@ -32,6 +32,7 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                   onPressed: controller.logIn,
                   child: const TitleLarge(
                     "PROCEDI",
+                    letterSpacing: 2,
                   ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,

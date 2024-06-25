@@ -8,7 +8,6 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
-import 'package:lines/core/utils/date_time_extension.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
@@ -135,8 +134,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   RxString oreDiSonnoValue = "".obs;
 
-  RxList<String> oreDiSonnoValues = List.generate(17, (index) {
-    final hour = (index / 2 + 4).floor();
+  RxList<String> oreDiSonnoValues = List.generate(25, (index) {
+    final hour = (index / 2 + 1).floor();
     final minute = index % 2 == 0 ? '00' : '30';
     return '$hour:$minute Ore';
   }).obs;
@@ -148,8 +147,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   RxString pesoValue = "".obs;
   RxList<String> pesoValues =
-      List.generate(291, (index) => '${index + 40} kg').obs;
-
+      List.generate(301, (index) => '${index + 30} kg').obs;
   RxString notesInitialValue = ''.obs;
 
   CalendarController() {
@@ -523,26 +521,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       removeMensesDates.add(formattedDate);
     } else {
       addedMensesDates.add(formattedDate);
-      newAddExtraDates(formattedDate);
     }
     addedMensesDates.refresh();
-  }
-
-  void newAddExtraDates(String dateString) {
-    final int periodDays = appController.user.value?.periodDays ?? 5;
-    final DateTime date = dateFormatYMD.parse(dateString);
-
-    for (int i = 1; i < periodDays; i++) {
-      final DateTime nextDate = date.add(Duration(days: i));
-      bool isDateBeforeOrToday = nextDate.isSameDayOrBefore(DateTime.now());
-      if (isDateBeforeOrToday) {
-        final String formattedDate = dateFormatYMD.format(nextDate);
-
-        if (!addedMensesDates.contains(formattedDate)) {
-          addedMensesDates.add(formattedDate);
-        }
-      }
-    }
   }
 
   Future<void> newSaveDates() async {

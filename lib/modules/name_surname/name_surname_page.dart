@@ -60,6 +60,7 @@ class NameSurnamePage extends GetView<NameSurnameController> {
                       : null,
                   child: const TitleLarge(
                     "AVANTI",
+                    letterSpacing: 1.5,
                   ).applyShaders(context),
                 );
               },

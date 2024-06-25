@@ -202,20 +202,20 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                 ],
               ),
               if (!controller.selectedMission.value.isCompleted)
-                SafeArea(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: ThemeSize.paddingSmall,
-                      ),
-                      child: PrimaryLoadingButton(
-                        isLoading: false,
-                        onPressed: controller.onContinuePressed,
-                        child: const TitleLarge(
-                          "CARICA CODICI",
-                          letterSpacing: 2,
-                        ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: ThemeSize.paddingSmall,
+                      right: ThemeSize.paddingSmall,
+                      left: ThemeSize.paddingSmall,
+                    ),
+                    child: PrimaryLoadingButton(
+                      isLoading: false,
+                      onPressed: controller.onContinuePressed,
+                      child: const TitleLarge(
+                        "CARICA CODICI",
+                        letterSpacing: 2,
                       ),
                     ),
                   ),

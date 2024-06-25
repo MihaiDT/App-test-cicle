@@ -53,10 +53,10 @@ class WalkthroughBottom extends GetView<WalkthroughController> {
                       }
                     },
                     child: TitleLarge(
-                      letterSpacing: 2,
                       controller.currentStepIndex.value < numberOfPages - 1
                           ? "CONTINUA"
                           : "AVANTI",
+                      letterSpacing: 2,
                     ),
                   ),
                   Visibility(
@@ -71,7 +71,7 @@ class WalkthroughBottom extends GetView<WalkthroughController> {
                       },
                       child: const TitleMedium(
                         "SALTA",
-                        letterSpacing: 2,
+                        letterSpacing: 1.5,
                         underline: true,
                       ).applyShaders(context),
                     ),

@@ -42,6 +42,7 @@ class AcceptConsentPage extends GetView<AcceptConsentController> {
                         isLoading: controller.pageIsPending.value,
                         child: const TitleLarge(
                           "TORNA INDIETRO",
+                          letterSpacing: 2,
                         ).applyShaders(context),
                       );
                     },
@@ -55,7 +56,7 @@ class AcceptConsentPage extends GetView<AcceptConsentController> {
                         "NON ACCONSENTO",
                         underline: true,
                         textAlign: TextAlign.center,
-                        letterSpacing: 2,
+                        letterSpacing: 1.5,
                       ),
                     ),
                   ),

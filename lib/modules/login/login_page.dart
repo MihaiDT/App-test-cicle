@@ -147,6 +147,7 @@ class LoginPage extends GetView<LoginController> {
                     : null,
                 child: const TitleLarge(
                   "AVANTI",
+                  letterSpacing: 2,
                 ).applyShaders(context),
               ),
               ThemeSizedBox.height8,
@@ -165,6 +166,7 @@ class LoginPage extends GetView<LoginController> {
                       ThemeSizedBox.width4,
                       const TitleMedium(
                         "REGISTRATI",
+                        letterSpacing: 1.5,
                         underline: true,
                       ),
                     ],

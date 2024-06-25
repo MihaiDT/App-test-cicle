@@ -79,7 +79,7 @@ class ConsentBottomSheet extends StatelessWidget {
               },
               child: const TitleMedium(
                 "NON ACCONSENTO",
-                letterSpacing: 2,
+                letterSpacing: 1.5,
                 textAlign: TextAlign.center,
                 underline: true,
               ),

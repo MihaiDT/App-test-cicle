@@ -49,6 +49,7 @@ class BirthDatePage extends GetView<BirthDateController> {
                       : null,
                   child: const TitleLarge(
                     "AVANTI",
+                    letterSpacing: 1.5,
                   ).applyShaders(context),
                 );
               },

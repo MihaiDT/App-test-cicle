@@ -66,6 +66,7 @@ class LastMensesPage extends GetView<LastMensesController> {
                       },
                       child: const TitleLarge(
                         "AVANTI",
+                        letterSpacing: 2,
                       ).applyShaders(context),
                     );
                   },
@@ -87,6 +88,7 @@ class LastMensesPage extends GetView<LastMensesController> {
                     child: const TitleMedium(
                       "NON ME LO RICORDO",
                       underline: true,
+                      letterSpacing: 1.5,
                       textAlign: TextAlign.center,
                     ),
                   ),

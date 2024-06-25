@@ -44,6 +44,7 @@ class HowLongMensesPage extends GetView<HowLongMensesController> {
                   onPressed: () => controller.onButtonPressed(),
                   child: const TitleLarge(
                     "AVANTI",
+                    letterSpacing: 2,
                   ).applyShaders(context),
                 ),
                 ThemeSizedBox.height16,
@@ -63,6 +64,7 @@ class HowLongMensesPage extends GetView<HowLongMensesController> {
                   child: const TitleMedium(
                     "NON LO SO",
                     underline: true,
+                    letterSpacing: 1.5,
                     textAlign: TextAlign.center,
                   ),
                 ),

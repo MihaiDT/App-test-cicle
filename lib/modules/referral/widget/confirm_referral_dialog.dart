@@ -54,6 +54,7 @@ class ConfirmReferralDialog extends StatelessWidget {
                   },
                   child: const TitleLarge(
                     "INDIETRO",
+                    letterSpacing: 2,
                   ).applyShaders(context),
                 ),
                 InkWell(
@@ -72,6 +73,7 @@ class ConfirmReferralDialog extends StatelessWidget {
                       ),
                       child: TitleMedium(
                         "AVANTI",
+                        letterSpacing: 2,
                       ),
                     ),
                   ),

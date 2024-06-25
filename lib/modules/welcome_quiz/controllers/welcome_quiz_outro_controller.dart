@@ -4,7 +4,7 @@ import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/badges_service.dart';
 
 class WelcomeQuizOutroController extends GetxController {
-  int get totalCoins => appController.user.value?.coinsCollected ?? 150;
+  RxInt get totalCoins => (appController.user.value?.coinsCollected ?? 150).obs;
 
   @override
   Future<void> onReady() async {

@@ -5,6 +5,7 @@ import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_decoration.dart';
 import 'package:lines/core/theme/theme_icon.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
+import 'package:lines/modules/info/widgets/info_bottom_sheet.dart';
 import 'package:lines/modules/info/widgets/info_what_are_coins_bottomsheet..dart';
 import 'package:lines/modules/welcome_quiz/controllers/welcome_quiz_outro_controller.dart';
 import 'package:lines/modules/welcome_quiz/widgets/quiz_body_text.dart';
@@ -48,14 +49,32 @@ class QuizOutroPage extends GetView<WelcomeQuizOutroController> {
                   'Completando il Welcome Quiz\n hai guadagnato 150 Coins!',
             ),
             ThemeSizedBox.height24,
-            QuizYourCoins(
-              totalCoins: controller.totalCoins,
+            Obx(
+              () {
+                return QuizYourCoins(
+                  totalCoins: controller.totalCoins.value,
+                );
+              },
             ),
             ThemeSizedBox.height24,
             InkWell(
               onTap: () {
-                Get.bottomSheet(
-                  const InfoWhatAreCoinsBottomSheet(),
+                showModalBottomSheet(
+                  constraints: BoxConstraints(maxHeight: Get.height * 0.85),
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (_) => Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: const InfoBottomSheet(
+                      child: InfoWhatAreCoinsBottomSheet(),
+                    ),
+                  ),
                 );
               },
               child: const TitleMedium(

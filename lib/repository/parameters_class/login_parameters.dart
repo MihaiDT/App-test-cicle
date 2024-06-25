@@ -1,12 +1,12 @@
 class LoginParameters {
-  final bool cookieProfiling;
-  final bool cookieStats;
+  final bool? cookieProfiling;
+  final bool? cookieStats;
   final String email;
   final String password;
 
   LoginParameters({
-    required this.cookieProfiling,
-    required this.cookieStats,
+    this.cookieProfiling,
+    this.cookieStats,
     required this.email,
     this.password = "",
   });

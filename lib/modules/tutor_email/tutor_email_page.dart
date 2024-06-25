@@ -41,6 +41,7 @@ class TutorEmailPage extends GetView<TutorEmailController> {
                   : null,
               child: const TitleLarge(
                 "AVANTI",
+                letterSpacing: 2,
               ).applyShaders(context),
             );
           }),

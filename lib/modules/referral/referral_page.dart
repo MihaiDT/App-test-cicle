@@ -45,6 +45,7 @@ class ReferralPage extends GetView<ReferralController> {
                         : null,
                     child: const TitleLarge(
                       "USA IL CODICE",
+                      letterSpacing: 2,
                     ).applyShaders(context),
                   ),
                 ),
@@ -62,6 +63,7 @@ class ReferralPage extends GetView<ReferralController> {
                     child: TitleMedium(
                       "CONTINUA SENZA",
                       underline: true,
+                      letterSpacing: 1.5,
                       textAlign: TextAlign.center,
                     ),
                   ),
