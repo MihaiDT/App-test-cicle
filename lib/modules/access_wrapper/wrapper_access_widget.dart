@@ -30,31 +30,23 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
     controller = Get.put(
       WrapperAccessController(),
     );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    print("object");
+    print("object");
+    print("object");
+    print("object");
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       /// The listener will be added only if the page need an authentication
-      if (widget.authNeeded) {
-        AppLifecycleListener(
-          onResume: () {
-            if (widget.authNeeded &&
-                (HiveManager.showLockPage ||
-                    appController.showLockPage.value)) {
-              authenticate().then((value) async {
-                appController.showLockPage.value = false;
-                HiveManager.showLockPage = false;
-                if (value == false) {
-                  /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
-                  /// TODO: CHECK HOW TO MANAGE THIS SCENARIO
-                  return value;
-                }
-              });
-            }
-          },
-          onPause: () {
-            HiveManager.showLockPage = true;
-            appController.showLockPage.value = true;
-          },
-        );
-      }
+      AppLifecycleListener(
+        onRestart: () {
+          if (mounted) {
+            setState(() {});
+          }
+        },
+        onHide: () {
+          HiveManager.showLockPage = true;
+          appController.showLockPage.value = true;
+        },
+      );
     });
 
     super.initState();
@@ -62,6 +54,18 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.authNeeded &&
+        (HiveManager.showLockPage || appController.showLockPage.value)) {
+      authenticate().then((value) async {
+        appController.showLockPage.value = false;
+        HiveManager.showLockPage = false;
+        if (value == false) {
+          /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
+          /// TODO: CHECK HOW TO MANAGE THIS SCENARIO
+          return value;
+        }
+      });
+    }
     return Obx(
       () {
         return Stack(

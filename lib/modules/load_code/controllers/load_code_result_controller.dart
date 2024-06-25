@@ -5,7 +5,8 @@ import 'package:lines/modules/mission_completed/arguments/mission_completed_argu
 import 'package:lines/repository/product_service.dart';
 
 class LoadCodeResultController extends GetxController {
-  int get totalCoins => appController.user.value?.coinsCollected ?? 0;
+  RxInt get totalCoins => (appController.user.value?.coinsCollected ?? 0).obs;
+
   final MissionCompletedArguments argument =
       appController.missionCompletedArguments.value;
 

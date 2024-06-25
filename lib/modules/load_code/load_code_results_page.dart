@@ -27,8 +27,12 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
           color: ThemeColor.darkBlue,
         ),
         actions: [
-          CoinTotal(
-            totalCoins: controller.totalCoins,
+          Obx(
+            () {
+              return CoinTotal(
+                totalCoins: controller.totalCoins.value,
+              );
+            },
           ),
         ],
       ),

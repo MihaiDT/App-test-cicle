@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/missions/controllers/missions_details_controller.dart';
 import 'package:lines/modules/missions/widgets/missions_how_to_participate_step_one.dart';
 import 'package:lines/modules/missions/widgets/missions_how_to_participate_step_three.dart';
@@ -33,8 +32,12 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
           color: ThemeColor.darkBlue,
         ),
         actions: [
-          CoinTotal(
-            totalCoins: appController.user.value?.coinsCollected ?? 0,
+          Obx(
+            () {
+              return CoinTotal(
+                totalCoins: controller.totalCoins.value,
+              );
+            },
           ),
         ],
         systemOverlayStyle: SystemUiOverlayStyle.dark,

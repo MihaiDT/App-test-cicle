@@ -9,6 +9,8 @@ import 'package:lines/routes/routes.dart';
 class MissionsDetailsController extends GetxController {
   Rx<Mission> selectedMission = (Get.arguments as Mission).obs;
 
+  RxInt get totalCoins => (appController.user.value?.coinsCollected ?? 0).obs;
+
   @override
   void onInit() {
     super.onInit();

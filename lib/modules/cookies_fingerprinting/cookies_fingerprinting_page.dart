@@ -88,9 +88,13 @@ class CookiesFingerprintingPage
                       ),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => {
-                                // TODO: privacy
-                              },
+                          ..onTap = () {
+                            launchUrl(
+                              Uri.parse(
+                                controller.privacyUrl,
+                              ),
+                            );
+                          },
                         text: 'clicca qui',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: ThemeColor.brightPink,
@@ -171,9 +175,14 @@ class CookiesFingerprintingPage
                       ),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => {
-                                // TODO: privacy
-                              },
+                          ..onTap = () {
+                            launchUrl(
+                              Uri.parse(
+                                'https://piwikpro.it/privacy-policy/?__hstc=229983747.4bf8e6efe7c31fcc605a0d332421dc21.1715239232097.1715239232097.1715239232097.1&__hssc=229983747.1.1715239232097&__hsfp=1343281090',
+                              ),
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
                         text:
                             'https://piwikpro.it/privacy-policy/?__hstc=229983747.4bf8e6efe7c31fcc605a0d332421dc21.1715239232097.1715239232097.1715239232097.1&__hssc=229983747.1.1715239232097&__hsfp=1343281090',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(

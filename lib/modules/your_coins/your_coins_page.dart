@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/info/widgets/info_bottom_sheet.dart';
 import 'package:lines/modules/info/widgets/info_what_are_coins_bottomsheet..dart';
 import 'package:lines/modules/your_coins/widgets/activity_card.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -29,7 +30,23 @@ class YourCoinsPage extends StatelessWidget {
         actions: [
           InkWell(
             onTap: () {
-              Get.bottomSheet(const InfoWhatAreCoinsBottomSheet());
+              showModalBottomSheet(
+                constraints: BoxConstraints(maxHeight: Get.height * 0.85),
+                context: context,
+                isScrollControlled: true,
+                builder: (_) => Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: const InfoBottomSheet(
+                    child: InfoWhatAreCoinsBottomSheet(),
+                  ),
+                ),
+              );
             },
             child: SvgPicture.asset(
               ThemeIcon.info,

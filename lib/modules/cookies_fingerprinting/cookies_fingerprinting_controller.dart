@@ -13,6 +13,8 @@ class CookiesFingerprintingController extends GetxController {
 
   Rx<bool?>? hasAcceptedCookieProfiling;
 
+  String get privacyUrl => appController.settings.value?.privacyUrl ?? '';
+
   @override
   void onInit() {
     hasAcceptedCookieStats = HiveManager.hasAcceptedCookieStats.obs;

@@ -15,6 +15,8 @@ class LoadCodeController extends GetxController {
   Rx<Mission?> selectedMission =
       appController.missionCompletedArguments.value.mission.obs;
 
+  RxInt get totalCoins => (appController.user.value?.coinsCollected ?? 0).obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -76,8 +78,6 @@ class LoadCodeController extends GetxController {
       mission: mission,
     );
   }
-
-  int get totalCoins => appController.user.value?.coinsCollected ?? 0;
 
   final RxString writtenCode = "".obs;
 
