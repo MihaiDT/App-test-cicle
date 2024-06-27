@@ -18,6 +18,11 @@ class NameSurnameController extends GetxController {
     super.onReady();
     if (appController.registerParameter.firstName.isNotEmpty == true) {
       nameController.text = appController.registerParameter.firstName;
+      nameValue.value = appController.registerParameter.firstName;
+    }
+    if (appController.registerParameter.lastName.isNotEmpty == true) {
+      surnameController.text = appController.registerParameter.lastName;
+      surnameValue.value = appController.registerParameter.firstName;
     }
   }
 

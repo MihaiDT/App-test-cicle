@@ -60,12 +60,12 @@ class ConfirmTutorEmailPage extends GetView<ConfirmTutorEmailController> {
                 ),
                 ThemeSizedBox.height32,
                 const HeadlineLarge(
-                  "Non hai ricevuto la mail?",
+                  "L’email non è stata ricevuta?",
                   fontWeight: FontWeight.w500,
                 ),
                 ThemeSizedBox.height8,
                 const BodyMedium(
-                  "Controlla nella Posta indesiderata.\nSe non la trovi prova con",
+                  "Consiglia al tuo genitore/tutore di controllare la posta indesiderata.\nSe non la trova clicca su",
                   textAlign: TextAlign.center,
                 ),
                 ThemeSizedBox.height8,

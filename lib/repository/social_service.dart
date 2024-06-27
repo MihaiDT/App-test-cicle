@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
@@ -37,8 +36,9 @@ class SocialService {
 
     await _saveUserData(
       credential.givenName!,
+      credential.familyName!,
       credential.email!,
-      credential.identityToken!,
+      // credential.identityToken!,
     );
 
     await _validateEmail(
@@ -67,13 +67,14 @@ class SocialService {
         auth!.idToken!,
         RegistrationProvider.google,
       );
-    }
 
-    await _saveUserData(
-      "",
-      googleSignIn.currentUser!.email,
-      googleSignIn.currentUser!.id,
-    );
+      await _saveUserData(
+        "",
+        "",
+        googleSignIn.currentUser!.email,
+        // googleSignIn.currentUser!.id,
+      );
+    }
   }
 
   static Future<void> facebookSignIn() async {
@@ -88,6 +89,13 @@ class SocialService {
         userData['email'],
         loginResult.accessToken!.tokenString,
         RegistrationProvider.facebook,
+      );
+
+      await _saveUserData(
+        "",
+        "",
+        userData['email'],
+        // userData['id'],
       );
     }
   }
@@ -114,15 +122,22 @@ class SocialService {
     appController.socialLoginParameter.registrationProvider =
         registrationProvider;
     appController.socialLoginParameter.token = socialToken;
+
+    appController.registerParameter.email = email;
+    appController.registerParameter.registrationProvider = registrationProvider;
+    appController.registerParameter.socialToken = socialToken;
   }
 
   static Future<void> _saveUserData(
     String name,
+    String lastName,
     String email,
-    String id,
+    // String id,
   ) async {
     appController.registerParameter.firstName = name;
+    appController.registerParameter.lastName = lastName;
     appController.registerParameter.email = email;
-    HiveManager.userId = id;
+
+    // HiveManager.userId = id;
   }
 }

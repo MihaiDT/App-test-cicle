@@ -10,4 +10,6 @@ abstract class Environment {
   String get cherryCustomizationEndpoint;
 
   Map<String, String> get piwik;
+
+  String get articleShareUrl;
 }

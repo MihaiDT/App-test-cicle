@@ -73,20 +73,21 @@ class BirthDatePage extends GetView<BirthDateController> {
                   children: [
                     Flexible(
                       flex: 120,
-                      child: InputTextField(
-                        focusNode: controller.dayFocus,
-                        contentPaddingLeft: 0,
-                        label: "",
-                        placeholder: "GG",
-                        textAlign: TextAlign.center,
-                        textEditingController: controller.dayController.value,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(2),
-                        ],
-                        onChanged: (txt) {
-                          controller.dayValue.value = txt;
-                        },
+                      child: Center(
+                        child: InputTextField(
+                          focusNode: controller.dayFocus,
+                          label: "",
+                          placeholder: "GG",
+                          textAlign: TextAlign.center,
+                          textEditingController: controller.dayController.value,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(2),
+                          ],
+                          onChanged: (txt) {
+                            controller.dayValue.value = txt;
+                          },
+                        ),
                       ),
                     ),
                     ThemeSizedBox.width16,
@@ -94,7 +95,6 @@ class BirthDatePage extends GetView<BirthDateController> {
                       flex: 120,
                       child: InputTextField(
                         focusNode: controller.monthFocus,
-                        contentPaddingLeft: 0,
                         label: "",
                         placeholder: "MM",
                         textAlign: TextAlign.center,
@@ -113,7 +113,6 @@ class BirthDatePage extends GetView<BirthDateController> {
                       flex: 160,
                       child: InputTextField(
                         focusNode: controller.yearFocus,
-                        contentPaddingLeft: 0,
                         label: "",
                         placeholder: "AAAA",
                         textAlign: TextAlign.center,

@@ -584,6 +584,13 @@ class CalendarController extends GetxController with MonthCalendarMixin {
         false;
   }
 
+  // bool get isTheoricalMensesDay {
+  //   return appController.calendarData.value?.calendarDays.firstWhereOrNull((element) {
+  //         return element.date == dateFormatYMD.format(rxSelectedDate.value);
+  //       })?.isTheoricalMensesDay ??
+  //       false;
+  // }
+
   bool isCategorySavedInHome(
     SymptomCategory category,
     List<String> categoryIds,

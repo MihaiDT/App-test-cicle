@@ -11,7 +11,7 @@ class HowOftenMensesWidget extends StatelessWidget {
     super.key,
     required this.onTap,
   }) {
-    howOftenMensesValue = ValueNotifier(_rangeMenses[0]);
+    howOftenMensesValue = ValueNotifier(_rangeMenses[18]);
   }
 
   @override
@@ -108,6 +108,9 @@ class HowOftenMensesWidget extends StatelessWidget {
 
   /// Return cupertino picker
   Widget getCupertinoPicker(BuildContext context) {
+    final daysController =
+        FixedExtentScrollController(initialItem: 28 - _rangeMenses[0]);
+
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.2,
       color: CupertinoColors.systemBackground.resolveFrom(context),
@@ -120,6 +123,7 @@ class HowOftenMensesWidget extends StatelessWidget {
           ),
           Expanded(
             child: CupertinoPicker(
+              scrollController: daysController,
               itemExtent: 35,
               children: _pickerChildren,
               onSelectedItemChanged: (int value) {

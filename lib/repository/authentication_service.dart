@@ -11,7 +11,6 @@ import 'package:lines/data/models/user.dart';
 import 'package:lines/data/models/validate_referral_code.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
-import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
@@ -64,9 +63,6 @@ class AuthenticationService {
   static Future<void> registration(
     RegistrationParameters registerParameter,
   ) async {
-    if (registerParameter.registrationProvider != RegistrationProvider.email) {
-      registerParameter.socialToken = userIDFromDB;
-    }
     appController.user.responseHandler = ResponseHandler.pending();
     try {
       final response = await dio.post(
@@ -256,10 +252,10 @@ class AuthenticationService {
         "/auth/logout",
       );
 
+      HiveManager.removeAcceptedCookie();
       HiveManager.removeIsPastDateCalculated();
       await Get.find<SecureStorageManager>().clearToken();
       HiveManager.removeUserId();
-      HiveManager.removeAcceptedCookie();
 
       appController.initializeState();
     } catch (e) {

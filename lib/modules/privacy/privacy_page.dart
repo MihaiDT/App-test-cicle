@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/theme/theme_decoration.dart';
@@ -10,6 +11,7 @@ import 'package:lines/modules/privacy/widgets/privacy_detail_widget.dart';
 import 'package:lines/widgets/buttons/secondary_loading_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PrivacyPage extends GetView<PrivacyController> {
   const PrivacyPage({
@@ -85,10 +87,30 @@ class PrivacyPage extends GetView<PrivacyController> {
                       value: controller.thirdAccepted.value,
                     ),
                     ThemeSizedBox.height24,
-                    const BodyMedium(
-                      "In qualsiasi momento potrai modificare le tue preferenze.\n"
-                      "Procedendo con la registration dichiari di aver letto l'informativa sul trattamento dei dati personali.",
+                    MarkdownBody(
+                      data:
+                          "In qualsiasi momento potrai modificare le tue preferenze.\n"
+                          "Procedendo con la registration dichiari di aver letto l'[informativa]() sul trattamento dei dati personali.",
+                      styleSheet: MarkdownStyleSheet(
+                        a: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.white,
+                            ),
+                        p: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(color: Colors.white),
+                      ),
+                      onTapLink: (text, href, title) {
+                        launchUrl(
+                          Uri.parse(
+                            "https://lines.it/informativa-privacy/app-my-lines",
+                          ),
+                        );
+                      },
                     ),
+                    ThemeSizedBox.height32,
                   ],
                 ),
               );

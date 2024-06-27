@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/api.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
@@ -53,7 +54,7 @@ class AdvicesSliderArticleDetail extends StatelessWidget {
             InkWell(
               onTap: () async {
                 await Share.share(
-                  'https://lines-test-link.s3.amazonaws.com/articles/$id',
+                  "${environment.articleShareUrl}/articoli/$id",
                 );
                 BadgesService.triggerEvent(BadgeEvent.share);
               },

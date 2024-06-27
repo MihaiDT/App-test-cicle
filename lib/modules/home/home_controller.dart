@@ -90,11 +90,12 @@ class HomeController extends AppScaffoldController {
 
     ever(
       rxShowGameTutorial,
+      condition: Get.currentRoute == Routes.main,
       (show) async {
         if (show) {
           rxShowGameTutorial.value = false;
 
-          await wait(milliseconds: 1500);
+          await wait(milliseconds: 800);
 
           // The Future.delayed is a workaround to ensure that
           // the homeCircularPeriodCalendarKey is in the correct position
@@ -105,7 +106,7 @@ class HomeController extends AppScaffoldController {
           final position = renderBox.localToGlobal(Offset.zero);
 
           Future.delayed(
-            const Duration(milliseconds: 300),
+            const Duration(milliseconds: 1),
             () {
               List<TargetFocus> gameTargets = [];
               gameTargets.addAll(
@@ -398,9 +399,9 @@ class HomeController extends AppScaffoldController {
                                 ),
                               ),
                             ),
-                            TutorialCloseButton(
-                              onTap: () => hideTutorial(),
-                            ),
+                            // TutorialCloseButton(
+                            //   onTap: () => hideTutorial(),
+                            // ),
                           ],
                         );
                       } else if (tutorialStep.value == 1) {
@@ -414,9 +415,9 @@ class HomeController extends AppScaffoldController {
                                 ),
                               ),
                             ),
-                            TutorialCloseButton(
-                              onTap: () => hideTutorial(),
-                            ),
+                            // TutorialCloseButton(
+                            //   onTap: () => hideTutorial(),
+                            // ),
                           ],
                         );
                       }

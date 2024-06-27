@@ -38,8 +38,8 @@ class AppTheme {
         ),
     textSelectionTheme: const TextSelectionThemeData(
       cursorColor: Colors.white,
-      selectionColor: ThemeColor.primary,
-      selectionHandleColor: ThemeColor.primary,
+      selectionColor: ThemeColor.brightPink,
+      selectionHandleColor: ThemeColor.brightPink,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     textTheme: const TextTheme(

@@ -42,7 +42,7 @@ class RegistrationParameters {
       "privacy_profiling": privacyProfiling,
       "privacy_marketing": privacyMarketing,
       "privacy_brand_marketing": privacyBrandMarketing,
-      "registration_provider": registrationProvider?.name,
+      "provider": registrationProvider?.name,
       "social_token": socialToken,
     };
   }

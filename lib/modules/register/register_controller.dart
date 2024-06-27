@@ -57,8 +57,12 @@ class RegisterController extends GetxController {
           isButtonPending.value = false;
           if (callback.content?.emailExists == false) {
             /// Save in the state email and password values
-            appController.registerParameter.email = emailController.text;
-            appController.registerParameter.password = password;
+            if ((appController.registerParameter.registrationProvider ??
+                    RegistrationProvider.email) ==
+                RegistrationProvider.email) {
+              appController.registerParameter.email = emailController.text;
+              appController.registerParameter.password = password;
+            }
 
             AdjustManager.trackEvent(AjustEventType.registration, {
               "createdBy":
@@ -127,15 +131,15 @@ class RegisterController extends GetxController {
     }
   }
 
-  void setSocialLoginParameters(
-    String email,
-    String socialToken,
-    RegistrationProvider registrationProvider,
-  ) {
-    appController.registerParameter.email = email;
-    appController.registerParameter.socialToken = socialToken;
-    appController.registerParameter.registrationProvider = registrationProvider;
-  }
+  // void _setSocialLoginParameters(
+  //   String email,
+  //   String socialToken,
+  //   RegistrationProvider registrationProvider,
+  // ) {
+  //   appController.registerParameter.email = email;
+  //   appController.registerParameter.socialToken = socialToken;
+  //   appController.registerParameter.registrationProvider = registrationProvider;
+  // }
 
   void _showValidateEmailDialog() {
     showErrorDialog(

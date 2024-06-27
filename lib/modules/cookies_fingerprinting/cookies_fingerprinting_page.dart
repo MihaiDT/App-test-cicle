@@ -212,7 +212,10 @@ class CookiesFingerprintingPage
                           groupValue: controller.hasAcceptedCookieStats?.value,
                           text: "Acconsento",
                           onChanged: (value) {
-                            controller.hasAcceptedCookieStats?.value = value;
+                            controller.hasAcceptedCookieStats?.value =
+                                controller.hasAcceptedCookieStats?.value != null
+                                    ? true
+                                    : value;
                           },
                         ),
                         ThemeSizedBox.width16,
@@ -221,7 +224,10 @@ class CookiesFingerprintingPage
                           groupValue: controller.hasAcceptedCookieStats?.value,
                           text: "Non acconsento",
                           onChanged: (value) {
-                            controller.hasAcceptedCookieStats?.value = value;
+                            controller.hasAcceptedCookieStats?.value =
+                                controller.hasAcceptedCookieStats?.value == null
+                                    ? false
+                                    : value;
                           },
                         ),
                       ],
@@ -345,7 +351,10 @@ class CookiesFingerprintingPage
                               controller.hasAcceptedCookieProfiling?.value,
                           onChanged: (value) {
                             controller.hasAcceptedCookieProfiling?.value =
-                                value;
+                                controller.hasAcceptedCookieProfiling?.value ==
+                                        null
+                                    ? true
+                                    : value;
                           },
                           text: 'Acconsento',
                         ),
@@ -357,7 +366,10 @@ class CookiesFingerprintingPage
                           text: "Non acconsento",
                           onChanged: (value) {
                             controller.hasAcceptedCookieProfiling?.value =
-                                value;
+                                controller.hasAcceptedCookieProfiling?.value ==
+                                        null
+                                    ? false
+                                    : value;
                           },
                         ),
                       ],
@@ -368,7 +380,7 @@ class CookiesFingerprintingPage
                 Obx(
                   () {
                     return PrimaryButton(
-                      onPressed: controller.hasChanged
+                      onPressed: controller.enableConfirmButton
                           ? controller.navigateToNextPage
                           : null,
                       child: const TitleLarge(

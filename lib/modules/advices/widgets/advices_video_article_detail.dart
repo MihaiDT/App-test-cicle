@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/modules/advices/controllers/advices_detail_controller.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
@@ -37,7 +38,7 @@ class AdvicesVideoArticleDetail extends GetView<AdvicesDetailController> {
             InkWell(
               onTap: () async {
                 await Share.share(
-                  'https://lines-test-link.s3.amazonaws.com/articles/${controller.article?.id}',
+                  "${environment.articleShareUrl}/articoli/${controller.article?.id}",
                 );
                 BadgesService.triggerEvent(BadgeEvent.share);
               },

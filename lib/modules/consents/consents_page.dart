@@ -23,7 +23,7 @@ class ConsentsPage extends GetView<ConsentsController> {
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         onBackPressed: () => controller.updateConsents(),
         title: const TitleSmall(
-          "GESTIONE CONSENSI",
+          "TENIAMO ALLA TUA PRIVACY",
           color: ThemeColor.primary,
         ),
         backButtonColor: ThemeColor.darkBlue,

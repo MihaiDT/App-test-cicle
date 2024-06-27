@@ -61,6 +61,7 @@ class InputTextField extends StatelessWidget {
           focusNode: focusNode,
           textAlign: textAlign,
           controller: textEditingController,
+          enableSuggestions: false,
           decoration: isPassword
               ? textFieldPasswordDecoration(
                   label,
@@ -75,7 +76,8 @@ class InputTextField extends StatelessWidget {
                   hasError: hasError,
                   isDisabled: isDisabled,
                   placeholder: placeholder,
-                  paddingLeft: contentPaddingLeft,
+                  paddingLeft:
+                      textAlign == TextAlign.center ? null : contentPaddingLeft,
                 ),
           style: ThemeTextStyle.bodyMedium.copyWith(
             color: ThemeColor.whiteDark,
@@ -125,7 +127,7 @@ class InputTextField extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
             child: BodyMedium(
               errorMessage,
               color: ThemeColor.menstruationColor,

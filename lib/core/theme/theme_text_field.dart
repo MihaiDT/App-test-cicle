@@ -38,16 +38,17 @@ InputDecoration textFieldDefaultDecoration(
   String label, {
   required bool isDisabled,
   required bool hasError,
-  double paddingLeft = 32,
+  double? paddingLeft,
   String? placeholder,
 }) {
   return InputDecoration(
-    contentPadding: EdgeInsets.only(
-      top: 18,
-      left: paddingLeft,
-      bottom: 18,
-    ),
-
+    contentPadding: paddingLeft != null
+        ? EdgeInsets.only(
+            top: 18,
+            left: paddingLeft,
+            bottom: 18,
+          )
+        : null,
     filled: hasError,
     disabledBorder: disabledOutlineInputBorder,
     enabled: !isDisabled,
@@ -80,7 +81,7 @@ InputDecoration textFieldDefaultDecoration(
               ),
             ),
           )
-        : const SizedBox(),
+        : null,
   );
 }
 
@@ -97,6 +98,7 @@ InputDecoration textFieldPasswordDecoration(
       isDisabled: isDisabled,
       hasError: hasError,
       placeholder: placeholder,
+      paddingLeft: 32,
     ).copyWith(
       suffixIcon: Padding(
         padding: const EdgeInsets.only(right: 8),

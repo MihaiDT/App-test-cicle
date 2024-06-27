@@ -22,12 +22,9 @@ class CookiesFingerprintingController extends GetxController {
     super.onInit();
   }
 
-  bool get hasChanged =>
-      (hasAcceptedCookieStats?.value != null &&
-          hasAcceptedCookieProfiling?.value != null) &&
-      (hasAcceptedCookieStats?.value != HiveManager.hasAcceptedCookieStats ||
-          hasAcceptedCookieProfiling?.value !=
-              HiveManager.hasAcceptedCookieProfiling);
+  bool get enableConfirmButton =>
+      hasAcceptedCookieStats?.value != null &&
+      hasAcceptedCookieProfiling?.value != null;
 
   void navigateToNextPage() {
     HiveManager.hasAcceptedCookieProfiling = hasAcceptedCookieProfiling?.value;

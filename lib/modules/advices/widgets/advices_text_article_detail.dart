@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/api.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/modules/advices/widgets/suggested_article_section.dart';
@@ -182,7 +183,7 @@ class AdvicesTextArticleDetails extends StatelessWidget {
                     onTap: () async {
                       HapticFeedback.heavyImpact();
                       await Share.share(
-                        'https://lines-test-link.s3.amazonaws.com/articles/${article?.id}',
+                        "${environment.articleShareUrl}/articoli/${article?.id}",
                       );
                       BadgesService.triggerEvent(BadgeEvent.share);
                     },

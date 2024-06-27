@@ -3,15 +3,20 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/app.dart';
 import 'package:lines/core/helpers/dependency_injection_manager.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/firebase_options.dart';
 import 'package:lines/flavors.dart';
+import 'package:lines/repository/advices_service.dart';
 import 'package:lines/repository/interceptor/dio_interceptor.dart';
 import 'package:lines/repository/interceptor/dio_log_intercpetor.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+
+import 'package:lines/core/helpers/hive_manager.dart';
 
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,19 +71,28 @@ void _initNetwork() {
 void _initDeepLinking() {
   final appLinks = AppLinks();
   appLinks.uriLinkStream.listen((uri) async {
-    /* logDebug('Deep link: $uri', tag: 'DeepLinkDeepLinkDeepLinkDeepLink');
-    appController.hasUsedDeepLink.value = true;
-    if (uri.pathSegments.isNotEmpty) {
-      final id = uri.pathSegments.last;
-      if (id.isNotEmpty) {
-        await AdvicesService.fetchSingleArticle(
-          "1de3b05f-dfd3-43e7-90a1-72e3e572e0d7",
-        );
-        Get.toNamed(
-          Routes.articleDetailPage,
-          arguments: appController.singleArticle.value,
-        );
+    logDebug('Deep link: $uri', tag: 'DeepLinkDeepLinkDeepLinkDeepLink');
+
+    if (uri.pathSegments.contains('/login')) {
+      Get.offAndToNamed(Routes.login);
+    } else if (uri.pathSegments.contains('/app/articoli/')) {
+      if (HiveManager.userId.isNotEmpty) {
+        // Link articolo
+        appController.hasUsedDeepLink.value = true;
+
+        final id = uri.pathSegments.last;
+
+        if (id.isNotEmpty) {
+          await AdvicesService.fetchSingleArticle(id);
+
+          if (appController.singleArticle.value != null) {
+            Get.toNamed(
+              Routes.articleDetailPage,
+              arguments: appController.singleArticle.value,
+            );
+          }
+        }
       }
-    }*/
+    }
   });
 }

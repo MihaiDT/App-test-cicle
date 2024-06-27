@@ -33,10 +33,10 @@ mixin MonthCalendarMixin {
       const Duration(
         days: 720,
       ),
-    ); // FIXME: Valutare se ha senso andare più indietro, data primo ciclo registrato
+    );
     maxDate = today.add(
       const Duration(
-        days: 120,
+        days: 180,
       ),
     );
 

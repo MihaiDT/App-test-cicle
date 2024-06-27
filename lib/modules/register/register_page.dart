@@ -145,7 +145,7 @@ class RegisterPage extends GetView<RegisterController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const TitleMedium(
-                        "Hai già un account?",
+                        "Hai già un account Lines?",
                       ),
                       ThemeSizedBox.width4,
                       const TitleMedium(

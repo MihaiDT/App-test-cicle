@@ -161,7 +161,7 @@ class LoginPage extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const TitleMedium(
-                        "Non hai un account?",
+                        "Non hai un account Lines?",
                       ),
                       ThemeSizedBox.width4,
                       const TitleMedium(

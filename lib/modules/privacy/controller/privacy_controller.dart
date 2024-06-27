@@ -37,6 +37,7 @@ class PrivacyController extends GetxController {
     appController.registerParameter.privacyMarketing = firstAccepted.value;
     appController.registerParameter.privacyProfiling = secondAccepted.value;
     appController.registerParameter.privacyBrandMarketing = thirdAccepted.value;
+
     AdjustManager.trackEvent(AjustEventType.privacyPolicy);
 
     PiwikManager.trackEvent(

@@ -24,4 +24,8 @@ class ProdEnv extends Environment {
         'baseUrl': '172e3eb8-e25f-4a2e-ad55-004c93e3026d',
         'siteId': 'https://fater.piwik.pro',
       };
+
+  @override
+  // String get articleShareUrl => "https://lines.it/app";
+  String get articleShareUrl => "https://lines.tandu.it";
 }

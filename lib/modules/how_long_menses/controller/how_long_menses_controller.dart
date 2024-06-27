@@ -5,9 +5,9 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
 
 class HowLongMensesController extends GetxController {
-  int mensesDuration = 1;
+  int mensesDuration = 5;
 
-  int howOftenMensesValue = 26;
+  int howOftenMensesValue = 28;
 
   void onButtonPressed() {
     appController.updateUserParameters.periodDays = mensesDuration;
