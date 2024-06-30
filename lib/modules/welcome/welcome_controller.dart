@@ -24,28 +24,28 @@ class WelcomeController extends AppScaffoldController {
 
   void onTapSignin() {
     appController.isLoginFlow.value = false;
-    if (HiveManager.hasAcceptedCookie) {
-      Get.toNamed(
-        Routes.register,
-      );
-    } else {
-      Get.toNamed(
-        Routes.cookie,
-      );
-    }
+    // if (HiveManager.hasAcceptedCookie) {
+    //   Get.toNamed(
+    //     Routes.register,
+    //   );
+    // } else {
+    Get.toNamed(
+      Routes.cookie,
+    );
+    // }
   }
 
   void onTapLogin() {
     appController.isLoginFlow.value = true;
-    if (HiveManager.hasAcceptedCookie) {
-      Get.toNamed(
-        Routes.login,
-      );
-    } else {
-      Get.toNamed(
-        Routes.cookie,
-      );
-    }
+    // if (HiveManager.hasAcceptedCookie) {
+    //   Get.toNamed(
+    //     Routes.login,
+    //   );
+    // } else {
+    Get.toNamed(
+      Routes.cookie,
+    );
+    // }
   }
 
   /// Private methods
