@@ -79,7 +79,12 @@ class SocialService {
 
   static Future<void> facebookSignIn() async {
     // By default the login method has the next permissions ['email','public_profile']
-    LoginResult loginResult = await FacebookAuth.instance.login();
+    LoginResult loginResult = await FacebookAuth.instance.login(
+      permissions: [
+        'email',
+        'public_profile',
+      ],
+    );
 
     if (loginResult.status == LoginStatus.success) {
       final userData = await FacebookAuth.instance

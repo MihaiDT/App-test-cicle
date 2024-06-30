@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';

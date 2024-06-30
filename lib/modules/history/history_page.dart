@@ -22,15 +22,28 @@ class HistoryPage extends GetView<HistoryController> {
           color: ThemeColor.darkBlue,
         ),
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.symmetric(
-          vertical: 32,
-          horizontal: 16,
-        ),
-        itemCount: 1,
-        itemBuilder: (context, index) => HistoryRow(
-          day: DateTime.now(),
-        ),
+      body: Obx(
+        () => controller.historyDays.isNotEmpty
+            ? ListView.builder(
+                padding: const EdgeInsets.only(
+                  bottom: 32,
+                  left: 16,
+                  right: 16,
+                ),
+                itemCount: controller.historyDays.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: HistoryRow(
+                      isMensesDay: controller.historyDays[index]
+                              ['isDuringPeriod'] ==
+                          true,
+                      symptomDiary: controller.historyDays[index],
+                    ),
+                  );
+                },
+              )
+            : const SizedBox.shrink(),
       ),
     );
   }

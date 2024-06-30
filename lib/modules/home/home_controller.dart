@@ -359,10 +359,7 @@ class HomeController extends AppScaffoldController {
                               hideTutorial();
                               Get.toNamed(Routes.calendar);
                             },
-                            child: const TitleSmall(
-                              "Aggiungi mestruazioni",
-                              letterSpacing: 1.2,
-                            ),
+                            child: const TitleLarge("Aggiungi mestruazioni"),
                           ),
                         ),
                         TutorialCloseButton(

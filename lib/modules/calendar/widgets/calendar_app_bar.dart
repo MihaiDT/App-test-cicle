@@ -3,9 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/calendar/calendar_app_bar_controller.dart';
-import 'package:lines/routes/routes.dart';
+import 'package:lines/modules/calendar/calendar_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:super_tooltip/super_tooltip.dart';
 
 class CalendarAppBar extends GetView<CalendarAppBarController>
     implements PreferredSizeWidget {
@@ -15,75 +14,19 @@ class CalendarAppBar extends GetView<CalendarAppBarController>
 
   @override
   Widget build(BuildContext context) {
+    final calendarController = Get.find<CalendarController>();
+
     return TransparentAppBar(
       actions: [
-        SuperTooltip(
-          arrowLength: 0,
-          arrowBaseWidth: 0,
-          showBarrier: false,
-          popupDirection: TooltipDirection.left,
-          minimumOutsideMargin: 0,
-          controller: controller.tooltipController,
-          content: SizedBox(
-            width: 150,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                InkWell(
-                  onTap: () {
-                    controller.onActionTap();
-                    Get.toNamed(Routes.historyPage);
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const HeadlineSmall(
-                        "Cronologia del diario",
-                        color: ThemeColor.darkBlue,
-                      ),
-                      const Spacer(),
-                      SvgPicture.asset(
-                        ThemeIcon.arrowRight,
-                        color: ThemeColor.primary,
-                      ),
-                    ],
-                  ),
-                ),
-                const Divider(),
-                InkWell(
-                  onTap: () {
-                    controller.onActionTap();
-                    Get.toNamed(Routes.yourDiaryPage);
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const HeadlineSmall(
-                        "Grafici e statistiche",
-                        color: ThemeColor.darkBlue,
-                      ),
-                      const Spacer(),
-                      SvgPicture.asset(
-                        ThemeIcon.arrowRight,
-                        color: ThemeColor.primary,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          child: GestureDetector(
-            onTap: controller.tooltipController.showTooltip,
-            behavior: HitTestBehavior.translucent,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: SvgPicture.asset(
-                ThemeIcon.threeDots,
-                color: ThemeColor.darkBlue,
-                height: 20,
-              ),
+        InkWell(
+          onTap: () => calendarController.showTooltip.value =
+              !calendarController.showTooltip.value,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: SvgPicture.asset(
+              ThemeIcon.threeDots,
+              color: ThemeColor.darkBlue,
+              height: 20,
             ),
           ),
         ),

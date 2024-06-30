@@ -91,10 +91,25 @@ class CalendarService {
           "weight": symptomsDiaries.weight,
         },
       );
-      _saveSymptomsDiaries(response);
+      _saveSymptomsDiary(response);
     } catch (e) {
       log.logApiException(e);
       appController.symptomsDiaries.responseHandler = ResponseHandler.failed();
+    }
+  }
+
+  static Future<void> symptomsDiaryHistory() async {
+    appController.symptomsDiariesHistory.responseHandler =
+        ResponseHandler.pending();
+    try {
+      final response = await dio.get(
+        "/symptoms_diaries_history",
+      );
+      _saveSymptomsHistories(response);
+    } catch (e) {
+      log.logApiException(e);
+      appController.symptomsDiariesHistory.responseHandler =
+          ResponseHandler.failed();
     }
   }
 
@@ -107,7 +122,7 @@ class CalendarService {
       final response = await dio.get(
         "/symptoms_diaries/$parsedDate",
       );
-      _saveSymptomsDiaries(response);
+      _saveSymptomsDiary(response);
     } catch (e) {
       log.logApiException(e);
       appController.symptomsDiaries.responseHandler = ResponseHandler.failed();
@@ -221,7 +236,14 @@ class CalendarService {
     );
   }
 
-  static void _saveSymptomsDiaries(Response response) {
+  static void _saveSymptomsHistories(Response response) {
+    appController.symptomsDiariesHistory.responseHandler =
+        ResponseHandler.successful(
+      content: List<Map<String, dynamic>>.from(response.data["history"]),
+    );
+  }
+
+  static void _saveSymptomsDiary(Response response) {
     appController.symptomsDiaries.responseHandler = ResponseHandler.successful(
       content: SymptomDiaries.fromJson(
         response.data["symptoms_diary"],

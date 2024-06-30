@@ -87,10 +87,7 @@ class HomeCircularPeriodCalendar extends GetView<HomeController> {
                   onPressed: () {
                     Get.toNamed(Routes.calendar);
                   },
-                  child: const TitleMedium(
-                    "Aggiungi mestruazioni",
-                    letterSpacing: 1.5,
-                  ),
+                  child: const TitleLarge("Aggiungi mestruazioni"),
                 ),
               ),
               Padding(

@@ -150,6 +150,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       List.generate(301, (index) => '${index + 30} kg').obs;
   RxString notesInitialValue = ''.obs;
 
+  RxBool showTooltip = false.obs;
+
   CalendarController() {
     ever(
       rxSelectedDate,

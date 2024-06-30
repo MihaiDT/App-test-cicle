@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/enums/calendar_tabs.dart';
@@ -9,6 +10,7 @@ import 'package:lines/modules/calendar/widgets/calendar_month_year_switch.dart';
 import 'package:lines/modules/calendar/widgets/calendar_week_row.dart';
 import 'package:lines/modules/calendar/widgets/calendar_year_body.dart';
 import 'package:lines/modules/calendar/widgets/scrollable_calendar.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/loaders/dark_loader.dart';
@@ -75,6 +77,79 @@ class CalendarPage extends GetView<CalendarController> {
                 },
               ),
             ],
+          ),
+          Obx(
+            () => !controller.showTooltip.value
+                ? const SizedBox.shrink()
+                : Positioned(
+                    top: ThemeSize.heightSafeAreaTop +
+                        ThemeSize.heightAppBarDefault -
+                        8,
+                    right: 24,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          ThemeShadow.flushShadow,
+                          ThemeShadow.flushShadow,
+                          ThemeShadow.flushShadow,
+                        ],
+                        image: ThemeDecoration.images.bgCalendar,
+                      ),
+                      width: 180,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              controller.showTooltip.value = false;
+                              Get.toNamed(Routes.historyPage);
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const HeadlineSmall(
+                                  "Cronologia del diario",
+                                  color: ThemeColor.darkBlue,
+                                ),
+                                const Spacer(),
+                                SvgPicture.asset(
+                                  ThemeIcon.arrowRight,
+                                  color: ThemeColor.primary,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Divider(),
+                          InkWell(
+                            onTap: () {
+                              controller.showTooltip.value = false;
+                              Get.toNamed(Routes.yourDiaryPage);
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const HeadlineSmall(
+                                  "Grafici e statistiche",
+                                  color: ThemeColor.darkBlue,
+                                ),
+                                const Spacer(),
+                                SvgPicture.asset(
+                                  ThemeIcon.arrowRight,
+                                  color: ThemeColor.primary,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
           ),
           Obx(
             () {

@@ -74,6 +74,7 @@ class AppController extends GetxController {
   EasyGetter<List<SymptomCategory>> categoriesSavedInHome;
 
   EasyGetter<SymptomDiaries> symptomsDiaries;
+  EasyGetter<List<Map<String, dynamic>>> symptomsDiariesHistory;
 
   EasyGetter<List<Badge>> badges;
 
@@ -83,6 +84,7 @@ class AppController extends GetxController {
 
   EasyGetter<List<ProductCategory>> productCategory;
   EasyGetter<SymptomCategoryStats> symptomCategoryStats;
+
   EasyGetter<List<Mission>> missions;
   EasyGetter<List<MensesStatistics>> mensesStatistics;
   EasyGetter<SendConfirmEmail> sendConfirmEmail;
@@ -125,6 +127,7 @@ class AppController extends GetxController {
     required this.missions,
     required this.mensesStatistics,
     required this.symptomsDiaries,
+    required this.symptomsDiariesHistory,
     required this.sendConfirmEmail,
     required this.updatePassword,
     required this.missionCompletedArguments,
@@ -152,6 +155,7 @@ class AppController extends GetxController {
       symptomCategory: EasyGetter<List<SymptomCategory>>(),
       categoriesSavedInHome: EasyGetter<List<SymptomCategory>>(),
       symptomsDiaries: EasyGetter<SymptomDiaries>(),
+      symptomsDiariesHistory: EasyGetter<List<Map<String, dynamic>>>(),
       badges: EasyGetter<List<Badge>>(),
       periodsStats: EasyGetter<List<PeriodsStats>>(),
       specificDatePeriodsStats: EasyGetter<SpecificDatePeriodsStats>(),
@@ -188,6 +192,7 @@ class AppController extends GetxController {
     symptomCategory = EasyGetter<List<SymptomCategory>>();
     categoriesSavedInHome = EasyGetter<List<SymptomCategory>>();
     symptomsDiaries = EasyGetter<SymptomDiaries>();
+    symptomsDiariesHistory = EasyGetter<List<Map<String, dynamic>>>();
     badges = EasyGetter<List<Badge>>();
     periodsStats = EasyGetter<List<PeriodsStats>>();
     specificDatePeriodsStats = EasyGetter<SpecificDatePeriodsStats>();

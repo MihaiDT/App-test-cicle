@@ -1,42 +1,142 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/symptom_category.dart';
-import 'package:lines/modules/history/widgets/history_symptom.dart';
+import 'package:lines/modules/calendar/widgets/calendar_chip.dart';
 
 class HistoryRow extends StatelessWidget {
-  final DateTime day;
+  final Map<String, dynamic> symptomDiary;
+  final bool isMensesDay;
 
   const HistoryRow({
-    required this.day,
+    required this.symptomDiary,
+    required this.isMensesDay,
     super.key,
   });
 
-  //only for testing purpose
-  static final List<SymptomCategory> _tmpList = [];
+  Widget get _symtompsByCategory {
+    return ListView.separated(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: symptomDiary['symptomsCategories'].length,
+      itemBuilder: (context, index) {
+        final item = symptomDiary['symptomsCategories'][index];
 
-  //only for testing purpose
-  static final Color _dayColor = ThemeColor.menstruationColor;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: SvgPicture.asset(
+                      "assets/icons/symptoms/${item['symptomsCategoryCode']}.svg"),
+                ),
+                ThemeSizedBox.width4,
+                HeadlineSmall(
+                  item['symptomsCategoryName'],
+                  color: ThemeColor.darkBlue,
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Wrap(
+                children: List.from(item['symptoms'])
+                    .asMap()
+                    .entries
+                    .map(
+                      (symptom) => symptom.value['name'] == ''
+                          ? const SizedBox.shrink()
+                          : Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: CalendarChip(
+                                label: symptom.value['name'],
+                                iconPath:
+                                    "assets/icons/symptoms/${symptom.value['code']}.svg",
+                              ),
+                            ),
+                    )
+                    .toList(),
+              ),
+            ),
+            ThemeSizedBox.height4,
+          ],
+        );
+      },
+      separatorBuilder: (context, index) => ThemeSizedBox.height8,
+    );
+  }
+
+  // //only for testing purpose
+  // List<Map<String, dynamic>> get _symtoms {
+  //   return (symptomDiary.symptomsIDs ?? [])
+  //       .asMap()
+  //       .entries
+  //       .map(
+  //         (elem) => Map<String, dynamic>.from({
+  //           'symptom': getSymptomFromId(elem.value),
+  //           'category': 1,
+  //         }),
+  //       )
+  //       .toList();
+  // }
+
+  Color get _dayColor =>
+      isMensesDay ? ThemeColor.menstruationColor : ThemeColor.primary;
+
+  // Symptom getSymptomFromId(String id) {
+  //   final result = symptomCategories
+  //       .map(
+  //         (category) => Map<String, dynamic>.from({
+  //           'symptomCategory': category,
+  //           'symptoms': category.symptoms,
+  //         }),
+  //       )
+  //       .firstWhere((map) => map['symptomCategory'] == 'cc45300e-b813-4c83-8cc5-1adf2a4e6249');
+
+  //   return symptomCategories.first.symptoms.first;
+  // }
+
+  // SymptomCategory? getSymptomCategoryFromSymptomId(String id) {
+  //   final String symptomCategoryId = symptomCategories
+  //       .expand((category) => category.symptoms)
+  //       .map((symptom) => symptom.id)
+  //       .toList()
+  //       .firstWhere((symptomId) => symptomId == id);
+
+  //   return symptomCategories.firstWhereOrNull((category) => category.id == symptomCategoryId);
+  // }
+
+  // List<SymptomCategory> get symptomCategories => appController.symptomCategory.value ?? [];
 
   @override
   Widget build(BuildContext context) {
-    String abbreviatedMonth = DateFormat.MMM('it').format(day).toUpperCase();
+    DateTime date = DateTime.parse(symptomDiary['date']);
+    String abbreviatedMonth = DateFormat.MMM('it').format(date).toUpperCase();
+
     return Row(
+      mainAxisSize: MainAxisSize.max,
       children: [
-        Column(
-          children: [
-            DisplayLarge(
-              '${day.day}',
-              color: _dayColor,
-            ),
-            LabelSmall(
-              abbreviatedMonth,
-              color: _dayColor,
-            ),
-          ],
+        SizedBox(
+          width: 44,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              DisplayLarge(
+                date.day.toString(),
+                color: _dayColor,
+              ),
+              LabelSmall(
+                abbreviatedMonth,
+                color: _dayColor,
+              ),
+            ],
+          ),
         ),
-        ThemeSizedBox.width16,
-        Flexible(
+        Expanded(
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -45,15 +145,7 @@ class HistoryRow extends StatelessWidget {
                 Radius.circular(10),
               ),
             ),
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              itemCount: _tmpList.length,
-              itemBuilder: (context, index) => HistorySymptom(
-                symptomCategory: _tmpList[index],
-              ),
-              separatorBuilder: (context, index) => ThemeSizedBox.height8,
-            ),
+            child: _symtompsByCategory,
           ),
         ),
       ],
