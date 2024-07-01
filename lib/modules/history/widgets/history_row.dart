@@ -32,7 +32,8 @@ class HistoryRow extends StatelessWidget {
                   width: 18,
                   height: 18,
                   child: SvgPicture.asset(
-                      "assets/icons/symptoms/${item['symptomsCategoryCode']}.svg"),
+                    "assets/icons/symptoms/${item['symptomsCategoryCode']}.svg",
+                  ),
                 ),
                 ThemeSizedBox.width4,
                 HeadlineSmall(
