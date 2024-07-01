@@ -71,47 +71,8 @@ class HistoryRow extends StatelessWidget {
     );
   }
 
-  // //only for testing purpose
-  // List<Map<String, dynamic>> get _symtoms {
-  //   return (symptomDiary.symptomsIDs ?? [])
-  //       .asMap()
-  //       .entries
-  //       .map(
-  //         (elem) => Map<String, dynamic>.from({
-  //           'symptom': getSymptomFromId(elem.value),
-  //           'category': 1,
-  //         }),
-  //       )
-  //       .toList();
-  // }
-
   Color get _dayColor =>
       isMensesDay ? ThemeColor.menstruationColor : ThemeColor.primary;
-
-  // Symptom getSymptomFromId(String id) {
-  //   final result = symptomCategories
-  //       .map(
-  //         (category) => Map<String, dynamic>.from({
-  //           'symptomCategory': category,
-  //           'symptoms': category.symptoms,
-  //         }),
-  //       )
-  //       .firstWhere((map) => map['symptomCategory'] == 'cc45300e-b813-4c83-8cc5-1adf2a4e6249');
-
-  //   return symptomCategories.first.symptoms.first;
-  // }
-
-  // SymptomCategory? getSymptomCategoryFromSymptomId(String id) {
-  //   final String symptomCategoryId = symptomCategories
-  //       .expand((category) => category.symptoms)
-  //       .map((symptom) => symptom.id)
-  //       .toList()
-  //       .firstWhere((symptomId) => symptomId == id);
-
-  //   return symptomCategories.firstWhereOrNull((category) => category.id == symptomCategoryId);
-  // }
-
-  // List<SymptomCategory> get symptomCategories => appController.symptomCategory.value ?? [];
 
   @override
   Widget build(BuildContext context) {

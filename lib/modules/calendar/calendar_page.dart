@@ -20,8 +20,9 @@ class CalendarPage extends GetView<CalendarController> {
 
   @override
   Widget build(BuildContext context) {
+    const appBar = CalendarAppBar();
     return AppScaffoldPage(
-      appBar: const CalendarAppBar(),
+      appBar: appBar,
       backgroundImage: ThemeDecoration.images.bgCalendar,
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -31,7 +32,7 @@ class CalendarPage extends GetView<CalendarController> {
             children: [
               SizedBox(
                 height:
-                    ThemeSize.heightSafeAreaTop + AppBar().preferredSize.height,
+                    ThemeSize.heightSafeAreaTop + appBar.preferredSize.height,
               ),
               Obx(
                 () => CalendarMonthYearSwitch(
@@ -190,27 +191,16 @@ class CalendarPage extends GetView<CalendarController> {
 
   Widget get pageView {
     return Expanded(
-      child: PageView(
+      child: PageView.builder(
         physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageViewController,
-        children: [
-          Obx(
-            () => Visibility(
-              visible: controller.selectedTab.value == CalendarTabs.monthTab &&
-                  controller.pageShouldRefresh,
-              child: const ScrollableCalendar(
-                spaceBetweenCalendars: 70.0,
-              ),
-            ),
-          ),
-          Obx(
-            () => Visibility(
-              visible: controller.selectedTab.value == CalendarTabs.yearTab &&
-                  controller.pageShouldRefresh,
-              child: const CalendarYearBody(),
-            ),
-          ),
-        ],
+        itemBuilder: (context, index) {
+          return index == 0
+              ? const ScrollableCalendar(
+                  spaceBetweenCalendars: 70.0,
+                )
+              : const CalendarYearBody();
+        },
       ),
     );
   }
