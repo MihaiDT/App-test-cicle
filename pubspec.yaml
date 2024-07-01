@@ -1,5 +1,5 @@
 name: lines
-version: 1.0.0+60
+version: 1.0.0+61
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -125,7 +125,7 @@ dependencies:
   google_sign_in: ^6.2.1
 
   # A Flutter plugin for Facebook Sign In 
-  flutter_facebook_auth: ^7.0.0
+  flutter_facebook_auth: ^7.0.1
   
   # A Flutter widget for rendering HTML and CSS as Flutter widgets.
   flutter_html: ^3.0.0-beta.2

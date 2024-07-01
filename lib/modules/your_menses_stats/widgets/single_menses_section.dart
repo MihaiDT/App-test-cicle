@@ -107,7 +107,7 @@ class SingleMensesSection extends StatelessWidget {
           height: 16,
         ),
         TitleMedium(
-          ovulationDays != null ? "$ovulationDays GIORNI" : " -- GIORNI",
+          endingDate != null ? "$periodDuration GIORNI" : "- GIORNI",
           fontWeight: FontWeight.w900,
           color: ThemeColor.primary,
         ),
@@ -117,6 +117,6 @@ class SingleMensesSection extends StatelessWidget {
 
   String formatDate(String date) {
     DateTime parsedDate = DateTime.parse(date);
-    return DateFormat('dd MMM').format(parsedDate);
+    return DateFormat('dd MMM', 'it').format(parsedDate);
   }
 }

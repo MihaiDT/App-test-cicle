@@ -46,7 +46,8 @@ class HistoryController extends GetxController {
         catCode = '';
 
         final tmpHistoryDay = tmpHistoryDays.firstWhereOrNull(
-            (historyDay) => historyDay['date'] == item['date']);
+          (historyDay) => historyDay['date'] == item['date'],
+        );
 
         if (tmpHistoryDay == null) {
           historyDay = {

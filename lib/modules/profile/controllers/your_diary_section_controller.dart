@@ -32,7 +32,12 @@ class YourDiarySectionController extends GetxController {
   ) async {
     if (symptomCategory != null) {
       await MensesService.getSymptomsCategoryStatistics(symptomCategory.id);
-      Get.toNamed(Routes.chartsAndStaticsPage);
+      Get.toNamed(
+        Routes.chartsAndStaticsPage,
+        arguments: {
+          'symptomCategoryName': symptomCategory.name,
+        },
+      );
     }
   }
 

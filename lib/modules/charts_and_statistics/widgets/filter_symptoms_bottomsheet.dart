@@ -45,7 +45,7 @@ class FilterSymptomsBottomSheet extends StatelessWidget {
                   const Divider(),
                   ListTile(
                     title: const HeadlineSmall(
-                      "Tutti i mood",
+                      "Tutti",
                       color: ThemeColor.darkBlue,
                     ),
                     onTap: () {
@@ -70,7 +70,10 @@ class FilterSymptomsBottomSheet extends StatelessWidget {
                       const Divider(),
                       ListTile(
                         leading: SvgPicture.asset(
-                          symptoms[index].iconPath,
+                          "${symptoms[index].iconPath}/${symptoms[index].code}.svg",
+                          height: 24,
+                          fit: BoxFit.scaleDown,
+                          width: 24,
                         ),
                         title: HeadlineSmall(
                           symptoms[index].name,

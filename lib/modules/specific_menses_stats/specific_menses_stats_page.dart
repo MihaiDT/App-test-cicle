@@ -88,7 +88,7 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
                 ),
                 ThemeSizedBox.height8,
                 SizedBox(
-                  height: 180,
+                  height: 160,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -96,17 +96,19 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
                         "Mestruazioni",
                         ThemeColor.menstruationColor,
                         RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                             text: "Le tue mestruazioni sono durate ",
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: ThemeColor.darkBlue,
+                              fontSize: 12,
                               fontWeight: FontWeight.w400,
                             ),
                             children: [
                               TextSpan(
-                                text: "dal 20 al 25 set",
-                                style: TextStyle(
+                                text: _menstruationFromTo,
+                                style: const TextStyle(
                                   color: ThemeColor.darkBlue,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -119,46 +121,68 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
                         "Periodo fertile",
                         const Color(0xFFB6D6E8),
                         RichText(
-                          text: const TextSpan(
-                            text:
-                                "Probabilmente il tuo periodo fertile è stato ",
-                            style: TextStyle(
-                              color: ThemeColor.darkBlue,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: "dal 1 al 6 ott",
-                                style: TextStyle(
-                                  color: ThemeColor.darkBlue,
-                                  fontWeight: FontWeight.w500,
+                          text: (controller.arguments.ovulationDays.length < 3)
+                              ? const TextSpan(
+                                  text: '--',
+                                  style: TextStyle(
+                                    color: ThemeColor.darkBlue,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              : TextSpan(
+                                  text:
+                                      "Probabilmente il tuo periodo fertile è stato ",
+                                  style: const TextStyle(
+                                    color: ThemeColor.darkBlue,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: _ovulationFromTo,
+                                      style: const TextStyle(
+                                        color: ThemeColor.darkBlue,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                       ThemeSizedBox.width8,
                       _card(
-                        "Periodo fertile",
+                        "Ovulazione",
                         ThemeColor.ovulationColor,
                         RichText(
-                          text: const TextSpan(
-                            text: "Probabilmente hai ovulato il ",
-                            style: TextStyle(
-                              color: ThemeColor.darkBlue,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: "dal 1 al 6 ott",
-                                style: TextStyle(
-                                  color: ThemeColor.darkBlue,
-                                  fontWeight: FontWeight.w500,
+                          text: (controller.arguments.ovulationDays.length < 3)
+                              ? const TextSpan(
+                                  text: '--',
+                                  style: TextStyle(
+                                    color: ThemeColor.darkBlue,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              : TextSpan(
+                                  text: "Probabilmente hai ovulato il ",
+                                  style: const TextStyle(
+                                    color: ThemeColor.darkBlue,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: _ovulationDay,
+                                      style: const TextStyle(
+                                        color: ThemeColor.darkBlue,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                     ],
@@ -169,7 +193,7 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
                   children: [
                     Flexible(
                       child: Container(
-                        height: 140,
+                        height: 94,
                         decoration: BoxDecoration(
                           color: ThemeColor.lightGrey.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(10),
@@ -194,10 +218,10 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
                                 "Durata mestruazioni",
                                 color: ThemeColor.darkBlue,
                               ),
-                              ThemeSizedBox.height12,
-                              Divider(
-                                color: ThemeColor.primary.withOpacity(0.03),
-                              ),
+                              // ThemeSizedBox.height12,
+                              // Divider(
+                              //   color: ThemeColor.primary.withOpacity(0.03),
+                              // ),
                             ],
                           ),
                         ),
@@ -206,7 +230,7 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
                     ThemeSizedBox.width8,
                     Flexible(
                       child: Container(
-                        height: 140,
+                        height: 94,
                         decoration: BoxDecoration(
                           color: ThemeColor.lightGrey.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(10),
@@ -231,38 +255,34 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
                                 "Durata del ciclo",
                                 color: ThemeColor.darkBlue,
                               ),
-                              ThemeSizedBox.height12,
-                              Divider(
-                                color: ThemeColor.primary.withOpacity(0.03),
-                              ),
-                              if (controller.specificDatePeriodsStats
-                                      ?.periodDurationLabel.isNotEmpty ==
-                                  true) ...[
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      ThemeIcon.orangeWarning,
-                                      width: 16,
-                                      height: 16,
-                                      color: Colors.orange,
-                                    ),
-                                    ThemeSizedBox.width12,
-                                    TitleSmall(
-                                      controller.specificDatePeriodsStats
-                                              ?.periodDurationLabel ??
-                                          '',
-                                      color: ThemeColor.primary,
-                                    ),
-                                    const Spacer(),
-                                    SvgPicture.asset(
-                                      ThemeIcon.info,
-                                      width: 16,
-                                      height: 16,
-                                      color: ThemeColor.primary,
-                                    ),
-                                  ],
-                                ),
-                              ],
+                              // ThemeSizedBox.height12,
+                              // Divider(
+                              //   color: ThemeColor.primary.withOpacity(0.03),
+                              // ),
+                              // if (controller.specificDatePeriodsStats?.periodDurationLabel.isNotEmpty == true) ...[
+                              //   Row(
+                              //     children: [
+                              //       SvgPicture.asset(
+                              //         ThemeIcon.orangeWarning,
+                              //         width: 16,
+                              //         height: 16,
+                              //         color: Colors.orange,
+                              //       ),
+                              //       ThemeSizedBox.width12,
+                              //       TitleSmall(
+                              //         controller.specificDatePeriodsStats?.periodDurationLabel ?? '',
+                              //         color: ThemeColor.primary,
+                              //       ),
+                              //       const Spacer(),
+                              //       SvgPicture.asset(
+                              //         ThemeIcon.info,
+                              //         width: 16,
+                              //         height: 16,
+                              //         color: ThemeColor.primary,
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ],
                             ],
                           ),
                         ),
@@ -271,9 +291,10 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
                   ],
                 ),
                 ThemeSizedBox.height8,
-                MensesChartWidget(
-                  spots: controller.chartSpots,
-                ),
+                if (controller.chartSpots.isNotEmpty)
+                  MensesChartWidget(
+                    spots: controller.chartSpots,
+                  ),
               ],
             ),
           );
@@ -282,9 +303,38 @@ class SpecificMensesStatsPage extends GetView<SpecificMensesStatsController> {
     );
   }
 
+  String get _ovulationDay {
+    final from = DateTime.parse(controller.arguments.startingDate);
+    final to = from.add(
+      Duration(days: controller.arguments.ovulationDays[1]),
+    );
+
+    return "il ${DateFormat('dd MMM', 'it').format(to)}";
+  }
+
+  String get _ovulationFromTo {
+    final from = DateTime.parse(controller.arguments.startingDate).add(
+      Duration(days: controller.arguments.ovulationDays[0]),
+    );
+    final to = from.add(
+      const Duration(days: 2),
+    );
+
+    return "dal ${DateFormat('dd MMM', 'it').format(from)} al ${DateFormat('dd MMM', 'it').format(to)}";
+  }
+
+  String get _menstruationFromTo {
+    final from = DateTime.parse(controller.arguments.startingDate);
+    final to = from.add(
+      Duration(days: controller.arguments.menstruationDays.length),
+    );
+
+    return "dal ${DateFormat('dd MMM', 'it').format(from)} al ${DateFormat('dd MMM', 'it').format(to)}";
+  }
+
   String formatDate(String date) {
     DateTime parsedDate = DateTime.parse(date);
-    return DateFormat('dd MMM').format(parsedDate);
+    return DateFormat('dd MMM', 'it').format(parsedDate);
   }
 
   Widget _card(

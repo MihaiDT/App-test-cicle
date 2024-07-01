@@ -1,5 +1,6 @@
 import 'dart:io';
 
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -16,6 +17,9 @@ class SocialService {
         await googleSignIn();
         break;
       case RegistrationProvider.facebook:
+        await facebookSignIn();
+        break;
+      case RegistrationProvider.facebookIOS:
         await facebookSignIn();
         break;
       case RegistrationProvider.apple:
@@ -79,21 +83,19 @@ class SocialService {
 
   static Future<void> facebookSignIn() async {
     // By default the login method has the next permissions ['email','public_profile']
-    LoginResult loginResult = await FacebookAuth.instance.login(
-      permissions: [
-        'email',
-        'public_profile',
-      ],
-    );
+    LoginResult loginResult = await FacebookAuth.instance.login();
 
     if (loginResult.status == LoginStatus.success) {
-      final userData = await FacebookAuth.instance
-          .getUserData(fields: "first_name, last_name, email");
+      final userData = await FacebookAuth.instance.getUserData(
+        fields: "first_name, last_name, email",
+      );
 
       _validateEmail(
         userData['email'],
         loginResult.accessToken!.tokenString,
-        RegistrationProvider.facebook,
+        Platform.isIOS
+            ? RegistrationProvider.facebookIOS
+            : RegistrationProvider.facebook,
       );
 
       await _saveUserData(

@@ -5,6 +5,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/your_diary/widgets/category_symptom_tile.dart';
 import 'package:lines/modules/your_diary/your_diary_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
+import 'package:lottie/lottie.dart';
 
 class YourDiaryPage extends GetView<YourDiaryController> {
   const YourDiaryPage({
@@ -48,8 +49,8 @@ class YourDiaryPage extends GetView<YourDiaryController> {
                         canBePressed: currentCategory.enabled,
                         imagePath: currentCategory.iconPath,
                         title: currentCategory.name,
-                        onTap: () => controller
-                            .onSymptomCategoryPressed(currentCategory.id),
+                        onTap: () => controller.onSymptomCategoryPressed(
+                            currentCategory.id, currentCategory.name),
                       );
                     },
                     separatorBuilder: (context, index) => _divider,
@@ -59,8 +60,15 @@ class YourDiaryPage extends GetView<YourDiaryController> {
                   ),
                 );
               }
-              return const Center(
-                child: CircularProgressIndicator(),
+
+              return Center(
+                child: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: LottieBuilder.asset(
+                    "assets/lottie/dark_loader.json",
+                  ),
+                ),
               );
             },
           ),

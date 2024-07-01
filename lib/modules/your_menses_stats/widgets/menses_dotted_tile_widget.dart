@@ -26,7 +26,11 @@ class MensesDottedTileWidget extends StatelessWidget {
           if (mensesDays.contains(index)) {
             dotColor = ThemeColor.menstruationColor;
           } else if (ovulationDays.contains(index)) {
-            dotColor = ThemeColor.ovulationColor;
+            if (ovulationDays.indexOf(index) == 1) {
+              dotColor = ThemeColor.ovulationColor;
+            } else {
+              dotColor = ThemeColor.ovulationColor.withOpacity(0.5);
+            }
           }
           return Padding(
             padding: const EdgeInsets.symmetric(

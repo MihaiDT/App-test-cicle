@@ -29,8 +29,8 @@ class ChartsAndStaticsPage extends GetView<ChartsAndStatisticsController> {
         child: ListView(
           children: [
             ThemeSizedBox.height16,
-            const DisplayMedium(
-              "MOOD",
+            DisplayMedium(
+              controller.symptomCategoryName,
               textAlign: TextAlign.center,
             ).applyShaders(context),
             ThemeSizedBox.height4,

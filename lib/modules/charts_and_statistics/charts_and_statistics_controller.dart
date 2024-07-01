@@ -7,10 +7,12 @@ import 'package:lines/modules/charts_and_statistics/widgets/filter_symptoms_bott
 class ChartsAndStatisticsController extends GetxController {
   RxList<MensesStatistics> mensesStatistics = <MensesStatistics>[].obs;
   Rx<Symptom?>? selectedSymptom;
+  late final String symptomCategoryName;
 
   @override
   void onInit() {
     selectedSymptom = Rx<Symptom?>(null);
+    symptomCategoryName = Get.arguments['symptomCategoryName'] ?? '';
 
     List<MensesStatistics> savedMensesStatistics =
         appController.mensesStatistics.value ?? [];

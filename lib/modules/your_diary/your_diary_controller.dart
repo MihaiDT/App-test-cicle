@@ -7,17 +7,24 @@ import 'package:lines/routes/routes.dart';
 class YourDiaryController extends GetxController {
   @override
   Future<void> onReady() async {
-    if (!appController.symptomCategoryStats.responseHandler.isSuccessful) {
-      await MensesService.mensesStatistics;
-    }
     super.onReady();
+
+    await MensesService.mensesStatistics;
   }
 
   SymptomCategoryStats? get symptomCategoryStats =>
       appController.symptomCategoryStats.value;
 
-  Future<void> onSymptomCategoryPressed(String symptomCategoryId) async {
+  Future<void> onSymptomCategoryPressed(
+    String symptomCategoryId,
+    String symptomCategoryName,
+  ) async {
     await MensesService.getSymptomsCategoryStatistics(symptomCategoryId);
-    Get.toNamed(Routes.chartsAndStaticsPage);
+    Get.toNamed(
+      Routes.chartsAndStaticsPage,
+      arguments: {
+        'symptomCategoryName': symptomCategoryName,
+      },
+    );
   }
 }
