@@ -185,10 +185,11 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   @override
   void onReady() async {
     super.onReady();
+    jumpToToday();
+
     AppLifecycleListener(
       onResume: () {
         selectedTab.value = CalendarTabs.monthTab;
-
         jumpToToday();
       },
     );
@@ -228,8 +229,6 @@ class CalendarController extends GetxController with MonthCalendarMixin {
           .where((element) => element.isMensesDay)
           .map((e) => e.date),
     );
-
-    jumpToToday();
 
     bool calendarConsent = appController.user.value!.calendarConsent ?? false;
     bool diaryConsent = appController.user.value!.diaryConsent ?? false;
@@ -454,11 +453,11 @@ class CalendarController extends GetxController with MonthCalendarMixin {
 
   void _waitForAttachmentAndJumpToMonth(DateTime date) {
     if (monthCalendarItemScrollController.isAttached) {
-      Future.delayed(const Duration(milliseconds: 50), () {
+      Future.delayed(Duration.zero, () {
         jumpToMonth(date: date);
       });
     } else {
-      Future.delayed(const Duration(milliseconds: 50), () {
+      Future.delayed(Duration.zero, () {
         _waitForAttachmentAndJumpToMonth(date);
       });
     }

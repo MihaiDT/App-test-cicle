@@ -25,25 +25,6 @@ class SplashPageController extends GetxController {
         if (appController.user.responseHandler.isFailed) {
           _startAnimation();
         } else if (appController.user.responseHandler.isSuccessful) {
-          /* if (appController.hasUsedDeepLink.value) {
-            /// Set to false to avoid entering the same condition
-            appController.hasUsedDeepLink.value = false;
-            AdvicesCategory? category = appController
-                .advicesCategories.value?.categories.values
-                .toList()
-                .first
-                .advicesCategory;
-            AdvicesArticle? article = appController.advicesCategories.value
-                ?.categories.values.first.subCategories.first.articles.first;
-
-            Get.offAndToNamed(
-              Routes.articleDetailPage,
-              arguments: AdvicesDetailPair(
-                category: category!,
-                article: article!,
-              ),
-            );
-          } else*/
           if (appController.user.value?.routeAfterLogin == "main") {
             Get.offAllNamed(Routes.main);
           } else if (appController.user.value?.routeAfterLogin ==
@@ -69,6 +50,7 @@ class SplashPageController extends GetxController {
     await AdvicesService.fetchSingleArticle("");
     await CalendarService.symptomCategories;
     await CalendarService.homePageSymptomCategories;
+    await CalendarService.symptomsDiaryHistory();
 
     await MensesService.statisticPeriod;
     await MensesService.mensesStatistics;
