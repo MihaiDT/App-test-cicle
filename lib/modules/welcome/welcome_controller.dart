@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/routes/routes.dart';
@@ -23,28 +24,28 @@ class WelcomeController extends AppScaffoldController {
 
   void onTapSignin() {
     appController.isLoginFlow.value = false;
-    // if (HiveManager.hasAcceptedCookie) {
-    //   Get.toNamed(
-    //     Routes.register,
-    //   );
-    // } else {
-    Get.toNamed(
-      Routes.cookie,
-    );
-    // }
+    if (HiveManager.hasAcceptedCookie) {
+      Get.toNamed(
+        Routes.register,
+      );
+    } else {
+      Get.toNamed(
+        Routes.cookie,
+      );
+    }
   }
 
   void onTapLogin() {
     appController.isLoginFlow.value = true;
-    // if (HiveManager.hasAcceptedCookie) {
-    //   Get.toNamed(
-    //     Routes.login,
-    //   );
-    // } else {
-    Get.toNamed(
-      Routes.cookie,
-    );
-    // }
+    if (HiveManager.hasAcceptedCookie) {
+      Get.toNamed(
+        Routes.login,
+      );
+    } else {
+      Get.toNamed(
+        Routes.cookie,
+      );
+    }
   }
 
   /// Private methods

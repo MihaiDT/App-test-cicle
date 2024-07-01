@@ -55,11 +55,10 @@ class CalendarBottomsheetTopButtons extends GetView<CalendarController> {
                         action: 'update period report',
                       );
                     },
-                    child: TitleLarge(
+                    child: HeadlineSmall(
                       controller.modifyPeriodMode.value
                           ? 'Salva mestruazione'
                           : 'Modifica mestruazioni',
-                      letterSpacing: 2,
                     ),
                   ),
                 ),

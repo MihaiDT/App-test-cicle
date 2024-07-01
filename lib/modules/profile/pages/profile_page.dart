@@ -36,10 +36,8 @@ class ProfilePage extends StatelessWidget {
                 ThemeSizedBox.height16,
                 const MyMensesSection(),
                 ThemeSizedBox.height16,
-                if (appController.user.value?.hasMoreThan18Years == true)
-                  const YourDiarySection(),
-                if (appController.user.value?.hasMoreThan18Years == true)
-                  ThemeSizedBox.height16,
+                const YourDiarySection(),
+                ThemeSizedBox.height16,
                 Obx(() {
                   return (appController.user.responseHandler.isSuccessful &&
                           (appController

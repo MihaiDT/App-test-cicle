@@ -57,8 +57,7 @@ class RegisterController extends GetxController {
           isButtonPending.value = false;
           if (callback.content?.emailExists == false) {
             /// Save in the state email and password values
-            if ((appController.registerParameter.registrationProvider ??
-                    RegistrationProvider.email) ==
+            if (appController.registerParameter.registrationProvider ==
                 RegistrationProvider.email) {
               appController.registerParameter.email = emailController.text;
               appController.registerParameter.password = password;
@@ -130,16 +129,6 @@ class RegisterController extends GetxController {
       await AuthenticationService.checkEmail(emailController.text);
     }
   }
-
-  // void _setSocialLoginParameters(
-  //   String email,
-  //   String socialToken,
-  //   RegistrationProvider registrationProvider,
-  // ) {
-  //   appController.registerParameter.email = email;
-  //   appController.registerParameter.socialToken = socialToken;
-  //   appController.registerParameter.registrationProvider = registrationProvider;
-  // }
 
   void _showValidateEmailDialog() {
     showErrorDialog(
