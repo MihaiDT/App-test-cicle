@@ -2,7 +2,8 @@ import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
 
 class YourMensesSectionController extends GetxController {
-  int get periodDays => appController.user.value?.periodDays ?? 0;
+  RxInt get periodDays => (appController.user.value?.periodDays ?? 0).obs;
 
-  int get periodDuration => appController.user.value?.periodDuration ?? 0;
+  RxInt get periodDuration =>
+      (appController.user.value?.periodDuration ?? 0).obs;
 }

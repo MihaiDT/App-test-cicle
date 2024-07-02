@@ -12,45 +12,49 @@ class YourMensesSection extends GetView<YourMensesSectionController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: ThemeSize.paddingSmall,
-          ),
-          child: Row(
-            children: [
-              const DisplayMedium(
-                "Il tuo ciclo",
-              ).applyShaders(context),
-              const Spacer(),
-            ],
-          ),
-        ),
-        ThemeSizedBox.height16,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Obx(
+      () {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InformationTile(
-              title: "Durata mestruazioni",
-              value: controller.periodDays.toString(),
-              onTap: () {
-                Get.toNamed(Routes.yourMensesStatsPage);
-              },
+            Padding(
+              padding: const EdgeInsets.only(
+                left: ThemeSize.paddingSmall,
+              ),
+              child: Row(
+                children: [
+                  const DisplayMedium(
+                    "Il tuo ciclo",
+                  ).applyShaders(context),
+                  const Spacer(),
+                ],
+              ),
             ),
-            ThemeSizedBox.height8,
-            InformationTile(
-              title: "Durata del ciclo",
-              value: controller.periodDuration.toString(),
-              onTap: () {
-                Get.toNamed(Routes.yourMensesStatsPage);
-              },
+            ThemeSizedBox.height16,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                InformationTile(
+                  title: "Durata mestruazioni",
+                  value: controller.periodDays.toString(),
+                  onTap: () {
+                    Get.toNamed(Routes.yourMensesStatsPage);
+                  },
+                ),
+                ThemeSizedBox.height8,
+                InformationTile(
+                  title: "Durata del ciclo",
+                  value: controller.periodDuration.toString(),
+                  onTap: () {
+                    Get.toNamed(Routes.yourMensesStatsPage);
+                  },
+                ),
+                ThemeSizedBox.height8,
+              ],
             ),
-            ThemeSizedBox.height8,
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
