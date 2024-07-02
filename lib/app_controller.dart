@@ -19,6 +19,7 @@ import 'package:lines/data/models/specific_date_period_stats.dart';
 import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/symptom_category.dart';
 import 'package:lines/data/models/symptom_diaries.dart';
+import 'package:lines/data/models/symptom_diaries_history.dart';
 import 'package:lines/data/models/symtpom_category_stats.dart';
 import 'package:lines/data/models/update_password.dart';
 import 'package:lines/data/models/uploaded_product.dart';
@@ -93,6 +94,7 @@ class AppController extends GetxController {
   EasyGetter<ValidateReferralCode> validateReferralCode;
   Rx<MissionCompletedArguments> missionCompletedArguments;
   EasyGetter<UploadedProduct> uploadedProduct;
+  EasyGetter<List<SymptomDiariesHistory>> symptomsDiariesHistory2;
 
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
@@ -135,6 +137,7 @@ class AppController extends GetxController {
     required this.badges,
     required this.hasUsedDeepLink,
     required this.validateReferralCode,
+    required this.symptomsDiariesHistory2,
   });
 
   factory AppController.initial() {
@@ -172,6 +175,7 @@ class AppController extends GetxController {
       isLoginFlow: false.obs,
       showLockPage: false.obs,
       hasUsedDeepLink: false.obs,
+      symptomsDiariesHistory2: EasyGetter<List<SymptomDiariesHistory>>(),
     );
   }
 
@@ -209,6 +213,7 @@ class AppController extends GetxController {
     isLoginFlow.value = false;
     showLockPage.value = false;
     hasUsedDeepLink.value = false;
+    symptomsDiariesHistory2 = EasyGetter<List<SymptomDiariesHistory>>();
 
     HiveManager.removeAcceptedCookie();
   }
