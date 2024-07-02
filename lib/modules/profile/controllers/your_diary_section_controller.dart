@@ -19,13 +19,14 @@ class YourDiarySectionController extends GetxController {
   // todo: implement with the correct symptoms
   List<Symptom> get mostFrequentSymptoms => [];
 
-  List<SingleCategoryStats>? get symptomCategories =>
-      appController.symptomCategoryStats.value?.symptomsCategories
-          .where(
-            (element) => element.enabled == true,
-          )
-          .toList() ??
-      [];
+  RxList get symptomCategories =>
+      (appController.symptomCategoryStats.value?.symptomsCategories
+                  .where(
+                    (element) => element.enabled == true,
+                  )
+                  .toList() ??
+              [])
+          .obs;
 
   Future<void> onSymptomCategoryPressed(
     SingleCategoryStats? symptomCategory,
@@ -41,5 +42,5 @@ class YourDiarySectionController extends GetxController {
     }
   }
 
-  bool get hasSavedSymptoms => symptomCategories?.isNotEmpty ?? false;
+  bool get hasSavedSymptoms => symptomCategories.isNotEmpty;
 }

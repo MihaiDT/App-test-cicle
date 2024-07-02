@@ -50,7 +50,9 @@ class YourDiaryPage extends GetView<YourDiaryController> {
                         imagePath: currentCategory.iconPath,
                         title: currentCategory.name,
                         onTap: () => controller.onSymptomCategoryPressed(
-                            currentCategory.id, currentCategory.name),
+                          currentCategory.id,
+                          currentCategory.name,
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) => _divider,
