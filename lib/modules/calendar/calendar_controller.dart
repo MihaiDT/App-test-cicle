@@ -21,6 +21,7 @@ import 'package:lines/modules/calendar/widgets/diary_consent_dialog.dart';
 import 'package:lines/modules/calendar/widgets/too_many_categories_dialog.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/calendar_service.dart';
+import 'package:lines/repository/menses_service.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/texts/notification_overlay.dart';
@@ -415,6 +416,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       );
 
       await CalendarService.fetchCalendarData();
+      MensesService.mensesStatistics;
+      AuthenticationService.fetchUser();
 
       jumpToToday();
     }
