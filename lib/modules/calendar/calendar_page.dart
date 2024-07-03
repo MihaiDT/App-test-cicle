@@ -169,7 +169,11 @@ class CalendarPage extends GetView<CalendarController> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    bottom: 32,
+                  ),
                   child: PrimaryButton(
                     child: const TitleLarge(
                       'SALVA',
