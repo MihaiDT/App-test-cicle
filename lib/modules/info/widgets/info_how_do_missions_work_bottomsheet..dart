@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/modules/info/widgets/info_paragraph.dart';
+import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/buttons/primary_button.dart';
 
 class InfoHowDoMissionsWorkBottomSheet extends StatelessWidget {
   const InfoHowDoMissionsWorkBottomSheet({
@@ -31,6 +34,17 @@ class InfoHowDoMissionsWorkBottomSheet extends StatelessWidget {
             title: "Come si accede alle missioni?",
             description:
                 "Puoi accedervi acquistando i prodotti Lines che ti vengono segnalati in ciascuna missione. Poi ti basterà caricare i codici che trovi all’interno delle confezioni, nella pagina missioni. Se la missione richiede il caricamento di più codici puoi caricarli in momenti diversi, l'importante è che tutti i codici richieste siano caricati entro la scadenza della missione. Quando avrai completato il caricamento di tutti i codici richiesti, avrai accesso al tuo premio. Se subito disponibile riceverai immediatamente il codice sconto nella tua email di registrazione (controlla la posta indesiderata!) Altrimenti dovrai pazientare qualche giorno: ti invieremo il codice sconto per email appena tornerà disponibile. Mi raccomando, segui le indicazioni per utilizzare il codice sconto tenendo conto della sua data di scadenza. Puoi partecipare più volte ad una stessa missione, per un numero massimo di volte riportato all'interno della missione e nel suo regolamento.",
+          ),
+          ThemeSizedBox.height32,
+          PrimaryButton(
+            child: const TitleLarge(
+              "SCOPRI LE MISSIONI",
+              letterSpacing: 2,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              Get.toNamed(Routes.missionsPage);
+            },
           ),
           ThemeSizedBox.height48,
         ],
