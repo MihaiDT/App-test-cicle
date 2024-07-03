@@ -44,11 +44,6 @@ class CalendarController extends GetxController with MonthCalendarMixin {
       DraggableScrollableController();
 
   bool get showSaveButtonSymptoms {
-    if (pageShouldRefresh &&
-        selectedTab.value == CalendarTabs.monthTab &&
-        (symptomsHasChanged.value ||
-            textInputHasChanged.value ||
-            savedCategoryHasChanged)) {}
     return pageShouldRefresh &&
         selectedTab.value == CalendarTabs.monthTab &&
         (symptomsHasChanged.value ||
@@ -213,6 +208,7 @@ class CalendarController extends GetxController with MonthCalendarMixin {
           ? showTopButton.value = false
           : showTopButton.value = true;
     });
+
     // if (!appController.symptomCategory.responseHandler.isSuccessful) {
     await CalendarService.symptomCategories;
     // }
@@ -322,6 +318,9 @@ class CalendarController extends GetxController with MonthCalendarMixin {
     } else {
       symptomIds.value = [];
       oreDiSonnoValue.value = "";
+      quantitaAcquaValue.value = "";
+      pesoValue.value = "";
+      notesInitialValue.value = "";
     }
     symptomIds.refresh();
   }
