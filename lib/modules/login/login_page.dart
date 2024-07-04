@@ -52,38 +52,40 @@ class LoginPage extends GetView<LoginController> {
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,
-              const TitleLarge(
-                "USA I TUOI SOCIAL",
-                textAlign: TextAlign.center,
-              ),
-              ThemeSizedBox.height24,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LinkAccountWidget(
-                    imagePath: ThemeImage.facebook,
-                    onTap: () => controller.socialLogin(
-                      RegistrationProvider.facebook,
-                    ),
-                  ),
-                  ThemeSizedBox.width40,
-                  LinkAccountWidget(
-                    imagePath: ThemeImage.google,
-                    onTap: () => controller.socialLogin(
-                      RegistrationProvider.google,
-                    ),
-                  ),
-                  if (Platform.isIOS) ...[
-                    ThemeSizedBox.width40,
+              if (Platform.isAndroid) ...[
+                const TitleLarge(
+                  "USA I TUOI SOCIAL",
+                  textAlign: TextAlign.center,
+                ),
+                ThemeSizedBox.height24,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     LinkAccountWidget(
-                      imagePath: ThemeImage.apple,
+                      imagePath: ThemeImage.facebook,
                       onTap: () => controller.socialLogin(
-                        RegistrationProvider.apple,
+                        RegistrationProvider.facebook,
                       ),
                     ),
+                    ThemeSizedBox.width40,
+                    LinkAccountWidget(
+                      imagePath: ThemeImage.google,
+                      onTap: () => controller.socialLogin(
+                        RegistrationProvider.google,
+                      ),
+                    ),
+                    if (Platform.isIOS) ...[
+                      ThemeSizedBox.width40,
+                      LinkAccountWidget(
+                        imagePath: ThemeImage.apple,
+                        onTap: () => controller.socialLogin(
+                          RegistrationProvider.apple,
+                        ),
+                      ),
+                    ],
                   ],
-                ],
-              ),
+                ),
+              ],
               ThemeSizedBox.height32,
               const DividerSection(),
               ThemeSizedBox.height32,
@@ -99,8 +101,7 @@ class LoginPage extends GetView<LoginController> {
                 onEditingComplete: controller.isEmailValid,
                 onSubmitted: (text) {
                   controller.emailValue.value = text;
-                  FocusScope.of(context)
-                      .requestFocus(controller.passwordFocusNode);
+                  FocusScope.of(context).requestFocus(controller.passwordFocusNode);
                 },
                 focusNode: controller.emailFocusNode,
               ),
@@ -115,8 +116,7 @@ class LoginPage extends GetView<LoginController> {
                     isPassword: true,
                     obscureText: controller.hidePassword.value,
                     onTapTogglePassword: () {
-                      controller.hidePassword.value =
-                          !controller.hidePassword.value;
+                      controller.hidePassword.value = !controller.hidePassword.value;
                     },
                     onSubmitted: (_) {
                       FocusScope.of(context).unfocus();
@@ -142,9 +142,7 @@ class LoginPage extends GetView<LoginController> {
               ThemeSizedBox.height24,
               SecondaryLoadingButton(
                 isLoading: controller.isButtonPending.value,
-                onPressed: controller.canProceed.value
-                    ? controller.onButtonPressed
-                    : null,
+                onPressed: controller.canProceed.value ? controller.onButtonPressed : null,
                 child: const TitleLarge(
                   "AVANTI",
                   letterSpacing: 2,

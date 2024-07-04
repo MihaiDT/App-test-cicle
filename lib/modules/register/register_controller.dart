@@ -7,7 +7,9 @@ import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/register/widget/activate_email_dialog.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
+import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/social_service.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -57,30 +59,30 @@ class RegisterController extends GetxController {
           isButtonPending.value = false;
           if (callback.content?.emailExists == false) {
             /// Save in the state email and password values
-            if (appController.registerParameter.registrationProvider ==
-                RegistrationProvider.email) {
+            if (appController.registerParameter.registrationProvider == RegistrationProvider.email) {
               appController.registerParameter.email = emailController.text;
               appController.registerParameter.password = password;
             }
 
             AdjustManager.trackEvent(AjustEventType.registration, {
-              "createdBy":
-                  appController.registerParameter.registrationProvider?.name ??
-                      "email",
+              "createdBy": appController.registerParameter.registrationProvider?.name ?? "email",
             });
             PiwikManager.trackEvent(
               PiwikEventType.registration,
               action: 'step 2 - registration method',
-              name:
-                  appController.registerParameter.registrationProvider?.name ??
-                      "email",
+              name: appController.registerParameter.registrationProvider?.name ?? "email",
             );
 
             Get.offAndToNamed(Routes.nameSurname);
-          } else if (callback.content?.emailExists == true &&
-              callback.content?.emailIsActive == false) {
+          } else if (callback.content?.emailExists == true && callback.content?.emailIsActive == false) {
+            appController.registerParameter = RegistrationParameters.initial();
+            appController.socialLoginParameter = SocialLoginParameter.initial();
+
             _showValidateEmailDialog();
           } else {
+            appController.registerParameter = RegistrationParameters.initial();
+            appController.socialLoginParameter = SocialLoginParameter.initial();
+
             appController.isLoginFlow.value = true;
 
             emailController.text = '';
@@ -141,11 +143,9 @@ class RegisterController extends GetxController {
     );
   }
 
-  String? get password =>
-      passwordController.text.isEmpty ? null : passwordController.text;
+  String? get password => passwordController.text.isEmpty ? null : passwordController.text;
 
-  String get email =>
-      appController.socialLoginParameter.email ?? emailController.text;
+  String get email => appController.socialLoginParameter.email ?? emailController.text;
 
   /// Check if the email is valid using a regex
   bool isEmailValid() {

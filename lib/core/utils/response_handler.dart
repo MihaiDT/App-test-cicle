@@ -52,7 +52,8 @@ enum ErrorType {
   productCodeNotValid,
   productCodeExternal,
   productCodeUploadFailed,
-  productCodeAlreadyUsed;
+  productCodeAlreadyUsed,
+  registerByEmail;
 
   String get errorText {
     switch (this) {
@@ -70,6 +71,8 @@ enum ErrorType {
         return "Utente già registrato";
       case ErrorType.userNotFound:
         return "Credenziali non valide";
+      case ErrorType.registerByEmail:
+        return "Effettua la login utilizzando e-mail e password";
       case ErrorType.productCodeNotValid:
         return "Il codice prodotto non è stato riconosciuto";
       case ErrorType.productCodeExternal:

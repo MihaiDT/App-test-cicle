@@ -5,6 +5,12 @@ import 'package:lines/repository/menses_service.dart';
 import 'package:lines/routes/routes.dart';
 
 class YourDiaryController extends GetxController {
+  late final bool showTitle;
+
+  YourDiaryController() {
+    showTitle = Get.arguments?['showTitle'] ?? true;
+  }
+
   @override
   Future<void> onReady() async {
     super.onReady();
@@ -12,8 +18,7 @@ class YourDiaryController extends GetxController {
     await MensesService.mensesStatistics;
   }
 
-  SymptomCategoryStats? get symptomCategoryStats =>
-      appController.symptomCategoryStats.value;
+  SymptomCategoryStats? get symptomCategoryStats => appController.symptomCategoryStats.value;
 
   Future<void> onSymptomCategoryPressed(
     String symptomCategoryId,

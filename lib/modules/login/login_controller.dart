@@ -15,7 +15,9 @@ import 'package:lines/modules/register/widget/email_does_not_exists.dart';
 import 'package:lines/modules/tutor_email/tutor_email_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
+import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
+import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/social_service.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/texts/notification_overlay.dart';
@@ -74,9 +76,7 @@ class LoginController extends GetxController {
           /// If the email exists and is active login the user
           else if (appController.checkEmail.value?.emailIsValid == true) {
             // FIXME: test this
-            if (appController.socialLoginParameter.registrationProvider
-                    ?.isSocialProvider ==
-                true) {
+            if (appController.socialLoginParameter.registrationProvider?.isSocialProvider == true) {
               await AuthenticationService.socialLoginUser(
                 appController.socialLoginParameter,
               );
@@ -92,15 +92,28 @@ class LoginController extends GetxController {
     );
     userEver = ever(
       appController.user.rxValue,
-      condition: () =>
-          Get.currentRoute == Routes.login &&
-          appController.checkEmail.responseHandler.isSuccessful,
+      condition: () => Get.currentRoute == Routes.login && appController.checkEmail.responseHandler.isSuccessful,
       (userStatus) async {
         if (userStatus.isPending) {
           isButtonPending.value = true;
         }
         if (userStatus.isFailed) {
-          if (userStatus.errorType == ErrorType.wrongPassword ||
+          appController.registerParameter = RegistrationParameters.initial();
+          appController.socialLoginParameter = SocialLoginParameter.initial();
+
+          if (userStatus.errorType == ErrorType.registerByEmail) {
+            FlushBar(
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 8,
+                ),
+                child: HeadlineSmall(
+                  "Effettua la login utilizzando e-mail e password",
+                  color: ThemeColor.darkBlue,
+                ),
+              ),
+            ).show(Get.context!);
+          } else if (userStatus.errorType == ErrorType.wrongPassword ||
               userStatus.errorType == ErrorType.userNotFound) {
             FlushBar(
               child: const Padding(
@@ -122,9 +135,7 @@ class LoginController extends GetxController {
 
           PiwikManager.trackEvent(
             PiwikEventType.login,
-            action:
-                appController.registerParameter.registrationProvider?.name ??
-                    "email",
+            action: appController.registerParameter.registrationProvider?.name ?? "email",
           );
 
           isButtonPending.value = false;
@@ -154,8 +165,7 @@ class LoginController extends GetxController {
               await AuthenticationService.sendConsentsEmail();
               Get.toNamed(Routes.confirmEmailPage);
             }
-          } else if (appController.user.value?.routeAfterLogin ==
-              "complete_profile") {
+          } else if (appController.user.value?.routeAfterLogin == "complete_profile") {
             Get.offAllNamed(Routes.lastMensesPage);
           } else {
             Get.offAllNamed(Routes.main);
@@ -220,8 +230,7 @@ class LoginController extends GetxController {
     );
   }
 
-  String get email =>
-      appController.socialLoginParameter.email ?? emailController.text;
+  String get email => appController.socialLoginParameter.email ?? emailController.text;
 
   /// Open the bottomsheet to recover the password
   void onForgotPasswordTap(BuildContext context) async {

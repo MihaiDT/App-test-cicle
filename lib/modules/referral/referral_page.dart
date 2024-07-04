@@ -91,6 +91,7 @@ class ReferralPage extends GetView<ReferralController> {
               InputTextField(
                 label: "Inserisci il codice",
                 textEditingController: controller.referralCodeController,
+                textCapitalization: TextCapitalization.characters,
               ),
               ThemeSizedBox.height32,
               ReferralCoinCard(
