@@ -31,8 +31,7 @@ class CalendarPage extends GetView<CalendarController> {
           Column(
             children: [
               SizedBox(
-                height:
-                    ThemeSize.heightSafeAreaTop + appBar.preferredSize.height,
+                height: ThemeSize.heightSafeAreaTop + appBar.preferredSize.height,
               ),
               Obx(
                 () => CalendarMonthYearSwitch(
@@ -64,8 +63,7 @@ class CalendarPage extends GetView<CalendarController> {
                             ),
                             child: Obx(
                               () => Visibility(
-                                visible: controller.selectedTab.value ==
-                                    CalendarTabs.monthTab,
+                                visible: controller.selectedTab.value == CalendarTabs.monthTab,
                                 child: CalendarWeekRow(controller: controller),
                               ),
                             ),
@@ -83,9 +81,7 @@ class CalendarPage extends GetView<CalendarController> {
             () => !controller.showTooltip.value
                 ? const SizedBox.shrink()
                 : Positioned(
-                    top: ThemeSize.heightSafeAreaTop +
-                        ThemeSize.heightAppBarDefault -
-                        8,
+                    top: ThemeSize.heightSafeAreaTop + ThemeSize.heightAppBarDefault - 8,
                     right: 24,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -129,7 +125,10 @@ class CalendarPage extends GetView<CalendarController> {
                           InkWell(
                             onTap: () {
                               controller.showTooltip.value = false;
-                              Get.toNamed(Routes.yourDiaryPage);
+                              Get.toNamed(
+                                Routes.yourDiaryPage,
+                                arguments: {'showTitle': false},
+                              );
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -169,7 +168,11 @@ class CalendarPage extends GetView<CalendarController> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    bottom: 32,
+                  ),
                   child: PrimaryButton(
                     child: const TitleLarge(
                       'SALVA',

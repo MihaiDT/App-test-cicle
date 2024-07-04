@@ -6,6 +6,7 @@ import 'package:lines/modules/consents/widgets/confirm_remove_calendar_consent.d
 import 'package:lines/modules/consents/widgets/confirm_remove_diary_consent.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/calendar_service.dart';
+import 'package:lines/repository/menses_service.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
 class ConsentsController extends GetxController {
@@ -100,5 +101,6 @@ class ConsentsController extends GetxController {
 
     await CalendarService.fetchCurrentPeriod();
     await CalendarService.fetchCalendarData();
+    await MensesService.mensesStatistics;
   }
 }

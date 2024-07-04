@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/calendar_data.dart';
@@ -117,7 +118,7 @@ class CalendarService {
     DateTime dateTime,
   ) async {
     appController.symptomsDiaries.responseHandler = ResponseHandler.pending();
-    String parsedDate = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
+    final parsedDate = dateFormatYMD.format(dateTime);
     try {
       final response = await dio.get(
         "/symptoms_diaries/$parsedDate",

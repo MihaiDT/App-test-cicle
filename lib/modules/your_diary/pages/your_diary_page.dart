@@ -24,16 +24,17 @@ class YourDiaryPage extends GetView<YourDiaryController> {
       ),
       body: Column(
         children: [
-          ThemeSizedBox.height16,
-          const DisplayMedium(
-            "Il tuo diario",
-            textAlign: TextAlign.center,
-          ).applyShaders(context),
+          if (controller.showTitle) ...[
+            ThemeSizedBox.height16,
+            const DisplayMedium(
+              "Il tuo diario",
+              textAlign: TextAlign.center,
+            ).applyShaders(context),
+          ],
           ThemeSizedBox.height16,
           Obx(
             () {
-              if (appController
-                      .symptomCategoryStats.responseHandler.isSuccessful &&
+              if (appController.symptomCategoryStats.responseHandler.isSuccessful &&
                   controller.symptomCategoryStats != null) {
                 return Expanded(
                   child: ListView.separated(
@@ -43,8 +44,7 @@ class YourDiaryPage extends GetView<YourDiaryController> {
                       bottom: ThemeSize.paddingMedium,
                     ),
                     itemBuilder: (context, index) {
-                      final currentCategory = controller
-                          .symptomCategoryStats!.symptomsCategories[index];
+                      final currentCategory = controller.symptomCategoryStats!.symptomsCategories[index];
                       return CategorySymptomTile(
                         canBePressed: currentCategory.enabled,
                         imagePath: currentCategory.iconPath,
@@ -56,9 +56,7 @@ class YourDiaryPage extends GetView<YourDiaryController> {
                       );
                     },
                     separatorBuilder: (context, index) => _divider,
-                    itemCount: controller
-                            .symptomCategoryStats?.symptomsCategories.length ??
-                        0,
+                    itemCount: controller.symptomCategoryStats?.symptomsCategories.length ?? 0,
                   ),
                 );
               }

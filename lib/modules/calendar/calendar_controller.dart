@@ -208,13 +208,16 @@ class CalendarController extends GetxController with MonthCalendarMixin {
           ? showTopButton.value = false
           : showTopButton.value = true;
     });
-    if (!appController.symptomCategory.responseHandler.isSuccessful) {
-      await CalendarService.symptomCategories;
-    }
+
+    // if (!appController.symptomCategory.responseHandler.isSuccessful) {
+    await CalendarService.symptomCategories;
+    // }
+    // if (!appController.symptomsDiaries.responseHandler.isSuccessful) {
     await CalendarService.fetchSymptomsForSpecificDate(rxSelectedDate.value);
-    if (!appController.categoriesSavedInHome.responseHandler.isSuccessful) {
-      await CalendarService.homePageSymptomCategories;
-    }
+    // }
+    // if (!appController.categoriesSavedInHome.responseHandler.isSuccessful) {
+    await CalendarService.homePageSymptomCategories;
+    // }
 
     _initSavedCategory();
 
