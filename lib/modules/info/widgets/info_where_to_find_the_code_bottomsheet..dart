@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/widgets/buttons/primary_button.dart';
 
 class InfoWhereToFindTheCodeBottomSheet extends StatelessWidget {
   const InfoWhereToFindTheCodeBottomSheet({
