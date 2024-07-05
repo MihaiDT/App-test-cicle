@@ -15,6 +15,7 @@ import 'package:lines/data/models/product_category.dart';
 import 'package:lines/data/models/question.dart';
 import 'package:lines/data/models/send_confirm_email.dart';
 import 'package:lines/data/models/settings.dart';
+import 'package:lines/data/models/single_advice_article.dart';
 import 'package:lines/data/models/specific_date_period_stats.dart';
 import 'package:lines/data/models/survey.dart';
 import 'package:lines/data/models/symptom_category.dart';
@@ -90,7 +91,7 @@ class AppController extends GetxController {
   EasyGetter<List<MensesStatistics>> mensesStatistics;
   EasyGetter<SendConfirmEmail> sendConfirmEmail;
   EasyGetter<UpdatePassword> updatePassword;
-  EasyGetter<AdvicesArticle> singleArticle;
+  EasyGetter<SingleAdviceArticle> singleArticle;
   EasyGetter<ValidateReferralCode> validateReferralCode;
   Rx<MissionCompletedArguments> missionCompletedArguments;
   EasyGetter<UploadedProduct> uploadedProduct;
@@ -168,7 +169,7 @@ class AppController extends GetxController {
       mensesStatistics: EasyGetter<List<MensesStatistics>>(),
       sendConfirmEmail: EasyGetter<SendConfirmEmail>(),
       updatePassword: EasyGetter<UpdatePassword>(),
-      singleArticle: EasyGetter<AdvicesArticle>(),
+      singleArticle: EasyGetter<SingleAdviceArticle>(),
       validateReferralCode: EasyGetter<ValidateReferralCode>(),
       missionCompletedArguments: MissionCompletedArguments.initial().obs,
       uploadedProduct: EasyGetter<UploadedProduct>(),
@@ -206,7 +207,7 @@ class AppController extends GetxController {
     mensesStatistics = EasyGetter<List<MensesStatistics>>();
     sendConfirmEmail = EasyGetter<SendConfirmEmail>();
     updatePassword = EasyGetter<UpdatePassword>();
-    singleArticle = EasyGetter<AdvicesArticle>();
+    singleArticle = EasyGetter<SingleAdviceArticle>();
     validateReferralCode = EasyGetter<ValidateReferralCode>();
     missionCompletedArguments = MissionCompletedArguments.initial().obs;
     uploadedProduct = EasyGetter<UploadedProduct>();

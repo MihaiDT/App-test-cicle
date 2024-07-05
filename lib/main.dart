@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/app.dart';
 import 'package:lines/core/helpers/dependency_injection_manager.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/helpers.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/advices_article_detail_pair.dart';
+import 'package:lines/data/models/advices_category.dart';
 import 'package:lines/firebase_options.dart';
 import 'package:lines/flavors.dart';
 import 'package:lines/repository/advices_service.dart';
@@ -16,15 +19,14 @@ import 'package:lines/repository/interceptor/dio_log_intercpetor.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-import 'package:lines/core/helpers/hive_manager.dart';
-
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initApp();
 
   await SentryFlutter.init(
     (options) {
-      options.dsn = 'https://fbfb4368c454bd92922315966f6e9e0c@o4506676620099584.ingest.us.sentry.io/4507391102484480';
+      options.dsn =
+          'https://fbfb4368c454bd92922315966f6e9e0c@o4506676620099584.ingest.us.sentry.io/4507391102484480';
       // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
       // We recommend adjusting this value in production.
       options.tracesSampleRate = F.appFlavor == Flavor.dev ? 1.0 : 0.2;
@@ -84,10 +86,24 @@ void _initDeepLinking() {
         if (id.isNotEmpty) {
           await AdvicesService.fetchSingleArticle(id);
 
-          if (appController.singleArticle.value != null) {
+          /// Method to retrieve the correct article category from the one
+          /// we have as response in AdvicesService.fetchSingleArticle
+          AdvicesCategory? category;
+          appController.advicesCategories.value?.categories.forEach(
+            (key, value) {
+              if (value.advicesCategory.categoryTitle ==
+                  appController.singleArticle.value?.article.categoryName) {
+                category = value.advicesCategory;
+              }
+            },
+          );
+          if (appController.singleArticle.value != null && category != null) {
             Get.toNamed(
               Routes.articleDetailPage,
-              arguments: appController.singleArticle.value,
+              arguments: AdvicesDetailPair(
+                article: appController.singleArticle.value!.article,
+                category: category!,
+              ),
             );
           }
         }

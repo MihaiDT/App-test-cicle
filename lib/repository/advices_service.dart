@@ -3,6 +3,7 @@ import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/advices_article.dart';
 import 'package:lines/data/models/advices_grouped_by_category.dart';
+import 'package:lines/data/models/single_advice_article.dart';
 
 class AdvicesService {
   static Future<void> fetchArticles() async {
@@ -35,7 +36,6 @@ class AdvicesService {
   }
 
   static Future<void> fetchSingleArticle(String articleId) async {
-    articleId = "091a3ad5-5f53-4f28-b239-e4dbcacac97d";
     try {
       appController.singleArticle.responseHandler = ResponseHandler.pending();
       final response = await dio.get(
@@ -44,7 +44,7 @@ class AdvicesService {
       _saveSingleArticle(response);
     } catch (e) {
       appController.singleArticle.responseHandler = ResponseHandler.failed();
-      log.logError(e);
+      log.logApiException(e);
     }
   }
 
@@ -90,8 +90,8 @@ class AdvicesService {
 
   static void _saveSingleArticle(Response response) {
     appController.singleArticle.responseHandler = ResponseHandler.successful(
-      content: AdvicesArticle.fromJson(
-        response.data,
+      content: SingleAdviceArticle.fromJson(
+        response.data['article'],
       ),
     );
   }
