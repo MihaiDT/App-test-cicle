@@ -25,14 +25,38 @@
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
       <meta-data android:name="io.flutter.embedding.android.NormalTheme" android:resource="@style/NormalTheme"/>
+      
+      
       <intent-filter android:autoVerify="true">
         <action android:name="android.intent.action.VIEW" />
+
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
+
+        <!-- Deep link fino ad Android 11  -->
+        <data
+            android:host="lines.tandu.it"
+            android:pathPrefix="/login"
+            android:scheme="https" />
+        
+        <!-- Deep link Android 12+  -->
         <data android:scheme="https" />
-        <data android:scheme="http" />
-        <data android:host="lines-test-link.s3.amazonaws.com"/>
+        <data android:host="lines.tandu.it"
+            android:pathPrefix="/login"/>
+
+
+        <!-- Deep link fino ad Android 11  -->
+        <data
+            android:host="lines.tandu.it"
+            android:pathPrefix="/app/articoli"
+            android:scheme="https" />
+        
+        <!-- Deep link Android 12+  -->
+        <data android:scheme="https" />
+        <data android:host="lines.tandu.it"
+            android:pathPrefix="/app/articoli"/>
       </intent-filter>
+
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>

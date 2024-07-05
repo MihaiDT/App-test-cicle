@@ -243,3 +243,10 @@ keytool -list -v -alias LinesKey -keystore LinesKey.keystore
 
 #### iOS
 È sufficiente seguire gli step descritti nella guida del plugin [google_sign_in](https://pub.dev/packages/google_sign_in).
+
+
+
+
+
+
+https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://lines.tandu.it&relation=delegate_permission/common.handle_all_urls
