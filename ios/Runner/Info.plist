@@ -43,7 +43,7 @@
 	<key>FacebookDisplayName</key>
 	<string>My Lines</string>
 	<key>FlutterDeepLinkingEnabled</key>
-	<true/>
+	<false/>
 	<key>GIDClientID</key>
 	<string>329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com</string>
 	<key>LSApplicationQueriesSchemes</key>
