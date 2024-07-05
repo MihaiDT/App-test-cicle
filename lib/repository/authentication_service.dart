@@ -97,8 +97,11 @@ class AuthenticationService {
 
     user.hasConsentCookieStats = HiveManager.hasAcceptedCookieStats;
     user.hasConsentCookieProfiling = HiveManager.hasAcceptedCookieProfiling;
-    user.diaryConsent = user.diaryConsent ?? appController.user.value?.diaryConsent ?? false;
-    user.calendarConsent = user.calendarConsent ?? appController.user.value?.calendarConsent ?? false;
+    user.diaryConsent =
+        user.diaryConsent ?? appController.user.value?.diaryConsent ?? false;
+    user.calendarConsent = user.calendarConsent ??
+        appController.user.value?.calendarConsent ??
+        false;
 
     appController.user.responseHandler = ResponseHandler.pending(
       content: appController.user.value,
@@ -182,8 +185,10 @@ class AuthenticationService {
             "last_name": lastName,
             "nickname": updateUserParameters.nickname,
             "birthdate": updateUserParameters.birthdate,
-            "last_menstruation_date_start": updateUserParameters.formattedLastMenstruationDateStart,
-            "last_menstruation_date_end": updateUserParameters.formattedLastMenstruationDateEnd,
+            "last_menstruation_date_start":
+                updateUserParameters.formattedLastMenstruationDateStart,
+            "last_menstruation_date_end":
+                updateUserParameters.formattedLastMenstruationDateEnd,
             "period_days": updateUserParameters.periodDays,
             "period_duration": updateUserParameters.periodDuration,
             "cookie_consent": cookieConsent,
@@ -219,14 +224,16 @@ class AuthenticationService {
 
   static Future<void> sendActivationLink(String email) async {
     try {
-      appController.sendConfirmEmail.responseHandler = ResponseHandler.pending();
+      appController.sendConfirmEmail.responseHandler =
+          ResponseHandler.pending();
       await dio.post(
         "/auth/send_activation_link",
         data: {
           "email": email,
         },
       );
-      appController.sendConfirmEmail.responseHandler = ResponseHandler.successful();
+      appController.sendConfirmEmail.responseHandler =
+          ResponseHandler.successful();
     } catch (e) {
       appController.sendConfirmEmail.responseHandler = ResponseHandler.failed(
         errorType: ErrorManager.checkError(e),
@@ -300,17 +307,20 @@ class AuthenticationService {
 
   static Future<void> validateInvitationCode(String invitationCode) async {
     try {
-      appController.validateReferralCode.responseHandler = ResponseHandler.pending();
+      appController.validateReferralCode.responseHandler =
+          ResponseHandler.pending();
       final response = await dio.get(
         "/users/validate_invitation_code?invitation_code=$invitationCode",
       );
-      appController.validateReferralCode.responseHandler = ResponseHandler.successful(
+      appController.validateReferralCode.responseHandler =
+          ResponseHandler.successful(
         content: ValidateReferralCode.fromJson(
           response.data,
         ),
       );
     } catch (e) {
-      appController.validateReferralCode.responseHandler = ResponseHandler.failed();
+      appController.validateReferralCode.responseHandler =
+          ResponseHandler.failed();
       log.logApiException(e);
     }
   }

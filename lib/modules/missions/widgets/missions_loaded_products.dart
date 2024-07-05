@@ -36,7 +36,7 @@ class MissionsLoadedProducts extends StatelessWidget {
         children: [
           ThemeSizedBox.height16,
           BodyMedium(
-            text ?? "Prodotti caricati ${products.length} su $totalCodes",
+            text ?? "Prodotti caricati ${products.length} di $totalCodes",
             color: ThemeColor.darkBlue,
           ),
           ThemeSizedBox.height12,

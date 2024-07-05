@@ -72,7 +72,9 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                   ),
                   ThemeSizedBox.height16,
                   TitleMedium(
-                    "CARICA CODICI ENTRO IL ${controller.selectedMission.value.endAt}",
+                    controller.selectedMission.value.totalCounter == 1
+                        ? "CARICA IL CODICE ENTRO IL ${controller.selectedMission.value.endAt}"
+                        : "CARICA I CODICI ENTRO IL ${controller.selectedMission.value.endAt}",
                     color: ThemeColor.brightPink,
                     textAlign: TextAlign.center,
                   ),
@@ -145,7 +147,10 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                           mission: controller.selectedMission.value,
                         ),
                         ThemeSizedBox.height16,
-                        const MissionsHowToParticipateStepTwo(),
+                        MissionsHowToParticipateStepTwo(
+                          totalCounter:
+                              controller.selectedMission.value.totalCounter,
+                        ),
                         ThemeSizedBox.height16,
                         MissionsHowToParticipateStepThree(
                           prizeDescription:
@@ -209,7 +214,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                      bottom: ThemeSize.paddingSmall,
+                      bottom: ThemeSize.paddingLarge,
                       right: ThemeSize.paddingSmall,
                       left: ThemeSize.paddingSmall,
                     ),

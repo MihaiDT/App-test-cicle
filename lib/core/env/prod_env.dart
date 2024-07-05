@@ -26,6 +26,5 @@ class ProdEnv extends Environment {
       };
 
   @override
-  // String get articleShareUrl => "https://lines.it/app";
-  String get articleShareUrl => "https://lines.tandu.it";
+  String get articleShareUrl => "https://lines.it/app";
 }

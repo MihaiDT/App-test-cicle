@@ -60,7 +60,9 @@ class MissionContainer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TitleMedium(
-                      "CARICA ENTRO IL ${mission.endAt}",
+                      mission.totalCounter == 1
+                          ? "CODICE ENTRO IL ${mission.endAt}"
+                          : "CODICI ENTRO IL ${mission.endAt}",
                       color: ThemeColor.brightPink,
                     ),
                     HeadlineSmall(

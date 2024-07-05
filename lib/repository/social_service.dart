@@ -53,13 +53,13 @@ class SocialService {
   }
 
   static Future<void> googleSignIn() async {
-    GoogleSignIn googleSignIn = Platform.isIOS
-        ? GoogleSignIn(
+    GoogleSignIn googleSignIn = Platform.isAndroid
+        ? GoogleSignIn(scopes: ['email'])
+        : GoogleSignIn(
             scopes: ['email'],
             clientId:
                 '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
-          )
-        : GoogleSignIn(scopes: ['email']);
+          );
 
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();

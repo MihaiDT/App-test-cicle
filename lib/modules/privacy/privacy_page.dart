@@ -43,7 +43,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                     isLoading: controller.buttonIsPending.value,
                     child: const TitleLarge(
                       "PROCEDI CON LA REGISTRAZIONE",
-                      letterSpacing: 2,
+                      letterSpacing: 1.2, // Non ci sta con letterspacing 2
                     ).applyShaders(context),
                   ),
                 ),

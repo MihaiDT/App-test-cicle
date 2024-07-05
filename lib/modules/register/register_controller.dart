@@ -59,22 +59,28 @@ class RegisterController extends GetxController {
           isButtonPending.value = false;
           if (callback.content?.emailExists == false) {
             /// Save in the state email and password values
-            if (appController.registerParameter.registrationProvider == RegistrationProvider.email) {
+            if (appController.registerParameter.registrationProvider ==
+                RegistrationProvider.email) {
               appController.registerParameter.email = emailController.text;
               appController.registerParameter.password = password;
             }
 
             AdjustManager.trackEvent(AjustEventType.registration, {
-              "createdBy": appController.registerParameter.registrationProvider?.name ?? "email",
+              "createdBy":
+                  appController.registerParameter.registrationProvider?.name ??
+                      "email",
             });
             PiwikManager.trackEvent(
               PiwikEventType.registration,
               action: 'step 2 - registration method',
-              name: appController.registerParameter.registrationProvider?.name ?? "email",
+              name:
+                  appController.registerParameter.registrationProvider?.name ??
+                      "email",
             );
 
             Get.offAndToNamed(Routes.nameSurname);
-          } else if (callback.content?.emailExists == true && callback.content?.emailIsActive == false) {
+          } else if (callback.content?.emailExists == true &&
+              callback.content?.emailIsActive == false) {
             appController.registerParameter = RegistrationParameters.initial();
             appController.socialLoginParameter = SocialLoginParameter.initial();
 
@@ -143,9 +149,11 @@ class RegisterController extends GetxController {
     );
   }
 
-  String? get password => passwordController.text.isEmpty ? null : passwordController.text;
+  String? get password =>
+      passwordController.text.isEmpty ? null : passwordController.text;
 
-  String get email => appController.socialLoginParameter.email ?? emailController.text;
+  String get email =>
+      appController.socialLoginParameter.email ?? emailController.text;
 
   /// Check if the email is valid using a regex
   bool isEmailValid() {

@@ -18,7 +18,8 @@ class YourDiaryController extends GetxController {
     await MensesService.mensesStatistics;
   }
 
-  SymptomCategoryStats? get symptomCategoryStats => appController.symptomCategoryStats.value;
+  SymptomCategoryStats? get symptomCategoryStats =>
+      appController.symptomCategoryStats.value;
 
   Future<void> onSymptomCategoryPressed(
     String symptomCategoryId,
