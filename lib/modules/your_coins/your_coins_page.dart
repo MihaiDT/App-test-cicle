@@ -79,33 +79,32 @@ class YourCoinsPage extends GetView<YoutCoinsController> {
               color: _dividerColor,
             ),
             ThemeSizedBox.height24,
-            const DisplayMedium(
-              "Le tue attività",
-              textAlign: TextAlign.center,
-            ).applyShaders(context),
-            ThemeSizedBox.height20,
-            Obx(
-              () => appController.walletTransactions.responseHandler.isSuccessful
-                  ? ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final walletTransaction = appController.walletTransactions.value![index];
+            //   const DisplayMedium(
+            //     "Le tue attività",
+            //     textAlign: TextAlign.center,
+            //   ).applyShaders(context),
+            //   ThemeSizedBox.height20,
+            //   Obx(
+            //     () => appController.walletTransactions.responseHandler.isSuccessful
+            //         ? ListView.separated(
+            //             physics: const NeverScrollableScrollPhysics(),
+            //             shrinkWrap: true,
+            //             itemBuilder: (context, index) {
+            //               final walletTransaction = appController.walletTransactions.value![index];
 
-                        return ActivityCard(
-                          formattedDate: walletTransaction.formattedDate,
-                          title: walletTransaction.title,
-                          coinAmount: walletTransaction.coins,
-                          imagePath:
-                              walletTransaction.imagePath != null ? "assets/${walletTransaction.imagePath}" : null,
-                        );
-                      },
-                      separatorBuilder: (context, index) => ThemeSizedBox.height16,
-                      itemCount: appController.walletTransactions.value!.length,
-                    )
-                  : _shimmer(),
-            ),
-            ThemeSizedBox.height90,
+            //               return ActivityCard(
+            //                 formattedDate: walletTransaction.formattedDate,
+            //                 title: walletTransaction.title,
+            //                 coinAmount: walletTransaction.coins,
+            //                 imagePath: walletTransaction.imagePath,
+            //               );
+            //             },
+            //             separatorBuilder: (context, index) => ThemeSizedBox.height16,
+            //             itemCount: appController.walletTransactions.value!.length,
+            //           )
+            //         : _shimmer(),
+            //   ),
+            //   ThemeSizedBox.height90,
           ],
         ),
       ),
