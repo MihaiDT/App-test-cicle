@@ -6,9 +6,10 @@ import 'package:lines/core/helpers/push_notification.dart';
 import 'package:lines/data/models/walkthrough_data.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:lines/widgets/walkthrough/controller/walkthrough_controller.dart';
 import 'package:lines/widgets/walkthrough/walkthrough.dart';
 
-class WelcomeWalkthroughPage extends StatelessWidget {
+class WelcomeWalkthroughPage extends GetView<WalkthroughController> {
   const WelcomeWalkthroughPage({
     super.key,
   });

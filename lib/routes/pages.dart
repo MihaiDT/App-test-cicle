@@ -119,6 +119,7 @@ import 'package:lines/modules/your_diary/pages/your_diary_page.dart';
 import 'package:lines/modules/your_menses_stats/your_menses_stats_binding.dart';
 import 'package:lines/modules/your_menses_stats/your_menses_stats_page.dart';
 import 'package:lines/routes/routes.dart';
+import 'package:lines/widgets/walkthrough/walkthrough_binding.dart';
 
 class Pages {
   Pages._(); // this is to prevent anyone from instantiating this object
@@ -425,6 +426,7 @@ class Pages {
     /// WelcomeWalkthrough
     GetPage(
       name: Routes.welcomeWalkthrough,
+      binding: WalkthroughBinding(),
       page: () => _mediaQueryWrapper(
         const WelcomeWalkthroughPage(),
       ),
@@ -447,6 +449,7 @@ class Pages {
 
     GetPage(
       name: Routes.prizesOnboardingPage,
+      binding: WalkthroughBinding(),
       page: () => _mediaQueryWrapper(
         const PrizesOnboardingPage(),
       ),

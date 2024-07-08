@@ -152,6 +152,7 @@ dependencies:
 
 
 
+  intl: any
 dev_dependencies:
   analyzer: ^6.4.1
   build_runner: ^2.4.7

@@ -5,12 +5,11 @@ import 'package:lines/widgets/walkthrough/controller/walkthrough_controller.dart
 import 'package:lines/widgets/walkthrough/walkthrough_body.dart';
 import 'package:lines/widgets/walkthrough/walkthrough_bottom.dart';
 
-class Walkthrough extends StatelessWidget {
-  final WalkthroughController _controller = Get.put(WalkthroughController());
+class Walkthrough extends GetView<WalkthroughController> {
   final List<WalkthroughData> pagesData;
   final VoidCallback? onTapLetsStart;
 
-  Walkthrough({
+  const Walkthrough({
     required this.pagesData,
     this.onTapLetsStart,
     super.key,
@@ -24,9 +23,9 @@ class Walkthrough extends StatelessWidget {
       children: [
         Obx(
           () => PageView.builder(
-            controller: _controller.pageController,
-            onPageChanged: (value) => _controller.onPageChanged(value),
-            physics: _controller.currentStepIndex.value >= pagesData.length - 1
+            controller: controller.pageController,
+            onPageChanged: (value) => controller.onPageChanged(value),
+            physics: controller.currentStepIndex.value >= pagesData.length - 1
                 ? const NeverScrollableScrollPhysics()
                 : null,
             itemCount: pagesData.length,
