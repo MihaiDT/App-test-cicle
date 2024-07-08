@@ -26,6 +26,7 @@ import 'package:lines/data/models/update_password.dart';
 import 'package:lines/data/models/uploaded_product.dart';
 import 'package:lines/data/models/user.dart';
 import 'package:lines/data/models/validate_referral_code.dart';
+import 'package:lines/data/models/wallet_transaction.dart';
 import 'package:lines/modules/mission_completed/arguments/mission_completed_arguments.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
@@ -79,6 +80,7 @@ class AppController extends GetxController {
   EasyGetter<List<Map<String, dynamic>>> symptomsDiariesHistory;
 
   EasyGetter<List<Badge>> badges;
+  EasyGetter<List<WalletTransaction>> walletTransactions;
 
   EasyGetter<List<PeriodsStats>> periodsStats;
 
@@ -139,6 +141,7 @@ class AppController extends GetxController {
     required this.hasUsedDeepLink,
     required this.validateReferralCode,
     required this.symptomsDiariesHistory2,
+    required this.walletTransactions,
   });
 
   factory AppController.initial() {
@@ -177,6 +180,7 @@ class AppController extends GetxController {
       showLockPage: false.obs,
       hasUsedDeepLink: false.obs,
       symptomsDiariesHistory2: EasyGetter<List<SymptomDiariesHistory>>(),
+      walletTransactions: EasyGetter<List<WalletTransaction>>(),
     );
   }
 
@@ -215,6 +219,7 @@ class AppController extends GetxController {
     showLockPage.value = false;
     hasUsedDeepLink.value = false;
     symptomsDiariesHistory2 = EasyGetter<List<SymptomDiariesHistory>>();
+    walletTransactions = EasyGetter<List<WalletTransaction>>();
 
     HiveManager.removeAcceptedCookie();
   }

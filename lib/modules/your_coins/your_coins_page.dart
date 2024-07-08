@@ -6,11 +6,13 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/info/widgets/info_bottom_sheet.dart';
 import 'package:lines/modules/info/widgets/info_what_are_coins_bottomsheet..dart';
 import 'package:lines/modules/your_coins/widgets/activity_card.dart';
+import 'package:lines/modules/your_coins/your_coins_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
+import 'package:shimmer/shimmer.dart';
 
-class YourCoinsPage extends StatelessWidget {
+class YourCoinsPage extends GetView<YoutCoinsController> {
   const YourCoinsPage({
     super.key,
   });
@@ -76,28 +78,73 @@ class YourCoinsPage extends StatelessWidget {
             const Divider(
               color: _dividerColor,
             ),
-            if (false) ...[
-              ThemeSizedBox.height24,
-              const DisplayMedium(
-                "Le tue attività",
-                textAlign: TextAlign.center,
-              ).applyShaders(context),
-              ThemeSizedBox.height20,
-              ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) => const ActivityCard(
-                  date: "20/07/2023",
-                  description: "Hai caricato un codice cofezione",
-                  coinAmount: 25,
-                ),
-                separatorBuilder: (context, index) => ThemeSizedBox.height16,
-                itemCount: 3,
-              ),
-            ],
+            ThemeSizedBox.height24,
+            const DisplayMedium(
+              "Le tue attività",
+              textAlign: TextAlign.center,
+            ).applyShaders(context),
+            ThemeSizedBox.height20,
+            Obx(
+              () => appController.walletTransactions.responseHandler.isSuccessful
+                  ? ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final walletTransaction = appController.walletTransactions.value![index];
+
+                        return ActivityCard(
+                          formattedDate: walletTransaction.formattedDate,
+                          title: walletTransaction.title,
+                          coinAmount: walletTransaction.coins,
+                          imagePath:
+                              walletTransaction.imagePath != null ? "assets/${walletTransaction.imagePath}" : null,
+                        );
+                      },
+                      separatorBuilder: (context, index) => ThemeSizedBox.height16,
+                      itemCount: appController.walletTransactions.value!.length,
+                    )
+                  : _shimmer(),
+            ),
             ThemeSizedBox.height90,
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _shimmer() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.white,
+            ),
+            height: 120,
+            width: double.maxFinite,
+          ),
+          ThemeSizedBox.height12,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.white,
+            ),
+            height: 120,
+            width: double.maxFinite,
+          ),
+          ThemeSizedBox.height12,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.white,
+            ),
+            height: 120,
+            width: double.maxFinite,
+          ),
+        ],
       ),
     );
   }

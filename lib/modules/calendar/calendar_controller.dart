@@ -423,8 +423,8 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   void _initCalendarYearController() {
-    Get.lazyPut<CalendarYearController>(
-      () => CalendarYearController(
+    Get.put(
+      CalendarYearController(
         minDate: DateTime(2022),
         maxDate: DateTime(2025),
       ),

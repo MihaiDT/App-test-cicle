@@ -3,6 +3,7 @@ import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/badge.dart';
+import 'package:lines/data/models/wallet_transaction.dart';
 
 class BadgesService {
   static Future<void> fetchBadges() async {
@@ -20,8 +21,27 @@ class BadgesService {
 
   static Future<void> get wallet async {
     try {
-      final response = await dio.get(
+      await dio.get(
         "/users/${HiveManager.userId}/wallet",
+      );
+    } catch (e) {
+      log.logApiException(e);
+    }
+  }
+
+  static Future<void> get walletTransactions async {
+    try {
+      final response = await dio.get(
+        "/users/${HiveManager.userId}/wallet_transactions",
+      );
+      appController.walletTransactions.responseHandler =
+          ResponseHandler.successful(
+        content: response.data["transactions"]
+            .map<WalletTransaction>(
+              (walletTransaction) =>
+                  WalletTransaction.fromJson(walletTransaction),
+            )
+            .toList(),
       );
     } catch (e) {
       log.logApiException(e);

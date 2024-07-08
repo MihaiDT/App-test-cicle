@@ -3,14 +3,14 @@ import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/coin/app_coin.dart';
 
 class ActivityCard extends StatelessWidget {
-  final String date;
-  final String description;
+  final String formattedDate;
+  final String title;
   final int coinAmount;
   final String? imagePath;
 
   const ActivityCard({
-    required this.date,
-    required this.description,
+    required this.formattedDate,
+    required this.title,
     required this.coinAmount,
     this.imagePath,
     super.key,
@@ -40,12 +40,12 @@ class ActivityCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LabelLarge(
-                  date,
+                  formattedDate,
                   color: ThemeColor.brightPink,
                 ),
                 ThemeSizedBox.height4,
                 HeadlineMedium(
-                  description,
+                  title,
                   color: ThemeColor.darkBlue,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -62,7 +62,7 @@ class ActivityCard extends StatelessWidget {
             dimension: 100,
             child: imagePath != null
                 ? Image.asset(imagePath!)
-                : const Placeholder(),
+                : const SizedBox.shrink(),
           ),
         ],
       ),
