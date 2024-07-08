@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
-import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/referral/widget/confirm_referral_dialog.dart';
@@ -101,7 +100,8 @@ class ReferralController extends GetxController {
 
   void onUseCodePressed(BuildContext context) async {
     if (referralCodeController.text.isNotEmpty) {
-      appController.updateUserParameters.referralCode = referralCodeController.text;
+      appController.updateUserParameters.referralCode =
+          referralCodeController.text;
 
       await AuthenticationService.validateInvitationCode(
         referralCodeController.text,

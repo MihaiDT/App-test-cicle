@@ -101,7 +101,8 @@ class LoginPage extends GetView<LoginController> {
                 onEditingComplete: controller.isEmailValid,
                 onSubmitted: (text) {
                   controller.emailValue.value = text;
-                  FocusScope.of(context).requestFocus(controller.passwordFocusNode);
+                  FocusScope.of(context)
+                      .requestFocus(controller.passwordFocusNode);
                 },
                 focusNode: controller.emailFocusNode,
               ),
@@ -116,7 +117,8 @@ class LoginPage extends GetView<LoginController> {
                     isPassword: true,
                     obscureText: controller.hidePassword.value,
                     onTapTogglePassword: () {
-                      controller.hidePassword.value = !controller.hidePassword.value;
+                      controller.hidePassword.value =
+                          !controller.hidePassword.value;
                     },
                     onSubmitted: (_) {
                       FocusScope.of(context).unfocus();
@@ -142,7 +144,9 @@ class LoginPage extends GetView<LoginController> {
               ThemeSizedBox.height24,
               SecondaryLoadingButton(
                 isLoading: controller.isButtonPending.value,
-                onPressed: controller.canProceed.value ? controller.onButtonPressed : null,
+                onPressed: controller.canProceed.value
+                    ? controller.onButtonPressed
+                    : null,
                 child: const TitleLarge(
                   "AVANTI",
                   letterSpacing: 2,
