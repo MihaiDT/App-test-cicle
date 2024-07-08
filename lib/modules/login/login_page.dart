@@ -52,7 +52,7 @@ class LoginPage extends GetView<LoginController> {
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,
-              if (Platform.isAndroid) ...[
+              if (false) ...[
                 const TitleLarge(
                   "USA I TUOI SOCIAL",
                   textAlign: TextAlign.center,
@@ -85,9 +85,9 @@ class LoginPage extends GetView<LoginController> {
                     ],
                   ],
                 ),
+                ThemeSizedBox.height32,
+                const DividerSection(),
               ],
-              ThemeSizedBox.height32,
-              const DividerSection(),
               ThemeSizedBox.height32,
               InputTextField(
                 label: "EMAIL",

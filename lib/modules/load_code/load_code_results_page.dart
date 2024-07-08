@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/core/utils/navigator_extension.dart';
 import 'package:lines/modules/load_code/controllers/load_code_result_controller.dart';
 import 'package:lines/modules/load_code/widgets/completed_mission_card.dart';
-import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
@@ -44,10 +42,8 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
           ),
           child: PrimaryButton(
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntilSpecifiedRoute(
-                routeName: Routes.infoDropdownResultsPage,
-                routeNameToRemoveUntil: Routes.main,
-              );
+              Get.back();
+              Get.back();
             },
             child: const TitleLarge(
               "CHIUDI",

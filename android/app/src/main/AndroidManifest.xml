@@ -35,25 +35,25 @@
 
         <!-- Deep link fino ad Android 11  -->
         <data
-            android:host="lines.tandu.it"
+            android:host="lines.it"
             android:pathPrefix="/login"
             android:scheme="https" />
         
         <!-- Deep link Android 12+  -->
         <data android:scheme="https" />
-        <data android:host="lines.tandu.it"
+        <data android:host="lines.it"
             android:pathPrefix="/login"/>
 
 
         <!-- Deep link fino ad Android 11  -->
         <data
-            android:host="lines.tandu.it"
+            android:host="lines.it"
             android:pathPrefix="/app/articoli"
             android:scheme="https" />
         
         <!-- Deep link Android 12+  -->
         <data android:scheme="https" />
-        <data android:host="lines.tandu.it"
+        <data android:host="lines.it"
             android:pathPrefix="/app/articoli"/>
       </intent-filter>
 

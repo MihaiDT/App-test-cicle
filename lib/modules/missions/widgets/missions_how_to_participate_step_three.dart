@@ -26,11 +26,13 @@ class MissionsHowToParticipateStepThree extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ThemeSizedBox.height20,
-          if (prizeDescription?.isNotEmpty == true)
-            const MissionsHowToParticipateHeader(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: MissionsHowToParticipateHeader(
               stepNumber: 3,
-              description: "Ricevi subito il tuo premio",
+              description: prizeDescription ?? '',
             ),
+          ),
           ThemeSizedBox.height16,
           if (prizeImage?.isNotEmpty == true)
             Center(
