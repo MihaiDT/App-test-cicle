@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/piwik_manager.dart';
+import 'package:lines/core/helpers/route_observer.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/mission_completed/mission_completed_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -47,12 +48,25 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
                 PrimaryLoadingButton(
                   isLoading: false,
                   onPressed: () {
-                    // FIXME:
                     PiwikManager.trackEvent(
                       PiwikEventType.mission,
                       action: 'mission complete',
                     );
-                    Get.back();
+
+                    final int backCounter =
+                        RoutingObserver.routeStack.toList().indexWhere(
+                              (route) =>
+                                  route.settings.name == '/missions_page' ||
+                                  route.settings.name == '/main',
+                            );
+
+                    if (backCounter == -1) {
+                      Get.back();
+                    } else {
+                      for (int i = 0; i <= backCounter; i++) {
+                        Get.back();
+                      }
+                    }
                   },
                   child: const TitleLarge(
                     "HO CAPITO",
@@ -73,9 +87,9 @@ class MissionCompletedPage extends GetView<MissionCompletedController> {
                       angle: -3 *
                           (3.141592653589793 /
                               180), // Converti i gradi in radianti
-                      child: controller.args.value.mission?.prizeImage != null
+                      child: controller.mission.prizeImage != null
                           ? Image.network(
-                              controller.args.value.mission!.prizeImage!,
+                              controller.mission.prizeImage!,
                               fit: BoxFit.scaleDown,
                               width: Get.width * 0.55,
                             )

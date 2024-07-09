@@ -30,7 +30,7 @@ class AuthenticationService {
         },
       );
 
-      _saveUserInfo(response);
+      await _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed(
         errorType: ErrorManager.checkError(e),
@@ -53,7 +53,7 @@ class AuthenticationService {
         },
       );
 
-      _saveUserInfo(response);
+      await _saveUserInfo(response);
     } catch (e) {
       ErrorType errorType = ErrorManager.checkError(e);
 
@@ -79,7 +79,7 @@ class AuthenticationService {
           "user": registerParameter.toJson(),
         },
       );
-      _saveUserInfo(response);
+      await _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
@@ -113,7 +113,7 @@ class AuthenticationService {
           "user": user.toJson(),
         },
       );
-      _saveUserInfo(response);
+      await _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
@@ -142,7 +142,7 @@ class AuthenticationService {
           "user": user.toJson(),
         },
       );
-      _saveUserInfo(response);
+      await _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
@@ -156,7 +156,7 @@ class AuthenticationService {
       final response = await dio.get(
         "/users/$userID",
       );
-      _saveUserInfo(response);
+      await _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
@@ -198,7 +198,7 @@ class AuthenticationService {
         },
       );
 
-      _saveUserInfo(response);
+      await _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
@@ -284,7 +284,7 @@ class AuthenticationService {
           "interest_ids": interestsId,
         },
       );
-      _saveUserInfo(response);
+      await _saveUserInfo(response);
     } catch (e) {
       appController.user.responseHandler = ResponseHandler.failed();
       log.logApiException(e);
@@ -351,13 +351,14 @@ class AuthenticationService {
     }
   }
 
-  static void _saveUserInfo(Response response) async {
+  static Future<void> _saveUserInfo(Response response) async {
     appController.user.responseHandler = ResponseHandler.successful(
       content: User.fromJson(
         response.data,
       ),
     );
     HiveManager.userId = appController.user.value?.userId ?? "";
+
     await _saveAccessTokenInDB(response.data['user']['session_token']);
   }
 
@@ -379,6 +380,6 @@ class AuthenticationService {
   }
 
   static String get userIDFromDB {
-    return HiveManager.userId;
+    return appController.user.value?.userId ?? HiveManager.userId;
   }
 }

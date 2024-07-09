@@ -68,6 +68,7 @@ class _CodeTextfieldState extends State<CodeTextfield> {
               maxLength: 10,
               controller: controller.codeController,
               focusNode: controller.codeFocusNode,
+              autocorrect: false,
               keyboardType: TextInputType.text,
               onChanged: (text) {
                 controller.updateWrittenCode(text);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/route_observer.dart';
 import 'package:lines/modules/load_code/controllers/load_code_result_controller.dart';
 import 'package:lines/modules/load_code/widgets/completed_mission_card.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -42,8 +43,20 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
           ),
           child: PrimaryButton(
             onPressed: () {
-              Get.back();
-              Get.back();
+              final int backCounter =
+                  RoutingObserver.routeStack.toList().indexWhere(
+                        (route) =>
+                            route.settings.name == '/missions_page' ||
+                            route.settings.name == '/main',
+                      );
+
+              if (backCounter == -1) {
+                Get.back();
+              } else {
+                for (int i = 0; i <= backCounter; i++) {
+                  Get.back();
+                }
+              }
             },
             child: const TitleLarge(
               "CHIUDI",

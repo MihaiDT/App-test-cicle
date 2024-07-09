@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/piwik_manager.dart';
+import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/modules/mission_completed/arguments/mission_completed_arguments.dart';
 import 'package:lines/modules/prizes/controller/prizes_controller.dart';
 import 'package:lines/modules/prizes/widgets/load_code_widget.dart';
 import 'package:lines/modules/prizes/widgets/mission_container.dart';
@@ -71,6 +73,12 @@ class PrizesPage extends GetView<PrizesController> {
                     AdjustManager.trackEvent(AjustEventType.loadProductCode);
                     PiwikManager.trackEvent(
                       PiwikEventType.loadCode,
+                    );
+
+                    appController.missionCompletedArguments.value =
+                        MissionCompletedArguments(
+                      mission: null,
+                      uploadedProduct: null,
                     );
                     Get.toNamed(Routes.loadCode);
                   },

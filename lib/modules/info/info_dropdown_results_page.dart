@@ -32,16 +32,18 @@ class InfoDropDownResultsPage extends GetView<InfoDropdownResultController> {
             textAlign: TextAlign.center,
           ).applyShaders(context),
           ThemeSizedBox.height32,
-          ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: controller.productCategories.length,
-            itemBuilder: (context, index) {
-              return InfoDropDown(
-                category: controller.productCategories[index],
-              );
-            },
-            separatorBuilder: (context, index) => ThemeSizedBox.height16,
+          Obx(
+            () => ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: controller.productCategories.length,
+              itemBuilder: (context, index) {
+                return InfoDropDown(
+                  category: controller.productCategories[index],
+                );
+              },
+              separatorBuilder: (context, index) => ThemeSizedBox.height16,
+            ),
           ),
           ThemeSizedBox.height48,
         ],

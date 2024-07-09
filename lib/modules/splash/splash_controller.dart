@@ -37,6 +37,7 @@ class SplashPageController extends GetxController {
         }
       },
     );
+
     final String authToken = await Get.find<SecureStorageManager>().getToken();
 
     /// If the token is not empty and it's the first access, the saved token is removed
@@ -44,6 +45,16 @@ class SplashPageController extends GetxController {
       Get.find<SecureStorageManager>().saveToken("");
       HiveManager.firstAccess = false;
     }
+
+    await AuthenticationService.fetchUser();
+
+    if ((appController.user.value?.appConsents ?? false) == false) {
+      await AuthenticationService.logout();
+      Get.offAllNamed(Routes.welcome);
+
+      return;
+    }
+
     await SettingsService.fetchSettings();
     await AdvicesService.fetchArticles();
     await AdvicesService.fetchSuggestedArticles();
@@ -57,7 +68,6 @@ class SplashPageController extends GetxController {
     await ProductService.products;
     await ProductService.mission;
     await BadgesService.wallet;
-    await AuthenticationService.fetchUser();
   }
 
   void _pageTransition() {

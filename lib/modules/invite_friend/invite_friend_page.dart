@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/invite_friend/invite_friend_controller.dart';
 import 'package:lines/modules/invite_friend/widgets/invite_friend_code.dart';
 import 'package:lines/modules/invite_friend/widgets/invite_friend_friends_and_coins.dart';
@@ -76,9 +77,12 @@ class InviteFriendPage extends GetView<InviteFriendController> {
                 ThemeSizedBox.height32,
                 SizedBox(
                   height: Get.height * 0.125,
-                  child: InviteFriendFriendsAndCoins(
-                    friendsAmount: 0,
-                    coinsCollected: controller.coinsCollected,
+                  child: Obx(
+                    () => InviteFriendFriendsAndCoins(
+                      friendsAmount:
+                          appController.user.value?.friendsInvited ?? 0,
+                      coinsCollected: controller.coinsCollected,
+                    ),
                   ),
                 ),
                 ThemeSizedBox.height8,

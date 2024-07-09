@@ -4,6 +4,6 @@ import 'package:lines/modules/info/controller/info_dropdown_result_controller.da
 class InfoDropdownResultBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => InfoDropdownResultController());
+    Get.put(InfoDropdownResultController());
   }
 }

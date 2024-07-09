@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/core/helpers/keyboard.dart';
 import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/modules/advices/advices_page.dart';
 import 'package:lines/modules/drawer/pages/drawer_main_page.dart';
@@ -19,6 +20,9 @@ class MainPage extends GetView<MainController> with RouteAware {
 
   @override
   Widget build(BuildContext context) {
+    /// Before the build, we have to force the keyboard to dismiss
+    dismissKeyboard(context);
+
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.dark,
       child: NavigatorPopHandler(

@@ -78,6 +78,6 @@
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver personalized ads to you.</string>
+	<string>Utilizziamo le informazioni di tracciamento per migliorare la tua esperienza personalizzata e suggerirti contenuti interessanti.</string>
 </dict>
 </plist>

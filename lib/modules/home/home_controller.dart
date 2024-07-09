@@ -95,7 +95,7 @@ class HomeController extends AppScaffoldController {
         if (show) {
           rxShowGameTutorial.value = false;
 
-          await wait(milliseconds: 800);
+          await wait(milliseconds: 100);
 
           // The Future.delayed is a workaround to ensure that
           // the homeCircularPeriodCalendarKey is in the correct position
@@ -233,7 +233,7 @@ class HomeController extends AppScaffoldController {
           // The Future.delayed is a workaround to ensure that
           // the homeCircularPeriodCalendarKey is in the correct position
           Future.delayed(
-            const Duration(milliseconds: 300),
+            const Duration(milliseconds: 100),
             () {
               HiveManager.isFirstTutorialWatched = true;
 

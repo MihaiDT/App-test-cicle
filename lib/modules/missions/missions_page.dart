@@ -40,22 +40,24 @@ class MissionsPage extends GetView<MissionsController> {
             ),
           ),
           ThemeSizedBox.height8,
-          ListView.separated(
-            padding: const EdgeInsets.symmetric(
-              horizontal: ThemeSize.paddingSmall,
+          Obx(
+            () => ListView.separated(
+              padding: const EdgeInsets.symmetric(
+                horizontal: ThemeSize.paddingSmall,
+              ),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: controller.missions.length,
+              itemBuilder: (context, index) {
+                return MissionContainer(
+                  onTap: () => controller.navigateToMissionDetails(
+                    controller.missions[index],
+                  ),
+                  mission: controller.missions[index],
+                );
+              },
+              separatorBuilder: (context, index) => ThemeSizedBox.height16,
             ),
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: controller.completedMission.length,
-            itemBuilder: (context, index) {
-              return MissionContainer(
-                onTap: () => controller.navigateToMissionDetails(
-                  controller.completedMission[index],
-                ),
-                mission: controller.completedMission[index],
-              );
-            },
-            separatorBuilder: (context, index) => ThemeSizedBox.height16,
           ),
           ThemeSizedBox.height32,
         ],

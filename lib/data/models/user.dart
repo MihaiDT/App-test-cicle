@@ -22,6 +22,7 @@ class User {
   String? password;
   int? periodDays;
   int? periodDuration;
+  int? friendsInvited;
   bool? privacyProfiling;
   bool? privacyMarketing;
   bool? privacyBrandMarketing;
@@ -59,6 +60,7 @@ class User {
     this.lastMenstrautionDate,
     this.lastName,
     this.legalGuardianEmail,
+    this.friendsInvited = 0,
     this.mgmCode,
     this.nickname,
     this.password,
@@ -96,6 +98,7 @@ class User {
       firstName: json['user']['first_name'],
       isConfirmed: json['user']['is_confirmed'],
       userId: json['user']['id'],
+      friendsInvited: json['user']['invited_friends'] ?? 0,
       lastMenstrautionDate: json['user']['last_menstraution_date'],
       lastName: json['user']['last_name'],
       mgmCode: json['user']['mgm_code'],
@@ -149,6 +152,7 @@ class User {
       "legal_guardian_email": legalGuardianEmail,
       "mgm_code": mgmCode,
       "nickname": nickname,
+      "friendsInvited": friendsInvited,
       "password": password,
       "period_days": periodDays,
       "period_duration": periodDuration,
