@@ -67,10 +67,10 @@ class LoadCodePage extends GetView<LoadCodeController> {
                 ),
                 child: Column(
                   children: [
-                    if (controller.selectedMission.value != null) ...[
+                    if (controller.selectedMission != null) ...[
                       ThemeSizedBox.height24,
                       TitleMedium(
-                        "FINO AL ${controller.selectedMission.value!.endAt}",
+                        "FINO AL ${controller.selectedMission!.endAt}",
                         color: ThemeColor.brightPink,
                         textAlign: TextAlign.center,
                       ),
@@ -80,7 +80,7 @@ class LoadCodePage extends GetView<LoadCodeController> {
                           horizontal: 0,
                         ),
                         child: HeadlineLarge(
-                          controller.selectedMission.value!.description,
+                          controller.selectedMission!.description,
                           color: ThemeColor.darkBlue,
                           textAlign: TextAlign.center,
                         ),
@@ -93,15 +93,13 @@ class LoadCodePage extends GetView<LoadCodeController> {
                         ),
                         child: MissionsLoadedProducts(
                           text: _missionLoadedProductsText,
-                          products:
-                              controller.selectedMission.value!.loadedProducts,
-                          totalCodes:
-                              controller.selectedMission.value!.totalCounter,
+                          products: controller.selectedMission!.loadedProducts,
+                          totalCodes: controller.selectedMission!.totalCounter,
                           showBottomLink: true,
                         ),
                       ),
                     ],
-                    if (controller.selectedMission.value == null) ...[
+                    if (controller.selectedMission == null) ...[
                       const DisplayMedium(
                         "Ottieni i Coins",
                       ).applyShaders(context),
@@ -148,12 +146,12 @@ class LoadCodePage extends GetView<LoadCodeController> {
   }
 
   String get _title =>
-      controller.selectedMission.value != null ? "MISSIONI" : "CARICA CODICE";
+      controller.selectedMission != null ? "MISSIONI" : "CARICA CODICE";
 
   String get _missionLoadedProductsText {
-    if (controller.selectedMission.value != null &&
-        controller.selectedMission.value!.totalCounter > 1) {
-      return "Inserisci i ${controller.selectedMission.value!.totalCounter} codici per completare la missione";
+    if (controller.selectedMission != null &&
+        controller.selectedMission!.totalCounter > 1) {
+      return "Inserisci i ${controller.selectedMission!.totalCounter} codici per completare la missione";
     }
 
     return "Inserisci 1 codice per completare la missione";

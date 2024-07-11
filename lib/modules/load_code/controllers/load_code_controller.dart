@@ -3,17 +3,18 @@ import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/mission.dart';
-import 'package:lines/data/models/uploaded_product.dart';
 import 'package:lines/modules/info/widgets/info_bottom_sheet.dart';
-import 'package:lines/modules/mission_completed/arguments/mission_completed_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/product_service.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class LoadCodeController extends GetxController {
-  Rx<Mission?> selectedMission =
-      appController.missionCompletedArguments.value.mission.obs;
+  Mission? get selectedMission => appController.selectedMissionId.value != null
+      ? appController.missions.value!.firstWhere(
+          (item) => item.id == appController.selectedMissionId.value,
+        )
+      : null;
 
   RxInt get totalCoins => (appController.user.value?.coinsCollected ?? 0).obs;
 
@@ -49,19 +50,20 @@ class LoadCodeController extends GetxController {
 
           isPending.value = false;
 
-          /// Update the state of the app
-          updateState(
-            uploadedProductResponse.content,
-            selectedMission.value,
-          );
+          // /// Update the state of the app
+          // updateState(
+          //   uploadedProductResponse.content,
+          //   selectedMission.value,
+          // );
 
           if (uploadedProductResponse.content!.prizeOrderCreated) {
-            Get.offNamed(
-              Routes.missionCompleted,
-            );
+            Get.offNamed(Routes.missionCompleted);
           } else {
             Get.offNamed(
               Routes.loadCodeResultsPage,
+              arguments: {
+                'uploadedProduct': uploadedProductResponse.content,
+              },
             );
           }
         }
@@ -69,15 +71,15 @@ class LoadCodeController extends GetxController {
     );
   }
 
-  void updateState(
-    UploadedProduct? uploadedProduct,
-    Mission? mission,
-  ) {
-    appController.missionCompletedArguments.value = MissionCompletedArguments(
-      uploadedProduct: uploadedProduct,
-      mission: mission,
-    );
-  }
+  // void updateState(
+  //   UploadedProduct? uploadedProduct,
+  //   Mission? mission,
+  // ) {
+  //   appController.missionCompletedArguments.value = MissionCompletedArguments(
+  //     uploadedProduct: uploadedProduct,
+  //     mission: mission,
+  //   );
+  // }
 
   final RxString writtenCode = "".obs;
 
@@ -96,7 +98,7 @@ class LoadCodeController extends GetxController {
       final String upperCaseCode = writtenCode.value.toUpperCase();
       await ProductService.loadCode(
         upperCaseCode,
-        selectedMission.value?.id,
+        selectedMission?.id,
       );
     }
   }

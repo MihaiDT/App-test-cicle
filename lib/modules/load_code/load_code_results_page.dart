@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/route_observer.dart';
+import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/load_code/controllers/load_code_result_controller.dart';
 import 'package:lines/modules/load_code/widgets/completed_mission_card.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
@@ -27,11 +28,11 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
         ),
         actions: [
           Obx(
-            () {
-              return CoinTotal(
-                totalCoins: controller.totalCoins.value,
-              );
-            },
+            () => CoinTotal(
+              totalCoins: appController.user.value != null
+                  ? appController.user.value!.coinsCollected
+                  : 0,
+            ),
           ),
         ],
       ),
@@ -64,9 +65,11 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
             ),
           ),
         ),
-        child: CompletedMissionCard(
-          uploadedProduct: controller.argument.uploadedProduct!,
-        ),
+        child: controller.uploadedProduct != null
+            ? CompletedMissionCard(
+                uploadedProduct: controller.uploadedProduct!,
+              )
+            : const SizedBox.shrink(),
       ),
     );
   }

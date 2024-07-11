@@ -5,28 +5,20 @@ import 'package:lines/core/helpers/logger/log.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/mission.dart';
-import 'package:lines/modules/mission_completed/arguments/mission_completed_arguments.dart';
 import 'package:lines/widgets/coin/app_coin.dart';
 import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class MissionCompletedController extends GetxController {
-  final Rx<MissionCompletedArguments> args =
-      appController.missionCompletedArguments;
-  late final Mission mission;
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    mission = appController.missions.value!.firstWhere(
-      (element) => element.id == args.value.mission?.id,
-    );
-  }
+  Mission get selectedMission => appController.missions.value!.firstWhere(
+        (item) => item.id == appController.selectedMissionId.value,
+      );
 
   @override
   void onReady() {
     super.onReady();
     logDebug("MissionCompletedController onReady()");
+
+    appController.selectedMissionId.refresh();
   }
 
   Future<void> showNotification() async {

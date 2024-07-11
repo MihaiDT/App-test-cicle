@@ -29,11 +29,7 @@ mixin MonthCalendarMixin {
 
   void initMonthCalendar() {
     final today = DateTime.now();
-    minDate = today.subtract(
-      const Duration(
-        days: 720,
-      ),
-    );
+    minDate = DateTime(2023, 6, 1);
     maxDate = today.add(
       const Duration(
         days: 180,

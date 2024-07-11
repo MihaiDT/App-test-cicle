@@ -56,7 +56,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Per accedere ai tuoi dati è necessario sbloccare l'app</string>
+	<string>Per accedere ai tuoi dati è necessario sbloccare l&apos;app</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -77,7 +77,5 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Utilizziamo le informazioni di tracciamento per migliorare la tua esperienza personalizzata e suggerirti contenuti interessanti.</string>
 </dict>
 </plist>

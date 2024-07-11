@@ -99,6 +99,8 @@ class AppController extends GetxController {
   EasyGetter<UploadedProduct> uploadedProduct;
   EasyGetter<List<SymptomDiariesHistory>> symptomsDiariesHistory2;
 
+  RxnInt selectedMissionId;
+
   /// Determine if the user is trying to log in or sign up
   final RxBool isLoginFlow;
 
@@ -142,6 +144,7 @@ class AppController extends GetxController {
     required this.validateReferralCode,
     required this.symptomsDiariesHistory2,
     required this.walletTransactions,
+    required this.selectedMissionId,
   });
 
   factory AppController.initial() {
@@ -181,6 +184,7 @@ class AppController extends GetxController {
       hasUsedDeepLink: false.obs,
       symptomsDiariesHistory2: EasyGetter<List<SymptomDiariesHistory>>(),
       walletTransactions: EasyGetter<List<WalletTransaction>>(),
+      selectedMissionId: RxnInt(null),
     );
   }
 
@@ -220,6 +224,7 @@ class AppController extends GetxController {
     hasUsedDeepLink.value = false;
     symptomsDiariesHistory2 = EasyGetter<List<SymptomDiariesHistory>>();
     walletTransactions = EasyGetter<List<WalletTransaction>>();
+    selectedMissionId = RxnInt(null);
 
     HiveManager.removeAcceptedCookie();
   }

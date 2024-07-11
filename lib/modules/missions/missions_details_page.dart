@@ -53,7 +53,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                     fit: StackFit.passthrough,
                     children: [
                       Image.network(
-                        controller.selectedMission.value.imageUrl,
+                        controller.selectedMission.imageUrl,
                         fit: BoxFit.fitWidth,
                       ),
                       Align(
@@ -62,9 +62,8 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                           padding: const EdgeInsets.all(8),
                           child: MissionProgressIndicator(
                             loadedCodes: controller
-                                .selectedMission.value.loadedProducts.length,
-                            totalCodes:
-                                controller.selectedMission.value.totalCounter,
+                                .selectedMission.loadedProducts.length,
+                            totalCodes: controller.selectedMission.totalCounter,
                           ),
                         ),
                       ),
@@ -72,9 +71,9 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                   ),
                   ThemeSizedBox.height16,
                   TitleMedium(
-                    controller.selectedMission.value.totalCounter == 1
-                        ? "CARICA IL CODICE ENTRO IL ${controller.selectedMission.value.endAt}"
-                        : "CARICA I CODICI ENTRO IL ${controller.selectedMission.value.endAt}",
+                    controller.selectedMission.totalCounter == 1
+                        ? "CARICA IL CODICE ENTRO IL ${controller.selectedMission.endAt}"
+                        : "CARICA I CODICI ENTRO IL ${controller.selectedMission.endAt}",
                     color: ThemeColor.brightPink,
                     textAlign: TextAlign.center,
                   ),
@@ -84,7 +83,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                       horizontal: ThemeSize.paddingMedium,
                     ),
                     child: HeadlineLarge(
-                      controller.selectedMission.value.description,
+                      controller.selectedMission.description,
                       color: ThemeColor.darkBlue,
                       textAlign: TextAlign.center,
                     ),
@@ -96,7 +95,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                     ),
                     child: Html(
                       data:
-                          """<div style="text-align: center !important;">${controller.selectedMission.value.description2 ?? ''}</div>""",
+                          """<div style="text-align: center !important;">${controller.selectedMission.description2 ?? ''}</div>""",
                       onLinkTap: (url, _, __) async {
                         await launchUrl(Uri.parse(url ?? ''));
                       },
@@ -120,8 +119,8 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                       horizontal: ThemeSize.paddingSmall,
                     ),
                     child: MissionsLoadedProducts(
-                      products: controller.selectedMission.value.loadedProducts,
-                      totalCodes: controller.selectedMission.value.totalCounter,
+                      products: controller.selectedMission.loadedProducts,
+                      totalCodes: controller.selectedMission.totalCounter,
                     ),
                   ),
                   ThemeSizedBox.height32,
@@ -144,24 +143,22 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                         ).applyShaders(context),
                         ThemeSizedBox.height16,
                         MissionsHowToParticipateStepOne(
-                          mission: controller.selectedMission.value,
+                          mission: controller.selectedMission,
                         ),
                         ThemeSizedBox.height16,
                         MissionsHowToParticipateStepTwo(
-                          totalCounter:
-                              controller.selectedMission.value.totalCounter,
+                          totalCounter: controller.selectedMission.totalCounter,
                         ),
                         ThemeSizedBox.height16,
                         MissionsHowToParticipateStepThree(
                           prizeDescription:
-                              controller.selectedMission.value.prizeDescription,
-                          prizeImage:
-                              controller.selectedMission.value.prizeImage,
+                              controller.selectedMission.prizeDescription,
+                          prizeImage: controller.selectedMission.prizeImage,
                         ),
                         ThemeSizedBox.height32,
                         Html(
                           data:
-                              """<div style="text-align: center !important;">${controller.selectedMission.value.disclaimer ?? ''}</div>""",
+                              """<div style="text-align: center !important;">${controller.selectedMission.disclaimer ?? ''}</div>""",
                           onLinkTap: (url, _, __) async {
                             await launchUrl(
                               Uri.parse(url ?? ''),
@@ -190,8 +187,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                           onTap: () async {
                             await launchUrl(
                               Uri.parse(
-                                controller.selectedMission.value.regolamento ??
-                                    '',
+                                controller.selectedMission.regolamento ?? '',
                               ),
                               mode: LaunchMode.externalApplication,
                             );
@@ -209,7 +205,7 @@ class MissionsDetailsPage extends GetView<MissionsDetailsController> {
                   ),
                 ],
               ),
-              if (!controller.selectedMission.value.isCompleted)
+              if (!controller.selectedMission.isCompleted)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(

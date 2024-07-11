@@ -47,6 +47,7 @@ class SplashPageController extends GetxController {
     }
 
     await AuthenticationService.fetchUser();
+    await SettingsService.fetchSettings();
 
     if ((appController.user.value?.appConsents ?? false) == false) {
       await AuthenticationService.logout();
@@ -55,7 +56,6 @@ class SplashPageController extends GetxController {
       return;
     }
 
-    await SettingsService.fetchSettings();
     await AdvicesService.fetchArticles();
     await AdvicesService.fetchSuggestedArticles();
     await AdvicesService.fetchSingleArticle("");

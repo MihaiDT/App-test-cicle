@@ -1,26 +1,18 @@
 import 'package:get/get.dart';
 import 'package:lines/core/utils/singletons.dart';
-import 'package:lines/data/models/mission.dart';
-import 'package:lines/modules/mission_completed/arguments/mission_completed_arguments.dart';
-import 'package:lines/repository/product_service.dart';
+import 'package:lines/data/models/uploaded_product.dart';
 
 class LoadCodeResultController extends GetxController {
-  RxInt get totalCoins => (appController.user.value?.coinsCollected ?? 0).obs;
+  UploadedProduct? uploadedProduct;
 
-  final MissionCompletedArguments argument =
-      appController.missionCompletedArguments.value;
+  LoadCodeResultController() {
+    uploadedProduct = Get.arguments['uploadedProduct'] as UploadedProduct?;
+  }
 
   @override
-  Future<void> onReady() async {
+  void onReady() {
     super.onReady();
 
-    await ProductService.mission;
-    Mission mission = appController.missions.value!.firstWhere(
-      (element) => element.id == argument.mission?.id,
-    );
-    appController.missionCompletedArguments.value = MissionCompletedArguments(
-      uploadedProduct: argument.uploadedProduct,
-      mission: mission,
-    );
+    appController.selectedMissionId.refresh();
   }
 }
