@@ -41,7 +41,7 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                     await launchUrl(
                       Uri.parse(
                         appController.settings.value?.helpdeskUrl ??
-                            'https://linesit.digimetrica.com/contatti-servizio-consumatori?from=app',
+                            'https://lines.it/contatti-servizio-consumatori?from=app',
                       ),
                       mode: LaunchMode.externalApplication,
                     );

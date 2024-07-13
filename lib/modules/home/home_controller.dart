@@ -359,8 +359,15 @@ class HomeController extends AppScaffoldController {
                               hideTutorial();
                               Get.toNamed(Routes.calendar);
                             },
-                            child: const HeadlineSmall(
+                            child: const Text(
                               "Aggiungi mestruazioni",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 9.5,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 1.1,
+                                height: 1.2,
+                              ),
                             ),
                           ),
                         ),

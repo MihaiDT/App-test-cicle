@@ -39,6 +39,7 @@ class SplashPageController extends GetxController {
     );
 
     final String authToken = await Get.find<SecureStorageManager>().getToken();
+    await SettingsService.fetchSettings();
 
     /// If the token is not empty and it's the first access, the saved token is removed
     if (authToken.isNotEmpty && HiveManager.firstAccess) {
@@ -47,7 +48,6 @@ class SplashPageController extends GetxController {
     }
 
     await AuthenticationService.fetchUser();
-    await SettingsService.fetchSettings();
 
     if ((appController.user.value?.appConsents ?? false) == false) {
       await AuthenticationService.logout();
@@ -76,7 +76,7 @@ class SplashPageController extends GetxController {
     );
   }
 
-  _startAnimation() async {
+  void _startAnimation() async {
     if (appController.settings.responseHandler.isSuccessful) {
       await wait(seconds: 1);
       _pageTransition();

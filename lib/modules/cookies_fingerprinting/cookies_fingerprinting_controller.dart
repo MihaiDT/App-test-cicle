@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/helpers/fullscreen_loader.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
@@ -22,22 +25,20 @@ class CookiesFingerprintingController extends GetxController {
     super.onInit();
   }
 
-  bool get enableConfirmButton =>
-      hasAcceptedCookieStats?.value != null &&
-      hasAcceptedCookieProfiling?.value != null;
+  bool get enableConfirmButton => hasAcceptedCookieStats?.value != null && hasAcceptedCookieProfiling?.value != null;
 
-  void navigateToNextPage() {
-    HiveManager.hasAcceptedCookieProfiling = hasAcceptedCookieProfiling?.value;
-    HiveManager.hasAcceptedCookieStats = hasAcceptedCookieStats?.value;
+  void navigateToNextPage() async {
+    HiveManager.hasAcceptedCookieProfiling =
+        (await _isAppTrackingTransparencyPermissionAccepted()) && (hasAcceptedCookieProfiling?.value ?? false);
+    HiveManager.hasAcceptedCookieStats =
+        (await _isAppTrackingTransparencyPermissionAccepted()) && (hasAcceptedCookieStats?.value ?? false);
     if (isEditing) {
       _updateConsents();
       Get.back();
       showFullScreenLoader();
     } else {
       Get.offAndToNamed(
-        appController.isLoginFlow.value == true
-            ? Routes.login
-            : Routes.register,
+        appController.isLoginFlow.value == true ? Routes.login : Routes.register,
       );
     }
   }
@@ -49,5 +50,12 @@ class CookiesFingerprintingController extends GetxController {
         hasConsentCookieStats: hasAcceptedCookieStats?.value,
       ),
     );
+  }
+
+  Future<bool> _isAppTrackingTransparencyPermissionAccepted() async {
+    if (Platform.isIOS) {
+      return await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
+    }
+    return true;
   }
 }

@@ -1,5 +1,5 @@
 name: lines
-version: 1.0.0+74
+version: 1.0.1+76
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -12,6 +12,9 @@ dependencies:
 
   # A Flutter plugin for opening iOS and Android phone settings from an app.
   app_settings: ^5.1.1
+
+  # This Flutter plugin allows you to display ios 14+ tracking authorization dialog and request permission to collect data. Collected data is crucial for ad networks (ie admob) to work efficiently on ios 14+ devices.
+  app_tracking_transparency: ^2.0.5
   
   # Braze Flutter SDK #
   braze_plugin: ^10.1.0

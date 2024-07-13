@@ -46,6 +46,7 @@ class HomeHorizontalCalendar extends GetView<HomeController> {
                     );
                     controller.periodSelectedDateIndex.value = index;
                   },
+
                   updateOnScroll: false,
                   shrinkWrap: true,
                 )

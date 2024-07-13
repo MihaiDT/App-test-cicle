@@ -107,6 +107,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                           Uri.parse(
                             "https://lines.it/informativa-privacy/app-my-lines",
                           ),
+                          mode: LaunchMode.externalApplication,
                         );
                       },
                     ),

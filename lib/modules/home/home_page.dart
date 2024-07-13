@@ -57,7 +57,16 @@ class HomePage extends GetView<HomeController> {
                           child: PrimaryButton(
                             onPressed: () => Get.toNamed(Routes.calendar),
                             buttonSize: ButtonSize.h31,
-                            child: const TitleLarge("Modifica mestruazioni"),
+                            child: const Text(
+                              "Modifica mestruazioni",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 1.1,
+                                height: 1.2,
+                              ),
+                            ),
                           ),
                         ),
                       )
@@ -83,51 +92,47 @@ class HomePage extends GetView<HomeController> {
                     : const SizedBox.shrink(),
               ),
               Obx(
-                () {
-                  if (controller.showMissionSection) {
-                    return Column(
-                      children: [
-                        ThemeSizedBox.height32,
-                        const MissionRowSection(),
-                      ],
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
+                () => (controller.showMissionSection)
+                    ? Column(
+                        children: [
+                          ThemeSizedBox.height32,
+                          const MissionRowSection(),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
               ),
-              Obx(() {
-                if (controller.showSuggestedArticlesSection.value) {
-                  return Column(
-                    children: [
-                      ThemeSizedBox.height32,
-                      const Padding(
-                        padding: EdgeInsets.only(
-                          left: 16,
-                        ),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: TitleMedium(
-                            'CONTENUTI PER TE',
-                            color: ThemeColor.darkBlue,
-                            letterSpacing: 2,
+              Obx(
+                () => controller.showSuggestedArticlesSection.value
+                    ? Column(
+                        children: [
+                          ThemeSizedBox.height32,
+                          const Padding(
+                            padding: EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: TitleMedium(
+                                'CONTENUTI PER TE',
+                                color: ThemeColor.darkBlue,
+                                letterSpacing: 2,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      ThemeSizedBox.height16,
-                      SizedBox(
-                        height: 220,
-                        child: AdvicesCardsRow(
-                          onCardTapped: (article, category) =>
-                              controller.showArticleDetails(article, category),
-                          withBorder: true,
-                          articles: controller.allSuggestedArticles,
-                        ),
-                      ),
-                    ],
-                  );
-                }
-                return const SizedBox.shrink();
-              }),
+                          ThemeSizedBox.height16,
+                          SizedBox(
+                            height: 220,
+                            child: AdvicesCardsRow(
+                              onCardTapped: (article, category) => controller
+                                  .showArticleDetails(article, category),
+                              withBorder: true,
+                              articles: controller.allSuggestedArticles,
+                            ),
+                          ),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+              ),
               ThemeSizedBox.height40,
             ],
           ),

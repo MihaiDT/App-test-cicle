@@ -9,6 +9,8 @@ PODS:
     - Flutter
   - app_settings (5.1.1):
     - Flutter
+  - app_tracking_transparency (0.0.1):
+    - Flutter
   - AppAuth (1.7.5):
     - AppAuth/Core (= 1.7.5)
     - AppAuth/ExternalUserAgent (= 1.7.5)
@@ -171,6 +173,7 @@ DEPENDENCIES:
   - adjust_sdk (from `.symlinks/plugins/adjust_sdk/ios`)
   - app_links (from `.symlinks/plugins/app_links/ios`)
   - app_settings (from `.symlinks/plugins/app_settings/ios`)
+  - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - braze_plugin (from `.symlinks/plugins/braze_plugin/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/darwin`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -227,6 +230,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/app_links/ios"
   app_settings:
     :path: ".symlinks/plugins/app_settings/ios"
+  app_tracking_transparency:
+    :path: ".symlinks/plugins/app_tracking_transparency/ios"
   braze_plugin:
     :path: ".symlinks/plugins/braze_plugin/ios"
   connectivity_plus:
@@ -277,6 +282,7 @@ SPEC CHECKSUMS:
   adjust_sdk: e2b8a3f4115b4bb61594a2941dea942c51afa0d6
   app_links: e70ca16b4b0f88253b3b3660200d4a10b4ea9795
   app_settings: 017320c6a680cdc94c799949d95b84cb69389ebc
+  app_tracking_transparency: e169b653478da7bb15a6c61209015378ca73e375
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   braze_plugin: e8333e8bd162d59f519673f60bcdc3e0da32a954
   BrazeKit: 7406e77825c624d8e7a162d858a4bffdf79270f5

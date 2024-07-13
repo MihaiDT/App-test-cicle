@@ -16,6 +16,8 @@ class MissionRowSectionController extends GetxController {
       name: currentMission.title,
     );
 
+    appController.selectedMissionId.value = currentMission.id;
+
     Get.toNamed(
       Routes.missionsDetailsPage,
       arguments: currentMission,
