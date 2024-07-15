@@ -69,4 +69,5 @@ class Routes {
 
   static const String editCookies = '/edit_cookies';
   static const String acceptConsent = '/accept_consent';
+  static const String confirmCondition = '/confirm_condition';
 }

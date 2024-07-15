@@ -169,7 +169,7 @@ class LoginController extends GetxController {
             } else {
               /// Send confirm email
               await AuthenticationService.sendConsentsEmail();
-              Get.toNamed(Routes.confirmEmailPage);
+              Get.toNamed(Routes.confirmCondition);
             }
           } else if (appController.user.value?.routeAfterLogin ==
               "complete_profile") {
