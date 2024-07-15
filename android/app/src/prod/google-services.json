@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:329390092342:android:bf89372d4f9a2c0996e897",
+        "android_client_info": {
+          "package_name": "com.fatergroup.my_lines"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329390092342-5ua99685eb8fsojpmo6ahvqfhs5dqkbu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqU8ho60aiwom-pRG5xNDsL3oSyweDi-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329390092342-5ua99685eb8fsojpmo6ahvqfhs5dqkbu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "329390092342-0qrf134m44ouft9q1p70nubt1t1hdo8u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it.fater.lines"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:329390092342:android:ba1116ff708d3c7c96e897",
         "android_client_info": {
           "package_name": "com.fatergroup.mylines"

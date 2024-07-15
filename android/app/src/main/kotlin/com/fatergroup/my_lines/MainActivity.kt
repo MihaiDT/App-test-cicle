@@ -1,4 +1,4 @@
-package com.fatergroup.mylines
+package com.fatergroup.my_lines
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 
