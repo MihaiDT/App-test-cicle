@@ -19,6 +19,8 @@ import 'package:lines/modules/change_profile/binding/your_menses_section_binding
 import 'package:lines/modules/change_profile/pages/change_profile_page.dart';
 import 'package:lines/modules/charts_and_statistics/charts_and_statistics_bindings.dart';
 import 'package:lines/modules/charts_and_statistics/charts_and_statistics_page.dart';
+import 'package:lines/modules/confirm_conditions/confirm_condition_binding.dart';
+import 'package:lines/modules/confirm_conditions/confirm_condition_page.dart';
 import 'package:lines/modules/confirm_email/confirm_email_binding.dart';
 import 'package:lines/modules/confirm_email/confirm_email_page.dart';
 import 'package:lines/modules/confirm_tutor_email/confirm_tutor_email.dart';
@@ -308,6 +310,19 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const ReferralPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    ///ConfirmEmailPage
+    GetPage(
+      name: Routes.confirmEmailPage,
+      bindings: [
+        ConfirmEmailBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        authNeeded: false,
+        const ConfirmEmailPage(),
       ),
       transition: Transition.rightToLeft,
     ),
@@ -749,11 +764,10 @@ class Pages {
 
     // Accept consent
     GetPage(
-      name: Routes.acceptConsent,
-      binding: AcceptConsentBinding(),
+      name: Routes.confirmCondition,
+      binding: ConfirmConditionBinding(),
       page: () => _mediaQueryWrapper(
-        const AcceptConsentPage(),
-        authNeeded: false,
+        const ConfirmConditionPage(),
       ),
       transition: Transition.downToUp,
     ),
