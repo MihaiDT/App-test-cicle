@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lines/app_controller.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/helpers/adjust_manager.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
@@ -8,11 +9,11 @@ import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/regex_extension.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/user.dart';
 import 'package:lines/modules/birth_date/widget/too_young_error_dialog.dart';
 import 'package:lines/modules/login/widget/forgot_password_bottomsheet.dart';
 import 'package:lines/modules/register/widget/activate_email_dialog.dart';
 import 'package:lines/modules/register/widget/email_does_not_exists.dart';
-import 'package:lines/modules/tutor_email/tutor_email_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
@@ -41,6 +42,8 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    appController.user = EasyGetter<User>();
 
     emailController.addListener(() {
       emailValue.value = emailController.text;
@@ -153,19 +156,22 @@ class LoginController extends GetxController {
 
               /// If user has more than 14 years but less than 18 years
               /// needs the confirm from the tutor by email
-            } else if (appController.user.value?.hasMoreThan18Years == false) {
-              Get.toNamed(
-                Routes.tutorEmailPage,
-                arguments: TutorEmailArguments(
-                  onContinue: (tutorEmail) async {
-                    await AuthenticationService.sendConsentsEmail(tutorEmail);
-                    Get.offAndToNamed(
-                      Routes.confirmTutorEmail,
-                      arguments: tutorEmail,
-                    );
-                  },
-                ),
-              );
+              // } else if (appController.user.value?.hasMoreThan18Years == false) {
+              //   Get.toNamed(
+              //     Routes.tutorEmailPage,
+              //     arguments: TutorEmailArguments(
+              //       onContinue: (tutorEmail) async {
+              //         await AuthenticationService.sendConsentsEmail(tutorEmail);
+              //         Get.offAndToNamed(
+              //           Routes.confirmTutorEmail,
+              //           arguments: tutorEmail,
+              //         );
+              //       },
+              //     ),
+              //   );
+            } else if (appController.user.value?.isCreatedBeforeLive == true) {
+              /// Privacy user registered before go live
+              Get.toNamed(Routes.privacyOldRegistration);
             } else {
               /// Send confirm email
               await AuthenticationService.sendConsentsEmail();

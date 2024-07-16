@@ -25,20 +25,26 @@ class CookiesFingerprintingController extends GetxController {
     super.onInit();
   }
 
-  bool get enableConfirmButton => hasAcceptedCookieStats?.value != null && hasAcceptedCookieProfiling?.value != null;
+  bool get enableConfirmButton =>
+      hasAcceptedCookieStats?.value != null &&
+      hasAcceptedCookieProfiling?.value != null;
 
   void navigateToNextPage() async {
     HiveManager.hasAcceptedCookieProfiling =
-        (await _isAppTrackingTransparencyPermissionAccepted()) && (hasAcceptedCookieProfiling?.value ?? false);
+        (await _isAppTrackingTransparencyPermissionAccepted()) &&
+            (hasAcceptedCookieProfiling?.value ?? false);
     HiveManager.hasAcceptedCookieStats =
-        (await _isAppTrackingTransparencyPermissionAccepted()) && (hasAcceptedCookieStats?.value ?? false);
+        (await _isAppTrackingTransparencyPermissionAccepted()) &&
+            (hasAcceptedCookieStats?.value ?? false);
     if (isEditing) {
       _updateConsents();
       Get.back();
       showFullScreenLoader();
     } else {
       Get.offAndToNamed(
-        appController.isLoginFlow.value == true ? Routes.login : Routes.register,
+        appController.isLoginFlow.value == true
+            ? Routes.login
+            : Routes.register,
       );
     }
   }
@@ -54,7 +60,8 @@ class CookiesFingerprintingController extends GetxController {
 
   Future<bool> _isAppTrackingTransparencyPermissionAccepted() async {
     if (Platform.isIOS) {
-      return await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
+      return await AppTrackingTransparency.requestTrackingAuthorization() ==
+          TrackingStatus.authorized;
     }
     return true;
   }

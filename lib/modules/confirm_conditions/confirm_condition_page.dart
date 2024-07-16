@@ -29,7 +29,7 @@ class ConfirmConditionPage extends GetView<ConfirmConditionController> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SecondaryButton(
-                  onPressed: () {},
+                  onPressed: controller.logIn,
                   child: const TitleLarge(
                     "PROCEDI",
                     letterSpacing: 2,
@@ -41,7 +41,7 @@ class ConfirmConditionPage extends GetView<ConfirmConditionController> {
                     await launchUrl(
                       Uri.parse(
                         appController.settings.value?.helpdeskUrl ??
-                            'https://linesit.digimetrica.com/contatti-servizio-consumatori?from=app',
+                            'https://lines.it/contatti-servizio-consumatori?from=app',
                       ),
                       mode: LaunchMode.externalApplication,
                     );

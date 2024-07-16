@@ -23,6 +23,7 @@ class User {
   int? periodDays;
   int? periodDuration;
   int? friendsInvited;
+  bool? isOld;
   bool? privacyProfiling;
   bool? privacyMarketing;
   bool? privacyBrandMarketing;
@@ -55,6 +56,7 @@ class User {
     this.deepcubeId,
     this.email,
     this.firstName,
+    this.isOld = false,
     this.isConfirmed = false,
     this.userId,
     this.lastMenstrautionDate,
@@ -98,6 +100,7 @@ class User {
       firstName: json['user']['first_name'],
       isConfirmed: json['user']['is_confirmed'],
       userId: json['user']['id'],
+      isOld: json['user']['is_old_user'] ?? false,
       friendsInvited: json['user']['invited_friends'] ?? 0,
       lastMenstrautionDate: json['user']['last_menstraution_date'],
       lastName: json['user']['last_name'],
@@ -192,6 +195,7 @@ class User {
         ' provider: $provider, sessionToken: $sessionToken, interests: $interests,'
         ' zipCode: $zipCode, active: $active, coinsCollected: $coinsCollected, userId: $userId,'
         ' profileCompletedAreas: ${profileCompletedAreas.toString()},'
+        ' isOld: $isOld,'
         ' isWelcomeQuizCompleted: $isWelcomeQuizCompleted,'
         ' profileCompletionPercentage: $profileCompletionPercentage,'
         ' routeAfterLogin: $routeAfterLogin,'
@@ -222,6 +226,8 @@ class User {
     }
     return age;
   }
+
+  bool get isCreatedBeforeLive => isOld ?? false;
 
   bool get hasMoreThan14Years {
     return age >= 14;

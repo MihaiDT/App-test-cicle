@@ -38,11 +38,19 @@ class PrivacyPage extends GetView<PrivacyController> {
                   ),
                   child: SecondaryLoadingButton(
                     onPressed: () {
-                      controller.registerUser();
+                      if (appController.user.value?.isCreatedBeforeLive ==
+                          true) {
+                        /// Privacy user registered before go live
+                        controller.savePrivacy();
+                      } else {
+                        controller.registerUser();
+                      }
                     },
                     isLoading: controller.buttonIsPending.value,
-                    child: const TitleLarge(
-                      "PROCEDI CON LA REGISTRAZIONE",
+                    child: TitleLarge(
+                      (appController.user.value?.isCreatedBeforeLive == true)
+                          ? "CONTINUA"
+                          : "PROCEDI CON LA REGISTRAZIONE",
                       letterSpacing: 1.2, // Non ci sta con letterspacing 2
                     ).applyShaders(context),
                   ),

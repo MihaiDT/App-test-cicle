@@ -4,6 +4,7 @@ import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/privacy_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 import 'package:lines/routes/routes.dart';
 
 class PrivacyController extends GetxController {
@@ -15,6 +16,22 @@ class PrivacyController extends GetxController {
   RxBool buttonIsPending = false.obs;
 
   PrivacyController() {
+    ever(
+      appController.user.rxValue,
+      condition: () => Get.currentRoute == Routes.privacyOldRegistration,
+      (callback) {
+        if (callback.isPending) {
+          buttonIsPending.value = true;
+        }
+        if (callback.isSuccessful) {
+          buttonIsPending.value = false;
+
+          AuthenticationService.sendConsentsEmail();
+          Get.toNamed(Routes.confirmCondition);
+        }
+      },
+    );
+
     ever(
       appController.user.rxValue,
       condition: () => Get.currentRoute == Routes.privacy,
@@ -29,6 +46,16 @@ class PrivacyController extends GetxController {
               : Get.offAllNamed(Routes.confirmTutorEmail);
         }
       },
+    );
+  }
+
+  Future<void> savePrivacy() async {
+    await AuthenticationService.updatePrivacy(
+      UpdateUserParameters(
+        privacyMarketing: firstAccepted.value,
+        privacyProfiling: secondAccepted.value,
+        privacyBrandMarketing: thirdAccepted.value,
+      ),
     );
   }
 

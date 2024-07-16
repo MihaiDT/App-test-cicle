@@ -17,6 +17,7 @@ class Routes {
   static const String birthDate = '/birth_date';
 
   static const String privacy = '/privacy';
+  static const String privacyOldRegistration = '/privacy_old_registration';
   static const String lastMensesPage = '/last_menses';
 
   static const String howLongMensesPage = '/how_long_menses_page';
