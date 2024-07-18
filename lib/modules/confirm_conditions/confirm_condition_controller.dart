@@ -7,7 +7,9 @@ import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/texts/notification_overlay.dart';
 
 class ConfirmConditionController extends GetxController {
-  String get email => appController.user.value?.email ?? '';
+  String get email => (appController.user.value?.hasMoreThan18Years == false)
+      ? appController.user.value?.legalGuardianEmail ?? ''
+      : appController.user.value?.email ?? '';
 
   void logIn() {
     appController.isLoginFlow.value = true;

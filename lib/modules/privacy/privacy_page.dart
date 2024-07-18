@@ -50,8 +50,8 @@ class PrivacyPage extends GetView<PrivacyController> {
                     child: TitleLarge(
                       (appController.user.value?.isCreatedBeforeLive == true)
                           ? "CONTINUA"
-                          : "PROCEDI CON LA REGISTRAZIONE",
-                      letterSpacing: 1.2, // Non ci sta con letterspacing 2
+                          : "CONTINUA CON LA MIA SELEZIONE",
+                      letterSpacing: 1.1, // Non ci sta con letterspacing 2
                     ).applyShaders(context),
                   ),
                 ),
@@ -59,7 +59,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                   children: [
                     ThemeSizedBox.height36,
                     const DisplayMedium(
-                      "La privacy prima di tutto",
+                      "Teniamo alla tua privacy",
                     ),
                     ThemeSizedBox.height32,
                     PrivacyDetailWidget(
@@ -98,7 +98,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                     MarkdownBody(
                       data:
                           "In qualsiasi momento potrai modificare le tue preferenze.\n"
-                          "Procedendo con la registration dichiari di aver letto l'[informativa]() sul trattamento dei dati personali.",
+                          "Procedendo con la registrazione dichiari di aver letto l'[informativa]() sul trattamento dei dati personali.",
                       styleSheet: MarkdownStyleSheet(
                         a: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Colors.white,

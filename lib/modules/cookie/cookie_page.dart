@@ -100,8 +100,9 @@ class CookiePage extends StatelessWidget {
               ),
               ThemeSizedBox.height16,
               const BodyMedium(
-                "Quest'app utilizza cookie tecnici/fingerprinting di profilazione, anche di terze parti,"
-                " per offrirti contenuti, servizi e pubblicità interessanti per te sulla base delle tue attività.",
+                "Questa App utilizza tracciatori tecnici, e con il tuo consenso, tracciatori di profilazione e statistici, "
+                "anche di terze parti, per migliorare l'app e offrirti contenuti, servizi e pubblicità interessanti per te "
+                "sulla base delle tue attività.",
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height16,
@@ -115,9 +116,9 @@ class CookiePage extends StatelessWidget {
               ),
               ThemeSizedBox.height16,
               const BodyMedium(
-                "Clicca \"acconsento\" per accettare, clicca \"più opzioni\""
-                " per accettare selettivamente tutti o alcuni cookie/fingerprinting."
-                " Clicca sulla X per chiudere senza prestare consenso.",
+                "Clicca \"acconsento\" per accettare, clicca \"più opzioni\" "
+                "per accettare alcuni tracciatori.\n"
+                "Clicca sulla X per chiudere senza prestare consenso.",
                 textAlign: TextAlign.center,
               ),
             ],

@@ -72,14 +72,15 @@ class ConfirmEmailPage extends GetView<ConfirmEmailController> {
                 ),
                 ThemeSizedBox.height16,
                 const BodyMedium(
-                  "Abbiamo inviato un'e-mail all'indirizzo",
+                  "Abbiamo inviato una mail all'indirizzo:",
                   textAlign: TextAlign.center,
                 ),
                 TitleLarge(
                   controller.email,
                 ),
+                ThemeSizedBox.height4,
                 const BodyMedium(
-                  "Visiona e accetta le condizioni di utilizzo per poter accedere all'app e conferma la tua registrazione cliccando sul link apposito.",
+                  "Visiona e accetta le condizioni di utilizzo e conferma la tua registrazione cliccando sul link apposito.",
                   textAlign: TextAlign.center,
                 ),
                 ThemeSizedBox.height32,

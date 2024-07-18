@@ -24,7 +24,7 @@ class HowLongMensesPage extends GetView<HowLongMensesController> {
       extendBodyBehindAppBar: true,
       appBar: const TransparentAppBar(
         title: TitleSmall(
-          "CONOSCIAMOCI",
+          "PARLACI DEL TUO CICLO",
         ),
       ),
       body: SafeArea(

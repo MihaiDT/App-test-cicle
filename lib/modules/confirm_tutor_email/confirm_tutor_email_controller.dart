@@ -27,6 +27,21 @@ class ConfirmTutorEmailController extends GetxController {
   }
 
   void sendEmail() async {
-    await AuthenticationService.sendConsentsEmail(tutorEmail);
+    await AuthenticationService.sendActivationLink(
+        appController.registerParameter.email);
+
+    FlushBar(
+      child: const Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 8,
+        ),
+        child: HeadlineSmall(
+          'Email inviata con successo!',
+          color: ThemeColor.darkBlue,
+        ),
+      ),
+    ).show(
+      Get.context!,
+    );
   }
 }

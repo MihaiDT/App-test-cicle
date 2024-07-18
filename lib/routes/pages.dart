@@ -17,6 +17,8 @@ import 'package:lines/modules/change_profile/binding/your_information_section_bi
 import 'package:lines/modules/change_profile/binding/your_interests_section_binding.dart';
 import 'package:lines/modules/change_profile/binding/your_menses_section_binding.dart';
 import 'package:lines/modules/change_profile/pages/change_profile_page.dart';
+import 'package:lines/modules/change_tutor_email/change_tutor_email_binding.dart';
+import 'package:lines/modules/change_tutor_email/change_tutor_email_page.dart';
 import 'package:lines/modules/charts_and_statistics/charts_and_statistics_bindings.dart';
 import 'package:lines/modules/charts_and_statistics/charts_and_statistics_page.dart';
 import 'package:lines/modules/confirm_conditions/confirm_condition_binding.dart';
@@ -258,7 +260,7 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const PrivacyPage(),
-        authNeeded: false,
+        authNeeded: true,
       ),
       transition: Transition.rightToLeft,
     ),
@@ -527,6 +529,18 @@ class Pages {
       page: () => _mediaQueryWrapper(
         authNeeded: false,
         const TutorEmailPage(),
+      ),
+      transition: Transition.rightToLeft,
+    ),
+
+    GetPage(
+      name: Routes.changeTutorEmailPage,
+      bindings: [
+        ChangeTutorEmailBinding(),
+      ],
+      page: () => _mediaQueryWrapper(
+        authNeeded: false,
+        const ChangeTutorEmailPage(),
       ),
       transition: Transition.rightToLeft,
     ),

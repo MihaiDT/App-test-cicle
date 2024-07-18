@@ -74,9 +74,7 @@ class ConsentBottomSheet extends StatelessWidget {
             ),
             ThemeSizedBox.height24,
             InkWell(
-              onTap: () {
-                Get.toNamed(Routes.acceptConsent);
-              },
+              onTap: () => Get.toNamed(Routes.referral),
               child: const TitleMedium(
                 "NON ACCONSENTO",
                 letterSpacing: 1.5,

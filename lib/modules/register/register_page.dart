@@ -48,7 +48,8 @@ class RegisterPage extends GetView<RegisterController> {
               ),
               ThemeSizedBox.height16,
               const BodyMedium(
-                "Registrati per iniziare la tua esperienza in My Lines. Se invece hai già un account Lines creato in app o sul sito Lines.it clicca su ACCEDI in basso",
+                "Registrati per iniziare la tua esperienza in My Lines.\n"
+                "Se invece hai già un account Lines creato in app o sul sito Lines.it clicca su ACCEDI in basso",
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,

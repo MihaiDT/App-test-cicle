@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/modules/tutor_email/tutor_email_controller.dart';
+import 'package:lines/modules/change_tutor_email/change_tutor_email_controller.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/secondary_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
-class TutorEmailPage extends GetView<TutorEmailController> {
-  const TutorEmailPage({
+class ChangeTutorEmailPage extends GetView<ChangeTutorEmailController> {
+  const ChangeTutorEmailPage({
     super.key,
   });
 
@@ -57,7 +57,10 @@ class TutorEmailPage extends GetView<TutorEmailController> {
                 ),
                 ThemeSizedBox.height16,
                 const BodyMedium(
-                  "Siccome sei ancora minorenne, hai bisogno dell'autorizzazione di un genitore o di un tutore legale per registrarti.\nInvieremo una mail all’indirizzo indicato per approvare la tua registrazione.\nPuoi stare tranquilla: il tuo account non sarà mai accessibile ad altri.",
+                  "Siccome sei ancora minorenne, hai bisogno che un tuo genitore o tutore visioni e accetti le condizioni "
+                  "dell'app My Lines per poter accedere.\n"
+                  "Invieremo una mail all’indirizzo da te indicato. "
+                  "Puoi stare tranquilla: il tuo account non sarà mai accessibile ad altri.",
                   textAlign: TextAlign.center,
                 ),
                 ThemeSizedBox.height32,

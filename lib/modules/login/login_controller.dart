@@ -156,19 +156,8 @@ class LoginController extends GetxController {
 
               /// If user has more than 14 years but less than 18 years
               /// needs the confirm from the tutor by email
-              // } else if (appController.user.value?.hasMoreThan18Years == false) {
-              //   Get.toNamed(
-              //     Routes.tutorEmailPage,
-              //     arguments: TutorEmailArguments(
-              //       onContinue: (tutorEmail) async {
-              //         await AuthenticationService.sendConsentsEmail(tutorEmail);
-              //         Get.offAndToNamed(
-              //           Routes.confirmTutorEmail,
-              //           arguments: tutorEmail,
-              //         );
-              //       },
-              //     ),
-              //   );
+            } else if (appController.user.value?.hasMoreThan18Years == false) {
+              Get.toNamed(Routes.changeTutorEmailPage);
             } else if (appController.user.value?.isCreatedBeforeLive == true) {
               /// Privacy user registered before go live
               Get.toNamed(Routes.privacyOldRegistration);
