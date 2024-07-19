@@ -28,7 +28,8 @@ class ConfirmTutorEmailController extends GetxController {
 
   void sendEmail() async {
     await AuthenticationService.sendActivationLink(
-        appController.registerParameter.email);
+      appController.registerParameter.email,
+    );
 
     FlushBar(
       child: const Padding(

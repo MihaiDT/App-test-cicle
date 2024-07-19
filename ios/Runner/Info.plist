@@ -78,6 +78,6 @@
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>Quest'app utilizza cookie tecnici/fingerprinting di profilazione, anche di terze parti, per offrirti contenuti, servizi e pubblicità interessanti per te sulla base delle tue attività.</string>
+	<string>I tuoi dati verranno utilizzati per inviarti annunci o contenuti personalizzati. Vedi l&apos;informativa in Impostazioni &gt; Privacy e Condizioni di utilizzo &gt; Informativa tracciatori</string>
 </dict>
 </plist>

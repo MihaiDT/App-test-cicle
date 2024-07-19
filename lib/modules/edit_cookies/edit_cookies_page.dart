@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
@@ -127,9 +130,21 @@ class EditCookiesPage extends StatelessWidget {
     await _updateConsents();
   }
 
+  Future<bool> _isAppTrackingTransparencyPermissionAccepted() async {
+    if (Platform.isIOS) {
+      return await AppTrackingTransparency.requestTrackingAuthorization() ==
+          TrackingStatus.authorized;
+    }
+    return true;
+  }
+
   Future<void> _acceptAllCookies() async {
-    HiveManager.hasAcceptedCookieStats = true;
-    HiveManager.hasAcceptedCookieProfiling = true;
+    final bool isConsents =
+        await _isAppTrackingTransparencyPermissionAccepted();
+
+    HiveManager.hasAcceptedCookieStats = isConsents && true;
+    HiveManager.hasAcceptedCookieProfiling = isConsents && true;
+
     await _updateConsents();
   }
 

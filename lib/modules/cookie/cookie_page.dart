@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
@@ -15,24 +18,25 @@ class CookiePage extends StatelessWidget {
     super.key,
   });
 
-  // void _requestAppTrackingTransparencyPermission() async {
-  //   if (Platform.isIOS) {
-  //     // Wait for dialog popping animation
-  //     await Future.delayed(const Duration(milliseconds: 200));
-  //     await AppTrackingTransparency.requestTrackingAuthorization();
-  //   }
-  // }
+  void _requestAppTrackingTransparencyPermission() async {
+    if (Platform.isIOS) {
+      // Wait for dialog popping animation
+      await Future.delayed(const Duration(milliseconds: 200));
+      await AppTrackingTransparency.requestTrackingAuthorization();
+    }
+  }
 
-  // Future<bool> _isAppTrackingTransparencyPermissionAccepted() async {
-  //   if (Platform.isIOS) {
-  //     return await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
-  //   }
-  //   return true;
-  // }
+  Future<bool> _isAppTrackingTransparencyPermissionAccepted() async {
+    if (Platform.isIOS) {
+      return await AppTrackingTransparency.requestTrackingAuthorization() ==
+          TrackingStatus.authorized;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
-    // _requestAppTrackingTransparencyPermission();
+    _requestAppTrackingTransparencyPermission();
 
     return AppScaffoldPage(
       extendBodyBehindAppBar: true,
@@ -146,9 +150,12 @@ class CookiePage extends StatelessWidget {
     );
   }
 
-  void acceptAllCookies() {
-    HiveManager.hasAcceptedCookieStats = true;
-    HiveManager.hasAcceptedCookieProfiling = true;
+  void acceptAllCookies() async {
+    final bool isConsents =
+        await _isAppTrackingTransparencyPermissionAccepted();
+
+    HiveManager.hasAcceptedCookieStats = isConsents && true;
+    HiveManager.hasAcceptedCookieProfiling = isConsents && true;
 
     PiwikManager.trackEvent(
       PiwikEventType.registration,

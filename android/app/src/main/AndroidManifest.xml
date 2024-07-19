@@ -36,13 +36,13 @@
         <!-- Deep link fino ad Android 11  -->
         <data
             android:host="lines.it"
-            android:pathPrefix="/login"
+            android:pathPrefix="/app"
             android:scheme="https" />
         
         <!-- Deep link Android 12+  -->
         <data android:scheme="https" />
         <data android:host="lines.it"
-            android:pathPrefix="/login"/>
+            android:pathPrefix="/app"/>
 
 
         <!-- Deep link fino ad Android 11  -->

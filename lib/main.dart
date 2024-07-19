@@ -74,7 +74,7 @@ void _initDeepLinking() {
   appLinks.uriLinkStream.listen((uri) async {
     logDebug('Deep link: $uri', tag: 'DeepLinkDeepLinkDeepLinkDeepLink');
 
-    if (uri.path.contains('/login')) {
+    if (uri.path.endsWith('/app')) {
       Get.offAndToNamed(Routes.login);
     } else if (uri.path.contains('/app/articoli')) {
       if (HiveManager.userId.isNotEmpty) {
