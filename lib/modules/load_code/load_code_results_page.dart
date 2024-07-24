@@ -5,6 +5,7 @@ import 'package:lines/core/helpers/route_observer.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/load_code/controllers/load_code_result_controller.dart';
 import 'package:lines/modules/load_code/widgets/completed_mission_card.dart';
+import 'package:lines/modules/load_code/widgets/selectable_mission_container.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
@@ -36,40 +37,72 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
           ),
         ],
       ),
-      body: BottomWidgetLayout(
-        bottomWidget: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ThemeSize.paddingLarge,
-            vertical: ThemeSize.paddingSmall,
-          ),
-          child: PrimaryButton(
-            onPressed: () {
-              final int backCounter =
-                  RoutingObserver.routeStack.toList().indexWhere(
-                        (route) =>
-                            route.settings.name == '/missions_page' ||
-                            route.settings.name == '/main',
+      body: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              CompletedMissionCard(
+                uploadedProduct: controller.uploadedProduct!,
+              ),
+              ThemeSizedBox.height60,
+              Expanded(
+                child: Container(
+                  width: Get.width,
+                  color: const Color(0x11e4d8e7),
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(ThemeSize.paddingLarge),
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    separatorBuilder: (context, index) =>
+                        ThemeSizedBox.height16,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return IntrinsicHeight(
+                        child: SelectableMissionContainer(
+                          mission: appController.missions.value!.first,
+                          selected: true,
+                          onChanged: (selected) {},
+                        ),
                       );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 32,
+              ),
+              child: PrimaryButton(
+                onPressed: () {
+                  final int backCounter =
+                      RoutingObserver.routeStack.toList().indexWhere(
+                            (route) =>
+                                route.settings.name == '/missions_page' ||
+                                route.settings.name == '/main',
+                          );
 
-              if (backCounter == -1) {
-                Get.back();
-              } else {
-                for (int i = 0; i <= backCounter; i++) {
-                  Get.back();
-                }
-              }
-            },
-            child: const TitleLarge(
-              "CHIUDI",
-              letterSpacing: 2.0,
+                  if (backCounter == -1) {
+                    Get.back();
+                  } else {
+                    for (int i = 0; i <= backCounter; i++) {
+                      Get.back();
+                    }
+                  }
+                },
+                child: const TitleLarge(
+                  "CHIUDI",
+                  letterSpacing: 2.0,
+                ),
+              ),
             ),
           ),
-        ),
-        child: controller.uploadedProduct != null
-            ? CompletedMissionCard(
-                uploadedProduct: controller.uploadedProduct!,
-              )
-            : const SizedBox.shrink(),
+        ],
       ),
     );
   }
