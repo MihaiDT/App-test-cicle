@@ -10,7 +10,6 @@ import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/coin/coin_total.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
-import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 
 class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
   const LoadCodeResultsPage({
