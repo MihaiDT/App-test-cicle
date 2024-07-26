@@ -22,64 +22,88 @@ class LoadCodeController extends GetxController {
   void onInit() {
     super.onInit();
 
-    ever(
-      appController.uploadedProduct.rxValue,
-      (uploadedProductResponse) async {
-        if (uploadedProductResponse.isPending) {
-          isPending.value = true;
-        }
-        if (uploadedProductResponse.isFailed) {
-          isPending.value = false;
-          FlushBar(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8,
+    if (selectedMission != null) {
+      ever(
+        appController.uploadedProduct.rxValue,
+        (uploadedProductResponse) async {
+          if (uploadedProductResponse.isPending) {
+            isPending.value = true;
+          }
+          if (uploadedProductResponse.isFailed) {
+            isPending.value = false;
+            FlushBar(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                ),
+                child: HeadlineSmall(
+                  uploadedProductResponse.errorType?.errorText ?? "".toString(),
+                  color: ThemeColor.darkBlue,
+                ),
               ),
-              child: HeadlineSmall(
-                uploadedProductResponse.errorType?.errorText ?? "".toString(),
-                color: ThemeColor.darkBlue,
+            ).show(Get.context!);
+          }
+          if (uploadedProductResponse.isSuccessful) {
+            // Aggiorno utente e wallet
+            await AuthenticationService.fetchUser();
+            // Aggiorno le missioni
+            await ProductService.mission;
+
+            isPending.value = false;
+
+            // /// Update the state of the app
+            // updateState(
+            //   uploadedProductResponse.content,
+            //   selectedMission.value,
+            // );
+
+            if (uploadedProductResponse.content!.prizeOrderCreated) {
+              Get.offNamed(Routes.missionCompleted);
+            } else {
+              Get.offNamed(
+                Routes.loadCodeResultsPage,
+                arguments: {
+                  'uploadedProduct': uploadedProductResponse.content,
+                },
+              );
+            }
+          }
+        },
+      );
+    } else {
+      ever(
+        appController.currentMissionsForProduct.rxValue,
+        (callback) {
+          if (callback.isPending) {
+            isPending.value = true;
+          }
+          if (callback.isFailed) {
+            isPending.value = false;
+            FlushBar(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                ),
+                child: HeadlineSmall(
+                  callback.errorType?.errorText ?? "".toString(),
+                  color: ThemeColor.darkBlue,
+                ),
               ),
-            ),
-          ).show(Get.context!);
-        }
-        if (uploadedProductResponse.isSuccessful) {
-          // Aggiorno utente e wallet
-          await AuthenticationService.fetchUser();
-          // Aggiorno le missioni
-          await ProductService.mission;
-
-          isPending.value = false;
-
-          // /// Update the state of the app
-          // updateState(
-          //   uploadedProductResponse.content,
-          //   selectedMission.value,
-          // );
-
-          if (uploadedProductResponse.content!.prizeOrderCreated) {
-            Get.offNamed(Routes.missionCompleted);
-          } else {
+            ).show(Get.context!);
+          }
+          if (callback.isSuccessful) {
+            isPending.value = false;
             Get.offNamed(
               Routes.loadCodeResultsPage,
               arguments: {
-                'uploadedProduct': uploadedProductResponse.content,
+                'currentMissionsForProduct': callback.content,
               },
             );
           }
-        }
-      },
-    );
+        },
+      );
+    }
   }
-
-  // void updateState(
-  //   UploadedProduct? uploadedProduct,
-  //   Mission? mission,
-  // ) {
-  //   appController.missionCompletedArguments.value = MissionCompletedArguments(
-  //     uploadedProduct: uploadedProduct,
-  //     mission: mission,
-  //   );
-  // }
 
   final RxString writtenCode = "".obs;
 
@@ -96,10 +120,16 @@ class LoadCodeController extends GetxController {
   Future<void> onConfirm() async {
     if (canProceed) {
       final String upperCaseCode = writtenCode.value.toUpperCase();
-      await ProductService.loadCode(
-        upperCaseCode,
-        selectedMission?.id,
-      );
+      if (selectedMission != null) {
+        await ProductService.loadCode(
+          upperCaseCode,
+          selectedMission?.id,
+        );
+      } else {
+        await ProductService.findMissionByCode(
+          upperCaseCode,
+        );
+      }
     }
   }
 
