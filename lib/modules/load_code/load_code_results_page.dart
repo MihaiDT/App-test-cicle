@@ -6,7 +6,7 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/product.dart';
 import 'package:lines/modules/load_code/controllers/load_code_result_controller.dart';
 import 'package:lines/modules/load_code/widgets/completed_mission_card.dart';
-import 'package:lines/modules/load_code/widgets/selectable_mission_container.dart';
+import 'package:lines/modules/load_code/widgets/current_product_missions.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/buttons/primary_loading_button.dart';
@@ -49,63 +49,13 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
                 ),
               ThemeSizedBox.height60,
               if (controller.currentMissionsForProduct != null)
-                Expanded(
-                  child: Container(
-                    width: Get.width,
-                    padding: const EdgeInsets.all(ThemeSize.paddingLarge),
-                    decoration: const BoxDecoration(
-                      color: Color(0x4DE4D8E7),
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        const DisplaySmall(
-                          "Scegli la missione",
-                          fontWeight: FontWeight.w500,
-                        ).applyShaders(context),
-                        ThemeSizedBox.height8,
-                        const BodyMedium(
-                          "Questo codice prodotto è valido per partecipare ad una delle seguenti missioni, scegli quale.",
-                          color: ThemeColor.darkBlue,
-                          textAlign: TextAlign.center,
-                        ),
-                        ThemeSizedBox.height16,
-                        Expanded(
-                          child: ListView.separated(
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            separatorBuilder: (context, index) =>
-                                ThemeSizedBox.height16,
-                            itemCount: controller
-                                .currentMissionsForProduct!.mission.length,
-                            itemBuilder: (context, index) {
-                              return Obx(
-                                () {
-                                  return IntrinsicHeight(
-                                    child: SelectableMissionContainer(
-                                      mission:
-                                          appController.missions.value!.first,
-                                      selected: controller
-                                          .isMissionSelected(controller
-                                              .currentMissionsForProduct!
-                                              .mission[index])
-                                          .value,
-                                      onPressed: (_, mission) {
-                                        controller.selectedMission =
-                                            mission.obs;
-                                      },
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                CurrentProductMissions(
+                  missions: controller.currentMissionsForProduct!.mission,
+                  groupValue: controller.selectedMission?.value,
+                  onChanged: (mission) {
+                    controller.selectedMission?.value = mission;
+                    controller.selectedMission?.refresh();
+                  },
                 ),
             ],
           ),
