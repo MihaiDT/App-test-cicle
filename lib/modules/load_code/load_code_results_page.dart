@@ -49,12 +49,16 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
                 ),
               ThemeSizedBox.height60,
               if (controller.currentMissionsForProduct != null)
-                CurrentProductMissions(
-                  missions: controller.currentMissionsForProduct!.mission,
-                  groupValue: controller.selectedMission?.value,
-                  onChanged: (mission) {
-                    controller.selectedMission?.value = mission;
-                    controller.selectedMission?.refresh();
+                ValueListenableBuilder(
+                  valueListenable: controller.selectedMission,
+                  builder: (context, value, child) {
+                    return CurrentProductMissions(
+                      missions: controller.currentMissionsForProduct!.mission,
+                      groupValue: value,
+                      onChanged: (mission) {
+                        controller.selectedMission.value = mission;
+                      },
+                    );
                   },
                 ),
             ],

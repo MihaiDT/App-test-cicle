@@ -18,7 +18,7 @@ class CurrentMissionsForProduct {
         json['missions'].map((x) => Mission.fromJson(x)),
       ),
       product: Product.fromJson(json['product']),
-      code: json['code']?? 'I2TS3JHQTP',
+      code: json['code'],
     );
   }
 

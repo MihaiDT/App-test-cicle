@@ -93,4 +93,25 @@ class Mission {
       'Mission(code: $code, completed_counter: $completeCounter, title: $title, description: $description,description2: $description2,shortDescription: $shortDescription, id: $id, image_url: $imageUrl, is_completed: $isCompleted, total_counter: $totalCounter, products: $products)';
 
   bool get isCompleted => loadedProducts.length >= totalCounter;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Mission &&
+        other.code == code &&
+        other.completeCounter == completeCounter &&
+        other.disclaimer == disclaimer &&
+        other.title == title &&
+        other.description == description &&
+        other.description2 == description2 &&
+        other.shortDescription == shortDescription &&
+        other.regolamento == regolamento &&
+        other.prizeImage == prizeImage &&
+        other.prizeDescription == prizeDescription &&
+        other.endAt == endAt &&
+        other.id == id &&
+        other.imageUrl == imageUrl &&
+        other.totalCounter == totalCounter;
+  }
 }

@@ -5,20 +5,19 @@ import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/current_missions_for_product.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/data/models/uploaded_product.dart';
-import 'package:lines/repository/advices_service.dart';
-import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/badges_service.dart';
-import 'package:lines/routes/routes.dart';
-
-import '../../../repository/product_service.dart';
+import 'package:lines/repository/product_service.dart';
 
 class LoadCodeResultController extends GetxController {
   UploadedProduct? uploadedProduct;
   CurrentMissionsForProduct? currentMissionsForProduct;
-  Rx<Mission>? selectedMission;
+  ValueNotifier<Mission?> selectedMission = ValueNotifier<Mission?>(null);
+
   RxBool isPending = false.obs;
 
-  LoadCodeResultController() {
+  @override
+  void onInit() {
+    super.onInit();
     if (Get.arguments['uploadedProduct'] != null) {
       uploadedProduct = Get.arguments['uploadedProduct'] as UploadedProduct;
     }
@@ -35,7 +34,7 @@ class LoadCodeResultController extends GetxController {
   }
 
   RxBool isMissionSelected(Mission mission) {
-    return (selectedMission?.value == mission).obs;
+    return (selectedMission.value == mission).obs;
   }
 
   Future<void> onSaveButtonPressed() async {
@@ -43,7 +42,7 @@ class LoadCodeResultController extends GetxController {
       isPending.value = true;
       await ProductService.loadCode(
         currentMissionsForProduct!.code,
-        selectedMission?.value.id,
+        selectedMission.value?.id,
       );
       await BadgesService.wallet;
       await ProductService.mission;
