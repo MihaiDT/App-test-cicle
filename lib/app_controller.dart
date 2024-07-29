@@ -6,6 +6,7 @@ import 'package:lines/data/models/advices_grouped_by_category.dart';
 import 'package:lines/data/models/badge.dart';
 import 'package:lines/data/models/calendar_data.dart';
 import 'package:lines/data/models/check_email.dart';
+import 'package:lines/data/models/current_missions_for_product.dart';
 import 'package:lines/data/models/current_period.dart';
 import 'package:lines/data/models/menses_statistics.dart';
 import 'package:lines/data/models/mission.dart';
@@ -98,6 +99,7 @@ class AppController extends GetxController {
   Rx<MissionCompletedArguments> missionCompletedArguments;
   EasyGetter<UploadedProduct> uploadedProduct;
   EasyGetter<List<SymptomDiariesHistory>> symptomsDiariesHistory2;
+  EasyGetter<CurrentMissionsForProduct> currentMissionsForProduct;
 
   RxnInt selectedMissionId;
 
@@ -143,6 +145,7 @@ class AppController extends GetxController {
     required this.hasUsedDeepLink,
     required this.validateReferralCode,
     required this.symptomsDiariesHistory2,
+    required this.currentMissionsForProduct,
     required this.walletTransactions,
     required this.selectedMissionId,
   });
@@ -184,6 +187,7 @@ class AppController extends GetxController {
       hasUsedDeepLink: false.obs,
       symptomsDiariesHistory2: EasyGetter<List<SymptomDiariesHistory>>(),
       walletTransactions: EasyGetter<List<WalletTransaction>>(),
+      currentMissionsForProduct: EasyGetter<CurrentMissionsForProduct>(),
       selectedMissionId: RxnInt(null),
     );
   }
@@ -225,6 +229,7 @@ class AppController extends GetxController {
     symptomsDiariesHistory2 = EasyGetter<List<SymptomDiariesHistory>>();
     walletTransactions = EasyGetter<List<WalletTransaction>>();
     selectedMissionId = RxnInt(null);
+    currentMissionsForProduct = EasyGetter<CurrentMissionsForProduct>();
 
     HiveManager.removeAcceptedCookie();
   }
