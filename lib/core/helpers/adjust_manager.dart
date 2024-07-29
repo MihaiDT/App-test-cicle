@@ -13,13 +13,14 @@ class AdjustManager {
   }
 
   /// Method that sends an event to Adjust,
-  /// the EventType is an enum that contains all the events code that we want to track,
+  /// the EventType is an enum that contains„ all the events code that we want to track,
   /// the parameters are optional and are used to send additional data to Adjust
   static void trackEvent(
     AjustEventType eventType, [
     Map<String, String>? parameters,
   ]) {
-    if (HiveManager.hasAcceptedCookieProfiling ?? false) {
+    if ((HiveManager.hasAcceptedCookieProfiling ?? false)) {
+      // && !kDebugMode && F.appFlavor == Flavor.prod) {
       final adjustEvent = AdjustEvent(
         eventType.tokenName,
       );
