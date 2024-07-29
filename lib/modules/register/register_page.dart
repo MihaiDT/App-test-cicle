@@ -53,42 +53,40 @@ class RegisterPage extends GetView<RegisterController> {
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,
-              if (false) ...[
-                const TitleLarge(
-                  "USA I TUOI SOCIAL",
-                  textAlign: TextAlign.center,
-                ),
-                ThemeSizedBox.height24,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LinkAccountWidget(
-                      imagePath: ThemeImage.facebook,
-                      onTap: () => controller.setRegistrationProvider(
-                        RegistrationProvider.facebook,
-                      ),
+              const TitleLarge(
+                "USA I TUOI SOCIAL",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height24,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.facebook,
+                    onTap: () => controller.setRegistrationProvider(
+                      RegistrationProvider.facebook,
                     ),
+                  ),
+                  ThemeSizedBox.width40,
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.google,
+                    onTap: () => controller.setRegistrationProvider(
+                      RegistrationProvider.google,
+                    ),
+                  ),
+                  if (Platform.isIOS) ...[
                     ThemeSizedBox.width40,
                     LinkAccountWidget(
-                      imagePath: ThemeImage.google,
+                      imagePath: ThemeImage.apple,
                       onTap: () => controller.setRegistrationProvider(
-                        RegistrationProvider.google,
+                        RegistrationProvider.apple,
                       ),
                     ),
-                    if (Platform.isIOS) ...[
-                      ThemeSizedBox.width40,
-                      LinkAccountWidget(
-                        imagePath: ThemeImage.apple,
-                        onTap: () => controller.setRegistrationProvider(
-                          RegistrationProvider.apple,
-                        ),
-                      ),
-                    ],
                   ],
-                ),
-                ThemeSizedBox.height32,
-                const DividerSection(),
-              ],
+                ],
+              ),
+              ThemeSizedBox.height32,
+              const DividerSection(),
               ThemeSizedBox.height32,
               InputTextField(
                 label: "EMAIL",

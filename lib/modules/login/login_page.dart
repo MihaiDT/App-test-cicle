@@ -52,42 +52,40 @@ class LoginPage extends GetView<LoginController> {
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,
-              if (false) ...[
-                const TitleLarge(
-                  "USA I TUOI SOCIAL",
-                  textAlign: TextAlign.center,
-                ),
-                ThemeSizedBox.height24,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LinkAccountWidget(
-                      imagePath: ThemeImage.facebook,
-                      onTap: () => controller.socialLogin(
-                        RegistrationProvider.facebook,
-                      ),
+              const TitleLarge(
+                "USA I TUOI SOCIAL",
+                textAlign: TextAlign.center,
+              ),
+              ThemeSizedBox.height24,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.facebook,
+                    onTap: () => controller.socialLogin(
+                      RegistrationProvider.facebook,
                     ),
+                  ),
+                  ThemeSizedBox.width40,
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.google,
+                    onTap: () => controller.socialLogin(
+                      RegistrationProvider.google,
+                    ),
+                  ),
+                  if (Platform.isIOS) ...[
                     ThemeSizedBox.width40,
                     LinkAccountWidget(
-                      imagePath: ThemeImage.google,
+                      imagePath: ThemeImage.apple,
                       onTap: () => controller.socialLogin(
-                        RegistrationProvider.google,
+                        RegistrationProvider.apple,
                       ),
                     ),
-                    if (Platform.isIOS) ...[
-                      ThemeSizedBox.width40,
-                      LinkAccountWidget(
-                        imagePath: ThemeImage.apple,
-                        onTap: () => controller.socialLogin(
-                          RegistrationProvider.apple,
-                        ),
-                      ),
-                    ],
                   ],
-                ),
-                ThemeSizedBox.height32,
-                const DividerSection(),
-              ],
+                ],
+              ),
+              ThemeSizedBox.height32,
+              const DividerSection(),
               ThemeSizedBox.height32,
               InputTextField(
                 label: "EMAIL",
