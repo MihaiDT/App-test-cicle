@@ -7,6 +7,7 @@ import 'package:lines/data/models/mission.dart';
 import 'package:lines/data/models/uploaded_product.dart';
 import 'package:lines/repository/badges_service.dart';
 import 'package:lines/repository/product_service.dart';
+import 'package:lines/routes/routes.dart';
 
 class LoadCodeResultController extends GetxController {
   UploadedProduct? uploadedProduct;
@@ -47,7 +48,13 @@ class LoadCodeResultController extends GetxController {
       await BadgesService.wallet;
       await ProductService.mission;
       isPending.value = false;
-      Get.back();
+
+
+      /// Set the id of the mission as global variable
+      appController.selectedMissionId.value = selectedMission.value?.id;
+      Get.offAndToNamed(
+        Routes.missionsDetailsPage,
+      );
     }
   }
 }
