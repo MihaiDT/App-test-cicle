@@ -519,11 +519,48 @@ class CalendarController extends GetxController with MonthCalendarMixin {
   }
 
   void updateMensesDay(String formattedDate) {
+    DateTime date = dateFormatYMD.parse(formattedDate);
+
+    final String formattedDayBefore = dateFormatYMD.format(
+      date.subtract(
+        const Duration(days: 1),
+      ),
+    );
+
+    final isToday = formattedDate == dateFormatYMD.format(DateTime.now());
+
     if (addedMensesDates.contains(formattedDate)) {
-      addedMensesDates.remove(formattedDate);
-      removeMensesDates.add(formattedDate);
+      // Remove
+      if (isToday && !addedMensesDates.contains(formattedDayBefore)) {
+        for (int i = 0; i < appController.user.value!.periodDays!; i++) {
+          final dayFormatted = dateFormatYMD.format(
+            date.add(
+              Duration(days: i),
+            ),
+          );
+
+          addedMensesDates.remove(dayFormatted);
+          removeMensesDates.add(dayFormatted);
+        }
+      } else {
+        addedMensesDates.remove(formattedDate);
+        removeMensesDates.add(formattedDate);
+      }
     } else {
-      addedMensesDates.add(formattedDate);
+      // Add
+      if (!addedMensesDates.contains(formattedDayBefore)) {
+        for (int i = 0; i < appController.user.value!.periodDays!; i++) {
+          addedMensesDates.add(
+            dateFormatYMD.format(
+              date.add(
+                Duration(days: i),
+              ),
+            ),
+          );
+        }
+      } else {
+        addedMensesDates.add(formattedDate);
+      }
     }
     addedMensesDates.refresh();
   }
