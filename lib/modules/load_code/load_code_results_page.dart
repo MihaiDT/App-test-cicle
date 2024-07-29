@@ -39,29 +39,39 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
         ],
       ),
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (product != null)
-                CompletedMissionCard(
-                  product: product!,
-                ),
-              ThemeSizedBox.height60,
-              if (controller.currentMissionsForProduct != null)
-                ValueListenableBuilder(
-                  valueListenable: controller.selectedMission,
-                  builder: (context, value, child) {
-                    return CurrentProductMissions(
-                      missions: controller.currentMissionsForProduct!.mission,
-                      groupValue: value,
-                      onChanged: (mission) {
-                        controller.selectedMission.value = mission;
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (product != null)
+                    CompletedMissionCard(
+                      product: product!,
+                    ),
+                  ThemeSizedBox.height60,
+
+
+                   if (controller.currentMissionsForProduct != null)
+                    ValueListenableBuilder(
+                      valueListenable: controller.selectedMission,
+                      builder: (context, value, child) {
+                        return CurrentProductMissions(
+                          missions: controller.currentMissionsForProduct!.mission,
+                          groupValue: value,
+                          onChanged: (mission) {
+                            controller.selectedMission.value = mission;
+                          },
+                        );
                       },
-                    );
-                  },
-                ),
-            ],
+                    ),
+                ],
+              ),
+            ),
           ),
           if (controller.uploadedProduct != null)
             Align(
