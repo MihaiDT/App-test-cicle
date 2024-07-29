@@ -54,10 +54,12 @@ class SocialService {
         ? GoogleSignIn(scopes: ['email'])
         : GoogleSignIn(
             scopes: ['email'],
-            clientId: '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
+            clientId:
+                '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
           );
 
-    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
     if (googleSignIn.currentUser != null) {
       final auth = await googleSignInAccount?.authentication;
 
@@ -138,7 +140,8 @@ class SocialService {
     RegistrationProvider registrationProvider,
   ) {
     appController.socialLoginParameter.email = email;
-    appController.socialLoginParameter.registrationProvider = registrationProvider;
+    appController.socialLoginParameter.registrationProvider =
+        registrationProvider;
     appController.socialLoginParameter.token = socialToken;
 
     appController.registerParameter.email = email;
