@@ -56,7 +56,8 @@ class ProductService {
   }
 
   static Future<void> findMissionByCode(String productCode) async {
-    appController.currentMissionsForProduct.responseHandler = ResponseHandler.pending();
+    appController.currentMissionsForProduct.responseHandler =
+        ResponseHandler.pending();
     try {
       final response = await dio.post(
         "/missions/find_missions_by_code",
@@ -66,7 +67,8 @@ class ProductService {
       );
       _saveCurrentMissionsForProduct(response);
     } catch (e, s) {
-      appController.currentMissionsForProduct.responseHandler = ResponseHandler.failed(
+      appController.currentMissionsForProduct.responseHandler =
+          ResponseHandler.failed(
         errorType: ErrorManager.checkError(e),
       );
       log.logApiException(e, s);
@@ -92,6 +94,7 @@ class ProductService {
     appController.missions.responseHandler = ResponseHandler.successful(
       content: missions,
     );
+    appController.missions.rxValue.refresh();
   }
 
   static void _saveUploadedProduct(Response response) {

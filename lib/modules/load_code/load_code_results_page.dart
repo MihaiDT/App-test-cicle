@@ -20,116 +20,116 @@ class LoadCodeResultsPage extends GetView<LoadCodeResultController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldPage(
-      backgroundColor: Colors.white,
-      appBar: TransparentAppBar(
-        backButtonColor: ThemeColor.darkBlue,
-        title: const TitleMedium(
-          "CARICA CODICE",
-          color: ThemeColor.darkBlue,
-        ),
-        actions: [
-          Obx(
-            () => CoinTotal(
+    return Obx(
+      () => AppScaffoldPage(
+        backgroundColor: Colors.white,
+        appBar: TransparentAppBar(
+          showBackButton: controller.showBackButton.value,
+          backButtonColor: ThemeColor.darkBlue,
+          title: const TitleMedium(
+            "CARICA CODICE",
+            color: ThemeColor.darkBlue,
+          ),
+          actions: [
+            CoinTotal(
               totalCoins: appController.user.value != null
                   ? appController.user.value!.coinsCollected
                   : 0,
             ),
-          ),
-        ],
-      ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (product != null)
-                    CompletedMissionCard(
-                      product: product!,
-                    ),
-                  ThemeSizedBox.height60,
-
-
-                   if (controller.currentMissionsForProduct != null)
-                    ValueListenableBuilder(
-                      valueListenable: controller.selectedMission,
-                      builder: (context, value, child) {
-                        return CurrentProductMissions(
-                          missions: controller.currentMissionsForProduct!.mission,
-                          groupValue: value,
-                          onChanged: (mission) {
-                            controller.selectedMission.value = mission;
-                          },
-                        );
-                      },
-                    ),
-                ],
+          ],
+        ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (product != null)
+                      CompletedMissionCard(
+                        product: product!,
+                      ),
+                    ThemeSizedBox.height60,
+                    if (controller.currentMissionsForProduct != null)
+                      ValueListenableBuilder(
+                        valueListenable: controller.selectedMission,
+                        builder: (context, value, child) {
+                          return CurrentProductMissions(
+                            missions:
+                                controller.currentMissionsForProduct!.mission,
+                            groupValue: value,
+                            onChanged: (mission) {
+                              controller.selectedMission.value = mission;
+                            },
+                          );
+                        },
+                      ),
+                  ],
+                ),
               ),
             ),
-          ),
-          if (controller.uploadedProduct != null)
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 32,
-                ),
-                child: PrimaryButton(
-                  onPressed: () {
-                    final int backCounter =
-                        RoutingObserver.routeStack.toList().indexWhere(
-                              (route) =>
-                                  route.settings.name == '/missions_page' ||
-                                  route.settings.name == '/main',
-                            );
+            if (controller.uploadedProduct != null)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 32,
+                  ),
+                  child: PrimaryButton(
+                    onPressed: () {
+                      final int backCounter =
+                          RoutingObserver.routeStack.toList().indexWhere(
+                                (route) =>
+                                    route.settings.name == '/missions_page' ||
+                                    route.settings.name == '/main',
+                              );
 
-                    if (backCounter == -1) {
-                      Get.back();
-                    } else {
-                      for (int i = 0; i <= backCounter; i++) {
+                      if (backCounter == -1) {
                         Get.back();
+                      } else {
+                        for (int i = 0; i <= backCounter; i++) {
+                          Get.back();
+                        }
                       }
-                    }
-                  },
-                  child: const TitleLarge(
-                    "CHIUDI",
-                    letterSpacing: 2.0,
+                    },
+                    child: const TitleLarge(
+                      "CHIUDI",
+                      letterSpacing: 2.0,
+                    ),
                   ),
                 ),
               ),
-            ),
-          if (controller.currentMissionsForProduct != null)
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 32,
-                ),
-                child: Obx(
-                  () {
-                    return PrimaryLoadingButton(
-                      isLoading: controller.isPending.value,
-                      onPressed: () {
-                        controller.onSaveButtonPressed();
-                      },
-                      child: const TitleLarge(
-                        "SALVA",
-                        letterSpacing: 2.0,
-                      ),
-                    );
-                  },
+            if (controller.currentMissionsForProduct != null)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 32,
+                  ),
+                  child: Obx(
+                    () {
+                      return PrimaryLoadingButton(
+                        isLoading: controller.isPending.value,
+                        onPressed: () {
+                          controller.onSaveButtonPressed();
+                        },
+                        child: const TitleLarge(
+                          "CONFERMA",
+                          letterSpacing: 2.0,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

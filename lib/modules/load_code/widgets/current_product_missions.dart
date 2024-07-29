@@ -40,7 +40,7 @@ class CurrentProductMissions extends StatelessWidget {
           ),
           ThemeSizedBox.height16,
           ListView.separated(
-            padding: const EdgeInsets.only(bottom: 64),
+            padding: const EdgeInsets.only(bottom: 90),
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             separatorBuilder: (context, index) => ThemeSizedBox.height16,
