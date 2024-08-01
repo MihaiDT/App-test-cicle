@@ -27,7 +27,6 @@ extension RegistrationProviderExtension on RegistrationProvider {
         return "google";
       case RegistrationProvider.facebook:
         return "facebook";
-
       case RegistrationProvider.apple:
         return "apple";
       case RegistrationProvider.email:

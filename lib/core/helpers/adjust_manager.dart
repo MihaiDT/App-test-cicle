@@ -1,6 +1,8 @@
 import 'package:adjust_sdk/adjust.dart';
 import 'package:adjust_sdk/adjust_event.dart';
+import 'package:flutter/foundation.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
+import 'package:lines/flavors.dart';
 
 /// Send events to Adjust
 class AdjustManager {
@@ -19,8 +21,9 @@ class AdjustManager {
     AjustEventType eventType, [
     Map<String, String>? parameters,
   ]) {
-    if ((HiveManager.hasAcceptedCookieProfiling ?? false)) {
-      // && !kDebugMode && F.appFlavor == Flavor.prod) {
+    if (kReleaseMode &&
+        (F.appFlavor?.isProdFlavor ?? false) &&
+        (HiveManager.hasAcceptedCookieProfiling ?? false)) {
       final adjustEvent = AdjustEvent(
         eventType.tokenName,
       );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lines/core/error/error_manager.dart';
@@ -11,6 +13,7 @@ import 'package:lines/data/models/user.dart';
 import 'package:lines/data/models/validate_referral_code.dart';
 import 'package:lines/repository/parameters_class/login_parameters.dart';
 import 'package:lines/repository/parameters_class/registration_parameters.dart';
+import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/repository/parameters_class/social_login_parameter.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 
@@ -47,7 +50,11 @@ class AuthenticationService {
       final response = await dio.post(
         "/auth/social_login",
         data: {
-          "provider": socialLoginParameter.registrationProvider?.name,
+          "provider": (socialLoginParameter.registrationProvider ==
+                      RegistrationProvider.facebook &&
+                  Platform.isIOS)
+              ? 'facebook_jwt'
+              : socialLoginParameter.registrationProvider?.name,
           "email": socialLoginParameter.email,
           "token": socialLoginParameter.token,
         },

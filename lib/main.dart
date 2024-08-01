@@ -4,6 +4,7 @@ import 'package:adjust_sdk/adjust.dart';
 import 'package:adjust_sdk/adjust_config.dart';
 import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/app.dart';
@@ -50,15 +51,18 @@ Future<void> _initApp() async {
   await _initFirebase();
 }
 
-void _initAdjust() {
-  // if (!kDebugMode && F.appFlavor == Flavor.prod) {
-  AdjustConfig config = AdjustConfig(
-    't9i3xit2s1ds',
-    AdjustEnvironment.production,
-  );
-  config.logLevel = AdjustLogLevel.verbose;
-  Adjust.start(config);
-  // }
+void _initAdjust() async {
+  if (!kDebugMode && F.appFlavor == Flavor.prod) {
+    AdjustConfig config = AdjustConfig(
+      't9i3xit2s1ds',
+      AdjustEnvironment.production,
+    );
+    config.coppaCompliantEnabled = false;
+    config.logLevel = AdjustLogLevel.verbose;
+
+    Adjust.start(config);
+    logDebug("Enabled: ${await Adjust.isEnabled()}", tag: "Adjust");
+  }
 }
 
 Future<void> _initFirebase() async {

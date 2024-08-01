@@ -340,19 +340,6 @@ class Pages {
       transition: Transition.rightToLeft,
     ),
 
-    ///ConfirmEmailPage
-    GetPage(
-      name: Routes.confirmEmailPage,
-      bindings: [
-        ConfirmEmailBinding(),
-      ],
-      page: () => _mediaQueryWrapper(
-        authNeeded: false,
-        const ConfirmEmailPage(),
-      ),
-      transition: Transition.rightToLeft,
-    ),
-
     /// Main
     GetPage(
       name: Routes.main,
