@@ -71,6 +71,7 @@ class CoinCard extends StatelessWidget {
                   flex: 12,
                   child: Image.asset(
                     iconPath,
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
               ],

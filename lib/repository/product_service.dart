@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:lines/core/error/error_manager.dart';
 import 'package:lines/core/utils/response_handler.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/data/models/current_missions_for_product.dart';
 import 'package:lines/data/models/mission.dart';
 import 'package:lines/data/models/product_category.dart';
 import 'package:lines/data/models/uploaded_product.dart';
@@ -54,6 +55,26 @@ class ProductService {
     }
   }
 
+  static Future<void> findMissionByCode(String productCode) async {
+    appController.currentMissionsForProduct.responseHandler =
+        ResponseHandler.pending();
+    try {
+      final response = await dio.post(
+        "/missions/find_missions_by_code",
+        data: {
+          "code": productCode,
+        },
+      );
+      _saveCurrentMissionsForProduct(response);
+    } catch (e, s) {
+      appController.currentMissionsForProduct.responseHandler =
+          ResponseHandler.failed(
+        errorType: ErrorManager.checkError(e),
+      );
+      log.logApiException(e, s);
+    }
+  }
+
   static void _saveProducts(Response response) {
     List<dynamic> periodsData = response.data["products"];
     List<ProductCategory> periodsStats = periodsData
@@ -73,11 +94,22 @@ class ProductService {
     appController.missions.responseHandler = ResponseHandler.successful(
       content: missions,
     );
+    appController.missions.rxValue.refresh();
   }
 
   static void _saveUploadedProduct(Response response) {
     appController.uploadedProduct.responseHandler = ResponseHandler.successful(
       content: UploadedProduct.fromJson(response.data),
+    );
+  }
+
+  static void _saveCurrentMissionsForProduct(Response response) {
+    final CurrentMissionsForProduct currentMissionsForProduct =
+        CurrentMissionsForProduct.fromJson(response.data);
+
+    appController.currentMissionsForProduct.responseHandler =
+        ResponseHandler.successful(
+      content: currentMissionsForProduct,
     );
   }
 }

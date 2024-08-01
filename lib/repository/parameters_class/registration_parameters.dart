@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:lines/repository/parameters_class/registration_provider.dart';
 
 class RegistrationParameters {
@@ -42,7 +44,10 @@ class RegistrationParameters {
       "privacy_profiling": privacyProfiling,
       "privacy_marketing": privacyMarketing,
       "privacy_brand_marketing": privacyBrandMarketing,
-      "provider": registrationProvider?.name,
+      "provider": (registrationProvider == RegistrationProvider.facebook &&
+              Platform.isIOS)
+          ? 'facebook_jwt'
+          : registrationProvider?.name,
       "social_token": socialToken,
     };
   }

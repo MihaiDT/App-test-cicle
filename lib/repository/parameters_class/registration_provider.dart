@@ -1,6 +1,6 @@
 enum RegistrationProvider {
   google,
-  facebookIOS,
+
   facebook,
   apple,
   email;
@@ -11,8 +11,6 @@ enum RegistrationProvider {
         return RegistrationProvider.google;
       case "facebook":
         return RegistrationProvider.facebook;
-      case "facebook_jwt":
-        return RegistrationProvider.facebookIOS;
       case "apple":
         return RegistrationProvider.apple;
       case "email":
@@ -29,8 +27,6 @@ extension RegistrationProviderExtension on RegistrationProvider {
         return "google";
       case RegistrationProvider.facebook:
         return "facebook";
-      case RegistrationProvider.facebookIOS:
-        return 'facebook_jwt';
       case RegistrationProvider.apple:
         return "apple";
       case RegistrationProvider.email:
@@ -42,7 +38,6 @@ extension RegistrationProviderExtension on RegistrationProvider {
     switch (this) {
       case RegistrationProvider.google:
       case RegistrationProvider.facebook:
-      case RegistrationProvider.facebookIOS:
       case RegistrationProvider.apple:
         return true;
       case RegistrationProvider.email:

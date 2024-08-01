@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/uploaded_product.dart';
+import 'package:lines/data/models/product.dart';
 import 'package:lines/modules/load_code/widgets/load_code_earned_coins.dart';
 import 'package:lines/routes/routes.dart';
 
 class CompletedMissionCard extends StatelessWidget {
-  final UploadedProduct uploadedProduct;
+  final Product product;
 
   const CompletedMissionCard({
-    required this.uploadedProduct,
+    required this.product,
     super.key,
   });
 
@@ -22,9 +22,9 @@ class CompletedMissionCard extends StatelessWidget {
         ).applyShaders(context),
         ThemeSizedBox.height32,
         LoadCodeEarnedCoins(
-          title: uploadedProduct.product.category,
-          earnedCoinsAmount: uploadedProduct.product.points,
-          imageUrl: uploadedProduct.product.imageUrl,
+          title: product.category,
+          earnedCoinsAmount: product.points,
+          imageUrl: product.imageUrl,
         ),
         ThemeSizedBox.height16,
         InkWell(

@@ -4,6 +4,7 @@ import 'package:lines/core/helpers/piwik_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/modules/privacy/privacy_arguments.dart';
 import 'package:lines/repository/authentication_service.dart';
+import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/repository/parameters_class/update_user_parameters.dart';
 import 'package:lines/routes/routes.dart';
 
@@ -41,9 +42,16 @@ class PrivacyController extends GetxController {
         }
         if (callback.isSuccessful) {
           buttonIsPending.value = false;
-          arguments?.userIsAdult == true
-              ? Get.offAllNamed(Routes.confirmEmailPage)
-              : Get.offAllNamed(Routes.confirmTutorEmail);
+          if (arguments?.userIsAdult == true) {
+            if (appController.user.value?.provider ==
+                RegistrationProvider.email) {
+              Get.offAllNamed(Routes.confirmEmailPage);
+            } else {
+              Get.offAllNamed(Routes.confirmCondition);
+            }
+          } else {
+            Get.offAllNamed(Routes.confirmTutorEmail);
+          }
         }
       },
     );

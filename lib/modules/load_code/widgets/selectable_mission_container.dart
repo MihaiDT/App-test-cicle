@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/mission.dart';
@@ -7,12 +7,12 @@ import 'package:lines/modules/prizes/widgets/mission_container.dart';
 
 class SelectableMissionContainer extends StatelessWidget {
   final Mission mission;
-  final Function(bool) onChanged;
+  final Function(bool, Mission) onPressed;
   final bool selected;
 
   const SelectableMissionContainer({
     required this.mission,
-    required this.onChanged,
+    required this.onPressed,
     required this.selected,
     super.key,
   });
@@ -21,7 +21,7 @@ class SelectableMissionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onChanged(!selected);
+        onPressed(!selected, mission);
       },
       child: Stack(
         fit: StackFit.expand,

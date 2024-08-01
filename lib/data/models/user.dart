@@ -45,6 +45,7 @@ class User {
   String? avatarPhase1ImgUrl;
   String? avatarPhase2ImgUrl;
   String? avatarPhase3ImgUrl;
+  String? landingLink;
 
   User({
     this.active = false,
@@ -59,6 +60,7 @@ class User {
     this.isOld = false,
     this.isConfirmed = false,
     this.userId,
+    this.landingLink,
     this.lastMenstrautionDate,
     this.lastName,
     this.legalGuardianEmail,
@@ -104,6 +106,7 @@ class User {
       friendsInvited: json['user']['invited_friends'] ?? 0,
       lastMenstrautionDate: json['user']['last_menstraution_date'],
       lastName: json['user']['last_name'],
+      landingLink: json['user']['landing_link'],
       mgmCode: json['user']['mgm_code'],
       periodDays: json['user']['period_days'],
       periodDuration: json['user']['period_duration'],
@@ -150,6 +153,7 @@ class User {
       "email": email,
       "first_name": firstName,
       "is_confirmed": isConfirmed,
+      "landing_link": landingLink,
       "last_menstraution_date": lastMenstrautionDate,
       "last_name": lastName,
       "legal_guardian_email": legalGuardianEmail,
@@ -196,6 +200,7 @@ class User {
         ' zipCode: $zipCode, active: $active, coinsCollected: $coinsCollected, userId: $userId,'
         ' profileCompletedAreas: ${profileCompletedAreas.toString()},'
         ' isOld: $isOld,'
+        ' landingLink: $landingLink,'
         ' isWelcomeQuizCompleted: $isWelcomeQuizCompleted,'
         ' profileCompletionPercentage: $profileCompletionPercentage,'
         ' routeAfterLogin: $routeAfterLogin,'

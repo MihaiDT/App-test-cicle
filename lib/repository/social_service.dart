@@ -19,9 +19,6 @@ class SocialService {
       case RegistrationProvider.facebook:
         await facebookSignIn();
         break;
-      case RegistrationProvider.facebookIOS:
-        await facebookSignIn();
-        break;
       case RegistrationProvider.apple:
         await appleSignIn();
         break;
@@ -83,27 +80,44 @@ class SocialService {
 
   static Future<void> facebookSignIn() async {
     // By default the login method has the next permissions ['email','public_profile']
-    LoginResult loginResult = await FacebookAuth.instance.login();
+    LoginResult loginResult = await FacebookAuth.instance.login(
+      loginBehavior: LoginBehavior.nativeWithFallback,
+    );
 
     if (loginResult.status == LoginStatus.success) {
-      final userData = await FacebookAuth.instance.getUserData(
-        fields: "first_name, last_name, email",
-      );
+      AccessToken accessToken = loginResult.accessToken!;
+      if (Platform.isIOS) {
+        final userData = accessToken.toJson();
 
-      _validateEmail(
-        userData['email'],
-        loginResult.accessToken!.tokenString,
-        Platform.isIOS
-            ? RegistrationProvider.facebookIOS
-            : RegistrationProvider.facebook,
-      );
+        await _validateEmail(
+          "${userData['userEmail']}",
+          accessToken.tokenString,
+          RegistrationProvider.facebook,
+        );
 
-      await _saveUserData(
-        "",
-        "",
-        userData['email'],
-        // userData['id'],
-      );
+        await _saveUserData(
+          "${userData['userName']}".split(' ').first,
+          "${userData['userName']}".split(' ').last,
+          "${userData['userEmail']}",
+        );
+      } else {
+        final userData = await FacebookAuth.instance.getUserData(
+          fields: "first_name, last_name, email",
+        );
+
+        _validateEmail(
+          userData['email'],
+          loginResult.accessToken!.tokenString,
+          RegistrationProvider.facebook,
+        );
+
+        await _saveUserData(
+          userData['first_name'],
+          userData['last_name'],
+          userData['email'],
+          // userData['id'],
+        );
+      }
     }
   }
 
