@@ -3,6 +3,7 @@ import 'dart:io';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/repository/authentication_service.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
@@ -35,15 +36,24 @@ class SocialService {
       ],
     );
 
+    String email = '';
+
+    if (credential.email?.isNotEmpty ?? false) {
+      HiveManager.appleSigninEmail = credential.email!;
+      email = credential.email!;
+    } else {
+      email = HiveManager.appleSigninEmail;
+    }
+
     await _saveUserData(
-      credential.givenName!,
-      credential.familyName!,
-      credential.email!,
+      credential.givenName ?? '',
+      credential.familyName ?? '',
+      email,
       // credential.identityToken!,
     );
 
     await _validateEmail(
-      credential.email!,
+      email,
       credential.identityToken!,
       RegistrationProvider.apple,
     );
@@ -54,12 +64,10 @@ class SocialService {
         ? GoogleSignIn(scopes: ['email'])
         : GoogleSignIn(
             scopes: ['email'],
-            clientId:
-                '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
+            clientId: '329390092342-as1nh1ofab4tddimc2iboo5kn3jd0u3q.apps.googleusercontent.com',
           );
 
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
     if (googleSignIn.currentUser != null) {
       final auth = await googleSignInAccount?.authentication;
 
@@ -140,8 +148,7 @@ class SocialService {
     RegistrationProvider registrationProvider,
   ) {
     appController.socialLoginParameter.email = email;
-    appController.socialLoginParameter.registrationProvider =
-        registrationProvider;
+    appController.socialLoginParameter.registrationProvider = registrationProvider;
     appController.socialLoginParameter.token = socialToken;
 
     appController.registerParameter.email = email;

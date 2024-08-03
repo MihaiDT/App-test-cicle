@@ -1,6 +1,6 @@
 name: lines
 
-version: 1.0.5+85
+version: 1.0.5+87
 
 
 environment:
@@ -121,7 +121,7 @@ dependencies:
   logger: ^2.0.2+1
 
   # A flutter plugin for social registration
-  sign_in_with_apple: ^6.1.0
+  sign_in_with_apple: ^6.1.1
   
   # A Flutter plugin for Google Sign In
   google_sign_in: ^6.2.1

@@ -17,6 +17,7 @@ import braze_plugin
 
 #if targetEnvironment(simulator)
 #else
+  do {
     // Setup Braze
     let configuration = Braze.Configuration(
       apiKey: "dd098a1b-2f31-4704-858b-54f7b8fd2457",
@@ -27,6 +28,9 @@ import braze_plugin
 
     let braze = BrazePlugin.initBraze(configuration)
     AppDelegate.braze = braze
+  } 
+  catch {
+  }
 #endif
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)

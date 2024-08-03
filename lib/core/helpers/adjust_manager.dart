@@ -22,7 +22,7 @@ class AdjustManager {
     Map<String, String>? parameters,
   ]) {
     if (kReleaseMode &&
-        (F.appFlavor?.isProdFlavor ?? false) &&
+        F.appFlavor == Flavor.prod &&
         (HiveManager.hasAcceptedCookieProfiling ?? false)) {
       final adjustEvent = AdjustEvent(
         eventType.tokenName,

@@ -260,7 +260,7 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const PrivacyPage(),
-        authNeeded: true,
+        authNeeded: false,
       ),
       transition: Transition.rightToLeft,
     ),
@@ -299,6 +299,7 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const WelcomeQuizPage(),
+        authNeeded: false,
       ),
       transition: Transition.rightToLeft,
     ),
@@ -322,6 +323,7 @@ class Pages {
         ReferralBinding(),
       ],
       page: () => _mediaQueryWrapper(
+        authNeeded: false,
         const ReferralPage(),
       ),
       transition: Transition.rightToLeft,

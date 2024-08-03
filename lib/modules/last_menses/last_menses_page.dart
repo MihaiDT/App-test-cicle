@@ -23,6 +23,7 @@ class LastMensesPage extends GetView<LastMensesController> {
       backgroundImage: ThemeDecoration.images.bgDark,
       extendBodyBehindAppBar: true,
       appBar: const TransparentAppBar(
+        showBackButton: false,
         title: HeadlineMedium(
           "PARLACI DEL TUO CICLO",
         ),

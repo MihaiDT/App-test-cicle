@@ -59,7 +59,7 @@ class MainController extends GetxController {
 
     _initTutorials();
 
-    sendBrazeData();
+    // sendBrazeData();
 
     final homeController = Get.find<HomeController>();
     ever(RoutingObserver.routeStack, (stack) {
@@ -89,8 +89,7 @@ class MainController extends GetxController {
     }
   }
 
-  bool get showWelcomeQuizSection =>
-      appController.user.value?.isWelcomeQuizCompleted == false;
+  bool get showWelcomeQuizSection => appController.user.value?.isWelcomeQuizCompleted == false;
 
   @override
   void onReady() {

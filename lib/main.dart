@@ -52,7 +52,7 @@ Future<void> _initApp() async {
 }
 
 void _initAdjust() async {
-  if (!kDebugMode && F.appFlavor == Flavor.prod) {
+  if (kReleaseMode && F.appFlavor == Flavor.prod) {
     AdjustConfig config = AdjustConfig(
       't9i3xit2s1ds',
       AdjustEnvironment.production,
