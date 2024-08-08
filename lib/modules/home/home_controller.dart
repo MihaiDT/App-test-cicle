@@ -451,6 +451,9 @@ class HomeController extends AppScaffoldController {
                               ),
                             ),
                           ),
+                          TutorialCloseButton(
+                            onTap: () => hideTutorial(),
+                          ),
                         ],
                       );
                     },
