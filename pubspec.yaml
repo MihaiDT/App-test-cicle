@@ -148,7 +148,7 @@ dependencies:
   # A Flutter plugin for launching a video youtube
   youtube_player_flutter: ^9.0.1
 
-  adjust_sdk: ^4.38.1
+  adjust_sdk: ^4.38.2
 
   sentry_flutter: ^8.2.0
 
