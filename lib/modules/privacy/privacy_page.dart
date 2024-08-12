@@ -50,7 +50,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                     child: TitleLarge(
                       (appController.user.value?.isCreatedBeforeLive == true)
                           ? "CONTINUA"
-                          : "CONTINUA CON LA MIA SELEZIONE",
+                          : "PROCEDI CON LA REGISTRAZIONE",
                       letterSpacing: 1.1, // Non ci sta con letterspacing 2
                     ).applyShaders(context),
                   ),
@@ -96,7 +96,7 @@ class PrivacyPage extends GetView<PrivacyController> {
                     ),
                     ThemeSizedBox.height24,
                     MarkdownBody(
-                      data:
+                      data: "I consensi sono facoltativi.\n\n"
                           "In qualsiasi momento potrai modificare le tue preferenze.\n"
                           "Procedendo con la registrazione dichiari di aver letto l'[informativa]() sul trattamento dei dati personali.",
                       styleSheet: MarkdownStyleSheet(
