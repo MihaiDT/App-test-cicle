@@ -12,6 +12,8 @@ import 'package:lines/modules/birth_date/birth_date_page.dart';
 import 'package:lines/modules/calendar/calendar_app_bar_binding.dart';
 import 'package:lines/modules/calendar/calendar_binding.dart';
 import 'package:lines/modules/calendar/calendar_page.dart';
+import 'package:lines/modules/calendar_navigation_page/calendar_navigation_binding.dart';
+import 'package:lines/modules/calendar_navigation_page/calendar_navigation_page.dart';
 import 'package:lines/modules/change_profile/binding/customize_cherry_binding.dart';
 import 'package:lines/modules/change_profile/binding/your_information_section_binding.dart';
 import 'package:lines/modules/change_profile/binding/your_interests_section_binding.dart';
@@ -273,6 +275,7 @@ class Pages {
       ],
       page: () => _mediaQueryWrapper(
         const LastMensesPage(),
+        authNeeded: false,
       ),
       transition: Transition.rightToLeft,
     ),
@@ -784,6 +787,16 @@ class Pages {
         const ConfirmConditionPage(),
       ),
       transition: Transition.downToUp,
+    ),
+
+    // Accept consent
+    GetPage(
+      name: Routes.calendarNavigationPage,
+      binding: CalendarNavigationBinding(),
+      page: () => _mediaQueryWrapper(
+        const CalendarNavigationPage(),
+      ),
+      transition: Transition.rightToLeft,
     ),
   ];
 

@@ -130,8 +130,8 @@ class CalendarPage extends GetView<CalendarController> {
                             onTap: () {
                               controller.showTooltip.value = false;
                               Get.toNamed(
-                                Routes.yourDiaryPage,
-                                arguments: {'showTitle': false},
+                                Routes.calendarNavigationPage,
+                                
                               );
                             },
                             child: Row(

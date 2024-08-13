@@ -1,5 +1,7 @@
 import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
@@ -29,6 +31,7 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
 
   bool isFirstPage = true;
   final rxShowBackButton = RxBool(false);
+  ValueNotifier<Color?> closeButtonColor = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {
@@ -37,23 +40,27 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(
-        leading: IconButton(
-          icon: Obx(
-            () => rxShowBackButton.value
-                ? const Icon(Icons.arrow_back)
-                : const SizedBox.shrink(),
-          ),
-          onPressed: () async {
-            bool canGoBack = webViewController != null;
+        leading: ValueListenableBuilder(
+          valueListenable: closeButtonColor,
+          builder: (context, value, child) {
+            return IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: value,
+              ),
+              onPressed: () async {
+                bool canGoBack = webViewController != null;
 
-            if (canGoBack) {
-              if (isFirstPage) {
-                Navigator.of(context).pop();
-              }
-              await webViewController?.evaluateJavascript(
-                source: "dispatchBackEvent()",
-              );
-            }
+                if (canGoBack) {
+                  if (isFirstPage) {
+                    Navigator.of(context).pop();
+                  }
+                  await webViewController?.evaluateJavascript(
+                    source: "dispatchBackEvent()",
+                  );
+                }
+              },
+            );
           },
         ),
       ),
@@ -76,9 +83,11 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
 
             // If the first page is loaded, allow the navigation
             if (uri != null && isFirstUrl) {
-              isFirstPage = false;
+              isFirstPage = true;
+              closeButtonColor.value = Colors.white;
               return NavigationActionPolicy.ALLOW;
             }
+            closeButtonColor.value = null;
 
             if (uri != null &&
                 (uri.toString().contains('BurpActivity') ||

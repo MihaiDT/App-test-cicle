@@ -30,17 +30,24 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
   bool isFirstPage = true;
   final rxShowSaveButton = RxBool(false);
 
+  ValueNotifier<Color?> backButtonColor = ValueNotifier(null);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: ThemeColor.darkBlue,
-          ),
-          onPressed: () => Get.back(),
+        leading: ValueListenableBuilder(
+          valueListenable: backButtonColor,
+          builder: (context, value, child) {
+            return IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: value,
+              ),
+              onPressed: () => Get.back(),
+            );
+          },
         ),
         actions: [
           Obx(
@@ -83,11 +90,6 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
         canPop: false,
         child: InAppWebView(
           shouldOverrideUrlLoading: (controller, navigationAction) async {
-            // final String loadingPageUrl = "${environment.cherryCustomizationEndpoint}/index.html";
-
-            //   // final String firstPageUrl =
-            //   //     "${environment.cherryCustomizationEndpoint}/HomePage";
-
             final uri = navigationAction.request.url;
             if (uri?.toString().contains('/ready') ?? false) {
               PiwikManager.trackEvent(
@@ -97,45 +99,13 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
 
               // I have to show the save button
               rxShowSaveButton.value = true;
+              backButtonColor.value = null;
               return NavigationActionPolicy.CANCEL;
             }
 
+            backButtonColor.value = Colors.white;
             return NavigationActionPolicy.ALLOW;
           },
-
-          //   //   // final isFirstUrl =
-          //   //   //     uri != null && uri.toString().startsWith(loadingPageUrl);
-
-          //   //   // // If the first page is loaded, allow the navigation
-          //   //   // if (uri != null && isFirstUrl) {
-          //   //   //   isFirstPage = false;
-          //   //   //   return NavigationActionPolicy.ALLOW;
-          //   //   // }
-
-          //   //   // if (uri != null && uri.toString().contains('/pad_change')) {
-          //   //   //   // Vado al questionario di cambio assorbente
-          //   //   //   Get.toNamed(Routes.gameQuiz);
-
-          //   //   //   // Cambio assorbente
-          //   //   //   webViewController?.evaluateJavascript(
-          //   //   //     source: "dispatchResetPadEvent()",
-          //   //   //   );
-          //   //   // } else {
-          //   //   //   // Set the first page to true if the first page is loaded in order to permit the back navigation
-          //   //   //   if (uri != null && uri.toString().startsWith(firstPageUrl)) {
-          //   //   //     isFirstPage = true;
-          //   //   //   } else {
-          //   //   //     isFirstPage = false;
-          //   //   //   }
-          //   //   // }
-
-          //   //   // logDebug(
-          //   //   //   "${environment.cherryCustomizationEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}",
-          //   //   // );
-
-          //   // return NavigationActionPolicy.CANCEL;
-          //   return NavigationActionPolicy.ALLOW;
-          // },
           initialUrlRequest: URLRequest(
             url: WebUri(
               "${environment.cherryCustomizationEndpoint}/index.html?token=${widget.sessionToken}&user_id=${HiveManager.userId}",
