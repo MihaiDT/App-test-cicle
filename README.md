@@ -200,6 +200,9 @@ Aggiungi
 ### Facebook Login
 ```bash
 keytool -exportcert -alias LinesKey -keystore LinesKey.keystore | openssl sha1 -binary | openssl base64
+
+SHA1
+https://tomeko.net/online_tools/hex_to_base64.php
 ```
 
 ### Google Login
