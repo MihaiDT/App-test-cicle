@@ -5,73 +5,74 @@ import 'package:lines/data/models/symptom.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/filter_symptoms_bottomsheet.dart';
 
 class ChartsAndStatisticsController extends GetxController {
-  RxList<MensesStatistics> mensesStatistics = <MensesStatistics>[].obs;
+  List<MensesStatistics> get stateMensesStatistics =>
+      List<MensesStatistics>.from(
+        appController.mensesStatistics.value ?? [],
+      );
+
+  RxList<MensesStatistics> updatedMensesStatistics = <MensesStatistics>[].obs;
   Rx<Symptom?>? selectedSymptom;
+
   late final String symptomCategoryName;
 
   @override
   void onInit() {
     selectedSymptom = Rx<Symptom?>(null);
     symptomCategoryName = Get.arguments['symptomCategoryName'] ?? '';
-
-    List<MensesStatistics> savedMensesStatistics =
-        appController.mensesStatistics.value ?? [];
-    mensesStatistics = savedMensesStatistics.obs;
+    updatedMensesStatistics.value = List.from(stateMensesStatistics);
     super.onInit();
   }
 
-  /// If null means that all symptoms are selected
-  List<Symptom> get filterSymptom {
+  List<Symptom> get symptomsCategory {
     List<Symptom> symptoms = [];
-    for (int i = 0; i < mensesStatistics.length; i++) {
+    for (int i = 0; i < stateMensesStatistics.length; i++) {
       for (int j = 0;
-          j < mensesStatistics[i].symptomPeriodStatistics.length;
+          j < stateMensesStatistics[i].symptomPeriodStatistics.length;
           j++) {
-        symptoms.add(mensesStatistics()[i].symptomPeriodStatistics[j].symptom);
+        symptoms
+            .add(stateMensesStatistics[i].symptomPeriodStatistics[j].symptom);
       }
     }
 
     return symptoms.toSet().toList();
   }
 
-  Future<void> onFilterSectionTapped({
-    required List<Symptom> filterSymptoms,
+  Future<Symptom?> onFilterSectionTapped({
+    required List<Symptom> symptoms,
   }) async {
     final Symptom? symptom = await Get.bottomSheet(
       FilterSymptomsBottomSheet(
-        symptoms: filterSymptoms,
+        symptoms: symptoms,
         selectedSymptom: selectedSymptom?.value,
       ),
-    ).then((value) {
-      return value;
-    });
-    selectedSymptom?.value = symptom;
+    );
 
-    mensesStatistics.clear();
-    mensesStatistics.value = updateMensesStatistics(selectedSymptom?.value);
+    return symptom;
   }
 
-  List<MensesStatistics> updateMensesStatistics(Symptom? selectedSymptom) {
-    List<MensesStatistics> savedMensesStatistics = [];
-    savedMensesStatistics.addAll(appController.mensesStatistics.value ?? []);
+  void updateMensesStatistics(Symptom? selectedSymptom) {
+    List<MensesStatistics> resultList = [];
+    updatedMensesStatistics.value = List.from(stateMensesStatistics);
     if (selectedSymptom == null) {
-      return savedMensesStatistics;
+      resultList = updatedMensesStatistics.value;
     } else {
-      final resultList = savedMensesStatistics
-          .where(
-            (element) => element.symptomPeriodStatistics
-                .any((element) => element.symptom == selectedSymptom),
-          )
+      resultList = updatedMensesStatistics.value
+          .map((element) {
+            // Filter the symptomPeriodStatistics for each MensesStatistics element
+            var filteredStatistics = element.symptomPeriodStatistics
+                .where((stat) => stat.symptom == selectedSymptom)
+                .toList();
+
+            // Create a new MensesStatistics object with the filtered symptomPeriodStatistics
+            return MensesStatistics(
+              symptomPeriodStatistics: filteredStatistics,
+              periodsStats: element.periodsStats,
+            );
+          })
+          .where((element) => element.symptomPeriodStatistics.isNotEmpty)
           .toList();
-
-      for (var element in resultList) {
-        element.symptomPeriodStatistics.removeWhere(
-          (element) => element.symptom != selectedSymptom,
-        );
-      }
-
-      mensesStatistics.value = resultList;
-      return resultList;
     }
+    updatedMensesStatistics.value = resultList;
+    updatedMensesStatistics.refresh();
   }
 }
