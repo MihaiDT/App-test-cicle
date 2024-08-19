@@ -20,4 +20,9 @@ class SymptomPeriodStatistics {
           .toList(),
     );
   }
+
+  @override
+  String toString() {
+    return 'SymptomPeriodStatistics(symptom: $symptom, singleSymptomStatistic: $singleSymptomStatistic)';
+  }
 }

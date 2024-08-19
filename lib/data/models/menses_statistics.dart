@@ -20,4 +20,10 @@ class MensesStatistics {
           .toList(),
     );
   }
+
+  @override
+  String toString() {
+    return 'MensesStatistics(periodsStats: $periodsStats, symptomPeriodStatistics: $symptomPeriodStatistics)';
+  }
+
 }
