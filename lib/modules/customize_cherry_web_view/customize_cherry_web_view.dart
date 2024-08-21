@@ -30,7 +30,7 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
   bool isFirstPage = true;
   final rxShowSaveButton = RxBool(false);
 
-  ValueNotifier<Color?> backButtonColor = ValueNotifier(null);
+  ValueNotifier<Color?> backButtonColor = ValueNotifier(Colors.white);
 
   @override
   Widget build(BuildContext context) {
