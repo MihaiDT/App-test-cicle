@@ -31,7 +31,7 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
 
   bool isFirstPage = true;
   final rxShowBackButton = RxBool(false);
-  ValueNotifier<Color?> closeButtonColor = ValueNotifier(null);
+  ValueNotifier<Color?> closeButtonColor = ValueNotifier(Colors.white);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,10 @@ class _TamagochiWebViewState extends State<TamagochiWebView> {
         leading: ValueListenableBuilder(
           valueListenable: closeButtonColor,
           builder: (context, value, child) {
+            print("Close button color: $value");
+            print("Close button color: $value");
+            print("Close button color: $value");
+            print("Close button color: $value");
             return IconButton(
               icon: Icon(
                 Icons.arrow_back,
