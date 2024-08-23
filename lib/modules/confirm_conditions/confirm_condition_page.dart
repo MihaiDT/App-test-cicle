@@ -102,61 +102,58 @@ class ConfirmConditionPage extends GetView<ConfirmConditionController> {
                 ],
                 if (appController.user.value?.provider ==
                     RegistrationProvider.email) ...[
-                  if (appController.user.value?.provider !=
-                      RegistrationProvider.email) ...[
-                    Image.asset(
-                      ThemeImage.welcomeEmail,
-                    ),
-                    ThemeSizedBox.height36,
-                    DisplayMedium(
-                      (appController.user.value?.hasMoreThan18Years == false)
-                          ? 'Ci siamo quasi, manca solo la conferma del tuo genitore o tutore.'
-                          : 'Ci siamo quasi, accetta  le condizioni  di utilizzo  per accedere',
-                      textAlign: TextAlign.center,
-                    ),
-                    ThemeSizedBox.height16,
-                    const BodyMedium(
-                      "Abbiamo inviato un'email all'indirizzo",
-                      textAlign: TextAlign.center,
-                    ),
-                    TitleLarge(
-                      controller.email,
-                    ),
-                    BodyMedium(
-                      (appController.user.value?.hasMoreThan18Years == false)
-                          ? "È necessario che il tuo genitore o tutore visioni ed accetti le condizioni di utilizzo perché tu possa accedere all'app My Lines"
-                          : "Visiona e accetta le condizioni di utilizzo per poter accedere all’app.",
-                      textAlign: TextAlign.center,
-                    ),
-                    ThemeSizedBox.height32,
-                    HeadlineLarge(
-                      (appController.user.value?.hasMoreThan18Years == false)
-                          ? "L'email non è stata ricevuta?"
-                          : "Non hai ricevuto l'email?",
-                      fontWeight: FontWeight.w500,
-                    ),
-                    ThemeSizedBox.height8,
-                    BodyMedium(
-                      (appController.user.value?.hasMoreThan18Years == false)
-                          ? "Consiglia al tuo genitore/tutore\n di controllare la Posta indesiderata.\nSe non la trova clicca su"
-                          : "Controlla nella Posta indesiderata.\nSe non la trovi clicca su",
-                      textAlign: TextAlign.center,
-                    ),
-                    ThemeSizedBox.height8,
-                    InkWell(
-                      onTap: () {
-                        controller.sendNewEmail();
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TitleMedium(
-                          "INVIA DI NUOVO",
-                          underline: true,
-                          textAlign: TextAlign.center,
-                        ),
+                  Image.asset(
+                    ThemeImage.welcomeEmail,
+                  ),
+                  ThemeSizedBox.height36,
+                  DisplayMedium(
+                    (appController.user.value?.hasMoreThan18Years == false)
+                        ? 'Ci siamo quasi, manca solo la conferma del tuo genitore o tutore.'
+                        : 'Ci siamo quasi, accetta  le condizioni  di utilizzo  per accedere',
+                    textAlign: TextAlign.center,
+                  ),
+                  ThemeSizedBox.height16,
+                  const BodyMedium(
+                    "Abbiamo inviato un'email all'indirizzo",
+                    textAlign: TextAlign.center,
+                  ),
+                  TitleLarge(
+                    controller.email,
+                  ),
+                  BodyMedium(
+                    (appController.user.value?.hasMoreThan18Years == false)
+                        ? "È necessario che il tuo genitore o tutore visioni ed accetti le condizioni di utilizzo perché tu possa accedere all'app My Lines"
+                        : "Visiona e accetta le condizioni di utilizzo per poter accedere all’app.",
+                    textAlign: TextAlign.center,
+                  ),
+                  ThemeSizedBox.height32,
+                  HeadlineLarge(
+                    (appController.user.value?.hasMoreThan18Years == false)
+                        ? "L'email non è stata ricevuta?"
+                        : "Non hai ricevuto l'email?",
+                    fontWeight: FontWeight.w500,
+                  ),
+                  ThemeSizedBox.height8,
+                  BodyMedium(
+                    (appController.user.value?.hasMoreThan18Years == false)
+                        ? "Consiglia al tuo genitore/tutore\n di controllare la Posta indesiderata.\nSe non la trova clicca su"
+                        : "Controlla nella Posta indesiderata.\nSe non la trovi clicca su",
+                    textAlign: TextAlign.center,
+                  ),
+                  ThemeSizedBox.height8,
+                  InkWell(
+                    onTap: () {
+                      controller.sendNewEmail();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: TitleMedium(
+                        "INVIA DI NUOVO",
+                        underline: true,
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ],
+                  ),
                 ],
               ],
             ),
