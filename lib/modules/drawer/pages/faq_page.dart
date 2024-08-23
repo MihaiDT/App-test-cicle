@@ -291,7 +291,7 @@ class _FaqPageState extends State<FaqPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
                     data:
-                        "[Qui trovi la lista di prodotti frase]() I pacchi doppi o tripli che contengono un unico codice hanno un valore pari ai coins del pacco singolo di riferimento moltiplicato per il numero di pacchi corrispondenti (2 o 3). Se hai acquistato una confezione multipla i codici validi per l'app My Lines sono stampati all'interno delle singole confezioni contenute nella confezione multipla. Se presente puoi quindi ignorare il codice stampato nella confezione esterna",
+                        "I pacchi doppi o tripli che contengono un unico codice hanno un valore pari ai coins del pacco singolo di riferimento moltiplicato per il numero di pacchi corrispondenti (2 o 3). Se hai acquistato una confezione multipla i codici validi per l'app My Lines sono stampati all'interno delle singole confezioni contenute nella confezione multipla. Se presente puoi quindi ignorare il codice stampato nella confezione esterna [Qui trovi la lista di prodotti]()",
                     styleSheet: MarkdownStyleSheet(
                       a: Theme.of(context)
                           .textTheme
