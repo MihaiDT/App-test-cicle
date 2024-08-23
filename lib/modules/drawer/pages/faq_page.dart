@@ -156,13 +156,6 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Posso visualizzare attività del mio diario in Home?",
-                answer:
-                    "Si, cliccando su “Aggiungi in home” accanto all’attività puoi aggiungerne fino a 3 per consultarle rapidamente.",
-              ),
-              ThemeSizedBox.height8,
-
-              _expandableFaq(
                 question:
                     "Ho sbagliato ad inserire le mestruazioni, posso modificarle?",
                 answer:
@@ -266,8 +259,7 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question:
-                    "Quanti amici posso invitare?·	Quanti amici posso invitare?",
+                question: "Quanti amici posso invitare?",
                 answer:
                     "Puoi invitare tutti gli amici che vuoi, ma soltanto per i primi 5 riceverai 50 coins per ogni amico che completa la registrazione all’app My Lines inserendo il tuo codice amico.",
               ),
@@ -425,13 +417,6 @@ class _FaqPageState extends State<FaqPage> {
                     "Posso personalizzare tutte le varie fasi del ciclo mestruale?",
                 answer:
                     "Le personalizzazioni che scegli si adatteranno a Cherry in tutte le fasi del ciclo mestruale.",
-              ),
-              ThemeSizedBox.height8,
-
-              _expandableFaq(
-                question: "Posso condividere la mia Cherry personalizzata?",
-                answer:
-                    "Si, una volta personalizzata la tua Cherry puoi salvare la foto sul tuo telefono e condividerla con chi vuoi!",
               ),
 
               ThemeSizedBox.height32,

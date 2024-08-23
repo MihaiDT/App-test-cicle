@@ -66,6 +66,7 @@ class ChartsAndStaticsPage extends GetView<ChartsAndStatisticsController> {
                 );
               },
             ),
+            ThemeSizedBox.height48,
           ],
         ),
       ),
