@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/core/utils/singletons.dart';
+import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
 import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/expandable/expandable.dart';
@@ -70,7 +73,7 @@ class _FaqPageState extends State<FaqPage> {
               _expandableFaq(
                 question: "Quali sono le funzionalità dell’app My Lines?",
                 answer:
-                    "My Lines è molto più di un calendario mestruale per seguire e tenere sotto controllo il tuo ciclo mestruale! Caricando i codici che si trovano all’interno delle confezioni dei prodotti Lines puoi partecipare alle missioni e  scoprire i tanti premi che ti aspettano. Tanti sconti e premi ti aspettano! All’interno dell’app puoi anche esplorare un mondo di contenuti gratuiti divisi per aree tematiche che riguardano a 360° il mondo femminile.",
+                    "My Lines è molto più di un calendario mestruale per seguire e tenere sotto controllo il tuo ciclo mestruale! Caricando i codici che si trovano all’interno delle confezioni dei prodotti Lines puoi partecipare alle missioni e scoprire i tanti premi che ti aspettano. Tanti sconti e premi ti aspettano! All’interno dell’app puoi anche esplorare un mondo di contenuti gratuiti divisi per aree tematiche che riguardano a 360° il mondo femminile.",
               ),
               ThemeSizedBox.height8,
 
@@ -84,9 +87,9 @@ class _FaqPageState extends State<FaqPage> {
               _expandableFaq(
                 question: "Come funzionano le missioni?",
                 answer: "•	Missioni: cosa sono?\n\n"
-                    "Le missioni sono delle operazioni a premio collegate all’acquisto dei prodotti Lines (assorbenti o salvaslip): acquista i prodotti Lines richiesti, carica i codici che trovi all’interno delle confezioni e scopritutti i premi che ti aspettano! Ricorda che ogni missione delle scadenze di caricamento codici e di utilizzo del ..codice sconto: leggi bene il regolamento di ciascuna missione e portala a termine nei tempi stabiliti.\n\n\n"
+                    "Le missioni sono delle operazioni a premio collegate all’acquisto dei prodotti Lines (assorbenti o salvaslip): acquista i prodotti Lines richiesti, carica i codici che trovi all’interno delle confezioni e scopri tutti i premi che ti aspettano! Ricorda che ogni missione delle scadenze di caricamento codici e di utilizzo del ..codice sconto: leggi bene il regolamento di ciascuna missione e portala a termine nei tempi stabiliti.\n\n\n"
                     "• Come si accede alle missioni?\n\n"
-                    "Acquista i prodotti Lines (assorbenti o salvaslip) e carica i codici stampati all’interno delle confezioni o dentro la  missione o nella sezione “Carica codice” (ti verranno proposte le missioni alle quali puoi partecipare  con il codice appena caricato). Se è richiesto il caricamento di più codici puoi inserirli  anche in momenti diversi entro la scadenza della missione. Quando avrai caricato tutti i codici richiesti avrai accesso al tuo premio. Riceverai subito un’ e-mail al tuo indirizzo e-mail di registrazione con tutte le informazioni relative alla disponibilità e all’utilizzo del tuo premio. Mi raccomando, controlla anche la posta indesiderata eSegui le indicazioni per utilizzare il codice sconto tenendo conto della  data di scadenza della missione e del termine ultimo per utilizzare il codice. Per maggiori informazioni consulta il regolamento della missione. Se il premio non fosse disponibile ti avviseremo e dovrai pazientare qualche giorno: ti invieremo il codice sconto per e-mail appena tornerà disponibile.",
+                    "Acquista i prodotti Lines (assorbenti o salvaslip) e carica i codici stampati all’interno delle confezioni o dentro la missione o nella sezione “Carica codice” (ti verranno proposte le missioni alle quali puoi partecipare  con il codice appena caricato). Se è richiesto il caricamento di più codici puoi inserirli anche in momenti diversi entro la scadenza della missione. Quando avrai caricato tutti i codici richiesti avrai accesso al tuo premio. Riceverai subito un’ e-mail al tuo indirizzo e-mail di registrazione con tutte le informazioni relative alla disponibilità e all’utilizzo del tuo premio. Mi raccomando, controlla anche la posta indesiderata e segui le indicazioni per utilizzare il codice sconto tenendo conto della data di scadenza della missione e del termine ultimo per utilizzare il codice. Per maggiori informazioni consulta il regolamento della missione. Se il premio non fosse disponibile ti avviseremo e dovrai pazientare qualche giorno: ti invieremo il codice sconto per e-mail appena tornerà disponibile.",
               ),
 
               ThemeSizedBox.height8,
@@ -128,7 +131,7 @@ class _FaqPageState extends State<FaqPage> {
               _expandableFaq(
                 question: "Quali sono le funzionalità dell’app My Lines?",
                 answer:
-                    "My Lines è molto più di un calendario mestruale per seguire e tenere sotto controllo il tuo ciclo mestruale! Caricando i codici che si trovano all’interno delle confezioni dei prodotti Lines puoi partecipare alle missioni e  scoprire i tanti premi che ti aspettano. Tanti sconti e premi ti aspettano! All’interno dell’app puoi anche esplorare un mondo di contenuti gratuiti divisi per aree tematiche che riguardano a 360° il mondo femminile.",
+                    "My Lines è molto più di un calendario mestruale per seguire e tenere sotto controllo il tuo ciclo mestruale! Caricando i codici che si trovano all’interno delle confezioni dei prodotti Lines puoi partecipare alle missioni e scoprire i tanti premi che ti aspettano. Tanti sconti e premi ti aspettano! All’interno dell’app puoi anche esplorare un mondo di contenuti gratuiti divisi per aree tematiche che riguardano a 360° il mondo femminile.",
               ),
               ThemeSizedBox.height8,
 
@@ -183,7 +186,7 @@ class _FaqPageState extends State<FaqPage> {
                 question:
                     "Che succede se tolgo il consenso al servizio Diario?",
                 answer:
-                    "Per garantire l’esercizio dei tuoi diritti, se togli il consenso per il servizio Diario dovremo cancellare tutti i dati di sintomi e attività che ci hai fornito. Ricorda che potrai fornire nuovamente il consenso nella pagina di gestione consensi ma on ritroverai i dati inseriti in precedenza, dovrai inserirli di nuovo.",
+                    "Per garantire l’esercizio dei tuoi diritti, se togli il consenso per il servizio Diario dovremo cancellare tutti i dati di sintomi e attività che ci hai fornito. Ricorda che potrai fornire nuovamente il consenso nella pagina di gestione consensi ma non ritroverai i dati inseriti in precedenza, dovrai inserirli di nuovo.",
               ),
 
               ThemeSizedBox.height32,
@@ -206,40 +209,33 @@ class _FaqPageState extends State<FaqPage> {
               ThemeSizedBox.height8,
 
               _expandableFaq(
-                question: "Come si ottengono i Coins?",
-                answer:
-                    "I Coins sono la moneta virtuale dell'app My Lines. Puoi accumularli caricando i codici che trovi all'interno dei prodotti Lines (assorbenti o salvaslip), rispondendo ai sondaggi o invitando altre amiche a scaricare l'app. Non perderti le novità che arriveranno! Potrai utilizzare i Coins per partecipare ai concorsi Lucky Lines e provare a vincere fantastici premi.",
-              ),
-              ThemeSizedBox.height8,
-
-              _expandableFaq(
                 question: "Dove trovo il codice?",
                 answer:
                     "Apri la confezione dei tuoi Lines: al suo interno troverai stampato il codice univoco da inserire per ottenere i Coins!\n"
-                    "Se hai acquistato una confezione multipla, puoi trovare i codici validi per l’app My Lines sono stampati all’interno  delle singole confezioni contenute nella confezione multipla. È possibile che sia presente un codice anche all'interno della confezione esterna: puoi ignorarlo in quanto non è valido per l'inserimento nell'app My Lines.",
+                    "Se hai acquistato una confezione multipla, puoi trovare i codici validi per l’app My Lines stampati all’interno  delle singole confezioni contenute nella confezione multipla. È possibile che sia presente un codice anche all'interno della confezione esterna: puoi ignorarlo in quanto non è valido per l'inserimento nell'app My Lines.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
                 question: "Come funzionano le missioni?",
                 answer: "•	Missioni: cosa sono?\n\n"
-                    "Le missioni sono delle operazioni a premio collegate all’acquisto dei prodotti Lines (assorbenti o salvaslip): acquista i prodotti Lines richiesti, carica i codici che trovi all’interno delle confezioni e scopritutti i premi che ti aspettano! Ricorda che ogni missione delle scadenze di caricamento codici e di utilizzo del ..codice sconto: leggi bene il regolamento di ciascuna missione e portala a termine nei tempi stabiliti.\n\n\n"
+                    "Le missioni sono delle operazioni a premio collegate all’acquisto dei prodotti Lines (assorbenti o salvaslip): acquista i prodotti Lines richiesti, carica i codici che trovi all’interno delle confezioni e scopri tutti i premi che ti aspettano! Ricorda che ogni missione delle scadenze di caricamento codici e di utilizzo del ..codice sconto: leggi bene il regolamento di ciascuna missione e portala a termine nei tempi stabiliti.\n\n\n"
                     "• Come si accede alle missioni?\n\n"
-                    "Acquista i prodotti Lines (assorbenti o salvaslip) e carica i codici stampati all’interno delle confezioni o dentro la  missione o nella sezione “Carica codice” (ti verranno proposte le missioni alle quali puoi partecipare  con il codice appena caricato). Se è richiesto il caricamento di più codici puoi inserirli  anche in momenti diversi entro la scadenza della missione. Quando avrai caricato tutti i codici richiesti avrai accesso al tuo premio. Riceverai subito un’ e-mail al tuo indirizzo e-mail di registrazione con tutte le informazioni relative alla disponibilità e all’utilizzo del tuo premio. Mi raccomando, controlla anche la posta indesiderata eSegui le indicazioni per utilizzare il codice sconto tenendo conto della  data di scadenza della missione e del termine ultimo per utilizzare il codice. Per maggiori informazioni consulta il regolamento della missione. Se il premio non fosse disponibile ti avviseremo e dovrai pazientare qualche giorno: ti invieremo il codice sconto per e-mail appena tornerà disponibile.",
+                    "Acquista i prodotti Lines (assorbenti o salvaslip) e carica i codici stampati all’interno delle confezioni o dentro la  missione o nella sezione “Carica codice” (ti verranno proposte le missioni alle quali puoi partecipare  con il codice appena caricato). Se è richiesto il caricamento di più codici puoi inserirli  anche in momenti diversi entro la scadenza della missione. Quando avrai caricato tutti i codici richiesti avrai accesso al tuo premio. Riceverai subito un’ e-mail al tuo indirizzo e-mail di registrazione con tutte le informazioni relative alla disponibilità e all’utilizzo del tuo premio. Mi raccomando, controlla anche la posta indesiderata e segui le indicazioni per utilizzare il codice sconto tenendo conto della  data di scadenza della missione e del termine ultimo per utilizzare il codice. Per maggiori informazioni consulta il regolamento della missione. Se il premio non fosse disponibile ti avviseremo e dovrai pazientare qualche giorno: ti invieremo il codice sconto per e-mail appena tornerà disponibile.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
                 question: "Come funzioneranno i Lucky Lines?",
                 answer:
-                    "Non perdeti la novità in arrivo! Presto potrai utilizzare i tuoi coins per accedere ai concorsi Lucky Lines. Basterà scegliere il premio che vuoi tentare di vincere: ti saranno scalati i coins ad esso collegati e scoprirai se sei stata fortunata. Altrimenti, potrai ritentare la sorte. Per tutti i dettagli su modalità di partecipazione e tempistiche potrai consultare il regolamento del concorso che troverai in app nella sezione Lucky Lines.",
+                    "Non perderti la novità in arrivo! Presto potrai utilizzare i tuoi coins per accedere ai concorsi Lucky Lines. Basterà scegliere il premio che vuoi tentare di vincere: ti saranno scalati i coins ad esso collegati e scoprirai se sei stata fortunata. Altrimenti, potrai ritentare la sorte. Per tutti i dettagli su modalità di partecipazione e tempistiche potrai consultare il regolamento del concorso che troverai in app nella sezione Lucky Lines.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
                 question: "E se carico un codice prodotto di una missione?",
                 answer:
-                    "Se carichi il codice di un prodotto Lines all’interno di una missione  la completerai (se è richiesto un solo codice di quel prodotto) oppure avrai fatto uno step verso il suo completamento.",
+                    "Se carichi il codice di un prodotto Lines all’interno di una missione la completerai (se è richiesto un solo codice di quel prodotto) oppure avrai fatto uno step verso il suo completamento.",
               ),
               ThemeSizedBox.height8,
 
@@ -284,10 +280,33 @@ class _FaqPageState extends State<FaqPage> {
               ),
               ThemeSizedBox.height8,
 
-              _expandableFaq(
-                question: "Che prodotti posso inserire nell’app My Lines?",
-                answer:
-                    "Inserire elenco di prodotti (domanda uguale a quella nella sezione premi) + frase “I pacchi doppi o tripli che contengono un unico codice hanno un valore pari ai coins del pacco singolo di riferimento moltiplicato per il numero di pacchi corrispondenti (2 o 3). Se hai acquistato una confezione multipla i codici validi per l'app My Lines sono stampati all'interno delle singole confezioni contenute nella confezione multipla. Se presente puoi quindi ignorare il codice stampato nella confezione esterna”",
+
+              /// This is a different Expandable widget that has a Markdown widget as a child and not simply a text
+              Expandable(
+                title: "Che prodotti posso inserire nell’app My Lines?",
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Markdown(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    data:
+                        "[Qui trovi la lista di prodotti frase]() I pacchi doppi o tripli che contengono un unico codice hanno un valore pari ai coins del pacco singolo di riferimento moltiplicato per il numero di pacchi corrispondenti (2 o 3). Se hai acquistato una confezione multipla i codici validi per l'app My Lines sono stampati all'interno delle singole confezioni contenute nella confezione multipla. Se presente puoi quindi ignorare il codice stampato nella confezione esterna",
+                    styleSheet: MarkdownStyleSheet(
+                      a: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: Colors.blue),
+                      p: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: ThemeColor.darkBlue),
+                    ),
+                    onTapLink: (_, __, ___) {
+                      Get.toNamed(Routes.infoDropdownResultsPage);
+                    },
+                  ),
+                ),
               ),
               ThemeSizedBox.height8,
 
@@ -295,7 +314,7 @@ class _FaqPageState extends State<FaqPage> {
                 question: "Dove trovo il codice?",
                 answer:
                     "Apri la confezione dei tuoi Lines: al suo interno troverai stampato il codice univoco da inserire per ottenere i Coins!\n"
-                    "Se hai acquistato una confezione multipla, puoi trovare i codici validi per l’app My Lines sono stampati all’interno  delle singole confezioni contenute nella confezione multipla. È possibile che sia presente un codice anche all'interno della confezione esterna: puoi ignorarlo in quanto non è valido per l'inserimento nell'app My Lines.",
+                    "Se hai acquistato una confezione multipla, puoi trovare i codici validi per l’app My Lines sono stampati all’interno delle singole confezioni contenute nella confezione multipla. È possibile che sia presente un codice anche all'interno della confezione esterna: puoi ignorarlo in quanto non è valido per l'inserimento nell'app My Lines.",
               ),
               ThemeSizedBox.height8,
 
@@ -449,9 +468,9 @@ class _FaqPageState extends State<FaqPage> {
               _expandableFaq(
                 question: "Non mi funziona l’app, che faccio?",
                 answer:
-                    "Non preoccuparti! Prova a seguire questi step, se non funziona il primo passa il secondo e così via:\n"
+                    "Non preoccuparti! Prova a seguire questi step, se non funziona il primo passa al secondo e così via:\n"
                     "-	Chiudi tutte le app aperte e poi utilizza l’app My Lines;\n"
-                    "-	Controlla dalle impostazioni del telefono (o da Google Play/Apple Store) se l’applicazione deve essere aggiornata e avvia l’aggiornamento;\n"
+                    "-	Controlla dalle impostazioni del telefono (o da Google Play/App Store) se l’applicazione deve essere aggiornata e avvia l’aggiornamento;\n"
                     "-	Controlla di avere una connessione di rete stabile. Se possibile cambia rete (da rete mobile a Wi-fi o viceversa);\n"
                     "-	Attendi e riprova in un secondo momento: potrebbe esserci della manutenzione in corso.",
               ),
@@ -461,7 +480,7 @@ class _FaqPageState extends State<FaqPage> {
                 question:
                     "Perché devo fare l’aggiornamento che l’app mi propone?",
                 answer:
-                    "Gli aggiornamenti ci servono per aggiungere o migliorare le funzionalità dell’app o a risolvere qualche bug tecnico. Aggiornare quindi significa avere la versione di My Lines migliore possibile ed in cui tutto funziona correttamente.",
+                    "Gli aggiornamenti ci servono per aggiungere o migliorare le funzionalità dell’app o per risolvere qualche bug tecnico. Aggiornare quindi significa avere la versione di My Lines migliore possibile ed in cui tutto funziona correttamente.",
               ),
               ThemeSizedBox.height8,
 
@@ -475,7 +494,7 @@ class _FaqPageState extends State<FaqPage> {
               _expandableFaq(
                 question: "Come posso cancellare l’account?",
                 answer:
-                    "Puoi cancellare il tuo account accedendo dal menù in alto a sinistra alle  impostazioni e alla pagina di gestione consensi tramite il Privacy Portal Fater. Se hai fatto accesso all’app utilizzando i social e quindi non conosci la tua password puoi comunque accedere al privacy portal utilizzando la sezione in basso a destra in cui è richiesta soltanto l’email.",
+                    "Puoi cancellare il tuo account accedendo, tramite il menù in alto a sinistra, alle impostazioni e alla pagina di gestione consensi tramite il Privacy Portal Fater. Se hai fatto accesso all’app utilizzando i social e quindi non conosci la tua password puoi comunque accedere al Privacy Portal utilizzando la sezione in basso a destra in cui è richiesta soltanto l’email.",
               ),
               ThemeSizedBox.height8,
 
@@ -491,14 +510,14 @@ class _FaqPageState extends State<FaqPage> {
                 question:
                     "Che succede se tolgo il consenso al servizio Diario?",
                 answer:
-                    "Per garantire l’esercizio dei tuoi diritti, se togli il consenso per il servizio Diario dovremo cancellare tutti i dati di sintomi e attività che ci hai fornito. Ricorda che potrai fornire nuovamente il consenso nella pagina di gestione consensi ma on ritroverai i dati inseriti in precedenza, dovrai inserirli di nuovo.",
+                    "Per garantire l’esercizio dei tuoi diritti, se togli il consenso per il servizio Diario dovremo cancellare tutti i dati di sintomi e attività che ci hai fornito. Ricorda che potrai fornire nuovamente il consenso nella pagina di gestione consensi ma non ritroverai i dati inseriti in precedenza, dovrai inserirli di nuovo.",
               ),
               ThemeSizedBox.height8,
 
               _expandableFaq(
                 question: "Dove posso attivare o disattivare le notifiche?",
                 answer:
-                    "Puoi farlo accedendo dal menù in alto a sinistra alle  impostazioni e alla pagina di gestione consensi.",
+                    "Puoi farlo accedendo tramite il menù in alto a sinistra alle impostazioni e alla pagina di gestione consensi.",
               ),
               ThemeSizedBox.height8,
 
