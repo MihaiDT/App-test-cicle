@@ -55,7 +55,7 @@ class _CustomizeCherryWebViewState extends State<CustomizeCherryWebView> {
                 ? InkWell(
                     onTap: () async {
                       showFullScreenLoader(
-                        dismissAfter: const Duration(seconds: 5),
+                        dismissAfter: const Duration(seconds: 6),
                       );
 
                       PiwikManager.trackEvent(

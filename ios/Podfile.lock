@@ -1,9 +1,9 @@
 PODS:
-  - Adjust (4.38.2):
-    - Adjust/Core (= 4.38.2)
-  - Adjust/Core (4.38.2)
-  - adjust_sdk (4.38.1):
-    - Adjust (= 4.38.2)
+  - Adjust (4.38.4):
+    - Adjust/Core (= 4.38.4)
+  - Adjust/Core (4.38.4)
+  - adjust_sdk (4.38.2):
+    - Adjust (= 4.38.4)
     - Flutter
   - app_links (0.0.1):
     - Flutter
@@ -30,14 +30,14 @@ PODS:
   - connectivity_plus (0.0.1):
     - Flutter
     - FlutterMacOS
-  - FBAEMKit (17.0.2):
-    - FBSDKCoreKit_Basics (= 17.0.2)
-  - FBSDKCoreKit (17.0.2):
-    - FBAEMKit (= 17.0.2)
-    - FBSDKCoreKit_Basics (= 17.0.2)
-  - FBSDKCoreKit_Basics (17.0.2)
-  - FBSDKLoginKit (17.0.2):
-    - FBSDKCoreKit (= 17.0.2)
+  - FBAEMKit (17.0.3):
+    - FBSDKCoreKit_Basics (= 17.0.3)
+  - FBSDKCoreKit (17.0.3):
+    - FBAEMKit (= 17.0.3)
+    - FBSDKCoreKit_Basics (= 17.0.3)
+  - FBSDKCoreKit_Basics (17.0.3)
+  - FBSDKLoginKit (17.0.3):
+    - FBSDKCoreKit (= 17.0.3)
   - Firebase/CoreOnly (10.27.0):
     - FirebaseCore (= 10.27.0)
   - Firebase/Messaging (10.27.0):
@@ -278,8 +278,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  Adjust: 5a0f813fe079212bed61404d1f635cc330068b4a
-  adjust_sdk: e2b8a3f4115b4bb61594a2941dea942c51afa0d6
+  Adjust: afda46df69f035fd216310fb85f399c40c61830a
+  adjust_sdk: 842aa02d307de38a3e5f1a73e695da0e23b76f8e
   app_links: e70ca16b4b0f88253b3b3660200d4a10b4ea9795
   app_settings: 017320c6a680cdc94c799949d95b84cb69389ebc
   app_tracking_transparency: e169b653478da7bb15a6c61209015378ca73e375
@@ -289,10 +289,10 @@ SPEC CHECKSUMS:
   BrazeLocation: 43405bf92037c9840f5f5467a7b8418583bc7850
   BrazeUI: 9e86bd30ca84f66444a5f6d95e438057000f4d0f
   connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
-  FBAEMKit: 619f96ea65427e8afca240d5b0f4703738dfdf5c
-  FBSDKCoreKit: a5f384db2e9ee84e98494fed8f983d2bd79accff
-  FBSDKCoreKit_Basics: d35c775aaf243a2d731dfae7be3a74b1987285ab
-  FBSDKLoginKit: f8ca5f7ab7c4e5b93e729d94975b0db7fcc511ed
+  FBAEMKit: 9900b2edd99a2d21629a6277e6166f14c6215799
+  FBSDKCoreKit: 0791f8f68a8630931a4c12aa23a56cc021551596
+  FBSDKCoreKit_Basics: 46d6b472c0dd0a5a7e972c025033d1c567f54eb4
+  FBSDKLoginKit: b4a4eba1d62eb452544411824f41689adabd5bd2
   Firebase: 26b040b20866a55f55eb3611b9fcf3ae64816b86
   firebase_core: 5926464bbb028fef87d2443369b73ada2a8a3608
   firebase_messaging: 17bc029302b3342daa1c5905a1ee4258bcf47572
@@ -330,4 +330,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 223362fec8615426fc713540d420c4b33b51c9e6
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2
