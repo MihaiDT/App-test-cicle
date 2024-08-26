@@ -22,7 +22,7 @@ class RegisterPage extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () {
+      () {
         return AppScaffoldPage(
           extendBodyBehindAppBar: true,
           backgroundImage: ThemeDecoration.images.bgDark,
@@ -33,10 +33,7 @@ class RegisterPage extends GetView<RegisterController> {
             padding: EdgeInsets.only(
               left: ThemeSize.paddingLarge,
               right: ThemeSize.paddingLarge,
-              top: MediaQuery
-                  .of(context)
-                  .padding
-                  .top * 1.5,
+              top: MediaQuery.of(context).padding.top * 1.5,
             ),
             children: [
               SvgPicture.asset(
@@ -52,7 +49,7 @@ class RegisterPage extends GetView<RegisterController> {
               ThemeSizedBox.height16,
               const BodyMedium(
                 "Registrati per iniziare la tua esperienza in My Lines.\n"
-                    "Se invece hai già un account Lines creato in app o sul sito Lines.it clicca su ACCEDI in basso",
+                "Se invece hai già un account Lines creato in app o sul sito Lines.it clicca su ACCEDI in basso",
                 textAlign: TextAlign.center,
               ),
               ThemeSizedBox.height32,
@@ -64,31 +61,26 @@ class RegisterPage extends GetView<RegisterController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (!Platform.isAndroid)...[
-                    LinkAccountWidget(
-                      imagePath: ThemeImage.facebook,
-                      onTap: () =>
-                          controller.setRegistrationProvider(
-                            RegistrationProvider.facebook,
-                          ),
+                  LinkAccountWidget(
+                    imagePath: ThemeImage.facebook,
+                    onTap: () => controller.setRegistrationProvider(
+                      RegistrationProvider.facebook,
                     ),
-                    ThemeSizedBox.width40,
-                  ],
+                  ),
+                  ThemeSizedBox.width40,
                   LinkAccountWidget(
                     imagePath: ThemeImage.google,
-                    onTap: () =>
-                        controller.setRegistrationProvider(
-                          RegistrationProvider.google,
-                        ),
+                    onTap: () => controller.setRegistrationProvider(
+                      RegistrationProvider.google,
+                    ),
                   ),
                   if (Platform.isIOS) ...[
                     ThemeSizedBox.width40,
                     LinkAccountWidget(
                       imagePath: ThemeImage.apple,
-                      onTap: () =>
-                          controller.setRegistrationProvider(
-                            RegistrationProvider.apple,
-                          ),
+                      onTap: () => controller.setRegistrationProvider(
+                        RegistrationProvider.apple,
+                      ),
                     ),
                   ],
                 ],
@@ -135,8 +127,8 @@ class RegisterPage extends GetView<RegisterController> {
                 isLoading: controller.isButtonPending.value,
                 onPressed: controller.canProceed.value
                     ? () async {
-                  await controller.onButtonPressed();
-                }
+                        await controller.onButtonPressed();
+                      }
                     : null,
                 child: const TitleLarge(
                   "AVANTI",
