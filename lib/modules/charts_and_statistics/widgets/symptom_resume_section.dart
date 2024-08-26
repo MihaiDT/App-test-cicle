@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/models/menses_statistics.dart';
+import 'package:lines/data/models/single_symptom_statistics.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/follicular_line_widget.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/luteal_line_widget.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/menses_line_widget.dart';
@@ -93,10 +94,9 @@ class _SymptomResumeSectionState extends State<SymptomResumeSection> {
                               buildSingleRow(
                                 length: currentMensesStatistic
                                     .periodsStats.periodDuration,
-                                menstruationDays: currentMensesStatistic
-                                    .periodsStats.menstruationDays,
-                                ovulationDays: currentMensesStatistic
-                                    .periodsStats.ovulationDays,
+                                singleSymptomStatistic: currentMensesStatistic
+                                    .symptomPeriodStatistics[index]
+                                    .singleSymptomStatistic,
                               ),
                               Align(
                                 alignment: Alignment.centerRight,
@@ -204,8 +204,7 @@ class _SymptomResumeSectionState extends State<SymptomResumeSection> {
 
   Widget buildSingleRow({
     required int length,
-    required List<int> menstruationDays,
-    required List<int> ovulationDays,
+    required List<SingleSymptomStatistic> singleSymptomStatistic,
   }) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -217,10 +216,23 @@ class _SymptomResumeSectionState extends State<SymptomResumeSection> {
               Color color = ThemeColor.lightGrey;
 
               /// Check if the current day is has a phase and change the color
-              if (menstruationDays.contains(index)) {
-                color = ThemeColor.menstruationColor;
-              } else if (ovulationDays.contains(index)) {
-                color = ThemeColor.ovulationColor;
+              for (var element in singleSymptomStatistic) {
+                if (element.day == index) {
+                  switch (element.periodPhase) {
+                    case PeriodPhase.menstruation:
+                      color = ThemeColor.menstruationColor;
+                      break;
+                    case PeriodPhase.follicular:
+                      color = ThemeColor.follicularColor;
+                      break;
+                    case PeriodPhase.ovulation:
+                      color = ThemeColor.ovulationColor;
+                      break;
+                    case PeriodPhase.luteal:
+                      color = ThemeColor.lutealColor;
+                      break;
+                  }
+                }
               }
 
               return Padding(
