@@ -76,10 +76,15 @@ class HomePage extends GetView<HomeController> {
               ),
               ThemeSizedBox.height16,
               Obx(
-                () => appController.currentPeriod.responseHandler.isPending ||
-                        appController.user.responseHandler.isPending
-                    ? const HomePeriodInfoShimmer()
-                    : const HomePeriodInfo(),
+                () {
+                  final currentPeriod =
+                      appController.currentPeriod.responseHandler;
+                  final user = appController.user.responseHandler;
+                  return (currentPeriod.isPending || currentPeriod.isInitial) ||
+                          (user.isPending || user.isInitial)
+                      ? const HomePeriodInfoShimmer()
+                      : const HomePeriodInfo();
+                },
               ),
               ThemeSizedBox.height16,
               const CherryHomeBox(),
