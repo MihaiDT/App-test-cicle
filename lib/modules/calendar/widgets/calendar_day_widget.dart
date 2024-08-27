@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:intl/intl.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/enums/period_phase.dart';
 import 'package:lines/data/models/single_day_data.dart';
 
 class CalendarDayWidget extends StatelessWidget {
@@ -70,7 +71,8 @@ class CalendarDayWidget extends StatelessWidget {
         return DottedBorder(
           borderType: BorderType.Circle,
           color: !singleDayData!.isTheoricalMensesDay &&
-                  !singleDayData!.ovulationDay
+                  !singleDayData!.ovulationDay &&
+                  singleDayData!.periodPhase != PeriodPhase.ovulation
               ? Colors.transparent
               : singleDayData!.periodPhase.periodColor,
           dashPattern: const [4],
