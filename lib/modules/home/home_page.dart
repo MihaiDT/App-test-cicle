@@ -34,19 +34,21 @@ class HomePage extends GetView<HomeController> {
             padding: EdgeInsets.zero,
             children: [
               Obx(
-                () => appController.currentPeriod.responseHandler.isPending ||
-                        appController.user.responseHandler.isPending
-                    ? const HomeHorizontalCalendarShimmer()
-                    : const HomeHorizontalCalendar(),
-              ),
-              Obx(
-                () => appController.currentPeriod.responseHandler.isPending ||
-                        appController.user.responseHandler.isPending
-                    ? const HomeCircularPeriodCalendarShimmer()
-                    : const Padding(
-                        padding: EdgeInsets.only(top: 4.5),
-                        child: HomeCircularPeriodCalendar(),
-                      ),
+                () {
+                  final currentPeriod =
+                      appController.currentPeriod.responseHandler;
+                  final user = appController.user.responseHandler;
+                  return (currentPeriod.isPending || currentPeriod.isInitial) ||
+                          (user.isPending || user.isInitial)
+                      ? const HomeCircularPeriodCalendarShimmer()
+                      : const Column(
+                          children: [
+                            SizedBox(height: 4.5),
+                            HomeCircularPeriodCalendar(),
+                            HomeHorizontalCalendar(),
+                          ],
+                        );
+                },
               ),
               ThemeSizedBox.height4,
               Obx(
