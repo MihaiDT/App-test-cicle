@@ -84,8 +84,12 @@ class BirthDatePage extends GetView<BirthDateController> {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(2),
                           ],
-                          onChanged: (txt) {
-                            controller.dayValue.value = txt;
+                          onChanged: (value) {
+                            controller.dayValue.value = value;
+                            if (value.length == 2) {
+                              FocusScope.of(context)
+                                  .requestFocus(controller.monthFocus);
+                            }
                           },
                         ),
                       ),
@@ -103,8 +107,12 @@ class BirthDatePage extends GetView<BirthDateController> {
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(2),
                         ],
-                        onChanged: (txt) {
-                          controller.monthValue.value = txt;
+                        onChanged: (value) {
+                          controller.monthValue.value = value;
+                          if (value.length == 2) {
+                            FocusScope.of(context)
+                                .requestFocus(controller.yearFocus);
+                          }
                         },
                       ),
                     ),
@@ -121,8 +129,11 @@ class BirthDatePage extends GetView<BirthDateController> {
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(4),
                         ],
-                        onChanged: (txt) {
-                          controller.yearValue.value = txt;
+                        onChanged: (value) {
+                          controller.yearValue.value = value;
+                          if (value.length == 4) {
+                            FocusScope.of(context).unfocus();
+                          }
                         },
                       ),
                     ),

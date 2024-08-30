@@ -35,7 +35,7 @@ class BirthDateController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    dayController.value.addListener(() {
+  /*  dayController.value.addListener(() {
       if (dayController.value.text.length == 2) {
         validateDay();
         FocusScope.of(Get.context!).requestFocus(monthFocus);
@@ -55,7 +55,7 @@ class BirthDateController extends GetxController {
         FocusScope.of(Get.context!).unfocus();
         FocusManager.instance.primaryFocus?.unfocus();
       }
-    });
+    });*/
   }
 
   @override
