@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/data/models/menses_statistics.dart';
 import 'package:lines/modules/charts_and_statistics/charts_and_statistics_controller.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/chart_legend_widget.dart';
 import 'package:lines/modules/charts_and_statistics/widgets/filter_section_widget.dart';
@@ -42,7 +41,7 @@ class ChartsAndStaticsPage extends GetView<ChartsAndStatisticsController> {
             ),
             ThemeSizedBox.height24,
             Obx(
-                  () {
+              () {
                 return FilterSectionWidget(
                   symptom: controller.selectedSymptom?.value,
                   onTap: () async {
@@ -60,7 +59,7 @@ class ChartsAndStaticsPage extends GetView<ChartsAndStatisticsController> {
             const ChartLegendWidget(),
             ThemeSizedBox.height32,
             Obx(
-               () {
+              () {
                 return SymptomResumeSection(
                   mensesStatistics: controller.updatedMensesStatistics.value,
                 );

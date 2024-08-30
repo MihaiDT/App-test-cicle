@@ -50,7 +50,8 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.authNeeded && (HiveManager.showLockPage || appController.showLockPage.value)) {
+    if (widget.authNeeded &&
+        (HiveManager.showLockPage || appController.showLockPage.value)) {
       authenticate().then((value) async {
         if (value == false) {
           /// HERE WHEN THE USER ENTER THE WRONG PIN AND CLOSE THE PIN PAGE
@@ -58,7 +59,7 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
           return value;
         } else {
           HiveManager.showLockPage = false;
-          
+
           /// !!! Non togliere le righe sotto, altrimenti la pagina di Face ID rischia di bloccarsi
           appController.showLockPage.value = true;
           appController.showLockPage.refresh();
@@ -71,7 +72,9 @@ class _WrapperAccessWidgetState extends State<WrapperAccessWidget> {
       () {
         return Stack(
           children: [
-            widget.authNeeded && (appController.showLockPage.value || HiveManager.showLockPage)
+            widget.authNeeded &&
+                    (appController.showLockPage.value ||
+                        HiveManager.showLockPage)
                 ? const LockPage()
                 : widget.child,
             if (controller.lockApp.value)

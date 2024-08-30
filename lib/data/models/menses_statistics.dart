@@ -25,5 +25,4 @@ class MensesStatistics {
   String toString() {
     return 'MensesStatistics(periodsStats: $periodsStats, symptomPeriodStatistics: $symptomPeriodStatistics)';
   }
-
 }

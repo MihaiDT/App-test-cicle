@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:lines/core/helpers/braze.dart';
 import 'package:lines/core/helpers/hive_manager.dart';
 import 'package:lines/core/helpers/route_observer.dart';
 import 'package:lines/core/utils/singletons.dart';
@@ -89,7 +88,8 @@ class MainController extends GetxController {
     }
   }
 
-  bool get showWelcomeQuizSection => appController.user.value?.isWelcomeQuizCompleted == false;
+  bool get showWelcomeQuizSection =>
+      appController.user.value?.isWelcomeQuizCompleted == false;
 
   @override
   void onReady() {

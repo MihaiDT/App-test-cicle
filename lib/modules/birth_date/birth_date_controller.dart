@@ -33,32 +33,6 @@ class BirthDateController extends GetxController {
   RxString yearValue = "".obs;
 
   @override
-  void onInit() {
-    super.onInit();
-  /*  dayController.value.addListener(() {
-      if (dayController.value.text.length == 2) {
-        validateDay();
-        FocusScope.of(Get.context!).requestFocus(monthFocus);
-      }
-    });
-
-    monthController.value.addListener(() {
-      if (monthController.value.text.length == 2) {
-        validateMonth();
-        FocusScope.of(Get.context!).requestFocus(yearFocus);
-      }
-    });
-
-    yearController.value.addListener(() {
-      if (yearController.value.text.length >= 4) {
-        validateYear();
-        FocusScope.of(Get.context!).unfocus();
-        FocusManager.instance.primaryFocus?.unfocus();
-      }
-    });*/
-  }
-
-  @override
   void dispose() {
     clearAll();
     super.dispose();

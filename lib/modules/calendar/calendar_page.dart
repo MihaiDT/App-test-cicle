@@ -131,7 +131,6 @@ class CalendarPage extends GetView<CalendarController> {
                               controller.showTooltip.value = false;
                               Get.toNamed(
                                 Routes.calendarNavigationPage,
-                                
                               );
                             },
                             child: Row(

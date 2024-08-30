@@ -19,7 +19,8 @@ class HiveManager {
   }
 
   static bool get firstAccess {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.isFirstAccess.name) ?? true;
+    return Hive.box(hiveBoxName).get(HiveReferenceKeys.isFirstAccess.name) ??
+        true;
   }
 
   static set firstAccess(bool symbol) {
@@ -39,23 +40,26 @@ class HiveManager {
   }
 
   static int get welcomeSurveyTotalAccess {
-    final accessKeys =
-        Hive.box(hiveBoxName).get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ?? Map<String, int>.from({});
+    final accessKeys = Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ??
+        Map<String, int>.from({});
 
     return accessKeys.keys.length;
   }
 
   static int get welcomeSurveyNumberOfAccess {
-    final accessKeys =
-        Hive.box(hiveBoxName).get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ?? Map<String, int>.from({});
+    final accessKeys = Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ??
+        Map<String, int>.from({});
 
     final todayKey = dateFormatYMD.format(DateTime.now());
     return accessKeys[todayKey] ?? 0;
   }
 
   static set welcomeSurveyNumberOfAccess(int numberOfAccess) {
-    final accessKeys =
-        Hive.box(hiveBoxName).get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ?? Map<String, int>.from({});
+    final accessKeys = Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name) ??
+        Map<String, int>.from({});
 
     if (accessKeys.keys.length >= 3) {
       return;
@@ -64,11 +68,14 @@ class HiveManager {
     final todayKey = dateFormatYMD.format(DateTime.now());
     accessKeys[todayKey] = numberOfAccess;
 
-    Hive.box(hiveBoxName).put(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name, accessKeys);
+    Hive.box(hiveBoxName)
+        .put(HiveReferenceKeys.welcomeSurveyNumberOfAccess.name, accessKeys);
   }
 
   static bool get isFirstTutorialWatched {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.isFirstTutorialWatched.name) ?? false;
+    return Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.isFirstTutorialWatched.name) ??
+        false;
   }
 
   static set isFirstTutorialWatched(bool isFirstTutorialWatched) {
@@ -79,7 +86,9 @@ class HiveManager {
   }
 
   static bool get showSecondTutorialAccess {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.showSecondTutorialAccess.name) ?? true;
+    return Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.showSecondTutorialAccess.name) ??
+        true;
   }
 
   static set showSecondTutorialAccess(bool showSecondTutorialAccess) {
@@ -90,7 +99,8 @@ class HiveManager {
   }
 
   static bool? get hasAcceptedCookieProfiling {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.hasAcceptedCookieProfiling.name);
+    return Hive.box(hiveBoxName)
+        .get(HiveReferenceKeys.hasAcceptedCookieProfiling.name);
   }
 
   static set hasAcceptedCookieProfiling(bool? hasAcceptedCookie) {
@@ -101,20 +111,28 @@ class HiveManager {
   }
 
   static bool? get hasAcceptedCookieStats {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.hasAcceptedCookieStats.name);
+    return Hive.box(hiveBoxName)
+        .get(HiveReferenceKeys.hasAcceptedCookieStats.name);
   }
 
   static set hasAcceptedCookieStats(bool? hasAcceptedCookie) {
-    Hive.box(hiveBoxName).put(HiveReferenceKeys.hasAcceptedCookieStats.name, hasAcceptedCookie);
+    Hive.box(hiveBoxName)
+        .put(HiveReferenceKeys.hasAcceptedCookieStats.name, hasAcceptedCookie);
   }
 
   static bool get hasAcceptedCookie {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.hasAcceptedCookieProfiling.name) != null &&
-        Hive.box(hiveBoxName).get(HiveReferenceKeys.hasAcceptedCookieStats.name) != null;
+    return Hive.box(hiveBoxName)
+                .get(HiveReferenceKeys.hasAcceptedCookieProfiling.name) !=
+            null &&
+        Hive.box(hiveBoxName)
+                .get(HiveReferenceKeys.hasAcceptedCookieStats.name) !=
+            null;
   }
 
   static bool get showSurveyTutorial {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.showSurveyTutorial.name) ?? false;
+    return Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.showSurveyTutorial.name) ??
+        false;
   }
 
   static set showSurveyTutorial(bool showSurveyTutorial) {
@@ -125,12 +143,15 @@ class HiveManager {
   }
 
   static void removeAcceptedCookie() {
-    Hive.box(hiveBoxName).delete(HiveReferenceKeys.hasAcceptedCookieProfiling.name);
+    Hive.box(hiveBoxName)
+        .delete(HiveReferenceKeys.hasAcceptedCookieProfiling.name);
     Hive.box(hiveBoxName).delete(HiveReferenceKeys.hasAcceptedCookieStats.name);
   }
 
   static bool get isPastDateCalculated {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.isPastDateCalculated.name) ?? false;
+    return Hive.box(hiveBoxName)
+            .get(HiveReferenceKeys.isPastDateCalculated.name) ??
+        false;
   }
 
   static set isPastDateCalculated(bool isFirstTutorialWatched) {
@@ -145,7 +166,8 @@ class HiveManager {
   }
 
   static String get appleSigninEmail {
-    return Hive.box(hiveBoxName).get(HiveReferenceKeys.appleSigninEmail.name) ?? '';
+    return Hive.box(hiveBoxName).get(HiveReferenceKeys.appleSigninEmail.name) ??
+        '';
   }
 
   static set appleSigninEmail(String appleSigninEmail) {

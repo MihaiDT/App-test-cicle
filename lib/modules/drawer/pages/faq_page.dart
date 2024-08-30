@@ -280,7 +280,6 @@ class _FaqPageState extends State<FaqPage> {
               ),
               ThemeSizedBox.height8,
 
-
               /// This is a different Expandable widget that has a Markdown widget as a child and not simply a text
               Expandable(
                 title: "Che prodotti posso inserire nell’app My Lines?",
