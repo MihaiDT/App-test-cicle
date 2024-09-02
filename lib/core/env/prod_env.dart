@@ -21,8 +21,8 @@ class ProdEnv extends Environment {
   // FIXME: ?
   @override
   Map<String, String> get piwik => {
-        'baseUrl': '172e3eb8-e25f-4a2e-ad55-004c93e3026d',
-        'siteId': 'https://fater.piwik.pro',
+        'siteId': '172e3eb8-e25f-4a2e-ad55-004c93e3026d',
+        'baseUrl': 'https://fater.piwik.pro',
       };
 
   @override

@@ -22,8 +22,8 @@ class StagingEnv extends Environment {
 
   @override
   Map<String, String> get piwik => {
-        'baseUrl': '8e6de72e-4541-41ea-b092-66de3e3aaf2b',
-        'siteId': 'https://fater.piwik.pro',
+        'baseUrl': 'https://fater.piwik.pro',
+        'siteId': '8e6de72e-4541-41ea-b092-66de3e3aaf2b',
       };
 
   @override
