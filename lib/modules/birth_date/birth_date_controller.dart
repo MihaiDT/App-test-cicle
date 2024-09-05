@@ -112,12 +112,12 @@ class BirthDateController extends GetxController {
         ),
       );
     } else {
-      Get.toNamed(
+      /*Get.toNamed(
         Routes.privacy,
         arguments: PrivacyArguments(
           userIsAdult: true,
         ),
-      );
+      );*/
     }
   }
 
@@ -195,7 +195,10 @@ class BirthDateController extends GetxController {
 
   bool get canProceed {
     return dayValue.value.isNotEmpty &&
+        dayValue.value.length == 2 &&
         monthValue.value.isNotEmpty &&
-        yearValue.value.isNotEmpty;
+        monthValue.value.length == 2 &&
+        yearValue.value.isNotEmpty &&
+        yearValue.value.length == 4;
   }
 }

@@ -87,6 +87,7 @@ class BirthDatePage extends GetView<BirthDateController> {
                           onChanged: (value) {
                             controller.dayValue.value = value;
                             if (value.length == 2) {
+                              controller.validateDay();
                               FocusScope.of(context)
                                   .requestFocus(controller.monthFocus);
                             }
@@ -110,6 +111,7 @@ class BirthDatePage extends GetView<BirthDateController> {
                         onChanged: (value) {
                           controller.monthValue.value = value;
                           if (value.length == 2) {
+                            controller.validateMonth();
                             FocusScope.of(context)
                                 .requestFocus(controller.yearFocus);
                           }
@@ -132,6 +134,7 @@ class BirthDatePage extends GetView<BirthDateController> {
                         onChanged: (value) {
                           controller.yearValue.value = value;
                           if (value.length == 4) {
+                            controller.validateYear();
                             FocusScope.of(context).unfocus();
                           }
                         },
