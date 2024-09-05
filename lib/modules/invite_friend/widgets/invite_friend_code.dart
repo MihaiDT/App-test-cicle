@@ -1,8 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
-import 'package:lines/widgets/texts/notification_overlay.dart';
+import 'package:lines/modules/invite_friend/invite_friend_controller.dart';
 
 class InviteFriendCode extends StatelessWidget {
   final String code;
@@ -19,23 +20,11 @@ class InviteFriendCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<InviteFriendController>();
+
     return InkWell(
       onTap: () async {
-        await Clipboard.setData(
-          ClipboardData(text: code),
-        );
-
-        FlushBar(
-          child: const Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 8,
-            ),
-            child: HeadlineSmall(
-              "Testo copiato correttamente!",
-              color: ThemeColor.darkBlue,
-            ),
-          ),
-        ).show(context);
+        await controller.shareCode();
       },
       child: Container(
         padding: const EdgeInsets.all(
