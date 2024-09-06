@@ -19,24 +19,18 @@ class ChangeProfileAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      alignment: Alignment.center,
-      backgroundColor: Colors.transparent,
-      contentPadding: EdgeInsets.zero,
-      buttonPadding: EdgeInsets.zero,
-      actionsPadding: EdgeInsets.zero,
-      content: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(20),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: 19,
-            right: 19,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -46,35 +40,33 @@ class ChangeProfileAlertDialog extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ).applyShaders(context),
               ThemeSizedBox.height16,
-              Material(
-                child: TextField(
-                  autofocus: true,
-                  controller: controller,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+              TextField(
+                controller: controller,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+                autofocus: true,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Inserisci le tue informazioni",
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 16,
                   ),
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Inserisci le tue informazioni",
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 16,
+                  fillColor: Color(0xfff3eef4),
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
                     ),
-                    fillColor: Color(0xfff3eef4),
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                      borderSide: BorderSide.none,
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                      borderSide: BorderSide.none,
-                    ),
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
@@ -88,11 +80,10 @@ class ChangeProfileAlertDialog extends StatelessWidget {
                   await onConfirm(controller.text);
                 },
               ),
-              ThemeSizedBox.height24,
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }

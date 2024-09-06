@@ -38,9 +38,10 @@ class YourInformationSectionController extends GetxController {
     required String initialText,
     required TextEditingController controller,
   }) {
-    showErrorDialog(
-      context: Get.context!,
-      builder: (context) => Obx(
+    Get.bottomSheet(
+      enableDrag: false,
+      ignoreSafeArea: true,
+      Obx(
         () {
           return ChangeProfileAlertDialog(
             title: title,

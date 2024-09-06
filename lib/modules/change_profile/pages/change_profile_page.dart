@@ -15,8 +15,9 @@ class ChangeProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldPage(
+    return Scaffold(
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: const TransparentAppBar(
         title: TitleSmall(
