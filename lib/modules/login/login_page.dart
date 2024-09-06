@@ -136,13 +136,13 @@ class LoginPage extends GetView<LoginController> {
                 onTap: () {
                   controller.onForgotPasswordTap(context);
                 },
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: TitleMedium(
+                child:  Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: const TitleMedium(
                     "PASSWORD DIMENTICATA?",
                     textAlign: TextAlign.center,
                     underline: true,
-                  ),
+                  ).applyShaders(context),
                 ),
               ),
               ThemeSizedBox.height24,

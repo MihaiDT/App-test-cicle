@@ -112,12 +112,12 @@ class BirthDateController extends GetxController {
         ),
       );
     } else {
-      /*Get.toNamed(
+      Get.toNamed(
         Routes.privacy,
         arguments: PrivacyArguments(
           userIsAdult: true,
         ),
-      );*/
+      );
     }
   }
 
