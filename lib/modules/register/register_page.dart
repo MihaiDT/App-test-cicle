@@ -86,7 +86,9 @@ class RegisterPage extends GetView<RegisterController> {
                 ],
               ),
               ThemeSizedBox.height32,
-              const DividerSection(),
+              const DividerSection(
+                color: ThemeColor.whiteDark,
+              ),
               ThemeSizedBox.height32,
               InputTextField(
                 label: "EMAIL",

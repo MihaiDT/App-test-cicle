@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lines/core/theme/text_wrapper.dart';
-import 'package:lines/core/theme/theme_color.dart';
 import 'package:lines/core/theme/theme_sized_box.dart';
 
 class DividerSection extends StatelessWidget {
-  const DividerSection({super.key});
+  final Color color;
+
+  const DividerSection({
+    required this.color,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +19,19 @@ class DividerSection extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              color: ThemeColor.whiteDark,
+              color: color,
               height: 2,
             ),
           ),
           ThemeSizedBox.width12,
-          const TitleMedium("OPPURE"),
+          TitleMedium(
+            "OPPURE",
+            color: color,
+          ),
           ThemeSizedBox.width12,
           Expanded(
             child: Container(
-              color: ThemeColor.whiteDark,
+              color: color,
               height: 2,
             ),
           ),

@@ -1,16 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/enums/background_type.dart';
 import 'package:lines/modules/login/login_controller.dart';
 import 'package:lines/modules/register/section/divider_section.dart';
 import 'package:lines/modules/register/widget/link_account_widget.dart';
 import 'package:lines/repository/parameters_class/registration_provider.dart';
 import 'package:lines/routes/routes.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/buttons/secondary_loading_button.dart';
+import 'package:lines/widgets/buttons/primary_loading_button.dart';
 import 'package:lines/widgets/forms/input_text_field.dart';
 import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
@@ -25,9 +27,10 @@ class LoginPage extends GetView<LoginController> {
       () {
         return AppScaffoldPage(
           extendBodyBehindAppBar: true,
-          backgroundImage: ThemeDecoration.images.bgDark,
+          backgroundColor: Colors.white,
           appBar: const TransparentAppBar(
-            showBackButton: false,
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            backButtonColor: ThemeColor.darkBlue,
           ),
           body: ListView(
             padding: EdgeInsets.only(
@@ -36,27 +39,26 @@ class LoginPage extends GetView<LoginController> {
               top: MediaQuery.of(context).padding.top * 1.5,
             ),
             children: [
-              SvgPicture.asset(
-                ThemeIcon.logo,
-                height: 85,
-                width: 70,
-              ),
-              ThemeSizedBox.height16,
-              const DisplayMedium(
-                "Accedi a My Lines",
-                textAlign: TextAlign.center,
-              ),
-              ThemeSizedBox.height16,
-              const BodyMedium(
-                "Inserisci username e password se hai già un account Lines creato in app o sul sito Lines.it",
-                textAlign: TextAlign.center,
-              ),
               ThemeSizedBox.height32,
-              const TitleLarge(
-                "USA I TUOI SOCIAL",
+              const DisplayMedium(
+                "Ci siamo, accedi",
                 textAlign: TextAlign.center,
+                color: ThemeColor.primary,
               ),
-              ThemeSizedBox.height24,
+              ThemeSizedBox.height16,
+              const HeadlineMedium(
+                "Utilizza la modalità di accesso\n scelta in fase di registrazione.",
+                textAlign: TextAlign.center,
+                fontWeight: FontWeight.w700,
+                color: ThemeColor.darkBlue,
+              ),
+              ThemeSizedBox.height48,
+              const TitleLarge(
+                "SE TI SEI REGISTRATO CON I SOCIAL\n CLICCA QUI",
+                textAlign: TextAlign.center,
+                color: ThemeColor.brightPink,
+              ),
+              ThemeSizedBox.height16,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -85,7 +87,9 @@ class LoginPage extends GetView<LoginController> {
                 ],
               ),
               ThemeSizedBox.height32,
-              const DividerSection(),
+              const DividerSection(
+                color: ThemeColor.brightPink,
+              ),
               ThemeSizedBox.height32,
               InputTextField(
                 label: "EMAIL",
@@ -103,6 +107,7 @@ class LoginPage extends GetView<LoginController> {
                       .requestFocus(controller.passwordFocusNode);
                 },
                 focusNode: controller.emailFocusNode,
+                backgroundType: BackgroundType.light,
               ),
               ThemeSizedBox.height24,
               Obx(
@@ -122,6 +127,7 @@ class LoginPage extends GetView<LoginController> {
                       FocusScope.of(context).unfocus();
                     },
                     focusNode: controller.passwordFocusNode,
+                    backgroundType: BackgroundType.light,
                   );
                 },
               ),
@@ -140,7 +146,7 @@ class LoginPage extends GetView<LoginController> {
                 ),
               ),
               ThemeSizedBox.height24,
-              SecondaryLoadingButton(
+              PrimaryLoadingButton(
                 isLoading: controller.isButtonPending.value,
                 onPressed: controller.canProceed.value
                     ? controller.onButtonPressed
@@ -148,7 +154,7 @@ class LoginPage extends GetView<LoginController> {
                 child: const TitleLarge(
                   "AVANTI",
                   letterSpacing: 2,
-                ).applyShaders(context),
+                ),
               ),
               ThemeSizedBox.height8,
               InkWell(
@@ -162,13 +168,13 @@ class LoginPage extends GetView<LoginController> {
                     children: [
                       const TitleMedium(
                         "Non hai un account Lines?",
-                      ),
+                      ).applyShaders(context),
                       ThemeSizedBox.width4,
                       const TitleMedium(
                         "REGISTRATI",
                         letterSpacing: 1.5,
                         underline: true,
-                      ),
+                      ).applyShaders(context),
                     ],
                   ),
                 ),

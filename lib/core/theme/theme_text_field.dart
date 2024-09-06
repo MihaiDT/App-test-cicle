@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/enums/background_type.dart';
 
 final enabledOutlineInputBorder = OutlineInputBorder(
   borderSide: const BorderSide(
@@ -40,6 +41,7 @@ InputDecoration textFieldDefaultDecoration(
   required bool hasError,
   double? paddingLeft,
   String? placeholder,
+  required BackgroundType backgroundType,
 }) {
   return InputDecoration(
     contentPadding: paddingLeft != null
@@ -50,19 +52,44 @@ InputDecoration textFieldDefaultDecoration(
           )
         : null,
     filled: hasError,
-    disabledBorder: disabledOutlineInputBorder,
+    disabledBorder: disabledOutlineInputBorder.copyWith(
+      borderSide: backgroundType == BackgroundType.light
+          ? const BorderSide(
+              color: ThemeColor.brightPink,
+              width: 2,
+            )
+          : null,
+    ),
     enabled: !isDisabled,
-    enabledBorder: enabledOutlineInputBorder,
+    enabledBorder: enabledOutlineInputBorder.copyWith(
+      borderSide: backgroundType == BackgroundType.light
+          ? const BorderSide(
+              color: ThemeColor.brightPink,
+              width: 2,
+            )
+          : null,
+    ),
     errorText: null,
     //  Gestisco a mano l'errore
     floatingLabelBehavior: FloatingLabelBehavior.never,
     fillColor: ThemeColor.menstruationColor,
-    focusedBorder: focusedOutlineInputBorder,
+    focusedBorder: focusedOutlineInputBorder.copyWith(
+      borderSide: backgroundType == BackgroundType.light
+          ? const BorderSide(
+              color: ThemeColor.brightPink,
+              width: 2,
+            )
+          : null,
+    ),
     focusedErrorBorder: errorOutlineInputBorder,
-    focusColor: ThemeColor.whiteDark,
+    focusColor: backgroundType == BackgroundType.light
+        ? ThemeColor.darkBlue
+        : ThemeColor.whiteDark,
     hintMaxLines: 1,
     hintStyle: ThemeTextStyle.bodyMedium.copyWith(
-      color: ThemeColor.whiteDark,
+      color: backgroundType == BackgroundType.light
+          ? ThemeColor.darkBlue
+          : ThemeColor.whiteDark,
       letterSpacing: 0,
     ),
     hintText: placeholder ?? label,
@@ -92,6 +119,7 @@ InputDecoration textFieldPasswordDecoration(
   String? placeholder,
   required bool obscureText,
   required GestureTapCallback? onTapTogglePassword,
+  required BackgroundType backgroundType,
 }) =>
     textFieldDefaultDecoration(
       label,
@@ -99,6 +127,7 @@ InputDecoration textFieldPasswordDecoration(
       hasError: hasError,
       placeholder: placeholder,
       paddingLeft: 32,
+      backgroundType: backgroundType,
     ).copyWith(
       suffixIcon: Padding(
         padding: const EdgeInsets.only(right: 8),

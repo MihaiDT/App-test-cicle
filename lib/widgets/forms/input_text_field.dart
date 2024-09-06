@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/enums/background_type.dart';
 
 class InputTextField extends StatelessWidget {
   final FocusNode? focusNode;
@@ -24,6 +25,7 @@ class InputTextField extends StatelessWidget {
   final Function(String txt)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
   final String errorMessage;
+  final BackgroundType backgroundType;
 
   const InputTextField({
     super.key,
@@ -48,6 +50,7 @@ class InputTextField extends StatelessWidget {
     this.textCapitalization,
     required this.textEditingController,
     this.textInputAction = TextInputAction.next,
+    this.backgroundType = BackgroundType.dark,
   });
 
   @override
@@ -56,7 +59,7 @@ class InputTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        _label(),
+        _label(context),
         TextFormField(
           focusNode: focusNode,
           textAlign: textAlign,
@@ -70,6 +73,7 @@ class InputTextField extends StatelessWidget {
                   obscureText: obscureText,
                   placeholder: placeholder,
                   onTapTogglePassword: onTapTogglePassword,
+                  backgroundType: backgroundType,
                 )
               : textFieldDefaultDecoration(
                   label,
@@ -78,9 +82,12 @@ class InputTextField extends StatelessWidget {
                   placeholder: placeholder,
                   paddingLeft:
                       textAlign == TextAlign.center ? null : contentPaddingLeft,
+                  backgroundType: backgroundType,
                 ),
           style: ThemeTextStyle.bodyMedium.copyWith(
-            color: ThemeColor.whiteDark,
+            color: backgroundType == BackgroundType.light
+                ? ThemeColor.darkBlue
+                : ThemeColor.whiteDark,
           ),
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
@@ -105,15 +112,19 @@ class InputTextField extends StatelessWidget {
     );
   }
 
-  Widget _label() {
+  Widget _label(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
         left: 32,
         bottom: 4,
       ),
-      child: TitleMedium(
-        label.toUpperCase(),
-      ),
+      child: backgroundType == BackgroundType.light
+          ? TitleMedium(
+              label.toUpperCase(),
+            ).applyShaders(context)
+          : TitleMedium(
+              label.toUpperCase(),
+            ),
     );
   }
 
