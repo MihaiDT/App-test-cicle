@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lines/core/helpers/show_error_dialog.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/user.dart';
-import 'package:lines/modules/change_profile/widget/change_profile_alert_dialog.dart';
+import 'package:lines/modules/change_profile/widget/change_profile_bottomsheet.dart';
 import 'package:lines/routes/routes.dart';
 
 class YourInformationSectionController extends GetxController {
@@ -43,7 +43,7 @@ class YourInformationSectionController extends GetxController {
       ignoreSafeArea: true,
       Obx(
         () {
-          return ChangeProfileAlertDialog(
+          return ChangeProfileBottomsheet(
             title: title,
             onConfirm: onConfirm,
             controller: controller,

@@ -38,7 +38,7 @@ class YourMensesSection extends GetView<YourMensesSectionController> {
                   title: "Durata mestruazioni",
                   value: controller.periodDays.toString(),
                   onTap: () {
-                    Get.toNamed(Routes.yourMensesStatsPage);
+                    controller.openModifyMensesDurationBottomSheet();
                   },
                 ),
                 ThemeSizedBox.height8,
@@ -46,7 +46,7 @@ class YourMensesSection extends GetView<YourMensesSectionController> {
                   title: "Durata del ciclo",
                   value: controller.periodDuration.toString(),
                   onTap: () {
-                    Get.toNamed(Routes.yourMensesStatsPage);
+                    controller.openHowOftenMensesDurationBottomsheet();
                   },
                 ),
                 ThemeSizedBox.height8,

@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lines/core/app_theme.dart';
+import 'package:lines/data/enums/background_type.dart';
 
 class HowOftenMensesWidget extends StatelessWidget {
+  final BackgroundType backgroundType;
   final Function(int) onTap;
   late final ValueNotifier<int> howOftenMensesValue;
 
   HowOftenMensesWidget({
     super.key,
+    this.backgroundType = BackgroundType.dark,
     required this.onTap,
   }) {
     howOftenMensesValue = ValueNotifier(_rangeMenses[18]);
@@ -31,7 +34,9 @@ class HowOftenMensesWidget extends StatelessWidget {
         padding: ThemeSize.paddingS,
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.white,
+            color: backgroundType == BackgroundType.dark
+                ? Colors.white
+                : ThemeColor.darkBlue,
             width: 2,
             strokeAlign: BorderSide.strokeAlignOutside,
           ),
@@ -51,6 +56,9 @@ class HowOftenMensesWidget extends StatelessWidget {
               builder: (BuildContext context, int value, Widget? child) {
                 return HeadlineMedium(
                   "$value giorni",
+                  color: backgroundType == BackgroundType.light
+                      ? ThemeColor.darkBlue
+                      : Colors.white,
                 );
               },
             ),
@@ -92,7 +100,9 @@ class HowOftenMensesWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(
           50,
         ),
-        color: Colors.white.withOpacity(0.3),
+        color: backgroundType == BackgroundType.dark
+            ? Colors.white.withOpacity(0.3)
+            : ThemeColor.darkBlue,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(

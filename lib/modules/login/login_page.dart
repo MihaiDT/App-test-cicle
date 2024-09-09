@@ -27,7 +27,7 @@ class LoginPage extends GetView<LoginController> {
       () {
         return AppScaffoldPage(
           extendBodyBehindAppBar: true,
-          backgroundColor: Colors.white,
+backgroundImage: ThemeDecoration.images.bgGradientLightPink,
           appBar: const TransparentAppBar(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
             backButtonColor: ThemeColor.darkBlue,

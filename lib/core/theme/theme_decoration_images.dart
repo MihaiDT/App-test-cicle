@@ -26,7 +26,7 @@ class ThemeDecorationImage {
         alignment: Alignment.topCenter,
       );
 
-  DecorationImage get bgWalkthrough => const DecorationImage(
+  DecorationImage get bgGradientLightPink => const DecorationImage(
         image: AssetImage(ThemeImage.bgWalkthrough),
         fit: BoxFit.cover,
         alignment: Alignment.topCenter,

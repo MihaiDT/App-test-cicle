@@ -429,6 +429,7 @@ class Pages {
         YourInformationSectionBinding(),
         YourMensesSectionBinding(),
         YourInterestsSectionBinding(),
+        MensesDurationCounterBinding(),
       ],
       page: () => _mediaQueryWrapper(
         const ChangeProfilePage(),

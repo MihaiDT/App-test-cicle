@@ -100,7 +100,9 @@ InputDecoration textFieldDefaultDecoration(
             ),
             child: CircleAvatar(
               radius: 12,
-              backgroundColor: Colors.white,
+              backgroundColor: backgroundType == BackgroundType.light
+                  ? ThemeColor.darkBlue
+                  : Colors.white,
               child: SvgPicture.asset(
                 ThemeIcon.close,
                 color: ThemeColor.menstruationColor,
@@ -138,7 +140,9 @@ InputDecoration textFieldPasswordDecoration(
             width: 40,
             child: SvgPicture.asset(
               obscureText ? ThemeIcon.eyeClosed : ThemeIcon.eyeOpened,
-              color: Colors.white,
+              color: backgroundType == BackgroundType.light
+                  ? ThemeColor.darkBlue
+                  : Colors.white,
             ),
           ),
         ),
