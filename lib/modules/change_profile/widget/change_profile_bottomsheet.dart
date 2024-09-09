@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/widgets/buttons/primary_loading_button.dart';
 
-class ChangeProfileAlertDialog extends StatelessWidget {
+class ChangeProfileBottomsheet extends StatelessWidget {
   final String title;
   final Function(String) onConfirm;
 
   final bool isButtonLoading;
   final TextEditingController controller;
 
-  const ChangeProfileAlertDialog({
+  const ChangeProfileBottomsheet({
     required this.title,
     required this.onConfirm,
     required this.isButtonLoading,
@@ -80,6 +80,7 @@ class ChangeProfileAlertDialog extends StatelessWidget {
                   await onConfirm(controller.text);
                 },
               ),
+              ThemeSizedBox.height20,
             ],
           ),
         ),
