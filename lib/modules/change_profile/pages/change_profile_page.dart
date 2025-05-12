@@ -6,7 +6,6 @@ import 'package:lines/modules/change_profile/widget/your_information_section.dar
 import 'package:lines/modules/change_profile/widget/your_interest_section.dart';
 import 'package:lines/modules/change_profile/widget/your_menses_section.dart';
 import 'package:lines/widgets/appbar/transparent_app_bar.dart';
-import 'package:lines/widgets/layouts/app_scaffold_page.dart';
 
 class ChangeProfilePage extends StatelessWidget {
   const ChangeProfilePage({

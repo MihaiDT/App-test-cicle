@@ -4,7 +4,7 @@ import 'package:lines/core/helpers/push_notification.dart';
 import 'package:lines/core/utils/singletons.dart';
 import 'package:lines/data/models/user.dart';
 
-import 'api.dart';
+import 'package:lines/core/helpers/api.dart';
 
 /// Send events to Piwik
 class PiwikManager {

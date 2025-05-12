@@ -4,7 +4,7 @@ import Flutter
 import BrazeKit
 import braze_plugin
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
     
   static var braze: Braze? = nil

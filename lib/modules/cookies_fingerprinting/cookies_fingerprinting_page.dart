@@ -13,7 +13,8 @@ import 'package:lines/widgets/buttons/primary_button.dart';
 import 'package:lines/widgets/layouts/bottom_widget_layout.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController> {
+class CookiesFingerprintingPage
+    extends GetView<CookiesFingerprintingController> {
   const CookiesFingerprintingPage({
     super.key,
   });
@@ -211,7 +212,9 @@ class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController>
                           text: "Acconsento",
                           onChanged: (value) {
                             controller.hasAcceptedCookieStats?.value =
-                                controller.hasAcceptedCookieStats?.value != null ? true : value;
+                                controller.hasAcceptedCookieStats?.value != null
+                                    ? true
+                                    : value;
                           },
                         ),
                         ThemeSizedBox.width16,
@@ -221,7 +224,9 @@ class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController>
                           text: "Non acconsento",
                           onChanged: (value) {
                             controller.hasAcceptedCookieStats?.value =
-                                controller.hasAcceptedCookieStats?.value == null ? false : value;
+                                controller.hasAcceptedCookieStats?.value == null
+                                    ? false
+                                    : value;
                           },
                         ),
                       ],
@@ -341,21 +346,29 @@ class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController>
                       children: [
                         AgreeCheckButtons(
                           value: true,
-                          groupValue: controller.hasAcceptedCookieProfiling?.value,
+                          groupValue:
+                              controller.hasAcceptedCookieProfiling?.value,
                           onChanged: (value) {
                             controller.hasAcceptedCookieProfiling?.value =
-                                controller.hasAcceptedCookieProfiling?.value == null ? true : value;
+                                controller.hasAcceptedCookieProfiling?.value ==
+                                        null
+                                    ? true
+                                    : value;
                           },
                           text: 'Acconsento',
                         ),
                         ThemeSizedBox.width16,
                         AgreeCheckButtons(
                           value: false,
-                          groupValue: controller.hasAcceptedCookieProfiling?.value,
+                          groupValue:
+                              controller.hasAcceptedCookieProfiling?.value,
                           text: "Non acconsento",
                           onChanged: (value) {
                             controller.hasAcceptedCookieProfiling?.value =
-                                controller.hasAcceptedCookieProfiling?.value == null ? false : value;
+                                controller.hasAcceptedCookieProfiling?.value ==
+                                        null
+                                    ? false
+                                    : value;
                           },
                         ),
                       ],
@@ -366,7 +379,9 @@ class CookiesFingerprintingPage extends GetView<CookiesFingerprintingController>
                 Obx(
                   () {
                     return PrimaryButton(
-                      onPressed: controller.enableConfirmButton ? controller.navigateToNextPage : null,
+                      onPressed: controller.enableConfirmButton
+                          ? controller.navigateToNextPage
+                          : null,
                       child: const TitleLarge(
                         "CONFERMA",
                       ),

@@ -20,11 +20,10 @@ class LinkAccountWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: ThemeColor.shadowColor.withOpacity(0.3),
-            offset: const Offset(10, 10),  // x and y offsets
-            blurRadius: 21,  // Blur radius
-            spreadRadius: 4,  // Spread radius
+            offset: const Offset(10, 10), // x and y offsets
+            blurRadius: 21, // Blur radius
+            spreadRadius: 4, // Spread radius
           ),
-          
         ],
       ),
       child: InkWell(

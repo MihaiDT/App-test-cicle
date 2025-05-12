@@ -1,0 +1,11 @@
+// FirebaseBypass.xcconfig
+// Forces Xcode to ignore modular import errors for Firebase
+
+// Explicitly allow non-modular includes in framework modules
+CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES
+
+// Disable specific warnings related to module imports
+OTHER_CFLAGS = $(inherited) -Wno-error=non-modular-include-in-framework-module -Wno-error=non-modular-include-in-module
+
+// Add Swift compiler flags to ignore module errors
+OTHER_SWIFT_FLAGS = $(inherited) -Xcc -Wno-error=non-modular-include-in-framework-module

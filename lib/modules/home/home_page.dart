@@ -50,28 +50,24 @@ class HomePage extends GetView<HomeController> {
                 },
               ),
               ThemeSizedBox.height4,
-              Obx(
-                () => controller.isSelectedMestruationDay
-                    ? Align(
-                        alignment: Alignment.center,
-                        child: IntrinsicWidth(
-                          child: PrimaryButton(
-                            onPressed: () => Get.toNamed(Routes.calendar),
-                            buttonSize: ButtonSize.h31,
-                            child: const Text(
-                              "Modifica mestruazioni",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 1.1,
-                                height: 1.2,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
+              Align(
+                alignment: Alignment.center,
+                child: IntrinsicWidth(
+                  child: PrimaryButton(
+                    onPressed: () => Get.toNamed(Routes.calendar),
+                    buttonSize: ButtonSize.h31,
+                    child: const Text(
+                      "Modifica mestruazioni",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.1,
+                        height: 1.2,
+                      ),
+                    ),
+                  ),
+                ),
               ),
               ThemeSizedBox.height16,
               Obx(

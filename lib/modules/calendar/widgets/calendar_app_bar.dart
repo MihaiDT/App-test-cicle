@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
@@ -32,6 +33,7 @@ class CalendarAppBar extends GetView<CalendarAppBarController>
         ),
       ],
       backButtonColor: ThemeColor.darkBlue,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
       title: const TitleLarge(
         'CALENDARIO',
         color: ThemeColor.darkBlue,

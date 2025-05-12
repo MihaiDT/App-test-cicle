@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lines/core/app_theme.dart';
 import 'package:lines/data/enums/background_type.dart';
@@ -29,8 +28,8 @@ class LoginPage extends GetView<LoginController> {
           extendBodyBehindAppBar: true,
 backgroundImage: ThemeDecoration.images.bgGradientLightPink,
           appBar: const TransparentAppBar(
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
             backButtonColor: ThemeColor.darkBlue,
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
           body: ListView(
             padding: EdgeInsets.only(
@@ -41,7 +40,7 @@ backgroundImage: ThemeDecoration.images.bgGradientLightPink,
             children: [
               ThemeSizedBox.height32,
               const DisplayMedium(
-                "Ci siamo, accedi",
+                "ACCEDI",
                 textAlign: TextAlign.center,
                 color: ThemeColor.primary,
               ),

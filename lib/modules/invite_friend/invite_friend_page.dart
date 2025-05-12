@@ -78,7 +78,8 @@ class InviteFriendPage extends GetView<InviteFriendController> {
                 SizedBox(
                   height: Get.height * 0.125,
                   child: Obx(() {
-                    final friendsAmount = appController.user.value?.friendsInvited ?? 0;
+                    final friendsAmount =
+                        appController.user.value?.friendsInvited ?? 0;
 
                     return InviteFriendFriendsAndCoins(
                       friendsAmount: friendsAmount,
